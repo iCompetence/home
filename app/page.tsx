@@ -10,6 +10,7 @@ export default function Home() {
   const contentFrameRef = useRef<HTMLDivElement>(null)
   const [frameMargin, setFrameMargin] = useState(160)
   const [showMenu, setShowMenu] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -51,14 +52,78 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Burger Menu - Sticky */}
-      <div className={`fixed top-6 right-6 z-30 transition-opacity duration-300 ${
-        showMenu ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      {/* Full Screen Menu Overlay */}
+      <div className={`fixed inset-0 bg-[#161925] z-40 transition-opacity duration-300 ${
+        isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
-        <button className="bg-[#161925] p-4 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
+        {/* Title in overlay */}
+        <div className="absolute top-6 left-6">
+          <Link 
+            href="/"
+            onClick={() => setIsMenuOpen(false)}
+            className="text-[#E0FBFC] hover:text-[#0099CC] transition-colors"
+          >
+            <h1 className="text-2xl font-bold font-theinhardt">iCompetence</h1>
+          </Link>
+        </div>
+        
+        <div className="h-full flex flex-col items-center justify-center space-y-8">
+          <Link 
+            href="https://www.icompetence.de/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Über uns
+          </Link>
+          <Link 
+            href="https://www.icompetence.de/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Unsere Leistungen
+          </Link>
+          <Link 
+            href="https://www.icompetence.de/blog" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Unser Blog
+          </Link>
+          <Link 
+            href="https://www.icompetence.de/kontakt" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Kontaktiere uns
+          </Link>
+        </div>
+      </div>
+
+      {/* Menu Toggle Button - Sticky */}
+      <div className={`fixed top-6 right-6 z-50 transition-opacity duration-300 ${
+        showMenu || isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}>
+        <button 
+          className="bg-[#161925] p-4 rounded-full flex items-center justify-center"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          )}
         </button>
       </div>
 
