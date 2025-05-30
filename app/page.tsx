@@ -7,7 +7,6 @@ import Link from "next/link"
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [scale, setScale] = useState(0.75)
   const frameRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -17,23 +16,6 @@ export default function Home() {
       clearTimeout(timer1)
       clearTimeout(timer2)
     }
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!frameRef.current) return
-      const rect = frameRef.current.getBoundingClientRect()
-      // Initial offset from top (marginTop: 360px)
-      const initialOffset = 360
-      // How far from the top the frame currently is
-      const distanceFromTop = rect.top
-      // Interpolate scale from 0.75 to 1 as the frame moves from initialOffset to 0
-      let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1))
-      let newScale = 0.75 + 0.25 * progress
-      setScale(newScale)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -97,13 +79,8 @@ export default function Home() {
         </div>
         <div
           ref={frameRef}
-          className="w-full bg-[#E0FBFC] origin-top"
-          style={{
-            height: '1500px',
-            marginTop: '360px',
-            transform: `scale(${scale})`,
-            transition: 'transform 0.2s',
-          }}
+          className="relative z-10 bg-[#E0FBFC] py-12 mx-[160px]"
+          style={{ height: '1500px', marginTop: '360px' }}
         >
           <div className="text-[#161925] text-2xl font-bold p-8">Dies ist ein Overlay-Frame</div>
         </div>
