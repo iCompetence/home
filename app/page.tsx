@@ -186,8 +186,8 @@ export default function Home() {
                     alt="Personalization Injection" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Personalization Injection</h3>
-                  <p className="text-lg text-[#888] font-semibold">Lucky Bike, pepXpress</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Personalization Injection</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">Lucky Bike, pepXpress</p>
                 </div>
                 {/* Card 2 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -196,8 +196,8 @@ export default function Home() {
                     alt="Data Visualization" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Data Visualization</h3>
-                  <p className="text-lg text-[#888] font-semibold">DataCorp, InsightX</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Data Visualization</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">DataCorp, InsightX</p>
                 </div>
                 {/* Card 3 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -206,8 +206,8 @@ export default function Home() {
                     alt="AI Automation" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">AI Automation</h3>
-                  <p className="text-lg text-[#888] font-semibold">AutoAI, NextGen</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">AI Automation</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">AutoAI, NextGen</p>
                 </div>
                 {/* Card 4 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -216,8 +216,8 @@ export default function Home() {
                     alt="Cloud Integration" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Cloud Integration</h3>
-                  <p className="text-lg text-[#888] font-semibold">Cloudify, SkyNet</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Cloud Integration</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">Cloudify, SkyNet</p>
                 </div>
                 {/* Card 5 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -226,8 +226,8 @@ export default function Home() {
                     alt="E-Commerce Boost" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">E-Commerce Boost</h3>
-                  <p className="text-lg text-[#888] font-semibold">ShopMaster, QuickCart</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">E-Commerce Boost</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">ShopMaster, QuickCart</p>
                 </div>
                 {/* Card 6 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -236,8 +236,8 @@ export default function Home() {
                     alt="Customer Insights" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Customer Insights</h3>
-                  <p className="text-lg text-[#888] font-semibold">InsightPro, UserSense</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Customer Insights</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">InsightPro, UserSense</p>
                 </div>
                 {/* Card 7 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -246,8 +246,8 @@ export default function Home() {
                     alt="Marketing Analytics" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Marketing Analytics</h3>
-                  <p className="text-lg text-[#888] font-semibold">MarketGenius, AdScope</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Marketing Analytics</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">MarketGenius, AdScope</p>
                 </div>
                 {/* Card 8 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -256,8 +256,8 @@ export default function Home() {
                     alt="Workflow Automation" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Workflow Automation</h3>
-                  <p className="text-lg text-[#888] font-semibold">FlowPro, TaskPilot</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Workflow Automation</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">FlowPro, TaskPilot</p>
                 </div>
                 {/* Card 9 */}
                 <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
@@ -266,8 +266,8 @@ export default function Home() {
                     alt="Realtime Reporting" 
                     className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <h3 className="text-xl font-bold text-black m-0">Realtime Reporting</h3>
-                  <p className="text-lg text-[#888] font-semibold">LiveStats, DashNow</p>
+                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Realtime Reporting</h3>
+                  <p className="text-lg text-[#888] font-normal font-theinhardt">LiveStats, DashNow</p>
                 </div>
               </div>
             </div>
