@@ -13,6 +13,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [showBottomText, setShowBottomText] = useState(false)
+  const [isAtBottom, setIsAtBottom] = useState(false)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -35,6 +36,11 @@ export default function Home() {
       setFrameMargin(newMargin);
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
+
+      // Check if content frame reaches bottom of viewport
+      const windowHeight = window.innerHeight;
+      const distanceFromBottom = windowHeight - rect.bottom;
+      setIsAtBottom(distanceFromBottom <= 0);
 
       // Check if scrolled to bottom
       const scrollContainer = contentFrameRef.current.querySelector('.h-full.overflow-y-auto');
@@ -236,7 +242,11 @@ export default function Home() {
           ref={contentFrameRef}
           id="leistungen"
           className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 ${
-            showMenu ? 'rounded-b-[24px]' : 'rounded-[24px]'
+            showMenu 
+              ? isAtBottom 
+                ? 'rounded-none' 
+                : 'rounded-b-[24px]'
+              : 'rounded-[24px]'
           }`}
           style={{
             marginTop: '360px',
@@ -244,6 +254,7 @@ export default function Home() {
             marginRight: `${frameMargin}px`,
             marginBottom: '200px',
             transition: 'margin 0.2s',
+            minHeight: '100vh'
           }}
         >
           <div className="h-full overflow-y-auto px-8">
