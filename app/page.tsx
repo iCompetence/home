@@ -50,7 +50,7 @@ export default function Home() {
           {/* Navigation */}
           <nav className="flex justify-between items-center p-6">
             <div className="flex space-x-2">
-              <Link href="https://www.linkedin.com/company/icompetence/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+              <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Über uns
               </Link>
               <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
@@ -85,7 +85,6 @@ export default function Home() {
           ref={contentFrameRef}
           className="relative z-10 bg-[#E0FBFC] py-12 rounded-[24px]"
           style={{
-            height: '1348px',
             marginTop: '360px',
             marginLeft: `${frameMargin}px`,
             marginRight: `${frameMargin}px`,
