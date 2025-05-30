@@ -9,10 +9,11 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null)
   const contentFrameRef = useRef<HTMLDivElement>(null)
   const [frameMargin, setFrameMargin] = useState(160)
+  const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
-    const timer2 = setTimeout(() => setAnimationState(2), 3000)
+    const timer2 = setTimeout(() => setAnimationState(2), 2000)
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
@@ -29,6 +30,8 @@ export default function Home() {
       // Interpolate margin from 160px to 0px
       let newMargin = 160 - 160 * progress;
       setFrameMargin(newMargin);
+      // Show menu when content frame reaches top
+      setShowMenu(distanceFromTop <= 0);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -36,19 +39,40 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
+      {/* Background */}
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white" />
+
+      {/* Title */}
+      <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
+        <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
+          animationState >= 1 ? 'top-6 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        }`}>
+          <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
+        </div>
+      </div>
+
+      {/* Burger Menu - Sticky */}
+      <div className={`fixed top-6 right-6 z-30 transition-opacity duration-300 ${
+        showMenu ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}>
+        <button className="bg-[#161925] p-4 rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+
       {/* Full homepage - appears in third state */}
       <div
-        className={`transition-all duration-1000 ease-in-out ${
+        className={`transition-all duration-1000 ease-in-out z-10 ${
           animationState >= 2 ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="fixed inset-0 w-full h-full z-0 bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
-          {/* Title */}
-          <div className="absolute top-6 left-1/2 -translate-x-1/2">
-            <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
-          </div>
           {/* Navigation */}
-          <nav className="flex justify-between items-center p-6">
+          <nav className={`transition-all duration-1000 ease-in-out ${
+            animationState >= 2 ? "opacity-100" : "opacity-0"
+          } flex justify-between items-center p-6`}>
             <div className="flex space-x-2">
               <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Über uns
@@ -65,11 +89,6 @@ export default function Home() {
               <Link href="https://www.icompetence.de/kontakt" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Kontaktiere uns
               </Link>
-              <button className="bg-[#161925] p-4 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-              </button>
             </div>
           </nav>
           {/* Question headline */}
