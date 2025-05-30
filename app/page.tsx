@@ -36,26 +36,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
-      {/* Logo - starts centered, then moves to top */}
-      <div
-        className={`transition-all duration-1000 ease-in-out ${
-          animationState === 0
-            ? "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            : "absolute top-6 left-1/2 -translate-x-1/2"
-        }`}
-      >
-        <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
-      </div>
-
-      {/* Tagline - appears in second state */}
-      <div
-        className={`transition-all duration-1000 ease-in-out absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center ${
-          animationState >= 1 ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <h2 className="text-4xl md:text-6xl font-serif"></h2>
-      </div>
-
       {/* Full homepage - appears in third state */}
       <div
         className={`transition-all duration-1000 ease-in-out ${
@@ -63,6 +43,10 @@ export default function Home() {
         }`}
       >
         <div className="fixed inset-0 w-full h-full z-0 bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
+          {/* Title */}
+          <div className="absolute top-6 left-1/2 -translate-x-1/2">
+            <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
+          </div>
           {/* Navigation */}
           <nav className="flex justify-between items-center p-6">
             <div className="flex space-x-2">
@@ -101,7 +85,7 @@ export default function Home() {
           ref={contentFrameRef}
           className="relative z-10 bg-[#E0FBFC] py-12 rounded-[24px]"
           style={{
-            height: '1500px',
+            height: '1348px',
             marginTop: '360px',
             marginLeft: `${frameMargin}px`,
             marginRight: `${frameMargin}px`,
@@ -111,78 +95,96 @@ export default function Home() {
         >
           <div className="h-full overflow-y-auto px-8">
             <div className="w-[1040px] mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex flex-wrap gap-x-4 gap-y-6 justify-center">
                 {/* Card 1 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="Personalization Injection" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">Personalization Injection</h3>
-                    <p className="text-lg text-[#888] font-semibold">Lucky Bike, pepXpress</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">Personalization Injection</h3>
+                  <p className="text-lg text-[#888] font-semibold">Lucky Bike, pepXpress</p>
                 </div>
                 {/* Card 2 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="Data Visualization" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">Data Visualization</h3>
-                    <p className="text-lg text-[#888] font-semibold">DataCorp, InsightX</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">Data Visualization</h3>
+                  <p className="text-lg text-[#888] font-semibold">DataCorp, InsightX</p>
                 </div>
                 {/* Card 3 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="AI Automation" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">AI Automation</h3>
-                    <p className="text-lg text-[#888] font-semibold">AutoAI, NextGen</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">AI Automation</h3>
+                  <p className="text-lg text-[#888] font-semibold">AutoAI, NextGen</p>
                 </div>
                 {/* Card 4 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="Cloud Integration" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">Cloud Integration</h3>
-                    <p className="text-lg text-[#888] font-semibold">Cloudify, SkyNet</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">Cloud Integration</h3>
+                  <p className="text-lg text-[#888] font-semibold">Cloudify, SkyNet</p>
                 </div>
                 {/* Card 5 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="E-Commerce Boost" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">E-Commerce Boost</h3>
-                    <p className="text-lg text-[#888] font-semibold">ShopMaster, QuickCart</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">E-Commerce Boost</h3>
+                  <p className="text-lg text-[#888] font-semibold">ShopMaster, QuickCart</p>
                 </div>
                 {/* Card 6 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
                     alt="Customer Insights" 
-                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
                   />
-                  <div className="flex flex-col flex-1 justify-end">
-                    <h3 className="text-xl font-bold text-black mb-1">Customer Insights</h3>
-                    <p className="text-lg text-[#888] font-semibold">InsightPro, UserSense</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-black m-0">Customer Insights</h3>
+                  <p className="text-lg text-[#888] font-semibold">InsightPro, UserSense</p>
+                </div>
+                {/* Card 7 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Marketing Analytics" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
+                  />
+                  <h3 className="text-xl font-bold text-black m-0">Marketing Analytics</h3>
+                  <p className="text-lg text-[#888] font-semibold">MarketGenius, AdScope</p>
+                </div>
+                {/* Card 8 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Workflow Automation" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
+                  />
+                  <h3 className="text-xl font-bold text-black m-0">Workflow Automation</h3>
+                  <p className="text-lg text-[#888] font-semibold">FlowPro, TaskPilot</p>
+                </div>
+                {/* Card 9 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Realtime Reporting" 
+                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
+                  />
+                  <h3 className="text-xl font-bold text-black m-0">Realtime Reporting</h3>
+                  <p className="text-lg text-[#888] font-semibold">LiveStats, DashNow</p>
                 </div>
               </div>
             </div>
