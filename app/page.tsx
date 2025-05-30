@@ -12,6 +12,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [showBottomText, setShowBottomText] = useState(false)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -34,6 +35,18 @@ export default function Home() {
       setFrameMargin(newMargin);
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
+
+      // Check if scrolled to bottom
+      const scrollContainer = contentFrameRef.current.querySelector('.h-full.overflow-y-auto');
+      if (scrollContainer) {
+        const isAtBottom = 
+          Math.abs(
+            scrollContainer.scrollHeight - 
+            scrollContainer.scrollTop - 
+            scrollContainer.clientHeight
+          ) < 1;
+        setShowBottomText(isAtBottom);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -213,7 +226,9 @@ export default function Home() {
             Wie können wir Ihnen weiterhelfen?
           </h2>
           {/* Bottom text */}
-          <div className="absolute left-0 w-full flex justify-center items-end pb-10" style={{ bottom: 0 }}>
+          <div className={`absolute left-0 w-full flex justify-center items-end pb-10 transition-opacity duration-500 ${
+            showBottomText ? 'opacity-100' : 'opacity-0'
+          }`} style={{ bottom: 0 }}>
             <span className="text-8xl text-[#E0FBFC]">Ihr Experience Orchestrator</span>
           </div>
         </div>
@@ -237,6 +252,9 @@ export default function Home() {
                     placeholder="Ich möchte personalisierte Angebote auf meiner Website anbieten."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => {
+                      document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="w-full px-6 py-4 text-4xl font-['EB_Garamond'] italic text-[#7F7F7F]/60 placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent"
                   />
                 </div>
