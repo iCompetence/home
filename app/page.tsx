@@ -234,7 +234,10 @@ export default function Home() {
         </div>
         <div
           ref={contentFrameRef}
-          className="relative z-10 bg-[#E0FBFC] py-12 rounded-[24px]"
+          id="leistungen"
+          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 ${
+            showMenu ? 'rounded-b-[24px]' : 'rounded-[24px]'
+          }`}
           style={{
             marginTop: '360px',
             marginLeft: `${frameMargin}px`,
@@ -243,7 +246,7 @@ export default function Home() {
             transition: 'margin 0.2s',
           }}
         >
-          <div id="leistungen" className="h-full overflow-y-auto px-8">
+          <div className="h-full overflow-y-auto px-8">
             <div className="w-[1040px] mx-auto">
               <div className="mb-6">
                 <div className="relative">
