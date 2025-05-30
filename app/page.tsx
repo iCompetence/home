@@ -6,28 +6,34 @@ import Link from "next/link"
 
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
+  const [bgAnimationState, setBgAnimationState] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
   const contentFrameRef = useRef<HTMLDivElement>(null)
+  const searchBarRef = useRef<HTMLDivElement>(null)
   const [frameMargin, setFrameMargin] = useState(160)
   const [showMenu, setShowMenu] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [showBottomText, setShowBottomText] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
+  const [showFloatingSearch, setShowFloatingSearch] = useState(false)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
     const timer2 = setTimeout(() => setAnimationState(2), 2000)
+    const bgTimer = setTimeout(() => setBgAnimationState(1), 500)
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
+      clearTimeout(bgTimer)
     }
   }, [])
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!contentFrameRef.current) return;
+      if (!contentFrameRef.current || !searchBarRef.current) return;
       const rect = contentFrameRef.current.getBoundingClientRect();
+      const searchRect = searchBarRef.current.getBoundingClientRect();
       const initialOffset = 360;
       const distanceFromTop = rect.top;
       let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
@@ -36,6 +42,9 @@ export default function Home() {
       setFrameMargin(newMargin);
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
+
+      // Check if search bar is out of view
+      setShowFloatingSearch(searchRect.bottom < 0);
 
       // Check if content frame reaches bottom of viewport
       const windowHeight = window.innerHeight;
@@ -114,7 +123,21 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
       {/* Background */}
-      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white" />
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66]" />
+
+      {/* Floating Search Bar */}
+      <div className={`fixed top-6 right-16 z-30 transition-all duration-300 ${
+        showFloatingSearch ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
+      }`}>
+        <button
+          onClick={() => {
+            document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="border border-[#161925] text-[#161925] hover:bg-[#161925] hover:text-[#E0FBFC] px-4 py-2 rounded-full text-base font-theinhardt transition-colors mr-2"
+        >
+          Suchen
+        </button>
+      </div>
 
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
@@ -277,7 +300,7 @@ export default function Home() {
           <div className="h-full overflow-y-auto px-8">
             <div className="w-[1040px] mx-auto">
               <div className="mb-6">
-                <div className="relative">
+                <div className="relative" ref={searchBarRef}>
                   <input
                     type="text"
                     placeholder="Ich möchte personalisierte Angebote auf meiner Website anbieten."
