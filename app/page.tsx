@@ -118,7 +118,7 @@ export default function Home() {
 
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
-        <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
+        <div className={`absolute transition-all duration-0 ease-in-out animate-fade-in ${
           animationState >= 1 ? 'top-6 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
         } ${showMenu ? 'opacity-0' : 'opacity-100'}`}>
           <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
@@ -170,7 +170,7 @@ export default function Home() {
             href="https://www.icompetence.de/kontakt" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            className="text-[#0099CC] text-2xl font-theinhardt hover:text-[#0099CC]/80 transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Kontaktiere uns
@@ -187,11 +187,11 @@ export default function Home() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           )}
@@ -222,14 +222,14 @@ export default function Home() {
               <Link href="https://www.icompetence.de/blog" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Unser Blog
               </Link>
-              <Link href="https://www.icompetence.de/kontakt" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+              <Link href="https://www.icompetence.de/kontakt" target="_blank" rel="noopener noreferrer" className="bg-[#E0FBFC] text-[#0099CC] hover:bg-[#161925] hover:text-[#E0FBFC] px-4 py-2 rounded-full text-base font-theinhardt">
                 Kontaktiere uns
               </Link>
               <button 
                 className="w-10 h-10 bg-[#161925] rounded-full flex items-center justify-center ml-4"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
               </button>
