@@ -7,7 +7,7 @@ import Link from "next/link"
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
-  const frameRef = useRef<HTMLDivElement>(null)
+  const contentFrameRef = useRef<HTMLDivElement>(null)
   const [frameMargin, setFrameMargin] = useState(160)
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!frameRef.current) return;
-      const rect = frameRef.current.getBoundingClientRect();
+      if (!contentFrameRef.current) return;
+      const rect = contentFrameRef.current.getBoundingClientRect();
       const initialOffset = 360;
       const distanceFromTop = rect.top;
       let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
         <div
-          ref={frameRef}
+          ref={contentFrameRef}
           className="relative z-10 bg-[#E0FBFC] py-12 rounded-[24px]"
           style={{
             height: '1500px',
@@ -109,7 +109,84 @@ export default function Home() {
             transition: 'margin 0.2s',
           }}
         >
-          <div className="text-[#161925] text-2xl font-bold p-8">Dies ist ein Overlay-Frame</div>
+          <div className="h-full overflow-y-auto px-8">
+            <div className="w-[1040px] mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Card 1 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Personalization Injection" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">Personalization Injection</h3>
+                    <p className="text-lg text-[#888] font-semibold">Lucky Bike, pepXpress</p>
+                  </div>
+                </div>
+                {/* Card 2 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Data Visualization" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">Data Visualization</h3>
+                    <p className="text-lg text-[#888] font-semibold">DataCorp, InsightX</p>
+                  </div>
+                </div>
+                {/* Card 3 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="AI Automation" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">AI Automation</h3>
+                    <p className="text-lg text-[#888] font-semibold">AutoAI, NextGen</p>
+                  </div>
+                </div>
+                {/* Card 4 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Cloud Integration" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">Cloud Integration</h3>
+                    <p className="text-lg text-[#888] font-semibold">Cloudify, SkyNet</p>
+                  </div>
+                </div>
+                {/* Card 5 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="E-Commerce Boost" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">E-Commerce Boost</h3>
+                    <p className="text-lg text-[#888] font-semibold">ShopMaster, QuickCart</p>
+                  </div>
+                </div>
+                {/* Card 6 */}
+                <div className="bg-[#E0FBFC] rounded-[40px] p-6 flex flex-col w-[336px] mx-auto" style={{ minHeight: '420px' }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
+                    alt="Customer Insights" 
+                    className="w-full h-64 object-cover rounded-[32px] mb-[16px]" 
+                  />
+                  <div className="flex flex-col flex-1 justify-end">
+                    <h3 className="text-xl font-bold text-black mb-1">Customer Insights</h3>
+                    <p className="text-lg text-[#888] font-semibold">InsightPro, UserSense</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
