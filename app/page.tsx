@@ -118,10 +118,10 @@ export default function Home() {
 
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
-        <div className={`absolute transition-all duration-0 ease-in-out animate-fade-in ${
+        <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
           animationState >= 1 ? 'top-6 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-        } ${showMenu ? 'opacity-0' : 'opacity-100'}`}>
-          <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
+        }`}>
+          <h1 className={`text-4xl md:text-3xl font-bold font-theinhardt transition-opacity duration-0 ${showMenu ? 'opacity-0' : 'opacity-100'}`}>iCompetence</h1>
         </div>
       </div>
 
@@ -145,14 +145,14 @@ export default function Home() {
             href="https://www.icompetence.de/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            className="text-[#E0FBFC] text-xl font-theinhardt hover:text-[#0099CC] transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Über uns
           </Link>
           <Link 
             href="#leistungen" 
-            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            className="text-[#E0FBFC] text-xl font-theinhardt hover:text-[#0099CC] transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Unsere Leistungen
@@ -161,7 +161,7 @@ export default function Home() {
             href="https://www.icompetence.de/blog" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            className="text-[#E0FBFC] text-xl font-theinhardt hover:text-[#0099CC] transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Unser Blog
@@ -170,10 +170,19 @@ export default function Home() {
             href="https://www.icompetence.de/kontakt" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[#0099CC] text-2xl font-theinhardt hover:text-[#0099CC]/80 transition-colors"
+            className="text-[#E0FBFC] text-xl font-theinhardt hover:text-[#0099CC] transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Kontaktiere uns
+          </Link>
+          <Link 
+            href="https://www.icompetence.de/impressum" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[#E0FBFC] text-xl font-theinhardt hover:text-[#0099CC] transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Impressum & Datenschutz
           </Link>
         </div>
       </div>
