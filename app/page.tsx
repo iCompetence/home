@@ -34,7 +34,7 @@ export default function Home() {
             : "absolute top-6 left-1/2 -translate-x-1/2"
         }`}
       >
-        <h1 className="text-4xl md:text-4xl font-bold font-theinhardt">iCompetence</h1>
+        <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
       </div>
 
       {/* Tagline - appears in second state */}
@@ -43,7 +43,7 @@ export default function Home() {
           animationState >= 1 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <h2 className="text-4xl md:text-6xl font-serif">Wir sind Ihr Experience Orchestrator.</h2>
+        <h2 className="text-4xl md:text-6xl font-serif"></h2>
       </div>
 
       {/* Full homepage - appears in third state */}
@@ -55,10 +55,10 @@ export default function Home() {
         {/* Navigation */}
         <nav className="flex justify-between items-center p-6">
           <div className="flex space-x-2">
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+            <Link href="#" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Über uns
             </Link>
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+            <Link href="#" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Unsere Leistungen
             </Link>
           </div>
@@ -69,10 +69,10 @@ export default function Home() {
           </div>
 
           <div className="flex space-x-2 h-10">
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+            <Link href="#" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Blog
             </Link>
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+            <Link href="#" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Kontakt
             </Link>
             <button className="bg-[#161925] p-4 rounded-full flex items-center justify-center">
@@ -90,8 +90,8 @@ export default function Home() {
           </h2>
 
           {/* Content card */}
-          <div className="mt-16 max-w-6xl mx-auto bg-white/10 backdrop-blur-xl border border-[#0099cc] rounded-3xl p-8 text-gray-700">
-            <div className="italic text-2xl md:text-4xl font-serif text-gray-500/60">
+          <div className="mt-16 max-w-6xl mx-auto bg-[#E0FBFC] backdrop-blur-xl border border-[#0099cc] rounded-3xl p-8 text-gray-700">
+            <div className="italic text-2xl md:text-4xl font-serif text-[#7F7F7F]/60">
               Ich möchte personalisierte Angebote auf meiner Website anbieten.
             </div>
 
