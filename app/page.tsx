@@ -101,7 +101,7 @@ export default function Home() {
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
         <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
           animationState >= 1 ? 'top-6 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-        }`}>
+        } ${showMenu ? 'opacity-0' : 'opacity-100'}`}>
           <h1 className="text-4xl md:text-3xl font-bold font-theinhardt">iCompetence</h1>
         </div>
       </div>
@@ -132,9 +132,7 @@ export default function Home() {
             Über uns
           </Link>
           <Link 
-            href="https://www.icompetence.de/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+            href="#leistungen" 
             className="text-[#E0FBFC] text-2xl font-theinhardt hover:text-[#0099CC] transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -196,7 +194,7 @@ export default function Home() {
               <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Über uns
               </Link>
-              <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
+              <Link href="#leistungen" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Unsere Leistungen
               </Link>
             </div>
@@ -230,7 +228,7 @@ export default function Home() {
             transition: 'margin 0.2s',
           }}
         >
-          <div className="h-full overflow-y-auto px-8">
+          <div id="leistungen" className="h-full overflow-y-auto px-8">
             <div className="w-[1040px] mx-auto">
               <div className="mb-6">
                 <div className="relative">
