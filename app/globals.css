@@ -97,3 +97,7 @@
 .font-serif {
   font-family: var(--font-eb-garamond);
 }
+
+.font-theinhardt {
+  font-family: var(--font-theinhardt);
+}

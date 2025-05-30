@@ -1,14 +1,23 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import { EB_Garamond } from "next/font/google"
+import localFont from 'next/font/local';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
   variable: "--font-eb-garamond",
 })
+
+const theinhardt = localFont({
+  src: [
+    { path: '../public/fonts/Theinhardt-Regular.otf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/Theinhardt-Bold.otf', weight: '700', style: 'normal' },
+    { path: '../public/fonts/Theinhardt-Medium.otf', weight: '500', style: 'normal' },
+    { path: '../public/fonts/Theinhardt-Light.otf', weight: '300', style: 'normal' },
+  ],
+  variable: '--font-theinhardt',
+});
 
 export const metadata: Metadata = {
   title: "iCompetence",
@@ -23,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className={`${inter.variable} ${ebGaramond.variable} font-sans`}>{children}</body>
+      <body className={`${theinhardt.variable} ${ebGaramond.variable}`}>{children}</body>
     </html>
   )
 }

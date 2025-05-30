@@ -25,7 +25,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white overflow-hidden h-screen">
       {/* Logo - starts centered, then moves to top */}
       <div
         className={`transition-all duration-1000 ease-in-out ${
@@ -34,7 +34,7 @@ export default function Home() {
             : "absolute top-6 left-1/2 -translate-x-1/2"
         }`}
       >
-        <h1 className="text-4xl md:text-5xl font-bold">iCompetence</h1>
+        <h1 className="text-4xl md:text-4xl font-bold font-theinhardt">iCompetence</h1>
       </div>
 
       {/* Tagline - appears in second state */}
@@ -55,32 +55,30 @@ export default function Home() {
         {/* Navigation */}
         <nav className="flex justify-between items-center p-6">
           <div className="flex space-x-2">
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full">
+            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Über uns
             </Link>
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full">
+            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Unsere Leistungen
             </Link>
           </div>
 
           {/* Logo in nav */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-4xl font-bold">iCompetence</h1>
+            {/* <h1 className="text-4xl font-bold">iCompetence</h1> */}
           </div>
 
-          <div className="flex space-x-2">
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full">
+          <div className="flex space-x-2 h-10">
+            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Blog
             </Link>
-            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full">
+            <Link href="#" className="bg-[#E0FBFC] text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
               Kontakt
             </Link>
-            <button className="bg-[#161925] p-4 rounded-full">
-              <div className="w-5 h-3.5 flex flex-col justify-between">
-                <div className="h-0.5 w-full bg-[#E0FBFC]"></div>
-                <div className="h-0.5 w-full bg-[#E0FBFC]"></div>
-                <div className="h-0.5 w-full bg-[#E0FBFC]"></div>
-              </div>
+            <button className="bg-[#161925] p-4 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
             </button>
           </div>
         </nav>
