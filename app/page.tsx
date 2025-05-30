@@ -7,6 +7,8 @@ import Link from "next/link"
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(0.75)
+  const frameRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -15,6 +17,23 @@ export default function Home() {
       clearTimeout(timer1)
       clearTimeout(timer2)
     }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!frameRef.current) return
+      const rect = frameRef.current.getBoundingClientRect()
+      // Initial offset from top (marginTop: 360px)
+      const initialOffset = 360
+      // How far from the top the frame currently is
+      const distanceFromTop = rect.top
+      // Interpolate scale from 0.75 to 1 as the frame moves from initialOffset to 0
+      let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1))
+      let newScale = 0.75 + 0.25 * progress
+      setScale(newScale)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -76,7 +95,16 @@ export default function Home() {
             Wie können wir Ihnen weiterhelfen?
           </h2>
         </div>
-        <div className="relative z-10 w-full bg-[#E0FBFC]" style={{ height: '1500px', marginTop: '360px' }}>
+        <div
+          ref={frameRef}
+          className="w-full bg-[#E0FBFC] origin-top"
+          style={{
+            height: '1500px',
+            marginTop: '360px',
+            transform: `scale(${scale})`,
+            transition: 'transform 0.2s',
+          }}
+        >
           <div className="text-[#161925] text-2xl font-bold p-8">Dies ist ein Overlay-Frame</div>
         </div>
       </div>
