@@ -8,6 +8,7 @@ export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
+  const [frameMargin, setFrameMargin] = useState(160)
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -17,6 +18,21 @@ export default function Home() {
       clearTimeout(timer2)
     }
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!frameRef.current) return;
+      const rect = frameRef.current.getBoundingClientRect();
+      const initialOffset = 360;
+      const distanceFromTop = rect.top;
+      let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
+      // Interpolate margin from 160px to 0px
+      let newMargin = 160 - 160 * progress;
+      setFrameMargin(newMargin);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
@@ -76,11 +92,22 @@ export default function Home() {
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-6xl mx-auto text-[#E0FBFC] mt-16 md:mt-24">
             Wie können wir Ihnen weiterhelfen?
           </h2>
+          {/* Bottom text */}
+          <div className="absolute left-0 w-full flex justify-center items-end pb-10" style={{ bottom: 0 }}>
+            <span className="text-8xl text-[#E0FBFC]">Ihr Experience Orchestrator</span>
+          </div>
         </div>
         <div
           ref={frameRef}
-          className="relative z-10 bg-[#E0FBFC] py-12 mx-[160px]"
-          style={{ height: '1500px', marginTop: '360px' }}
+          className="relative z-10 bg-[#E0FBFC] py-12 rounded-[24px]"
+          style={{
+            height: '1500px',
+            marginTop: '360px',
+            marginLeft: `${frameMargin}px`,
+            marginRight: `${frameMargin}px`,
+            marginBottom: '200px',
+            transition: 'margin 0.2s',
+          }}
         >
           <div className="text-[#161925] text-2xl font-bold p-8">Dies ist ein Overlay-Frame</div>
         </div>
