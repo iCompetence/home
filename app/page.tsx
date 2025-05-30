@@ -11,6 +11,7 @@ export default function Home() {
   const [frameMargin, setFrameMargin] = useState(160)
   const [showMenu, setShowMenu] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -37,6 +38,59 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const cards = [
+    {
+      title: "Personalization Injection",
+      subtitle: "Lucky Bike, pepXpress",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Data Visualization",
+      subtitle: "DataCorp, InsightX",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "AI Automation",
+      subtitle: "AutoAI, NextGen",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Cloud Integration",
+      subtitle: "Cloudify, SkyNet",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "E-Commerce Boost",
+      subtitle: "ShopMaster, QuickCart",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Customer Insights",
+      subtitle: "InsightPro, UserSense",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Marketing Analytics",
+      subtitle: "MarketGenius, AdScope",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Workflow Automation",
+      subtitle: "FlowPro, TaskPilot",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      title: "Realtime Reporting",
+      subtitle: "LiveStats, DashNow",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+    }
+  ]
+
+  const filteredCards = cards.filter(card => 
+    card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    card.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
@@ -178,97 +232,31 @@ export default function Home() {
         >
           <div className="h-full overflow-y-auto px-8">
             <div className="w-[1040px] mx-auto">
-              <div className="flex flex-wrap gap-x-4 gap-y-6 justify-center">
-                {/* Card 1 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Personalization Injection" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
+              <div className="mb-6">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Ich möchte personalisierte Angebote auf meiner Website anbieten."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-6 py-4 text-4xl font-['EB_Garamond'] italic text-[#7F7F7F]/60 placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent"
                   />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Personalization Injection</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">Lucky Bike, pepXpress</p>
                 </div>
-                {/* Card 2 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Data Visualization" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Data Visualization</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">DataCorp, InsightX</p>
-                </div>
-                {/* Card 3 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="AI Automation" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">AI Automation</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">AutoAI, NextGen</p>
-                </div>
-                {/* Card 4 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Cloud Integration" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Cloud Integration</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">Cloudify, SkyNet</p>
-                </div>
-                {/* Card 5 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="E-Commerce Boost" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">E-Commerce Boost</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">ShopMaster, QuickCart</p>
-                </div>
-                {/* Card 6 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Customer Insights" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Customer Insights</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">InsightPro, UserSense</p>
-                </div>
-                {/* Card 7 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Marketing Analytics" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Marketing Analytics</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">MarketGenius, AdScope</p>
-                </div>
-                {/* Card 8 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Workflow Automation" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Workflow Automation</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">FlowPro, TaskPilot</p>
-                </div>
-                {/* Card 9 */}
-                <div className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" 
-                    alt="Realtime Reporting" 
-                    className="w-full h-[336px] object-cover rounded-[32px]" style={{ marginBottom: 16 }}
-                  />
-                  <h3 className="text-xl font-medium text-black m-0 font-theinhardt">Realtime Reporting</h3>
-                  <p className="text-lg text-[#888] font-normal font-theinhardt">LiveStats, DashNow</p>
-                </div>
+              </div>
+              <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div>
+              <div className="flex flex-wrap gap-x-4 gap-y-6 justify-start">
+                {filteredCards.map((card, index) => (
+                  <div key={index} className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
+                    <img 
+                      src={card.image}
+                      alt={card.title}
+                      className="w-full h-[336px] object-cover rounded-[32px]"
+                      style={{ marginBottom: 16 }}
+                    />
+                    <h3 className="text-xl font-medium text-black m-0 font-theinhardt">{card.title}</h3>
+                    <p className="text-lg text-[#888] font-normal font-theinhardt">{card.subtitle}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
