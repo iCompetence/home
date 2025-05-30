@@ -183,15 +183,15 @@ export default function Home() {
         showMenu || isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
         <button 
-          className="bg-[#161925] p-4 rounded-full flex items-center justify-center"
+          className="w-10 h-10 bg-[#161925] rounded-full flex items-center justify-center"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           )}
@@ -225,6 +225,14 @@ export default function Home() {
               <Link href="https://www.icompetence.de/kontakt" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-4 py-2 rounded-full text-base font-theinhardt">
                 Kontaktiere uns
               </Link>
+              <button 
+                className="w-10 h-10 bg-[#161925] rounded-full flex items-center justify-center ml-4"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+              </button>
             </div>
           </nav>
           {/* Question headline */}
@@ -269,7 +277,7 @@ export default function Home() {
                     onFocus={() => {
                       document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full px-6 py-4 text-4xl font-['EB_Garamond'] italic text-[#7F7F7F]/60 placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent"
+                    className="w-full px-6 py-4 text-4xl font-['EB_Garamond'] italic text-[#161925] placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent"
                   />
                 </div>
               </div>
