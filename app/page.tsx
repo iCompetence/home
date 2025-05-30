@@ -276,7 +276,7 @@ export default function Home() {
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div>
               <div className="flex flex-wrap gap-x-4 gap-y-6 justify-start">
                 {filteredCards.map((card, index) => (
-                  <div key={index} className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px] mx-auto">
+                  <div key={index} className="bg-[#E0FBFC] rounded-[40px] flex flex-col w-[336px]">
                     <img 
                       src={card.image}
                       alt={card.title}
