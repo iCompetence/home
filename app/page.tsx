@@ -52,9 +52,8 @@ export default function Home() {
     window.addEventListener('resize', updateBaseMargin);
     
     const handleScroll = () => {
-      if (!contentFrameRef.current || !searchBarRef.current) return;
+      if (!contentFrameRef.current) return;
       const rect = contentFrameRef.current.getBoundingClientRect();
-      const searchRect = searchBarRef.current.getBoundingClientRect();
       const initialOffset = 360;
       const distanceFromTop = rect.top;
       let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
@@ -64,25 +63,13 @@ export default function Home() {
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
 
-      // Check if search bar is out of view
-      setShowFloatingSearch(searchRect.bottom < 0);
-
       // Check if content frame reaches bottom of viewport
       const windowHeight = window.innerHeight;
       const distanceFromBottom = windowHeight - rect.bottom;
       setIsAtBottom(distanceFromBottom <= 0);
 
-      // Check if scrolled to bottom
-      const scrollContainer = contentFrameRef.current.querySelector('.h-full.overflow-y-auto');
-      if (scrollContainer) {
-        const isAtBottom = 
-          Math.abs(
-            scrollContainer.scrollHeight - 
-            scrollContainer.scrollTop - 
-            scrollContainer.clientHeight
-          ) < 1;
-        setShowBottomText(isAtBottom);
-      }
+      // Show bottom text only when container is full-width (frameMargin is 0)
+      setShowBottomText(newMargin <= 1);
     };
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -150,18 +137,20 @@ export default function Home() {
       <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66]" />
 
       {/* Floating Search Bar */}
-      <div className={`fixed top-4 sm:top-5 md:top-6 lg:top-7 xl:top-8 2xl:top-10 right-8 sm:right-12 md:right-16 lg:right-20 xl:right-24 2xl:right-32 z-30 transition-all duration-300 ${
+      {/* <div className={`fixed top-[4.5rem] sm:top-[5.25rem] md:top-[5.75rem] lg:top-[6.25rem] xl:top-[6.75rem] 2xl:top-[7.5rem] right-4 sm:right-5 md:right-6 lg:right-7 xl:right-8 2xl:right-10 z-30 transition-all duration-300 ${
         showFloatingSearch ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}>
         <button
           onClick={() => {
             document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="border border-[#161925] text-[#161925] hover:bg-[#161925] hover:text-[#E0FBFC] px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 py-1 sm:py-1.5 md:py-2 lg:py-2.5 xl:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-theinhardt transition-colors mr-2"
+          className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 bg-[#161925] rounded-full flex items-center justify-center"
         >
-          Suchen
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
         </button>
-      </div>
+      </div> */}
 
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
@@ -299,13 +288,13 @@ export default function Home() {
           <div className={`absolute left-0 w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 2xl:pb-16 transition-opacity duration-500 ${
             showBottomText ? 'opacity-100' : 'opacity-0'
           }`} style={{ bottom: 0 }}>
-            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#E0FBFC] text-center px-4">Ihr Experience Orchestrator</span>
+            <span className="text-5xl sm:text-6xl lg:text-7xl 2xl:text-8xl text-[#E0FBFC] text-center px-4">Ihr Experience Orchestrator</span>
           </div>
         </div>
         <div
           ref={contentFrameRef}
           id="leistungen"
-          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[200px] sm:mt-[240px] md:mt-[300px] lg:mt-[360px] 2xl:mt-[480px] mb-[200px] ${
+          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[160px] sm:mt-[180px] md:mt-[220px] lg:mt-[360px] 2xl:mt-[480px] mb-[200px] ${
             showMenu 
               ? isAtBottom 
                 ? 'rounded-none' 
@@ -321,7 +310,7 @@ export default function Home() {
         >
           <div className="h-full overflow-y-auto px-0 lg:px-10">
             <div className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <div className="relative" ref={searchBarRef}>
                   <input
                     type="text"
@@ -335,9 +324,10 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div>
+              <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-[#161925] text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
-                {filteredCards.map((card, index) => (
+                {cards.map((card, index) => (
                   <div key={index} className="bg-[#E0FBFC] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6">
                     <img 
                       src={card.image}
