@@ -10,7 +10,8 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null)
   const contentFrameRef = useRef<HTMLDivElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
-  const [frameMargin, setFrameMargin] = useState(160)
+  const [frameMargin, setFrameMargin] = useState(60)
+  const [baseMargin, setBaseMargin] = useState(60)
   const [showMenu, setShowMenu] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
@@ -30,6 +31,17 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    const updateBaseMargin = () => {
+      if (typeof window === 'undefined') return;
+      const newBaseMargin = window.innerWidth >= 1024 ? 160 : 60;
+      setBaseMargin(newBaseMargin);
+      setFrameMargin(newBaseMargin);
+    };
+    
+    // Set initial value immediately
+    updateBaseMargin();
+    window.addEventListener('resize', updateBaseMargin);
+    
     const handleScroll = () => {
       if (!contentFrameRef.current || !searchBarRef.current) return;
       const rect = contentFrameRef.current.getBoundingClientRect();
@@ -37,8 +49,8 @@ export default function Home() {
       const initialOffset = 360;
       const distanceFromTop = rect.top;
       let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
-      // Interpolate margin from 160px to 0px
-      let newMargin = 160 - 160 * progress;
+      // Interpolate margin from baseMargin to 0px
+      let newMargin = baseMargin - baseMargin * progress;
       setFrameMargin(newMargin);
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
@@ -64,8 +76,11 @@ export default function Home() {
       }
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateBaseMargin);
+    };
+  }, [baseMargin]);
 
   const cards = [
     {
@@ -295,7 +310,7 @@ export default function Home() {
             minHeight: '100vh'
           }}
         >
-          <div className="h-full overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
+          <div className="h-full overflow-y-auto px-10 lg:px-10">
             <div className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
               <div className="mb-6">
                 <div className="relative" ref={searchBarRef}>
@@ -312,13 +327,13 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 justify-items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
                 {filteredCards.map((card, index) => (
                   <div key={index} className="bg-[#E0FBFC] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6">
                     <img 
                       src={card.image}
                       alt={card.title}
-                      className="w-full h-[200px] sm:h-[220px] md:h-[240px] lg:h-[280px] xl:h-[320px] 2xl:h-[360px] object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
+                      className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
                     />
                     <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black m-0 font-theinhardt mb-1 sm:mb-2">{card.title}</h3>
                     <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] font-normal font-theinhardt">{card.subtitle}</p>
