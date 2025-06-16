@@ -3,6 +3,104 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion, useMotionValue, useSpring, MotionValue } from "framer-motion"
+
+// TiltCard component with the tilt effect
+interface TiltCardProps {
+  card: {
+    title: string;
+    subtitle: string;
+    image: string;
+    description: string;
+    features: string[];
+    benefits: string;
+  };
+  index: number;
+  onClick: () => void;
+}
+
+function TiltCard({ card, index, onClick }: TiltCardProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isDesktop, setIsDesktop] = useState(false)
+  
+  const springValues = {
+    damping: 15,
+    stiffness: 300,
+    mass: 0.5,
+  }
+  
+  const rotateX = useSpring(0, springValues)
+  const rotateY = useSpring(0, springValues)
+  const scale = useSpring(1, springValues)
+  
+  const rotateAmplitude = 14
+  const scaleOnHover = 1.05
+
+  // Check if we're on desktop/ultra-wide
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
+    if (!ref.current || !isDesktop) return
+
+    const rect = ref.current.getBoundingClientRect()
+    const offsetX = e.clientX - rect.left - rect.width / 2
+    const offsetY = e.clientY - rect.top - rect.height / 2
+
+    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude
+    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude
+
+    rotateX.set(rotationX)
+    rotateY.set(rotationY)
+  }
+
+  function handleMouseEnter() {
+    if (!isDesktop) return
+    scale.set(scaleOnHover)
+  }
+
+  function handleMouseLeave() {
+    if (!isDesktop) return
+    scale.set(1)
+    rotateX.set(0)
+    rotateY.set(0)
+  }
+
+  return (
+    <div className="[perspective:800px]">
+      <motion.div
+        ref={ref}
+        onClick={onClick}
+        className="group bg-[#E0FBFC] hover:bg-[#161925] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6 cursor-pointer hover:shadow-lg transition-all duration-300"
+        style={{
+          rotateX: isDesktop ? rotateX : 0,
+          rotateY: isDesktop ? rotateY : 0,
+          scale: isDesktop ? scale : 1,
+          transformStyle: "preserve-3d"
+        }}
+        onMouseMove={handleMouse}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <img 
+          src={card.image}
+          alt={card.title}
+          className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
+        />
+        <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black group-hover:text-[#E0FBFC] m-0 font-theinhardt mb-1 sm:mb-2 transition-colors duration-300">{card.title}</h3>
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] group-hover:text-[#E0FBFC] font-normal font-theinhardt transition-colors duration-300">{card.subtitle}</p>
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
@@ -19,6 +117,8 @@ export default function Home() {
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showFloatingSearch, setShowFloatingSearch] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [selectedCard, setSelectedCard] = useState<number | null>(null)
+  const [showOnePager, setShowOnePager] = useState(false)
 
   // Ensure client-side hydration is complete
   useEffect(() => {
@@ -88,47 +188,119 @@ export default function Home() {
     {
       title: "Personalization Injection",
       subtitle: "Lucky Bike, pepXpress",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Steigern Sie Ihre Conversion-Rate durch intelligente Personalisierung. Unsere AI-gestützte Lösung analysiert Nutzerverhalten in Echtzeit und passt Inhalte dynamisch an.",
+      features: [
+        "Real-time Nutzeranalyse",
+        "Dynamische Content-Anpassung", 
+        "A/B Testing Integration",
+        "Performance Analytics"
+      ],
+      benefits: "Bis zu 35% höhere Conversion-Rate und verbesserte User Experience"
     },
     {
       title: "Data Visualization",
       subtitle: "DataCorp, InsightX",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Verwandeln Sie komplexe Daten in verständliche, interaktive Visualisierungen. Unsere Dashboards ermöglichen datengetriebene Entscheidungen auf allen Unternehmensebenen.",
+      features: [
+        "Interactive Dashboards",
+        "Real-time Data Streaming",
+        "Custom Visualizations",
+        "Multi-source Integration"
+      ],
+      benefits: "Schnellere Entscheidungsfindung und verbesserte Datenverständlichkeit"
     },
     {
       title: "AI Automation",
       subtitle: "AutoAI, NextGen",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Automatisieren Sie repetitive Aufgaben mit intelligenten AI-Workflows. Sparen Sie Zeit und Ressourcen durch maßgeschneiderte Automatisierungslösungen.",
+      features: [
+        "Workflow Automation",
+        "Intelligent Task Management",
+        "Process Optimization",
+        "Integration APIs"
+      ],
+      benefits: "Bis zu 60% Zeitersparnis und reduzierte Fehlerquote"
     },
     {
       title: "Cloud Integration",
       subtitle: "Cloudify, SkyNet",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Nahtlose Integration Ihrer bestehenden Systeme in die Cloud. Skalierbare, sichere und kosteneffiziente Cloud-Lösungen für Ihr Unternehmen.",
+      features: [
+        "Multi-Cloud Strategy",
+        "Data Migration",
+        "Security Implementation",
+        "Cost Optimization"
+      ],
+      benefits: "Verbesserte Skalierbarkeit und reduzierte IT-Kosten"
     },
     {
       title: "E-Commerce Boost",
       subtitle: "ShopMaster, QuickCart",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Optimieren Sie Ihren Online-Shop für maximale Performance. Von der User Experience bis zur Conversion-Optimierung - wir steigern Ihren E-Commerce Erfolg.",
+      features: [
+        "Conversion Optimization",
+        "Performance Tuning",
+        "Mobile-first Design",
+        "Analytics Integration"
+      ],
+      benefits: "Höhere Verkaufszahlen und verbesserte Kundenzufriedenheit"
     },
     {
       title: "Customer Insights",
       subtitle: "InsightPro, UserSense",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Verstehen Sie Ihre Kunden besser durch fortgeschrittene Analytics. Unsere Insights helfen Ihnen, zielgerichtete Marketingstrategien zu entwickeln.",
+      features: [
+        "Customer Journey Mapping",
+        "Behavioral Analytics",
+        "Segmentation Tools",
+        "Predictive Modeling"
+      ],
+      benefits: "Verbesserte Kundenbindung und zielgerichtetes Marketing"
     },
     {
       title: "Marketing Analytics",
       subtitle: "MarketGenius, AdScope",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Messen und optimieren Sie Ihre Marketing-Performance in Echtzeit. Unsere Analytics-Lösungen geben Ihnen die Insights, die Sie für erfolgreiche Kampagnen benötigen.",
+      features: [
+        "Campaign Performance Tracking",
+        "ROI Analysis",
+        "Attribution Modeling",
+        "Automated Reporting"
+      ],
+      benefits: "Höhere Marketing-Effizienz und besserer ROI"
     },
     {
       title: "Workflow Automation",
       subtitle: "FlowPro, TaskPilot",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Streamlinen Sie Ihre Geschäftsprozesse mit intelligenten Workflows. Automatisieren Sie komplexe Abläufe und verbessern Sie die Effizienz Ihres Teams.",
+      features: [
+        "Process Automation",
+        "Task Management",
+        "Team Collaboration",
+        "Performance Monitoring"
+      ],
+      benefits: "Verbesserte Produktivität und reduzierte Bearbeitungszeiten"
     },
     {
       title: "Realtime Reporting",
       subtitle: "LiveStats, DashNow",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      description: "Erhalten Sie sofortige Einblicke in Ihre Geschäftsmetriken. Unsere Echtzeit-Reporting-Lösungen halten Sie immer über wichtige KPIs informiert.",
+      features: [
+        "Real-time Dashboards",
+        "Automated Alerts",
+        "Custom Reports",
+        "Data Export Options"
+      ],
+      benefits: "Schnellere Reaktionszeiten und datenbasierte Entscheidungen"
     }
   ]
 
@@ -338,21 +510,107 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
                 {cards.map((card, index) => (
-                  <div key={index} className="bg-[#E0FBFC] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6">
-                    <img 
-                      src={card.image}
-                      alt={card.title}
-                      className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
-                    />
-                    <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black m-0 font-theinhardt mb-1 sm:mb-2">{card.title}</h3>
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] font-normal font-theinhardt">{card.subtitle}</p>
-                  </div>
+                  <TiltCard 
+                    key={index} 
+                    card={card}
+                    index={index}
+                    onClick={() => {
+                      setSelectedCard(index);
+                      setShowOnePager(true);
+                    }}
+                  />
                 ))}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Product One-Pager Overlay */}
+      {showOnePager && selectedCard !== null && (
+        <div className="fixed inset-0 bg-[#E0FBFC] z-[100] overflow-y-auto">
+          <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-20">
+            {/* Back Button */}
+            <button
+              onClick={() => {
+                setShowOnePager(false);
+                setSelectedCard(null);
+              }}
+              className="fixed top-4 sm:top-6 md:top-8 lg:top-12 xl:top-16 2xl:top-20 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 2xl:left-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#161925] rounded-full flex items-center justify-center z-[101] hover:bg-[#0099CC] transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* One-Pager Content */}
+            <div className="max-w-4xl mx-auto pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 2xl:pt-36">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 2xl:gap-20">
+                {/* Left Column - Image and Title */}
+                <div>
+                  <img 
+                    src={cards[selectedCard].image}
+                    alt={cards[selectedCard].title}
+                    className="w-full aspect-square object-cover rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] mb-6 sm:mb-8"
+                  />
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-[#161925] font-theinhardt mb-3 sm:mb-4">
+                    {cards[selectedCard].title}
+                  </h1>
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#888] font-theinhardt">
+                    {cards[selectedCard].subtitle}
+                  </p>
+                </div>
+
+                {/* Right Column - Description and Details */}
+                <div>
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-[#161925] font-theinhardt mb-8 sm:mb-10 md:mb-12 leading-relaxed">
+                    {cards[selectedCard].description}
+                  </p>
+
+                  {/* Features */}
+                  <div className="mb-8 sm:mb-10 md:mb-12">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#161925] font-theinhardt mb-4 sm:mb-6">
+                      Features
+                    </h3>
+                    <ul className="space-y-3 sm:space-y-4">
+                      {cards[selectedCard].features.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="w-2 h-2 sm:w-3 sm:h-3 bg-[#0099CC] rounded-full mt-2 sm:mt-3 mr-3 sm:mr-4 flex-shrink-0"></span>
+                          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-[#161925] font-theinhardt">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Benefits */}
+                  <div className="bg-[#0099CC] p-6 sm:p-8 md:p-10 rounded-[20px] sm:rounded-[24px] md:rounded-[28px]">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-[#E0FBFC] font-theinhardt mb-4 sm:mb-6">
+                      Ihr Vorteil
+                    </h3>
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-[#E0FBFC] font-theinhardt leading-relaxed">
+                      {cards[selectedCard].benefits}
+                    </p>
+                  </div>
+
+                  {/* Contact Button */}
+                  <div className="mt-8 sm:mt-10 md:mt-12">
+                    <Link 
+                      href="https://www.icompetence.de/kontakt" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block bg-[#161925] text-[#E0FBFC] hover:bg-[#0099CC] px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 rounded-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-theinhardt transition-colors"
+                    >
+                      Jetzt anfragen
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

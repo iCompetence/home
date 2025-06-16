@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom 3D perspective for tilt cards */
+.perspective-800 {
+  perspective: 800px;
+}
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 153, 204;
