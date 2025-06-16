@@ -142,7 +142,7 @@ export default function Home() {
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
         <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
-          animationState >= 1 ? 'top-6 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+          animationState >= 1 ? 'top-4 sm:top-5 md:top-6 lg:top-7 xl:top-8 2xl:top-10 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
         }`}>
           <h1 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold font-theinhardt transition-opacity duration-0 ${showMenu ? 'opacity-0' : 'opacity-100'}`}>iCompetence</h1>
         </div>
@@ -307,7 +307,7 @@ export default function Home() {
                     onFocus={() => {
                       document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 2xl:py-7 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-['EB_Garamond'] italic text-[#161925] placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent"
+                    className="w-full px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 2xl:py-7 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-['EB_Garamond'] italic text-[#161925] placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent truncate"
                   />
                 </div>
               </div>
