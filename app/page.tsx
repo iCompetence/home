@@ -18,6 +18,12 @@ export default function Home() {
   const [showBottomText, setShowBottomText] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showFloatingSearch, setShowFloatingSearch] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  // Ensure client-side hydration is complete
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationState(1), 1000)
@@ -47,7 +53,7 @@ export default function Home() {
       setFrameMargin(newBaseMargin);
     };
     
-    // Set initial value immediately
+    // Only run on client side after hydration
     updateBaseMargin();
     window.addEventListener('resize', updateBaseMargin);
     
@@ -301,10 +307,14 @@ export default function Home() {
                 : 'rounded-b-[24px]'
               : 'rounded-[24px]'
           }`}
-          style={{
+          style={isMounted ? {
             marginLeft: `${frameMargin}px`,
             marginRight: `${frameMargin}px`,
             transition: 'margin 0.2s',
+            minHeight: '100vh'
+          } : {
+            marginLeft: '60px',
+            marginRight: '60px',
             minHeight: '100vh'
           }}
         >
@@ -325,7 +335,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-[#161925] text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
                 {cards.map((card, index) => (
                   <div key={index} className="bg-[#E0FBFC] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6">
