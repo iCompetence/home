@@ -37,14 +37,27 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
       // Parse CSV line (handling commas within quotes)
       const columns = parseCSVLine(line);
       
-      const title = columns[0]?.trim();
-      const description = columns[1]?.trim();
-      const benefits = columns[2]?.trim();
-      const link = columns[3]?.trim();
-      const subtitle = columns[4]?.trim();
+      // Ensure we have at least 5 columns, pad with empty strings if needed
+      while (columns.length < 5) {
+        columns.push('');
+      }
+      
+      const title = columns[0]?.trim() || '';
+      const description = columns[1]?.trim() || '';
+      const benefits = columns[2]?.trim() || '';
+      const link = columns[3]?.trim() || '';
+      const subtitle = columns[4]?.trim() || '';
       
       // Only add products that have at least title and description
       if (title && description) {
+        console.log('Processing product:', { 
+          title, 
+          subtitle, 
+          description: description.length > 50 ? description.substring(0, 50) + '...' : description, 
+          benefits: benefits.length > 30 ? benefits.substring(0, 30) + '...' : benefits, 
+          link 
+        });
+        
         products.push({
           title,
           subtitle: subtitle || 'iCompetence Solution',
@@ -53,6 +66,11 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           link: link || '',
           image: DEFAULT_IMAGE,
           features: [] // We'll keep this empty for now as it's not in the sheet
+        });
+      } else {
+        console.log('Skipping row - missing title or description:', { 
+          title, 
+          description: description ? (description.length > 30 ? description.substring(0, 30) + '...' : description) : 'empty'
         });
       }
     }
@@ -65,7 +83,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
   }
 }
 
-// Simple CSV parser that handles quoted fields
+// Improved CSV parser that handles quoted fields and empty cells
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
   let current = '';
@@ -85,16 +103,16 @@ function parseCSVLine(line: string): string[] {
         inQuotes = !inQuotes;
       }
     } else if (char === ',' && !inQuotes) {
-      // End of field
-      result.push(current);
+      // End of field - add current field (even if empty)
+      result.push(current.trim());
       current = '';
     } else {
       current += char;
     }
   }
   
-  // Add the last field
-  result.push(current);
+  // Add the last field (even if empty)
+  result.push(current.trim());
   
   return result;
 }

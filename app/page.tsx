@@ -426,7 +426,7 @@ export default function Home() {
           <div className={`absolute left-0 w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 2xl:pb-16 transition-opacity duration-500 ${
             showBottomText ? 'opacity-100' : 'opacity-0'
           }`} style={{ bottom: 0 }}>
-            <span className="text-5xl sm:text-6xl lg:text-7xl 2xl:text-8xl text-[#E0FBFC] text-center px-4">Ihr Experience Orchestrator</span>
+            <span className="text-5xl sm:text-6xl lg:text-7xl 2xl:text-8xl text-[#E0FBFC] text-center px-4">Ihr Entwickler für proprietäre KI-Agenten</span>
           </div>
         </div>
         <div
