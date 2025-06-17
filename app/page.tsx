@@ -542,11 +542,19 @@ export default function Home() {
                         <span className="sm:hidden">Vorherige</span>
                         <span className="hidden sm:inline">Vorherige Leistung</span>
                       </span>
-                      <img 
-                        src={cards[selectedCard - 1].image}
-                        alt={cards[selectedCard - 1].title}
-                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
-                      />
+                      {cards[selectedCard - 1].image.includes('drive.google.com') ? (
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[#0099CC] rounded-full flex items-center justify-center">
+                          <span className="text-[#E0FBFC] text-xs font-bold">
+                            {cards[selectedCard - 1].title.charAt(0)}
+                          </span>
+                        </div>
+                      ) : (
+                        <img 
+                          src={cards[selectedCard - 1].image}
+                          alt={cards[selectedCard - 1].title}
+                          className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
+                        />
+                      )}
                     </div>
                   </button>
                 ) : (
@@ -576,11 +584,19 @@ export default function Home() {
                     className="bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-2 sm:p-3 md:p-4 flex items-center gap-1.5 sm:gap-2 md:gap-3 transition-colors group"
                   >
                     <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
-                      <img 
-                        src={cards[selectedCard + 1].image}
-                        alt={cards[selectedCard + 1].title}
-                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
-                      />
+                      {cards[selectedCard + 1].image.includes('drive.google.com') ? (
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[#0099CC] rounded-full flex items-center justify-center">
+                          <span className="text-[#E0FBFC] text-xs font-bold">
+                            {cards[selectedCard + 1].title.charAt(0)}
+                          </span>
+                        </div>
+                      ) : (
+                        <img 
+                          src={cards[selectedCard + 1].image}
+                          alt={cards[selectedCard + 1].title}
+                          className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
+                        />
+                      )}
                       <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
                         <span className="sm:hidden">Nächste</span>
                         <span className="hidden sm:inline">Nächste Leistung</span>
@@ -697,11 +713,19 @@ export default function Home() {
                     <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
                       Vorherige Leistung
                     </span>
-                    <img 
-                      src={cards[selectedCard - 1].image}
-                      alt={cards[selectedCard - 1].title}
-                      className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
-                    />
+                    {cards[selectedCard - 1].image.includes('drive.google.com') ? (
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#0099CC] rounded-full flex items-center justify-center">
+                        <span className="text-[#E0FBFC] text-sm font-bold">
+                          {cards[selectedCard - 1].title.charAt(0)}
+                        </span>
+                      </div>
+                    ) : (
+                      <img 
+                        src={cards[selectedCard - 1].image}
+                        alt={cards[selectedCard - 1].title}
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
+                      />
+                    )}
                   </div>
                 </button>
               )}
@@ -715,11 +739,19 @@ export default function Home() {
                   className="bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-3 sm:p-4 flex items-center gap-2 sm:gap-3 transition-colors group"
                 >
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <img 
-                      src={cards[selectedCard + 1].image}
-                      alt={cards[selectedCard + 1].title}
-                      className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
-                    />
+                    {cards[selectedCard + 1].image.includes('drive.google.com') ? (
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#0099CC] rounded-full flex items-center justify-center">
+                        <span className="text-[#E0FBFC] text-sm font-bold">
+                          {cards[selectedCard + 1].title.charAt(0)}
+                        </span>
+                      </div>
+                    ) : (
+                      <img 
+                        src={cards[selectedCard + 1].image}
+                        alt={cards[selectedCard + 1].title}
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
+                      />
+                    )}
                     <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
                       Nächste Leistung
                     </span>
