@@ -86,11 +86,11 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
       >
         <div className="relative mb-3 sm:mb-4 md:mb-5 lg:mb-6">
           {card.image.includes('drive.google.com') && card.image.includes('/preview') ? (
-            // Render video for Google Drive preview links
+            // Render video for Google Drive preview links (no autoplay due to CSP restrictions)
             <iframe
-              src={`${card.image}${card.image.includes('?') ? '&' : '?'}autoplay=1&loop=1&mute=1`}
+              src={card.image}
               className="w-full aspect-square rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
-              allow="autoplay; encrypted-media"
+              allow="encrypted-media"
               style={{ border: 'none' }}
               title={card.title}
             />
@@ -100,6 +100,11 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
               src={card.image}
               alt={card.title}
               className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+              onError={(e) => {
+                // Fallback to default image if Google Drive image fails to load
+                const target = e.target as HTMLImageElement;
+                target.src = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
+              }}
             />
           )}
           <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] flex items-center justify-center">
@@ -242,8 +247,8 @@ export default function Home() {
 
     loadProducts();
 
-    // Set up polling to check for updates every 30 seconds
-    const interval = setInterval(loadProducts, 30000);
+    // Set up polling to check for updates every hour
+    const interval = setInterval(loadProducts, 3600000);
 
     return () => clearInterval(interval);
   }, []);
@@ -263,9 +268,9 @@ export default function Home() {
         showFloatingSearch ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}>
         <button
-                      onClick={() => {
+          onClick={() => {
               document.getElementById('produkte')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          }}
           className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 bg-[#161925] rounded-full flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8">
@@ -488,14 +493,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Produkte</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-4 sm:mb-4 lg:mb-6 2xl:mb-6 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Produkte</h2>
               
               {isLoadingCards ? (
                 <div className="flex justify-center items-center py-12">
                   <div className="text-[#161925] text-lg sm:text-xl font-theinhardt">Laden...</div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
                   {cards.map((card, index) => (
                     <TiltCard 
                       key={`${card.title}-${index}`} 
@@ -549,7 +554,7 @@ export default function Home() {
                     <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
                       <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
                         <span className="sm:hidden">Vorherige</span>
-                        <span className="hidden sm:inline">Vorherige Leistung</span>
+                        <span className="hidden sm:inline">Vorheriges Produkt</span>
                       </span>
                       {cards[selectedCard - 1].image.includes('drive.google.com') ? (
                         <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[#0099CC] rounded-full flex items-center justify-center">
@@ -608,7 +613,7 @@ export default function Home() {
                       )}
                       <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
                         <span className="sm:hidden">Nächste</span>
-                        <span className="hidden sm:inline">Nächste Leistung</span>
+                        <span className="hidden sm:inline">Nächstes Produkt</span>
                       </span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">
@@ -624,11 +629,11 @@ export default function Home() {
                 {/* Left Column - Image (and Benefits on desktop) */}
                 <div>
                   {cards[selectedCard].image.includes('drive.google.com') && cards[selectedCard].image.includes('/preview') ? (
-                    // Render video for Google Drive preview links
+                    // Render video for Google Drive preview links (no autoplay due to CSP restrictions)
                     <iframe
-                      src={`${cards[selectedCard].image}${cards[selectedCard].image.includes('?') ? '&' : '?'}autoplay=1&loop=1&mute=1`}
+                      src={cards[selectedCard].image}
                       className="w-full aspect-square rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
-                      allow="autoplay; encrypted-media"
+                      allow="encrypted-media"
                       style={{ border: 'none' }}
                       title={cards[selectedCard].title}
                     />
@@ -638,6 +643,11 @@ export default function Home() {
                       src={cards[selectedCard].image}
                       alt={cards[selectedCard].title}
                       className="w-full aspect-square object-cover rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
+                      onError={(e) => {
+                        // Fallback to default image if Google Drive image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
+                      }}
                     />
                   )}
                   
@@ -720,7 +730,7 @@ export default function Home() {
                   </svg>
                   <div className="flex items-center gap-2 sm:gap-3">
                     <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
-                      Vorherige Leistung
+                      Vorheriges Produkt
                     </span>
                     {cards[selectedCard - 1].image.includes('drive.google.com') ? (
                       <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#0099CC] rounded-full flex items-center justify-center">
@@ -762,7 +772,7 @@ export default function Home() {
                       />
                     )}
                     <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
-                      Nächste Leistung
+                      Nächstes Produkt
                     </span>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">

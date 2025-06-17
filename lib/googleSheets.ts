@@ -45,8 +45,8 @@ function getDirectGoogleDriveUrl(productTitle: string, fileId: string): string {
       console.log(`Generated video URL: ${videoUrl}`);
       return videoUrl;
     }
-    // For images, use direct view format
-    const imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+    // For images, use direct view format with proper sharing
+    const imageUrl = `https://lh3.googleusercontent.com/d/${fileId}=w1000`;
     console.log(`Generated image URL: ${imageUrl}`);
     return imageUrl;
   }
