@@ -119,35 +119,36 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
   }
 }
 
-// Simple and reliable CSV parser using regex
+// Robust CSV parser that handles quoted fields and empty cells
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
   
-  // Use regex to split on commas, but respect quoted fields
-  // This regex handles: "quoted,field",normal,,"empty",,
-  const regex = /("(?:[^"]|"")*"|[^,]*)/g;
-  let match;
-  
-  while ((match = regex.exec(line)) !== null) {
-    let field = match[1];
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
     
-    // Remove surrounding quotes if present
-    if (field.startsWith('"') && field.endsWith('"')) {
-      field = field.slice(1, -1);
-      // Handle escaped quotes within the field
-      field = field.replace(/""/g, '"');
-    }
-    
-    result.push(field.trim());
-  }
-  
-  // Handle trailing empty fields (if line ends with commas)
-  const trailingCommas = line.match(/,+$/);
-  if (trailingCommas) {
-    for (let i = 0; i < trailingCommas[0].length; i++) {
-      result.push('');
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        // Handle escaped quotes
+        current += '"';
+        i++; // Skip next quote
+      } else {
+        // Toggle quote state
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of field
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
     }
   }
+  
+  // Add the last field
+  result.push(current.trim());
   
   return result;
 }
