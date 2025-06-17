@@ -4,17 +4,11 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useMotionValue, useSpring, MotionValue } from "framer-motion"
+import { fetchProductsFromSheet, ProductData } from "../lib/googleSheets"
 
 // TiltCard component with the tilt effect
 interface TiltCardProps {
-  card: {
-    title: string;
-    subtitle: string;
-    image: string;
-    description: string;
-    features: string[];
-    benefits: string;
-  };
+  card: ProductData;
   index: number;
   onClick: () => void;
 }
@@ -128,6 +122,8 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false)
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
   const [showOnePager, setShowOnePager] = useState(false)
+  const [cards, setCards] = useState<ProductData[]>([])
+  const [isLoadingCards, setIsLoadingCards] = useState(true)
 
   // Mission text split into words
   const missionText = "Unsere Mission ist es, intelligente, autonome KI-Agenten zu entwickeln, die komplexe Herausforderungen lösen, Effizienz steigern und nachhaltigen Mehrwert für unsere Kunden schaffen, stets unter Berücksichtigung höchster Standards für Datenschutz und ethische KI."
@@ -218,125 +214,27 @@ export default function Home() {
     };
   }, [baseMargin]);
 
-  const cards = [
-    {
-      title: "Personalization Injection",
-      subtitle: "Lucky Bike, pepXpress",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Steigern Sie Ihre Conversion-Rate durch intelligente Personalisierung. Unsere AI-gestützte Lösung analysiert Nutzerverhalten in Echtzeit und passt Inhalte dynamisch an.",
-      features: [
-        "Real-time Nutzeranalyse",
-        "Dynamische Content-Anpassung", 
-        "A/B Testing Integration",
-        "Performance Analytics"
-      ],
-      benefits: "Bis zu 35% höhere Conversion-Rate und verbesserte User Experience"
-    },
-    {
-      title: "Data Visualization",
-      subtitle: "DataCorp, InsightX",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Verwandeln Sie komplexe Daten in verständliche, interaktive Visualisierungen. Unsere Dashboards ermöglichen datengetriebene Entscheidungen auf allen Unternehmensebenen.",
-      features: [
-        "Interactive Dashboards",
-        "Real-time Data Streaming",
-        "Custom Visualizations",
-        "Multi-source Integration"
-      ],
-      benefits: "Schnellere Entscheidungsfindung und verbesserte Datenverständlichkeit"
-    },
-    {
-      title: "AI Automation",
-      subtitle: "AutoAI, NextGen",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Automatisieren Sie repetitive Aufgaben mit intelligenten AI-Workflows. Sparen Sie Zeit und Ressourcen durch maßgeschneiderte Automatisierungslösungen.",
-      features: [
-        "Workflow Automation",
-        "Intelligent Task Management",
-        "Process Optimization",
-        "Integration APIs"
-      ],
-      benefits: "Bis zu 60% Zeitersparnis und reduzierte Fehlerquote"
-    },
-    {
-      title: "Cloud Integration",
-      subtitle: "Cloudify, SkyNet",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Nahtlose Integration Ihrer bestehenden Systeme in die Cloud. Skalierbare, sichere und kosteneffiziente Cloud-Lösungen für Ihr Unternehmen.",
-      features: [
-        "Multi-Cloud Strategy",
-        "Data Migration",
-        "Security Implementation",
-        "Cost Optimization"
-      ],
-      benefits: "Verbesserte Skalierbarkeit und reduzierte IT-Kosten"
-    },
-    {
-      title: "E-Commerce Boost",
-      subtitle: "ShopMaster, QuickCart",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Optimieren Sie Ihren Online-Shop für maximale Performance. Von der User Experience bis zur Conversion-Optimierung - wir steigern Ihren E-Commerce Erfolg.",
-      features: [
-        "Conversion Optimization",
-        "Performance Tuning",
-        "Mobile-first Design",
-        "Analytics Integration"
-      ],
-      benefits: "Höhere Verkaufszahlen und verbesserte Kundenzufriedenheit"
-    },
-    {
-      title: "Customer Insights",
-      subtitle: "InsightPro, UserSense",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Verstehen Sie Ihre Kunden besser durch fortgeschrittene Analytics. Unsere Insights helfen Ihnen, zielgerichtete Marketingstrategien zu entwickeln.",
-      features: [
-        "Customer Journey Mapping",
-        "Behavioral Analytics",
-        "Segmentation Tools",
-        "Predictive Modeling"
-      ],
-      benefits: "Verbesserte Kundenbindung und zielgerichtetes Marketing"
-    },
-    {
-      title: "Marketing Analytics",
-      subtitle: "MarketGenius, AdScope",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Messen und optimieren Sie Ihre Marketing-Performance in Echtzeit. Unsere Analytics-Lösungen geben Ihnen die Insights, die Sie für erfolgreiche Kampagnen benötigen.",
-      features: [
-        "Campaign Performance Tracking",
-        "ROI Analysis",
-        "Attribution Modeling",
-        "Automated Reporting"
-      ],
-      benefits: "Höhere Marketing-Effizienz und besserer ROI"
-    },
-    {
-      title: "Workflow Automation",
-      subtitle: "FlowPro, TaskPilot",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Streamlinen Sie Ihre Geschäftsprozesse mit intelligenten Workflows. Automatisieren Sie komplexe Abläufe und verbessern Sie die Effizienz Ihres Teams.",
-      features: [
-        "Process Automation",
-        "Task Management",
-        "Team Collaboration",
-        "Performance Monitoring"
-      ],
-      benefits: "Verbesserte Produktivität und reduzierte Bearbeitungszeiten"
-    },
-    {
-      title: "Realtime Reporting",
-      subtitle: "LiveStats, DashNow",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-      description: "Erhalten Sie sofortige Einblicke in Ihre Geschäftsmetriken. Unsere Echtzeit-Reporting-Lösungen halten Sie immer über wichtige KPIs informiert.",
-      features: [
-        "Real-time Dashboards",
-        "Automated Alerts",
-        "Custom Reports",
-        "Data Export Options"
-      ],
-      benefits: "Schnellere Reaktionszeiten und datenbasierte Entscheidungen"
-    }
-  ]
+  // Fetch products from Google Sheets
+  useEffect(() => {
+    const loadProducts = async () => {
+      setIsLoadingCards(true);
+      try {
+        const products = await fetchProductsFromSheet();
+        setCards(products);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      } finally {
+        setIsLoadingCards(false);
+      }
+    };
+
+    loadProducts();
+
+    // Set up polling to check for updates every 30 seconds
+    const interval = setInterval(loadProducts, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const filteredCards = cards.filter(card => 
     card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -570,19 +468,26 @@ export default function Home() {
               </div>
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
               <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
-                {cards.map((card, index) => (
-                  <TiltCard 
-                    key={index} 
-                    card={card}
-                    index={index}
-                    onClick={() => {
-                      setSelectedCard(index);
-                      setShowOnePager(true);
-                    }}
-                  />
-                ))}
-              </div>
+              
+              {isLoadingCards ? (
+                <div className="flex justify-center items-center py-12">
+                  <div className="text-[#161925] text-lg sm:text-xl font-theinhardt">Laden...</div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
+                  {cards.map((card, index) => (
+                    <TiltCard 
+                      key={`${card.title}-${index}`} 
+                      card={card}
+                      index={index}
+                      onClick={() => {
+                        setSelectedCard(index);
+                        setShowOnePager(true);
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -721,13 +626,26 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* Contact Button */}
-                  <div className="mt-4 sm:mt-5 md:mt-6">
+                  {/* Contact Buttons */}
+                  <div className="mt-4 sm:mt-5 md:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    {/* Additional CTA Button - Show only if link exists */}
+                    {cards[selectedCard].link && (
+                      <Link 
+                        href={cards[selectedCard].link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block bg-[#0099CC] text-[#E0FBFC] hover:bg-[#161925] hover:text-[#E0FBFC] px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-10 py-1.5 sm:py-2 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-theinhardt transition-colors text-center"
+                      >
+                        Mehr erfahren
+                      </Link>
+                    )}
+                    
+                    {/* Contact Button */}
                     <Link 
                       href="https://www.icompetence.de/kontakt" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-block bg-[#E0FBFC] text-[#161925] hover:bg-[#0099CC] hover:text-[#E0FBFC] px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-10 py-1.5 sm:py-2 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-theinhardt transition-colors"
+                      className="inline-block bg-[#E0FBFC] text-[#161925] hover:bg-[#0099CC] hover:text-[#E0FBFC] px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-10 py-1.5 sm:py-2 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-theinhardt transition-colors text-center"
                     >
                       Kontaktiere uns
                     </Link>
