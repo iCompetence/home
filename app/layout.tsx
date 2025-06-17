@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className={`${theinhardt.variable} ${ebGaramond.variable}`}>{children}</body>
+      <body className={`${theinhardt.variable} ${ebGaramond.variable}`} suppressHydrationWarning={true}>{children}</body>
     </html>
   )
 }

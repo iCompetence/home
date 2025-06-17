@@ -36,15 +36,22 @@ function getDirectGoogleDriveUrl(productTitle: string, fileId: string): string {
   // For images, use direct view format
   
   if (fileId) {
+    console.log(`Generating URL for ${productTitle} with file ID: ${fileId}`);
+    
     // Check if this is likely a video based on product title
     // You can expand this logic or add a separate column for media type
     if (productTitle === "ICU User Journey Explorer" || fileId.toLowerCase().includes('mp4')) {
-      return `https://drive.google.com/file/d/${fileId}/preview`;
+      const videoUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+      console.log(`Generated video URL: ${videoUrl}`);
+      return videoUrl;
     }
     // For images, use direct view format
-    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    const imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+    console.log(`Generated image URL: ${imageUrl}`);
+    return imageUrl;
   }
   
+  console.log(`No file ID provided for ${productTitle}, using default image`);
   return DEFAULT_IMAGE;
 }
 
@@ -58,16 +65,56 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
     });
     
     const csvData = response.data;
-    const lines = csvData.split('\n');
+    console.log('Full CSV data received:', csvData);
     
-    // Skip header row
-    const dataLines: string[] = lines.slice(1).filter((line: string) => line.trim() !== '');
+    // More robust line splitting that handles various line endings
+    const lines = csvData.split(/\r?\n/);
+    
+    // Skip header row and filter out empty lines
+    let dataLines: string[] = lines.slice(1).filter((line: string) => line.trim() !== '');
+    
+    // Reconstruct lines that may have been split due to line breaks within quoted fields
+    const reconstructedLines: string[] = [];
+    let currentLine = '';
+    let inQuotes = false;
+    
+    for (const line of dataLines) {
+      if (currentLine) {
+        currentLine += '\n' + line;
+      } else {
+        currentLine = line;
+      }
+      
+      // Count quotes to determine if we're inside a quoted field
+      const quoteCount = (currentLine.match(/"/g) || []).length;
+      inQuotes = quoteCount % 2 === 1;
+      
+      if (!inQuotes) {
+        reconstructedLines.push(currentLine);
+        currentLine = '';
+      }
+    }
+    
+    // If there's a remaining line, add it
+    if (currentLine) {
+      reconstructedLines.push(currentLine);
+    }
+    
+    console.log('Data lines found:', reconstructedLines.length);
     
     const products: ProductData[] = [];
     
-    for (const line of dataLines) {
+    for (let i = 0; i < reconstructedLines.length; i++) {
+      const line = reconstructedLines[i];
+      console.log(`Processing line ${i + 1}:`, line);
+      
+      // Skip lines that are clearly incomplete or malformed
+      if (!line.includes('"') && line.split(',').length < 3) {
+        console.log('Skipping malformed line:', line);
+        continue;
+      }
+      
       // Parse CSV line (handling commas within quotes)
-      console.log('Raw CSV line:', line);
       const columns = parseCSVLine(line);
       console.log('Parsed columns:', columns);
       
@@ -84,8 +131,8 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
       const fileId = columns[5]?.trim() || '';
       
       // Only add products that have at least title and description
-      if (title && description) {
-        console.log('Processing product:', { 
+      if (title && description && !title.startsWith(',,')) {
+        console.log('Adding product:', { 
           title, 
           subtitle, 
           description: description.length > 50 ? description.substring(0, 50) + '...' : description, 
@@ -104,10 +151,11 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           features: [] // We'll keep this empty for now as it's not in the sheet
         });
       } else {
-        // Skipping row - missing title or description
+        console.log('Skipping row - missing title or description or malformed:', { title, description });
       }
     }
     
+    console.log('Final products array:', products);
     return products;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -146,6 +194,11 @@ function parseCSVLine(line: string): string[] {
   
   // Add the last field
   result.push(current.trim());
+  
+  // If we ended in quotes state, the line might be incomplete
+  if (inQuotes) {
+    console.warn('CSV line appears incomplete (unclosed quotes):', line);
+  }
   
   return result;
 }

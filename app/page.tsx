@@ -88,9 +88,9 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
           {card.image.includes('drive.google.com') && card.image.includes('/preview') ? (
             // Render video for Google Drive preview links
             <iframe
-              src={card.image}
+              src={`${card.image}${card.image.includes('?') ? '&' : '?'}autoplay=1&loop=1&mute=1`}
               className="w-full aspect-square rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
-              allow="autoplay"
+              allow="autoplay; encrypted-media"
               style={{ border: 'none' }}
               title={card.title}
             />
@@ -263,9 +263,9 @@ export default function Home() {
         showFloatingSearch ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}>
         <button
-          onClick={() => {
-            document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
-          }}
+                      onClick={() => {
+              document.getElementById('produkte')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 bg-[#161925] rounded-full flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8">
@@ -279,7 +279,14 @@ export default function Home() {
         <div className={`absolute transition-all duration-1000 ease-in-out animate-fade-in ${
           animationState >= 1 ? 'top-4 sm:top-5 md:top-6 lg:top-7 xl:top-8 2xl:top-10 left-1/2 -translate-x-1/2' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
         }`}>
-          <h1 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold font-theinhardt transition-opacity duration-0 ${showMenu ? 'opacity-0' : 'opacity-100'}`}>iCompetence</h1>
+          <h1 
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold font-theinhardt transition-opacity duration-0 cursor-pointer pointer-events-auto hover:text-[#E0FBFC] transition-colors ${showMenu ? 'opacity-0' : 'opacity-100'}`}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            iCompetence
+          </h1>
         </div>
       </div>
 
@@ -317,13 +324,15 @@ export default function Home() {
       }`}>
         {/* Title in overlay */}
         <div className="absolute top-4 sm:top-5 md:top-6 lg:top-7 xl:top-8 2xl:top-10 left-4 sm:left-5 md:left-6 lg:left-7 xl:left-8 2xl:left-10">
-          <Link 
-            href="/"
-            onClick={() => setIsMenuOpen(false)}
+          <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="text-[#E0FBFC] hover:text-[#0099CC] transition-colors"
           >
             <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold font-theinhardt">iCompetence</h1>
-          </Link>
+          </button>
         </div>
         
         <div className="h-full flex flex-col items-center justify-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 xl:space-y-12 2xl:space-y-16 px-4">
@@ -337,11 +346,11 @@ export default function Home() {
             Über uns
           </Link>
           <Link 
-            href="#leistungen" 
+            href="#produkte" 
             className="text-[#E0FBFC] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-theinhardt hover:text-[#0099CC] transition-colors text-center"
             onClick={() => setIsMenuOpen(false)}
           >
-            Unsere Leistungen
+            Unsere Produkte
           </Link>
           <Link 
             href="https://www.icompetence.de/blog" 
@@ -408,8 +417,8 @@ export default function Home() {
               <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-5 xl:px-6 py-2 rounded-full text-lg xl:text-xl font-theinhardt">
                 Über uns
               </Link>
-              <Link href="#leistungen" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-5 xl:px-6 py-2 rounded-full text-lg xl:text-xl font-theinhardt">
-                Unsere Leistungen
+              <Link href="#produkte" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-5 xl:px-6 py-2 rounded-full text-lg xl:text-xl font-theinhardt">
+                Unsere Produkte
               </Link>
             </div>
             <div className="hidden lg:block absolute left-1/2 -translate-x-1/2"></div>
@@ -443,7 +452,7 @@ export default function Home() {
         </div>
         <div
           ref={contentFrameRef}
-          id="leistungen"
+          id="produkte"
           className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[160px] sm:mt-[180px] md:mt-[220px] lg:mt-[360px] 2xl:mt-[480px] mb-[200px] ${
             showMenu 
               ? isAtBottom 
@@ -472,14 +481,14 @@ export default function Home() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => {
-                      document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' });
+                      document.getElementById('produkte')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="w-full px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 2xl:py-7 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-['EB_Garamond'] italic text-[#161925] placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent truncate"
                   />
                 </div>
               </div>
               <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Leistungen</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Produkte</h2>
               
               {isLoadingCards ? (
                 <div className="flex justify-center items-center py-12">
@@ -617,9 +626,9 @@ export default function Home() {
                   {cards[selectedCard].image.includes('drive.google.com') && cards[selectedCard].image.includes('/preview') ? (
                     // Render video for Google Drive preview links
                     <iframe
-                      src={cards[selectedCard].image}
+                      src={`${cards[selectedCard].image}${cards[selectedCard].image.includes('?') ? '&' : '?'}autoplay=1&loop=1&mute=1`}
                       className="w-full aspect-square rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
-                      allow="autoplay"
+                      allow="autoplay; encrypted-media"
                       style={{ border: 'none' }}
                       title={cards[selectedCard].title}
                     />
