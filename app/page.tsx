@@ -90,11 +90,18 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <img 
-          src={card.image}
-          alt={card.title}
-          className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
-        />
+        <div className="relative mb-3 sm:mb-4 md:mb-5 lg:mb-6">
+          <img 
+            src={card.image}
+            alt={card.title}
+            className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] flex items-center justify-center">
+            <button className="bg-[#E0FBFC] text-[#161925] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-theinhardt font-medium hover:bg-[#0099CC] hover:text-[#E0FBFC] transition-colors">
+              Details ansehen
+            </button>
+          </div>
+        </div>
         <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black group-hover:text-[#E0FBFC] m-0 font-theinhardt mb-1 sm:mb-2 transition-colors duration-300">{card.title}</h3>
         <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] group-hover:text-[#E0FBFC] font-normal font-theinhardt transition-colors duration-300">{card.subtitle}</p>
       </motion.div>
@@ -528,86 +535,172 @@ export default function Home() {
 
       {/* Product One-Pager Overlay */}
       {showOnePager && selectedCard !== null && (
-        <div className="fixed inset-0 bg-[#E0FBFC] z-[100] overflow-y-auto">
-          <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-20">
+        <div className="fixed inset-0 bg-[#161925] z-[100] overflow-y-auto lg:overflow-hidden">
+          <div className="min-h-screen lg:h-full flex flex-col lg:justify-center lg:items-center">
             {/* Back Button */}
-            <button
-              onClick={() => {
-                setShowOnePager(false);
-                setSelectedCard(null);
-              }}
-              className="fixed top-4 sm:top-6 md:top-8 lg:top-12 xl:top-16 2xl:top-20 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 2xl:left-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#161925] rounded-full flex items-center justify-center z-[101] hover:bg-[#0099CC] transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
+                          <button
+                onClick={() => {
+                  setShowOnePager(false);
+                  setSelectedCard(null);
+                }}
+                className="fixed top-4 sm:top-6 md:top-8 lg:top-12 xl:top-16 2xl:top-20 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 2xl:left-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#E0FBFC] rounded-full flex items-center justify-center z-[101] hover:bg-[#0099CC] transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#161925" className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
 
             {/* One-Pager Content */}
-            <div className="max-w-4xl mx-auto pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 2xl:pt-36">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 2xl:gap-20">
-                {/* Left Column - Image and Title */}
+            <div className="w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 pt-16 sm:pt-20 md:pt-24 lg:py-8 xl:py-12 2xl:py-16 pb-3 sm:pb-6 md:pb-8">
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 2xl:gap-24 h-full items-start">
+                {/* Left Column - Image and Benefits */}
                 <div>
                   <img 
                     src={cards[selectedCard].image}
                     alt={cards[selectedCard].title}
-                    className="w-full aspect-square object-cover rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] mb-6 sm:mb-8"
+                    className="w-full aspect-square object-cover rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6"
                   />
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-[#161925] font-theinhardt mb-3 sm:mb-4">
-                    {cards[selectedCard].title}
-                  </h1>
-                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#888] font-theinhardt">
-                    {cards[selectedCard].subtitle}
-                  </p>
-                </div>
-
-                {/* Right Column - Description and Details */}
-                <div>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-[#161925] font-theinhardt mb-8 sm:mb-10 md:mb-12 leading-relaxed">
-                    {cards[selectedCard].description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="mb-8 sm:mb-10 md:mb-12">
-                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#161925] font-theinhardt mb-4 sm:mb-6">
-                      Features
-                    </h3>
-                    <ul className="space-y-3 sm:space-y-4">
-                      {cards[selectedCard].features.map((feature, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-2 h-2 sm:w-3 sm:h-3 bg-[#0099CC] rounded-full mt-2 sm:mt-3 mr-3 sm:mr-4 flex-shrink-0"></span>
-                          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-[#161925] font-theinhardt">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
+                  
                   {/* Benefits */}
-                  <div className="bg-[#0099CC] p-6 sm:p-8 md:p-10 rounded-[20px] sm:rounded-[24px] md:rounded-[28px]">
-                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-[#E0FBFC] font-theinhardt mb-4 sm:mb-6">
+                  <div className="bg-[#0099CC] p-1.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 2xl:p-8 rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px]">
+                    <h3 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-bold text-[#E0FBFC] font-['EB_Garamond'] italic mb-1 sm:mb-1.5 md:mb-2">
                       Ihr Vorteil
                     </h3>
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-[#E0FBFC] font-theinhardt leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl text-[#E0FBFC] font-['EB_Garamond'] italic leading-relaxed">
                       {cards[selectedCard].benefits}
                     </p>
                   </div>
+                </div>
+
+                {/* Right Column - Title, Subtitle, Description and Contact */}
+                <div>
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-6xl font-bold text-[#E0FBFC] font-theinhardt mb-1 sm:mb-1.5 md:mb-2">
+                    {cards[selectedCard].title}
+                  </h1>
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl text-[#E0FBFC] opacity-80 font-theinhardt mb-4 sm:mb-5 md:mb-6">
+                    {cards[selectedCard].subtitle}
+                  </p>
+                  
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl text-[#E0FBFC] font-theinhardt mb-4 sm:mb-5 md:mb-6 leading-relaxed">
+                    {cards[selectedCard].description}
+                  </p>
 
                   {/* Contact Button */}
-                  <div className="mt-8 sm:mt-10 md:mt-12">
+                  <div className="mt-4 sm:mt-5 md:mt-6">
                     <Link 
                       href="https://www.icompetence.de/kontakt" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-block bg-[#161925] text-[#E0FBFC] hover:bg-[#0099CC] px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 rounded-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-theinhardt transition-colors"
+                      className="inline-block bg-[#E0FBFC] text-[#161925] hover:bg-[#0099CC] hover:text-[#E0FBFC] px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-10 py-1.5 sm:py-2 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-5 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-theinhardt transition-colors"
                     >
-                      Jetzt anfragen
+                      Kontaktiere uns
                     </Link>
                   </div>
                 </div>
               </div>
+
+              {/* Navigation Buttons - Mobile/Tablet: underneath content */}
+              <div className="flex justify-between items-center mt-6 sm:mt-7 md:mt-8 px-4 sm:px-6 md:px-8 lg:hidden">
+                {selectedCard > 0 ? (
+                  <button
+                    onClick={() => {
+                      setSelectedCard(selectedCard - 1);
+                    }}
+                    className="bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-2 sm:p-3 md:p-4 flex items-center gap-1.5 sm:gap-2 md:gap-3 transition-colors group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+                      <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
+                        Vorherige Leistung
+                      </span>
+                      <img 
+                        src={cards[selectedCard - 1].image}
+                        alt={cards[selectedCard - 1].title}
+                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
+                      />
+                    </div>
+                  </button>
+                ) : (
+                  <div></div>
+                )}
+
+                {selectedCard < cards.length - 1 ? (
+                  <button
+                    onClick={() => {
+                      setSelectedCard(selectedCard + 1);
+                    }}
+                    className="bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-2 sm:p-3 md:p-4 flex items-center gap-1.5 sm:gap-2 md:gap-3 transition-colors group"
+                  >
+                    <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+                      <img 
+                        src={cards[selectedCard + 1].image}
+                        alt={cards[selectedCard + 1].title}
+                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-cover rounded-full"
+                      />
+                      <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
+                        Nächste Leistung
+                      </span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
+
+            {/* Navigation Buttons - Desktop: fixed at bottom */}
+            {/* Previous Service Button - Show from second item onwards */}
+            {selectedCard > 0 && (
+              <button
+                onClick={() => {
+                  setSelectedCard(selectedCard - 1);
+                }}
+                className="hidden lg:flex fixed bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-12 xl:bottom-16 2xl:bottom-20 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 2xl:left-20 bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-3 sm:p-4 items-center gap-2 sm:gap-3 transition-colors z-[101] group"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
+                    Vorherige Leistung
+                  </span>
+                  <img 
+                    src={cards[selectedCard - 1].image}
+                    alt={cards[selectedCard - 1].title}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
+                  />
+                </div>
+              </button>
+            )}
+
+            {/* Next Service Button - Hide on last item */}
+            {selectedCard < cards.length - 1 && (
+              <button
+                onClick={() => {
+                  setSelectedCard(selectedCard + 1);
+                }}
+                className="hidden lg:flex fixed bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-12 xl:bottom-16 2xl:bottom-20 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 2xl:right-20 bg-[#E0FBFC] hover:bg-[#0099CC] rounded-full p-3 sm:p-4 items-center gap-2 sm:gap-3 transition-colors z-[101] group"
+              >
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <img 
+                    src={cards[selectedCard + 1].image}
+                    alt={cards[selectedCard + 1].title}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full"
+                  />
+                  <span className="text-[#161925] group-hover:text-[#E0FBFC] text-xs sm:text-sm md:text-base font-theinhardt font-medium whitespace-nowrap">
+                    Nächste Leistung
+                  </span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-[#161925] group-hover:text-[#E0FBFC]">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       )}
