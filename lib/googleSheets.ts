@@ -67,9 +67,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
     
     for (const line of dataLines) {
       // Parse CSV line (handling commas within quotes)
-      console.log('Raw CSV line:', line);
       const columns = parseCSVLine(line);
-      console.log('Parsed columns:', columns);
       
       // Ensure we have at least 6 columns, pad with empty strings if needed
       while (columns.length < 6) {
@@ -85,14 +83,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
       
       // Only add products that have at least title and description
       if (title && description) {
-        console.log('Processing product:', { 
-          title, 
-          subtitle, 
-          description: description.length > 50 ? description.substring(0, 50) + '...' : description, 
-          benefits: benefits.length > 30 ? benefits.substring(0, 30) + '...' : benefits, 
-          link,
-          fileId 
-        });
+        // Product processed successfully
         
         products.push({
           title,
@@ -104,10 +95,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           features: [] // We'll keep this empty for now as it's not in the sheet
         });
       } else {
-        console.log('Skipping row - missing title or description:', { 
-          title, 
-          description: description ? (description.length > 30 ? description.substring(0, 30) + '...' : description) : 'empty'
-        });
+        // Skipping row - missing title or description
       }
     }
     
