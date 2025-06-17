@@ -112,6 +112,8 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const [bgAnimationState, setBgAnimationState] = useState(0)
+  const [missionWordIndex, setMissionWordIndex] = useState(0)
+  const [missionFadingOut, setMissionFadingOut] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const contentFrameRef = useRef<HTMLDivElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -127,21 +129,46 @@ export default function Home() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
   const [showOnePager, setShowOnePager] = useState(false)
 
+  // Mission text split into words
+  const missionText = "Unsere Mission ist es, intelligente, autonome KI-Agenten zu entwickeln, die komplexe Herausforderungen lösen, Effizienz steigern und nachhaltigen Mehrwert für unsere Kunden schaffen, stets unter Berücksichtigung höchster Standards für Datenschutz und ethische KI."
+  const missionWords = missionText.split(' ')
+
   // Ensure client-side hydration is complete
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setAnimationState(1), 1000)
-    const timer2 = setTimeout(() => setAnimationState(2), 2000)
+    const timer1 = setTimeout(() => setAnimationState(1), 1000) // Logo moves up
+    const timer2 = setTimeout(() => setAnimationState(2), 2500) // Mission text starts
+    const timer3 = setTimeout(() => setAnimationState(3), 2500 + (missionWords.length * 200) + 1000) // Mission text stands for 1 second, then starts fading out
     const bgTimer = setTimeout(() => setBgAnimationState(1), 500)
+    
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
+      clearTimeout(timer3)
       clearTimeout(bgTimer)
     }
-  }, [])
+  }, [missionWords.length])
+
+  // Handle mission fade-out trigger
+  useEffect(() => {
+    if (animationState === 3) {
+      setMissionFadingOut(true)
+    }
+  }, [animationState])
+
+  // Mission text word-by-word animation
+  useEffect(() => {
+    if (animationState >= 2 && missionWordIndex < missionWords.length) {
+      const wordTimer = setTimeout(() => {
+        setMissionWordIndex(prev => prev + 1)
+      }, 200) // 200ms between each word
+      
+      return () => clearTimeout(wordTimer)
+    }
+  }, [animationState, missionWordIndex, missionWords.length])
 
   useEffect(() => {
     const updateBaseMargin = () => {
@@ -346,6 +373,34 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Mission Statement */}
+      <div 
+        className={`fixed inset-0 w-full h-full z-20 pointer-events-none transition-all duration-1000 ease-in-out ${
+          animationState >= 2 && !missionFadingOut ? 'opacity-100' : 'opacity-0'
+        }`}
+        onTransitionEnd={(e) => {
+          // Only trigger when the opacity transition ends and we're fading out
+          if (e.propertyName === 'opacity' && missionFadingOut && e.target === e.currentTarget) {
+            setAnimationState(4) // Show website after fade-out is complete
+          }
+        }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 px-4">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#E0FBFC] text-left leading-relaxed font-['EB_Garamond'] italic">
+            {missionWords.map((word, index) => (
+              <span
+                key={index}
+                className={`inline-block mr-2 transition-all duration-700 ease-out transform ${
+                  index < missionWordIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}
+              >
+                {word}
+              </span>
+            ))}
+          </p>
+        </div>
+      </div>
+
       {/* Full Screen Menu Overlay */}
       <div className={`fixed inset-0 bg-[#161925] z-40 transition-opacity duration-300 ${
         isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -428,16 +483,16 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Full homepage - appears in third state */}
+      {/* Full homepage - appears in fifth state */}
       <div
         className={`transition-all duration-1000 ease-in-out z-10 ${
-          animationState >= 2 ? "opacity-100" : "opacity-0 pointer-events-none"
+          animationState >= 4 ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="fixed inset-0 w-full h-full z-0 bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
           {/* Navigation */}
           <nav className={`transition-all duration-1000 ease-in-out ${
-            animationState >= 2 ? "opacity-100" : "opacity-0"
+            animationState >= 4 ? "opacity-100" : "opacity-0"
           } flex justify-between items-center p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12`}>
             <div className="hidden lg:flex flex-wrap justify-start space-x-3">
               <Link href="https://www.icompetence.de/" target="_blank" rel="noopener noreferrer" className="border border-[#E0FBFC] text-[#E0FBFC] hover:bg-[#E0FBFC] hover:text-[#0099cc] px-5 xl:px-6 py-2 rounded-full text-lg xl:text-xl font-theinhardt">
