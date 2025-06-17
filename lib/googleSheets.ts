@@ -20,43 +20,25 @@ const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1465101046530-73398c7f2
 const DRIVE_FOLDER_ID = '1HE6YC6X3wSjX05hNeOPIXlvaJj1CwLbf';
 
 // Function to generate Google Drive direct link for a file
-function getGoogleDriveImageUrl(productTitle: string): string {
-  // Try common file extensions
-  const extensions = ['.mp4', '.jpg', '.jpeg', '.png', '.gif', '.webp'];
+function getGoogleDriveImageUrl(productTitle: string, fileId: string): string {
+  // If we have a file ID from the sheet, use it directly
+  if (fileId) {
+    return getDirectGoogleDriveUrl(productTitle, fileId);
+  }
   
-  // For now, we'll use a direct link format for Google Drive files
-  // Note: This requires the files to be publicly accessible
-  // Format: https://drive.google.com/uc?export=view&id=FILE_ID
-  
-  // Since we can't easily get individual file IDs without API access,
-  // we'll create a mapping based on known files or use a fallback
-  return getDirectGoogleDriveUrl(productTitle);
+  // Fallback to default image if no file ID provided
+  return DEFAULT_IMAGE;
 }
 
-function getDirectGoogleDriveUrl(productTitle: string): string {
-  // File ID mapping for Google Drive files
-  // To get file IDs: Right-click file → Share → Copy link → Extract ID from URL
-  // Format: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
-  
-  const fileMapping: { [key: string]: string } = {
-    // Add your actual file IDs here
-    // Example: "ICU User Journey Explorer": "1ABC123DEF456GHI789JKL",
-    
-    // Placeholder - you'll need to replace with actual file IDs
-    "ICU User Journey Explorer": "", // Add file ID here
-    "ICS Intelligentic Product Searcher": "", // Add file ID here
-    "User Consent Management": "", // Add file ID here
-    "Customer Data Tracking": "", // Add file ID here
-    "Customer Data Hub": "", // Add file ID here
-    "Privacy-led AI Consulting": "", // Add file ID here
-    "Privacy-led AI Hosting": "", // Add file ID here
-  };
-  
-  const fileId = fileMapping[productTitle];
+function getDirectGoogleDriveUrl(productTitle: string, fileId: string): string {
+  // Generate Google Drive URL based on file type
+  // For videos (.mp4), use embed format for better display
+  // For images, use direct view format
   
   if (fileId) {
-    // For videos (.mp4), use embed format
-    if (productTitle === "ICU User Journey Explorer") {
+    // Check if this is likely a video based on product title
+    // You can expand this logic or add a separate column for media type
+    if (productTitle === "ICU User Journey Explorer" || fileId.toLowerCase().includes('mp4')) {
       return `https://drive.google.com/file/d/${fileId}/preview`;
     }
     // For images, use direct view format
@@ -89,8 +71,8 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
       const columns = parseCSVLine(line);
       console.log('Parsed columns:', columns);
       
-      // Ensure we have at least 5 columns, pad with empty strings if needed
-      while (columns.length < 5) {
+      // Ensure we have at least 6 columns, pad with empty strings if needed
+      while (columns.length < 6) {
         columns.push('');
       }
       
@@ -99,6 +81,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
       const benefits = columns[2]?.trim() || '';
       const link = columns[3]?.trim() || '';
       const subtitle = columns[4]?.trim() || '';
+      const fileId = columns[5]?.trim() || '';
       
       // Only add products that have at least title and description
       if (title && description) {
@@ -107,7 +90,8 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           subtitle, 
           description: description.length > 50 ? description.substring(0, 50) + '...' : description, 
           benefits: benefits.length > 30 ? benefits.substring(0, 30) + '...' : benefits, 
-          link 
+          link,
+          fileId 
         });
         
         products.push({
@@ -116,7 +100,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           description,
           benefits: benefits || 'Verbesserte Effizienz und Wachstum für Ihr Unternehmen',
           link: link || '',
-          image: getGoogleDriveImageUrl(title),
+          image: getGoogleDriveImageUrl(title, fileId),
           features: [] // We'll keep this empty for now as it's not in the sheet
         });
       } else {
