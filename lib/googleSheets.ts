@@ -16,6 +16,56 @@ const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?forma
 // Default placeholder image
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
 
+// Google Drive folder ID for product images/videos
+const DRIVE_FOLDER_ID = '1HE6YC6X3wSjX05hNeOPIXlvaJj1CwLbf';
+
+// Function to generate Google Drive direct link for a file
+function getGoogleDriveImageUrl(productTitle: string): string {
+  // Try common file extensions
+  const extensions = ['.mp4', '.jpg', '.jpeg', '.png', '.gif', '.webp'];
+  
+  // For now, we'll use a direct link format for Google Drive files
+  // Note: This requires the files to be publicly accessible
+  // Format: https://drive.google.com/uc?export=view&id=FILE_ID
+  
+  // Since we can't easily get individual file IDs without API access,
+  // we'll create a mapping based on known files or use a fallback
+  return getDirectGoogleDriveUrl(productTitle);
+}
+
+function getDirectGoogleDriveUrl(productTitle: string): string {
+  // File ID mapping for Google Drive files
+  // To get file IDs: Right-click file → Share → Copy link → Extract ID from URL
+  // Format: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+  
+  const fileMapping: { [key: string]: string } = {
+    // Add your actual file IDs here
+    // Example: "ICU User Journey Explorer": "1ABC123DEF456GHI789JKL",
+    
+    // Placeholder - you'll need to replace with actual file IDs
+    "ICU User Journey Explorer": "", // Add file ID here
+    "ICS Intelligentic Product Searcher": "", // Add file ID here
+    "User Consent Management": "", // Add file ID here
+    "Customer Data Tracking": "", // Add file ID here
+    "Customer Data Hub": "", // Add file ID here
+    "Privacy-led AI Consulting": "", // Add file ID here
+    "Privacy-led AI Hosting": "", // Add file ID here
+  };
+  
+  const fileId = fileMapping[productTitle];
+  
+  if (fileId) {
+    // For videos (.mp4), use embed format
+    if (productTitle === "ICU User Journey Explorer") {
+      return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+    // For images, use direct view format
+    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  }
+  
+  return DEFAULT_IMAGE;
+}
+
 export async function fetchProductsFromSheet(): Promise<ProductData[]> {
   try {
     const response = await axios.get(CSV_URL, {
@@ -66,7 +116,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           description,
           benefits: benefits || 'Verbesserte Effizienz und Wachstum für Ihr Unternehmen',
           link: link || '',
-          image: DEFAULT_IMAGE,
+          image: getGoogleDriveImageUrl(title),
           features: [] // We'll keep this empty for now as it's not in the sheet
         });
       } else {

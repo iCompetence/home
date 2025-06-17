@@ -85,11 +85,23 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
         onMouseLeave={handleMouseLeave}
       >
         <div className="relative mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-          <img 
-            src={card.image}
-            alt={card.title}
-            className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
-          />
+          {card.image.includes('drive.google.com') && card.image.includes('/preview') ? (
+            // Render video for Google Drive preview links
+            <iframe
+              src={card.image}
+              className="w-full aspect-square rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+              allow="autoplay"
+              style={{ border: 'none' }}
+              title={card.title}
+            />
+          ) : (
+            // Render image for regular image URLs
+            <img 
+              src={card.image}
+              alt={card.title}
+              className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+            />
+          )}
           <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] flex items-center justify-center">
             <button className="bg-[#E0FBFC] text-[#161925] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-theinhardt font-medium hover:bg-[#0099CC] hover:text-[#E0FBFC] transition-colors">
               Details ansehen
@@ -586,11 +598,23 @@ export default function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 xl:gap-16 2xl:gap-24 h-full items-start">
                 {/* Left Column - Image (and Benefits on desktop) */}
                 <div>
-                  <img 
-                    src={cards[selectedCard].image}
-                    alt={cards[selectedCard].title}
-                    className="w-full aspect-square object-cover rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
-                  />
+                  {cards[selectedCard].image.includes('drive.google.com') && cards[selectedCard].image.includes('/preview') ? (
+                    // Render video for Google Drive preview links
+                    <iframe
+                      src={cards[selectedCard].image}
+                      className="w-full aspect-square rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
+                      allow="autoplay"
+                      style={{ border: 'none' }}
+                      title={cards[selectedCard].title}
+                    />
+                  ) : (
+                    // Render image for regular image URLs
+                    <img 
+                      src={cards[selectedCard].image}
+                      alt={cards[selectedCard].title}
+                      className="w-full aspect-square object-cover rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] 2xl:rounded-[32px] mb-4 sm:mb-5 md:mb-6 lg:mb-4 xl:mb-5 2xl:mb-6"
+                    />
+                  )}
                   
                   {/* Benefits - Desktop only */}
                   <div className="hidden lg:block bg-[#0099CC] p-4 rounded-none">
