@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-module.exports = {
-  trailingSlash: true,
-}
-
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -14,6 +10,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
 }
 
 export default nextConfig
