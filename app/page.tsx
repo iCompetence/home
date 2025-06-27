@@ -123,7 +123,10 @@ function TiltCard({ card, index, onClick }: TiltCardProps) {
 export default function Home() {
   const [animationState, setAnimationState] = useState(0)
   const [bgAnimationState, setBgAnimationState] = useState(0)
+<<<<<<< HEAD
   const [backgroundTransition, setBackgroundTransition] = useState(false)
+=======
+>>>>>>> 47d5e14732737c9c69bbd1989052d781ba767f4f
   const [missionWordIndex, setMissionWordIndex] = useState(0)
   const [missionFadingOut, setMissionFadingOut] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -157,14 +160,20 @@ export default function Home() {
     const timer2 = setTimeout(() => setAnimationState(2), 2500) // Mission text starts
     const timer3 = setTimeout(() => setAnimationState(3), 2500 + (missionWords.length * 200) + 1000) // Mission text stands for 1 second, then starts fading out
     const bgTimer = setTimeout(() => setBgAnimationState(1), 500)
+<<<<<<< HEAD
     const bgTransitionTimer = setTimeout(() => setBackgroundTransition(true), 1000) // Start background transition when logo moves up
+=======
+>>>>>>> 47d5e14732737c9c69bbd1989052d781ba767f4f
     
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
       clearTimeout(timer3)
       clearTimeout(bgTimer)
+<<<<<<< HEAD
       clearTimeout(bgTransitionTimer)
+=======
+>>>>>>> 47d5e14732737c9c69bbd1989052d781ba767f4f
     }
   }, [missionWords.length])
 
@@ -262,6 +271,7 @@ export default function Home() {
   )
 
   return (
+<<<<<<< HEAD
     <main className="min-h-screen text-white">
       {/* Background - Solid base layer */}
       <div className="fixed inset-0 w-full h-full bg-[#0099CC]" />
@@ -269,6 +279,11 @@ export default function Home() {
       <div className={`fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66] transition-opacity duration-1000 ease-in-out ${
         backgroundTransition ? 'opacity-100' : 'opacity-0'
       }`} />
+=======
+    <main className="min-h-screen bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
+      {/* Background */}
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-[#0099cc] to-[#004d66]" />
+>>>>>>> 47d5e14732737c9c69bbd1989052d781ba767f4f
 
       {/* Floating Search Bar */}
       {/* <div className={`fixed top-[4.5rem] sm:top-[5.25rem] md:top-[5.75rem] lg:top-[6.25rem] xl:top-[6.75rem] 2xl:top-[7.5rem] right-4 sm:right-5 md:right-6 lg:right-7 xl:right-8 2xl:right-10 z-30 transition-all duration-300 ${
@@ -420,6 +435,7 @@ export default function Home() {
           animationState >= 4 ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
+<<<<<<< HEAD
         <div className="fixed inset-0 w-full h-full z-0 text-white">
           {/* Solid base layer */}
           <div className="absolute inset-0 bg-[#0099CC]" />
@@ -427,6 +443,9 @@ export default function Home() {
           <div className={`absolute inset-0 bg-gradient-to-br from-[#0099cc] to-[#004d66] transition-opacity duration-1000 ease-in-out ${
             backgroundTransition ? 'opacity-100' : 'opacity-0'
           }`} />
+=======
+        <div className="fixed inset-0 w-full h-full z-0 bg-gradient-to-br from-[#0099cc] to-[#004d66] text-white">
+>>>>>>> 47d5e14732737c9c69bbd1989052d781ba767f4f
           {/* Navigation */}
           <nav className={`transition-all duration-1000 ease-in-out ${
             animationState >= 4 ? "opacity-100" : "opacity-0"
