@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { google } from 'googleapis';
 
 export interface ProductData {
   title: string;
@@ -10,36 +10,22 @@ export interface ProductData {
   features: string[];
 }
 
-const SHEET_ID = '1sYll9NvCW_zVibsHV4LmPPn8nK4i9aLWqj3Xg3AjUvk';
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
-
 // Default placeholder image
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
 
-// Google Drive folder ID for product images/videos
-const DRIVE_FOLDER_ID = '1HE6YC6X3wSjX05hNeOPIXlvaJj1CwLbf';
-
 // Function to generate Google Drive direct link for a file
 function getGoogleDriveImageUrl(productTitle: string, fileId: string): string {
-  // If we have a file ID from the sheet, use it directly
   if (fileId) {
     return getDirectGoogleDriveUrl(productTitle, fileId);
   }
-  
-  // Fallback to default image if no file ID provided
   return DEFAULT_IMAGE;
 }
 
 function getDirectGoogleDriveUrl(productTitle: string, fileId: string): string {
-  // Generate Google Drive URL based on file type
-  // For videos (.mp4), use embed format for better display
-  // For images, use direct view format
-  
   if (fileId) {
     console.log(`Generating URL for ${productTitle} with file ID: ${fileId}`);
     
     // Check if this is likely a video based on product title
-    // You can expand this logic or add a separate column for media type
     if (productTitle === "ICU User Journey Explorer" || fileId.toLowerCase().includes('mp4')) {
       const videoUrl = `https://drive.google.com/file/d/${fileId}/preview`;
       console.log(`Generated video URL: ${videoUrl}`);
@@ -55,91 +41,84 @@ function getDirectGoogleDriveUrl(productTitle: string, fileId: string): string {
   return DEFAULT_IMAGE;
 }
 
+// Secure server-side function to fetch data from Google Sheets
 export async function fetchProductsFromSheet(): Promise<ProductData[]> {
   try {
-    const response = await axios.get(CSV_URL, {
+    // This will now be called from an API route for security
+    const response = await fetch('/api/products', {
+      method: 'GET',
       headers: {
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache'
       }
     });
-    
-    const csvData = response.data;
-    console.log('Full CSV data received:', csvData);
-    
-    // More robust line splitting that handles various line endings
-    const lines = csvData.split(/\r?\n/);
-    
-    // Skip header row and filter out empty lines
-    let dataLines: string[] = lines.slice(1).filter((line: string) => line.trim() !== '');
-    
-    // Reconstruct lines that may have been split due to line breaks within quoted fields
-    const reconstructedLines: string[] = [];
-    let currentLine = '';
-    let inQuotes = false;
-    
-    for (const line of dataLines) {
-      if (currentLine) {
-        currentLine += '\n' + line;
-      } else {
-        currentLine = line;
-      }
-      
-      // Count quotes to determine if we're inside a quoted field
-      const quoteCount = (currentLine.match(/"/g) || []).length;
-      inQuotes = quoteCount % 2 === 1;
-      
-      if (!inQuotes) {
-        reconstructedLines.push(currentLine);
-        currentLine = '';
-      }
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products: ${response.statusText}`);
     }
-    
-    // If there's a remaining line, add it
-    if (currentLine) {
-      reconstructedLines.push(currentLine);
+
+    const products = await response.json();
+    return products;
+  } catch (error) {
+    console.error('Error fetching data from API:', error);
+    // Return fallback data if API is unavailable
+    return getFallbackData();
+  }
+}
+
+// Server-side function for Google Sheets API (to be used in API routes only)
+export async function fetchProductsFromSheetSecure(): Promise<ProductData[]> {
+  try {
+    // Verify we're running on server-side
+    if (typeof window !== 'undefined') {
+      throw new Error('This function should only be called server-side');
     }
+
+    // Initialize Google Sheets API with service account
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        type: 'service_account',
+        project_id: process.env.GOOGLE_PROJECT_ID,
+        private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+        token_uri: 'https://oauth2.googleapis.com/token',
+        auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs'
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
     
-    console.log('Data lines found:', reconstructedLines.length);
+    // Fetch data from the private sheet
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: 'Sheet1!A2:F', // Adjust range as needed
+    });
+
+    const rows = response.data.values || [];
+    console.log('Data rows found:', rows.length);
     
     const products: ProductData[] = [];
     
-    for (let i = 0; i < reconstructedLines.length; i++) {
-      const line = reconstructedLines[i];
-      console.log(`Processing line ${i + 1}:`, line);
-      
-      // Skip lines that are clearly incomplete or malformed
-      if (!line.includes('"') && line.split(',').length < 3) {
-        console.log('Skipping malformed line:', line);
-        continue;
-      }
-      
-      // Parse CSV line (handling commas within quotes)
-      const columns = parseCSVLine(line);
-      console.log('Parsed columns:', columns);
-      
+    for (const row of rows) {
       // Ensure we have at least 6 columns, pad with empty strings if needed
-      while (columns.length < 6) {
-        columns.push('');
+      while (row.length < 6) {
+        row.push('');
       }
       
-      const title = columns[0]?.trim() || '';
-      const description = columns[1]?.trim() || '';
-      const benefits = columns[2]?.trim() || '';
-      const link = columns[3]?.trim() || '';
-      const subtitle = columns[4]?.trim() || '';
-      const fileId = columns[5]?.trim() || '';
+      const title = row[0]?.trim() || '';
+      const description = row[1]?.trim() || '';
+      const benefits = row[2]?.trim() || '';
+      const link = row[3]?.trim() || '';
+      const subtitle = row[4]?.trim() || '';
+      const fileId = row[5]?.trim() || '';
       
       // Only add products that have at least title and description
-      if (title && description && !title.startsWith(',,')) {
-        console.log('Adding product:', { 
-          title, 
-          subtitle, 
-          description: description.length > 50 ? description.substring(0, 50) + '...' : description, 
-          benefits: benefits.length > 30 ? benefits.substring(0, 30) + '...' : benefits, 
-          link,
-          fileId 
-        });
+      if (title && description) {
+        console.log('Adding product:', { title, subtitle });
         
         products.push({
           title,
@@ -148,59 +127,17 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
           benefits: benefits || 'Verbesserte Effizienz und Wachstum für Ihr Unternehmen',
           link: link || '',
           image: getGoogleDriveImageUrl(title, fileId),
-          features: [] // We'll keep this empty for now as it's not in the sheet
+          features: []
         });
-      } else {
-        console.log('Skipping row - missing title or description or malformed:', { title, description });
       }
     }
     
-    console.log('Final products array:', products);
+    console.log('Final products array:', products.length);
     return products;
   } catch (error) {
-    console.error('Error fetching data from Google Sheets:', error);
-    // Return fallback data if sheet is unavailable
+    console.error('Error fetching data from Google Sheets API:', error);
     return getFallbackData();
   }
-}
-
-// Robust CSV parser that handles quoted fields and empty cells
-function parseCSVLine(line: string): string[] {
-  const result: string[] = [];
-  let current = '';
-  let inQuotes = false;
-  
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    const nextChar = line[i + 1];
-    
-    if (char === '"') {
-      if (inQuotes && nextChar === '"') {
-        // Handle escaped quotes
-        current += '"';
-        i++; // Skip next quote
-      } else {
-        // Toggle quote state
-        inQuotes = !inQuotes;
-      }
-    } else if (char === ',' && !inQuotes) {
-      // End of field
-      result.push(current.trim());
-      current = '';
-    } else {
-      current += char;
-    }
-  }
-  
-  // Add the last field
-  result.push(current.trim());
-  
-  // If we ended in quotes state, the line might be incomplete
-  if (inQuotes) {
-    console.warn('CSV line appears incomplete (unclosed quotes):', line);
-  }
-  
-  return result;
 }
 
 // Fallback data in case the sheet is unavailable
