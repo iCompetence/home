@@ -1,5 +1,3 @@
-import { google } from 'googleapis';
-
 export interface ProductData {
   title: string;
   subtitle: string;
@@ -66,79 +64,7 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
   }
 }
 
-// Server-side function for Google Sheets API (to be used in API routes only)
-export async function fetchProductsFromSheetSecure(): Promise<ProductData[]> {
-  try {
-    // Verify we're running on server-side
-    if (typeof window !== 'undefined') {
-      throw new Error('This function should only be called server-side');
-    }
-
-    // Initialize Google Sheets API with service account
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        type: 'service_account',
-        project_id: process.env.GOOGLE_PROJECT_ID,
-        private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-        token_uri: 'https://oauth2.googleapis.com/token',
-        auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs'
-      },
-      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
-    });
-
-    const sheets = google.sheets({ version: 'v4', auth });
-    
-    // Fetch data from the private sheet
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Sheet1!A2:F', // Adjust range as needed
-    });
-
-    const rows = response.data.values || [];
-    console.log('Data rows found:', rows.length);
-    
-    const products: ProductData[] = [];
-    
-    for (const row of rows) {
-      // Ensure we have at least 6 columns, pad with empty strings if needed
-      while (row.length < 6) {
-        row.push('');
-      }
-      
-      const title = row[0]?.trim() || '';
-      const description = row[1]?.trim() || '';
-      const benefits = row[2]?.trim() || '';
-      const link = row[3]?.trim() || '';
-      const subtitle = row[4]?.trim() || '';
-      const fileId = row[5]?.trim() || '';
-      
-      // Only add products that have at least title and description
-      if (title && description) {
-        console.log('Adding product:', { title, subtitle });
-        
-        products.push({
-          title,
-          subtitle: subtitle || 'iCompetence Solution',
-          description,
-          benefits: benefits || 'Verbesserte Effizienz und Wachstum für Ihr Unternehmen',
-          link: link || '',
-          image: getGoogleDriveImageUrl(title, fileId),
-          features: []
-        });
-      }
-    }
-    
-    console.log('Final products array:', products.length);
-    return products;
-  } catch (error) {
-    console.error('Error fetching data from Google Sheets API:', error);
-    return getFallbackData();
-  }
-}
+// This function is now moved to the API route for server-side only usage
 
 // Fallback data in case the sheet is unavailable
 function getFallbackData(): ProductData[] {
