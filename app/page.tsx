@@ -428,7 +428,7 @@ export default function Home() {
             backgroundTransition ? 'opacity-100' : 'opacity-0'
           }`} />
           {/* Navigation */}
-          <nav className={`transition-all duration-1000 ease-in-out ${
+          <nav className={`relative z-20 transition-all duration-1000 ease-in-out ${
             animationState >= 4 ? "opacity-100" : "opacity-0"
           } flex justify-between items-center p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12`}>
             <div className="hidden lg:flex flex-wrap justify-start space-x-3">
@@ -458,9 +458,11 @@ export default function Home() {
             </div>
           </nav>
           {/* Question headline */}
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif text-center max-w-2xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-none mx-auto text-[#E0FBFC] mt-4 sm:mt-6 md:mt-12 lg:mt-20 xl:mt-24 2xl:mt-32 2xl:whitespace-nowrap">
-            Wie können wir Ihnen weiterhelfen?
-          </h2>
+          <div className="relative z-20 flex justify-center items-center" style={{ height: 'calc(50vh - 100px)' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif text-center max-w-2xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-none mx-auto text-[#E0FBFC] 2xl:whitespace-nowrap px-4">
+              Wie können wir Ihnen weiterhelfen?
+            </h2>
+          </div>
           {/* Bottom text */}
           <div className={`absolute left-0 w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 2xl:pb-16 transition-opacity duration-500 ${
             showBottomText ? 'opacity-100' : 'opacity-0'
@@ -471,7 +473,7 @@ export default function Home() {
         <div
           ref={contentFrameRef}
           id="produkte"
-          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[160px] sm:mt-[180px] md:mt-[220px] lg:mt-[360px] 2xl:mt-[480px] mb-[200px] ${
+          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[50vh] mb-[200px] ${
             showMenu 
               ? isAtBottom 
                 ? 'rounded-none' 
