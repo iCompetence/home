@@ -3,120 +3,50 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useMotionValue, useSpring, MotionValue } from "framer-motion"
 import { fetchProductsFromSheet, ProductData } from "../lib/googleSheets"
+import SpotlightCard from "../components/ui/spotlight-card"
 
-// TiltCard component with the tilt effect
-interface TiltCardProps {
+// ProductCard component with spotlight effect
+interface ProductCardProps {
   card: ProductData;
   index: number;
   onClick: () => void;
 }
 
-function TiltCard({ card, index, onClick }: TiltCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isDesktop, setIsDesktop] = useState(false)
-  
-  const springValues = {
-    damping: 15,
-    stiffness: 300,
-    mass: 0.5,
-  }
-  
-  const rotateX = useSpring(0, springValues)
-  const rotateY = useSpring(0, springValues)
-  const scale = useSpring(1, springValues)
-  
-  const rotateAmplitude = 14
-  const scaleOnHover = 1.05
-
-  // Check if we're on desktop/ultra-wide
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 1024)
-    }
-    
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
-  function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
-    if (!ref.current || !isDesktop) return
-
-    const rect = ref.current.getBoundingClientRect()
-    const offsetX = e.clientX - rect.left - rect.width / 2
-    const offsetY = e.clientY - rect.top - rect.height / 2
-
-    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude
-    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude
-
-    rotateX.set(rotationX)
-    rotateY.set(rotationY)
-  }
-
-  function handleMouseEnter() {
-    if (!isDesktop) return
-    scale.set(scaleOnHover)
-  }
-
-  function handleMouseLeave() {
-    if (!isDesktop) return
-    scale.set(1)
-    rotateX.set(0)
-    rotateY.set(0)
-  }
-
+function ProductCard({ card, index, onClick }: ProductCardProps) {
   return (
-    <div className="[perspective:800px]">
-      <motion.div
-        ref={ref}
-        onClick={onClick}
-        className="group bg-[#E0FBFC] hover:bg-[#161925] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px] 2xl:rounded-[40px] flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6 cursor-pointer hover:shadow-lg transition-all duration-300"
-        style={{
-          rotateX: isDesktop ? rotateX : 0,
-          rotateY: isDesktop ? rotateY : 0,
-          scale: isDesktop ? scale : 1,
-          transformStyle: "preserve-3d"
-        }}
-        onMouseMove={handleMouse}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="relative mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-          {card.image.includes('drive.google.com') && card.image.includes('/preview') ? (
-            // Render video for Google Drive preview links (no autoplay due to CSP restrictions)
-            <iframe
-              src={card.image}
-              className="w-full aspect-square rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
-              allow="encrypted-media"
-              style={{ border: 'none' }}
-              title={card.title}
-            />
-          ) : (
-            // Render image for regular image URLs
-            <img 
-              src={card.image}
-              alt={card.title}
-              className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
-              onError={(e) => {
-                // Fallback to default image if Google Drive image fails to load
-                const target = e.target as HTMLImageElement;
-                target.src = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
-              }}
-            />
-          )}
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px] flex items-center justify-center">
-            <button className="bg-[#E0FBFC] text-[#161925] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-theinhardt font-medium hover:bg-[#0099CC] hover:text-[#E0FBFC] transition-colors">
-              Details ansehen
-            </button>
-          </div>
-        </div>
-        <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black group-hover:text-[#E0FBFC] m-0 font-theinhardt mb-1 sm:mb-2 transition-colors duration-300">{card.title}</h3>
-        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] group-hover:text-[#E0FBFC] font-normal font-theinhardt transition-colors duration-300">{card.subtitle}</p>
-      </motion.div>
-    </div>
+    <SpotlightCard 
+      onClick={onClick}
+      className="flex flex-col w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] xl:max-w-[360px] 2xl:max-w-[400px] p-3 sm:p-4 md:p-5 lg:p-6 border-0"
+      spotlightColor="rgba(0, 153, 204, 0.2)"
+    >
+      <div className="relative mb-3 sm:mb-4 md:mb-5 lg:mb-6">
+        {card.image.includes('drive.google.com') && card.image.includes('/preview') ? (
+          // Render video for Google Drive preview links (no autoplay due to CSP restrictions)
+          <iframe
+            src={card.image}
+            className="w-full aspect-square rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+            allow="encrypted-media"
+            style={{ border: 'none' }}
+            title={card.title}
+          />
+        ) : (
+          // Render image for regular image URLs
+          <img 
+            src={card.image}
+            alt={card.title}
+            className="w-full aspect-square object-cover rounded-[16px] sm:rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] 2xl:rounded-[36px]"
+            onError={(e) => {
+              // Fallback to default image if Google Drive image fails to load
+              const target = e.target as HTMLImageElement;
+              target.src = "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80";
+            }}
+          />
+        )}
+      </div>
+      <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-medium text-black m-0 font-theinhardt mb-1 sm:mb-2">{card.title}</h3>
+      <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#888] font-normal font-theinhardt">{card.subtitle}</p>
+    </SpotlightCard>
   )
 }
 
@@ -460,8 +390,8 @@ export default function Home() {
           {/* Question headline */}
           <div className="relative z-20 flex justify-center items-center" style={{ height: 'calc(50vh - 100px)' }}>
             <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif text-center max-w-2xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-none mx-auto text-[#E0FBFC] 2xl:whitespace-nowrap px-4">
-              Wie können wir Ihnen weiterhelfen?
-            </h2>
+            Wie können wir Ihnen weiterhelfen?
+          </h2>
           </div>
           {/* Bottom text */}
           <div className={`absolute left-0 w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 2xl:pb-16 transition-opacity duration-500 ${
@@ -517,7 +447,7 @@ export default function Home() {
               ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
                   {cards.map((card, index) => (
-                    <TiltCard 
+                    <ProductCard 
                       key={`${card.title}-${index}`} 
                       card={card}
                       index={index}

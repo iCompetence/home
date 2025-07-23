@@ -50,11 +50,11 @@ export async function fetchProductsFromSheet(): Promise<ProductData[]> {
         'Pragma': 'no-cache'
       }
     });
-
+    
     if (!response.ok) {
       throw new Error(`Failed to fetch products: ${response.statusText}`);
-    }
-
+      }
+      
     const products = await response.json();
     return products;
   } catch (error) {
