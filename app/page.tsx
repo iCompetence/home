@@ -423,7 +423,7 @@ export default function Home() {
         >
           <div className="h-full overflow-y-auto px-0 lg:px-10">
             <div className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
-              {/* <div className="mb-6">
+              <div className="mb-6">
                 <div className="relative" ref={searchBarRef}>
                   <input
                     type="text"
@@ -437,7 +437,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div> */}
+              <div className="w-full h-px bg-[#7F7F7F]/20 mb-6"></div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-[#161925] text-center sm:text-left mb-4 sm:mb-4 lg:mb-6 2xl:mb-6 font-theinhardt ml-0 sm:ml-4 lg:ml-8 2xl:ml-12">Unsere Produkte</h2>
               
               {isLoadingCards ? (
@@ -446,13 +446,15 @@ export default function Home() {
                 </div>
               ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-6 2xl:gap-8 justify-items-center">
-                  {cards.map((card, index) => (
+                  {filteredCards.map((card, index) => (
                     <ProductCard 
                       key={`${card.title}-${index}`} 
                       card={card}
                       index={index}
                       onClick={() => {
-                        setSelectedCard(index);
+                        // Find the original index in the full cards array
+                        const originalIndex = cards.findIndex(c => c.title === card.title);
+                        setSelectedCard(originalIndex);
                         setShowOnePager(true);
                       }}
                     />
