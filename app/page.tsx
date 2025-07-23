@@ -149,6 +149,12 @@ export default function Home() {
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
 
+      // Check if search bar is out of view
+      if (searchBarRef.current) {
+        const searchRect = searchBarRef.current.getBoundingClientRect();
+        setShowFloatingSearch(searchRect.bottom < 0);
+      }
+
       // Check if content frame reaches bottom of viewport
       const windowHeight = window.innerHeight;
       const distanceFromBottom = windowHeight - rect.bottom;
@@ -201,20 +207,29 @@ export default function Home() {
       }`} />
 
       {/* Floating Search Bar */}
-      {/* <div className={`fixed top-[4.5rem] sm:top-[5.25rem] md:top-[5.75rem] lg:top-[6.25rem] xl:top-[6.75rem] 2xl:top-[7.5rem] right-4 sm:right-5 md:right-6 lg:right-7 xl:right-8 2xl:right-10 z-30 transition-all duration-300 ${
+      <div className={`fixed top-[4.5rem] sm:top-[5.25rem] md:top-[5.75rem] lg:top-[6.25rem] xl:top-[6.75rem] 2xl:top-[7.5rem] right-4 sm:right-5 md:right-6 lg:right-7 xl:right-8 2xl:right-10 z-30 transition-all duration-300 ${
         showFloatingSearch ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}>
-        <button
-          onClick={() => {
-              document.getElementById('produkte')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 bg-[#161925] rounded-full flex items-center justify-center"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </button>
-      </div> */}
+        <div className="bg-[#E0FBFC] rounded-full p-2 shadow-lg border border-[#161925]/10">
+          <input
+            type="text"
+            placeholder="Suche..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 px-4 py-2 text-sm md:text-base text-[#161925] placeholder-[#7F7F7F]/60 focus:outline-none bg-transparent font-['EB_Garamond'] italic"
+          />
+          <button
+            onClick={() => {
+                document.getElementById('produkte')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="ml-2 w-8 h-8 bg-[#161925] rounded-full flex items-center justify-center hover:bg-[#0099CC] transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#E0FBFC" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       {/* Title */}
       <div className={`fixed inset-0 w-full h-full z-20 pointer-events-none`}>
