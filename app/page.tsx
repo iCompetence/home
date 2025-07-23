@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { fetchProductsFromSheet, ProductData } from "../lib/googleSheets"
 import SpotlightCard from "../components/ui/spotlight-card"
+import LogoCarousel from "../components/ui/logo-carousel"
 
 // ProductCard component with spotlight effect
 interface ProductCardProps {
@@ -72,6 +73,7 @@ export default function Home() {
   const [showOnePager, setShowOnePager] = useState(false)
   const [cards, setCards] = useState<ProductData[]>([])
   const [isLoadingCards, setIsLoadingCards] = useState(true)
+  const lastScrollTime = useRef(0)
 
   // Mission text split into words
   const missionText = "Unsere Mission ist es, intelligente, autonome KI-Agenten zu entwickeln, die komplexe Herausforderungen lösen, Effizienz steigern und nachhaltigen Mehrwert für unsere Kunden schaffen, stets unter Berücksichtigung höchster Standards für Datenschutz und ethische KI."
@@ -138,14 +140,25 @@ export default function Home() {
     window.addEventListener('resize', updateBaseMargin);
     
     const handleScroll = () => {
+      const now = performance.now();
+      
+      // Throttle to max 60fps (16.67ms)
+      if (now - lastScrollTime.current < 16) {
+        return;
+      }
+      lastScrollTime.current = now;
+      
       if (!contentFrameRef.current) return;
+      
       const rect = contentFrameRef.current.getBoundingClientRect();
       const initialOffset = 360;
       const distanceFromTop = rect.top;
       let progress = 1 - Math.max(0, Math.min(distanceFromTop / initialOffset, 1));
+      
       // Interpolate margin from baseMargin to 0px
       let newMargin = baseMargin - baseMargin * progress;
       setFrameMargin(newMargin);
+      
       // Show menu when content frame reaches top
       setShowMenu(distanceFromTop <= 0);
 
@@ -163,7 +176,7 @@ export default function Home() {
       // Show bottom text only when container is full-width (frameMargin is 0)
       setShowBottomText(newMargin <= 1);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateBaseMargin);
@@ -412,17 +425,16 @@ export default function Home() {
         <div
           ref={contentFrameRef}
           id="produkte"
-          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[50vh] mb-[200px] ${
+          className={`relative z-10 bg-[#E0FBFC] py-12 transition-all duration-300 mt-[50vh] mb-0 ${
             showMenu 
               ? isAtBottom 
                 ? 'rounded-none' 
-                : 'rounded-b-[24px]'
-              : 'rounded-[24px]'
+                : 'rounded-t-[24px]'
+              : 'rounded-t-[24px]'
           }`}
           style={isMounted ? {
             marginLeft: `${frameMargin}px`,
             marginRight: `${frameMargin}px`,
-            transition: 'margin 0.2s',
             minHeight: '100vh'
           } : {
             marginLeft: '60px',
@@ -474,6 +486,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
+      {/* Logo Karussel - Kundenliste - außerhalb aller Container */}
+      {animationState >= 4 && <LogoCarousel />}
 
       {/* Product One-Pager Overlay */}
       {showOnePager && selectedCard !== null && (
