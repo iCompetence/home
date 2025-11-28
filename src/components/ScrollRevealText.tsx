@@ -11,10 +11,27 @@ interface ScrollRevealTextProps {
 export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, style }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [revealProgress, setRevealProgress] = useState(0); // 0 to 1
   const [isLocked, setIsLocked] = useState(false);
   const scrollAccumulator = useRef(0);
   const lockedScrollPosition = useRef(0);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+      setIsMobile(mobile);
+      // On mobile, instantly reveal all text
+      if (mobile) {
+        setRevealProgress(1);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Reset progress when children change (e.g., language switch)
   useEffect(() => {
@@ -65,6 +82,9 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
   }, [children]);
 
   useEffect(() => {
+    // Skip scroll lock on mobile
+    if (isMobile) return;
+
     const container = containerRef.current;
     const textElement = textRef.current;
     if (!container || !textElement) return;
@@ -134,7 +154,7 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [revealProgress, isLocked]);
+  }, [revealProgress, isLocked, isMobile]);
 
   // Update word colors based on reveal progress
   useEffect(() => {
