@@ -168,6 +168,19 @@ export const Home = ({
         </div>
       )}
 
+      {/* Language Switcher - Mobile only */}
+      {!showIntroLogo && isMobile && scrollY < 50 && (
+        <div
+          className="fixed top-4 right-4 z-50"
+          style={{
+            opacity: 0,
+            animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+          }}
+        >
+          <LanguageSwitcher />
+        </div>
+      )}
+
       {/* Header Right Side - Desktop only */}
       {!showIntroLogo && !isMobile && (
         <div

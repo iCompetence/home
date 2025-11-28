@@ -118,14 +118,14 @@ export const BrandBanner = ({
     return (
       <div className="relative overflow-hidden">
         <motion.div
-          className="flex whitespace-nowrap"
+          className="flex whitespace-nowrap gap-8 sm:gap-16"
           style={{ x }}
         >
           {[...Array(4)].map((_, setIndex) => (
             <div
               key={setIndex}
               ref={setIndex === 0 ? copyRef : null}
-              className="flex flex-shrink-0 items-center gap-8 sm:gap-16 pr-8 sm:pr-16"
+              className="flex flex-shrink-0 items-center gap-8 sm:gap-16"
             >
               {displayLogos.map((logo, index) => (
                 <div
