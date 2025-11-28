@@ -57,13 +57,16 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
       {!isOpen && (
         <button
           onClick={toggleMenu}
-          className="fixed top-8 sm:top-10 md:hidden z-50 p-2 sm:p-3 rounded-full transition-all duration-300 hover:bg-white/10 cursor-pointer"
+          className="fixed top-8 sm:top-10 md:hidden z-50 rounded-full transition-all duration-300 hover:bg-white/20 cursor-pointer flex items-center justify-center"
           style={{
             right: '24px',
-            background: 'transparent',
+            background: 'rgba(255, 255, 255, 0.1)',
             border: 'none',
             opacity: 0,
-            animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+            animation: 'fadeIn 0.8s ease-out 0.6s forwards',
+            padding: '10px',
+            width: '44px',
+            height: '44px'
           }}
           data-burger-menu
         >
