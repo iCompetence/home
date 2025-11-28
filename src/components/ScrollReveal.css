@@ -1,0 +1,21 @@
+.scroll-reveal {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 110%;
+  color: var(--gray-white);
+}
+
+.scroll-reveal-text {
+  display: inline;
+}
+
+.scroll-reveal .word {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+  .scroll-reveal {
+    font-size: 24px !important;
+  }
+}

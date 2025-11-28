@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #FCFCFC;
+  --foreground: #0B0B0B;
+  --card: #FCFCFC;
+  --card-foreground: #0B0B0B;
+  --popover: #FCFCFC;
+  --popover-foreground: #0B0B0B;
+  --primary: #012332;
+  --primary-foreground: #FCFCFC;
+  --secondary: #0B99CC;
+  --secondary-foreground: #FCFCFC;
+  --muted: #BEBEBE;
+  --muted-foreground: #484848;
+  --accent: #31A4AF;
+  --accent-foreground: #FCFCFC;
+  --destructive: #C8635D;
+  --destructive-foreground: #FCFCFC;
+  --border: rgba(72, 72, 72, 0.2);
+  --input: transparent;
+  --input-background: #BEBEBE;
+  --switch-background: #BEBEBE;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #484848;
+  --chart-1: #31A4AF;
+  --chart-2: #E19B74;
+  --chart-3: #D476CD;
+  --chart-4: #76AF77;
+  --chart-5: #E0AE57;
+  --radius: 0.625rem;
+  --sidebar: #FCFCFC;
+  --sidebar-foreground: #0B0B0B;
+  --sidebar-primary: #012332;
+  --sidebar-primary-foreground: #FCFCFC;
+  --sidebar-accent: #BEBEBE;
+  --sidebar-accent-foreground: #0B0B0B;
+  --sidebar-border: #BEBEBE;
+  --sidebar-ring: #484848;
+  
+  /* Custom brand colors from Figma palette */
+  --brand-primary-dark: #012332;
+  --brand-primary-light: #0B99CC;
+  --brand-accent-1: #31A4AF;
+  --brand-accent-2: #E19B74;
+  --brand-accent-3: #D476CD;
+  --state-success: #76AF77;
+  --state-warning: #E0AE57;
+  --state-error: #C8635D;
+  --gray-black: #0B0B0B;
+  --gray-dark: #484848;
+  --gray-light: #BEBEBE;
+  --gray-white: #FCFCFC;
+}
+
+.dark {
+  --background: #012332;
+  --foreground: #FCFCFC;
+  --card: #012332;
+  --card-foreground: #FCFCFC;
+  --popover: #012332;
+  --popover-foreground: #FCFCFC;
+  --primary: #0B99CC;
+  --primary-foreground: #012332;
+  --secondary: #31A4AF;
+  --secondary-foreground: #FCFCFC;
+  --muted: #484848;
+  --muted-foreground: #BEBEBE;
+  --accent: #31A4AF;
+  --accent-foreground: #FCFCFC;
+  --destructive: #C8635D;
+  --destructive-foreground: #FCFCFC;
+  --border: rgba(190, 190, 190, 0.2);
+  --input: #484848;
+  --ring: #BEBEBE;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #31A4AF;
+  --chart-2: #E19B74;
+  --chart-3: #D476CD;
+  --chart-4: #76AF77;
+  --chart-5: #E0AE57;
+  --sidebar: #012332;
+  --sidebar-foreground: #FCFCFC;
+  --sidebar-primary: #0B99CC;
+  --sidebar-primary-foreground: #012332;
+  --sidebar-accent: #484848;
+  --sidebar-accent-foreground: #FCFCFC;
+  --sidebar-border: #484848;
+  --sidebar-ring: #BEBEBE;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html,
+  body {
+    background-color: #012332 !important;
+    color: #FCFCFC;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix for mobile step-by-step appearance without breaking backgrounds */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ensure content sections render smoothly on mobile */
+  section {
+    transform: translateZ(0);
+  }
+
+  /* Force immediate rendering of complex components on mobile */
+  #tools-services-section {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Ensure carousel renders immediately */
+  .custom-carousel {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Aurora background transition - desktop only */
+  .aurora-background {
+    will-change: opacity;
+    transform: translateZ(0);
+    transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    -webkit-transition: opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+}
+
+/**
+ * Custom typography classes - always applied
+ */
+@layer base {
+  /* Hero Headline - 64px, 110% line height */
+  .hero-headline {
+    font-size: 64px !important;
+    font-weight: 700 !important;
+    line-height: 110% !important;
+  }
+
+  /* Direct h1 styling to ensure it applies */
+  h1 {
+    font-size: 40px !important;
+    font-weight: 700 !important;
+    line-height: 110% !important;
+  }
+  
+  /* Mobile responsive typography */
+  @media (max-width: 768px) {
+    .hero-headline {
+      font-size: 40px !important;
+    }
+    
+    h1 {
+      font-size: 32px !important;
+    }
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    /* Heading 1 (h1) - 40px, 110% line height */
+    h1 {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 110%;
+    }
+
+    /* Heading 2 (h2) - 32px, 110% line height */
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 110%;
+    }
+
+    /* Heading 3 (h3) - 24px, 110% line height */
+    h3 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 110%;
+    }
+
+    /* Body - 16px, 150% line height */
+    p {
+      font-size: 16px;
+      font-weight: var(--font-weight-normal);
+      line-height: 150%;
+    }
+
+    /* Small - 14px, 150% line height */
+    small, .small {
+      font-size: 14px;
+      font-weight: var(--font-weight-normal);
+      line-height: 150%;
+    }
+
+    /* Body text for general text elements */
+    body {
+      font-size: 16px;
+      line-height: 150%;
+    }
+
+    /* Form elements - using body sizing */
+    label {
+      font-size: 16px;
+      font-weight: var(--font-weight-medium);
+      line-height: 150%;
+    }
+
+    button {
+      font-size: 16px;
+      font-weight: var(--font-weight-medium);
+      line-height: 150%;
+    }
+
+    input, textarea {
+      font-size: 16px;
+      font-weight: var(--font-weight-normal);
+      line-height: 150%;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
