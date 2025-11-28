@@ -61,14 +61,19 @@ export const Home = ({
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
-  // Hide intro logo after hero delay
+  // Hide intro logo after hero delay (skip on mobile)
   useEffect(() => {
+    if (isMobile) {
+      setShowIntroLogo(false);
+      return;
+    }
+
     const timer = setTimeout(() => {
       setShowIntroLogo(false);
     }, entranceTiming.heroDelay);
 
     return () => clearTimeout(timer);
-  }, [entranceTiming]);
+  }, [entranceTiming, isMobile]);
 
   // Scroll detection for Aurora fade
   useEffect(() => {
