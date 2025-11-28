@@ -249,6 +249,10 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
         @media (max-width: 768px) {
           .mobile-reveal-text {
             font-size: 24px !important;
+            color: var(--gray-white) !important;
+          }
+          .mobile-reveal-text .reveal-word {
+            color: var(--gray-white) !important;
           }
         }
       `}</style>
