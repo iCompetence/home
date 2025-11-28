@@ -171,8 +171,9 @@ export const Home = ({
       {/* Language Switcher - Mobile only */}
       {!showIntroLogo && isMobile && scrollY < 50 && (
         <div
-          className="fixed top-8 z-50"
+          className="fixed z-50"
           style={{
+            top: '32px',
             right: '80px',
             opacity: 0,
             animation: 'fadeIn 0.8s ease-out 0.6s forwards',
