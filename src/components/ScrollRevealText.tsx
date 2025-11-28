@@ -196,7 +196,8 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
         alignItems: 'center',
         justifyContent: 'center',
         padding: '20vh 0',
-        position: 'relative'
+        position: 'relative',
+        zIndex: 10
       }}
       className="px-4 sm:px-6 lg:px-8"
     >
