@@ -163,7 +163,7 @@ function PrivacyLedAIPageContent() {
               </h1>
               <p
                 style={{
-                  color: 'var(--gray-light)',
+                  color: 'var(--gray-white)',
                   fontSize: 'clamp(24px, 4vw, 48px)',
                   fontWeight: '500',
                   lineHeight: '130%'
@@ -235,7 +235,7 @@ function PrivacyLedAIPageContent() {
             </h1>
             <p
               style={{
-                color: 'var(--gray-light)',
+                color: 'var(--gray-white)',
                 fontSize: 'clamp(24px, 4vw, 48px)',
                 fontWeight: '500',
                 lineHeight: '130%'
