@@ -86,7 +86,6 @@ export const TwoColumnOffer = ({
       className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
       animationType="fadeInUp"
       duration={0}
-      style={{ backgroundColor: '#012332' }}
     >
       <div className="container mx-auto">
         <div className="max-w-6xl mx-auto">

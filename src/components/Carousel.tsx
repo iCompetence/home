@@ -15,6 +15,8 @@ interface CarouselItem {
 interface CarouselProps {
   /** Section title */
   title: string;
+  /** Optional subline text */
+  subline?: string;
   /** Array of carousel items */
   items: CarouselItem[];
   /** Section ID for scrolling */
@@ -33,6 +35,7 @@ interface CarouselProps {
 
 export const Carousel = ({
   title,
+  subline,
   items,
   id = "carousel-section",
   slidesToShowDesktop = 2,
@@ -173,15 +176,26 @@ export const Carousel = ({
         <div className="max-w-6xl mx-auto" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="mobile-carousel-h2" style={{ 
+            <h2 className="mobile-carousel-h2" style={{
               background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              marginBottom: '1.5rem' 
+              marginBottom: subline ? '1.5rem' : '0'
             }}>
               {title}
             </h2>
+            {subline && (
+              <p className="mobile-carousel-subline" style={{
+                color: 'var(--gray-light)',
+                fontSize: '18px',
+                lineHeight: '160%',
+                maxWidth: '900px',
+                margin: '0 auto'
+              }}>
+                {subline}
+              </p>
+            )}
           </div>
           
           {/* Carousel Container */}
