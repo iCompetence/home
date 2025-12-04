@@ -78,21 +78,18 @@ export const ImageText = ({
                 </div>
               )}
               
-              <h2 
-                style={{ 
-                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  fontSize: '36px', 
-                  fontWeight: '700', 
+              <h3
+                style={{
+                  color: 'var(--gray-white)',
+                  fontSize: '24px',
+                  fontWeight: '600',
                   lineHeight: '110%',
-                  marginBottom: '2rem'
+                  marginBottom: '1.5rem'
                 }}
-                className="mobile-image-text-h2"
+                className="mobile-image-text-h3"
               >
                 {title}
-              </h2>
+              </h3>
               
               {copyText && (
                 <p 
@@ -151,8 +148,8 @@ export const ImageText = ({
                 </p>
               )}
               
-              {/* {cta && (
-                <a 
+              {cta && (
+                <a
                   href={cta.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -166,16 +163,16 @@ export const ImageText = ({
                 >
                   {cta.text}
                 </a>
-              )} */}
+              )}
             </div>
 
             {/* Image Column */}
             <div className={imageOrder}>
-              <div 
+              <div
                 className="border border-white/10 rounded-[16px] overflow-hidden hover:bg-white/[0.02] transition-colors duration-200"
               >
-                <ImageWithFallback 
-                  src={privacyImage}
+                <ImageWithFallback
+                  src={image}
                   alt={imageAlt}
                   className="w-full h-auto"
                 />
@@ -197,8 +194,8 @@ if (typeof document !== 'undefined') {
     styleTag.id = styleId;
     styleTag.textContent = `
       @media (max-width: 768px) {
-        .mobile-image-text-h2 {
-          font-size: 28px !important;
+        .mobile-image-text-h3 {
+          font-size: 20px !important;
         }
         .mobile-copy-text {
           font-size: 16px !important;

@@ -27,7 +27,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
   };
 
   const handleHomeClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = '/';
     closeMenu();
   };
 
@@ -183,7 +183,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
             
             <button
               onClick={() => {
-                window.open('https://privacy-led-ai.de/', '_blank');
+                window.location.href = '/privacy-led-ai';
                 closeMenu();
               }}
               className="block w-full text-center mobile-burger-menu-item"
