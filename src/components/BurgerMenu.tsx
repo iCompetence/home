@@ -180,29 +180,6 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
             >
               {t('burgerMenu.blog')}
             </button>
-            
-            <button
-              onClick={() => {
-                window.location.href = '/privacy-led-ai';
-                closeMenu();
-              }}
-              className="block w-full text-center mobile-burger-menu-item"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--gray-white)',
-                fontSize: '64px',
-                fontWeight: '700',
-                lineHeight: '110%',
-                padding: '0',
-                transition: 'color 0.3s ease'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#0B99CC'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--gray-white)'}
-            >
-              {t('burgerMenu.privacyLed')}
-            </button>
           </nav>
         </div>
       </div>

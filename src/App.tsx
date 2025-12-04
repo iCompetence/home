@@ -496,11 +496,11 @@ function AppContent() {
                   >
                     {t('footer.imprint')}
                   </button>
-                  <button 
-                    onClick={() => window.open('https://www.icompetence.de/datenschutz', '_blank')}
-                    style={{ 
-                      color: 'var(--gray-light)', 
-                      fontSize: '16px', 
+                  <button
+                    onClick={() => window.open('https://www.icompetence.de/impressum', '_blank')}
+                    style={{
+                      color: 'var(--gray-light)',
+                      fontSize: '16px',
                       fontWeight: '500',
                       background: 'none',
                       border: 'none',
