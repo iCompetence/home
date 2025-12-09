@@ -86,9 +86,9 @@ export const Home = ({
   const auroraOpacity = !showIntroLogo && !hasScrolled ? 1 : 0;
 
   return (
-    <div 
-      className="relative h-screen overflow-x-hidden" 
-      style={{ 
+    <div
+      className="relative h-screen overflow-x-hidden"
+      style={{
         background: 'linear-gradient(180deg, #012332 0%, #012332 100%)'
       }}
     >
@@ -195,7 +195,7 @@ export const Home = ({
           {/* Contact us Button */}
           <button
             onClick={() => {
-              window.open('https://www.icompetence.de/kontakt', '_blank');
+              window.open('/kontakt', '_blank');
             }}
             className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
             style={{
@@ -276,7 +276,7 @@ export const Home = ({
       {!showIntroLogo && isMobile && (
         <button
           onClick={() => {
-            window.open('https://www.icompetence.de/kontakt', '_blank');
+            window.open('/kontakt', '_blank');
           }}
           className="fixed bottom-6 right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{
@@ -309,9 +309,9 @@ export const Home = ({
           }}
         >
           <div className="flex flex-col items-center gap-3">
-            <p 
+            <p
               className="transition-opacity duration-300 text-sm sm:text-base"
-              style={{ 
+              style={{
                 color: 'var(--gray-white)',
                 fontWeight: '500',
                 textAlign: 'center'

@@ -49,11 +49,11 @@ function AppContent() {
   //   const handleScroll = () => {
   //     // Exit early if aurora is already shown
   //     // if (showFooterAurora) return;
-  //     
+  //
   //     const scrollTop = window.scrollY;
   //     const windowHeight = window.innerHeight;
   //     const docHeight = document.documentElement.scrollHeight;
-  //     
+  //
   //     // Show aurora when near the bottom (within 200px)
   //     if (docHeight - (scrollTop + windowHeight) < 200) {
   //       // setShowFooterAurora(true);
@@ -63,7 +63,7 @@ function AppContent() {
   //   };
 
   //   window.addEventListener('scroll', handleScroll, { passive: true });
-  //   
+  //
   //   // Cleanup
   //   return () => window.removeEventListener('scroll', handleScroll);
   // }, []);
@@ -309,9 +309,9 @@ function AppContent() {
       />
 
       {/* Footer Aurora Background - DISABLED FOR DEBUGGING */}
-      {/* <div 
+      {/* <div
         className="fixed w-full"
-        style={{ 
+        style={{
           bottom: 0,
           left: 0,
           right: 0,
@@ -325,16 +325,16 @@ function AppContent() {
       </div> */}
 
       {/* 10. CTA & Footer Section */}
-      <AnimatedSection 
+      <AnimatedSection
         id="cta-footer-section"
         className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
         animationType="fadeInUp"
         duration={0}
       >
         {/* Footer Aurora Background */}
-        <div 
+        <div
           className="absolute inset-0"
-          style={{ 
+          style={{
             pointerEvents: 'none',
             zIndex: 0,
             overflow: 'hidden'
@@ -346,9 +346,9 @@ function AppContent() {
         {/* CTA */}
         <div className="container mx-auto relative z-10" style={{ marginBottom: '120px' }}>
           <div className="max-w-4xl mx-auto text-center">
-            <p 
+            <p
               className="mobile-cta-text"
-              style={{ 
+              style={{
                 color: 'var(--gray-white)',
                 fontSize: '32px',
                 fontWeight: '600',
@@ -359,13 +359,13 @@ function AppContent() {
             >
               {t('cta.headline')}
             </p>
-            
+
             <button
               onClick={() => {
-                window.open('https://www.icompetence.de/kontakt', '_blank');
+                window.open('/kontakt', '_blank');
               }}
               className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
-              style={{ 
+              style={{
                 color: 'var(--gray-white)',
                 fontWeight: '500'
               }}
@@ -382,9 +382,9 @@ function AppContent() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 mb-16 sm:mb-24">
                 {/* Left Side - Tagline */}
                 <div>
-                  <p className="mobile-footer-tagline" style={{ 
-                    color: 'var(--gray-white)', 
-                    fontSize: '64px', 
+                  <p className="mobile-footer-tagline" style={{
+                    color: 'var(--gray-white)',
+                    fontSize: '64px',
                     fontWeight: '700',
                     lineHeight: '110%'
                   }}>
@@ -396,7 +396,7 @@ function AppContent() {
                 <div className="lg:text-right">
                   {/* Social Media Icons */}
                   <div className="flex gap-4 lg:justify-end mb-8">
-                    <button 
+                    <button
                       onClick={() => window.open('https://www.linkedin.com/company/icompetence/posts/?feedView=all', '_blank')}
                       className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer"
                       style={{ background: 'rgba(255, 255, 255, 0.1)', border: 'none' }}
@@ -418,9 +418,9 @@ function AppContent() {
                   {/* Contact Information */}
                   <div className="space-y-4">
                     <div>
-                      <p style={{ 
-                        color: 'var(--gray-light)', 
-                        fontSize: '14px', 
+                      <p style={{
+                        color: 'var(--gray-light)',
+                        fontSize: '14px',
                         fontWeight: '500',
                         marginBottom: '4px'
                       }}>
@@ -428,9 +428,9 @@ function AppContent() {
                       </p>
                       <button
                         onClick={() => window.open('mailto:info@icompetence.de', '_blank')}
-                        style={{ 
-                          color: 'var(--gray-white)', 
-                          fontSize: '18px', 
+                        style={{
+                          color: 'var(--gray-white)',
+                          fontSize: '18px',
                           fontWeight: '500',
                           background: 'none',
                           border: 'none',
@@ -446,9 +446,9 @@ function AppContent() {
                       </button>
                     </div>
                     <div>
-                      <p style={{ 
-                        color: 'var(--gray-light)', 
-                        fontSize: '14px', 
+                      <p style={{
+                        color: 'var(--gray-light)',
+                        fontSize: '14px',
                         fontWeight: '500',
                         marginBottom: '4px'
                       }}>
@@ -456,9 +456,9 @@ function AppContent() {
                       </p>
                       <button
                         onClick={() => window.open('tel:+494060945510', '_blank')}
-                        style={{ 
-                          color: 'var(--gray-white)', 
-                          fontSize: '18px', 
+                        style={{
+                          color: 'var(--gray-white)',
+                          fontSize: '18px',
                           fontWeight: '500',
                           background: 'none',
                           border: 'none',
@@ -480,11 +480,11 @@ function AppContent() {
               {/* Bottom Links */}
               <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                 <div className="flex gap-8 mb-4 sm:mb-0">
-                  <button 
-                    onClick={() => window.open('https://www.icompetence.de/impressum', '_blank')}
-                    style={{ 
-                      color: 'var(--gray-light)', 
-                      fontSize: '16px', 
+                  <button
+                    onClick={() => window.open('/impressum', '_blank')}
+                    style={{
+                      color: 'var(--gray-light)',
+                      fontSize: '16px',
                       fontWeight: '500',
                       background: 'none',
                       border: 'none',
@@ -497,7 +497,7 @@ function AppContent() {
                     {t('footer.imprint')}
                   </button>
                   <button
-                    onClick={() => window.open('https://www.icompetence.de/impressum', '_blank')}
+                    onClick={() => window.open('/impressum', '_blank')}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -514,12 +514,12 @@ function AppContent() {
                   </button>
                 </div>
 
-                <button 
+                <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="flex items-center gap-2 group"
-                  style={{ 
-                    color: 'var(--gray-light)', 
-                    fontSize: '16px', 
+                  style={{
+                    color: 'var(--gray-light)',
+                    fontSize: '16px',
                     fontWeight: '500',
                     background: 'none',
                     border: 'none',
@@ -538,10 +538,10 @@ function AppContent() {
                   }}
                 >
                   {t('footer.backToTop')}
-                  <ChevronDown 
-                    size={16} 
+                  <ChevronDown
+                    size={16}
                     className="transform rotate-180 group-hover:translate-y-[-2px] transition-transform"
-                    style={{ color: 'var(--gray-light)', transition: 'color 0.3s ease' }} 
+                    style={{ color: 'var(--gray-light)', transition: 'color 0.3s ease' }}
                   />
                 </button>
               </div>
@@ -589,7 +589,7 @@ function AppContent() {
             transform: translateY(0);
           }
         }
-        
+
         @media (max-width: 768px) {
           .mobile-cta-text {
             font-size: 24px !important;
