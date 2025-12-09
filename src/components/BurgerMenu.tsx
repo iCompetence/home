@@ -131,7 +131,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
         onClick={closeMenu}
       >
         {/* Menu Content */}
-        <div 
+        <div
           className={`fixed inset-0 h-full w-full transition-transform duration-300 flex flex-col justify-center items-center px-8 ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
@@ -160,9 +160,9 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
             >
               {t('burgerMenu.home')}
             </button>
-            
+
             <button
-              onClick={() => window.open('https://www.icompetence.de/blog', '_blank')}
+              onClick={() => window.open('/blog', '_blank')}
               className="block w-full text-center mobile-burger-menu-item"
               style={{
                 background: 'none',
@@ -183,7 +183,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
           </nav>
         </div>
       </div>
-      
+
       <style>{`
         @media (max-width: 768px) {
           .mobile-burger-menu-item {
