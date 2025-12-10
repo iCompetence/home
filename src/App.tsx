@@ -257,7 +257,7 @@ function AppContent() {
           t('privacyLed.description2'),
           t('privacyLed.description3')
         ]}
-        image="https://images.unsplash.com/photo-1603985529862-9e12198c9a60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMHByaXZhY3klMjBkYXRhJTIwcHJvdGVjdGlvbnxlbnwxfHx8fDE3NjMzODYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        image="/images/priv.jpeg"
         imageAlt="Privacy and data security"
         layout="image-left"
         cta={{
