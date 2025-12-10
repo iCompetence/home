@@ -46,8 +46,8 @@ export function Skills() {
   ];
 
   const technologies = [
-    "React", "Next.js", "TypeScript", "Node.js", "Python", "AWS", 
-    "Docker", "Kubernetes", "PostgreSQL", "MongoDB", "GraphQL", 
+    "React", "Next.js", "TypeScript", "Node.js", "Python", "AWS",
+    "Docker", "Kubernetes", "PostgreSQL", "MongoDB", "GraphQL",
     "Tailwind CSS", "Firebase", "Supabase", "Vercel", "Figma"
   ];
 
@@ -57,7 +57,7 @@ export function Skills() {
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold">Our Expertise</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our team brings together diverse technical skills and industry expertise 
+            Our team brings together diverse technical skills and industry expertise
             to deliver exceptional results across all project phases.
           </p>
         </div>
@@ -103,7 +103,7 @@ export function Skills() {
           <div className="space-y-8">
             <div className="relative">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1718220216044-006f43e3a9b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b3Jrc3BhY2UlMjBkZXNpZ258ZW58MXx8fHwxNzU3NTY4ODUxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+                src="/images/prof.jpeg"
                 alt="Professional workspace design"
                 className="rounded-2xl shadow-xl w-full h-[400px] object-cover"
               />

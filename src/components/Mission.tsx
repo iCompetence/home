@@ -36,7 +36,7 @@ export function Mission() {
             <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl font-bold">Our Mission</h2>
               <p className="text-lg text-muted-foreground">
-                To empower businesses with innovative technology solutions that drive growth, 
+                To empower businesses with innovative technology solutions that drive growth,
                 enhance efficiency, and create lasting value in an ever-evolving digital landscape.
               </p>
             </div>
@@ -59,7 +59,7 @@ export function Mission() {
 
           <div className="relative">
             <ImageWithFallback
-              src="https://images.unsplash.com/photo-1573757056004-065ad36e2cf4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGlubm92YXRpb24lMjB0ZWNobm9sb2d5fGVufDF8fHx8MTc1NzUzNjU4Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+              src="/images/inno.jpeg"
               alt="Business innovation and technology"
               className="rounded-2xl shadow-xl w-full h-[600px] object-cover"
             />
