@@ -87,7 +87,7 @@ export const Home = ({
 
   return (
     <div
-      className="relative h-screen overflow-x-hidden"
+      className="relative h-screen"
       style={{
         background: 'linear-gradient(180deg, #012332 0%, #012332 100%)'
       }}

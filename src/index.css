@@ -329,9 +329,6 @@
 
   html, body {
     color: #fcfcfc;
-    overscroll-behavior-y: none;
-    overscroll-behavior-x: none;
-    overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
     width: 100%;
     font-family: Inter, system-ui, -apple-system, sans-serif;
