@@ -3,8 +3,12 @@ import '../src/index.css';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.icompetence.de'),
   title: 'iCompetence - We enable companies for the Agentic Era',
   description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
