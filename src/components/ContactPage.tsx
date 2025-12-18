@@ -1,34 +1,23 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Mail, X } from 'lucide-react';
+import { ChevronDown, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
 import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
-import Script from 'next/script';
 
 const logoImage = '/d7c679fa2e863e2732ac2061e38e77091bef6fdd.png';
 
 function ContactPageContent() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const closeMenuRef = useRef<(() => void) | null>(null);
-
-  // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    honeypot: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     setMounted(true);
@@ -55,52 +44,6 @@ function ContactPageContent() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Honeypot check
-    if (formData.honeypot) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      // Submit to Netlify Forms
-      const formBody = new URLSearchParams({
-        'form-name': 'contact',
-        'name': formData.name,
-        'email': formData.email,
-        'message': formData.message,
-      }).toString();
-
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formBody,
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '', honeypot: '' });
-      } else {
-        console.error('Form submission failed:', response.status, response.statusText);
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (!mounted) {
     return (
@@ -329,206 +272,147 @@ function ContactPageContent() {
                 lineHeight: '180%'
               }}
             >
-              {submitStatus === 'success' ? (
-                <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                  <h2
+                {/* Traditional form submit like the old kontakt.html */}
+              <form
+                name="contact"
+                method="post"
+                action="/danke"
+                data-netlify="true"
+                data-netlify-recaptcha="true"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label
+                    htmlFor="contactName"
                     style={{
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      marginBottom: '1rem',
-                      color: '#0b99cc'
+                      display: 'block',
+                      marginBottom: '0.5rem',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500'
                     }}
                   >
-                    {t('contact.success.title')}
-                  </h2>
-                  <p style={{ color: 'var(--gray-light)' }}>
-                    {t('contact.success.message')}
-                  </p>
-                </div>
-              ) : (
-                <>
-                  {/* Hidden form for Netlify to detect at build time */}
-                  <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-                    <input type="text" name="name" />
-                    <input type="email" name="email" />
-                    <textarea name="message" />
-                  </form>
-
-                  <form onSubmit={handleSubmit} name="contact" data-netlify="true" data-netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="contact" />
-
-                    {/* Honeypot field - hidden from users */}
-                    <div style={{ display: 'none' }}>
-                      <label htmlFor="bot-field">Don&apos;t fill this out</label>
-                    <input
-                      type="text"
-                      id="bot-field"
-                      name="bot-field"
-                      value={formData.honeypot}
-                      onChange={handleInputChange}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
-                  </div>
-
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label
-                      htmlFor="name"
-                      style={{
-                        display: 'block',
-                        marginBottom: '0.5rem',
-                        color: 'var(--gray-white)',
-                        fontSize: '14px',
-                        fontWeight: '500'
-                      }}
-                    >
-                      {t('contact.form.name')} <sup style={{ color: '#0b99cc' }}>*</sup>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder={t('contact.form.namePlaceholder')}
-                      required
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '8px',
-                        color: 'var(--gray-white)',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'border-color 0.3s ease'
-                      }}
-                      onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                    />
-                  </div>
-
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label
-                      htmlFor="email"
-                      style={{
-                        display: 'block',
-                        marginBottom: '0.5rem',
-                        color: 'var(--gray-white)',
-                        fontSize: '14px',
-                        fontWeight: '500'
-                      }}
-                    >
-                      {t('contact.form.email')} <sup style={{ color: '#0b99cc' }}>*</sup>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder={t('contact.form.emailPlaceholder')}
-                      required
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '8px',
-                        color: 'var(--gray-white)',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'border-color 0.3s ease'
-                      }}
-                      onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                    />
-                  </div>
-
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label
-                      htmlFor="message"
-                      style={{
-                        display: 'block',
-                        marginBottom: '0.5rem',
-                        color: 'var(--gray-white)',
-                        fontSize: '14px',
-                        fontWeight: '500'
-                      }}
-                    >
-                      {t('contact.form.message')}
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={5}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '8px',
-                        color: 'var(--gray-white)',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'border-color 0.3s ease',
-                        resize: 'vertical',
-                        minHeight: '120px'
-                      }}
-                      onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                    />
-                  </div>
-
-                  {/* reCAPTCHA */}
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div
-                      className="g-recaptcha"
-                      data-sitekey="6Lf7QtQUAAAAAIiRzogVjs0CgkXXwC3mwhcBWVW-"
-                      data-theme="dark"
-                    />
-                  </div>
-
-                  {submitStatus === 'error' && (
-                    <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(255, 0, 0, 0.1)', borderRadius: '8px' }}>
-                      <p style={{ color: '#ff6b6b', fontSize: '14px' }}>
-                        {t('contact.error.message')}
-                      </p>
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
+                    {t('contact.form.name')} <sup style={{ color: '#0b99cc' }}>*</sup>
+                  </label>
+                  <input
+                    type="text"
+                    id="contactName"
+                    name="contactName"
+                    placeholder={t('contact.form.namePlaceholder')}
+                    required
                     style={{
-                      padding: '0.75rem 2rem',
-                      backgroundColor: isSubmitting ? 'rgba(11, 153, 204, 0.5)' : '#0b99cc',
-                      border: 'none',
-                      borderRadius: '9999px',
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '8px',
                       color: 'var(--gray-white)',
                       fontSize: '16px',
-                      fontWeight: '500',
-                      cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                      transition: 'background-color 0.3s ease'
+                      outline: 'none',
+                      transition: 'border-color 0.3s ease'
                     }}
-                    onMouseEnter={(e) => {
-                      if (!isSubmitting) {
-                        (e.target as HTMLButtonElement).style.backgroundColor = '#0a88b8';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSubmitting) {
-                        (e.target as HTMLButtonElement).style.backgroundColor = '#0b99cc';
-                      }
+                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
+                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label
+                    htmlFor="contactEmail"
+                    style={{
+                      display: 'block',
+                      marginBottom: '0.5rem',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500'
                     }}
                   >
-                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
-                  </button>
-                </form>
-                </>
-              )}
+                    {t('contact.form.email')} <sup style={{ color: '#0b99cc' }}>*</sup>
+                  </label>
+                  <input
+                    type="email"
+                    id="contactEmail"
+                    name="contactEmail"
+                    placeholder={t('contact.form.emailPlaceholder')}
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '8px',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'border-color 0.3s ease'
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
+                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label
+                    htmlFor="contactText"
+                    style={{
+                      display: 'block',
+                      marginBottom: '0.5rem',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500'
+                    }}
+                  >
+                    {t('contact.form.message')}
+                  </label>
+                  <textarea
+                    id="contactText"
+                    name="contactText"
+                    rows={5}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '8px',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'border-color 0.3s ease',
+                      resize: 'vertical',
+                      minHeight: '120px'
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
+                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+                  />
+                </div>
+
+                {/* Netlify reCAPTCHA - automatically injected */}
+                <div style={{ marginBottom: '1.5rem' }} data-netlify-recaptcha="true" />
+
+                <button
+                  type="submit"
+                  style={{
+                    padding: '0.75rem 2rem',
+                    backgroundColor: '#0b99cc',
+                    border: 'none',
+                    borderRadius: '9999px',
+                    color: 'var(--gray-white)',
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.target as HTMLButtonElement).style.backgroundColor = '#0a88b8';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLButtonElement).style.backgroundColor = '#0b99cc';
+                  }}
+                >
+                  {t('contact.form.submit')}
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -720,11 +604,6 @@ function ContactPageContent() {
         </footer>
       </AnimatedSection>
 
-      {/* reCAPTCHA Script */}
-      <Script
-        src="https://www.google.com/recaptcha/api.js"
-        strategy="lazyOnload"
-      />
 
       <style>{`
         @keyframes fadeIn {

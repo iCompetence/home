@@ -6,12 +6,11 @@
   <title>Forms</title>
 </head>
 <body>
-  <!-- Contact Form -->
-  <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-    <input type="text" name="bot-field" />
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-    <textarea name="message"></textarea>
+  <!-- Contact Form - matches old kontakt.html structure -->
+  <form name="contact" method="post" action="/danke" data-netlify="true" data-netlify-recaptcha="true" hidden>
+    <input type="text" name="contactName" />
+    <input type="email" name="contactEmail" />
+    <textarea name="contactText"></textarea>
   </form>
 </body>
 </html>
