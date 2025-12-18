@@ -56,7 +56,7 @@ function ContactPageContent() {
             // @ts-ignore
             window.grecaptcha.render(container, {
               'sitekey': '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61',
-              'theme': 'dark'
+              'theme': 'light'
             });
           }
         }
@@ -298,18 +298,6 @@ function ContactPageContent() {
                   lineHeight: '180%'
                 }}
               >
-              {/* Form embedded via iframe for Netlify Forms detection
-                <iframe
-                  src="/contact-form.html"
-                  title="Contact Form"
-                  style={{
-                    width: '100%',
-                    minHeight: '500px',
-                    border: 'none',
-                    background: 'transparent'
-                  }}
-                />
-              */}
                 <div style={{ color: 'var(--gray-white)', fontSize: '16px', lineHeight: '180%' }}>
                   <form
                     name="contact"
@@ -357,7 +345,7 @@ function ContactPageContent() {
                       />
                     </div>
 
-                    <div data-netlify-recaptcha="true"></div>
+                    <div style={{ margin-bottom: '8px'}} data-netlify-recaptcha="true"></div>
 
                     <button
                       type="submit"
