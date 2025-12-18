@@ -272,7 +272,7 @@ function ContactPageContent() {
                 lineHeight: '180%'
               }}
             >
-                {/* Form embedded via iframe for Netlify Forms detection */}
+            {/* Form embedded via iframe for Netlify Forms detection
               <iframe
                 src="/contact-form.html"
                 title="Contact Form"
@@ -283,6 +283,63 @@ function ContactPageContent() {
                   background: 'transparent'
                 }}
               />
+            */}
+              <div style={{ color: 'var(--gray-white)', fontSize: '16px', lineHeight: '180%' }}>
+                <form
+                  name="contact"
+                  id="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-recaptcha="true"
+                  action="/danke"
+                  className="space-y-6"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+
+                  <div>
+                    <label className="block mb-2" htmlFor="name">{t('contact.form.name')}</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      required
+                      className="w-100 p-3 bg-white/10 border border-white/20 rounded"
+                      style={{ width: '100%', color: 'white' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2" htmlFor="email">{t('contact.form.email')}</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      required
+                      className="w-100 p-3 bg-white/10 border border-white/20 rounded"
+                      style={{ width: '100%', color: 'white' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2" htmlFor="message">{t('contact.form.message')}</label>
+                    <textarea
+                      name="message"
+                      id="message"
+                      required
+                      rows={5}
+                      className="w-100 p-3 bg-white/10 border border-white/20 rounded"
+                      style={{ width: '100%', color: 'white' }}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="px-8 py-3 bg-[#0b99cc] hover:bg-[#0b99cc]/80 transition-colors rounded font-bold"
+                  >
+                    {t('contact.form.submit')}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
