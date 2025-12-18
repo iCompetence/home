@@ -100,7 +100,7 @@ function ContactPageContent() {
 
   return (
     <>
-      {/* <Script src="https://www.google.com/recaptcha/api.js" strategy="lazyOnload" /> */}
+      <Script src="https://www.google.com/recaptcha/api.js" strategy="lazyOnload" />
 
       <div
         className="relative"
