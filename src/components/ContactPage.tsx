@@ -274,11 +274,11 @@ function ContactPageContent() {
             >
                 {/* Traditional form submit like the old kontakt.html */}
               <form
-                name="contact"
-                method="post"
                 action="/danke"
-                data-netlify="true"
                 data-netlify-recaptcha="true"
+                id="contact"
+                method="post"
+                name="contact"
               >
                 <input type="hidden" name="form-name" value="contact" />
 
@@ -387,8 +387,8 @@ function ContactPageContent() {
                   />
                 </div>
 
-                {/* Netlify reCAPTCHA - automatically injected */}
-                <div style={{ marginBottom: '1.5rem' }} data-netlify-recaptcha="true" />
+                {/* Netlify reCAPTCHA placeholder - Netlify injects here */}
+                <div data-netlify-recaptcha="true" style={{ marginBottom: '1.5rem' }} />
 
                 <button
                   type="submit"
