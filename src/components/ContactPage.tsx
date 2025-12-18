@@ -46,6 +46,26 @@ function ContactPageContent() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mounted) {
+      const initRecaptcha = () => {
+        // @ts-ignore
+        if (typeof window !== 'undefined' && window.grecaptcha && window.grecaptcha.render) {
+          const container = document.querySelector('[data-netlify-recaptcha="true"]');
+          if (container && container.innerHTML === "") {
+            // @ts-ignore
+            window.grecaptcha.render(container, {
+              'sitekey': '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61',
+              'theme': 'dark'
+            });
+          }
+        }
+      };
+      const timer = setTimeout(initRecaptcha, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [mounted]);
+
   if (!mounted) {
     return (
       <div
@@ -100,7 +120,7 @@ function ContactPageContent() {
 
   return (
     <>
-      <Script src="https://www.google.com/recaptcha/api.js" strategy="afterInteractive" />
+      <Script src="https://www.google.com/recaptcha/api.js?render=explicit" strategy="afterInteractive" />
 
       <div
         className="relative"
