@@ -345,7 +345,7 @@ function ContactPageContent() {
                       />
                     </div>
 
-                    <div style={{ margin-bottom: '8px'}} data-netlify-recaptcha="true"></div>
+                    <div style={{ marginBottom: '8px'}} data-netlify-recaptcha="true"></div>
 
                     <button
                       type="submit"
