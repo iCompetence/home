@@ -150,8 +150,10 @@ export const Home = ({
       {/* Logo - Top Left */}
       {!showIntroLogo && (
         <div
-          className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 cursor-pointer"
+          className="fixed z-50 cursor-pointer"
           style={{
+            top: '40px',
+            left: '36px',
             opacity: 0,
             animation: 'fadeIn 0.8s ease-out 0.6s forwards'
           }}
@@ -162,7 +164,7 @@ export const Home = ({
           <ImageWithFallback
             src={logoImage}
             alt="Logo"
-            className="h-16 sm:h-16 lg:h-20"
+            className="h-6"
             style={{ width: 'auto' }}
           />
         </div>
