@@ -272,147 +272,17 @@ function ContactPageContent() {
                 lineHeight: '180%'
               }}
             >
-                {/* Traditional form submit like the old kontakt.html */}
-              <form
-                action="/danke"
-                data-netlify-recaptcha="true"
-                id="contact"
-                method="post"
-                name="contact"
-              >
-                <input type="hidden" name="form-name" value="contact" />
-
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <label
-                    htmlFor="contactName"
-                    style={{
-                      display: 'block',
-                      marginBottom: '0.5rem',
-                      color: 'var(--gray-white)',
-                      fontSize: '14px',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {t('contact.form.name')} <sup style={{ color: '#0b99cc' }}>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    id="contactName"
-                    name="contactName"
-                    placeholder={t('contact.form.namePlaceholder')}
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem 1rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      color: 'var(--gray-white)',
-                      fontSize: '16px',
-                      outline: 'none',
-                      transition: 'border-color 0.3s ease'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                  />
-                </div>
-
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <label
-                    htmlFor="contactEmail"
-                    style={{
-                      display: 'block',
-                      marginBottom: '0.5rem',
-                      color: 'var(--gray-white)',
-                      fontSize: '14px',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {t('contact.form.email')} <sup style={{ color: '#0b99cc' }}>*</sup>
-                  </label>
-                  <input
-                    type="email"
-                    id="contactEmail"
-                    name="contactEmail"
-                    placeholder={t('contact.form.emailPlaceholder')}
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem 1rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      color: 'var(--gray-white)',
-                      fontSize: '16px',
-                      outline: 'none',
-                      transition: 'border-color 0.3s ease'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                  />
-                </div>
-
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <label
-                    htmlFor="contactText"
-                    style={{
-                      display: 'block',
-                      marginBottom: '0.5rem',
-                      color: 'var(--gray-white)',
-                      fontSize: '14px',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {t('contact.form.message')}
-                  </label>
-                  <textarea
-                    id="contactText"
-                    name="contactText"
-                    rows={5}
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem 1rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      color: 'var(--gray-white)',
-                      fontSize: '16px',
-                      outline: 'none',
-                      transition: 'border-color 0.3s ease',
-                      resize: 'vertical',
-                      minHeight: '120px'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#0b99cc'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
-                  />
-                </div>
-
-                {/* Netlify reCAPTCHA placeholder - Netlify injects here */}
-                <div data-netlify-recaptcha="true" style={{ marginBottom: '1.5rem' }} />
-
-                <button
-                  type="submit"
-                  style={{
-                    padding: '0.75rem 2rem',
-                    backgroundColor: '#0b99cc',
-                    border: 'none',
-                    borderRadius: '9999px',
-                    color: 'var(--gray-white)',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    transition: 'background-color 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = '#0a88b8';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = '#0b99cc';
-                  }}
-                >
-                  {t('contact.form.submit')}
-                </button>
-              </form>
+                {/* Form embedded via iframe for Netlify Forms detection */}
+              <iframe
+                src="/contact-form.html"
+                title="Contact Form"
+                style={{
+                  width: '100%',
+                  minHeight: '500px',
+                  border: 'none',
+                  background: 'transparent'
+                }}
+              />
             </div>
           </div>
         </div>
