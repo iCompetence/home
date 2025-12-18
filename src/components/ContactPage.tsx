@@ -294,7 +294,6 @@ function ContactPageContent() {
                     id="contact"
                     method="POST"
                     data-netlify="true"
-                    data-netlify-recaptcha="true"
                     action="/danke"
                     className="space-y-6"
                   >
