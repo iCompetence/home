@@ -94,7 +94,7 @@
   </style>
 </head>
 <body>
-  <form action="/danke.html" data-netlify-recaptcha="true" id="contact" method="post" name="contact">
+  <form action="/danke" data-netlify-recaptcha="true" id="contact" method="post" name="contact">
     <input type="hidden" name="form-name" value="contact" />
 
     <!-- Honeypot field -->
@@ -118,7 +118,10 @@
       <textarea id="contactText" name="contactText" rows="5" placeholder="Ihre Nachricht..."></textarea>
     </div>
 
-    <div class="recaptcha-wrapper" data-netlify-recaptcha="true"></div>
+    <div class="recaptcha-wrapper">
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+      <div class="g-recaptcha" data-sitekey="6Lf7QtQUAAAAAIiRzogVjs0CgkXXwC3mwhcBWVW-"></div>
+    </div>
 
     <button type="submit">Anfrage absenden</button>
   </form>
