@@ -8,6 +8,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
+import Script from 'next/script';
 
 const logoImage = '/d7c679fa2e863e2732ac2061e38e77091bef6fdd.png';
 
@@ -98,6 +99,8 @@ function ContactPageContent() {
   }
 
   return (
+    <Script src="https://www.google.com/recaptcha/api.js" strategy="lazyOnload" />
+
     <div
       className="relative"
       style={{
@@ -331,6 +334,8 @@ function ContactPageContent() {
                       style={{ width: '100%', color: 'white' }}
                     />
                   </div>
+
+                  <div data-netlify-recaptcha="true"></div>
 
                   <button
                     type="submit"
