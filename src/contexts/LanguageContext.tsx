@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'de';
 
@@ -420,18 +420,183 @@ const translations: Translations = {
   'burgerMenu.privacyLed': {
     en: 'Privacy-led AI',
     de: 'Privacy-led AI'
+  },
+
+  // Imprint Page
+  'imprint.hero.title': {
+    en: 'Legal Disclosure & Privacy',
+    de: 'Impressum & Datenschutz'
+  },
+  'imprint.section1.title': {
+    en: 'Information according to § 5 TMG (German Telemedia Act)',
+    de: 'Angaben gemäß § 5 TMG'
+  },
+  'imprint.section1.subtitle': {
+    en: '',
+    de: ''
+  },
+  'imprint.section1.company': {
+    en: 'iCompetence GmbH',
+    de: 'iCompetence GmbH'
+  },
+  'imprint.section1.director': {
+    en: 'Managing Director:',
+    de: 'Geschäftsführer:'
+  },
+  'imprint.section2.title': {
+    en: 'Register Entry',
+    de: 'Registereintrag'
+  },
+  'imprint.section2.content': {
+    en: 'Entry in the Handelsregister (Commercial Register).',
+    de: 'Eintragung im Handelsregister.'
+  },
+  'imprint.section2.court': {
+    en: 'Register Court: Amtsgericht Hamburg (District Court of Hamburg)',
+    de: 'Registergericht: Amtsgericht Hamburg'
+  },
+  'imprint.section2.number': {
+    en: 'Registration Number: HRB 110059',
+    de: 'Registernummer: HRB 110059'
+  },
+  'imprint.section2.taxNumber': {
+    en: 'Tax Number: 42/733/00396',
+    de: 'Umsatzsteuer-Nr: 42/733/00396'
+  },
+  'imprint.section2.vatId': {
+    en: 'VAT ID (Umsatzsteuer-Identifikationsnummer): DE 265 683 841',
+    de: 'Umsatzsteuer-ID: DE 265 683 841'
+  },
+  'imprint.section3.title': {
+    en: 'Image Credits',
+    de: 'Bildnachweise'
+  },
+  'imprint.section4.title': {
+    en: 'Disclaimer',
+    de: 'Haftungsausschluss'
+  },
+  'imprint.section4.content.title': {
+    en: 'Liability for Content',
+    de: 'Haftung für Inhalte'
+  },
+  'imprint.section4.content.text': {
+    en: 'The contents of our pages were created with the greatest care. However, we cannot guarantee the accuracy, completeness, or topicality of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 Para. 1 TMG under general law. According to §§ 8 to 10 TMG, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general law remain unaffected. However, liability in this regard is only possible from the time of knowledge of a specific infringement. Upon notification of such violations, we will remove this content immediately.',
+    de: 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.'
+  },
+  'imprint.section4.links.title': {
+    en: 'Liability for Links',
+    de: 'Haftung für Links'
+  },
+  'imprint.section4.links.text': {
+    en: 'Our offer contains links to external websites of third parties, the content of which we have no influence over. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement. Upon notification of violations, we will remove such links immediately.',
+    de: 'Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.'
+  },
+  'imprint.section4.copyright.title': {
+    en: 'Copyright',
+    de: 'Urheberrecht'
+  },
+  'imprint.section4.copyright.text': {
+    en: 'The content and works created by the site operators on these pages are subject to German copyright law. Duplication, processing, distribution, and any kind of exploitation outside the limits of copyright law require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use. Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. Upon notification of violations, we will remove such content immediately.',
+    de: 'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.'
+  },
+  'imprint.section4.privacy.title': {
+    en: 'Data Protection',
+    de: 'Datenschutz'
+  },
+  'imprint.section4.privacy.text1': {
+    en: 'The use of our website is generally possible without providing personal data. Insofar as personal data (e.g., name, address, or email addresses) is collected on our pages, this is always done on a voluntary basis as far as possible. This data will not be passed on to third parties without your express consent.',
+    de: 'Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.'
+  },
+  'imprint.section4.privacy.text2': {
+    en: 'We point out that data transmission over the Internet (e.g., when communicating by email) can have security gaps. Complete protection of data against access by third parties is not possible.',
+    de: 'Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.'
+  },
+  'imprint.section4.privacy.text3': {
+    en: 'The use of contact data published within the scope of the imprint obligation by third parties for the purpose of sending unsolicited advertising and information materials is hereby expressly prohibited. The operators of the pages expressly reserve the right to take legal action in the event of unsolicited sending of advertising information, such as spam emails.',
+    de: 'Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.'
+  },
+  'imprint.source': {
+    en: 'Source: eRecht24 (Attorney-at-Law Sören Siebert)',
+    de: 'Quelle: eRecht24 (Rechtsanwalt Sören Siebert)'
+  },
+
+  // Contact Page
+  'contact.hero.title': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+  'contact.form.name': {
+    en: 'Name',
+    de: 'Name'
+  },
+  'contact.form.namePlaceholder': {
+    en: 'Your name',
+    de: 'Ihr Name'
+  },
+  'contact.form.email': {
+    en: 'Email Address',
+    de: 'Email Adresse'
+  },
+  'contact.form.emailPlaceholder': {
+    en: 'name@example.com',
+    de: 'name@beispiel.de'
+  },
+  'contact.form.message': {
+    en: 'Message',
+    de: 'Anliegen'
+  },
+  'contact.form.honeypot': {
+    en: 'Do not fill this out',
+    de: 'Nicht ausfüllen'
+  },
+  'contact.form.submit': {
+    en: 'Send Request',
+    de: 'Anfrage absenden'
+  },
+  'contact.form.submitting': {
+    en: 'Sending...',
+    de: 'Wird gesendet...'
+  },
+  'contact.success.title': {
+    en: 'Thank you!',
+    de: 'Vielen Dank!'
+  },
+  'contact.success.message': {
+    en: 'Your message has been sent successfully. We will get back to you as soon as possible.',
+    de: 'Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns schnellstmöglich bei Ihnen melden.'
+  },
+  'contact.error.message': {
+    en: 'An error occurred while sending your message. Please try again later.',
+    de: 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.'
   }
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Check localStorage for saved language preference after mount
+    const savedLanguage = localStorage.getItem('preferredLanguage') as Language | null;
+    if (savedLanguage === 'en' || savedLanguage === 'de') {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferredLanguage', lang);
+    }
+  };
 
   const t = (key: string): string => {
     return translations[key]?.[language] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
