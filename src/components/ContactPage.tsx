@@ -74,25 +74,28 @@ function ContactPageContent() {
 
     try {
       // Submit to Netlify Forms
-      const formDataObj = new FormData();
-      formDataObj.append('form-name', 'contact');
-      formDataObj.append('name', formData.name);
-      formDataObj.append('email', formData.email);
-      formDataObj.append('message', formData.message);
+      const formBody = new URLSearchParams({
+        'form-name': 'contact',
+        'name': formData.name,
+        'email': formData.email,
+        'message': formData.message,
+      }).toString();
 
-      const response = await fetch('/', {
+      const response = await fetch('/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataObj as unknown as Record<string, string>).toString(),
+        body: formBody,
       });
 
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '', honeypot: '' });
       } else {
+        console.error('Form submission failed:', response.status, response.statusText);
         setSubmitStatus('error');
       }
-    } catch {
+    } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
