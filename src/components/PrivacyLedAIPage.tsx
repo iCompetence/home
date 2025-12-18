@@ -12,7 +12,7 @@ import { ImageText } from './ImageText';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 
-const logoImage = '/d7c679fa2e863e2732ac2061e38e77091bef6fdd.png';
+const logoImage = '/iCompetence_logo.svg';
 
 function PrivacyLedAIPageContent() {
   const { t } = useLanguage();

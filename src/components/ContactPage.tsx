@@ -10,7 +10,7 @@ import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 import Script from 'next/script';
 
-const logoImage = '/d7c679fa2e863e2732ac2061e38e77091bef6fdd.png';
+const logoImage = '/iCompetence_logo.svg';
 
 function ContactPageContent() {
   const { t } = useLanguage();
