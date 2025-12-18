@@ -81,7 +81,7 @@ function ContactPageContent() {
         'message': formData.message,
       }).toString();
 
-      const response = await fetch('/contact/', {
+      const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formBody,
