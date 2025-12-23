@@ -570,7 +570,7 @@ function ImpressumPageContent() {
               <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                 <div className="flex gap-8 mb-4 sm:mb-0">
                   <button
-                    onClick={() => window.location.href = '/impressum'}
+                    onClick={() => window.location.href = '/imprint'}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -586,7 +586,7 @@ function ImpressumPageContent() {
                     {t('footer.imprint')}
                   </button>
                   <button
-                    onClick={() => window.location.href = '/impressum'}
+                    onClick={() => window.location.href = '/imprint'}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
