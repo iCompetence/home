@@ -257,7 +257,7 @@ function AppContent() {
           t('privacyLed.description2'),
           t('privacyLed.description3')
         ]}
-        image="/images/priv.jpeg"
+        image="/images/privacy-led.jpg"
         imageAlt="Privacy and data security"
         layout="image-left"
         cta={{
