@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef } from 'react';
 import { AnimatedSection } from './ScrollAnimations';
 
 interface ProcessStep {
@@ -7,6 +8,8 @@ interface ProcessStep {
   label: string;
   /** Step description */
   description: string;
+  /** Optional video URL to show on hover */
+  video?: string;
 }
 
 interface ProcessListProps {
@@ -14,6 +17,8 @@ interface ProcessListProps {
   id?: string;
   /** Section title */
   title: string;
+  /** Optional subline/description below title */
+  subline?: string | string[];
   /** Array of process steps */
   steps: ProcessStep[];
   /** Layout direction */
@@ -27,49 +32,99 @@ interface ProcessListProps {
 export const ProcessList = ({
   id = "process-list-section",
   title,
+  subline,
   steps,
   layout = "vertical",
   className = "",
   animationType = "fadeInUp"
 }: ProcessListProps) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent, index: number) => {
+    if (steps[index]?.video) {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (rect) {
+        setMousePos({
+          x: e.clientX - rect.left + 20,
+          y: e.clientY - rect.top - 100
+        });
+      }
+    }
+  };
+
+  const handleMouseEnter = (index: number) => {
+    if (steps[index]?.video) {
+      setHoveredIndex(index);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   return (
-    <AnimatedSection 
+    <AnimatedSection
       id={id}
       className={`relative z-10 py-16 px-4 sm:px-6 lg:px-8 ${className}`}
       animationType={animationType}
       duration={0}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto" ref={containerRef}>
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="mobile-process-h2" style={{ 
+          <div className="mb-16">
+            <h2 className="mobile-process-h2" style={{
               background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              marginBottom: '1.5rem', 
-              fontSize: '32px', 
-              fontWeight: '700', 
-              lineHeight: '110%' 
+              marginBottom: subline ? '2rem' : '1.5rem',
+              fontSize: '32px',
+              fontWeight: '700',
+              lineHeight: '110%'
             }}>
               {title}
             </h2>
+            {subline && (
+              <div className="space-y-6 max-w-4xl">
+                {(Array.isArray(subline) ? subline : [subline]).map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="mobile-process-subline"
+                    style={{
+                      color: 'var(--gray-white)',
+                      fontSize: '18px',
+                      lineHeight: '170%'
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
-          
+
           {/* Process Steps List */}
-          <div className="space-y-0">
+          <div className="space-y-0 relative">
             {steps.map((step, index) => (
               <div
                 key={index}
                 className="border-b border-white/10 last:border-b-0"
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+                onMouseMove={(e) => handleMouseMove(e, index)}
               >
-                <div className="py-6 sm:py-8 px-0 hover:bg-white/[0.02] transition-colors duration-200">
+                <div
+                  className="py-6 sm:py-8 px-0 hover:bg-white/[0.02] transition-colors duration-200"
+                  style={{ cursor: step.video ? 'pointer' : 'default' }}
+                >
                   <div className="flex items-start gap-4 sm:gap-8">
                     {/* Step Number */}
-                    <span 
+                    <span
                       className="mobile-step-number"
-                      style={{ 
+                      style={{
                         color: 'var(--gray-light)',
                         fontSize: '14px',
                         fontWeight: '500',
@@ -79,13 +134,13 @@ export const ProcessList = ({
                     >
                       ({String(index + 1).padStart(2, '0')})
                     </span>
-                    
+
                     {/* Step Content */}
                     <div className="flex-1">
                       {/* Step Label */}
-                      <h3 
+                      <h3
                         className="mobile-step-label"
-                        style={{ 
+                        style={{
                           color: 'var(--gray-white)',
                           fontSize: '24px',
                           fontWeight: '600',
@@ -97,9 +152,9 @@ export const ProcessList = ({
                       </h3>
 
                       {/* Step Description */}
-                      <p 
+                      <p
                         className="mobile-step-desc"
-                        style={{ 
+                        style={{
                           color: 'var(--gray-light)',
                           fontSize: '18px',
                           lineHeight: '160%',
@@ -113,14 +168,46 @@ export const ProcessList = ({
                 </div>
               </div>
             ))}
+
+            {/* Video Preview on Hover */}
+            {hoveredIndex !== null && steps[hoveredIndex]?.video && (
+              <div
+                className="fixed pointer-events-none z-50"
+                style={{
+                  left: mousePos.x,
+                  top: mousePos.y,
+                  transform: 'translate(0, 0)',
+                }}
+              >
+                <video
+                  src={steps[hoveredIndex].video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="shadow-2xl"
+                  style={{
+                    width: '400px',
+                    height: 'auto',
+                    maxHeight: '300px',
+                    objectFit: 'cover',
+                    border: '2px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '16px'
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
+
       <style>{`
         @media (max-width: 768px) {
           .mobile-process-h2 {
             font-size: 28px !important;
+          }
+          .mobile-process-subline {
+            font-size: 16px !important;
           }
           .mobile-step-number {
             min-width: 40px !important;

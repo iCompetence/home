@@ -568,6 +568,144 @@ const translations: Translations = {
   'contact.error.message': {
     en: 'An error occurred while sending your message. Please try again later.',
     de: 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.'
+  },
+
+  // Intelligentic Search Page
+  'is.hero.title': {
+    en: 'Intelligentic Search',
+    de: 'Intelligentic Search'
+  },
+  'is.hero.subline': {
+    en: 'The ideal product found in minutes',
+    de: 'Das ideale Produkt in Minuten gefunden'
+  },
+  'is.anchor.intro': {
+    en: 'Intro',
+    de: 'Intro'
+  },
+  'is.anchor.statusQuo': {
+    en: 'Status Quo',
+    de: 'Status Quo'
+  },
+  'is.anchor.features': {
+    en: 'Features',
+    de: 'Features'
+  },
+  'is.anchor.howItWorks': {
+    en: 'How it Works',
+    de: 'Funktionsweise'
+  },
+  'is.anchor.benefits': {
+    en: 'Benefits',
+    de: 'Vorteile'
+  },
+  'is.anchor.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+  'is.quote.text': {
+    en: 'Product search as we know it is a relic from another era. Users still click through rigid filters, type keywords, and fight through endless result lists – even though AI could already enable us to find products as easily as we describe them. But this potential has so far been reserved for the big tech giants: OpenAI integrates shopping into ChatGPT, Amazon launches Rufus, Zalando builds its own models.',
+    de: 'Die Produktsuche, wie wir sie kennen, ist ein Relikt aus einer anderen Zeit. Nutzer klicken sich noch immer durch starre Filter, tippen Keywords ein und kämpfen sich durch endlose Ergebnislisten – obwohl KI uns längst ermöglichen könnte, Produkte so leicht zu finden, wie wir sie beschreiben. Doch genau dieses Potenzial bleibt bis heute vor allem den großen Tech-Konzernen vorbehalten: OpenAI integriert Shopping in ChatGPT, Amazon launcht Rufus, Zalando baut seine eigenen Modelle.'
+  },
+  'is.quote.conclusion': {
+    en: 'And SMEs? They\'re watching.',
+    de: 'Und der Mittelstand? Schaut zu.'
+  },
+  'is.features.title': {
+    en: 'Away from rigid filters and thousands of search results – towards the perfect match.',
+    de: 'Weg von starren Filtern und Tausenden von Suchergebnissen – hin zum perfekten Match.'
+  },
+  'is.features.subline1': {
+    en: 'Intelligentic Search is a modern form of product and information search. It automatically captures and transforms a company\'s product data and makes it searchable in natural language within milliseconds.',
+    de: 'Die Intelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie für Nutzer in natürlicher Sprache in Millisekunden durchsuchbar.'
+  },
+  'is.features.subline2': {
+    en: 'Users can freely formulate their requirements – from "I need a lightweight jacket for 10-degree drizzle" to a screenshot from social media. They receive precise results instantly. And when there are questions about shipping, products, or company knowledge, the AI delivers answers just as quickly.',
+    de: 'Nutzer können ihre Anforderungen frei formulieren – von „Ich brauche eine leichte Jacke für 10 Grad Nieselregen" bis hin zu einem Screenshot aus Social Media. Sie erhalten sofort präzise Ergebnisse. Und wenn es Fragen zu Versand, Produkten oder Unternehmenswissen gibt, liefert die KI ebenso schnell Antworten.'
+  },
+  'is.features.subline3': {
+    en: 'Intelligentic Search combines NLP, Computer Vision, and Machine Learning into a user experience where searching becomes finding.',
+    de: 'Die Intelligentic Search kombiniert NLP, Computer Vision und Machine Learning zu einer Nutzererfahrung, in der Suchen zu Finden wird.'
+  },
+  'is.features.step1.label': {
+    en: 'More precise than conventional AI searches',
+    de: 'Präziser als herkömmliche KI-Suchen'
+  },
+  'is.features.step1.description': {
+    en: 'We vectorize all product information, not just titles or short excerpts (like ChatGPT does).',
+    de: 'Wir vektorisieren alle Produktinformationen, nicht nur Titel oder kurze Auszüge (wie z.B. bei ChatGPT).'
+  },
+  'is.features.step2.label': {
+    en: 'Image search integrated',
+    de: 'Bildsuche integriert'
+  },
+  'is.features.step2.description': {
+    en: 'Users can upload images → matching products appear in seconds.',
+    de: 'Nutzer können Bilder hochladen → passende Produkte erscheinen in Sekunden.'
+  },
+  'is.features.step3.label': {
+    en: 'Real AI instead of static logic',
+    de: 'Echte KI statt statischer Logik'
+  },
+  'is.features.step3.description': {
+    en: 'No keyword filters, no hard-wired dialog trees. Dynamic interpretation of needs.',
+    de: 'Keine Keyword-Filter, keine fest verdrahteten Dialogbäume. Dynamische Interpretation von Bedürfnissen.'
+  },
+  'is.features.step4.label': {
+    en: 'Millisecond response times',
+    de: 'Millisekunden-Antwortzeiten'
+  },
+  'is.features.step4.description': {
+    en: 'Through highly efficient vector search and locally hosted models.',
+    de: 'Durch hocheffiziente Vektorsuche und lokal gehostete Modelle.'
+  },
+  'is.modular.title': {
+    en: 'Modular and dynamic.',
+    de: 'Modular und dynamisch.'
+  },
+  'is.modular.text1': {
+    en: 'Our mission is to find the perfectly tailored solution for everyone. Intelligentic Search is a modular system that can be extended with custom features and adapted to your company\'s characteristics.',
+    de: 'Unsere Mission ist es für jeden die perfekt zugeschnittene Lösung zu finden. Die Intelligentic Search ist ein Modulares System, das um eigene Wünsche und Funktionen erweitert und auf die Eigenschaften Ihres Unternehmens angepasst werden kann.'
+  },
+  'is.modular.text2': {
+    en: 'The same applies to the interface through which users operate the search. We offer various integration and design options or can simply connect Intelligentic Search to your existing design.',
+    de: 'Das gilt ebenso für das Interface, über das Nutzer die Suche bedienen können. Wir bieten diverse Integrations- und Designmöglichkeiten oder können die Intelligentic Search ganz einfach an ihr bestehendes Design anbinden.'
+  },
+  'is.modular.text3': {
+    en: 'Intelligentic Search is primarily the system in the background, not the visual.',
+    de: 'Die Intelligentic Search ist primär das System im Hintergrund und nicht das Visuelle.'
+  },
+  'is.howItWorks.title': {
+    en: 'How Intelligentic Search works.',
+    de: 'Wie funktioniert die Intelligentic Search.'
+  },
+  'is.stats.title': {
+    en: 'Ideal product found in',
+    de: 'Das ideale Produkt gefunden in'
+  },
+  'is.stats.description': {
+    en: 'Intelligentic Search finds the right product in milliseconds – instead of the usual 10-30 minutes with traditional search.',
+    de: 'Die Intelligentic Search findet das passende Produkt in Millisekunden – statt der üblichen 10-30 Minuten bei traditioneller Suche.'
+  },
+  'is.stats.value': {
+    en: '< 1 Sec',
+    de: '< 1 Sek'
+  },
+  'is.stats.label': {
+    en: 'Average search time with Intelligentic Search',
+    de: 'Durchschnittliche Suchzeit mit Intelligentic Search'
+  },
+  'is.benefits.title': {
+    en: 'No irrelevant search results.',
+    de: 'Keine irrelevanten Suchergebnisse.'
+  },
+  'is.benefits.text1': {
+    en: 'Intelligentic Search is not just a technical search function.',
+    de: 'Die Intelligentic Search ist nicht nur eine technische Suchfunktion.'
+  },
+  'is.benefits.text2': {
+    en: 'For users, it\'s the feeling of being supported and advised, rather than being left on their own.',
+    de: 'Für die Nutzer ist es das Gefühl, unterstützt und beraten zu werden und nicht auf sich allein gestellt zu sein.'
   }
 };
 
