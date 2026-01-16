@@ -671,21 +671,21 @@ const translations: Translations = {
     en: 'The same applies to the interface through which users operate the search. We offer various integration and design options or can simply connect Intelligentic Search to your existing design.',
     de: 'Das gilt ebenso für das Interface, über das Nutzer die Suche bedienen können. Wir bieten diverse Integrations- und Designmöglichkeiten oder können die Intelligentic Search ganz einfach an ihr bestehendes Design anbinden.'
   },
-  'is.modular.text3': {
-    en: 'Intelligentic Search is primarily the system in the background, not the visual.',
-    de: 'Die Intelligentic Search ist primär das System im Hintergrund und nicht das Visuelle.'
-  },
   'is.howItWorks.title': {
-    en: 'How Intelligentic Search works.',
-    de: 'Wie funktioniert die Intelligentic Search.'
+    en: 'Under the hood: How the Intelligentic Search Engine works',
+    de: 'Unter der Haube: Wie die Intelligentic Search Engine funktioniert'
+  },
+  'is.howItWorks.description': {
+    en: 'The Intelligentic Search is primarily the engine in the background, not the visual frontend.',
+    de: 'Die Intelligentic Search ist primär die Engine im Hintergrund, nicht das visuelle Frontend.'
   },
   'is.stats.title': {
-    en: 'Ideal product found in',
-    de: 'Das ideale Produkt gefunden in'
+    en: 'Straight to the product',
+    de: 'Ohne Umweg zum Produkt'
   },
   'is.stats.description': {
-    en: 'Intelligentic Search finds the right product in milliseconds – instead of the usual 10-30 minutes with traditional search.',
-    de: 'Die Intelligentic Search findet das passende Produkt in Millisekunden – statt der üblichen 10-30 Minuten bei traditioneller Suche.'
+    en: 'In typical online purchases, users today need an average of 10 to 30 minutes to find the ideal product. The Intelligentic Search finds the right product in milliseconds. The Intelligentic Search also prevents the well-known frustration of zero results, as it always finds the closest possible match. Users reach their ideal product faster and the likelihood of abandonment decreases significantly.',
+    de: 'Bei typischen Online-Käufen brauchen Nutzer heute durchschnittlich zwischen 10 und 30 Minuten um das ideale Produkt zu finden. Die Intelligentic Search findet das passende Produkt in Millisekunden. Die Intelligentic Search verhindert zudem bekannte Enttäuschungen über 0 Treffer, zumal sie immer einen möglichst ähnlichen Treffer landet. Die Nutzer kommen schneller zum idealen Produkt und die Wahrscheinlichkeit eines Abbruchs sinkt signifikant.'
   },
   'is.stats.value': {
     en: '< 1 Sec',
@@ -695,17 +695,65 @@ const translations: Translations = {
     en: 'Average search time with Intelligentic Search',
     de: 'Durchschnittliche Suchzeit mit Intelligentic Search'
   },
-  'is.benefits.title': {
+  'is.comparison.title': {
     en: 'No irrelevant search results.',
     de: 'Keine irrelevanten Suchergebnisse.'
   },
+  'is.comparison.primaryHeader': {
+    en: 'Intelligentic Search',
+    de: 'Intelligentic Search'
+  },
+  'is.comparison.secondaryHeader': {
+    en: 'Traditional Search',
+    de: 'Traditionelle Suche'
+  },
+  'is.comparison.row1.feature': {
+    en: 'Time to Product',
+    de: 'Zeit bis zum Produkt'
+  },
+  'is.comparison.row1.primary': {
+    en: '< 3 minutes',
+    de: '< 3 Minuten'
+  },
+  'is.comparison.row1.secondary': {
+    en: '20-30 minutes',
+    de: '20-30 Minuten'
+  },
+  'is.comparison.row2.feature': {
+    en: 'Search Style',
+    de: 'Suchstil'
+  },
+  'is.comparison.row2.primary': {
+    en: 'Natural language',
+    de: 'Natürliche Sprache'
+  },
+  'is.comparison.row2.secondary': {
+    en: 'Keyword search, complex filters and tags',
+    de: 'Stichwortsuche, komplexe Filter und Tags'
+  },
+  'is.comparison.row3.feature': {
+    en: 'Recommended Products',
+    de: 'Empfohlene Produkte'
+  },
+  'is.comparison.row3.primary': {
+    en: 'Only 3-5 ideal products',
+    de: 'Nur 3-5 ideale Produkte'
+  },
+  'is.comparison.row3.secondary': {
+    en: 'Up to thousands of products',
+    de: 'Bis zu tausende Produkte'
+  },
+  'is.benefits.title': {
+    en: 'Straight to the product',
+    de: 'Ohne Umweg zum Produkt'
+  },
   'is.benefits.text1': {
-    en: 'Intelligentic Search is not just a technical search function.',
-    de: 'Die Intelligentic Search ist nicht nur eine technische Suchfunktion.'
+    en: 'In typical online purchases, users today need an average of 10 to 30 minutes to find the ideal product. The Intelligentic Search finds the right product in milliseconds. The Intelligentic Search also prevents the well-known frustration of zero results, as it always finds the closest possible match. Users reach their ideal product faster and the likelihood of abandonment decreases significantly.',
+    de: 'Bei typischen Online-Käufen brauchen Nutzer heute durchschnittlich zwischen 10 und 30 Minuten um das ideale Produkt zu finden. Die Intelligentic Search findet das passende Produkt in Millisekunden. Die Intelligentic Search verhindert zudem bekannte Enttäuschungen über 0 Treffer, zumal sie immer einen möglichst ähnlichen Treffer landet. Die Nutzer kommen schneller zum idealen Produkt und die Wahrscheinlichkeit eines Abbruchs sinkt signifikant.'
   },
   'is.benefits.text2': {
-    en: 'For users, it\'s the feeling of being supported and advised, rather than being left on their own.',
-    de: 'Für die Nutzer ist es das Gefühl, unterstützt und beraten zu werden und nicht auf sich allein gestellt zu sein.'
+    en: 'Intelligentic Search is not just a technical search function. For users, it\'s the feeling of being supported and advised, rather than being left on their own.',
+    de: 'Die Intelligentic Search ist nicht nur eine technische Suchfunktion. Für die Nutzer ist es das Gefühl, unterstützt und beraten zu werden und nicht auf sich allein gestellt zu sein.'
   }
 };
 

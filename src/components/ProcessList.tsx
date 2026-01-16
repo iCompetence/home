@@ -187,9 +187,9 @@ export const ProcessList = ({
                   playsInline
                   className="shadow-2xl"
                   style={{
-                    width: '400px',
+                    width: '600px',
                     height: 'auto',
-                    maxHeight: '300px',
+                    maxHeight: '450px',
                     objectFit: 'cover',
                     border: '2px solid rgba(255, 255, 255, 0.1)',
                     borderRadius: '16px'

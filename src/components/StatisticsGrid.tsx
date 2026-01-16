@@ -51,53 +51,7 @@ export const StatisticsGrid = ({
         <div className="max-w-6xl mx-auto">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Left Column - Text Content */}
-            <div>
-              {badge && (
-                <div className="mb-6">
-                  <span 
-                    className="inline-block px-4 py-2 rounded-full border border-white/10"
-                    style={{ 
-                      color: 'var(--gray-white)',
-                      fontSize: '14px',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {badge}
-                  </span>
-                </div>
-              )}
-              
-              <h2 
-                className="mobile-stats-h2"
-                style={{ 
-                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  fontSize: '36px', 
-                  fontWeight: '700', 
-                  lineHeight: '110%',
-                  marginBottom: '1.5rem'
-                }}
-              >
-                {title}
-              </h2>
-              
-              <p 
-                className="mobile-stats-desc"
-                style={{ 
-                  color: 'var(--gray-light)',
-                  fontSize: '18px',
-                  lineHeight: '160%',
-                  maxWidth: '500px'
-                }}
-              >
-                {description}
-              </p>
-            </div>
-
-            {/* Right Column - Statistics Grid */}
+            {/* Left Column - Statistics Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {statistics.map((stat, index) => (
                 <div
@@ -108,14 +62,14 @@ export const StatisticsGrid = ({
                   {/* Icon */}
                   <div className="mb-4">
                     {/* {stat.isPositive ? (
-                      <TrendingUp 
-                        size={20} 
-                        style={{ color: 'var(--gray-light)' }} 
+                      <TrendingUp
+                        size={20}
+                        style={{ color: 'var(--gray-light)' }}
                       />
                     ) : (
-                      <TrendingDown 
-                        size={20} 
-                        style={{ color: 'var(--gray-light)' }} 
+                      <TrendingDown
+                        size={20}
+                        style={{ color: 'var(--gray-light)' }}
                       />
                     )} */}
                   </div>
@@ -123,8 +77,8 @@ export const StatisticsGrid = ({
                   {/* Value and Change */}
                   <div className="mb-3">
                     <div className="flex items-baseline gap-3">
-                      <span 
-                        style={{ 
+                      <span
+                        style={{
                           color: 'var(--gray-white)',
                           fontSize: '32px',
                           fontWeight: '700',
@@ -133,8 +87,8 @@ export const StatisticsGrid = ({
                       >
                         {stat.value}
                       </span>
-                      <span 
-                        style={{ 
+                      <span
+                        style={{
                           color: stat.isPositive ? '#10b981' : '#ef4444',
                           fontSize: '14px',
                           fontWeight: '500'
@@ -146,8 +100,8 @@ export const StatisticsGrid = ({
                   </div>
 
                   {/* Label */}
-                  <p 
-                    style={{ 
+                  <p
+                    style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
                       lineHeight: '160%'
@@ -157,6 +111,52 @@ export const StatisticsGrid = ({
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Right Column - Text Content */}
+            <div>
+              {badge && (
+                <div className="mb-6">
+                  <span
+                    className="inline-block px-4 py-2 rounded-full border border-white/10"
+                    style={{
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500'
+                    }}
+                  >
+                    {badge}
+                  </span>
+                </div>
+              )}
+
+              <h2
+                className="mobile-stats-h2"
+                style={{
+                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontSize: '36px',
+                  fontWeight: '700',
+                  lineHeight: '110%',
+                  marginBottom: '1.5rem'
+                }}
+              >
+                {title}
+              </h2>
+
+              <p
+                className="mobile-stats-desc"
+                style={{
+                  color: 'var(--gray-light)',
+                  fontSize: '18px',
+                  lineHeight: '160%',
+                  maxWidth: '500px'
+                }}
+              >
+                {description}
+              </p>
             </div>
           </div>
         </div>

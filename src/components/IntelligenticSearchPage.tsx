@@ -8,7 +8,7 @@ import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
 import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import { StaticText } from './StaticText';
-import { StatisticsGrid } from './StatisticsGrid';
+import { ComparisonTable } from './ComparisonTable';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 
@@ -267,7 +267,7 @@ function IntelligenticSearchPageContent() {
           className="fixed z-40"
           style={{
             top: isMobile ? '80px' : '100px',
-            left: isMobile ? '16px' : '24px',
+            left: '36px',
             opacity: 0,
             animation: 'fadeIn 0.3s ease-out forwards'
           }}
@@ -551,25 +551,28 @@ function IntelligenticSearchPageContent() {
       {/* Full Width Image Section */}
       <AnimatedSection
         id="hero-image-section"
-        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
+        className="relative z-10 py-16 sm:py-24"
         animationType="fadeInUp"
         duration={0}
       >
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <div
-              className="relative w-full overflow-hidden"
-              style={{
-                aspectRatio: '16/9',
-                borderRadius: '16px'
-              }}
-            >
-              <ImageWithFallback
-                src="/images/intelligentic-search-hero.jpg"
-                alt="Intelligentic Search Demo"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
+        <div
+          style={{
+            paddingLeft: '36px',
+            paddingRight: '24px'
+          }}
+        >
+          <div
+            className="relative w-full overflow-hidden"
+            style={{
+              aspectRatio: '16/9',
+              borderRadius: '16px'
+            }}
+          >
+            <ImageWithFallback
+              src="/images/intelligentic-search-hero.jpg"
+              alt="Intelligentic Search Demo"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
         </div>
       </AnimatedSection>
@@ -637,9 +640,6 @@ function IntelligenticSearchPageContent() {
               <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
                 {t('is.modular.text2')}
               </p>
-              <p style={{ color: 'var(--gray-light)', fontSize: '18px', lineHeight: '170%', fontStyle: 'italic' }}>
-                {t('is.modular.text3')}
-              </p>
             </div>
           </div>
         </div>
@@ -661,7 +661,7 @@ function IntelligenticSearchPageContent() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                marginBottom: '3rem',
+                marginBottom: '2rem',
                 fontSize: '32px',
                 fontWeight: '700',
                 lineHeight: '110%'
@@ -669,6 +669,10 @@ function IntelligenticSearchPageContent() {
             >
               {t('is.howItWorks.title')}
             </h2>
+
+            <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', marginBottom: '3rem' }}>
+              {t('is.howItWorks.description')}
+            </p>
 
             {/* Architecture Image */}
             <div
@@ -687,14 +691,25 @@ function IntelligenticSearchPageContent() {
 
       {/* Benefits Section */}
       <div id="benefits-section">
-        <StatisticsGrid
-          id="metrics-section"
-          title={t('is.stats.title')}
-          description={t('is.stats.description')}
-          statistics={[
+        <ComparisonTable
+          title={t('is.comparison.title')}
+          primaryHeader={t('is.comparison.primaryHeader')}
+          secondaryHeader={t('is.comparison.secondaryHeader')}
+          rows={[
             {
-              value: t('is.stats.value'),
-              label: t('is.stats.label')
+              feature: t('is.comparison.row1.feature'),
+              primary: t('is.comparison.row1.primary'),
+              secondary: t('is.comparison.row1.secondary')
+            },
+            {
+              feature: t('is.comparison.row2.feature'),
+              primary: t('is.comparison.row2.primary'),
+              secondary: t('is.comparison.row2.secondary')
+            },
+            {
+              feature: t('is.comparison.row3.feature'),
+              primary: t('is.comparison.row3.primary'),
+              secondary: t('is.comparison.row3.secondary')
             }
           ]}
         />
