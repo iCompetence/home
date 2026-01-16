@@ -563,29 +563,41 @@ function PrivacyLedAIPageContent() {
         }}
       >
         <div className="py-16">
+          {/* Border container - respects padding on desktop */}
           <div
-            className="border-t border-white/10 pt-8"
+            className="border-t border-white/10 pt-8 anchor-nav-border-container"
             style={{
-              paddingLeft: '36px',
-              paddingRight: '24px',
               maxWidth: 'calc(1152px + 36px + 24px)',
               margin: '0 auto'
             }}
           >
-            <div className="overflow-x-auto">
-              <nav className="flex flex-row flex-nowrap items-start gap-0 anchor-nav-container" style={{ minWidth: 'max-content' }}>
+            {/* Scroll container - full width, handles horizontal scroll */}
+            <div
+              className="anchor-nav-scroll-container"
+              style={{
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              <nav
+                className="flex flex-row flex-nowrap items-start gap-0 anchor-nav-container"
+                style={{
+                  width: 'max-content',
+                  minWidth: '100%'
+                }}
+              >
                 {/* Intro Link */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="anchor-nav-link group text-left flex-shrink-0"
+                  className="anchor-nav-link anchor-nav-first group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    minWidth: '150px',
-                    paddingLeft: '0',
-                    paddingRight: '24px'
+                    paddingLeft: '36px',
+                    paddingRight: '32px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -608,7 +620,8 @@ function PrivacyLedAIPageContent() {
                         opacity: activeSection === 'hero' ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Intro
@@ -625,9 +638,8 @@ function PrivacyLedAIPageContent() {
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    minWidth: '150px',
-                    paddingLeft: '24px',
-                    paddingRight: '24px'
+                    paddingLeft: '32px',
+                    paddingRight: '32px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -650,7 +662,8 @@ function PrivacyLedAIPageContent() {
                         opacity: activeSection === 'intro-section' ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Problem
@@ -667,9 +680,8 @@ function PrivacyLedAIPageContent() {
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    minWidth: '150px',
-                    paddingLeft: '24px',
-                    paddingRight: '24px'
+                    paddingLeft: '32px',
+                    paddingRight: '32px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -692,7 +704,8 @@ function PrivacyLedAIPageContent() {
                         opacity: activeSection === 'services-section' ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Services
@@ -709,9 +722,8 @@ function PrivacyLedAIPageContent() {
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    minWidth: '150px',
-                    paddingLeft: '24px',
-                    paddingRight: '24px'
+                    paddingLeft: '32px',
+                    paddingRight: '32px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -734,7 +746,8 @@ function PrivacyLedAIPageContent() {
                         opacity: activeSection === 'guidance-section' ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Consulting
@@ -745,15 +758,14 @@ function PrivacyLedAIPageContent() {
                 {/* Contact Link */}
                 <button
                   onClick={() => scrollToSection('cta-footer-section')}
-                  className="anchor-nav-link group text-left flex-shrink-0"
+                  className="anchor-nav-link anchor-nav-last group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    minWidth: '150px',
-                    paddingLeft: '24px',
-                    paddingRight: '0'
+                    paddingLeft: '32px',
+                    paddingRight: '24px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -776,7 +788,8 @@ function PrivacyLedAIPageContent() {
                         opacity: activeSection === 'cta-footer-section' ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       Contact
@@ -1153,6 +1166,33 @@ function PrivacyLedAIPageContent() {
           }
         }
 
+        .anchor-nav-border-container {
+          padding-left: 36px;
+          padding-right: 24px;
+        }
+
+        .anchor-nav-scroll-container {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .anchor-nav-scroll-container::-webkit-scrollbar {
+          height: 4px;
+        }
+
+        .anchor-nav-scroll-container::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .anchor-nav-scroll-container::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 2px;
+        }
+
+        .anchor-nav-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+
         .anchor-nav-link {
           border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -1162,18 +1202,22 @@ function PrivacyLedAIPageContent() {
         }
 
         @media (max-width: 768px) {
-          .anchor-nav-link {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-            min-width: 120px !important;
-          }
-
-          .anchor-nav-link:first-child {
+          .anchor-nav-border-container {
             padding-left: 0 !important;
+            padding-right: 0 !important;
           }
 
-          .anchor-nav-link:last-child {
-            padding-right: 0 !important;
+          .anchor-nav-link {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+
+          .anchor-nav-first {
+            padding-left: 16px !important;
+          }
+
+          .anchor-nav-last {
+            padding-right: 16px !important;
           }
 
           .mobile-anchor-text {
@@ -1191,9 +1235,16 @@ function PrivacyLedAIPageContent() {
 
         @media (max-width: 640px) {
           .anchor-nav-link {
-            padding-left: 6px !important;
-            padding-right: 6px !important;
-            min-width: 100px !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+
+          .anchor-nav-first {
+            padding-left: 16px !important;
+          }
+
+          .anchor-nav-last {
+            padding-right: 16px !important;
           }
 
           .mobile-anchor-text {

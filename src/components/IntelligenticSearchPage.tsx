@@ -475,17 +475,30 @@ function IntelligenticSearchPageContent() {
         }}
       >
         <div className="py-16">
+          {/* Border container - respects padding on desktop */}
           <div
-            className="border-t border-white/10 pt-8"
+            className="border-t border-white/10 pt-8 anchor-nav-border-container"
             style={{
-              paddingLeft: '36px',
-              paddingRight: '24px',
               maxWidth: 'calc(1152px + 36px + 24px)',
               margin: '0 auto'
             }}
           >
-            <div className="overflow-x-auto">
-              <nav className="flex flex-row flex-nowrap items-start gap-0 anchor-nav-container" style={{ minWidth: 'max-content' }}>
+            {/* Scroll container - full width, handles horizontal scroll */}
+            <div
+              className="anchor-nav-scroll-container"
+              style={{
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              <nav
+                className="flex flex-row flex-nowrap items-start gap-0 anchor-nav-container"
+                style={{
+                  width: 'max-content',
+                  minWidth: '100%'
+                }}
+              >
               {anchorItems.map((item, index) => (
                 <button
                   key={item.id}
@@ -496,14 +509,14 @@ function IntelligenticSearchPageContent() {
                       scrollToSection(item.id);
                     }
                   }}
-                  className="anchor-nav-link group text-left flex-shrink-0"
+                  className={`anchor-nav-link group text-left flex-shrink-0 ${index === 0 ? 'anchor-nav-first' : ''} ${index === anchorItems.length - 1 ? 'anchor-nav-last' : ''}`}
                   style={{
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    paddingLeft: index === 0 ? '0' : '32px',
-                    paddingRight: index === anchorItems.length - 1 ? '0' : '32px'
+                    paddingLeft: index === 0 ? '36px' : '32px',
+                    paddingRight: index === anchorItems.length - 1 ? '24px' : '32px'
                   }}
                 >
                   <div className="flex items-start gap-3">
@@ -526,7 +539,8 @@ function IntelligenticSearchPageContent() {
                         opacity: activeSection === item.id ? 1 : 0.4,
                         fontSize: '16px',
                         fontWeight: '500',
-                        lineHeight: '140%'
+                        lineHeight: '140%',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       {item.label}
@@ -1020,26 +1034,30 @@ function IntelligenticSearchPageContent() {
           }
         }
 
-        .anchor-nav-container {
-          scrollbar-width: thin;
-          scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-          -webkit-overflow-scrolling: touch;
+        .anchor-nav-border-container {
+          padding-left: 36px;
+          padding-right: 24px;
         }
 
-        .anchor-nav-container::-webkit-scrollbar {
+        .anchor-nav-scroll-container {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .anchor-nav-scroll-container::-webkit-scrollbar {
           height: 4px;
         }
 
-        .anchor-nav-container::-webkit-scrollbar-track {
+        .anchor-nav-scroll-container::-webkit-scrollbar-track {
           background: transparent;
         }
 
-        .anchor-nav-container::-webkit-scrollbar-thumb {
+        .anchor-nav-scroll-container::-webkit-scrollbar-thumb {
           background: rgba(255, 255, 255, 0.3);
           border-radius: 2px;
         }
 
-        .anchor-nav-container::-webkit-scrollbar-thumb:hover {
+        .anchor-nav-scroll-container::-webkit-scrollbar-thumb:hover {
           background: rgba(255, 255, 255, 0.5);
         }
 
@@ -1052,17 +1070,22 @@ function IntelligenticSearchPageContent() {
         }
 
         @media (max-width: 768px) {
+          .anchor-nav-border-container {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+
           .anchor-nav-link {
             padding-left: 16px !important;
             padding-right: 16px !important;
           }
 
-          .anchor-nav-link:first-child {
-            padding-left: 0 !important;
+          .anchor-nav-first {
+            padding-left: 16px !important;
           }
 
-          .anchor-nav-link:last-child {
-            padding-right: 0 !important;
+          .anchor-nav-last {
+            padding-right: 16px !important;
           }
 
           .mobile-anchor-text {
@@ -1088,9 +1111,16 @@ function IntelligenticSearchPageContent() {
 
         @media (max-width: 640px) {
           .anchor-nav-link {
-            padding-left: 6px !important;
-            padding-right: 6px !important;
-            min-width: 100px !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+
+          .anchor-nav-first {
+            padding-left: 16px !important;
+          }
+
+          .anchor-nav-last {
+            padding-right: 16px !important;
           }
 
           .mobile-anchor-text {
