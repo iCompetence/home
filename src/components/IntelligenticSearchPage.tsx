@@ -606,7 +606,7 @@ function IntelligenticSearchPageContent() {
             }}
           >
             <ImageWithFallback
-              src="/images/intelligentic-search-hero.jpg"
+              src="/images/ICS_Travel_Club.png"
               alt="Intelligentic Search Demo"
               className="absolute inset-0 w-full h-full object-cover"
             />
