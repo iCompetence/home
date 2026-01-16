@@ -247,6 +247,19 @@ function PrivacyLedAIPageContent() {
         </div>
       </section>
 
+      {/* Header Background - appears on scroll (mobile only) */}
+      {isMobile && (
+        <div
+          className="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
+          style={{
+            height: '80px',
+            backgroundColor: scrollY > 50 ? '#012332' : 'transparent',
+            opacity: scrollY > 50 ? 1 : 0,
+            pointerEvents: 'none'
+          }}
+        />
+      )}
+
       {/* Logo - Top Left */}
       <div
         className="fixed z-50 cursor-pointer"
@@ -522,8 +535,9 @@ function PrivacyLedAIPageContent() {
           onClick={() => {
             window.open('/contact', '_blank');
           }}
-          className="fixed bottom-6 right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
+          className="fixed right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{
+            bottom: '124px',
             opacity: 0,
             animation: 'fadeIn 0.8s ease-out 0.6s forwards'
           }}
@@ -548,15 +562,18 @@ function PrivacyLedAIPageContent() {
           background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)'
         }}
       >
-        <div
-          className="py-16"
-          style={{
-            paddingLeft: '36px',
-            paddingRight: '24px'
-          }}
-        >
-          <div className="border-t border-white/10 pt-8">
-            <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
+        <div className="py-16">
+          <div
+            className="border-t border-white/10 pt-8"
+            style={{
+              paddingLeft: '36px',
+              paddingRight: '24px',
+              maxWidth: 'calc(1152px + 36px + 24px)',
+              margin: '0 auto'
+            }}
+          >
+            <div className="overflow-x-auto">
+              <nav className="flex flex-row flex-nowrap items-start gap-0 anchor-nav-container" style={{ minWidth: 'max-content' }}>
                 {/* Intro Link */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -766,7 +783,8 @@ function PrivacyLedAIPageContent() {
                     </span>
                   </div>
                 </button>
-            </nav>
+              </nav>
+            </div>
           </div>
         </div>
       </section>
@@ -1159,7 +1177,7 @@ function PrivacyLedAIPageContent() {
           }
 
           .mobile-anchor-text {
-            font-size: 13px !important;
+            font-size: 14px !important;
           }
 
           .mobile-cta-text {
@@ -1179,7 +1197,7 @@ function PrivacyLedAIPageContent() {
           }
 
           .mobile-anchor-text {
-            font-size: 12px !important;
+            font-size: 14px !important;
           }
         }
 
