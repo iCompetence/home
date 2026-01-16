@@ -53,6 +53,15 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
 
   return (
     <>
+      {/* Mobile Header Bar - Shows dark background when scrolled */}
+      <div
+        className="fixed top-0 left-0 right-0 h-20 md:hidden z-40 transition-colors duration-300"
+        style={{
+          backgroundColor: scrollY > 0 ? '#012332' : 'transparent',
+          pointerEvents: 'none'
+        }}
+      />
+
       {/* Burger Menu Button - Mobile only */}
       {!isOpen && (
         <button
