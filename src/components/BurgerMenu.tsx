@@ -69,7 +69,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
           className="fixed top-8 sm:top-10 md:hidden z-50 rounded-full transition-all duration-300 hover:bg-white/20 cursor-pointer flex items-center justify-center"
           style={{
             right: '24px',
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'transparent',
             border: 'none',
             opacity: 0,
             animation: 'fadeIn 0.8s ease-out 0.6s forwards',

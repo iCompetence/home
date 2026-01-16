@@ -244,15 +244,22 @@ function ICUUserJourneyExplorerPageContent() {
       </section>
 
       {/* Header Background - appears on scroll (mobile only) */}
-      <div
-        className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 header-scroll-bg"
-        style={{
-          height: '80px',
-          backgroundColor: scrollY > 50 ? '#012332' : 'transparent',
-          opacity: scrollY > 50 ? 1 : 0,
-          pointerEvents: 'none'
-        }}
-      />
+      {isMobile && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '80px',
+            backgroundColor: '#012332',
+            opacity: scrollY > 50 ? 1 : 0,
+            zIndex: 40,
+            pointerEvents: 'none',
+            transition: 'opacity 0.3s ease'
+          }}
+        />
+      )}
 
       {/* Logo - Top Left */}
       <div
@@ -558,7 +565,7 @@ function ICUUserJourneyExplorerPageContent() {
           }}
           className="fixed right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{
-            bottom: '124px',
+            bottom: '84px',
             opacity: 0,
             animation: 'fadeIn 0.8s ease-out 0.6s forwards'
           }}
@@ -1255,16 +1262,6 @@ ICU's agent interprets the question, runs the analysis, and shows the answer vis
           }
           to {
             opacity: 1;
-          }
-        }
-
-        .header-scroll-bg {
-          display: none;
-        }
-
-        @media (max-width: 768px) {
-          .header-scroll-bg {
-            display: block;
           }
         }
 
