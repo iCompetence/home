@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AnimatedSection } from './ScrollAnimations';
 
 interface ProcessStep {
@@ -40,10 +40,21 @@ export const ProcessList = ({
 }: ProcessListProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Detect mobile devices
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent, index: number) => {
-    if (steps[index]?.video) {
+    if (!isMobile && steps[index]?.video) {
       const rect = containerRef.current?.getBoundingClientRect();
       if (rect) {
         setMousePos({
@@ -55,7 +66,7 @@ export const ProcessList = ({
   };
 
   const handleMouseEnter = (index: number) => {
-    if (steps[index]?.video) {
+    if (!isMobile && steps[index]?.video) {
       setHoveredIndex(index);
     }
   };
@@ -118,7 +129,7 @@ export const ProcessList = ({
               >
                 <div
                   className="py-6 sm:py-8 px-0 hover:bg-white/[0.02] transition-colors duration-200"
-                  style={{ cursor: step.video ? 'pointer' : 'default' }}
+                  style={{ cursor: !isMobile && step.video ? 'pointer' : 'default' }}
                 >
                   <div className="flex items-start gap-4 sm:gap-8">
                     {/* Step Number */}
@@ -169,8 +180,8 @@ export const ProcessList = ({
               </div>
             ))}
 
-            {/* Video Preview on Hover */}
-            {hoveredIndex !== null && steps[hoveredIndex]?.video && (
+            {/* Video Preview on Hover - Desktop only */}
+            {!isMobile && hoveredIndex !== null && steps[hoveredIndex]?.video && (
               <div
                 className="fixed pointer-events-none z-50"
                 style={{
