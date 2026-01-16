@@ -460,60 +460,64 @@ function IntelligenticSearchPageContent() {
           background: 'linear-gradient(90deg, #31A4AF 0%, #117FA9 100%)'
         }}
       >
-        <div className="container mx-auto py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="border-t border-white/10 pt-8">
-              <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
-                {anchorItems.map((item, index) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      if (item.id === 'hero') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      } else {
-                        scrollToSection(item.id);
-                      }
-                    }}
-                    className="anchor-nav-link group text-left flex-shrink-0"
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      paddingLeft: index === 0 ? '0' : '32px',
-                      paddingRight: index === anchorItems.length - 1 ? '0' : '32px'
-                    }}
-                  >
-                    <div className="flex items-start gap-3">
-                      <span
-                        className="group-hover:text-[#0B99CC] transition-colors"
-                        style={{
-                          color: 'var(--gray-white)',
-                          opacity: activeSection === item.id ? 1 : 0.4,
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          minWidth: '32px'
-                        }}
-                      >
-                        ({item.number})
-                      </span>
-                      <span
-                        className="group-hover:text-[#0B99CC] transition-colors mobile-anchor-text"
-                        style={{
-                          color: 'var(--gray-white)',
-                          opacity: activeSection === item.id ? 1 : 0.4,
-                          fontSize: '16px',
-                          fontWeight: '500',
-                          lineHeight: '140%'
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </nav>
-            </div>
+        <div
+          className="py-16"
+          style={{
+            paddingLeft: '36px',
+            paddingRight: '24px'
+          }}
+        >
+          <div className="border-t border-white/10 pt-8">
+            <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
+              {anchorItems.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    if (item.id === 'hero') {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                      scrollToSection(item.id);
+                    }
+                  }}
+                  className="anchor-nav-link group text-left flex-shrink-0"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    paddingLeft: index === 0 ? '0' : '32px',
+                    paddingRight: index === anchorItems.length - 1 ? '0' : '32px'
+                  }}
+                >
+                  <div className="flex items-start gap-3">
+                    <span
+                      className="group-hover:text-[#0B99CC] transition-colors"
+                      style={{
+                        color: 'var(--gray-white)',
+                        opacity: activeSection === item.id ? 1 : 0.4,
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        minWidth: '32px'
+                      }}
+                    >
+                      ({item.number})
+                    </span>
+                    <span
+                      className="group-hover:text-[#0B99CC] transition-colors mobile-anchor-text"
+                      style={{
+                        color: 'var(--gray-white)',
+                        opacity: activeSection === item.id ? 1 : 0.4,
+                        fontSize: '16px',
+                        fontWeight: '500',
+                        lineHeight: '140%'
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </nav>
           </div>
         </div>
       </section>
@@ -555,12 +559,7 @@ function IntelligenticSearchPageContent() {
         animationType="fadeInUp"
         duration={0}
       >
-        <div
-          style={{
-            paddingLeft: '36px',
-            paddingRight: '24px'
-          }}
-        >
+        <div className="hero-image-container">
           <div
             className="relative w-full overflow-hidden"
             style={{
@@ -989,6 +988,18 @@ function IntelligenticSearchPageContent() {
         .is-language-switcher:hover {
           border-color: #FCFCFC !important;
           color: #FCFCFC !important;
+        }
+
+        .hero-image-container {
+          padding-left: 36px;
+          padding-right: 24px;
+        }
+
+        @media (max-width: 768px) {
+          .hero-image-container {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
         }
 
         .anchor-nav-container {

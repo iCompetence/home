@@ -270,7 +270,7 @@ function ICUUserJourneyExplorerPageContent() {
           className="fixed z-40"
           style={{
             top: isMobile ? '80px' : '100px',
-            left: isMobile ? '16px' : '24px',
+            left: '36px',
             opacity: 0,
             animation: 'fadeIn 0.3s ease-out forwards'
           }}
@@ -571,10 +571,15 @@ function ICUUserJourneyExplorerPageContent() {
           background: 'linear-gradient(90deg, #31A4AF 0%, #117FA9 100%)'
         }}
       >
-        <div className="container mx-auto py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="border-t border-white/10 pt-8">
-              <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
+        <div
+          className="py-16"
+          style={{
+            paddingLeft: '36px',
+            paddingRight: '24px'
+          }}
+        >
+          <div className="border-t border-white/10 pt-8">
+            <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
                 {/* Intro Link */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -820,8 +825,7 @@ function ICUUserJourneyExplorerPageContent() {
                     </span>
                   </div>
                 </button>
-              </nav>
-            </div>
+            </nav>
           </div>
         </div>
       </section>

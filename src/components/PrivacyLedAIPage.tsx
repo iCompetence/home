@@ -274,7 +274,7 @@ function PrivacyLedAIPageContent() {
           className="fixed z-40"
           style={{
             top: isMobile ? '80px' : '100px',
-            left: isMobile ? '16px' : '24px',
+            left: '36px',
             opacity: 0,
             animation: 'fadeIn 0.3s ease-out forwards'
           }}
@@ -548,14 +548,19 @@ function PrivacyLedAIPageContent() {
           background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)'
         }}
       >
-        <div className="container mx-auto py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="border-t border-white/10 pt-8">
-              <nav className="flex flex-row flex-wrap items-start gap-0">
+        <div
+          className="py-16"
+          style={{
+            paddingLeft: '36px',
+            paddingRight: '24px'
+          }}
+        >
+          <div className="border-t border-white/10 pt-8">
+            <nav className="flex flex-row flex-nowrap items-start gap-0 overflow-x-auto anchor-nav-container">
                 {/* Intro Link */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="anchor-nav-link group text-left flex-1"
+                  className="anchor-nav-link group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -597,7 +602,7 @@ function PrivacyLedAIPageContent() {
                 {/* Problem Link */}
                 <button
                   onClick={() => scrollToSection('intro-section')}
-                  className="anchor-nav-link group text-left flex-1"
+                  className="anchor-nav-link group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -639,7 +644,7 @@ function PrivacyLedAIPageContent() {
                 {/* Services Link */}
                 <button
                   onClick={() => scrollToSection('services-section')}
-                  className="anchor-nav-link group text-left flex-1"
+                  className="anchor-nav-link group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -681,7 +686,7 @@ function PrivacyLedAIPageContent() {
                 {/* Consulting Link */}
                 <button
                   onClick={() => scrollToSection('guidance-section')}
-                  className="anchor-nav-link group text-left flex-1"
+                  className="anchor-nav-link group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -723,7 +728,7 @@ function PrivacyLedAIPageContent() {
                 {/* Contact Link */}
                 <button
                   onClick={() => scrollToSection('cta-footer-section')}
-                  className="anchor-nav-link group text-left flex-1"
+                  className="anchor-nav-link group text-left flex-shrink-0"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -761,8 +766,7 @@ function PrivacyLedAIPageContent() {
                     </span>
                   </div>
                 </button>
-              </nav>
-            </div>
+            </nav>
           </div>
         </div>
       </section>
