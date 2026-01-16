@@ -117,7 +117,7 @@ function ICUUserJourneyExplorerPageContent() {
         style={{
           backgroundColor: '#012332',
           minHeight: '100vh',
-          overflowX: 'hidden',
+          overflowX: 'clip',
           width: '100%'
         }}
       >
@@ -181,7 +181,7 @@ function ICUUserJourneyExplorerPageContent() {
       style={{
         backgroundColor: '#012332',
         minHeight: '100vh',
-        overflowX: 'hidden',
+        overflowX: 'clip',
         width: '100%'
       }}
     >

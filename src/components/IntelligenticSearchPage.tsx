@@ -123,7 +123,7 @@ function IntelligenticSearchPageContent() {
         style={{
           backgroundColor: '#012332',
           minHeight: '100vh',
-          overflowX: 'hidden',
+          overflowX: 'clip',
           width: '100%'
         }}
       >
@@ -180,7 +180,7 @@ function IntelligenticSearchPageContent() {
       style={{
         backgroundColor: '#012332',
         minHeight: '100vh',
-        overflowX: 'hidden',
+        overflowX: 'clip',
         width: '100%'
       }}
     >

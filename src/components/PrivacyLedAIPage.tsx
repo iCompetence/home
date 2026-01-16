@@ -121,7 +121,7 @@ function PrivacyLedAIPageContent() {
         style={{
           backgroundColor: '#012332',
           minHeight: '100vh',
-          overflowX: 'hidden',
+          overflowX: 'clip',
           width: '100%'
         }}
       >
@@ -185,7 +185,7 @@ function PrivacyLedAIPageContent() {
       style={{
         backgroundColor: '#012332',
         minHeight: '100vh',
-        overflowX: 'hidden',
+        overflowX: 'clip',
         width: '100%'
       }}
     >
