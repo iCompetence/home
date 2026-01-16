@@ -241,17 +241,15 @@ function IntelligenticSearchPageContent() {
       </section>
 
       {/* Header Background - appears on scroll (mobile only) */}
-      {isMobile && (
-        <div
-          className="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
-          style={{
-            height: '80px',
-            backgroundColor: scrollY > 50 ? '#012332' : 'transparent',
-            opacity: scrollY > 50 ? 1 : 0,
-            pointerEvents: 'none'
-          }}
-        />
-      )}
+      <div
+        className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 header-scroll-bg"
+        style={{
+          height: '80px',
+          backgroundColor: scrollY > 50 ? '#012332' : 'transparent',
+          opacity: scrollY > 50 ? 1 : 0,
+          pointerEvents: 'none'
+        }}
+      />
 
       {/* Logo - Top Left */}
       <div
@@ -1014,6 +1012,16 @@ function IntelligenticSearchPageContent() {
           }
           to {
             opacity: 1;
+          }
+        }
+
+        .header-scroll-bg {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .header-scroll-bg {
+            display: block;
           }
         }
 
