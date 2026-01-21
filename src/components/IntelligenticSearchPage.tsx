@@ -630,7 +630,7 @@ function IntelligenticSearchPageContent() {
           {
             label: t('is.features.step1.label'),
             description: t('is.features.step1.description'),
-            video: "/videos/ICS_Präzision.mp4"
+            video: "/videos/Praezision_final.mp4"
           },
           {
             label: t('is.features.step2.label'),
