@@ -5,6 +5,7 @@ import { ChevronDown, Mail, X } from 'lucide-react';
 import { ProcessList } from './ProcessList';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
+import Aurora1 from "../imports/Aurora1";
 import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import { StaticText } from './StaticText';
@@ -17,6 +18,7 @@ const logoImage = '/iCompetence_logo.svg';
 function IntelligenticSearchPageContent() {
   const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -51,10 +53,12 @@ function IntelligenticSearchPageContent() {
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
-  // Scroll detection
+  // Scroll detection for Aurora fade
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      setHasScrolled(currentScrollY > 1);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -131,6 +135,7 @@ function IntelligenticSearchPageContent() {
           className="relative flex items-center justify-center"
           style={{ height: '80vh' }}
         >
+          {/* Aurora Background */}
           <div
             style={{
               position: 'absolute',
@@ -138,11 +143,12 @@ function IntelligenticSearchPageContent() {
               left: 0,
               width: '100%',
               height: '100%',
-              background: 'linear-gradient(90deg, #31A4AF 0%, #117FA9 100%)',
-              opacity: 1.0,
+              overflow: 'hidden',
               zIndex: 0
             }}
-          />
+          >
+            <Aurora1 />
+          </div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 1 }}>
             <div className="text-center max-w-4xl mx-auto">
               <h1
@@ -184,61 +190,65 @@ function IntelligenticSearchPageContent() {
         width: '100%'
       }}
     >
-      {/* Hero Section */}
-      <section
-        className="relative flex items-center justify-center"
-        style={{ height: '80vh' }}
+      {/* Aurora Background - Fixed, fades on scroll */}
+      <div
+        className="fixed inset-0 w-full h-full"
+        style={{
+          opacity: hasScrolled ? 0 : 1,
+          transition: hasScrolled
+            ? 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+            : 'opacity 1s ease-out 0.3s',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
       >
-        {/* Gradient Background */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(90deg, #31A4AF 0%, #117FA9 100%)',
-            opacity: 1.0,
-            zIndex: 0
-          }}
-        />
+        <Aurora1 />
+      </div>
 
-        {/* Hero Text */}
-        <div
-          className="container mx-auto px-4 sm:px-6 lg:px-8"
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            opacity: 0,
-            animation: 'fadeInUp 1s ease-out 0.3s forwards'
-          }}
+      {/* Hero + Anchor Nav Container */}
+      <div className="relative">
+
+        {/* Hero Section */}
+        <section
+          className="relative flex items-center justify-center"
+          style={{ height: '80vh', zIndex: 1 }}
         >
-          <div className="text-center max-w-4xl mx-auto">
-            <h1
-              className="hero-headline"
-              style={{
-                color: 'var(--gray-white)',
-                fontSize: 'clamp(48px, 8vw, 96px)',
-                fontWeight: '700',
-                lineHeight: '110%',
-                marginBottom: '1.5rem'
-              }}
-            >
-              {t('is.hero.title')}
-            </h1>
-            <p
-              style={{
-                color: 'var(--gray-white)',
-                fontSize: 'clamp(24px, 4vw, 48px)',
-                fontWeight: '500',
-                lineHeight: '130%'
-              }}
-            >
-              {t('is.hero.subline')}
-            </p>
+          {/* Hero Text */}
+          <div
+            className="container mx-auto px-4 sm:px-6 lg:px-8"
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              opacity: 0,
+              animation: 'fadeInUp 1s ease-out 0.3s forwards'
+            }}
+          >
+            <div className="text-center max-w-4xl mx-auto">
+              <h1
+                className="hero-headline"
+                style={{
+                  color: 'var(--gray-white)',
+                  fontSize: 'clamp(48px, 8vw, 96px)',
+                  fontWeight: '700',
+                  lineHeight: '110%',
+                  marginBottom: '1.5rem'
+                }}
+              >
+                {t('is.hero.title')}
+              </h1>
+              <p
+                style={{
+                  color: 'var(--gray-white)',
+                  fontSize: 'clamp(24px, 4vw, 48px)',
+                  fontWeight: '500',
+                  lineHeight: '130%'
+                }}
+              >
+                {t('is.hero.subline')}
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Header Background - appears on scroll (mobile only) */}
       {isMobile && (
@@ -366,10 +376,7 @@ function IntelligenticSearchPageContent() {
             transform: 'scale(0.9)'
           }}
         >
-          <LanguageSwitcher
-            className="is-language-switcher"
-            style={{ borderColor: '#012332', color: '#012332' }}
-          />
+          <LanguageSwitcher />
         </div>
       )}
 
@@ -386,7 +393,7 @@ function IntelligenticSearchPageContent() {
             onClick={() => {
               window.open('/contact', '_blank');
             }}
-            className="px-6 py-2.5 rounded-full bg-[#012332] border border-[#012332] hover:bg-[#011a24] hover:border-[#011a24] transition-all duration-300 cursor-pointer"
+            className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
             style={{
               color: 'var(--gray-white)',
               fontSize: '14px',
@@ -396,12 +403,7 @@ function IntelligenticSearchPageContent() {
             {t('header.contact')}
           </button>
 
-          {scrollY < 50 && (
-            <LanguageSwitcher
-              className="is-language-switcher"
-              style={{ borderColor: '#012332', color: '#012332' }}
-            />
-          )}
+          {scrollY < 50 && <LanguageSwitcher />}
 
           {!isBurgerMenuOpen ? (
             <button
@@ -476,11 +478,10 @@ function IntelligenticSearchPageContent() {
       <section
         className="relative anchor-nav-section"
         style={{
-          backgroundColor: '#012332',
-          background: 'linear-gradient(90deg, #31A4AF 0%, #117FA9 100%)'
+          zIndex: 1
         }}
       >
-        <div className="py-16">
+        <div className="py-16 relative">
           {/* Border container - respects padding on desktop */}
           <div
             className="border-t border-white/10 pt-8 anchor-nav-border-container"
@@ -559,6 +560,8 @@ function IntelligenticSearchPageContent() {
           </div>
         </div>
       </section>
+      </div>
+      {/* End of Hero + Anchor Nav Container */}
 
       {/* Intro/Quote Section - Status Quo */}
       <StaticText
@@ -1026,11 +1029,6 @@ function IntelligenticSearchPageContent() {
           to {
             opacity: 1;
           }
-        }
-
-        .is-language-switcher:hover {
-          border-color: #FCFCFC !important;
-          color: #FCFCFC !important;
         }
 
         .hero-image-container {
