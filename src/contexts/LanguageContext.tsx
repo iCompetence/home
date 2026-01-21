@@ -413,10 +413,6 @@ const translations: Translations = {
     en: 'Home',
     de: 'Home'
   },
-  'burgerMenu.blog': {
-    en: 'Our Blog',
-    de: 'Unser Blog'
-  },
   'burgerMenu.privacyLed': {
     en: 'Privacy-led AI',
     de: 'Privacy-led AI'
