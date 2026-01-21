@@ -576,8 +576,8 @@ const translations: Translations = {
     de: 'Intelligentic Search'
   },
   'is.hero.subline': {
-    en: 'Search made effective: Less effort, better results - happier customers, more conversions',
-    de: 'Suche effektiv gemacht: Weniger Aufwand, bessere Ergebnisse - zufriedenere Kunden, mehr Conversions'
+    en: 'Search made effective: Less effort, better results',
+    de: 'Suche effektiv gemacht: Weniger Aufwand, bessere Ergebnisse'
   },
   'is.anchor.intro': {
     en: 'Intro',
