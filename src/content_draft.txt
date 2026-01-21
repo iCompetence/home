@@ -1,0 +1,204 @@
+Modul: Bühne
+
+
+Headline:
+We enable companies for the Agentic Era
+on a trustworthy data foundation.
+  
+
+
+
+Modul: Intro
+
+
+Headline:
+Be one of the 10%
+
+
+Copy Text:
+Over 90% of AI projects in companies fail.* One of the main reasons: the dataset. We combine Context Data Accuracy with Agentic Era Readiness: from robust data layers, web & app analytics, and connected systems to the implementation of custom AI solutions and proprietary tools.
+
+
+  
+
+
+
+Modul: Offer
+
+
+Headline:
+Better and faster impact on AI solutions
+
+
+Subline:
+Many teams start with AI pilots - then stumble over unclear events, missing taxonomies, and siloed tools. We close that gap: we combine Context Data Accuracy and Agentic Era Readiness. The result: reliable decisions, robust automations, fast impact.
+
+
+* Sub Headline 1:
+Context Data Accuracy
+No effective AI without clean context data.
+
+Copy Text:
+We build the foundation: data layer concepts, web & app tracking, analytics setups, unified campaign parameters, interfaces & integrations, Analytics team enablement.
+
+Outcome: Measurable data quality, fewer silos, reliable KPIs, lower MarTech complexity.
+
+Akkordeon (zum ausklappen):
+
+Key Services: 
+   * Data layer architecture & governance
+   * Web & app tracking (Adobe, GA4, server‑side, consent integration)
+   * Analytics setups & dashboards (Adobe/Google/BI)
+   * Campaign parameter framework & taxonomy
+   * CDP/CRM/Adtech connectivity & APIs
+   * QA, tag audits & monitoring
+   * Training & enablement (Analytics, Marketing, Product)
+
+      * Sub Headline 2:
+Agentic Era Readiness
+From experiments to productive AI workflows.
+
+Copy Text:
+Consulting and implementation of custom AI solutions—from use‑case roadmaps and agents & automations to proprietary tools built on your data foundation
+
+Outcome: Faster time‑to‑value, productive automations, measurable impact 
+on revenue & efficiency.
+
+Akkordeon (zum ausklappen):
+
+Key Services: 
+         * AI strategy & use‑case portfolio (prioritised by value/feasibility)
+         * Agentic workflows & orchestration (prompting, tools, guardrails)
+         * Prototyping → pilot → scale
+         * Integration into existing systems (Analytics, CRM, CMS, ticketing, BI)
+         * Proprietary tools/agents (e.g., Reporting Agent, Campaign QA Agent, Knowledge Copilot)
+         * Security & compliance (PII/GDPR, access, auditability)
+
+
+  
+
+
+
+Modul: Slider Context Data Tool Stack
+
+
+Headline:
+iCompetence Context Data Tool Stack
+
+
+Slider Item 1:
+
+
+         * Headline:
+Campaign Parameter Tool
+
+         * Copy Text:
+A tool that helps marketers to leverage their campaign parameter framework 
+for better campaign data.
+
+Slider Item 2:
+
+
+            * Headline:
+Tracking & Analytics
+
+            * Copy Text:
+How do customers behave on your digital channels? How does this affect sales? Why does one campaign work and another fail? We are certified in many of the leading analytics enterprise solutions and can guide you through planning, configuration, and implementation.
+
+
+
+Slider Item 2:
+
+
+               * Headline:
+Consent Risk Audit
+
+               * Copy Text:
+Comprehensive privacy and consent compliance assessment. Identify risks, gaps, and opportunities in your data collection practices with actionable recommendations.
+
+  
+
+Modul: How we work
+
+
+Headline:
+This is how we work
+
+
+Copy Text:
+                  * Assess – Quick audit of tracking, data layer, parameters & systems 
+                  * Align – Define target picture, use cases, KPI framework & governance 
+                  * Build – Implement, integrate, train; pilot/PoC for AI applications 
+                  * Scale – Monitoring, automations & rollout across teams
+  
+
+Modul: Metrics
+
+
+Headline:
+Metrics that matter
+
+
+Copy Text:
+                  * 40% uplift in data coverage & quality 
+                  * Time to value < 6 weeks for your first productive agent
+  
+
+Modul: Slider Agentic Era Tool Stack
+
+
+Headline:
+iCompetence Agentic Era Tool Stack
+
+
+Slider Item 1:
+
+
+                  * Headline:
+ICU – Customer Journey Explorer
+
+                  * Copy Text:
+Map and analyze customer touchpoints with zero-party data insights. Understand authentic user journeys without tracking, using consented personal context for genuine experience optimization.
+
+
+Slider Item 2:
+
+
+                     * Headline:
+Personalization Injection
+
+                     * Copy Text:
+Deliver dynamic, contextual personalization powered by user-owned data. Create relevant experiences that adapt in real-time while respecting privacy and user control.
+
+
+Slider Item 3:
+
+
+                        * Headline:
+Personal Context Provider
+
+                        * Copy Text:
+Enable users to share rich personal context on their terms. Build deeper understanding through consensual data sharing that benefits both users and businesses.
+  
+
+Modul: Privacy Led
+
+
+Headline:
+Privacy-Led Setups
+
+
+Copy Text:
+                           * GDPR‑compliant setups, consent flows & data minimisation
+                           * Security & access concepts 
+                           * Vendor‑agnostic consulting
+  
+
+Modul: FAQ
+
+
+Akkordion (ausklappbar):
+                           * Do I have to start with Context Data Accuracy?
+                           * Do I need new tools right away?
+                           * How long until first results?
+                           * How do you handle privacy?

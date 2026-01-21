@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: transparent;
+      color: #fcfcfc;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #fcfcfc;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    label sup {
+      color: #0b99cc;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fcfcfc;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: #0b99cc;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #a0a0a0;
+      opacity: 0.5;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .recaptcha-wrapper {
+      margin-bottom: 1.5rem;
+    }
+
+    button[type="submit"] {
+      padding: 0.75rem 2rem;
+      background-color: #0b99cc;
+      border: none;
+      border-radius: 9999px;
+      color: #fcfcfc;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0a88b8;
+    }
+
+    /* Hide honeypot */
+    .d-none {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form action="/danke" data-netlify-recaptcha="true" id="contact" method="post" name="contact">
+    <input type="hidden" name="form-name" value="contact" />
+
+    <!-- Honeypot field -->
+    <div class="d-none">
+      <label for="anrede">Nicht ausfüllen</label>
+      <input type="text" id="anrede" name="anrede">
+    </div>
+
+    <div class="form-group">
+      <label for="contactName">Name <sup>*</sup></label>
+      <input type="text" id="contactName" name="contactName" placeholder="Ihr Name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contactEmail">E-Mail <sup>*</sup></label>
+      <input type="email" id="contactEmail" name="contactEmail" placeholder="name@example.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="contactText">Nachricht</label>
+      <textarea id="contactText" name="contactText" rows="5" placeholder="Ihre Nachricht..."></textarea>
+    </div>
+
+    <div class="recaptcha-wrapper">
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+      <div class="g-recaptcha" data-sitekey="6Lf7QtQUAAAAAIiRzogVjs0CgkXXwC3mwhcBWVW-"></div>
+    </div>
+
+    <button type="submit">Anfrage absenden</button>
+  </form>
+</body>
+</html>
