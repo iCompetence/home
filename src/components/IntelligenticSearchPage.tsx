@@ -590,7 +590,7 @@ function IntelligenticSearchPageContent() {
         <br /><br />
         {t('is.quote.text')}
         <br /><br />
-        <span style={{ fontWeight: '500' }}>{t('is.quote.conclusion')}</span>
+        <span style={{ fontWeight: '700' }}>{t('is.quote.conclusion')}</span>
       </StaticText>
 
       {/* Full Width Image Section */}

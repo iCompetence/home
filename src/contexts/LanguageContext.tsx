@@ -696,8 +696,8 @@ const translations: Translations = {
     de: 'Durchschnittliche Suchzeit mit Intelligentic Search'
   },
   'is.comparison.title': {
-    en: '',
-    de: ''
+    en: 'The benefits for you',
+    de: 'Die Vorteile für Sie'
   },
   'is.comparison.primaryHeader': {
     en: 'Intelligentic Search',
