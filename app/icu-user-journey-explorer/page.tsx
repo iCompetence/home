@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/icu-user-journey-explorer',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function ICUUserJourneyExplorer() {

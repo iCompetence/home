@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/campaign-parameter-tool',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function CampaignParameterTool() {

@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/privacy-led-ai',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function PrivacyLedAI() {
