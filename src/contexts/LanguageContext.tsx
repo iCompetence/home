@@ -1090,8 +1090,8 @@ const translations: Translations = {
     de: 'jährliche Abrechnung'
   },
   'ct.pricing.trialBadge': {
-    en: '14 Day Trial Version',
-    de: '14 Tage Trial Version'
+    en: '14 Day Free Trial',
+    de: '14 Tage Free Trial'
   },
   'ct.pricing.tier1.name': {
     en: 'Basic',
