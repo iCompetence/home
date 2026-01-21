@@ -572,16 +572,16 @@ function IntelligenticSearchPageContent() {
         }}
       >
         <span style={{ color: '#E19B74', fontStyle: 'italic' }}>
-          "...customers that use Rufus during a shopping journey are 60% more likely to complete a purchase."
+          "...customers who use Rufus during a shopping journey are 60% more likely to complete a purchase."
         </span>
         <span style={{ color: '#E19B74' }}> (</span>
         <a
-          href="https://aws.amazon.com"
+          href="https://www.aboutamazon.com/news/retail/amazon-rufus-ai-assistant-personalized-shopping-features"
           target="_blank"
           rel="noopener noreferrer"
           style={{ color: '#E19B74', textDecoration: 'underline' }}
         >
-          AWS
+          Amazon
         </a>
         <span style={{ color: '#E19B74' }}>, 2025)</span>
         <br /><br />
@@ -626,11 +626,13 @@ function IntelligenticSearchPageContent() {
         steps={[
           {
             label: t('is.features.step1.label'),
-            description: t('is.features.step1.description')
+            description: t('is.features.step1.description'),
+            video: "/videos/ICS_Präzision.mp4"
           },
           {
             label: t('is.features.step2.label'),
-            description: t('is.features.step2.description')
+            description: t('is.features.step2.description'),
+            video: "/videos/ICS_Image_Search.mp4"
           },
           {
             label: t('is.features.step3.label'),
@@ -711,14 +713,17 @@ function IntelligenticSearchPageContent() {
               {t('is.howItWorks.description')}
             </p>
 
-            {/* Architecture Image */}
+            {/* Architecture Video */}
             <div
               className="relative w-full overflow-hidden"
               style={{ borderRadius: '16px' }}
             >
-              <ImageWithFallback
-                src="/images/Architecture.png"
-                alt="Intelligentic Search Architecture"
+              <video
+                src="/videos/Architecture.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-auto"
               />
             </div>
