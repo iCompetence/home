@@ -876,26 +876,26 @@ function ICUUserJourneyExplorerPageContent() {
           textAlign: 'left'
         }}
       >
-        Most analytics tools show the journeys you presume your users take. ICU shows the ones they actually took. The AI driven tool reconstructs every real path across your website or product in real time — every step, every return, every drop-off — and turns it into a visual map anyone can understand. No setup, no dashboards to configure, no analyst degree required.
+        {t('icu.intro.text')}
       </StaticText>
 
       {/* Services Carousel */}
       <Carousel
         id="services-section"
-        title="We bring clarity to your user's behaviour. In an instant."
-        subline="ICU is built for the people who make decisions and for everybody else. ICU automatically - effortlessly - reveals the real journeys your users take. No dashboards to configure, no filters to master, no IT course to take — just clear, visual behaviour anyone on your team can understand intuitively."
+        title={t('icu.carousel.title')}
+        subline={t('icu.carousel.subline')}
         items={[
           {
-            title: "Real journeys, not assumptions",
-            description: "ICU uncovers every real path your users take — including loops, returns, and silent drop-offs — reconstructed automatically from your full dataset. No setup. No stitching. No guesswork."
+            title: t('icu.carousel.item1.title'),
+            description: t('icu.carousel.item1.description')
           },
           {
-            title: "Made for non-analysts",
-            description: "Marketing managers, product teams, and growth leads can explore behaviour without relying on technical analysts. ICU removes the complexity and turns raw activity into understandable, actionable insights."
+            title: t('icu.carousel.item2.title'),
+            description: t('icu.carousel.item2.description')
           },
           {
-            title: "Insights in natural language",
-            description: "Ask ICU in plain language —\n\"Where did most users drop last week?\"\n\"How did returning users behave differently from new ones?\"\nThe system runs the analysis for you and visualises the result instantly."
+            title: t('icu.carousel.item3.title'),
+            description: t('icu.carousel.item3.description')
           }
         ]}
         slidesToShowDesktop={2}
@@ -919,7 +919,7 @@ function ICUUserJourneyExplorerPageContent() {
                 lineHeight: '110%'
               }}
             >
-              How ICU turns complexity into clarity
+              {t('icu.guidance.title')}
             </h2>
             <p
               className="mobile-subline"
@@ -931,7 +931,7 @@ function ICUUserJourneyExplorerPageContent() {
                 margin: '0 auto'
               }}
             >
-              Explore real user journeys through visual maps you can navigate — or simply ask for the insights you need.
+              {t('icu.guidance.subline')}
             </p>
           </div>
         </div>
@@ -940,8 +940,8 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Card 1 - From overview to every detail */}
       <ImageText
         id="from-overview"
-        title="From general overview down to the smallest detail"
-        description="ICU reconstructs every real journey end-to-end — every phase, step, loop, and event. Everything is linked automatically, so you can spot dominant patterns and understand behaviour at both macro and micro levels."
+        title={t('icu.card1.title')}
+        description={t('icu.card1.description')}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="From overview to every detail"
         layout="image-left"
@@ -950,8 +950,8 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Card 2 - Complexity, simplified */}
       <ImageText
         id="complexity-simplified"
-        title="Complexity, simplified"
-        description="ICU visualizes transitions and paths that traditional analytics bury in tables. Even the most tangled journeys become readable: Clear structure, clean flows, no clutter — so you can focus on what matters, not on deciphering dashboards."
+        title={t('icu.card2.title')}
+        description={t('icu.card2.description')}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Complexity, simplified"
         layout="image-right"
@@ -960,8 +960,8 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Card 3 - How users actually reach conversion */}
       <ImageText
         id="reach-conversion"
-        title="This is how users actually reach conversion"
-        description="ICU traces all relevant user paths leading to a conversion. You immediately see which touchpoints drive progress, which detours unexpectedly work, and where friction slows people down. Conversion journeys become transparent — and optimizable."
+        title={t('icu.card3.title')}
+        description={t('icu.card3.description')}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="How users actually reach conversion"
         layout="image-left"
@@ -970,11 +970,8 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Card 4 - Answers instead of questions */}
       <ImageText
         id="answers-ai"
-        title="Answers instead of questions — powered by AI"
-        description={`Ask ICU in everyday language and get the analysis instantly.
-"Where did most users drop off last week?"
-"What's the biggest behavioural difference between new and returning users?"
-ICU's agent interprets the question, runs the analysis, and presents the answer in a comprehensible way. No filters, no SQL, no manual setup.`}
+        title={t('icu.card4.title')}
+        description={t('icu.card4.description')}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Answers instead of questions"
         layout="image-right"
@@ -983,8 +980,8 @@ ICU's agent interprets the question, runs the analysis, and presents the answer 
       {/* Card 5 - Interactive analysis */}
       <ImageText
         id="interactive-analysis"
-        title="Interactive analysis, down to the dot"
-        description="Every node is clickable, every transition explorable. ICU lets you dive in as deeply as you need: from high-level patterns to single behavioural decisions. Drop-offs, loops, progressions, anomalies — everything becomes visible the moment you explore it."
+        title={t('icu.card5.title')}
+        description={t('icu.card5.description')}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Interactive analysis"
         layout="image-left"
@@ -993,31 +990,31 @@ ICU's agent interprets the question, runs the analysis, and presents the answer 
       {/* FAQ Section */}
       <Accordion
         id="faq-section"
-        title="Frequently Asked Questions"
+        title={t('icu.faq.title')}
         items={[
           {
-            title: "What makes ICU different from traditional analytics tools?",
-            content: "Most analytics platforms let you assemble hypothetical flows.\nICU reconstructs the actual journeys your users take — automatically, from your full dataset. No manual setup, no dashboards to configure, no guesswork."
+            title: t('icu.faq.q1.title'),
+            content: t('icu.faq.q1.content')
           },
           {
-            title: "Do I need technical knowledge to use ICU?",
-            content: "No. ICU is designed for non-analysts.\nMarketing teams, product managers, and growth leads can explore behaviour without filters, segments, event taxonomies, or SQL. Everything is visual, intuitive, and guided."
+            title: t('icu.faq.q2.title'),
+            content: t('icu.faq.q2.content')
           },
           {
-            title: "How does ICU reconstruct real user journeys?",
-            content: "ICU processes your raw event data and automatically maps every step, loop, return and drop-off. The system links events into complete journeys and visualises them as clean, explorable paths."
+            title: t('icu.faq.q3.title'),
+            content: t('icu.faq.q3.content')
           },
           {
-            title: "Can I ask ICU questions in natural language?",
-            content: "Yes.\nICU includes an intelligent agent that understands plain-language questions like:\n\"Where did most users drop off last week?\"\n\"How do new users behave differently from returning ones?\"\nICU runs the analysis for you and shows the answer visually."
+            title: t('icu.faq.q4.title'),
+            content: t('icu.faq.q4.content')
           },
           {
-            title: "Which data sources does ICU support?",
-            content: "ICU integrates seamlessly with common setups:\nTag Managers, event pipelines, backend events, CRM data, and custom tracking.\nIf your system emits behavioural data, ICU can process it."
+            title: t('icu.faq.q5.title'),
+            content: t('icu.faq.q5.content')
           },
           {
-            title: "How does ICU handle data privacy and security?",
-            content: "ICU never requires unnecessary personal data.\nAll analyses are based on behavioural signals, handled within secure environments, and processed according to privacy-first principles.\nWe show journeys, not identities."
+            title: t('icu.faq.q6.title'),
+            content: t('icu.faq.q6.content')
           }
         ]}
       />

@@ -761,6 +761,142 @@ const translations: Translations = {
     en: 'Real user journeys, automatically revealed',
     de: 'Echte User Journeys, automatisch sichtbar gemacht'
   },
+  'icu.intro.text': {
+    en: 'Most analytics tools show the journeys you presume your users take. ICU shows the ones they actually took. The AI driven tool reconstructs every real path across your website or product in real time — every step, every return, every drop-off — and turns it into a visual map anyone can understand. No setup, no dashboards to configure, no analyst degree required.',
+    de: 'Die meisten Analytics-Tools zeigen die Journeys, die Sie bei Ihren Nutzern vermuten. ICU zeigt die, die tatsächlich stattgefunden haben. Das KI-gestützte Tool rekonstruiert jeden echten Pfad durch Ihre Website oder Ihr Produkt in Echtzeit — jeden Schritt, jede Rückkehr, jeden Abbruch — und verwandelt ihn in eine visuelle Karte, die jeder verstehen kann. Kein Setup, keine Dashboards zu konfigurieren, kein Analyst-Studium erforderlich.'
+  },
+  'icu.carousel.title': {
+    en: "We bring clarity to your user's behaviour. In an instant.",
+    de: 'Wir bringen Klarheit in das Verhalten Ihrer Nutzer. Sofort.'
+  },
+  'icu.carousel.subline': {
+    en: 'ICU is built for the people who make decisions and for everybody else. ICU automatically - effortlessly - reveals the real journeys your users take. No dashboards to configure, no filters to master, no IT course to take — just clear, visual behaviour anyone on your team can understand intuitively.',
+    de: 'ICU wurde für Entscheider entwickelt — und für alle anderen. ICU enthüllt automatisch und mühelos die echten Journeys Ihrer Nutzer. Keine Dashboards zu konfigurieren, keine Filter zu beherrschen, kein IT-Kurs nötig — nur klares, visuelles Verhalten, das jeder in Ihrem Team intuitiv versteht.'
+  },
+  'icu.carousel.item1.title': {
+    en: 'Real journeys, not assumptions',
+    de: 'Echte Journeys, keine Annahmen'
+  },
+  'icu.carousel.item1.description': {
+    en: 'ICU uncovers every real path your users take — including loops, returns, and silent drop-offs — reconstructed automatically from your full dataset. No setup. No stitching. No guesswork.',
+    de: 'ICU deckt jeden echten Pfad Ihrer Nutzer auf — einschließlich Schleifen, Rückkehrern und stillen Abbrüchen — automatisch aus Ihrem vollständigen Datensatz rekonstruiert. Kein Setup. Kein Zusammenstückeln. Kein Rätselraten.'
+  },
+  'icu.carousel.item2.title': {
+    en: 'Made for non-analysts',
+    de: 'Für Nicht-Analysten gemacht'
+  },
+  'icu.carousel.item2.description': {
+    en: 'Marketing managers, product teams, and growth leads can explore behaviour without relying on technical analysts. ICU removes the complexity and turns raw activity into understandable, actionable insights.',
+    de: 'Marketing-Manager, Produktteams und Growth Leads können Verhalten erkunden, ohne auf technische Analysten angewiesen zu sein. ICU beseitigt die Komplexität und verwandelt rohe Aktivitäten in verständliche, umsetzbare Erkenntnisse.'
+  },
+  'icu.carousel.item3.title': {
+    en: 'Insights in natural language',
+    de: 'Erkenntnisse in natürlicher Sprache'
+  },
+  'icu.carousel.item3.description': {
+    en: "Ask ICU in plain language —\n\"Where did most users drop last week?\"\n\"How did returning users behave differently from new ones?\"\nThe system runs the analysis for you and visualises the result instantly.",
+    de: 'Fragen Sie ICU in einfacher Sprache —\n„Wo sind letzte Woche die meisten Nutzer abgesprungen?"\n„Wie haben sich wiederkehrende Nutzer anders verhalten als neue?"\nDas System führt die Analyse für Sie durch und visualisiert das Ergebnis sofort.'
+  },
+  'icu.guidance.title': {
+    en: 'How ICU turns complexity into clarity',
+    de: 'Wie ICU Komplexität in Klarheit verwandelt'
+  },
+  'icu.guidance.subline': {
+    en: 'Explore real user journeys through visual maps you can navigate — or simply ask for the insights you need.',
+    de: 'Erkunden Sie echte User Journeys durch visuelle Karten, die Sie navigieren können — oder fragen Sie einfach nach den Erkenntnissen, die Sie brauchen.'
+  },
+  'icu.card1.title': {
+    en: 'From general overview down to the smallest detail',
+    de: 'Vom allgemeinen Überblick bis ins kleinste Detail'
+  },
+  'icu.card1.description': {
+    en: 'ICU reconstructs every real journey end-to-end — every phase, step, loop, and event. Everything is linked automatically, so you can spot dominant patterns and understand behaviour at both macro and micro levels.',
+    de: 'ICU rekonstruiert jede echte Journey von Anfang bis Ende — jede Phase, jeden Schritt, jede Schleife und jedes Event. Alles ist automatisch verknüpft, sodass Sie dominante Muster erkennen und Verhalten sowohl auf Makro- als auch auf Mikroebene verstehen können.'
+  },
+  'icu.card2.title': {
+    en: 'Complexity, simplified',
+    de: 'Komplexität, vereinfacht'
+  },
+  'icu.card2.description': {
+    en: 'ICU visualizes transitions and paths that traditional analytics bury in tables. Even the most tangled journeys become readable: Clear structure, clean flows, no clutter — so you can focus on what matters, not on deciphering dashboards.',
+    de: 'ICU visualisiert Übergänge und Pfade, die traditionelle Analytics in Tabellen verstecken. Selbst die verwirrensten Journeys werden lesbar: Klare Struktur, saubere Abläufe, kein Durcheinander — damit Sie sich auf das Wesentliche konzentrieren können, nicht auf das Entschlüsseln von Dashboards.'
+  },
+  'icu.card3.title': {
+    en: 'This is how users actually reach conversion',
+    de: 'So erreichen Nutzer tatsächlich die Conversion'
+  },
+  'icu.card3.description': {
+    en: 'ICU traces all relevant user paths leading to a conversion. You immediately see which touchpoints drive progress, which detours unexpectedly work, and where friction slows people down. Conversion journeys become transparent — and optimizable.',
+    de: 'ICU verfolgt alle relevanten Nutzerpfade, die zu einer Conversion führen. Sie sehen sofort, welche Touchpoints den Fortschritt vorantreiben, welche Umwege unerwartet funktionieren und wo Reibung die Menschen ausbremst. Conversion-Journeys werden transparent — und optimierbar.'
+  },
+  'icu.card4.title': {
+    en: 'Answers instead of questions — powered by AI',
+    de: 'Antworten statt Fragen — mit KI'
+  },
+  'icu.card4.description': {
+    en: "Ask ICU in everyday language and get the analysis instantly.\n\"Where did most users drop off last week?\"\n\"What's the biggest behavioural difference between new and returning users?\"\nICU's agent interprets the question, runs the analysis, and presents the answer in a comprehensible way. No filters, no SQL, no manual setup.",
+    de: 'Fragen Sie ICU in Alltagssprache und erhalten Sie die Analyse sofort.\n„Wo sind letzte Woche die meisten Nutzer abgesprungen?"\n„Was ist der größte Verhaltensunterschied zwischen neuen und wiederkehrenden Nutzern?"\nICUs Agent interpretiert die Frage, führt die Analyse durch und präsentiert die Antwort verständlich. Keine Filter, kein SQL, kein manuelles Setup.'
+  },
+  'icu.card5.title': {
+    en: 'Interactive analysis, down to the dot',
+    de: 'Interaktive Analyse, bis ins Detail'
+  },
+  'icu.card5.description': {
+    en: 'Every node is clickable, every transition explorable. ICU lets you dive in as deeply as you need: from high-level patterns to single behavioural decisions. Drop-offs, loops, progressions, anomalies — everything becomes visible the moment you explore it.',
+    de: 'Jeder Knoten ist anklickbar, jeder Übergang erkundbar. ICU lässt Sie so tief eintauchen, wie Sie möchten: von übergeordneten Mustern bis zu einzelnen Verhaltensentscheidungen. Abbrüche, Schleifen, Fortschritte, Anomalien — alles wird sichtbar, sobald Sie es erkunden.'
+  },
+  'icu.faq.title': {
+    en: 'Frequently Asked Questions',
+    de: 'Häufig gestellte Fragen'
+  },
+  'icu.faq.q1.title': {
+    en: 'What makes ICU different from traditional analytics tools?',
+    de: 'Was unterscheidet ICU von traditionellen Analytics-Tools?'
+  },
+  'icu.faq.q1.content': {
+    en: "Most analytics platforms let you assemble hypothetical flows.\nICU reconstructs the actual journeys your users take — automatically, from your full dataset. No manual setup, no dashboards to configure, no guesswork.",
+    de: 'Die meisten Analytics-Plattformen lassen Sie hypothetische Flows zusammenstellen.\nICU rekonstruiert die tatsächlichen Journeys Ihrer Nutzer — automatisch, aus Ihrem vollständigen Datensatz. Kein manuelles Setup, keine Dashboards zu konfigurieren, kein Rätselraten.'
+  },
+  'icu.faq.q2.title': {
+    en: 'Do I need technical knowledge to use ICU?',
+    de: 'Brauche ich technisches Wissen, um ICU zu nutzen?'
+  },
+  'icu.faq.q2.content': {
+    en: "No. ICU is designed for non-analysts.\nMarketing teams, product managers, and growth leads can explore behaviour without filters, segments, event taxonomies, or SQL. Everything is visual, intuitive, and guided.",
+    de: 'Nein. ICU ist für Nicht-Analysten konzipiert.\nMarketing-Teams, Produktmanager und Growth Leads können Verhalten ohne Filter, Segmente, Event-Taxonomien oder SQL erkunden. Alles ist visuell, intuitiv und geführt.'
+  },
+  'icu.faq.q3.title': {
+    en: 'How does ICU reconstruct real user journeys?',
+    de: 'Wie rekonstruiert ICU echte User Journeys?'
+  },
+  'icu.faq.q3.content': {
+    en: "ICU processes your raw event data and automatically maps every step, loop, return and drop-off. The system links events into complete journeys and visualises them as clean, explorable paths.",
+    de: 'ICU verarbeitet Ihre rohen Event-Daten und kartiert automatisch jeden Schritt, jede Schleife, jede Rückkehr und jeden Abbruch. Das System verknüpft Events zu vollständigen Journeys und visualisiert sie als übersichtliche, erkundbare Pfade.'
+  },
+  'icu.faq.q4.title': {
+    en: 'Can I ask ICU questions in natural language?',
+    de: 'Kann ich ICU Fragen in natürlicher Sprache stellen?'
+  },
+  'icu.faq.q4.content': {
+    en: "Yes.\nICU includes an intelligent agent that understands plain-language questions like:\n\"Where did most users drop off last week?\"\n\"How do new users behave differently from returning ones?\"\nICU runs the analysis for you and shows the answer visually.",
+    de: 'Ja.\nICU enthält einen intelligenten Agenten, der einfache Fragen versteht wie:\n„Wo sind letzte Woche die meisten Nutzer abgesprungen?"\n„Wie verhalten sich neue Nutzer anders als wiederkehrende?"\nICU führt die Analyse für Sie durch und zeigt die Antwort visuell.'
+  },
+  'icu.faq.q5.title': {
+    en: 'Which data sources does ICU support?',
+    de: 'Welche Datenquellen unterstützt ICU?'
+  },
+  'icu.faq.q5.content': {
+    en: "ICU integrates seamlessly with common setups:\nTag Managers, event pipelines, backend events, CRM data, and custom tracking.\nIf your system emits behavioural data, ICU can process it.",
+    de: 'ICU integriert sich nahtlos mit gängigen Setups:\nTag Manager, Event-Pipelines, Backend-Events, CRM-Daten und Custom Tracking.\nWenn Ihr System Verhaltensdaten ausgibt, kann ICU sie verarbeiten.'
+  },
+  'icu.faq.q6.title': {
+    en: 'How does ICU handle data privacy and security?',
+    de: 'Wie geht ICU mit Datenschutz und Sicherheit um?'
+  },
+  'icu.faq.q6.content': {
+    en: "ICU never requires unnecessary personal data.\nAll analyses are based on behavioural signals, handled within secure environments, and processed according to privacy-first principles.\nWe show journeys, not identities.",
+    de: 'ICU benötigt niemals unnötige personenbezogene Daten.\nAlle Analysen basieren auf Verhaltenssignalen, werden in sicheren Umgebungen verarbeitet und folgen Privacy-First-Prinzipien.\nWir zeigen Journeys, keine Identitäten.'
+  },
 
   // Campaign Parameter Tool Page
   'ct.hero.headline': {
