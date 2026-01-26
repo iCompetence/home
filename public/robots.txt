@@ -1,0 +1,6 @@
+# robots.txt for icompetence.de
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.icompetence.de/sitemap.xml
