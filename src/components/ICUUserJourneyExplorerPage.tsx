@@ -951,7 +951,7 @@ function ICUUserJourneyExplorerPageContent() {
       <ImageText
         id="complexity-simplified"
         title="Complexity, simplified"
-        description="ICU visualises transitions and paths that traditional analytics bury in tables. Even the most tangled journeys become readable: clear structure, clean flows, no clutter — so you can focus on what matters, not on deciphering dashboards."
+        description="ICU visualizes transitions and paths that traditional analytics bury in tables. Even the most tangled journeys become readable: Clear structure, clean flows, no clutter — so you can focus on what matters, not on deciphering dashboards."
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Complexity, simplified"
         layout="image-right"
