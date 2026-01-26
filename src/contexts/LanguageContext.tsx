@@ -752,6 +752,16 @@ const translations: Translations = {
     de: 'Die Intelligentic Search ist nicht nur eine technische Suchfunktion. Für die Nutzer ist es das Gefühl, unterstützt und beraten zu werden und nicht auf sich allein gestellt zu sein.'
   },
 
+  // ICU User Journey Explorer Page
+  'icu.hero.title': {
+    en: 'ICU – User Journey Explorer',
+    de: 'ICU – User Journey Explorer'
+  },
+  'icu.hero.subline': {
+    en: 'Real user journeys, automatically revealed',
+    de: 'Echte User Journeys, automatisch sichtbar gemacht'
+  },
+
   // Campaign Parameter Tool Page
   'ct.hero.headline': {
     en: 'UTM Automation for Marketing, Media & Analytics Teams',
