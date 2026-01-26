@@ -961,7 +961,7 @@ function ICUUserJourneyExplorerPageContent() {
       <ImageText
         id="reach-conversion"
         title="How users actually reach conversion"
-        description="ICU traces all relevant user paths leading to a conversion. You immediately see which touchpoints drive progress, which detours unexpectedly work, and where friction slows people down. Conversion journeys become transparent — and optimisable."
+        description="ICU traces all relevant user paths leading to a conversion. You immediately see which touchpoints drive progress, which detours unexpectedly work, and where friction slows people down. Conversion journeys become transparent — and optimizable."
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="How users actually reach conversion"
         layout="image-left"
