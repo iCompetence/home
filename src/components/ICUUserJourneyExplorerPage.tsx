@@ -882,7 +882,7 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Services Carousel */}
       <Carousel
         id="services-section"
-        title="We bring clarity to your user behaviour"
+        title="We bring clarity to your user's behaviour. In an instant."
         subline="ICU is built for the people who make decisions — not the ones who write SQL. Instead of asking you to assemble hypothetical flows, ICU automatically reveals the real journeys your users take. No dashboards to configure, no filters to master — just clear, visual behaviour anyone on your team can understand."
         items={[
           {
