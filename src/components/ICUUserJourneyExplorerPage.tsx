@@ -876,7 +876,7 @@ function ICUUserJourneyExplorerPageContent() {
           textAlign: 'left'
         }}
       >
-        Most analytics tools show the journeys you think your users take. ICU shows the ones they actually took. It automatically reconstructs every real path across your website or product — every step, every return, every drop-off — and turns it into a visual map anyone can understand. No setup, no dashboards to configure, no analyst degree required.
+        Most analytics tools show the journeys you presume your users take. ICU shows the ones they actually took. The AI driven tool reconstructs every real path across your website or product in real time — every step, every return, every drop-off — and turns it into a visual map anyone can understand. No setup, no dashboards to configure, no analyst degree required.
       </StaticText>
 
       {/* Services Carousel */}
