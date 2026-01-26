@@ -974,7 +974,7 @@ function ICUUserJourneyExplorerPageContent() {
         description={`Ask ICU in everyday language and get the analysis instantly.
 "Where did most users drop off last week?"
 "What's the biggest behavioural difference between new and returning users?"
-ICU's agent interprets the question, runs the analysis, and shows the answer visually. No filters, no SQL, no manual setup.`}
+ICU's agent interprets the question, runs the analysis, and presents the answer in a comprehensible way. No filters, no SQL, no manual setup.`}
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Answers instead of questions"
         layout="image-right"
