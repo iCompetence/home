@@ -940,7 +940,7 @@ function ICUUserJourneyExplorerPageContent() {
       {/* Card 1 - From overview to every detail */}
       <ImageText
         id="from-overview"
-        title="From overview to every detail"
+        title="From general overview down to the smallest detail"
         description="ICU reconstructs every real journey end-to-end — every phase, step, loop, and event. Everything is linked automatically, so you can spot dominant patterns and understand behaviour at both macro and micro levels."
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="From overview to every detail"
