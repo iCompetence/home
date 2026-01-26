@@ -9,6 +9,62 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    title: 'iCompetence - We enable companies for the Agentic Era',
+    description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
+    url: 'https://www.icompetence.de',
+    siteName: 'iCompetence',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'iCompetence - Data & AI Consulting',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'iCompetence - We enable companies for the Agentic Era',
+    description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
+    images: ['/og-image.jpg'],
+  },
+};
+
+// JSON-LD structured data for Organization
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'iCompetence',
+  url: 'https://www.icompetence.de',
+  logo: 'https://www.icompetence.de/iCompetence_logo.svg',
+  description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'DE',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+49-40-609-45-51-0',
+    contactType: 'customer service',
+    email: 'info@icompetence.de',
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/icompetence/',
+  ],
 };
 
 export default function RootLayout({
@@ -20,8 +76,12 @@ export default function RootLayout({
   const USERCENTRICS_ID = 'gRxSmB1lD';
 
   return (
-    <html lang="de">
+    <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Script
           id="usercentrics-cmp"
           src="https://web.cmp.usercentrics.eu/ui/loader.js"
