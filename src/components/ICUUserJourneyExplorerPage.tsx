@@ -984,7 +984,7 @@ ICU's agent interprets the question, runs the analysis, and presents the answer 
       <ImageText
         id="interactive-analysis"
         title="Interactive analysis, down to the dot"
-        description="Every node is clickable, every transition explorable. ICU lets you dive as deep as you need: from high-level patterns to single behavioural decisions. Drop-offs, loops, progressions, anomalies — everything becomes visible the moment you explore it."
+        description="Every node is clickable, every transition explorable. ICU lets you dive in as deeply as you need: from high-level patterns to single behavioural decisions. Drop-offs, loops, progressions, anomalies — everything becomes visible the moment you explore it."
         image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
         imageAlt="Interactive analysis"
         layout="image-left"
