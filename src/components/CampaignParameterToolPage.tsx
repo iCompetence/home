@@ -227,15 +227,14 @@ function CampaignParameterToolPageContent() {
         />
       </div>
 
-      {/* Anchor Dropdown - Below Header */}
+      {/* Anchor Dropdown - Aligned with Contact button */}
       {showAnchorDropdown && (
         <div
           className="fixed z-40"
           style={{
-            top: isMobile ? '80px' : '100px',
+            top: isMobile ? '80px' : (isFooterVisible ? '100px' : '40px'),
             left: '36px',
-            opacity: 0,
-            animation: 'fadeIn 0.3s ease-out forwards'
+            transition: 'top 0.4s ease-out'
           }}
         >
           <div className="relative">
