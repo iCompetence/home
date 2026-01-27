@@ -19,6 +19,8 @@ function ImpressumPageContent() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const closeMenuRef = useRef<(() => void) | null>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -45,6 +47,21 @@ function ImpressumPageContent() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [mounted]);
 
   if (!mounted) {
     return (
@@ -159,11 +176,9 @@ function ImpressumPageContent() {
         style={{
           top: '40px',
           left: '36px',
-          opacity: 0,
-          animation: 'fadeIn 0.8s ease-out 0.6s forwards',
-          backgroundColor: '#012332',
-          padding: '8px 12px',
-          borderRadius: '9999px'
+          opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
+          transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+          transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
         }}
         onClick={() => {
           window.location.href = '/';
@@ -456,6 +471,7 @@ function ImpressumPageContent() {
         </div>
       </section>
 
+      <div ref={footerRef}>
       <AnimatedSection
         id="cta-footer-section"
         className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
@@ -641,6 +657,7 @@ function ImpressumPageContent() {
           </div>
         </footer>
       </AnimatedSection>
+      </div>
 
       <style>{`
         @keyframes fadeIn {
