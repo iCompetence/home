@@ -960,7 +960,7 @@ function ICUUserJourneyExplorerPageContent() {
         id="from-overview"
         title={t('icu.card1.title')}
         description={t('icu.card1.description')}
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
+        video="/ic_layers.mov"
         imageAlt="From overview to every detail"
         layout="image-left"
       />
@@ -970,7 +970,7 @@ function ICUUserJourneyExplorerPageContent() {
         id="complexity-simplified"
         title={t('icu.card2.title')}
         description={t('icu.card2.description')}
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
+        video="/ic_komplexitaet.mov"
         imageAlt="Complexity, simplified"
         layout="image-right"
       />
@@ -980,7 +980,7 @@ function ICUUserJourneyExplorerPageContent() {
         id="reach-conversion"
         title={t('icu.card3.title')}
         description={t('icu.card3.description')}
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
+        video="/ic_all_journeys.mov"
         imageAlt="How users actually reach conversion"
         layout="image-left"
       />
@@ -1000,7 +1000,7 @@ function ICUUserJourneyExplorerPageContent() {
         id="interactive-analysis"
         title={t('icu.card5.title')}
         description={t('icu.card5.description')}
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
+        video="/ic_exploration.mov"
         imageAlt="Interactive analysis"
         layout="image-left"
       />

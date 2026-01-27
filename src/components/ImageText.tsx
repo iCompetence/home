@@ -16,7 +16,9 @@ interface ImageTextProps {
   /** Description text or array of bullet points */
   description: string | string[];
   /** Image source */
-  image: string;
+  image?: string;
+  /** Video source (alternative to image) */
+  video?: string;
   /** Alt text for image */
   imageAlt?: string;
   /** Layout direction */
@@ -39,6 +41,7 @@ export const ImageText = ({
   copyText,
   description,
   image,
+  video,
   imageAlt = "Section image",
   layout = "image-right",
   className = "",
@@ -166,16 +169,27 @@ export const ImageText = ({
               )}
             </div>
 
-            {/* Image Column */}
+            {/* Image/Video Column */}
             <div className={imageOrder}>
               <div
                 className="border border-white/10 rounded-[16px] overflow-hidden hover:bg-white/[0.02] transition-colors duration-200"
               >
-                <ImageWithFallback
-                  src={image}
-                  alt={imageAlt}
-                  className="w-full h-auto"
-                />
+                {video ? (
+                  <video
+                    src={video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto"
+                  />
+                ) : image ? (
+                  <ImageWithFallback
+                    src={image}
+                    alt={imageAlt}
+                    className="w-full h-auto"
+                  />
+                ) : null}
               </div>
             </div>
 
