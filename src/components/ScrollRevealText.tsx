@@ -16,6 +16,7 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
   const [isLocked, setIsLocked] = useState(false);
   const scrollAccumulator = useRef(0);
   const lockedScrollPosition = useRef(0);
+  const revealCompleted = useRef(false);
 
   // Detect mobile
   useEffect(() => {
@@ -39,6 +40,7 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
     setIsLocked(false);
     scrollAccumulator.current = 0;
     lockedScrollPosition.current = 0;
+    revealCompleted.current = false;
   }, [children]);
 
   // Split children into processable elements
@@ -90,6 +92,11 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
     if (!container || !textElement) return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Don't lock if reveal is already completed
+      if (revealCompleted.current) {
+        return;
+      }
+
       const rect = container.getBoundingClientRect();
       // Wider detection zone: from 100px before top to 100px after
       const isNearTop = rect.top <= 100 && rect.top >= -100;
@@ -114,6 +121,11 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
         const newProgress = Math.min(1, Math.max(0, scrollAccumulator.current / 2000));
         setRevealProgress(newProgress);
 
+        // Mark as completed when reveal finishes
+        if (newProgress >= 1) {
+          revealCompleted.current = true;
+        }
+
         // Lock the scroll position
         window.scrollTo(0, lockedScrollPosition.current);
       } else if (revealProgress >= 1 && isLocked) {
@@ -122,6 +134,11 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
     };
 
     const handleScroll = () => {
+      // Don't do anything if reveal is already completed
+      if (revealCompleted.current) {
+        return;
+      }
+
       if (isLocked) {
         // Force scroll back to locked position
         requestAnimationFrame(() => {
