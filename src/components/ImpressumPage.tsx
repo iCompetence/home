@@ -160,7 +160,10 @@ function ImpressumPageContent() {
           top: '40px',
           left: '36px',
           opacity: 0,
-          animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+          animation: 'fadeIn 0.8s ease-out 0.6s forwards',
+          backgroundColor: '#012332',
+          padding: '8px 12px',
+          borderRadius: '9999px'
         }}
         onClick={() => {
           window.location.href = '/';
