@@ -19,6 +19,8 @@ function ContactPageContent() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const closeMenuRef = useRef<(() => void) | null>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -45,6 +47,21 @@ function ContactPageContent() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [mounted]);
 
   useEffect(() => {
     if (mounted) {
@@ -182,8 +199,9 @@ function ContactPageContent() {
           style={{
             top: '40px',
             left: '36px',
-            opacity: 0,
-            animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+            opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
+            transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+            transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
             window.location.href = '/';
@@ -360,6 +378,7 @@ function ContactPageContent() {
           </div>
         </section>
 
+        <div ref={footerRef}>
         <AnimatedSection
           id="cta-footer-section"
           className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
@@ -545,6 +564,7 @@ function ContactPageContent() {
             </div>
           </footer>
         </AnimatedSection>
+        </div>
 
 
         <style>{`

@@ -36,6 +36,8 @@ function CampaignParameterToolPageContent() {
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'trial' | 'demo'>('trial');
   const closeMenuRef = useRef<(() => void) | null>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -72,6 +74,21 @@ function CampaignParameterToolPageContent() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [mounted]);
 
   // Detect active section based on scroll position
   useEffect(() => {
@@ -194,8 +211,9 @@ function CampaignParameterToolPageContent() {
         style={{
           top: '40px',
           left: '36px',
-          opacity: 0,
-          animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+          opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
+          transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+          transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
         }}
         onClick={() => {
           window.location.href = '/';
@@ -518,7 +536,9 @@ function CampaignParameterToolPageContent() {
       </div>
 
       {/* CTA & Footer Section */}
-      <CTCTA onTrialClick={() => { setModalMode('demo'); setIsTrialModalOpen(true); }} />
+      <div ref={footerRef}>
+        <CTCTA onTrialClick={() => { setModalMode('demo'); setIsTrialModalOpen(true); }} />
+      </div>
 
       {/* Trial Modal */}
       <CTTrialModal

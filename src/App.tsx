@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 const logoImage = '/iCompetence_logo.svg';
 import { Target, BarChart3, Shield, Map, User, Zap, ChevronDown } from 'lucide-react';
 import Aurora1 from "./imports/Aurora1";
@@ -21,6 +21,23 @@ function AppContent() {
   const { t } = useLanguage();
   // const [showFooterAurora, setShowFooterAurora] = useState(false);
   const introSectionRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Scroll functions
   const scrollToIntro = () => {
@@ -86,6 +103,7 @@ function AppContent() {
         onScrollToPrinciples={scrollToOffer}
         onScrollToToolsServices={scrollToTools}
         entranceTiming={{ logoDelay: 500, heroDelay: 3000 }}
+        isFooterVisible={isFooterVisible}
       />
 
       {/* 2. Be Among Section */}
@@ -325,6 +343,7 @@ function AppContent() {
       </div> */}
 
       {/* 10. CTA & Footer Section */}
+      <div ref={footerRef}>
       <AnimatedSection
         id="cta-footer-section"
         className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
@@ -549,6 +568,7 @@ function AppContent() {
           </div>
         </footer>
       </AnimatedSection>
+      </div>
 
       {/* Global Styles */}
       <style>{`

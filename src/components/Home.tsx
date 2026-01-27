@@ -28,6 +28,8 @@ interface HomeProps {
     logoDelay?: number;
     heroDelay?: number;
   };
+  /** Whether the footer is visible */
+  isFooterVisible?: boolean;
 }
 
 export const Home = ({
@@ -37,7 +39,8 @@ export const Home = ({
   onScrollClick,
   onScrollToPrinciples,
   onScrollToToolsServices,
-  entranceTiming = { logoDelay: 300, heroDelay: 1800 }
+  entranceTiming = { logoDelay: 300, heroDelay: 1800 },
+  isFooterVisible = false
 }: HomeProps) => {
   const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
@@ -154,8 +157,9 @@ export const Home = ({
           style={{
             top: '40px',
             left: '36px',
-            opacity: 0,
-            animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+            opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
+            transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+            transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
             window.location.href = '/';

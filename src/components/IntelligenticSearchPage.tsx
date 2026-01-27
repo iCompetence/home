@@ -26,6 +26,8 @@ function IntelligenticSearchPageContent() {
   const [showAnchorDropdown, setShowAnchorDropdown] = useState(false);
   const [isAnchorDropdownOpen, setIsAnchorDropdownOpen] = useState(false);
   const closeMenuRef = useRef<(() => void) | null>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -64,6 +66,21 @@ function IntelligenticSearchPageContent() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [mounted]);
 
   // Detect active section based on scroll position and anchor nav visibility
   useEffect(() => {
@@ -275,8 +292,9 @@ function IntelligenticSearchPageContent() {
         style={{
           top: '40px',
           left: '36px',
-          opacity: 0,
-          animation: 'fadeIn 0.8s ease-out 0.6s forwards'
+          opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
+          transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+          transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
         }}
         onClick={() => {
           window.location.href = '/';
@@ -796,6 +814,7 @@ function IntelligenticSearchPageContent() {
       </div>
 
       {/* CTA & Footer Section */}
+      <div ref={footerRef}>
       <AnimatedSection
         id="cta-footer-section"
         className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
@@ -1020,6 +1039,7 @@ function IntelligenticSearchPageContent() {
           </div>
         </footer>
       </AnimatedSection>
+      </div>
 
       <style>{`
         @keyframes fadeIn {
