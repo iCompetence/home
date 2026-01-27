@@ -989,8 +989,8 @@ function ICUUserJourneyExplorerPageContent() {
         id="answers-ai"
         title={t('icu.card4.title')}
         description={t('icu.card4.description')}
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
-        imageAlt="Answers instead of questions"
+        image="/icu_agent.png"
+        imageAlt="iCU Agent chat interface"
         layout="image-right"
       />
 
