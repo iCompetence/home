@@ -198,7 +198,7 @@ function ImpressumPageContent() {
         >
           <button
             onClick={() => {
-              window.open('/kontakt', '_blank');
+              window.open('/contact', '_blank');
             }}
             className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
             style={{
@@ -275,7 +275,7 @@ function ImpressumPageContent() {
       {isMobile && (
         <button
           onClick={() => {
-            window.open('/kontakt', '_blank');
+            window.open('/contact', '_blank');
           }}
           className="fixed bottom-6 right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{
