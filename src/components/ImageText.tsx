@@ -49,8 +49,10 @@ export const ImageText = ({
   cta
 }: ImageTextProps) => {
   const isBulletList = Array.isArray(description);
-  const contentOrder = layout === 'image-left' ? 'order-2 lg:order-2' : 'order-1 lg:order-1';
-  const imageOrder = layout === 'image-left' ? 'order-1 lg:order-1' : 'order-2 lg:order-2';
+  // On mobile: video/image always first (order-1), text second (order-2)
+  // On desktop: respect layout prop
+  const contentOrder = layout === 'image-left' ? 'order-2 lg:order-2' : 'order-2 lg:order-1';
+  const imageOrder = layout === 'image-left' ? 'order-1 lg:order-1' : 'order-1 lg:order-2';
 
   return (
     <AnimatedSection 
