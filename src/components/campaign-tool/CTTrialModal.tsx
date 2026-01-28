@@ -101,9 +101,6 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
       setIsSubmitting(false);
       console.error("Submission error:", error);
     }
-
-    // Simulate form submission - replace with actual API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
