@@ -98,6 +98,15 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
       }
 
       const rect = container.getBoundingClientRect();
+
+      // If user has scrolled past the section, mark as complete and don't lock
+      if (rect.bottom < -50) {
+        revealCompleted.current = true;
+        setRevealProgress(1);
+        setIsLocked(false);
+        return;
+      }
+
       // Wider detection zone: from 100px before top to 100px after
       const isNearTop = rect.top <= 100 && rect.top >= -100;
       const shouldLock = rect.top <= 50 && revealProgress < 1;
@@ -139,6 +148,17 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
         return;
       }
 
+      const rect = container.getBoundingClientRect();
+
+      // If user has scrolled past the section (it's now above viewport),
+      // mark reveal as complete and release lock to prevent snap-back
+      if (rect.bottom < -50) {
+        revealCompleted.current = true;
+        setRevealProgress(1);
+        setIsLocked(false);
+        return;
+      }
+
       if (isLocked) {
         // Force scroll back to locked position
         requestAnimationFrame(() => {
@@ -146,7 +166,6 @@ export const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ children, st
         });
       } else if (revealProgress < 1) {
         // Check if we should engage the lock
-        const rect = container.getBoundingClientRect();
         if (rect.top <= 10 && rect.top >= -10) {
           setIsLocked(true);
           const containerTop = container.offsetTop;
