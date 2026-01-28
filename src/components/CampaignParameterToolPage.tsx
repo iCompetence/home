@@ -8,6 +8,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import { Accordion } from './Accordion';
 import { AnimatedSection } from './ScrollAnimations';
+import Script from 'next/script';
 
 // Import campaign-tool components
 import { CTHero } from './campaign-tool/CTHero';
