@@ -331,7 +331,13 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
               />
             </div>
 
-            <div className="mb-5" data-netlify-recaptcha="true"></div>
+            <div
+              className="mb-5"
+              style={{
+                marginBottom: 'calc(var(--spacing) * 4)'
+              }}
+              data-netlify-recaptcha="true">
+            </div>
 
             {/* Submit Button */}
             <button
