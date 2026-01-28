@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import Script from 'next/script';
 
 interface CTTrialModalProps {
   isOpen: boolean;
