@@ -54,22 +54,56 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const initRecaptcha = () => {
+      // @ts-ignore
+      if (typeof window !== 'undefined' && window.grecaptcha && window.grecaptcha.render) {
+        const container = document.querySelector('[data-netlify-recaptcha="true"]');
+        if (container && container.innerHTML === "") {
+          // @ts-ignore
+          window.grecaptcha.render(container, {
+            'sitekey': '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61',
+            'theme': 'light'
+          });
+        }
+      }
+    };
+    const timer = setTimeout(initRecaptcha, 1000);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const myForm = e.currentTarget;
+    const formData = new FormData(myForm);
+
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      // 2. Erfolg-Status setzen
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // 3. Reset und Schließen (nach 2 Sekunden)
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', email: '', company: '', message: '' });
+        onClose();
+      }, 2000);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error("Submission error:", error);
+    }
+
     // Simulate form submission - replace with actual API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset and close after showing success
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', company: '', message: '' });
-      onClose();
-    }, 2000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -144,7 +178,8 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form name="trial" id="trial" data-netlify="true" onSubmit={handleSubmit}>
+            <input type="hidden" name="form-name" value="trial" />
             {/* Name Field */}
             <div className="mb-4">
               <label
@@ -260,7 +295,7 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
             </div>
 
             {/* Message Field (Optional) */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 htmlFor="message"
                 style={{
@@ -295,6 +330,8 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
                 }}
               />
             </div>
+
+            <div class="mb-5" data-netlify-recaptcha="true"></div>
 
             {/* Submit Button */}
             <button
