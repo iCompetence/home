@@ -77,7 +77,7 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
     e.preventDefault();
     setIsSubmitting(true);
 
-    const myForm = e.currentTarget;
+    const myForm = e.currentTarget as HTMLFormElement;
     const formData = new FormData(myForm);
 
     try {
