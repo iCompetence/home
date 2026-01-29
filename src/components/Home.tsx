@@ -157,8 +157,8 @@ export const Home = ({
           style={{
             top: '40px',
             left: '36px',
-            opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
-            transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
+            opacity: scrollY < 100 ? 1 : 0,
+            transform: scrollY < 100 ? 'translateY(0)' : 'translateY(-20px)',
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
