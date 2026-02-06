@@ -263,10 +263,10 @@ export const Carousel = ({
                       }}
                       ref={el => { cardRefs.current[index] = el; }}
                     >
-                      <div className="flex items-start gap-4 sm:gap-8">
-                        <span 
+                      <div className="flex items-start gap-4 sm:gap-8" style={{ height: '100%' }}>
+                        <span
                           className="mobile-carousel-number"
-                          style={{ 
+                          style={{
                             color: 'var(--gray-light)',
                             fontSize: '14px',
                             fontWeight: '500',
@@ -276,11 +276,11 @@ export const Carousel = ({
                         >
                           ({String(index + 1).padStart(2, '0')})
                         </span>
-                        <div className="flex-1">
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
                           {/* Icon removed */}
-                          <h3 
+                          <h3
                             className="mobile-carousel-title"
-                            style={{ 
+                            style={{
                               color: 'var(--gray-white)',
                               fontSize: '24px',
                               lineHeight: '110%',
@@ -305,21 +305,17 @@ export const Carousel = ({
                               href={item.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="carousel-card-button"
+                              className="px-6 py-2.5 rounded-full hover:opacity-90 transition-all duration-300"
                               style={{
                                 display: 'inline-block',
-                                marginTop: '1.5rem',
-                                padding: '12px 24px',
+                                marginTop: 'auto',
                                 background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
                                 color: 'var(--gray-black)',
                                 fontSize: '14px',
-                                fontWeight: '600',
+                                fontWeight: '500',
                                 textDecoration: 'none',
-                                borderRadius: '4px',
-                                transition: 'opacity 0.2s ease'
+                                alignSelf: 'flex-start'
                               }}
-                              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                             >
                               {item.linkText || 'Learn more'}
                             </a>
