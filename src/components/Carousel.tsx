@@ -10,6 +10,8 @@ interface CarouselItem {
   icon?: React.ComponentType<any>;
   color?: string;
   bgColor?: string;
+  link?: string;
+  linkText?: string;
 }
 
 interface CarouselProps {
@@ -287,9 +289,9 @@ export const Carousel = ({
                           >
                             {item.title}
                           </h3>
-                          <p 
+                          <p
                             className="mobile-carousel-desc"
-                            style={{ 
+                            style={{
                               color: 'var(--gray-light)',
                               fontSize: '18px',
                               lineHeight: '160%',
@@ -298,6 +300,30 @@ export const Carousel = ({
                           >
                             {item.description}
                           </p>
+                          {item.link && (
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="carousel-card-button"
+                              style={{
+                                display: 'inline-block',
+                                marginTop: '1.5rem',
+                                padding: '12px 24px',
+                                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                                color: 'var(--gray-black)',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                textDecoration: 'none',
+                                borderRadius: '4px',
+                                transition: 'opacity 0.2s ease'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                            >
+                              {item.linkText || 'Learn more'}
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>

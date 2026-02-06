@@ -184,7 +184,8 @@ function AppContent() {
             title: t('contextTools.tool1.title'),
             description: t('contextTools.tool1.description'),
             icon: Target,
-            color: "var(--brand-accent-1)"
+            color: "var(--brand-accent-1)",
+            link: "https://icompetence.de/campaign-parameter-tool/"
           },
           {
             title: t('contextTools.tool2.title'),
@@ -255,12 +256,14 @@ function AppContent() {
           {
             title: t('agenticTools.tool1.title'),
             description: t('agenticTools.tool1.description'),
-            color: "var(--brand-accent-1)"
+            color: "var(--brand-accent-1)",
+            link: "https://icompetence.de/icu-user-journey-explorer"
           },
           {
             title: t('agenticTools.tool2.title'),
             description: t('agenticTools.tool2.description'),
-            color: "var(--brand-accent-2)"
+            color: "var(--brand-accent-2)",
+            link: "https://icompetence.de/intelligentic-search/"
           }
         ]}
       />
