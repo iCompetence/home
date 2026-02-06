@@ -301,25 +301,24 @@ export const Carousel = ({
                             {item.description}
                           </p>
                           {item.link && (
-                            <a
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-6 py-2.5 rounded-full hover:opacity-90 transition-all duration-300"
-                              style={{
-                                display: 'inline-block',
-                                marginTop: 'auto',
-                                paddingTop: '24px',
-                                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                                color: 'var(--gray-black)',
-                                fontSize: '14px',
-                                fontWeight: '500',
-                                textDecoration: 'none',
-                                alignSelf: 'flex-start'
-                              }}
-                            >
-                              {item.linkText || 'Learn more'}
-                            </a>
+                            <div style={{ marginTop: 'auto', paddingTop: '24px' }}>
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-2.5 rounded-full hover:opacity-90 transition-all duration-300"
+                                style={{
+                                  display: 'inline-block',
+                                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                                  color: 'var(--gray-black)',
+                                  fontSize: '14px',
+                                  fontWeight: '500',
+                                  textDecoration: 'none'
+                                }}
+                              >
+                                {item.linkText || 'Learn more'}
+                              </a>
+                            </div>
                           )}
                         </div>
                       </div>
