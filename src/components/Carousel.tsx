@@ -309,6 +309,7 @@ export const Carousel = ({
                               style={{
                                 display: 'inline-block',
                                 marginTop: 'auto',
+                                paddingTop: '24px',
                                 background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
                                 color: 'var(--gray-black)',
                                 fontSize: '14px',
