@@ -300,16 +300,16 @@ const translations: Translations = {
     de: 'Status Quo'
   },
   'iknow.anchor.whatIs': {
-    en: 'What is iKnow?',
-    de: 'Was ist iKnow?'
+    en: 'About iKnow',
+    de: 'Über iKnow'
   },
   'iknow.anchor.benefits': {
     en: 'Your Benefits',
     de: 'Ihr Mehrwert'
   },
   'iknow.anchor.intoTool': {
-    en: 'Into the Tool',
-    de: 'Ins Tool'
+    en: 'How it works',
+    de: 'So funktioniert\'s'
   },
   'iknow.anchor.contact': {
     en: 'Contact',
