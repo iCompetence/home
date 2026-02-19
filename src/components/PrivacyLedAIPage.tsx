@@ -876,80 +876,31 @@ function PrivacyLedAIPageContent() {
         slidesToShowMobile={1}
       />
 
-      {/* Guidance Section - Header */}
-      <section id="guidance-section" className="relative z-10 py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#012332' }}>
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2
-              className="mobile-h2-title"
-              style={{
-                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                marginBottom: '1.5rem',
-                fontSize: '32px',
-                fontWeight: '700',
-                lineHeight: '110%'
-              }}
-            >
-              If you're unsure where to start, we're here to guide you.
-            </h2>
-            <p
-              className="mobile-subline"
-              style={{
-                color: 'var(--gray-light)',
-                fontSize: '18px',
-                lineHeight: '160%',
-                maxWidth: '900px',
-                margin: '0 auto'
-              }}
-            >
-              AI in sensitive environments raises questions.
-              We help you understand what's possible, what's safe, and what creates real value in your organisation.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Card 1 - Clarity */}
-      <ImageText
-        id="clarity"
-        title="Clarity"
-        description="AI raises big questions — and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty."
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
-        imageAlt="Clarity"
-        layout="image-left"
-      />
-
-      {/* Card 2 - Responsibility */}
-      <ImageText
-        id="responsibility"
-        title="Responsibility"
-        description="AI should serve your organisation, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees."
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
-        imageAlt="Responsibility"
-        layout="image-right"
-      />
-
-      {/* Card 3 - Transparency */}
-      <ImageText
-        id="transparency"
-        title="Transparency"
-        description="Understanding how AI works is essential — especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why."
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
-        imageAlt="Transparency"
-        layout="image-left"
-      />
-
-      {/* Card 4 - Security */}
-      <ImageText
-        id="security"
-        title="Security"
-        description="Your data never leaves your environment. We implement AI inside your infrastructure — secure, compliant, auditable — giving you the confidence and control you need to innovate safely."
-        image="/ddf0d19828db3a9bf12976f08e6ab6c523c84c0c.png"
-        imageAlt="Security"
-        layout="image-right"
+      {/* Guidance Section - Carousel */}
+      <Carousel
+        id="guidance-section"
+        title="If you're unsure where to start, we're here to guide you."
+        subline="AI in sensitive environments raises questions. We help you understand what's possible, what's safe, and what creates real value in your organisation."
+        items={[
+          {
+            title: "Clarity",
+            description: "AI raises big questions — and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty."
+          },
+          {
+            title: "Responsibility",
+            description: "AI should serve your organisation, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees."
+          },
+          {
+            title: "Transparency",
+            description: "Understanding how AI works is essential — especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why."
+          },
+          {
+            title: "Security",
+            description: "Your data never leaves your environment. We implement AI inside your infrastructure — secure, compliant, auditable — giving you the confidence and control you need to innovate safely."
+          }
+        ]}
+        slidesToShowDesktop={2}
+        slidesToShowMobile={1}
       />
 
       {/* 10. CTA & Footer Section */}
