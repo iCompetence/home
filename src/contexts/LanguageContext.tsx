@@ -277,6 +277,14 @@ const translations: Translations = {
     en: 'Our semantic search for your website. Deliver dynamic, contextual personalization powered by user-owned data. Create relevant experiences that adapt in real-time while respecting privacy and user control. The better Rufus with more options and better usabilty. For your company with your CI and exactly the information you want to provide. Be more relevant for your customers with less effort.',
     de: 'Unsere semantische Suche für Ihre Website. Bieten Sie Ihren Kunden dynamische, kontextuelle Personalisierung auf Basis nutzereigener Daten. Erstellen Sie relevante Erlebnisse, die sich in Echtzeit anpassen – bei voller Wahrung von Datenschutz und Nutzerkontrolle. Der bessere Rufus: mehr Optionen, bessere Usability. Für Ihr Unternehmen, in Ihrem CI und mit genau den Informationen, die Sie bereitstellen möchten. Mehr Relevanz für Ihre Kund:innen – mit weniger Aufwand.'
   },
+  'agenticTools.tool3.title': {
+    en: 'iKnow',
+    de: 'iKnow'
+  },
+  'agenticTools.tool3.description': {
+    en: 'The central knowledge platform for your organization. AI-powered, local, and secure – iKnow transforms distributed information into a structured, always-available knowledge foundation for better decisions and future AI applications.',
+    de: 'Die zentrale Wissensplattform für Ihr Unternehmen. KI-basiert, lokal und sicher – iKnow verwandelt verteiltes Wissen in eine strukturierte, jederzeit verfügbare Wissensgrundlage für bessere Entscheidungen und zukunftssichere KI-Anwendungen.'
+  },
 
   // Privacy-Led Section
   'privacyLed.title': {
