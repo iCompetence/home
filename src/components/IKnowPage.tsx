@@ -116,12 +116,12 @@ function IKnowPageContent() {
   }, [mounted]);
 
   const anchorItems = [
-    { id: 'hero', label: 'Intro', number: '01' },
-    { id: 'intro-section', label: 'Status Quo', number: '02' },
-    { id: 'what-section', label: 'Was ist iKnow?', number: '03' },
-    { id: 'guidance-section', label: 'Ihr Mehrwert', number: '04' },
-    { id: 'how-it-works-section', label: 'Ins Tool', number: '05' },
-    { id: 'cta-footer-section', label: 'Kontakt', number: '06' }
+    { id: 'hero', label: t('iknow.anchor.intro'), number: '01' },
+    { id: 'intro-section', label: t('iknow.anchor.statusQuo'), number: '02' },
+    { id: 'what-section', label: t('iknow.anchor.whatIs'), number: '03' },
+    { id: 'guidance-section', label: t('iknow.anchor.benefits'), number: '04' },
+    { id: 'how-it-works-section', label: t('iknow.anchor.intoTool'), number: '05' },
+    { id: 'cta-footer-section', label: t('iknow.anchor.contact'), number: '06' }
   ];
 
   if (!mounted) {
@@ -174,7 +174,7 @@ function IKnowPageContent() {
                   lineHeight: '130%'
                 }}
               >
-                KI ohne Wissen ist nur ein weiteres Tool
+                {t('iknow.hero.subtitle')}
               </p>
             </div>
           </div>
@@ -246,7 +246,7 @@ function IKnowPageContent() {
                   lineHeight: '130%'
                 }}
               >
-                KI ohne Wissen ist nur ein weiteres Tool
+                {t('iknow.hero.subtitle')}
               </p>
             </div>
           </div>
@@ -571,15 +571,15 @@ function IKnowPageContent() {
         }}
       >
         <span style={{ color: '#E19B74', fontStyle: 'italic' }}>
-          "Every company's business data is their gold mine."
+          {t('iknow.intro.quote')}
         </span>
-        <span style={{ color: '#E19B74' }}> – Jensen Huang, 2024</span>
+        <span style={{ color: '#E19B74' }}>{t('iknow.intro.quoteAuthor')}</span>
         <br /><br />
-        Ihr Unternehmen besitzt eine Goldmine: Das kollektive Wissen Ihrer Organisation und Ihrer Mitarbeiter, das Sie über Jahre aufgebaut haben.
+        {t('iknow.intro.p1')}
         <br /><br />
-        Heben Sie diesen Schatz! KI ermöglicht Ihnen, das personengebundene Wissen allen verfügbar zu machen. Ein Wissenspool statt einer Insel, Struktur statt Silo, zugänglich für alle.
+        {t('iknow.intro.p2')}
         <br /><br />
-        <span style={{ fontWeight: '700' }}>Wie das geht? Mit iKnow:</span>
+        <span style={{ fontWeight: '700' }}>{t('iknow.intro.p3')}</span>
       </StaticText>
 
       {/* Hero Image Placeholder */}
@@ -631,21 +631,21 @@ function IKnowPageContent() {
                 lineHeight: '110%'
               }}
             >
-              Was ist iKnow?
+              {t('iknow.what.title')}
             </h2>
 
             <div className="space-y-6 max-w-4xl">
               <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
-                iKnow ist die zentrale Wissensplattform für Unternehmen und Organisationen, die ihr Wissen nachhaltig nutzbar machen wollen. Sie sammelt Wissen dort, wo es im Arbeitsalltag entsteht – einfach, intuitiv, automatisiert, KI-basiert, sicher und ohne zusätzlichen Aufwand für Mitarbeitende.
+                {t('iknow.what.p1')}
               </p>
               <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
-                Sie wächst mit dem Wissen Ihres Unternehmens. Kontinuierlich lernen? Selbstverständlich, das tun Sie ja auch.
+                {t('iknow.what.p2')}
               </p>
               <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
-                Aber bitte transparent: Sie behalten die volle Kontrolle über Inhalte, Quellen und Verarbeitung. Alle Daten bleiben lokal im Unternehmen, ohne Anbindung nach außen, also ohne öffentliche KI-APIs.
+                {t('iknow.what.p3')}
               </p>
               <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', fontWeight: '600' }}>
-                → So verwandelt iKnow im Unternehmen verteilte Informationen in eine sichere, strukturierte und jederzeit verfügbare Wissensgrundlage für bessere Entscheidungen und zukünftige KI-Anwendungen.
+                {t('iknow.what.p4')}
               </p>
             </div>
           </div>
@@ -669,7 +669,7 @@ function IKnowPageContent() {
                 lineHeight: '110%'
               }}
             >
-              Das haben Sie nun davon!
+              {t('iknow.guidance.title')}
             </h2>
           </div>
         </div>
@@ -678,64 +678,93 @@ function IKnowPageContent() {
       {/* Card 1 - Alle Wissensquellen vereint */}
       <ImageText
         id="knowledge-sources"
-        title="Alle Wissensquellen vereint"
-        description="iKnow verbindet sich per API mit Tools wie Microsoft 365, Google Workspace oder Slack. Es führt verteiltes Wissen zentral zusammen."
+        title={t('iknow.card1.title')}
+        description={t('iknow.card1.description')}
         layout="image-left"
-        imageAlt="Alle Wissensquellen vereint"
+        imageAlt={t('iknow.card1.title')}
       />
 
-      {/* Card 2 - Aufgeräumt und strukturiert */}
+      {/* Card 2 */}
       <ImageText
         id="structured-knowledge"
-        title="Aufgeräumt und strukturiert"
-        description="E-Mails, Chats und Dokumente werden automatisch erfasst und standardisiert. So werden unübersichtliche Datenmengen durch lokale KI zu einer klar strukturierten Wissensbasis."
+        title={t('iknow.card2.title')}
+        description={t('iknow.card2.description')}
         layout="image-right"
-        imageAlt="Aufgeräumt und strukturiert"
+        imageAlt={t('iknow.card2.title')}
       />
 
-      {/* Card 3 - Optional: Nutzen Sie auch Gespräche */}
+      {/* Card 3 */}
       <ImageText
         id="conversations"
-        title="Optional: Nutzen Sie auch Gespräche"
-        description="iKnow kann Meetings und Workshops transkribieren und so neues Wissen direkt in das System integrieren. So können Sie, wenn gewünscht, Wissen sichern, bevor es verloren geht."
+        title={t('iknow.card3.title')}
+        description={t('iknow.card3.description')}
         layout="image-left"
-        imageAlt="Gespräche als Wissensquelle"
+        imageAlt={t('iknow.card3.title')}
       />
 
-      {/* Card 4 - Wissen von heute für morgen */}
+      {/* Card 4 */}
       <ImageText
         id="future-knowledge"
-        title="Wissen von heute für morgen"
-        description="Sichern Sie Wissen heutiger Generationen für künftige: iKnow bewahrt Ihre wertvollste Ressource dauerhaft und sichert so das kollektive Gedächtnis Ihres Unternehmens."
+        title={t('iknow.card4.title')}
+        description={t('iknow.card4.description')}
         layout="image-right"
-        imageAlt="Wissen von heute für morgen"
+        imageAlt={t('iknow.card4.title')}
       />
 
-      {/* Card 5 - Sicherheit und Souveränität */}
+      {/* Card 5 */}
       <ImageText
         id="security-sovereignty"
-        title="Sicherheit und Souveränität"
-        description="iKnow arbeitet lokal: Als Desktop-Software verarbeitet es Daten sicher vor Ort. Behalten Sie die Kontrolle über Ihre Daten und Ihr Wissen, jederzeit."
+        title={t('iknow.card5.title')}
+        description={t('iknow.card5.description')}
         layout="image-left"
-        imageAlt="Sicherheit und Souveränität"
+        imageAlt={t('iknow.card5.title')}
       />
 
-      {/* Card 6 - Bereit für Ihre Unternehmens-KI */}
+      {/* Card 6 */}
       <ImageText
         id="ai-ready"
-        title="Bereit für Ihre Unternehmens-KI"
-        description="iKnow baut für Sie die Datengrundlage, die Sie für die Nutzung von KI-Agenten benötigen. So wird Ihr Unternehmen in kurzer Zeit bereit für die Zukunft mit KI – automatisiert, einfach, datensicher und auf der Höhe der Zeit."
+        title={t('iknow.card6.title')}
+        description={t('iknow.card6.description')}
         layout="image-right"
-        imageAlt="Bereit für Ihre Unternehmens-KI"
+        imageAlt={t('iknow.card6.title')}
       />
 
-      {/* How It Works - Placeholder Image */}
+      {/* How It Works - with header and copy */}
       <AnimatedSection
         id="how-it-works-section"
-        className="relative z-10 py-16 sm:py-24"
+        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
         animationType="fadeInUp"
         duration={0}
       >
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <h2
+              className="mobile-h2-title"
+              style={{
+                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                marginBottom: '1.5rem',
+                fontSize: '32px',
+                fontWeight: '700',
+                lineHeight: '110%'
+              }}
+            >
+              {t('iknow.howItWorks.title')}
+            </h2>
+
+            <div className="space-y-6 max-w-4xl" style={{ marginBottom: '3rem' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+                {t('iknow.howItWorks.p1')}
+              </p>
+              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+                {t('iknow.howItWorks.p2')}
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="hero-image-container">
           <div
             className="relative w-full overflow-hidden"
@@ -752,42 +781,6 @@ function IKnowPageContent() {
             <p style={{ color: 'rgba(255, 255, 255, 0.25)', fontSize: '18px', fontWeight: '500' }}>
               Tool-Screenshot / Demo-Video Platzhalter
             </p>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Entdecken Sie iKnow - Text Section */}
-      <AnimatedSection
-        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-        animationType="fadeInUp"
-        duration={0}
-      >
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <h2
-              className="mobile-h2-title"
-              style={{
-                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                marginBottom: '2rem',
-                fontSize: '32px',
-                fontWeight: '700',
-                lineHeight: '110%'
-              }}
-            >
-              Entdecken Sie iKnow: Der Blick ins Tool
-            </h2>
-
-            <div className="space-y-6 max-w-4xl">
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
-                Die Frage ist nicht, ob Sie KI einsetzen. Sondern worauf Sie sie aufbauen.
-              </p>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
-                Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Machen Sie KI zu Ihrem Wettbewerbsvorteil!
-              </p>
-            </div>
           </div>
         </div>
       </AnimatedSection>

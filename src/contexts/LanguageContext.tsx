@@ -286,6 +286,140 @@ const translations: Translations = {
     de: 'Die zentrale Wissensplattform für Ihr Unternehmen. KI-basiert, lokal und sicher – iKnow verwandelt verteiltes Wissen in eine strukturierte, jederzeit verfügbare Wissensgrundlage für bessere Entscheidungen und zukunftssichere KI-Anwendungen.'
   },
 
+  // iKnow Page
+  'iknow.hero.subtitle': {
+    en: 'AI without knowledge is just another tool',
+    de: 'KI ohne Wissen ist nur ein weiteres Tool'
+  },
+  'iknow.anchor.intro': {
+    en: 'Intro',
+    de: 'Intro'
+  },
+  'iknow.anchor.statusQuo': {
+    en: 'Status Quo',
+    de: 'Status Quo'
+  },
+  'iknow.anchor.whatIs': {
+    en: 'What is iKnow?',
+    de: 'Was ist iKnow?'
+  },
+  'iknow.anchor.benefits': {
+    en: 'Your Benefits',
+    de: 'Ihr Mehrwert'
+  },
+  'iknow.anchor.intoTool': {
+    en: 'Into the Tool',
+    de: 'Ins Tool'
+  },
+  'iknow.anchor.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+  'iknow.intro.quote': {
+    en: '"Every company\'s business data is their gold mine."',
+    de: '"Every company\'s business data is their gold mine."'
+  },
+  'iknow.intro.quoteAuthor': {
+    en: ' – Jensen Huang, 2024',
+    de: ' – Jensen Huang, 2024'
+  },
+  'iknow.intro.p1': {
+    en: 'Your company holds a gold mine: the collective knowledge of your organization and employees, built up over years.',
+    de: 'Ihr Unternehmen besitzt eine Goldmine: Das kollektive Wissen Ihrer Organisation und Ihrer Mitarbeiter, das Sie über Jahre aufgebaut haben.'
+  },
+  'iknow.intro.p2': {
+    en: 'Uncover this treasure! AI enables you to make individual knowledge available to everyone. A knowledge pool instead of an island, structure instead of silos, accessible to all.',
+    de: 'Heben Sie diesen Schatz! KI ermöglicht Ihnen, das personengebundene Wissen allen verfügbar zu machen. Ein Wissenspool statt einer Insel, Struktur statt Silo, zugänglich für alle.'
+  },
+  'iknow.intro.p3': {
+    en: 'How does it work? With iKnow:',
+    de: 'Wie das geht? Mit iKnow:'
+  },
+  'iknow.what.title': {
+    en: 'What is iKnow?',
+    de: 'Was ist iKnow?'
+  },
+  'iknow.what.p1': {
+    en: 'iKnow is the central knowledge platform for companies and organizations that want to make their knowledge sustainably usable. It captures knowledge where it arises in everyday work – simply, intuitively, automated, AI-based, secure, and without additional effort for employees.',
+    de: 'iKnow ist die zentrale Wissensplattform für Unternehmen und Organisationen, die ihr Wissen nachhaltig nutzbar machen wollen. Sie sammelt Wissen dort, wo es im Arbeitsalltag entsteht – einfach, intuitiv, automatisiert, KI-basiert, sicher und ohne zusätzlichen Aufwand für Mitarbeitende.'
+  },
+  'iknow.what.p2': {
+    en: 'It grows with your company\'s knowledge. Continuous learning? Of course – that\'s what you do too.',
+    de: 'Sie wächst mit dem Wissen Ihres Unternehmens. Kontinuierlich lernen? Selbstverständlich, das tun Sie ja auch.'
+  },
+  'iknow.what.p3': {
+    en: 'But with full transparency: you retain complete control over content, sources, and processing. All data stays local within your company, with no external connections – no public AI APIs.',
+    de: 'Aber bitte transparent: Sie behalten die volle Kontrolle über Inhalte, Quellen und Verarbeitung. Alle Daten bleiben lokal im Unternehmen, ohne Anbindung nach außen, also ohne öffentliche KI-APIs.'
+  },
+  'iknow.what.p4': {
+    en: '\u2192 This is how iKnow transforms distributed information within your company into a secure, structured, and always-available knowledge foundation for better decisions and future AI applications.',
+    de: '\u2192 So verwandelt iKnow im Unternehmen verteilte Informationen in eine sichere, strukturierte und jederzeit verfügbare Wissensgrundlage für bessere Entscheidungen und zukünftige KI-Anwendungen.'
+  },
+  'iknow.guidance.title': {
+    en: 'Here\'s what you get!',
+    de: 'Das haben Sie nun davon!'
+  },
+  'iknow.card1.title': {
+    en: 'All knowledge sources united',
+    de: 'Alle Wissensquellen vereint'
+  },
+  'iknow.card1.description': {
+    en: 'iKnow connects via API to tools like Microsoft 365, Google Workspace, or Slack. It brings distributed knowledge together in one central place.',
+    de: 'iKnow verbindet sich per API mit Tools wie Microsoft 365, Google Workspace oder Slack. Es führt verteiltes Wissen zentral zusammen.'
+  },
+  'iknow.card2.title': {
+    en: 'Organized and structured',
+    de: 'Aufgeräumt und strukturiert'
+  },
+  'iknow.card2.description': {
+    en: 'Emails, chats, and documents are automatically captured and standardized. This way, overwhelming amounts of data are transformed by local AI into a clearly structured knowledge base.',
+    de: 'E-Mails, Chats und Dokumente werden automatisch erfasst und standardisiert. So werden unübersichtliche Datenmengen durch lokale KI zu einer klar strukturierten Wissensbasis.'
+  },
+  'iknow.card3.title': {
+    en: 'Optional: Use conversations too',
+    de: 'Optional: Nutzen Sie auch Gespräche'
+  },
+  'iknow.card3.description': {
+    en: 'iKnow can transcribe meetings and workshops, integrating new knowledge directly into the system. This way, you can capture knowledge before it\'s lost – if desired.',
+    de: 'iKnow kann Meetings und Workshops transkribieren und so neues Wissen direkt in das System integrieren. So können Sie, wenn gewünscht, Wissen sichern, bevor es verloren geht.'
+  },
+  'iknow.card4.title': {
+    en: 'Today\'s knowledge for tomorrow',
+    de: 'Wissen von heute für morgen'
+  },
+  'iknow.card4.description': {
+    en: 'Preserve the knowledge of today\'s generations for the future: iKnow permanently safeguards your most valuable resource, securing your company\'s collective memory.',
+    de: 'Sichern Sie Wissen heutiger Generationen für künftige: iKnow bewahrt Ihre wertvollste Ressource dauerhaft und sichert so das kollektive Gedächtnis Ihres Unternehmens.'
+  },
+  'iknow.card5.title': {
+    en: 'Security and sovereignty',
+    de: 'Sicherheit und Souveränität'
+  },
+  'iknow.card5.description': {
+    en: 'iKnow works locally: as desktop software, it processes data securely on-site. Maintain control over your data and knowledge at all times.',
+    de: 'iKnow arbeitet lokal: Als Desktop-Software verarbeitet es Daten sicher vor Ort. Behalten Sie die Kontrolle über Ihre Daten und Ihr Wissen, jederzeit.'
+  },
+  'iknow.card6.title': {
+    en: 'Ready for your enterprise AI',
+    de: 'Bereit für Ihre Unternehmens-KI'
+  },
+  'iknow.card6.description': {
+    en: 'iKnow builds the data foundation you need for AI agents. This way, your company becomes ready for the future with AI in no time – automated, simple, data-secure, and state of the art.',
+    de: 'iKnow baut für Sie die Datengrundlage, die Sie für die Nutzung von KI-Agenten benötigen. So wird Ihr Unternehmen in kurzer Zeit bereit für die Zukunft mit KI – automatisiert, einfach, datensicher und auf der Höhe der Zeit.'
+  },
+  'iknow.howItWorks.title': {
+    en: 'Discover iKnow: A look into the tool',
+    de: 'Entdecken Sie iKnow: Der Blick ins Tool'
+  },
+  'iknow.howItWorks.p1': {
+    en: 'The question is not whether you use AI. But what you build it on.',
+    de: 'Die Frage ist nicht, ob Sie KI einsetzen. Sondern worauf Sie sie aufbauen.'
+  },
+  'iknow.howItWorks.p2': {
+    en: 'Success and security go hand in hand: only with a secure, internal knowledge base can AI be safe and successful. Make AI your competitive advantage!',
+    de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Machen Sie KI zu Ihrem Wettbewerbsvorteil!'
+  },
+
   // Privacy-Led Section
   'privacyLed.title': {
     en: 'Privacy-Led Setups',
