@@ -8,6 +8,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import { StaticText } from './StaticText';
 import { Carousel } from './Carousel';
+import { ProcessList } from './ProcessList';
 import { ImageText } from './ImageText';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
@@ -876,31 +877,29 @@ function PrivacyLedAIPageContent() {
         slidesToShowMobile={1}
       />
 
-      {/* Guidance Section - Carousel */}
-      <Carousel
+      {/* Guidance Section - Features */}
+      <ProcessList
         id="guidance-section"
         title="If you're unsure where to start, we're here to guide you."
         subline="AI in sensitive environments raises questions. We help you understand what's possible, what's safe, and what creates real value in your organisation."
-        items={[
+        steps={[
           {
-            title: "Clarity",
+            label: "Clarity",
             description: "AI raises big questions — and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty."
           },
           {
-            title: "Responsibility",
+            label: "Responsibility",
             description: "AI should serve your organisation, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees."
           },
           {
-            title: "Transparency",
+            label: "Transparency",
             description: "Understanding how AI works is essential — especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why."
           },
           {
-            title: "Security",
+            label: "Security",
             description: "Your data never leaves your environment. We implement AI inside your infrastructure — secure, compliant, auditable — giving you the confidence and control you need to innovate safely."
           }
         ]}
-        slidesToShowDesktop={2}
-        slidesToShowMobile={1}
       />
 
       {/* 10. CTA & Footer Section */}
