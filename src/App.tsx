@@ -265,12 +265,12 @@ function AppContent() {
             color: "var(--brand-accent-2)",
             link: "https://icompetence.de/intelligentic-search/"
           }
-          // {
-          //   title: t('agenticTools.tool3.title'),
-          //   description: t('agenticTools.tool3.description'),
-          //   color: "var(--brand-primary-light)",
-          //   link: "/iknow"
-          // }
+          {
+            title: t('agenticTools.tool3.title'),
+            description: t('agenticTools.tool3.description'),
+            color: "var(--brand-primary-light)",
+            link: "https://icompetence.de/iknow/"
+          }
         ]}
       />
 
@@ -289,7 +289,7 @@ function AppContent() {
         layout="image-left"
         cta={{
           text: t('privacyLed.cta'),
-          url: "https://privacy-led-ai.de/"
+          url: "https://icompetence.de/privacy-led-ai/"
         }}
       />
 
