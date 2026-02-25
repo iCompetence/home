@@ -648,7 +648,7 @@ function AIWorkshopPageContent() {
           style={{ backgroundColor: '#012332' }}
         >
           <div className="container mx-auto">
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <h2
                 className="mobile-h2-title"
                 style={{
