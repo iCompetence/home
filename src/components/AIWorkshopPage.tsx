@@ -706,7 +706,6 @@ function AIWorkshopPageContent() {
                   <label
                     className="block mb-2"
                     htmlFor="workshop-name"
-                    style={{ color: 'var(--gray-white)', fontSize: '16px', fontWeight: '500' }}
                   >
                     {t('aiworkshop.form.name')} *
                   </label>
@@ -715,17 +714,13 @@ function AIWorkshopPageContent() {
                     name="name"
                     id="workshop-name"
                     required
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded focus:border-[#0b99cc] focus:outline-none transition-colors"
+                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
                 </div>
 
                 <div>
-                  <label
-                    className="block mb-2"
-                    htmlFor="workshop-email"
-                    style={{ color: 'var(--gray-white)', fontSize: '16px', fontWeight: '500' }}
-                  >
+                  <label className="block mb-2" htmlFor="workshop-email">
                     {t('aiworkshop.form.email')} *
                   </label>
                   <input
@@ -733,34 +728,26 @@ function AIWorkshopPageContent() {
                     name="email"
                     id="workshop-email"
                     required
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded focus:border-[#0b99cc] focus:outline-none transition-colors"
+                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
                 </div>
 
                 <div>
-                  <label
-                    className="block mb-2"
-                    htmlFor="workshop-phone"
-                    style={{ color: 'var(--gray-white)', fontSize: '16px', fontWeight: '500' }}
-                  >
+                  <label className="block mb-2" htmlFor="workshop-phone">
                     {t('aiworkshop.form.phone')}
                   </label>
                   <input
                     type="tel"
                     name="phone"
                     id="workshop-phone"
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded focus:border-[#0b99cc] focus:outline-none transition-colors"
+                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
                 </div>
 
                 <div>
-                  <label
-                    className="block mb-2"
-                    htmlFor="workshop-position"
-                    style={{ color: 'var(--gray-white)', fontSize: '16px', fontWeight: '500' }}
-                  >
+                  <label className="block mb-2" htmlFor="workshop-position">
                     {t('aiworkshop.form.position')} *
                   </label>
                   <input
@@ -768,17 +755,13 @@ function AIWorkshopPageContent() {
                     name="position"
                     id="workshop-position"
                     required
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded focus:border-[#0b99cc] focus:outline-none transition-colors"
+                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
                 </div>
 
                 <div>
-                  <label
-                    className="block mb-2"
-                    htmlFor="workshop-company"
-                    style={{ color: 'var(--gray-white)', fontSize: '16px', fontWeight: '500' }}
-                  >
+                  <label className="block mb-2" htmlFor="workshop-company">
                     {t('aiworkshop.form.company')} *
                   </label>
                   <input
@@ -786,7 +769,7 @@ function AIWorkshopPageContent() {
                     name="company"
                     id="workshop-company"
                     required
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded focus:border-[#0b99cc] focus:outline-none transition-colors"
+                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
                 </div>
@@ -795,12 +778,7 @@ function AIWorkshopPageContent() {
 
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-[#0b99cc] hover:bg-[#0b99cc]/80 transition-colors rounded font-bold cursor-pointer"
-                  style={{
-                    color: 'var(--gray-white)',
-                    fontSize: '18px',
-                    border: 'none'
-                  }}
+                  className="px-8 py-3 bg-[#0b99cc] hover:bg-[#0b99cc]/80 transition-colors rounded font-bold cursor-pointer"
                 >
                   {t('aiworkshop.form.submit')}
                 </button>
