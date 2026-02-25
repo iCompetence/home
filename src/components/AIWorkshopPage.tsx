@@ -601,11 +601,10 @@ function AIWorkshopPageContent() {
               </h2>
 
               <div
-                className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12"
-                style={{ justifyItems: 'center' }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12"
               >
                 {experts.map((expert) => (
-                  <div key={expert.initials} className="flex flex-col items-center text-center">
+                  <div key={expert.initials} className="flex flex-col items-center text-center lg:flex-row lg:items-center lg:text-left lg:gap-4">
                     {/* Circular placeholder with initials */}
                     <div
                       style={{
