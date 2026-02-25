@@ -681,7 +681,7 @@ function AIWorkshopPageContent() {
                 method="POST"
                 data-netlify="true"
                 action="/danke"
-                className="space-y-6"
+                className="space-y-8"
               >
                 <input type="hidden" name="form-name" value="ai-workshop" />
 
