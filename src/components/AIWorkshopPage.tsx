@@ -588,7 +588,7 @@ function AIWorkshopPageContent() {
                 className="flex flex-wrap justify-center gap-8 lg:flex-nowrap lg:justify-between lg:gap-0"
               >
                 {experts.map((expert) => (
-                  <div key={expert.initials} className="flex flex-col items-center text-center">
+                  <div key={expert.initials} className="flex flex-col items-center text-center lg:flex-1">
                     {/* Circular placeholder with initials */}
                     <div
                       style={{
