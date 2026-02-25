@@ -585,7 +585,7 @@ function AIWorkshopPageContent() {
               </h2>
 
               <div
-                className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12"
+                className="flex flex-wrap justify-center gap-8 lg:gap-12 lg:flex-nowrap"
               >
                 {experts.map((expert) => (
                   <div key={expert.initials} className="flex flex-col items-center text-center">
