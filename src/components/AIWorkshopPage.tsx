@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, X, Mail } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
 import Aurora1 from "../imports/Aurora1";
-import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
@@ -15,14 +13,19 @@ import Script from 'next/script';
 const logoImage = '/iCompetence_logo.svg';
 
 const experts = [
-  { name: 'Dennis Breuer', initials: 'DB', role: 'aiworkshop.expert.dennis.role' },
-  { name: 'Marc-André Lampe', initials: 'ML', role: 'aiworkshop.expert.marc.role' },
-  { name: 'Matthias Postel', initials: 'MP', role: 'aiworkshop.expert.matthias.role' },
-  { name: 'Lionel Schulz', initials: 'LS', role: 'aiworkshop.expert.lionel.role' },
+  { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Experience Orchestration' },
+  { name: 'Marc-André Lampe', initials: 'ML', role: 'Senior Data Architect' },
+  { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence' },
+  { name: 'Lionel Schulz', initials: 'LS', role: 'Lead Experience Lab' },
+];
+
+const dateOptions = [
+  '17. Juni 2026',
+  '9. September 2026',
+  '18. November 2026',
 ];
 
 function AIWorkshopPageContent() {
-  const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -43,11 +46,11 @@ function AIWorkshopPageContent() {
   };
 
   const anchorItems = [
-    { id: 'hero', label: t('aiworkshop.anchor.intro'), number: '01' },
-    { id: 'intro-section', label: t('aiworkshop.anchor.about'), number: '02' },
-    { id: 'experts-section', label: t('aiworkshop.anchor.experts'), number: '03' },
-    { id: 'form-section', label: t('aiworkshop.anchor.apply'), number: '04' },
-    { id: 'cta-footer-section', label: t('aiworkshop.anchor.contact'), number: '05' },
+    { id: 'hero', label: 'Intro', number: '01' },
+    { id: 'intro-section', label: 'Über den Workshop', number: '02' },
+    { id: 'experts-section', label: 'Experten', number: '03' },
+    { id: 'form-section', label: 'Jetzt bewerben', number: '04' },
+    { id: 'cta-footer-section', label: 'Kontakt', number: '05' },
   ];
 
   useEffect(() => {
@@ -190,7 +193,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '1.5rem'
                 }}
               >
-                {t('aiworkshop.hero.title')}
+                Der KI-Workshop
               </h1>
             </div>
           </div>
@@ -252,7 +255,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '1.5rem'
                 }}
               >
-                {t('aiworkshop.hero.title')}
+                Der KI-Workshop
               </h1>
               <p
                 style={{
@@ -262,7 +265,7 @@ function AIWorkshopPageContent() {
                   lineHeight: '130%'
                 }}
               >
-                {t('aiworkshop.hero.subline')}
+                Orientierungshilfe mit Platz für Ihre Fragen
               </p>
             </div>
           </div>
@@ -290,21 +293,7 @@ function AIWorkshopPageContent() {
           />
         </div>
 
-        {/* Language Switcher + Navigation */}
-        {isMobile && scrollY < 50 && (
-          <div
-            className="fixed top-8 z-50"
-            style={{
-              right: '80px',
-              opacity: 0,
-              animation: 'fadeIn 0.8s ease-out 0.6s forwards',
-              transform: 'scale(0.9)'
-            }}
-          >
-            <LanguageSwitcher />
-          </div>
-        )}
-
+        {/* Navigation */}
         {!isMobile && (
           <div
             className="fixed top-10 right-6 z-50 flex items-center gap-6"
@@ -313,8 +302,6 @@ function AIWorkshopPageContent() {
               animation: 'fadeIn 0.8s ease-out 0.6s forwards'
             }}
           >
-            {scrollY < 50 && <LanguageSwitcher />}
-
             <button
               onClick={() => scrollToSection('form-section')}
               className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
@@ -324,7 +311,7 @@ function AIWorkshopPageContent() {
                 fontWeight: '500'
               }}
             >
-              {t('header.contact')}
+              Kontaktiere uns
             </button>
 
             {!isBurgerMenuOpen ? (
@@ -561,13 +548,13 @@ function AIWorkshopPageContent() {
           }}
         >
           <span style={{ color: '#0b99cc', fontStyle: 'italic' }}>
-            {t('aiworkshop.intro.makers')}
+            Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform „iKnow" und der „Intelligentic Search".
           </span>
           <br /><br />
-          {t('aiworkshop.intro.text')}
+          Ohne KI geht heute praktisch nichts mehr. Selbst wenn Unternehmen nicht KI für ihre Markenkommunikation und Kundenansprache nutzen – spätestens die Kunden sehen die Produkte der Marke durch die KI ihrer Endgeräte. Wie kann ich als Markenspezialist KI für den Aufbau meiner Marke effektiv und zugleich sicher nutzen? Was sind die Voraussetzungen – auch hinsichtlich der Datenmenge und Qualität? Wie kann ich für meine Unternehmensdaten Sicherheit schaffen und trotz Hyperpersonalisierung die Marke bewahren? Welche Risiken muss ich kennen, wie hoch ist der ROI und welche Möglichkeiten bieten sich mir, meine Marke zu stärken und sichtbar zu machen? Wo liegen die Risiken, wo die Kosten und wo die Möglichkeiten? Ein Workshop, der Ihnen einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI-Entwicklung mitwirken. Einblicke und Platz für Ihre Fragen.
           <br /><br />
           <span style={{ color: '#0b99cc', fontWeight: '700' }}>
-            {t('aiworkshop.intro.cta')}
+            Gratis. Nur wenige Plätze!
           </span>
         </StaticText>
 
@@ -593,7 +580,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '3rem'
                 }}
               >
-                {t('aiworkshop.experts.title')}
+                Meet the Experts
               </h2>
 
               <div
@@ -644,7 +631,7 @@ function AIWorkshopPageContent() {
                         lineHeight: '140%'
                       }}
                     >
-                      {t(expert.role)}
+                      {expert.role}
                     </p>
                   </div>
                 ))}
@@ -674,7 +661,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '1rem'
                 }}
               >
-                {t('aiworkshop.form.title')}
+                Jetzt bewerben
               </h2>
               <p
                 style={{
@@ -684,7 +671,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '3rem'
                 }}
               >
-                {t('aiworkshop.form.subtitle')}
+                Sichern Sie sich Ihren Platz beim KI-Workshop.
               </p>
 
               <form
@@ -702,7 +689,7 @@ function AIWorkshopPageContent() {
                     className="block mb-2"
                     htmlFor="workshop-name"
                   >
-                    {t('aiworkshop.form.name')} *
+                    Name *
                   </label>
                   <input
                     type="text"
@@ -716,7 +703,7 @@ function AIWorkshopPageContent() {
 
                 <div>
                   <label className="block mb-2" htmlFor="workshop-email">
-                    {t('aiworkshop.form.email')} *
+                    E-Mail *
                   </label>
                   <input
                     type="email"
@@ -730,7 +717,7 @@ function AIWorkshopPageContent() {
 
                 <div>
                   <label className="block mb-2" htmlFor="workshop-phone">
-                    {t('aiworkshop.form.phone')}
+                    Telefon (optional)
                   </label>
                   <input
                     type="tel"
@@ -743,7 +730,7 @@ function AIWorkshopPageContent() {
 
                 <div>
                   <label className="block mb-2" htmlFor="workshop-position">
-                    {t('aiworkshop.form.position')} *
+                    Position *
                   </label>
                   <input
                     type="text"
@@ -757,7 +744,7 @@ function AIWorkshopPageContent() {
 
                 <div>
                   <label className="block mb-2" htmlFor="workshop-company">
-                    {t('aiworkshop.form.company')} *
+                    Firma *
                   </label>
                   <input
                     type="text"
@@ -771,19 +758,19 @@ function AIWorkshopPageContent() {
 
                 <div>
                   <p className="block mb-2">
-                    {t('aiworkshop.form.date')} *
+                    Bevorzugte(r) Termin(e) *
                   </p>
                   <div className="flex flex-col gap-3">
-                    {['date1', 'date2', 'date3'].map((dateKey) => (
-                      <label key={dateKey} className="flex items-center gap-3 cursor-pointer">
+                    {dateOptions.map((date) => (
+                      <label key={date} className="flex items-center gap-3 cursor-pointer">
                         <input
                           type="checkbox"
                           name="date"
-                          value={t(`aiworkshop.form.${dateKey}`)}
+                          value={date}
                           className="w-5 h-5 rounded border border-white/20 bg-white/10 accent-[#0b99cc]"
                         />
                         <span style={{ color: 'var(--gray-white)', fontSize: '16px' }}>
-                          {t(`aiworkshop.form.${dateKey}`)}
+                          {date}
                         </span>
                       </label>
                     ))}
@@ -796,7 +783,7 @@ function AIWorkshopPageContent() {
                   type="submit"
                   className="px-8 py-3 bg-[#0b99cc] hover:bg-[#0b99cc]/80 transition-colors rounded font-bold cursor-pointer"
                 >
-                  {t('aiworkshop.form.submit')}
+                  Bewerbung absenden
                 </button>
               </form>
             </div>
@@ -836,7 +823,7 @@ function AIWorkshopPageContent() {
                     letterSpacing: '-0.01em'
                   }}
                 >
-                  {t('cta.headline')}
+                  Bereit, dein Unternehmen für die Agentic Era zu befähigen?
                 </p>
 
                 <button
@@ -847,7 +834,7 @@ function AIWorkshopPageContent() {
                     fontWeight: '500'
                   }}
                 >
-                  {t('cta.button')}
+                  Buche dein Erstgespräch
                 </button>
               </div>
             </div>
@@ -863,7 +850,7 @@ function AIWorkshopPageContent() {
                         fontWeight: '700',
                         lineHeight: '110%'
                       }}>
-                        {t('footer.tagline')}
+                        Separate the signal from the noise.
                       </p>
                     </div>
 
@@ -896,7 +883,7 @@ function AIWorkshopPageContent() {
                             fontWeight: '500',
                             marginBottom: '4px'
                           }}>
-                            {t('footer.inquiries')}
+                            Anfragen
                           </p>
                           <button
                             onClick={() => window.open('mailto:info@icompetence.de', '_blank')}
@@ -924,7 +911,7 @@ function AIWorkshopPageContent() {
                             fontWeight: '500',
                             marginBottom: '4px'
                           }}>
-                            {t('footer.phone')}
+                            Telefon
                           </p>
                           <button
                             onClick={() => window.open('tel:+494060945510', '_blank')}
@@ -965,7 +952,7 @@ function AIWorkshopPageContent() {
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = '#FCFCFC'}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-light)'}
                       >
-                        {t('footer.imprint')}
+                        Impressum
                       </button>
                       <button
                         onClick={() => window.location.href = '/imprint'}
@@ -981,7 +968,7 @@ function AIWorkshopPageContent() {
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = '#FCFCFC'}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-light)'}
                       >
-                        {t('footer.privacy')}
+                        Datenschutz
                       </button>
                     </div>
 
@@ -1008,7 +995,7 @@ function AIWorkshopPageContent() {
                         if (icon) (icon as SVGElement).style.color = 'var(--gray-light)';
                       }}
                     >
-                      {t('footer.backToTop')}
+                      Nach oben
                       <ChevronDown
                         size={16}
                         className="transform rotate-180 group-hover:translate-y-[-2px] transition-transform"
@@ -1141,9 +1128,5 @@ function AIWorkshopPageContent() {
 }
 
 export default function AIWorkshopPage() {
-  return (
-    <LanguageProvider>
-      <AIWorkshopPageContent />
-    </LanguageProvider>
-  );
+  return <AIWorkshopPageContent />;
 }
