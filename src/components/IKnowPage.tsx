@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Mail, X } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, Mail, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
 import Aurora1 from "../imports/Aurora1";
@@ -13,6 +13,87 @@ import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 
 const logoImage = '/iCompetence_logo.svg';
+
+const discoverImages = [
+  { src: '/assets/iknow/chat.png', alt: 'iKnow Chat' },
+  { src: '/assets/iknow/connectoren.png', alt: 'iKnow Connectors' },
+  { src: '/assets/iknow/visualization.png', alt: 'iKnow Visualization' },
+  { src: '/assets/iknow/audio-meeting.png', alt: 'iKnow Audio Meeting' },
+  { src: '/assets/iknow/Interview-erstellen.png', alt: 'iKnow Interview erstellen' },
+  { src: '/assets/iknow/Interview-durchführen.png', alt: 'iKnow Interview durchführen' },
+];
+
+function DiscoverCarousel() {
+  const [current, setCurrent] = useState(0);
+  const total = discoverImages.length;
+
+  const next = () => setCurrent((prev) => (prev + 1) % total);
+  const prev = () => setCurrent((prev) => (prev - 1 + total) % total);
+
+  return (
+    <div className="hero-image-container">
+      <div className="relative w-full overflow-hidden" style={{ borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+        <div
+          style={{
+            display: 'flex',
+            transition: 'transform 0.4s ease',
+            transform: `translateX(-${current * 100}%)`,
+          }}
+        >
+          {discoverImages.map((img, i) => (
+            <img
+              key={i}
+              src={img.src}
+              alt={img.alt}
+              className="w-full h-auto"
+              style={{ flex: '0 0 100%', display: 'block' }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between mt-4">
+        <button
+          onClick={prev}
+          className="flex items-center gap-2 cursor-pointer"
+          style={{ background: 'none', border: 'none', opacity: 0.8 }}
+        >
+          <ChevronLeft size={20} style={{ color: 'var(--gray-white)' }} />
+          <span style={{ color: 'var(--gray-white)', fontSize: '14px', fontWeight: '500' }}>Previous</span>
+        </button>
+
+        <div className="flex items-center gap-2">
+          {discoverImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className="cursor-pointer"
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                background: i === current ? 'var(--gray-white)' : 'rgba(255, 255, 255, 0.3)',
+                border: 'none',
+                padding: 0,
+                transition: 'background 0.2s ease',
+              }}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          className="flex items-center gap-2 cursor-pointer"
+          style={{ background: 'none', border: 'none', opacity: 0.8 }}
+        >
+          <span style={{ color: 'var(--gray-white)', fontSize: '14px', fontWeight: '500' }}>Next</span>
+          <ChevronRight size={20} style={{ color: 'var(--gray-white)' }} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function IKnowPageContent() {
   const { t } = useLanguage();
@@ -582,7 +663,7 @@ function IKnowPageContent() {
         <span style={{ fontWeight: '700' }}>{t('iknow.intro.p3')}</span>
       </StaticText>
 
-      {/* Hero Image Placeholder */}
+      {/* Hero Image */}
       <AnimatedSection
         id="hero-image-section"
         className="relative z-10 py-16 sm:py-24"
@@ -593,18 +674,16 @@ function IKnowPageContent() {
           <div
             className="relative w-full overflow-hidden"
             style={{
-              aspectRatio: '16/9',
               borderRadius: '16px',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px dashed rgba(255, 255, 255, 0.2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              border: '1px solid rgba(255, 255, 255, 0.1)',
             }}
           >
-            <p style={{ color: 'rgba(255, 255, 255, 0.25)', fontSize: '18px', fontWeight: '500' }}>
-              Bild-Platzhalter
-            </p>
+            <img
+              src="/assets/iknow/chat.png"
+              alt="iKnow Chat Interface"
+              className="w-full h-auto"
+              style={{ display: 'block' }}
+            />
           </div>
         </div>
       </AnimatedSection>
@@ -681,6 +760,7 @@ function IKnowPageContent() {
         title={t('iknow.card1.title')}
         description={t('iknow.card1.description')}
         layout="image-left"
+        video="/assets/iknow/videos/connectors.mov"
         imageAlt={t('iknow.card1.title')}
       />
 
@@ -690,6 +770,7 @@ function IKnowPageContent() {
         title={t('iknow.card2.title')}
         description={t('iknow.card2.description')}
         layout="image-right"
+        video="/assets/iknow/videos/cluster.mov"
         imageAlt={t('iknow.card2.title')}
       />
 
@@ -699,6 +780,7 @@ function IKnowPageContent() {
         title={t('iknow.card3.title')}
         description={t('iknow.card3.description')}
         layout="image-left"
+        video="/assets/iknow/videos/transcribe.mov"
         imageAlt={t('iknow.card3.title')}
       />
 
@@ -708,6 +790,7 @@ function IKnowPageContent() {
         title={t('iknow.card4.title')}
         description={t('iknow.card4.description')}
         layout="image-right"
+        video="/assets/iknow/videos/network.mov"
         imageAlt={t('iknow.card4.title')}
       />
 
@@ -717,6 +800,7 @@ function IKnowPageContent() {
         title={t('iknow.card5.title')}
         description={t('iknow.card5.description')}
         layout="image-left"
+        video="/assets/iknow/videos/local-ai.mov"
         imageAlt={t('iknow.card5.title')}
       />
 
@@ -726,6 +810,7 @@ function IKnowPageContent() {
         title={t('iknow.card6.title')}
         description={t('iknow.card6.description')}
         layout="image-right"
+        video="/assets/iknow/videos/agents.mov"
         imageAlt={t('iknow.card6.title')}
       />
 
@@ -765,24 +850,7 @@ function IKnowPageContent() {
           </div>
         </div>
 
-        <div className="hero-image-container">
-          <div
-            className="relative w-full overflow-hidden"
-            style={{
-              aspectRatio: '16/9',
-              borderRadius: '16px',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px dashed rgba(255, 255, 255, 0.2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <p style={{ color: 'rgba(255, 255, 255, 0.25)', fontSize: '18px', fontWeight: '500' }}>
-              Tool-Screenshot / Demo-Video Platzhalter
-            </p>
-          </div>
-        </div>
+        <DiscoverCarousel />
       </AnimatedSection>
 
       {/* CTA & Footer Section */}
