@@ -929,16 +929,17 @@ function AIWorkshopPageContent() {
                   Bereit, dein Unternehmen für die Agentic Era zu befähigen?
                 </p>
 
-                <button
-                  onClick={() => scrollToSection('form-section')}
-                  className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
+                <a
+                  href="/contact"
+                  className="inline-block px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                   style={{
                     color: 'var(--gray-white)',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    textDecoration: 'none'
                   }}
                 >
                   Buche dein Erstgespräch
-                </button>
+                </a>
               </div>
             </div>
 
