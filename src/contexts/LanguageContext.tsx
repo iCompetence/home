@@ -1582,6 +1582,108 @@ const translations: Translations = {
   'ct.anchor.contact': {
     en: 'Contact',
     de: 'Kontakt'
+  },
+
+  // AI Workshop Page
+  'aiworkshop.hero.title': {
+    en: 'The AI Workshop',
+    de: 'Der KI-Workshop'
+  },
+  'aiworkshop.hero.subline': {
+    en: 'Guidance with room for your questions',
+    de: 'Orientierungshilfe mit Platz für Ihre Fragen'
+  },
+  'aiworkshop.intro.makers': {
+    en: 'From the creators of the first self-learning, privacy-compliant German data platform "iKnow" and "Intelligentic Search".',
+    de: 'Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform „iKnow" und der „Intelligentic Search".'
+  },
+  'aiworkshop.intro.text': {
+    en: 'AI is now indispensable. Even if companies don\'t use AI for their brand communication and customer engagement — customers already see brand products through the AI on their devices. How can I, as a brand specialist, use AI effectively and safely to build my brand? What are the prerequisites — including data volume and quality? How can I secure my corporate data while preserving the brand despite hyper-personalization? What risks do I need to know, what is the ROI, and what opportunities do I have to strengthen and increase brand visibility? Where are the risks, the costs, and the opportunities? A workshop that gives you an overview, from experts who are at the forefront of German AI development. Insights and room for your questions.',
+    de: 'Ohne KI geht heute praktisch nichts mehr. Selbst wenn Unternehmen nicht KI für ihre Markenkommunikation und Kundenansprache nutzen – spätestens die Kunden sehen die Produkte der Marke durch die KI ihrer Endgeräte. Wie kann ich als Markenspezialist KI für den Aufbau meiner Marke effektiv und zugleich sicher nutzen? Was sind die Voraussetzungen – auch hinsichtlich der Datenmenge und Qualität? Wie kann ich für meine Unternehmensdaten Sicherheit schaffen und trotz Hyperpersonalisierung die Marke bewahren? Welche Risiken muss ich kennen, wie hoch ist der ROI und welche Möglichkeiten bieten sich mir, meine Marke zu stärken und sichtbar zu machen? Wo liegen die Risiken, wo die Kosten und wo die Möglichkeiten? Ein Workshop, der Ihnen einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI-Entwicklung mitwirken. Einblicke und Platz für Ihre Fragen.'
+  },
+  'aiworkshop.intro.cta': {
+    en: 'Free. Limited spots only!',
+    de: 'Gratis. Nur wenige Plätze!'
+  },
+  'aiworkshop.dates.title': {
+    en: 'Dates',
+    de: 'Termine'
+  },
+  'aiworkshop.dates.text': {
+    en: 'For first-time users, we offer the workshop free of charge on 3 days. Custom dates can be booked for a fee.',
+    de: 'Für Erstnutzende bieten wir den Workshop an 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden.'
+  },
+  'aiworkshop.experts.title': {
+    en: 'Meet the Experts',
+    de: 'Meet the Experts'
+  },
+  'aiworkshop.expert.dennis.role': {
+    en: 'Head of Experience Orchestration',
+    de: 'Head of Experience Orchestration'
+  },
+  'aiworkshop.expert.marc.role': {
+    en: 'Senior Data Architect',
+    de: 'Senior Data Architect'
+  },
+  'aiworkshop.expert.matthias.role': {
+    en: 'CEO iCompetence',
+    de: 'CEO iCompetence'
+  },
+  'aiworkshop.expert.lionel.role': {
+    en: 'Lead Experience Lab',
+    de: 'Lead Experience Lab'
+  },
+  'aiworkshop.form.title': {
+    en: 'Apply Now',
+    de: 'Jetzt bewerben'
+  },
+  'aiworkshop.form.subtitle': {
+    en: 'Secure your spot at the AI Workshop.',
+    de: 'Sichern Sie sich Ihren Platz beim KI-Workshop.'
+  },
+  'aiworkshop.form.name': {
+    en: 'Name',
+    de: 'Name'
+  },
+  'aiworkshop.form.email': {
+    en: 'Email',
+    de: 'E-Mail'
+  },
+  'aiworkshop.form.phone': {
+    en: 'Phone (optional)',
+    de: 'Telefon (optional)'
+  },
+  'aiworkshop.form.position': {
+    en: 'Position',
+    de: 'Position'
+  },
+  'aiworkshop.form.company': {
+    en: 'Company',
+    de: 'Firma'
+  },
+  'aiworkshop.form.submit': {
+    en: 'Submit Application',
+    de: 'Bewerbung absenden'
+  },
+  'aiworkshop.anchor.intro': {
+    en: 'Intro',
+    de: 'Intro'
+  },
+  'aiworkshop.anchor.about': {
+    en: 'About the Workshop',
+    de: 'Über den Workshop'
+  },
+  'aiworkshop.anchor.experts': {
+    en: 'Experts',
+    de: 'Experten'
+  },
+  'aiworkshop.anchor.apply': {
+    en: 'Apply Now',
+    de: 'Jetzt bewerben'
+  },
+  'aiworkshop.anchor.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
   }
 };
 
