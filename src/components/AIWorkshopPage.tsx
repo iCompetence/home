@@ -583,15 +583,18 @@ function AIWorkshopPageContent() {
           duration={0}
         >
           <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <h2
+                className="mobile-h2-title"
                 style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(32px, 5vw, 48px)',
+                  background: 'linear-gradient(90deg, #0B99CC 0%, #06A0A0 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontSize: '32px',
                   fontWeight: '700',
                   lineHeight: '110%',
-                  marginBottom: '3rem',
-                  textAlign: 'center'
+                  marginBottom: '3rem'
                 }}
               >
                 {t('aiworkshop.experts.title')}
@@ -664,24 +667,26 @@ function AIWorkshopPageContent() {
           <div className="container mx-auto">
             <div className="max-w-2xl mx-auto">
               <h2
+                className="mobile-h2-title"
                 style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(32px, 5vw, 48px)',
+                  background: 'linear-gradient(90deg, #0B99CC 0%, #06A0A0 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontSize: '32px',
                   fontWeight: '700',
                   lineHeight: '110%',
-                  marginBottom: '1rem',
-                  textAlign: 'center'
+                  marginBottom: '1rem'
                 }}
               >
                 {t('aiworkshop.form.title')}
               </h2>
               <p
                 style={{
-                  color: 'var(--gray-light)',
+                  color: 'var(--gray-white)',
                   fontSize: '18px',
                   lineHeight: '170%',
-                  marginBottom: '3rem',
-                  textAlign: 'center'
+                  marginBottom: '3rem'
                 }}
               >
                 {t('aiworkshop.form.subtitle')}
@@ -1048,6 +1053,10 @@ function AIWorkshopPageContent() {
           @media (max-width: 768px) {
             .mobile-footer-tagline {
               font-size: 40px !important;
+            }
+
+            .mobile-h2-title {
+              font-size: 28px !important;
             }
 
             .anchor-nav-border-container {
