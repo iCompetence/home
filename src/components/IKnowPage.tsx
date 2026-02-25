@@ -53,7 +53,7 @@ function DiscoverCarousel() {
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-4">
+      <div className="flex items-center justify-between mt-8">
         <button
           onClick={prev}
           className="flex items-center gap-2 cursor-pointer"
