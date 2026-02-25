@@ -774,7 +774,7 @@ function AIWorkshopPageContent() {
                   />
                 </div>
 
-                <div style={{ marginBottom: '8px' }} data-netlify-recaptcha="true"></div>
+                <div style={{ marginBottom: '8px', marginTop: '24px' }} data-netlify-recaptcha="true"></div>
 
                 <button
                   type="submit"
