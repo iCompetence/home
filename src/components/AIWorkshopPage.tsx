@@ -559,7 +559,7 @@ function AIWorkshopPageContent() {
           </span>
         </StaticText>
 
-        {/* Meet the Experts Section */}
+        {/* Unsere Experten Section */}
         <AnimatedSection
           id="experts-section"
           className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
@@ -581,7 +581,7 @@ function AIWorkshopPageContent() {
                   marginBottom: '3rem'
                 }}
               >
-                Meet the Experts
+                Unsere Experten
               </h2>
 
               <div
