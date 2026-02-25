@@ -9,6 +9,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
+import { StaticText } from './StaticText';
 import Script from 'next/script';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -549,92 +550,30 @@ function AIWorkshopPageContent() {
         </section>
 
         {/* Intro Section */}
-        <AnimatedSection
+        <StaticText
           id="intro-section"
-          className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-          animationType="fadeInUp"
-          duration={0}
+          enableScrollStop={false}
+          style={{
+            fontSize: '32px',
+            fontWeight: '700',
+            lineHeight: '130%',
+            textAlign: 'left'
+          }}
         >
-          <div className="container mx-auto">
-            <div className="max-w-3xl mx-auto">
-              <p
-                style={{
-                  color: '#0b99cc',
-                  fontSize: 'clamp(16px, 2.5vw, 20px)',
-                  fontWeight: '600',
-                  lineHeight: '160%',
-                  marginBottom: '2rem'
-                }}
-              >
-                {t('aiworkshop.intro.makers')}
-              </p>
-
-              <p
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(18px, 2.5vw, 22px)',
-                  fontWeight: '400',
-                  lineHeight: '180%',
-                  marginBottom: '2.5rem'
-                }}
-              >
-                {t('aiworkshop.intro.text')}
-              </p>
-
-              <div
-                style={{
-                  background: 'rgba(11, 153, 204, 0.1)',
-                  border: '1px solid rgba(11, 153, 204, 0.3)',
-                  borderRadius: '12px',
-                  padding: 'clamp(20px, 3vw, 32px)',
-                  marginBottom: '2.5rem'
-                }}
-              >
-                <p
-                  style={{
-                    color: '#0b99cc',
-                    fontSize: 'clamp(20px, 3vw, 28px)',
-                    fontWeight: '700',
-                    lineHeight: '140%',
-                    marginBottom: '0.5rem'
-                  }}
-                >
-                  {t('aiworkshop.intro.cta')}
-                </p>
-              </div>
-
-              <div
-                style={{
-                  borderLeft: '3px solid rgba(255, 255, 255, 0.2)',
-                  paddingLeft: '1.5rem',
-                  marginBottom: '1rem'
-                }}
-              >
-                <h3
-                  style={{
-                    color: 'var(--gray-white)',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    marginBottom: '0.75rem'
-                  }}
-                >
-                  {t('aiworkshop.dates.title')}
-                </h3>
-                <p
-                  style={{
-                    color: 'var(--gray-light)',
-                    fontSize: '16px',
-                    lineHeight: '170%'
-                  }}
-                >
-                  {t('aiworkshop.dates.text')}
-                </p>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
+          <span style={{ color: '#0b99cc', fontStyle: 'italic' }}>
+            {t('aiworkshop.intro.makers')}
+          </span>
+          <br /><br />
+          {t('aiworkshop.intro.text')}
+          <br /><br />
+          <span style={{ color: '#0b99cc', fontWeight: '700' }}>
+            {t('aiworkshop.intro.cta')}
+          </span>
+          <br /><br />
+          <span style={{ opacity: 0.6, fontSize: '24px', fontWeight: '500' }}>
+            {t('aiworkshop.dates.title')}: {t('aiworkshop.dates.text')}
+          </span>
+        </StaticText>
 
         {/* Meet the Experts Section */}
         <AnimatedSection
