@@ -757,7 +757,7 @@ function AIWorkshopPageContent() {
                   />
                 </div>
 
-                <div style={{ marginTop: '12px' }}>
+                <div>
                   <p className="block mb-2">
                     Bevorzugte(r) Termin(e) *
                   </p>
@@ -778,7 +778,7 @@ function AIWorkshopPageContent() {
                   </div>
                 </div>
 
-                <div style={{ marginBottom: '8px', marginTop: '24px' }} data-netlify-recaptcha="true"></div>
+                <div data-netlify-recaptcha="true"></div>
 
                 <button
                   type="submit"
