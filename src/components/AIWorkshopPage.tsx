@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, X, Mail } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { LanguageProvider } from "../contexts/LanguageContext";
 import Aurora1 from "../imports/Aurora1";
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
@@ -1128,5 +1129,9 @@ function AIWorkshopPageContent() {
 }
 
 export default function AIWorkshopPage() {
-  return <AIWorkshopPageContent />;
+  return (
+    <LanguageProvider>
+      <AIWorkshopPageContent />
+    </LanguageProvider>
+  );
 }
