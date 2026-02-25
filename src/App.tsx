@@ -264,7 +264,7 @@ function AppContent() {
             description: t('agenticTools.tool2.description'),
             color: "var(--brand-accent-2)",
             link: "https://icompetence.de/intelligentic-search/"
-          }
+          },
           {
             title: t('agenticTools.tool3.title'),
             description: t('agenticTools.tool3.description'),
