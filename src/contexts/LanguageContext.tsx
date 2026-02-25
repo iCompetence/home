@@ -1661,6 +1661,22 @@ const translations: Translations = {
     en: 'Company',
     de: 'Firma'
   },
+  'aiworkshop.form.date': {
+    en: 'Preferred Date(s)',
+    de: 'Bevorzugte(r) Termin(e)'
+  },
+  'aiworkshop.form.date1': {
+    en: 'June 17, 2026',
+    de: '17. Juni 2026'
+  },
+  'aiworkshop.form.date2': {
+    en: 'September 9, 2026',
+    de: '9. September 2026'
+  },
+  'aiworkshop.form.date3': {
+    en: 'November 18, 2026',
+    de: '18. November 2026'
+  },
   'aiworkshop.form.submit': {
     en: 'Submit Application',
     de: 'Bewerbung absenden'

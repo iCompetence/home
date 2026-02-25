@@ -569,10 +569,6 @@ function AIWorkshopPageContent() {
           <span style={{ color: '#0b99cc', fontWeight: '700' }}>
             {t('aiworkshop.intro.cta')}
           </span>
-          <br /><br />
-          <span style={{ opacity: 0.6, fontSize: '24px', fontWeight: '500' }}>
-            {t('aiworkshop.dates.title')}: {t('aiworkshop.dates.text')}
-          </span>
         </StaticText>
 
         {/* Meet the Experts Section */}
@@ -771,6 +767,27 @@ function AIWorkshopPageContent() {
                     className="w-100 p-3 bg-white/10 border border-white/20 rounded"
                     style={{ width: '100%', color: 'white' }}
                   />
+                </div>
+
+                <div>
+                  <p className="block mb-2">
+                    {t('aiworkshop.form.date')} *
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    {['date1', 'date2', 'date3'].map((dateKey) => (
+                      <label key={dateKey} className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="date"
+                          value={t(`aiworkshop.form.${dateKey}`)}
+                          className="w-5 h-5 rounded border border-white/20 bg-white/10 accent-[#0b99cc]"
+                        />
+                        <span style={{ color: 'var(--gray-white)', fontSize: '16px' }}>
+                          {t(`aiworkshop.form.${dateKey}`)}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
                 <div style={{ marginBottom: '8px', marginTop: '24px' }} data-netlify-recaptcha="true"></div>
