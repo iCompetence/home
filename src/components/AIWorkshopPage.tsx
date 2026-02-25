@@ -756,7 +756,7 @@ function AIWorkshopPageContent() {
                   />
                 </div>
 
-                <div>
+                <div style={{ marginTop: '12px' }}>
                   <p className="block mb-2">
                     Bevorzugte(r) Termin(e) *
                   </p>
