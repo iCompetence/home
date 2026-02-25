@@ -566,8 +566,8 @@ function AIWorkshopPageContent() {
           animationType="fadeInUp"
           duration={0}
         >
-          <div className="container mx-auto">
-            <div className="max-w-6xl mx-auto">
+          <div className="w-full">
+            <div className="w-full">
               <h2
                 className="mobile-h2-title"
                 style={{
@@ -585,10 +585,10 @@ function AIWorkshopPageContent() {
               </h2>
 
               <div
-                className="flex flex-wrap justify-center gap-8 lg:flex-nowrap lg:justify-between lg:gap-0"
+                className="w-full flex flex-wrap justify-center gap-8 lg:flex-nowrap lg:gap-0"
               >
                 {experts.map((expert) => (
-                  <div key={expert.initials} className="flex flex-col items-center text-center lg:flex-1">
+                  <div key={expert.initials} className="flex flex-col items-center text-center flex-1">
                     {/* Circular placeholder with initials */}
                     <div
                       style={{
