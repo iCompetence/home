@@ -587,7 +587,7 @@ function AIWorkshopPageContent() {
               <h2
                 className="mobile-h2-title"
                 style={{
-                  background: 'linear-gradient(90deg, #0B99CC 0%, #06A0A0 100%)',
+                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -669,7 +669,7 @@ function AIWorkshopPageContent() {
               <h2
                 className="mobile-h2-title"
                 style={{
-                  background: 'linear-gradient(90deg, #0B99CC 0%, #06A0A0 100%)',
+                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
