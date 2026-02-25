@@ -828,6 +828,36 @@ function AIWorkshopPageContent() {
               <AuroraFooter />
             </div>
 
+            {/* CTA */}
+            <div className="container mx-auto relative z-10" style={{ marginBottom: '120px' }}>
+              <div className="max-w-4xl mx-auto text-center">
+                <p
+                  className="mobile-cta-text"
+                  style={{
+                    color: 'var(--gray-white)',
+                    fontSize: '32px',
+                    fontWeight: '600',
+                    lineHeight: '140%',
+                    marginBottom: '2.5rem',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  {t('cta.headline')}
+                </p>
+
+                <button
+                  onClick={() => scrollToSection('form-section')}
+                  className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
+                  style={{
+                    color: 'var(--gray-white)',
+                    fontWeight: '500'
+                  }}
+                >
+                  {t('cta.button')}
+                </button>
+              </div>
+            </div>
+
             <footer className="relative z-10">
               <div className="container mx-auto">
                 <div className="max-w-6xl mx-auto">
@@ -1057,6 +1087,10 @@ function AIWorkshopPageContent() {
 
             .mobile-h2-title {
               font-size: 28px !important;
+            }
+
+            .mobile-cta-text {
+              font-size: 24px !important;
             }
 
             .anchor-nav-border-container {
