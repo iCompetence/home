@@ -681,14 +681,19 @@ function AIWorkshopPageContent() {
                 method="POST"
                 data-netlify="true"
                 action="/danke"
-                className="space-y-8"
               >
                 <input type="hidden" name="form-name" value="ai-workshop" />
 
-                <div>
+                <div className="mb-4">
                   <label
-                    className="block mb-2"
                     htmlFor="workshop-name"
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
                   >
                     Name *
                   </label>
@@ -697,13 +702,30 @@ function AIWorkshopPageContent() {
                     name="name"
                     id="workshop-name"
                     required
-                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
-                    style={{ width: '100%', color: 'white' }}
+                    className="w-full px-4 py-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none'
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = '#0b99cc'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
                   />
                 </div>
 
-                <div>
-                  <label className="block mb-2" htmlFor="workshop-email">
+                <div className="mb-4">
+                  <label
+                    htmlFor="workshop-email"
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
+                  >
                     E-Mail *
                   </label>
                   <input
@@ -711,26 +733,60 @@ function AIWorkshopPageContent() {
                     name="email"
                     id="workshop-email"
                     required
-                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
-                    style={{ width: '100%', color: 'white' }}
+                    className="w-full px-4 py-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none'
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = '#0b99cc'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
                   />
                 </div>
 
-                <div>
-                  <label className="block mb-2" htmlFor="workshop-phone">
+                <div className="mb-4">
+                  <label
+                    htmlFor="workshop-phone"
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
+                  >
                     Telefon (optional)
                   </label>
                   <input
                     type="tel"
                     name="phone"
                     id="workshop-phone"
-                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
-                    style={{ width: '100%', color: 'white' }}
+                    className="w-full px-4 py-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none'
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = '#0b99cc'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
                   />
                 </div>
 
-                <div>
-                  <label className="block mb-2" htmlFor="workshop-position">
+                <div className="mb-4">
+                  <label
+                    htmlFor="workshop-position"
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
+                  >
                     Position *
                   </label>
                   <input
@@ -738,13 +794,30 @@ function AIWorkshopPageContent() {
                     name="position"
                     id="workshop-position"
                     required
-                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
-                    style={{ width: '100%', color: 'white' }}
+                    className="w-full px-4 py-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none'
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = '#0b99cc'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
                   />
                 </div>
 
-                <div>
-                  <label className="block mb-2" htmlFor="workshop-company">
+                <div className="mb-4">
+                  <label
+                    htmlFor="workshop-company"
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
+                  >
                     Firma *
                   </label>
                   <input
@@ -752,13 +825,29 @@ function AIWorkshopPageContent() {
                     name="company"
                     id="workshop-company"
                     required
-                    className="w-100 p-3 bg-white/10 border border-white/20 rounded"
-                    style={{ width: '100%', color: 'white' }}
+                    className="w-full px-4 py-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'var(--gray-white)',
+                      fontSize: '16px',
+                      outline: 'none'
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = '#0b99cc'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
                   />
                 </div>
 
-                <div>
-                  <p className="block mb-2">
+                <div className="mb-4">
+                  <p
+                    style={{
+                      display: 'block',
+                      color: 'var(--gray-white)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      marginBottom: '8px'
+                    }}
+                  >
                     Bevorzugte(r) Termin(e) *
                   </p>
                   <div className="flex flex-col gap-3">
@@ -778,11 +867,24 @@ function AIWorkshopPageContent() {
                   </div>
                 </div>
 
-                <div data-netlify-recaptcha="true"></div>
+                <div
+                  className="mb-5"
+                  style={{ marginBottom: 'calc(var(--spacing) * 4)' }}
+                  data-netlify-recaptcha="true"
+                ></div>
 
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-[#0b99cc] hover:bg-[#0b99cc]/80 transition-colors rounded font-bold cursor-pointer"
+                  className="w-full px-8 py-3 rounded-full transition-all duration-300 cursor-pointer"
+                  style={{
+                    backgroundColor: '#e19b74',
+                    color: 'var(--gray-white)',
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    border: 'none'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d18a63'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#e19b74'; }}
                 >
                   Bewerbung absenden
                 </button>
