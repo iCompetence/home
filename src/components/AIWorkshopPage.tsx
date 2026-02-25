@@ -566,8 +566,8 @@ function AIWorkshopPageContent() {
           animationType="fadeInUp"
           duration={0}
         >
-          <div className="w-full">
-            <div className="w-full">
+          <div className="container mx-auto">
+            <div className="max-w-6xl mx-auto">
               <h2
                 className="mobile-h2-title"
                 style={{
