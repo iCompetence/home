@@ -31,7 +31,7 @@ function DiscoverCarousel() {
   const prev = () => setCurrent((prev) => (prev - 1 + total) % total);
 
   return (
-    <div className="hero-image-container">
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px' }}>
       <div className="relative w-full overflow-hidden" style={{ borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
         <div
           style={{
