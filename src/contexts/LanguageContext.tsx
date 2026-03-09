@@ -693,6 +693,70 @@ const translations: Translations = {
     en: 'Privacy-led AI',
     de: 'Privacy-led AI'
   },
+  'burgerMenu.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+  'burgerMenu.products': {
+    en: 'Products & Tools',
+    de: 'Produkte & Tools'
+  },
+  'burgerMenu.analyticsAgent': {
+    en: 'Analytics Agent',
+    de: 'Analytics Agent'
+  },
+  'burgerMenu.analyticsAgent.desc': {
+    en: 'AI agent for your data',
+    de: 'KI-Agent für Ihre Daten'
+  },
+  'burgerMenu.iknow': {
+    en: 'iKnow',
+    de: 'iKnow'
+  },
+  'burgerMenu.iknow.desc': {
+    en: 'Enterprise knowledge platform',
+    de: 'Wissensplattform für Unternehmen'
+  },
+  'burgerMenu.intelligenticSearch': {
+    en: 'Intelligentic Search',
+    de: 'Intelligentic Search'
+  },
+  'burgerMenu.intelligenticSearch.desc': {
+    en: 'AI-powered search',
+    de: 'KI-gestützte Suche'
+  },
+  'burgerMenu.privacyLedAi': {
+    en: 'Privacy-Led AI',
+    de: 'Privacy-Led AI'
+  },
+  'burgerMenu.privacyLedAi.desc': {
+    en: 'GDPR-compliant AI',
+    de: 'DSGVO-konforme KI'
+  },
+  'burgerMenu.aiWorkshop': {
+    en: 'AI Workshop',
+    de: 'KI-Workshop'
+  },
+  'burgerMenu.aiWorkshop.desc': {
+    en: 'AI introduction workshop',
+    de: 'KI-Einführungsworkshop'
+  },
+  'burgerMenu.campaignTool': {
+    en: 'Campaign Parameters',
+    de: 'Campaign Parameters'
+  },
+  'burgerMenu.campaignTool.desc': {
+    en: 'UTM management tool',
+    de: 'UTM-Management-Tool'
+  },
+  'burgerMenu.userJourney': {
+    en: 'User Journey Explorer',
+    de: 'User Journey Explorer'
+  },
+  'burgerMenu.userJourney.desc': {
+    en: 'Customer journey insights',
+    de: 'Customer-Journey-Insights'
+  },
 
   // Imprint Page
   'imprint.hero.title': {

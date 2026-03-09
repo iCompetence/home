@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Mail, X } from 'lucide-react';
+import { ChevronDown, Mail } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Aurora2 from "../imports/Aurora2-130-1167";
 import Aurora1 from "../imports/Aurora1";
@@ -217,64 +217,50 @@ export const Home = ({
           {scrollY < 50 && <LanguageSwitcher />}
 
           {/* Burger Menu / Close Button - Desktop */}
-          {!isBurgerMenuOpen ? (
-            <button
-              onClick={() => {
-                // Trigger burger menu
+          <button
+            onClick={() => {
+              if (isBurgerMenuOpen) {
+                if (closeMenuRef.current) closeMenuRef.current();
+              } else {
                 const burgerButton = document.querySelector('[data-burger-menu]') as HTMLButtonElement;
                 if (burgerButton) burgerButton.click();
-              }}
-              className="p-3 rounded-full transition-all duration-300 hover:bg-white/10 cursor-pointer"
-              style={{
-                background: 'transparent',
-                border: 'none'
-              }}
-              data-burger-trigger-desktop
-            >
-              <svg
-                width="28"
-                height="16"
-                viewBox="0 0 28 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <line
-                  x1="0"
-                  y1="2"
-                  x2="28"
-                  y2="2"
-                  stroke="var(--gray-white)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-                <line
-                  x1="0"
-                  y1="14"
-                  x2="28"
-                  y2="14"
-                  stroke="var(--gray-white)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                if (closeMenuRef.current) closeMenuRef.current();
-              }}
-              className="rounded-full transition-all duration-300 hover:bg-white/10 cursor-pointer flex items-center justify-center"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: 'none',
-                padding: '10px',
-                width: '44px',
-                height: '44px'
-              }}
-            >
-              <X size={20} style={{ color: 'var(--gray-white)' }} />
-            </button>
-          )}
+              }
+            }}
+            className="p-3 rounded-full transition-all duration-300 hover:bg-white/10 cursor-pointer flex items-center justify-center"
+            style={{
+              background: 'transparent',
+              border: 'none',
+            }}
+          >
+            <div style={{ width: '28px', height: '16px', position: 'relative' }}>
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  height: '2.5px',
+                  backgroundColor: 'var(--gray-white)',
+                  borderRadius: '2px',
+                  transition: 'transform 0.3s ease, top 0.3s ease',
+                  top: isBurgerMenuOpen ? '50%' : '0',
+                  transform: isBurgerMenuOpen ? 'translateY(-50%) rotate(45deg)' : 'none',
+                }}
+              />
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  height: '2.5px',
+                  backgroundColor: 'var(--gray-white)',
+                  borderRadius: '2px',
+                  transition: 'transform 0.3s ease, bottom 0.3s ease',
+                  bottom: isBurgerMenuOpen ? '50%' : '0',
+                  transform: isBurgerMenuOpen ? 'translateY(50%) rotate(-45deg)' : 'none',
+                }}
+              />
+            </div>
+          </button>
         </div>
       )}
 
