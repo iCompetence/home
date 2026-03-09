@@ -420,6 +420,140 @@ const translations: Translations = {
     de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Machen Sie KI zu Ihrem Wettbewerbsvorteil!'
   },
 
+  // Analytics Agent Page
+  'analyticsAgent.hero.subtitle': {
+    en: 'Your data. Your questions. Instant answers.',
+    de: 'Ihre Daten. Ihre Fragen. Sofortige Antworten.'
+  },
+  'analyticsAgent.anchor.intro': {
+    en: 'Intro',
+    de: 'Intro'
+  },
+  'analyticsAgent.anchor.challenge': {
+    en: 'The Challenge',
+    de: 'Die Herausforderung'
+  },
+  'analyticsAgent.anchor.whatIs': {
+    en: 'About Analytics Agent',
+    de: 'Über den Analytics Agent'
+  },
+  'analyticsAgent.anchor.features': {
+    en: 'Capabilities',
+    de: 'Fähigkeiten'
+  },
+  'analyticsAgent.anchor.inAction': {
+    en: 'In Action',
+    de: 'In Aktion'
+  },
+  'analyticsAgent.anchor.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+  'analyticsAgent.intro.quote': {
+    en: '"Without data, you\'re just another person with an opinion."',
+    de: '"Without data, you\'re just another person with an opinion."'
+  },
+  'analyticsAgent.intro.quoteAuthor': {
+    en: ' – W. Edwards Deming',
+    de: ' – W. Edwards Deming'
+  },
+  'analyticsAgent.intro.p1': {
+    en: 'Your company collects vast amounts of data every day – from web analytics and CRM systems to databases and spreadsheets. But accessing meaningful insights still requires technical expertise, complex queries, and hours of manual analysis.',
+    de: 'Ihr Unternehmen sammelt jeden Tag riesige Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.'
+  },
+  'analyticsAgent.intro.p2': {
+    en: 'What if anyone in your organization could simply ask questions in plain language and get instant, visual answers? No SQL, no dashboards to configure, no waiting for the data team.',
+    de: 'Was wäre, wenn jeder in Ihrem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.'
+  },
+  'analyticsAgent.intro.p3': {
+    en: 'That\'s exactly what the Analytics Agent does:',
+    de: 'Genau das macht der Analytics Agent:'
+  },
+  'analyticsAgent.what.title': {
+    en: 'What is the Analytics Agent?',
+    de: 'Was ist der Analytics Agent?'
+  },
+  'analyticsAgent.what.p1': {
+    en: 'The Analytics Agent is a standalone AI agent that connects to any data source you have. It understands your data, your business context, and your questions – all in natural language.',
+    de: 'Der Analytics Agent ist ein eigenständiger KI-Agent, der sich mit jeder beliebigen Datenquelle verbinden lässt. Er versteht Ihre Daten, Ihren Business-Kontext und Ihre Fragen – alles in natürlicher Sprache.'
+  },
+  'analyticsAgent.what.p2': {
+    en: 'One of the most popular use cases: Google Analytics 4. The agent connects directly to the GA4 API and lets you interact with your web analytics data through conversation. Ask anything – from simple traffic questions to complex funnel analyses.',
+    de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit Ihren Web-Analytics-Daten im Dialog. Fragen Sie alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.'
+  },
+  'analyticsAgent.what.p3': {
+    en: 'But GA4 is just the beginning. The Analytics Agent can be connected to any data source imaginable – databases, APIs, spreadsheets, data warehouses. A knowledge base underneath brings in the semantic understanding of your data in the relevant business context.',
+    de: 'Aber GA4 ist nur der Anfang. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis Ihrer Daten im relevanten Business-Kontext.'
+  },
+  'analyticsAgent.what.p4': {
+    en: '\u2192 The Analytics Agent transforms raw data into actionable insights – instantly, visually, and in the language you speak.',
+    de: '\u2192 Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in Ihrer Sprache.'
+  },
+  'analyticsAgent.features.title': {
+    en: 'What you can expect!',
+    de: 'Das können Sie erwarten!'
+  },
+  'analyticsAgent.card1.title': {
+    en: 'Any data source, one agent',
+    de: 'Jede Datenquelle, ein Agent'
+  },
+  'analyticsAgent.card1.description': {
+    en: 'The Analytics Agent connects to Google Analytics 4, databases, CRM systems, spreadsheets, APIs, and data warehouses. All your data sources – accessible through a single conversational interface.',
+    de: 'Der Analytics Agent verbindet sich mit Google Analytics 4, Datenbanken, CRM-Systemen, Spreadsheets, APIs und Data Warehouses. Alle Ihre Datenquellen – zugänglich über eine einzige Konversationsschnittstelle.'
+  },
+  'analyticsAgent.card2.title': {
+    en: 'Ask in natural language',
+    de: 'Fragen in natürlicher Sprache'
+  },
+  'analyticsAgent.card2.description': {
+    en: 'No SQL, no query builders, no technical knowledge required. Simply ask your question the way you\'d ask a colleague: "What were our top landing pages last month?" or "Compare conversion rates across channels."',
+    de: 'Kein SQL, keine Query-Builder, kein technisches Wissen nötig. Stellen Sie Ihre Frage einfach so, wie Sie einen Kollegen fragen würden: „Was waren unsere Top-Landingpages letzten Monat?" oder „Vergleiche die Conversion-Raten über alle Kanäle."'
+  },
+  'analyticsAgent.card3.title': {
+    en: 'Visual analytics on the fly',
+    de: 'Visuelle Analysen in Echtzeit'
+  },
+  'analyticsAgent.card3.description': {
+    en: 'The agent doesn\'t just answer – it visualizes. Statistical graphs, comparison tables, trend charts, and custom dashboards are generated instantly as part of the conversation.',
+    de: 'Der Agent antwortet nicht nur – er visualisiert. Statistische Grafiken, Vergleichstabellen, Trenddiagramme und individuelle Dashboards werden sofort als Teil der Konversation generiert.'
+  },
+  'analyticsAgent.card4.title': {
+    en: 'Contextual knowledge base',
+    de: 'Kontextuelle Wissensbasis'
+  },
+  'analyticsAgent.card4.description': {
+    en: 'A knowledge base underneath the agent brings semantic understanding of your data in context. It knows what your metrics mean, how your business works, and delivers insights that actually make sense.',
+    de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis Ihrer Daten im Kontext. Sie weiß, was Ihre Metriken bedeuten, wie Ihr Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.'
+  },
+  'analyticsAgent.card5.title': {
+    en: 'Google Analytics 4 – ready to go',
+    de: 'Google Analytics 4 – sofort einsatzbereit'
+  },
+  'analyticsAgent.card5.description': {
+    en: 'The GA4 integration is one of the most popular use cases. Connect directly to the GA4 API and start asking questions about your website traffic, user behavior, conversions, and more – no dashboard setup needed.',
+    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle. Verbinden Sie sich direkt mit der GA4-API und stellen Sie Fragen zu Ihrem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.'
+  },
+  'analyticsAgent.card6.title': {
+    en: 'Built for your enterprise',
+    de: 'Für Ihr Unternehmen gebaut'
+  },
+  'analyticsAgent.card6.description': {
+    en: 'The Analytics Agent runs as a standalone solution that integrates into your existing infrastructure. Secure, scalable, and designed to grow with your data landscape.',
+    de: 'Der Analytics Agent läuft als eigenständige Lösung, die sich in Ihre bestehende Infrastruktur integriert. Sicher, skalierbar und darauf ausgelegt, mit Ihrer Datenlandschaft zu wachsen.'
+  },
+  'analyticsAgent.howItWorks.title': {
+    en: 'See the Analytics Agent in action',
+    de: 'Sehen Sie den Analytics Agent in Aktion'
+  },
+  'analyticsAgent.howItWorks.p1': {
+    en: 'The question is not whether you have data. It\'s whether you can use it.',
+    de: 'Die Frage ist nicht, ob Sie Daten haben. Sondern ob Sie sie nutzen können.'
+  },
+  'analyticsAgent.howItWorks.p2': {
+    en: 'With the Analytics Agent, every team member becomes a data analyst. Decisions are no longer based on gut feeling – but on real-time insights from your actual data.',
+    de: 'Mit dem Analytics Agent wird jedes Teammitglied zum Datenanalysten. Entscheidungen basieren nicht mehr auf Bauchgefühl – sondern auf Echtzeit-Erkenntnissen aus Ihren tatsächlichen Daten.'
+  },
+
   // Privacy-Led Section
   'privacyLed.title': {
     en: 'Privacy-Led Setups',
