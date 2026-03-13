@@ -1898,6 +1898,108 @@ const translations: Translations = {
   'aiworkshop.anchor.contact': {
     en: 'Contact',
     de: 'Kontakt'
+  },
+
+  // What's New Page
+  'whatsNew.hero.title': {
+    en: "What's New at iCompetence",
+    de: 'Neuigkeiten bei iCompetence'
+  },
+  'whatsNew.hero.subtitle': {
+    en: 'Discover our latest products, features and updates.',
+    de: 'Entdecken Sie unsere neuesten Produkte, Features und Updates.'
+  },
+  'whatsNew.march2026.title': {
+    en: 'March 2026',
+    de: 'März 2026'
+  },
+  'whatsNew.march2026.item1.title': {
+    en: 'Analytics Agent — now generally available',
+    de: 'Analytics Agent — jetzt allgemein verfügbar'
+  },
+  'whatsNew.march2026.item1.description': {
+    en: 'Our AI-powered Analytics Agent is now available for all customers. Connect any data source, ask questions in natural language, and get instant visualizations and insights.',
+    de: 'Unser KI-gestützter Analytics Agent ist jetzt für alle Kunden verfügbar. Verbinden Sie beliebige Datenquellen, stellen Sie Fragen in natürlicher Sprache und erhalten Sie sofortige Visualisierungen und Insights.'
+  },
+  'whatsNew.march2026.item1.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'whatsNew.march2026.item2.title': {
+    en: 'AI Workshop — new hands-on format',
+    de: 'AI Workshop — neues Hands-on Format'
+  },
+  'whatsNew.march2026.item2.description': {
+    en: 'We have redesigned our AI Workshop with an interactive, hands-on approach. Participants now work directly with real-world datasets and AI tools during the session.',
+    de: 'Wir haben unseren AI Workshop mit einem interaktiven, praxisnahen Ansatz neu gestaltet. Teilnehmer arbeiten jetzt direkt mit realen Datensätzen und KI-Tools während der Sitzung.'
+  },
+  'whatsNew.march2026.item2.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'whatsNew.february2026.title': {
+    en: 'February 2026',
+    de: 'Februar 2026'
+  },
+  'whatsNew.february2026.item1.title': {
+    en: 'iKnow — enhanced knowledge management',
+    de: 'iKnow — erweitertes Wissensmanagement'
+  },
+  'whatsNew.february2026.item1.description': {
+    en: 'iKnow now supports multi-language document ingestion and improved semantic search across your entire knowledge base. Find the right information faster than ever.',
+    de: 'iKnow unterstützt jetzt die Aufnahme mehrsprachiger Dokumente und eine verbesserte semantische Suche über Ihre gesamte Wissensbasis. Finden Sie die richtigen Informationen schneller als je zuvor.'
+  },
+  'whatsNew.february2026.item1.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'whatsNew.february2026.item2.title': {
+    en: 'Privacy-Led AI — new compliance dashboard',
+    de: 'Privacy-Led AI — neues Compliance-Dashboard'
+  },
+  'whatsNew.february2026.item2.description': {
+    en: 'Monitor your AI data processing in real-time with our new compliance dashboard. Track consent status, data flows, and audit trails all in one place.',
+    de: 'Überwachen Sie Ihre KI-Datenverarbeitung in Echtzeit mit unserem neuen Compliance-Dashboard. Verfolgen Sie den Einwilligungsstatus, Datenflüsse und Audit-Trails an einem Ort.'
+  },
+  'whatsNew.february2026.item2.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'whatsNew.january2026.title': {
+    en: 'January 2026',
+    de: 'Januar 2026'
+  },
+  'whatsNew.january2026.item1.title': {
+    en: 'Intelligentic Search — smarter results with context',
+    de: 'Intelligentic Search — intelligentere Ergebnisse mit Kontext'
+  },
+  'whatsNew.january2026.item1.description': {
+    en: 'Our search solution now understands context and intent, delivering more relevant results by analyzing user behavior patterns and content relationships.',
+    de: 'Unsere Suchlösung versteht jetzt Kontext und Absicht und liefert relevantere Ergebnisse durch die Analyse von Nutzerverhaltensmustern und Inhaltsbeziehungen.'
+  },
+  'whatsNew.january2026.item1.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'whatsNew.january2026.item2.title': {
+    en: 'Campaign Parameter Tool — UTM template library',
+    de: 'Campaign Parameter Tool — UTM-Vorlagenbibliothek'
+  },
+  'whatsNew.january2026.item2.description': {
+    en: 'Save and reuse your most common UTM parameter configurations with our new template library. Share templates across your team for consistent campaign tracking.',
+    de: 'Speichern und verwenden Sie Ihre häufigsten UTM-Parameter-Konfigurationen mit unserer neuen Vorlagenbibliothek. Teilen Sie Vorlagen im Team für konsistentes Kampagnen-Tracking.'
+  },
+  'whatsNew.january2026.item2.link': {
+    en: 'Learn more',
+    de: 'Mehr erfahren'
+  },
+  'burgerMenu.whatsNew': {
+    en: "What's New",
+    de: 'Neuigkeiten'
+  },
+  'burgerMenu.whatsNew.desc': {
+    en: 'Latest product updates',
+    de: 'Neueste Produkt-Updates'
   }
 };
 

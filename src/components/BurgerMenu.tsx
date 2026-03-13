@@ -18,6 +18,7 @@ const landingPages = [
   { titleKey: 'burgerMenu.aiWorkshop', href: '/ai-workshop/' },
   { titleKey: 'burgerMenu.campaignTool', href: '/campaign-parameter-tool/' },
   { titleKey: 'burgerMenu.userJourney', href: '/icu-user-journey-explorer/' },
+  { titleKey: 'burgerMenu.whatsNew', href: '/whats-new/' },
 ] as const;
 
 type MenuItemId = 'home' | 'products' | 'contact';
