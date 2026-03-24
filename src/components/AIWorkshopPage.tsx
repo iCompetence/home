@@ -16,8 +16,8 @@ const logoImage = '/iCompetence_logo.svg';
 
 const experts = [
   { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Experience Orchestration' },
+  { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence GmbH' },
   { name: 'Marc-André Lampe', initials: 'ML', role: 'Senior Data Architect' },
-  { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence' },
   { name: 'Lionel Schulz', initials: 'LS', role: 'Lead Experience Lab' },
 ];
 
@@ -268,7 +268,7 @@ function AIWorkshopPageContent() {
                   lineHeight: '130%'
                 }}
               >
-                Orientierungshilfe mit Platz für Ihre Fragen
+                KI-Boost für Marken
               </p>
             </div>
           </div>
@@ -554,9 +554,13 @@ function AIWorkshopPageContent() {
             Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform „iKnow" und der „Intelligentic Search".
           </span>
           <br /><br />
-          Ohne KI geht heute praktisch nichts mehr. Selbst wenn Unternehmen nicht KI für ihre Markenkommunikation und Kundenansprache nutzen – spätestens die Kunden sehen die Produkte der Marke durch die KI ihrer Endgeräte. Wie kann ich als Markenspezialist KI für den Aufbau meiner Marke effektiv und zugleich sicher nutzen? Was sind die Voraussetzungen – auch hinsichtlich der Datenmenge und Qualität? Wie kann ich für meine Unternehmensdaten Sicherheit schaffen und trotz Hyperpersonalisierung die Marke bewahren? Welche Risiken muss ich kennen, wie hoch ist der ROI und welche Möglichkeiten bieten sich mir, meine Marke zu stärken und sichtbar zu machen? Wo liegen die Risiken, wo die Kosten und wo die Möglichkeiten? Ein Workshop, der Ihnen einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI-Entwicklung mitwirken. Einblicke und Platz für Ihre Fragen.
+          Im Rennen um die vorderen Plätze auf dem Markt spielt KI eine zentrale Rolle. Aber wie sie sicher nutzen? Was sind die Voraussetzungen - auch hinsichtlich der Datenmenge und -qualität? Welche Sichtbarkeit, welchen Nutzen und ROI kann ich erwarten? Wir klären die zentralen Fragen für Marken und Marketers.
           <br /><br />
-          <span style={{ color: '#0b99cc', fontWeight: '700' }}>
+          <span style={{ color: 'var(--gray-white)', fontWeight: '700' }}>
+            Der Workshop, der Ihnen einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI Entwicklung mitwirken. Einblicke und Platz für Ihre Fragen.
+          </span>
+          {' '}
+          <span style={{ color: '#0b99cc', fontWeight: '700', fontStyle: 'italic' }}>
             Gratis. Nur wenige Plätze!
           </span>
         </StaticText>
@@ -647,7 +651,7 @@ function AIWorkshopPageContent() {
         <ProcessList
           id="dates-section"
           title="Verfügbare Termine"
-          subline="Für Erstnutzende bieten wir den Workshop an 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden."
+          subline="Für Erstnutzende bieten wir den Workshop an folgenden 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden."
           steps={[
             { label: 'Dienstag, 14.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
             { label: 'Donnerstag, 16.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
