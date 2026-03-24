@@ -22,9 +22,9 @@ const experts = [
 ];
 
 const dateOptions = [
-  'Dienstag, 14.04.2026 (9:45 bis 11:35 Uhr)',
-  'Donnerstag, 16.04.2026 (9:45 bis 11:35 Uhr)',
-  'Donnerstag, 23.04.2026 (14:00 bis 15:35 Uhr)',
+  'Dienstag, 14.04.2026 (10:00 bis 11:30 Uhr)',
+  'Donnerstag, 16.04.2026 (10:00 bis 11:30 Uhr)',
+  'Donnerstag, 23.04.2026 (14:00 bis 15:30 Uhr)',
   'Individuellen Termin buchen',
 ];
 
@@ -653,9 +653,9 @@ function AIWorkshopPageContent() {
           title="Verfügbare Termine"
           subline="Für Erstnutzende bieten wir den Workshop an folgenden 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden."
           steps={[
-            { label: 'Dienstag, 14.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
-            { label: 'Donnerstag, 16.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
-            { label: 'Donnerstag, 23.04.2026', description: 'Zeitraum: 14:00 bis 15:35 Uhr, Ort: Remote' },
+            { label: 'Dienstag, 14.04.2026', description: 'Zeitraum: 10:00 bis 11:30 Uhr, Ort: Remote' },
+            { label: 'Donnerstag, 16.04.2026', description: 'Zeitraum: 10:00 bis 11:30 Uhr, Ort: Remote' },
+            { label: 'Donnerstag, 23.04.2026', description: 'Zeitraum: 14:00 bis 15:30 Uhr, Ort: Remote' },
           ]}
           layout="vertical"
           className="py-8 sm:py-16"
