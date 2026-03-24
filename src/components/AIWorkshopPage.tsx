@@ -9,6 +9,7 @@ import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 import { StaticText } from './StaticText';
+import { ProcessList } from './ProcessList';
 import Script from 'next/script';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -21,9 +22,10 @@ const experts = [
 ];
 
 const dateOptions = [
-  '17. Juni 2026',
-  '9. September 2026',
-  '18. November 2026',
+  'Dienstag, 14.04.2026 (9:45 bis 11:35 Uhr)',
+  'Donnerstag, 16.04.2026 (9:45 bis 11:35 Uhr)',
+  'Donnerstag, 23.04.2026 (14:00 bis 15:35 Uhr)',
+  'Individuellen Termin buchen',
 ];
 
 function AIWorkshopPageContent() {
@@ -640,6 +642,20 @@ function AIWorkshopPageContent() {
             </div>
           </div>
         </AnimatedSection>
+
+        {/* Workshop Dates Section */}
+        <ProcessList
+          id="dates-section"
+          title="Verfügbare Termine"
+          subline="Für Erstnutzende bieten wir den Workshop an 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden."
+          steps={[
+            { label: 'Dienstag, 14.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
+            { label: 'Donnerstag, 16.04.2026', description: 'Zeitraum: 9:45 bis 11:35 Uhr, Ort: Remote' },
+            { label: 'Donnerstag, 23.04.2026', description: 'Zeitraum: 14:00 bis 15:35 Uhr, Ort: Remote' },
+          ]}
+          layout="vertical"
+          className="py-8 sm:py-16"
+        />
 
         {/* Application Form Section */}
         <section
