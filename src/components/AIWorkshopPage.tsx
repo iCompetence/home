@@ -15,10 +15,10 @@ import Script from 'next/script';
 const logoImage = '/iCompetence_logo.svg';
 
 const experts = [
-  { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Experience Orchestration' },
-  { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence GmbH' },
-  { name: 'Marc-André Lampe', initials: 'ML', role: 'Senior Data Architect' },
-  { name: 'Lionel Schulz', initials: 'LS', role: 'Lead Experience Lab' },
+  { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Experience Orchestration', photo: '/images/experts/Dennis_4x.png' },
+  { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence GmbH', photo: '/images/experts/Matthias_4x.png', photoCredit: 'Source: Frank Krems' },
+  { name: 'Marc-André Lampe', initials: 'ML', role: 'Senior Data Architect', photo: '/images/experts/Marc_4x.png' },
+  { name: 'Lionel Schulz', initials: 'LS', role: 'Lead Experience Lab', photo: '/images/experts/Lionel_4x.png' },
 ];
 
 const dateOptions = [
@@ -595,30 +595,26 @@ function AIWorkshopPageContent() {
               >
                 {experts.map((expert) => (
                   <div key={expert.initials} className="flex flex-col items-center text-center flex-1">
-                    {/* Circular placeholder with initials */}
                     <div
+                      title={expert.photoCredit || undefined}
                       style={{
                         width: 'clamp(100px, 15vw, 140px)',
                         height: 'clamp(100px, 15vw, 140px)',
                         borderRadius: '50%',
-                        background: 'linear-gradient(135deg, rgba(11, 153, 204, 0.3) 0%, rgba(1, 35, 50, 0.8) 100%)',
+                        overflow: 'hidden',
                         border: '2px solid rgba(11, 153, 204, 0.4)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         marginBottom: '1rem'
                       }}
                     >
-                      <span
+                      <ImageWithFallback
+                        src={expert.photo}
+                        alt={expert.name}
                         style={{
-                          color: 'var(--gray-white)',
-                          fontSize: 'clamp(24px, 4vw, 36px)',
-                          fontWeight: '600',
-                          opacity: 0.7
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
                         }}
-                      >
-                        {expert.initials}
-                      </span>
+                      />
                     </div>
                     <p
                       style={{
