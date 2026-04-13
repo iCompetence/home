@@ -711,17 +711,17 @@ function AnalyticsAgentPageContent() {
               {t('analyticsAgent.what.title')}
             </h2>
 
-            <div className="space-y-6 max-w-4xl">
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+            <div className="max-w-4xl" style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%' }}>
                 {t('analyticsAgent.what.p1')}
               </p>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%' }}>
                 {t('analyticsAgent.what.p2')}
               </p>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%' }}>
                 {t('analyticsAgent.what.p3')}
               </p>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', fontWeight: '600' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%', fontWeight: '600' }}>
                 {t('analyticsAgent.what.p4')}
               </p>
             </div>
@@ -837,11 +837,11 @@ function AnalyticsAgentPageContent() {
               {t('analyticsAgent.howItWorks.title')}
             </h2>
 
-            <div className="space-y-6 max-w-4xl" style={{ marginBottom: '3rem' }}>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+            <div className="max-w-4xl" style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginBottom: '3rem' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%' }}>
                 {t('analyticsAgent.howItWorks.p1')}
               </p>
-              <p style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+              <p style={{ color: 'var(--gray-white)', fontSize: '24px', lineHeight: '170%' }}>
                 {t('analyticsAgent.howItWorks.p2')}
               </p>
             </div>

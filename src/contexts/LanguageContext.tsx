@@ -490,8 +490,8 @@ const translations: Translations = {
     de: '\u2192 Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in Ihrer Sprache.'
   },
   'analyticsAgent.features.title': {
-    en: 'What you can expect!',
-    de: 'Das können Sie erwarten!'
+    en: 'What you can expect',
+    de: 'Das können Sie erwarten'
   },
   'analyticsAgent.card1.title': {
     en: 'Any data source, one agent',

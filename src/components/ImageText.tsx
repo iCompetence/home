@@ -100,8 +100,8 @@ export const ImageText = ({
                 <p 
                   className="mobile-copy-text"
                   style={{ 
-                    color: 'var(--gray-light)',
-                    fontSize: '18px',
+                    color: 'var(--gray-white)',
+                    fontSize: '24px',
                     lineHeight: '160%',
                     maxWidth: '500px',
                     marginBottom: '16px'
@@ -120,8 +120,8 @@ export const ImageText = ({
                     >
                       <span 
                         style={{ 
-                          color: 'var(--gray-light)',
-                          fontSize: '18px',
+                          color: 'var(--gray-white)',
+                          fontSize: '24px',
                           marginTop: '2px'
                         }}
                       >
@@ -129,8 +129,8 @@ export const ImageText = ({
                       </span>
                       <span 
                         style={{ 
-                          color: 'var(--gray-light)',
-                          fontSize: '18px',
+                          color: 'var(--gray-white)',
+                          fontSize: '24px',
                           lineHeight: '160%',
                           flex: 1
                         }}
@@ -143,8 +143,8 @@ export const ImageText = ({
               ) : (
                 <p 
                   style={{ 
-                    color: 'var(--gray-light)',
-                    fontSize: '18px',
+                    color: 'var(--gray-white)',
+                    fontSize: '24px',
                     lineHeight: '160%',
                     maxWidth: '500px'
                   }}
