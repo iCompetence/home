@@ -1000,7 +1000,7 @@ function IKnowPageContent() {
                           onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = '#0B99CC'}
                           onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-white)'}
                         >
-                          +49 40 609 45 51-0
+                          +49 40 22636380
                         </button>
                       </div>
                     </div>

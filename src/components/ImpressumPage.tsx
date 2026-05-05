@@ -337,7 +337,7 @@ function ImpressumPageContent() {
                 <p>Weidenallee 10c<br />20357 Hamburg</p>
                 <p><strong>{t('imprint.section1.director')}</strong> Matthias Postel</p>
                 <p>
-                  {t('footer.phone')}: +49 40 609 45 51-0<br />
+                  {t('footer.phone')}: +49 40 22636380<br />
                   Fax: +49 40 609 45 51-99<br />
                   Email: <a href="mailto:info@iCompetence.de" style={{ color: '#0b99cc', textDecoration: 'none' }}>info@iCompetence.de</a>
                 </p>
@@ -579,7 +579,7 @@ function ImpressumPageContent() {
                         onMouseEnter={(e) => (e.currentTarget as HTMLButtonElement).style.color = '#0B99CC'}
                         onMouseLeave={(e) => (e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-white)'}
                       >
-                        +49 40 609 45 51-0
+                        +49 40 22636380
                       </button>
                     </div>
                   </div>
