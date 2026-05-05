@@ -338,7 +338,6 @@ function ImpressumPageContent() {
                 <p><strong>{t('imprint.section1.director')}</strong> Matthias Postel</p>
                 <p>
                   {t('footer.phone')}: +49 40 22636380<br />
-                  Fax: +49 40 609 45 51-99<br />
                   Email: <a href="mailto:info@iCompetence.de" style={{ color: '#0b99cc', textDecoration: 'none' }}>info@iCompetence.de</a>
                 </p>
               </div>
