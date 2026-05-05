@@ -1034,7 +1034,7 @@ function PrivacyLedAIPageContent() {
                         {t('footer.phone')}
                       </p>
                       <button
-                        onClick={() => window.open('tel:+494060945510', '_blank')}
+                        onClick={() => window.open('tel:+494022636380', '_blank')}
                         style={{
                           color: 'var(--gray-white)',
                           fontSize: '18px',
