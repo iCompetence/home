@@ -420,6 +420,230 @@ const translations: Translations = {
     de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Machen Sie KI zu Ihrem Wettbewerbsvorteil!'
   },
 
+  // iC EmpCo Audit Page
+  'empco.hero.headline': {
+    en: 'Sustainability that holds up under scrutiny.',
+    de: 'Nachhaltigkeit, die der Prüfung standhält.'
+  },
+  'empco.hero.subtitle': {
+    en: 'The automated audit that helps you prevent greenwashing on your website. Within hours you know which sustainability claims are defensible — and which are becoming a risk.',
+    de: 'Der automatisierte Audit, der Sie vor Greenwashing auf Ihrer Website schützt. In Stunden wissen Sie, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
+  },
+  'empco.hero.ctaPrimary': {
+    en: 'Request a free sample page',
+    de: 'Kostenlose Probeseite anfordern'
+  },
+  'empco.hero.ctaSecondary': {
+    en: 'How the iC EmpCo Audit works',
+    de: 'So funktioniert der iC EmpCo Audit'
+  },
+  'empco.anchor.intro': {
+    en: 'Intro',
+    de: 'Intro'
+  },
+  'empco.anchor.why': {
+    en: 'Why now',
+    de: 'Warum jetzt'
+  },
+  'empco.anchor.what': {
+    en: 'About the Audit',
+    de: 'Über den Audit'
+  },
+  'empco.anchor.features': {
+    en: 'What sets it apart',
+    de: 'Was zeichnet es aus'
+  },
+  'empco.anchor.test': {
+    en: 'Try it first',
+    de: 'Erst testen'
+  },
+  'empco.anchor.contact': {
+    en: 'Contact',
+    de: 'Kontakt'
+  },
+
+  // Section 2: Why now
+  'empco.why.title': {
+    en: 'Sustainability marketing is becoming a legal obligation.',
+    de: 'Aus Nachhaltigkeitswerbung wird Rechtspflicht.'
+  },
+  'empco.why.p1': {
+    en: 'The EU Green Claims Directive and the Empowering Consumers Directive are changing what companies are allowed to communicate about sustainability. From 2026, terms such as "climate-neutral", "sustainable" or "environmentally friendly" must be substantiated. Without proof, companies face cease-and-desist letters under unfair-competition law, fines, and reputational damage.',
+    de: 'Die EU Green Claims Directive und die Empowering Consumers Directive verändern, was Unternehmen über Nachhaltigkeit kommunizieren dürfen. Begriffe wie „klimaneutral", „nachhaltig" oder „umweltfreundlich" müssen ab 2026 belegbar sein. Ohne Nachweis drohen Abmahnungen nach UWG, Bußgelder und Reputationsschäden.'
+  },
+  'empco.why.p2': {
+    en: 'At the same time, the CSRD is tightening the requirements for non-financial reporting. Statements on your website have to match your ESG reporting. Anyone with gaps stands out — internally, externally, in court.',
+    de: 'Parallel verschärft die CSRD die Anforderungen an die nicht-finanzielle Berichterstattung. Aussagen auf Ihrer Website müssen zu Ihrer ESG-Berichterstattung passen. Wer hier Lücken hat, fällt auf. Intern, extern, vor Gericht.'
+  },
+  'empco.why.p3': {
+    en: 'The problem: most companies don\'t know exactly what is written on their own website. Marketing, sustainability, and legal work in separate tools. Texts have grown over the years. Nobody has the capacity to review hundreds of pages line by line.',
+    de: 'Das Problem: Die meisten Unternehmen wissen nicht genau, was auf der eigenen Website steht. Marketing, Nachhaltigkeit und Recht arbeiten in getrennten Tools. Texte sind über Jahre gewachsen. Niemand hat die Kapazität, hunderte Seiten Zeile für Zeile zu prüfen.'
+  },
+  'empco.why.p4': {
+    en: 'This is exactly where the iC EmpCo Audit comes in.',
+    de: 'Genau hier setzt der iC EmpCo Audit an.'
+  },
+
+  // Section 3: What it is
+  'empco.what.title': {
+    en: 'The groundwork that usually takes months. Done in hours.',
+    de: 'Die Vorarbeit, die sonst Monate dauert. In Stunden erledigt.'
+  },
+  'empco.what.p1': {
+    en: 'A complete EmpCo or unfair-competition audit is costly and resource-intensive for most companies. Multiple departments read through their own website page by page for weeks, collect statements, match them with evidence, and hand the result over to the legal department or an external law firm. Industry-typical total costs sit in the mid- to high five-figure range depending on company size, and significantly higher for large corporations.',
+    de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Branchenüblich liegen die Gesamtkosten je nach Unternehmensgröße im mittleren bis hohen fünfstelligen Bereich, bei großen Konzernen auch deutlich darüber.'
+  },
+  'empco.what.p2': {
+    en: 'The iC EmpCo Audit does not replace your lawyers. It replaces the preparation work in front of them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually need legal judgment.',
+    de: 'Der iC EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Vorarbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung brauchen.'
+  },
+
+  // Section 4: Features
+  'empco.features.title': {
+    en: 'Not a screenshot in ChatGPT. An audit tool with built-in quality assurance.',
+    de: 'Kein Screenshot in ChatGPT. Ein Audit-Werkzeug mit eingebauter Qualitätssicherung.'
+  },
+  'empco.features.lead': {
+    en: 'The difference between an AI toy and a defensible audit lies in what happens behind the button press.',
+    de: 'Der Unterschied zwischen einem KI-Spielzeug und einem belastbaren Audit liegt darin, was hinter dem Knopfdruck steckt.'
+  },
+  'empco.feature1.title': {
+    en: 'Complete coverage',
+    de: 'Vollständige Sicht'
+  },
+  'empco.feature1.desc': {
+    en: 'The audit reads every page, every PDF, every annual report. Long documents are analysed in full — not just the first few paragraphs. What is online is seen.',
+    de: 'Der Audit liest jede Seite, jedes PDF, jeden Geschäftsbericht. Auch lange Dokumente werden komplett analysiert, nicht nur die ersten Absätze. Was online steht, wird gesehen.'
+  },
+  'empco.feature2.title': {
+    en: 'A second look at critical findings',
+    de: 'Doppelter Blick auf kritische Aussagen'
+  },
+  'empco.feature2.desc': {
+    en: 'Every critical finding is reviewed a second time by a deliberately sceptical counter-instance. If the two reviews disagree, the passage is automatically escalated for manual review. Single opinions get caught.',
+    de: 'Jedes kritische Finding wird ein zweites Mal geprüft, von einer bewusst skeptischen Gegeninstanz. Sind sich beide Prüfungen nicht einig, wandert die Stelle automatisch in die manuelle Nachsicht. Einzelmeinungen werden so abgefangen.'
+  },
+  'empco.feature3.title': {
+    en: 'Evidence required for every finding',
+    de: 'Belegpflicht für jeden Befund'
+  },
+  'empco.feature3.desc': {
+    en: 'Every flagged statement is documented with the verbatim quote from the source. If the model invents something that is not actually on the page, it is automatically detected and flagged. You will not get phantom findings.',
+    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und markiert. Sie bekommen keine Phantom-Befunde.'
+  },
+  'empco.feature4.title': {
+    en: 'Aligned with actual law',
+    de: 'An echten Gesetzen ausgerichtet'
+  },
+  'empco.feature4.desc': {
+    en: 'Every assessment cites a concrete paragraph from EmpCo, the German Act Against Unfair Competition, relevant Federal Court of Justice rulings, or ISO 14021. No free model interpretation. You can always see why something is marked as problematic.',
+    de: 'Jede Bewertung verweist auf einen konkreten Paragraphen aus EmpCo, UWG, einschlägige BGH-Urteile oder ISO 14021. Keine freie Modell-Interpretation. Sie sehen immer, warum etwas als problematisch markiert ist.'
+  },
+  'empco.feature5.title': {
+    en: 'Context awareness',
+    de: 'Kontextverständnis'
+  },
+  'empco.feature5.desc': {
+    en: 'Statements are evaluated in their full context — including surrounding paragraphs, related pages, and matching evidence from your reporting. No isolated keyword search, but reading that understands what the page actually says.',
+    de: 'Aussagen werden im vollen Kontext bewertet — einschließlich umliegender Absätze, verwandter Seiten und passender Belege aus Ihrer Berichterstattung. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.'
+  },
+  'empco.feature6.title': {
+    en: 'Traceable down to the last line',
+    de: 'Nachvollziehbar bis zur letzten Zeile'
+  },
+  'empco.feature6.desc': {
+    en: 'Every assessment, every status change, every decision is documented with a timestamp. Compatible with your compliance processes. Compatible with supervisory authorities.',
+    de: 'Jede Bewertung, jede Statusänderung, jede Entscheidung ist mit Zeitstempel dokumentiert. Anschlussfähig an Ihre Compliance-Prozesse. Anschlussfähig gegenüber Aufsichtsbehörden.'
+  },
+
+  // Section 5a: Test first
+  'empco.test.title': {
+    en: 'See what the audit finds. Before you pay.',
+    de: 'Sehen, was der Audit findet. Bevor Sie zahlen.'
+  },
+  'empco.test.intro': {
+    en: 'Before commissioning a full review of your website, let us analyse a single page of your choice. Free of charge, no obligation, using the same methodology as the paid audit.',
+    de: 'Bevor Sie eine vollständige Prüfung Ihrer Website beauftragen, lassen Sie uns eine einzelne Seite Ihrer Wahl analysieren. Kostenlos, ohne Verpflichtung, mit derselben Methodik wie der bezahlte Audit.'
+  },
+  'empco.test.processTitle': {
+    en: 'How it works',
+    de: 'Ablauf'
+  },
+  'empco.test.step1.title': {
+    en: 'You send us a URL',
+    de: 'Sie nennen uns eine URL'
+  },
+  'empco.test.step1.desc': {
+    en: 'Pick any URL from your domain. Sustainability landing page, product page, press release. You decide.',
+    de: 'Eine Seite aus Ihrer Domain. Sustainability-Landingpage, Produktseite, Pressemeldung. Sie entscheiden.'
+  },
+  'empco.test.step2.title': {
+    en: 'You get the full report within 24 hours',
+    de: 'Befund innerhalb von 24 Stunden'
+  },
+  'empco.test.step2.desc': {
+    en: 'The complete finding lands in your inbox — with quotes, regulatory references, and prioritization.',
+    de: 'Der vollständige Befund landet in Ihrem Postfach — mit Zitaten, Regelverweisen und Priorisierung.'
+  },
+  'empco.test.step3.title': {
+    en: 'You decide whether to commission the full audit',
+    de: 'Sie entscheiden über den vollen Audit'
+  },
+  'empco.test.step3.desc': {
+    en: 'If the result is convincing, you commission the audit for the entire website. Fixed price, transparent cost preview before order placement.',
+    de: 'Überzeugt das Ergebnis, beauftragen Sie den Audit für die gesamte Website. Festpreis, transparente Kostenvorschau vor Auftragserteilung.'
+  },
+  'empco.test.closing': {
+    en: 'Protecting your communication against greenwashing risks is a matter of trust. One example says more than any whitepaper.',
+    de: 'Ihre Kommunikation vor Greenwashing-Risiken zu schützen, ist Vertrauenssache. Ein Beispiel sagt mehr als ein Whitepaper.'
+  },
+  'empco.test.cta': {
+    en: 'Request a free sample page',
+    de: 'Kostenlose Probeseite anfordern'
+  },
+
+  // EmpCo Audit – Form section
+  'empco.anchor.form': {
+    en: 'Request audit',
+    de: 'Probeseite anfordern'
+  },
+  'empco.form.title': {
+    en: 'Request your free sample audit',
+    de: 'Kostenlose Probeseite anfordern'
+  },
+  'empco.form.intro': {
+    en: 'Tell us which page we should audit. We will get back to you with a sample report within a few business days.',
+    de: 'Sagen Sie uns, welche Seite wir prüfen sollen. Wir melden uns innerhalb weniger Werktage mit einem Beispielbericht.'
+  },
+  'empco.form.name': {
+    en: 'Name',
+    de: 'Name'
+  },
+  'empco.form.company': {
+    en: 'Company (optional)',
+    de: 'Unternehmen (optional)'
+  },
+  'empco.form.email': {
+    en: 'Email address',
+    de: 'E-Mail-Adresse'
+  },
+  'empco.form.url': {
+    en: 'URL of the page to audit',
+    de: 'URL der zu prüfenden Seite'
+  },
+  'empco.form.urlHint': {
+    en: 'Best a page or landing page that talks about sustainability.',
+    de: 'Am besten eine Seite/Landingpage, auf der über Nachhaltigkeit gesprochen wird.'
+  },
+  'empco.form.submit': {
+    en: 'Request sample audit',
+    de: 'Probeseite anfordern'
+  },
+  'empco.form.required': {
+    en: 'required',
+    de: 'Pflichtfeld'
+  },
+
   // Analytics Agent Page
   'analyticsAgent.hero.subtitle': {
     en: 'Your data. Your questions. Instant answers.',
@@ -716,6 +940,14 @@ const translations: Translations = {
   'burgerMenu.iknow.desc': {
     en: 'Enterprise knowledge platform',
     de: 'Wissensplattform für Unternehmen'
+  },
+  'burgerMenu.empcoAudit': {
+    en: 'iC EmpCo Audit',
+    de: 'iC EmpCo Audit'
+  },
+  'burgerMenu.empcoAudit.desc': {
+    en: 'Protects your website against greenwashing risks',
+    de: 'Schützt Ihre Website vor Greenwashing-Risiken'
   },
   'burgerMenu.intelligenticSearch': {
     en: 'Intelligentic Search',
