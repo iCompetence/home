@@ -51,12 +51,49 @@ function smoothAnchor(e: React.MouseEvent<HTMLAnchorElement>) {
   scrollToId(id);
 }
 
-const section = (extra: React.CSSProperties = {}): React.CSSProperties => ({
+const FRAME_MAX_WIDTH = 1440;
+const SECTION_VERTICAL_PADDING = 64;
+const SECTION_HORIZONTAL_PADDING = 96;
+
+const sectionOuter = (extra: React.CSSProperties = {}): React.CSSProperties => ({
   width: '100%',
-  padding: '64px 96px',
+  paddingTop: SECTION_VERTICAL_PADDING,
+  paddingBottom: SECTION_VERTICAL_PADDING,
   boxSizing: 'border-box',
   ...extra,
 });
+
+const sectionInner = (extra: React.CSSProperties = {}): React.CSSProperties => ({
+  width: '100%',
+  maxWidth: FRAME_MAX_WIDTH,
+  margin: '0 auto',
+  paddingLeft: SECTION_HORIZONTAL_PADDING,
+  paddingRight: SECTION_HORIZONTAL_PADDING,
+  boxSizing: 'border-box',
+  ...extra,
+});
+
+/** Pins absolutely-positioned decorative children to the 1440 design frame,
+ *  so coords from the .pen file stay accurate regardless of viewport width. */
+function DesignFrameOverlay({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        maxWidth: FRAME_MAX_WIDTH,
+        height: '100%',
+        pointerEvents: 'none',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function LavenderHome() {
   useEffect(() => {
@@ -75,13 +112,10 @@ export default function LavenderHome() {
       className="lavender-page"
       style={{
         width: '100%',
-        maxWidth: 1440,
-        margin: '0 auto',
         background: PAGE_BG,
         color: NAVY,
         fontFamily: FONT,
         fontWeight: 500,
-        overflow: 'hidden',
       }}
     >
       <style
@@ -116,33 +150,41 @@ function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: 644,
         background: 'rgba(245,225,255,0.10)',
       }}
     >
-      {/* Yellow star background */}
+      {/* Yellow star — pinned to the 1440 design frame so original .pen coords still apply */}
+      <DesignFrameOverlay>
+        <div
+          style={{
+            position: 'absolute',
+            left: 560,
+            top: -200,
+            width: 1200,
+            height: 1200,
+            backgroundImage: 'url(/images/icompetence_visual_gelb.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
+          }}
+        />
+      </DesignFrameOverlay>
+
+      {/* Top nav (lives inside a 40px-gutter wrapper to preserve the .pen layout) */}
       <div
         style={{
-          position: 'absolute',
-          left: 560,
-          top: -200,
-          width: 1200,
-          height: 1200,
-          backgroundImage: 'url(/images/icompetence_visual_gelb.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
-          pointerEvents: 'none',
+          position: 'relative',
+          zIndex: 5,
+          width: '100%',
+          maxWidth: FRAME_MAX_WIDTH,
+          margin: '0 auto',
+          padding: '24px 40px 0 40px',
+          boxSizing: 'border-box',
         }}
-      />
-
-      {/* Top nav */}
+      >
       <nav
         style={{
-          position: 'absolute',
-          left: 40,
-          top: 24,
-          width: 1360,
+          width: '100%',
           background: NAVY,
           borderRadius: 100,
           padding: '16px 32px',
@@ -152,7 +194,6 @@ function Hero() {
           gap: 48,
           boxSizing: 'border-box',
           color: WHITE,
-          zIndex: 5,
         }}
       >
         <a
@@ -227,19 +268,19 @@ function Hero() {
           </button>
         </div>
       </nav>
+      </div>
 
       {/* Hero content */}
       <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          top: 185,
-          width: 1248,
+        style={sectionInner({
+          position: 'relative',
+          zIndex: 2,
+          paddingTop: 105,
+          paddingBottom: 64,
           display: 'flex',
           flexDirection: 'column',
           gap: 40,
-          zIndex: 2,
-        }}
+        })}
       >
         <div
           role="heading"
@@ -325,26 +366,22 @@ function LogoCarousel() {
   const logos = ['ACME', 'GLOBEX', 'INITECH', 'UMBRELLA', 'MERIDIAN'];
   return (
     <section
-      style={section({
+      style={sectionOuter({
         background: 'transparent',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 40,
         overflow: 'hidden',
         borderTop: `1px solid ${NAVY_20}`,
         borderBottom: `1px solid ${NAVY_20}`,
       })}
     >
       <div
-        style={{
+        style={sectionInner({
+          paddingLeft: 40,
+          paddingRight: 40,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 96,
-          padding: '0 40px',
-          width: '100%',
-          boxSizing: 'border-box',
-        }}
+        })}
       >
         {logos.map((logo) => (
           <div
@@ -489,12 +526,13 @@ function ServicesGrid() {
   return (
     <section
       id="services"
-      style={section({
-        background: 'transparent',
+      style={sectionOuter({ background: 'transparent' })}
+    >
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
-        borderRadius: 32,
       })}
     >
       {/* Header row */}
@@ -592,6 +630,7 @@ function ServicesGrid() {
           />
         ))}
       </div>
+    </div>
     </section>
   );
 }
@@ -847,27 +886,23 @@ function CollapsedServicePill({
 
 function Statement() {
   return (
-    <section
-      style={section({
-        display: 'flex',
-        flexDirection: 'column',
-        background: 'transparent',
-      })}
-    >
-      <p
-        style={{
-          margin: 0,
-          width: '100%',
-          fontFamily: FONT,
-          fontSize: 54,
-          fontWeight: 500,
-          lineHeight: 1.1,
-          color: NAVY,
-          textAlign: 'center',
-        }}
-      >
-        We help ambitious teams turn data and AI into real business outcomes.
-      </p>
+    <section style={sectionOuter({ background: 'transparent' })}>
+      <div style={sectionInner()}>
+        <p
+          style={{
+            margin: 0,
+            width: '100%',
+            fontFamily: FONT,
+            fontSize: 54,
+            fontWeight: 500,
+            lineHeight: 1.1,
+            color: NAVY,
+            textAlign: 'center',
+          }}
+        >
+          We help ambitious teams turn data and AI into real business outcomes.
+        </p>
+      </div>
     </section>
   );
 }
@@ -878,30 +913,35 @@ function StatementCTA() {
       id="cta"
       style={{
         width: '100%',
-        padding: '0 96px 64px 96px',
+        paddingBottom: SECTION_VERTICAL_PADDING,
         boxSizing: 'border-box',
-        display: 'flex',
-        justifyContent: 'center',
       }}
     >
-      <a
-        href={MAILTO}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          background: NAVY,
-          color: WHITE,
-          borderRadius: 100,
-          padding: '12px 24px',
-          fontSize: 16,
-          fontWeight: 500,
-          textDecoration: 'none',
-        }}
+      <div
+        style={sectionInner({
+          display: 'flex',
+          justifyContent: 'center',
+        })}
       >
-        Get in touch
-        <ArrowUpRight size={20} strokeWidth={2} />
-      </a>
+        <a
+          href={MAILTO}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            background: NAVY,
+            color: WHITE,
+            borderRadius: 100,
+            padding: '12px 24px',
+            fontSize: 16,
+            fontWeight: 500,
+            textDecoration: 'none',
+          }}
+        >
+          Get in touch
+          <ArrowUpRight size={20} strokeWidth={2} />
+        </a>
+      </div>
     </section>
   );
 }
@@ -942,10 +982,9 @@ function LanguageToggle() {
 
 function Highlight() {
   return (
-    <section
-      id="cases"
-      style={section({
-        background: 'transparent',
+    <section id="cases" style={sectionOuter({ background: 'transparent' })}>
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
@@ -1056,6 +1095,7 @@ function Highlight() {
           image="/images/icompetence_visual_gelb.png"
         />
       </div>
+    </div>
     </section>
   );
 }
@@ -1194,9 +1234,9 @@ function Testimonial() {
   const t = TESTIMONIALS[idx];
 
   return (
-    <section
-      style={section({
-        background: 'transparent',
+    <section style={sectionOuter({ background: 'transparent' })}>
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
@@ -1329,6 +1369,7 @@ function Testimonial() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }
@@ -1370,10 +1411,9 @@ function Process() {
   const [expanded, setExpanded] = useState<number | null>(1);
 
   return (
-    <section
-      id="process"
-      style={section({
-        background: 'transparent',
+    <section id="process" style={sectionOuter({ background: 'transparent' })}>
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
@@ -1404,6 +1444,7 @@ function Process() {
           />
         ))}
       </div>
+    </div>
     </section>
   );
 }
@@ -1529,10 +1570,9 @@ function ProcessRow({
 
 function PrivacyLed() {
   return (
-    <section
-      id="privacy-led"
-      style={section({
-        background: 'transparent',
+    <section id="privacy-led" style={sectionOuter({ background: 'transparent' })}>
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
@@ -1602,6 +1642,7 @@ function PrivacyLed() {
           <ArrowUpRight size={20} strokeWidth={2} />
         </a>
       </div>
+    </div>
     </section>
   );
 }
@@ -1610,9 +1651,9 @@ function PrivacyLed() {
 
 function CTABand() {
   return (
-    <section
-      style={section({
-        background: LAVENDER,
+    <section style={sectionOuter({ background: LAVENDER })}>
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
@@ -1662,6 +1703,7 @@ function CTABand() {
         Get in touch
         <ArrowUpRight size={20} strokeWidth={2} />
       </a>
+    </div>
     </section>
   );
 }
@@ -1671,13 +1713,17 @@ function CTABand() {
 function Footer() {
   return (
     <footer
-      style={section({
+      style={sectionOuter({
         background: NAVY,
         color: WHITE,
+        overflow: 'hidden',
+      })}
+    >
+    <div
+      style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
-        overflow: 'hidden',
       })}
     >
       {/* Top row */}
@@ -1781,6 +1827,7 @@ function Footer() {
           <ChevronUp size={16} strokeWidth={2} />
         </a>
       </div>
+    </div>
     </footer>
   );
 }
