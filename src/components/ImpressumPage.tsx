@@ -459,6 +459,97 @@ function ImpressumPageContent() {
                 <p>
                   {t('imprint.section4.privacy.text3')}
                 </p>
+
+                <h3
+                  style={{
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    marginTop: '1.5rem',
+                    marginBottom: '0.75rem',
+                    color: 'var(--gray-white)'
+                  }}
+                >
+                  {t('imprint.empco.title')}
+                </h3>
+                <p>{t('imprint.empco.intro')}</p>
+                <p>
+                  <strong>{t('imprint.empco.dataCollected.label')}</strong>{' '}
+                  {t('imprint.empco.dataCollected.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.purpose.label')}</strong>{' '}
+                  {t('imprint.empco.purpose.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.legalBasis.label')}</strong>{' '}
+                  {t('imprint.empco.legalBasis.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.retention.label')}</strong>{' '}
+                  {t('imprint.empco.retention.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.recipients.label')}</strong>
+                </p>
+                <div style={{ overflowX: 'auto', marginTop: '0.5rem', marginBottom: '1rem' }}>
+                  <table
+                    style={{
+                      width: '100%',
+                      borderCollapse: 'collapse',
+                      fontSize: '14px',
+                      color: 'var(--gray-white)'
+                    }}
+                  >
+                    <thead>
+                      <tr style={{ textAlign: 'left', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+                        <th style={{ padding: '0.5rem 0.75rem' }}>{t('imprint.empco.recipients.col.provider')}</th>
+                        <th style={{ padding: '0.5rem 0.75rem' }}>{t('imprint.empco.recipients.col.location')}</th>
+                        <th style={{ padding: '0.5rem 0.75rem' }}>{t('imprint.empco.recipients.col.purpose')}</th>
+                        <th style={{ padding: '0.5rem 0.75rem' }}>{t('imprint.empco.recipients.col.transfer')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>Anthropic PBC</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>USA</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.anthropic.purpose')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.anthropic.transfer')}</td>
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>Cloudflare Inc.</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>USA</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.cloudflare.purpose')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.cloudflare.transfer')}</td>
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>Netlify Inc.</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>USA</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.netlify.purpose')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.netlify.transfer')}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.google.provider')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.google.location')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.google.purpose')}</td>
+                        <td style={{ padding: '0.5rem 0.75rem', verticalAlign: 'top' }}>{t('imprint.empco.recipients.google.transfer')}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>{t('imprint.empco.dpa')}</p>
+                <p>
+                  <strong>{t('imprint.empco.thirdCountry.label')}</strong>{' '}
+                  {t('imprint.empco.thirdCountry.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.pseudonymization.label')}</strong>{' '}
+                  {t('imprint.empco.pseudonymization.value')}
+                </p>
+                <p>
+                  <strong>{t('imprint.empco.noAutomatedDecision.label')}</strong>{' '}
+                  {t('imprint.empco.noAutomatedDecision.value')}
+                </p>
+
                 <p style={{ fontSize: '14px', color: 'var(--gray-light)', marginTop: '1rem' }}>
                   {t('imprint.source')}
                 </p>

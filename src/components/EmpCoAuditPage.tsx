@@ -1,28 +1,15 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react';
-import {
-  ChevronDown,
-  Mail,
-  X,
-  CheckCircle2,
-  AlertTriangle,
-  XCircle,
-  Eye,
-  Scale,
-  FileSearch,
-  Layers,
-  ShieldCheck,
-  ClipboardList,
-} from 'lucide-react';
+import { ChevronDown, Mail, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import Aurora1 from '../imports/Aurora1';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
-import { StaticText } from './StaticText';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
+import { Accordion } from './Accordion';
 import Script from 'next/script';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -159,15 +146,6 @@ function EmpCoAuditPageContent() {
     { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '07' },
   ];
 
-  const features = [
-    { icon: Eye, titleKey: 'empco.feature1.title', descKey: 'empco.feature1.desc' },
-    { icon: ShieldCheck, titleKey: 'empco.feature2.title', descKey: 'empco.feature2.desc' },
-    { icon: FileSearch, titleKey: 'empco.feature3.title', descKey: 'empco.feature3.desc' },
-    { icon: Scale, titleKey: 'empco.feature4.title', descKey: 'empco.feature4.desc' },
-    { icon: Layers, titleKey: 'empco.feature5.title', descKey: 'empco.feature5.desc' },
-    { icon: ClipboardList, titleKey: 'empco.feature6.title', descKey: 'empco.feature6.desc' },
-  ];
-
   if (!mounted) {
     return (
       <div
@@ -273,184 +251,66 @@ function EmpCoAuditPageContent() {
               animation: 'fadeInUp 1s ease-out 0.3s forwards',
             }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-              {/* Left: text + CTAs */}
-              <div className="text-left">
-                <h1
-                  className="hero-headline"
-                  style={{
-                    color: 'var(--gray-white)',
-                    fontSize: 'clamp(48px, 7vw, 84px)',
-                    fontWeight: '700',
-                    lineHeight: '110%',
-                    marginBottom: '1.5rem',
-                  }}
-                >
-                  iC EmpCo Audit
-                </h1>
-                <p
-                  style={{
-                    color: 'var(--gray-white)',
-                    fontSize: 'clamp(22px, 3vw, 32px)',
-                    fontWeight: '600',
-                    lineHeight: '130%',
-                    marginBottom: '1.25rem',
-                  }}
-                >
-                  {t('empco.hero.headline')}
-                </p>
-                <p
-                  style={{
-                    color: 'var(--gray-white)',
-                    fontSize: 'clamp(18px, 2vw, 22px)',
-                    fontWeight: '500',
-                    lineHeight: '150%',
-                    marginBottom: '2.5rem',
-                    opacity: 0.9,
-                  }}
-                >
-                  {t('empco.hero.subtitle')}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button
-                    onClick={() => scrollToSection('form-section')}
-                    className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
-                    style={{
-                      color: 'var(--gray-white)',
-                      fontWeight: '500',
-                    }}
-                  >
-                    {t('empco.hero.ctaPrimary')}
-                  </button>
-
-                  <button
-                    onClick={() => scrollToSection('what-section')}
-                    className="px-6 sm:px-8 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300 cursor-pointer text-sm sm:text-base"
-                    style={{
-                      color: 'var(--gray-white)',
-                      fontWeight: '500',
-                      background: 'transparent',
-                    }}
-                  >
-                    {t('empco.hero.ctaSecondary')}
-                  </button>
-                </div>
-              </div>
-
-              {/* Right: Sample Audit Card */}
-              <div
-                className="empco-hero-card"
+            <div className="text-center max-w-4xl mx-auto">
+              <h1
+                className="hero-headline"
                 style={{
-                  background:
-                    'linear-gradient(135deg, rgba(225, 155, 116, 0.08) 0%, rgba(212, 118, 205, 0.08) 100%)',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
-                  padding: '28px',
-                  backdropFilter: 'blur(12px)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.25)',
+                  color: 'var(--gray-white)',
+                  fontSize: 'clamp(48px, 8vw, 96px)',
+                  fontWeight: '700',
+                  lineHeight: '110%',
+                  marginBottom: '1.5rem',
                 }}
               >
-                <div
+                iC EmpCo Audit
+              </h1>
+              <p
+                style={{
+                  color: 'var(--gray-white)',
+                  fontSize: 'clamp(24px, 4vw, 48px)',
+                  fontWeight: '500',
+                  lineHeight: '130%',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                {t('empco.hero.headline')}
+              </p>
+              <p
+                style={{
+                  color: 'var(--gray-white)',
+                  fontSize: 'clamp(18px, 2vw, 22px)',
+                  fontWeight: '500',
+                  lineHeight: '150%',
+                  marginBottom: '2.5rem',
+                  opacity: 0.9,
+                }}
+              >
+                {t('empco.hero.subtitle')}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => scrollToSection('form-section')}
+                  className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '20px',
-                    paddingBottom: '16px',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                    color: 'var(--gray-white)',
+                    fontWeight: '500',
                   }}
                 >
-                  <span
-                    style={{
-                      color: 'var(--gray-light)',
-                      fontSize: '12px',
-                      fontWeight: '500',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    Audit-Befund
-                  </span>
-                  <span
-                    style={{
-                      color: 'var(--gray-light)',
-                      fontSize: '12px',
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    /sustainability
-                  </span>
-                </div>
+                  {t('empco.hero.ctaPrimary')}
+                </button>
 
-                {/* Finding rows */}
-                <div className="space-y-3">
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      padding: '12px',
-                      borderRadius: '10px',
-                      background: 'rgba(74, 222, 128, 0.08)',
-                      border: '1px solid rgba(74, 222, 128, 0.2)',
-                    }}
-                  >
-                    <CheckCircle2 size={20} style={{ color: '#4ADE80', flexShrink: 0, marginTop: '2px' }} />
-                    <div style={{ flex: 1 }}>
-                      <p style={{ color: 'var(--gray-white)', fontSize: '14px', fontWeight: '500', marginBottom: '2px' }}>
-                        „Recycelter Kunststoff seit 2021"
-                      </p>
-                      <p style={{ color: 'var(--gray-light)', fontSize: '12px', lineHeight: '140%' }}>
-                        Beleg: CSRD-Report 2024, S. 47
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      padding: '12px',
-                      borderRadius: '10px',
-                      background: 'rgba(251, 191, 36, 0.08)',
-                      border: '1px solid rgba(251, 191, 36, 0.2)',
-                    }}
-                  >
-                    <AlertTriangle size={20} style={{ color: '#FBBF24', flexShrink: 0, marginTop: '2px' }} />
-                    <div style={{ flex: 1 }}>
-                      <p style={{ color: 'var(--gray-white)', fontSize: '14px', fontWeight: '500', marginBottom: '2px' }}>
-                        „Umweltfreundliche Verpackung"
-                      </p>
-                      <p style={{ color: 'var(--gray-light)', fontSize: '12px', lineHeight: '140%' }}>
-                        Vage Aussage · § 5a UWG · Beleg unklar
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      padding: '12px',
-                      borderRadius: '10px',
-                      background: 'rgba(239, 68, 68, 0.08)',
-                      border: '1px solid rgba(239, 68, 68, 0.2)',
-                    }}
-                  >
-                    <XCircle size={20} style={{ color: '#EF4444', flexShrink: 0, marginTop: '2px' }} />
-                    <div style={{ flex: 1 }}>
-                      <p style={{ color: 'var(--gray-white)', fontSize: '14px', fontWeight: '500', marginBottom: '2px' }}>
-                        „Klimaneutral seit 2023"
-                      </p>
-                      <p style={{ color: 'var(--gray-light)', fontSize: '12px', lineHeight: '140%' }}>
-                        EmpCo Art. 6 · kein verifizierter Nachweis
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  onClick={() => scrollToSection('what-section')}
+                  className="px-6 sm:px-8 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300 cursor-pointer text-sm sm:text-base"
+                  style={{
+                    color: 'var(--gray-white)',
+                    fontWeight: '500',
+                    background: 'transparent',
+                  }}
+                >
+                  {t('empco.hero.ctaSecondary')}
+                </button>
               </div>
             </div>
           </div>
@@ -837,200 +697,38 @@ function EmpCoAuditPageContent() {
       </AnimatedSection>
 
       {/* Section 4: Features */}
-      <AnimatedSection
+      <Accordion
         id="features-section"
-        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-        animationType="fadeInUp"
-        duration={0}
-      >
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <h2
-              className="mobile-h2-title"
-              style={{
-                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                marginBottom: '1.5rem',
-                fontSize: '32px',
-                fontWeight: '700',
-                lineHeight: '110%',
-              }}
-            >
-              {t('empco.features.title')}
-            </h2>
-
-            <p
-              className="mobile-subline"
-              style={{
-                color: 'var(--gray-light)',
-                fontSize: '20px',
-                lineHeight: '160%',
-                marginBottom: '4rem',
-                maxWidth: '720px',
-              }}
-            >
-              {t('empco.features.lead')}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div
-                    key={index}
-                    className="empco-feature-card"
-                    style={{
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '16px',
-                      padding: '32px',
-                      transition: 'background-color 0.2s ease, border-color 0.2s ease',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '12px',
-                        background:
-                          'linear-gradient(135deg, rgba(225, 155, 116, 0.15) 0%, rgba(212, 118, 205, 0.15) 100%)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '20px',
-                      }}
-                    >
-                      <Icon size={24} style={{ color: '#E19B74' }} />
-                    </div>
-                    <h3
-                      style={{
-                        color: 'var(--gray-white)',
-                        fontSize: '20px',
-                        fontWeight: '600',
-                        lineHeight: '130%',
-                        marginBottom: '12px',
-                      }}
-                    >
-                      {t(feature.titleKey)}
-                    </h3>
-                    <p
-                      style={{
-                        color: 'var(--gray-light)',
-                        fontSize: '16px',
-                        lineHeight: '160%',
-                      }}
-                    >
-                      {t(feature.descKey)}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
+        title={t('empco.features.title')}
+        items={[
+          { title: t('empco.feature1.title'), content: t('empco.feature1.desc') },
+          { title: t('empco.feature2.title'), content: t('empco.feature2.desc') },
+          { title: t('empco.feature3.title'), content: t('empco.feature3.desc') },
+          { title: t('empco.feature4.title'), content: t('empco.feature4.desc') },
+          { title: t('empco.feature5.title'), content: t('empco.feature5.desc') },
+          { title: t('empco.feature6.title'), content: t('empco.feature6.desc') },
+        ]}
+      />
 
       {/* Section 5a: Test first */}
-      <AnimatedSection
+      <Accordion
         id="test-section"
-        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
+        title={t('empco.test.title')}
+        items={[
+          { title: t('empco.test.step1.title'), content: t('empco.test.step1.desc') },
+          { title: t('empco.test.step2.title'), content: t('empco.test.step2.desc') },
+          { title: t('empco.test.step3.title'), content: t('empco.test.step3.desc') },
+        ]}
+      />
+
+      {/* Section 5a closing + CTA */}
+      <AnimatedSection
+        className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
         animationType="fadeInUp"
         duration={0}
       >
         <div className="container mx-auto">
           <div className="max-w-6xl mx-auto">
-            <h2
-              className="mobile-h2-title"
-              style={{
-                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                marginBottom: '2rem',
-                fontSize: '32px',
-                fontWeight: '700',
-                lineHeight: '110%',
-              }}
-            >
-              {t('empco.test.title')}
-            </h2>
-
-            <p
-              style={{
-                color: 'var(--gray-white)',
-                fontSize: '18px',
-                lineHeight: '170%',
-                maxWidth: '760px',
-                marginBottom: '3rem',
-              }}
-            >
-              {t('empco.test.intro')}
-            </p>
-
-            <h3
-              style={{
-                color: 'var(--gray-white)',
-                fontSize: '22px',
-                fontWeight: '600',
-                marginBottom: '1.5rem',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {t('empco.test.processTitle')}
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              {[
-                { numStr: '01', titleKey: 'empco.test.step1.title', descKey: 'empco.test.step1.desc' },
-                { numStr: '02', titleKey: 'empco.test.step2.title', descKey: 'empco.test.step2.desc' },
-                { numStr: '03', titleKey: 'empco.test.step3.title', descKey: 'empco.test.step3.desc' },
-              ].map((step) => (
-                <div
-                  key={step.numStr}
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '16px',
-                    padding: '28px',
-                  }}
-                >
-                  <span
-                    style={{
-                      color: '#E19B74',
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      letterSpacing: '0.1em',
-                      display: 'block',
-                      marginBottom: '12px',
-                    }}
-                  >
-                    ({step.numStr})
-                  </span>
-                  <h4
-                    style={{
-                      color: 'var(--gray-white)',
-                      fontSize: '18px',
-                      fontWeight: '600',
-                      lineHeight: '130%',
-                      marginBottom: '12px',
-                    }}
-                  >
-                    {t(step.titleKey)}
-                  </h4>
-                  <p
-                    style={{
-                      color: 'var(--gray-light)',
-                      fontSize: '15px',
-                      lineHeight: '160%',
-                    }}
-                  >
-                    {t(step.descKey)}
-                  </p>
-                </div>
-              ))}
-            </div>
-
             <p
               style={{
                 color: 'var(--gray-white)',
@@ -1090,10 +788,24 @@ function EmpCoAuditPageContent() {
                 color: 'var(--gray-light)',
                 fontSize: '18px',
                 lineHeight: '170%',
-                marginBottom: '2.5rem',
+                marginBottom: '1.5rem',
               }}
             >
               {t('empco.form.intro')}
+            </p>
+
+            <p
+              style={{
+                color: 'var(--gray-light)',
+                fontSize: '15px',
+                lineHeight: '160%',
+                fontStyle: 'italic',
+                borderLeft: '2px solid rgba(225, 155, 116, 0.5)',
+                paddingLeft: '16px',
+                marginBottom: '2.5rem',
+              }}
+            >
+              {t('empco.form.disclaimer')}
             </p>
 
             <form
@@ -1187,6 +899,34 @@ function EmpCoAuditPageContent() {
                 </p>
               </div>
 
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  id="empco-consent"
+                  required
+                  style={{
+                    marginTop: '4px',
+                    width: '18px',
+                    height: '18px',
+                    flexShrink: 0,
+                    accentColor: '#0b99cc',
+                    cursor: 'pointer',
+                  }}
+                />
+                <label
+                  htmlFor="empco-consent"
+                  style={{
+                    color: 'var(--gray-white)',
+                    fontSize: '15px',
+                    lineHeight: '160%',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {t('empco.form.consent')} <span style={{ color: '#E19B74' }}>*</span>
+                </label>
+              </div>
+
               <div style={{ marginBottom: '8px' }} data-netlify-recaptcha="true"></div>
 
               <button
@@ -1196,6 +936,30 @@ function EmpCoAuditPageContent() {
               >
                 {t('empco.form.submit')}
               </button>
+
+              <p
+                style={{
+                  color: 'var(--gray-light)',
+                  fontSize: '13px',
+                  lineHeight: '160%',
+                  marginTop: '16px',
+                  opacity: 0.8,
+                }}
+              >
+                {t('empco.form.privacyNotice')}{' '}
+                <a
+                  href="/imprint"
+                  style={{
+                    color: 'var(--gray-light)',
+                    textDecoration: 'underline',
+                    transition: 'color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-light)')}
+                >
+                  → {t('empco.form.privacyLink')}
+                </a>
+              </p>
             </form>
           </div>
         </div>
@@ -1473,11 +1237,6 @@ function EmpCoAuditPageContent() {
           }
         }
 
-        .empco-feature-card:hover {
-          background-color: rgba(255, 255, 255, 0.02);
-          border-color: rgba(255, 255, 255, 0.18) !important;
-        }
-
         .anchor-nav-border-container {
           padding-left: 36px;
           padding-right: 24px;
@@ -1550,10 +1309,6 @@ function EmpCoAuditPageContent() {
 
           .mobile-footer-tagline {
             font-size: 40px !important;
-          }
-
-          .empco-hero-card {
-            padding: 20px !important;
           }
         }
 

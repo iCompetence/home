@@ -426,8 +426,8 @@ const translations: Translations = {
     de: 'Nachhaltigkeit, die der Prüfung standhält.'
   },
   'empco.hero.subtitle': {
-    en: 'The automated audit that helps you prevent greenwashing on your website. Within hours you know which sustainability claims are defensible — and which are becoming a risk.',
-    de: 'Der automatisierte Audit, der Sie vor Greenwashing auf Ihrer Website schützt. In Stunden wissen Sie, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
+    en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',
+    de: 'Der automatisierte Audit, der Sie vor EmpCo-Verstößen auf Ihrer Website schützt. Innerhalb weniger Stunden wissen Sie, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
   },
   'empco.hero.ctaPrimary': {
     en: 'Request a free sample page',
@@ -468,8 +468,8 @@ const translations: Translations = {
     de: 'Aus Nachhaltigkeitswerbung wird Rechtspflicht.'
   },
   'empco.why.p1': {
-    en: 'The EU Green Claims Directive and the Empowering Consumers Directive are changing what companies are allowed to communicate about sustainability. From 2026, terms such as "climate-neutral", "sustainable" or "environmentally friendly" must be substantiated. Without proof, companies face cease-and-desist letters under unfair-competition law, fines, and reputational damage.',
-    de: 'Die EU Green Claims Directive und die Empowering Consumers Directive verändern, was Unternehmen über Nachhaltigkeit kommunizieren dürfen. Begriffe wie „klimaneutral", „nachhaltig" oder „umweltfreundlich" müssen ab 2026 belegbar sein. Ohne Nachweis drohen Abmahnungen nach UWG, Bußgelder und Reputationsschäden.'
+    en: 'The EU Green Claims Directive and the Empowering Consumers Directive (EmpCo) are changing what companies are allowed to communicate about sustainability. From September 2026, terms such as "climate-neutral", "sustainable" or "environmentally friendly" must be substantiated. Without proof, companies face cease-and-desist letters under unfair-competition law, fines, and reputational damage.',
+    de: 'Die EU Green Claims Directive und die Empowering Consumers Directive (EmpCo) verändern, was Unternehmen über Nachhaltigkeit kommunizieren dürfen. Begriffe wie „klimaneutral", „nachhaltig" oder „umweltfreundlich" müssen ab September 2026 belegbar sein. Ohne Nachweis drohen Abmahnungen nach UWG, Bußgelder und Reputationsschäden.'
   },
   'empco.why.p2': {
     en: 'At the same time, the CSRD is tightening the requirements for non-financial reporting. Statements on your website have to match your ESG reporting. Anyone with gaps stands out — internally, externally, in court.',
@@ -494,8 +494,8 @@ const translations: Translations = {
     de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Branchenüblich liegen die Gesamtkosten je nach Unternehmensgröße im mittleren bis hohen fünfstelligen Bereich, bei großen Konzernen auch deutlich darüber.'
   },
   'empco.what.p2': {
-    en: 'The iC EmpCo Audit does not replace your lawyers. It replaces the preparation work in front of them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually need legal judgment.',
-    de: 'Der iC EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Vorarbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung brauchen.'
+    en: 'The iC EmpCo Audit does not replace your lawyers. It replaces the work that comes before them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually require legal judgment.',
+    de: 'Der iC EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Arbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung benötigen.'
   },
 
   // Section 4: Features
@@ -594,8 +594,8 @@ const translations: Translations = {
     de: 'Überzeugt das Ergebnis, beauftragen Sie den Audit für die gesamte Website. Festpreis, transparente Kostenvorschau vor Auftragserteilung.'
   },
   'empco.test.closing': {
-    en: 'Protecting your communication against greenwashing risks is a matter of trust. One example says more than any whitepaper.',
-    de: 'Ihre Kommunikation vor Greenwashing-Risiken zu schützen, ist Vertrauenssache. Ein Beispiel sagt mehr als ein Whitepaper.'
+    en: 'The perfect lead-in for your legal team: the iC EmpCo Audit surfaces greenwashing risks up front and prepares your claims optimally for the legal review.',
+    de: 'Die perfekte Steilvorlage für die Rechtsabteilung: Unser iC EmpCo Audit liefert Greenwashing-Risiken vorab heraus und bereitet Ihre Claims optimal für die juristische Prüfung auf.'
   },
   'empco.test.cta': {
     en: 'Request a free sample page',
@@ -642,6 +642,22 @@ const translations: Translations = {
   'empco.form.required': {
     en: 'required',
     de: 'Pflichtfeld'
+  },
+  'empco.form.disclaimer': {
+    en: 'Note: the iC EmpCo Audit is an initial technical assessment and does not replace legal advice. For the final legal evaluation of your claims, discuss the audit results with your legal department or an external law firm.',
+    de: 'Hinweis: Der iC EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine Rechtsberatung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einer Kanzlei.'
+  },
+  'empco.form.consent': {
+    en: 'I have read the privacy policy and agree to my data being processed for the purpose of creating the audit.',
+    de: 'Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Erstellung des Audits zu.'
+  },
+  'empco.form.privacyNotice': {
+    en: 'We process your details (name, email, company, URL) solely to create the audit. Processors: Anthropic/USA, Cloudflare/USA (SCCs). Deletion any time via email to info@icompetence.de.',
+    de: 'Wir verarbeiten deine Angaben (Name, Mail, Firma, URL) ausschließlich zur Audit-Erstellung. Auftragsverarbeiter: Anthropic/USA, Cloudflare/USA (SCCs). Löschung jederzeit per Mail an info@icompetence.de.'
+  },
+  'empco.form.privacyLink': {
+    en: 'Full privacy policy',
+    de: 'Vollständige Datenschutzerklärung'
   },
 
   // Analytics Agent Page
@@ -1082,6 +1098,134 @@ const translations: Translations = {
   'imprint.section4.privacy.text3': {
     en: 'The use of contact data published within the scope of the imprint obligation by third parties for the purpose of sending unsolicited advertising and information materials is hereby expressly prohibited. The operators of the pages expressly reserve the right to take legal action in the event of unsolicited sending of advertising information, such as spam emails.',
     de: 'Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.'
+  },
+  'imprint.empco.title': {
+    en: 'EmpCo Audit (Greenwashing Check)',
+    de: 'EmpCo-Audit (Greenwashing-Prüfung)'
+  },
+  'imprint.empco.intro': {
+    en: 'Via the EmpCo audit form on this website, you can request a free, AI-supported review of your website for sustainability/greenwashing claims. In addition to the general information, the following applies to this processing.',
+    de: 'Über das EmpCo-Audit-Formular auf dieser Website können Sie eine kostenlose, KI-gestützte Prüfung Ihrer Website auf Nachhaltigkeits-/Greenwashing-Aussagen anfordern. Für diese Verarbeitung gelten ergänzend zu den allgemeinen Hinweisen die folgenden Angaben.'
+  },
+  'imprint.empco.dataCollected.label': {
+    en: 'Data collected:',
+    de: 'Erhobene Daten:'
+  },
+  'imprint.empco.dataCollected.value': {
+    en: 'Name, email address, company, URL of the website to be audited.',
+    de: 'Name, E-Mail-Adresse, Unternehmen, URL der zu auditierenden Website.'
+  },
+  'imprint.empco.purpose.label': {
+    en: 'Purpose:',
+    de: 'Zweck:'
+  },
+  'imprint.empco.purpose.value': {
+    en: 'Creation of a free EmpCo audit of your website as a non-binding marketing service by iCompetence GmbH.',
+    de: 'Erstellung eines kostenlosen EmpCo-Audits Ihrer Website als unverbindliche Marketing-Leistung der iCompetence GmbH.'
+  },
+  'imprint.empco.legalBasis.label': {
+    en: 'Legal basis:',
+    de: 'Rechtsgrundlage:'
+  },
+  'imprint.empco.legalBasis.value': {
+    en: 'Art. 6 (1) (b) GDPR (taking pre-contractual steps at your request).',
+    de: 'Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen auf Ihre Anfrage hin).'
+  },
+  'imprint.empco.retention.label': {
+    en: 'Retention period:',
+    de: 'Speicherdauer:'
+  },
+  'imprint.empco.retention.value': {
+    en: 'Until the request is completed, no longer than 12 months after initial contact. Deletion is possible at any time on request by email to info@icompetence.de.',
+    de: 'Bis zum Abschluss der Anfrage, längstens 12 Monate nach Erstkontakt. Auf Wunsch jederzeit Löschung per Mail an info@icompetence.de.'
+  },
+  'imprint.empco.recipients.label': {
+    en: 'Recipients / processors:',
+    de: 'Empfänger / Auftragsverarbeiter:'
+  },
+  'imprint.empco.recipients.col.provider': {
+    en: 'Provider',
+    de: 'Anbieter'
+  },
+  'imprint.empco.recipients.col.location': {
+    en: 'Location',
+    de: 'Sitz'
+  },
+  'imprint.empco.recipients.col.purpose': {
+    en: 'Purpose',
+    de: 'Zweck'
+  },
+  'imprint.empco.recipients.col.transfer': {
+    en: 'Transfer mechanism',
+    de: 'Transfermechanismus'
+  },
+  'imprint.empco.recipients.anthropic.purpose': {
+    en: 'AI-supported text analysis for the EmpCo audit',
+    de: 'KI-gestützte Textanalyse für das EmpCo-Audit'
+  },
+  'imprint.empco.recipients.anthropic.transfer': {
+    en: 'EU Standard Contractual Clauses (Art. 46 (2) (c) GDPR)',
+    de: 'EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO)'
+  },
+  'imprint.empco.recipients.cloudflare.purpose': {
+    en: 'Hosting of the finished audit page (password-protected)',
+    de: 'Hosting der fertigen Audit-Seite (passwortgeschützt)'
+  },
+  'imprint.empco.recipients.cloudflare.transfer': {
+    en: 'EU Standard Contractual Clauses',
+    de: 'EU-Standardvertragsklauseln'
+  },
+  'imprint.empco.recipients.netlify.purpose': {
+    en: 'Processing of the form submission',
+    de: 'Verarbeitung der Form-Submission'
+  },
+  'imprint.empco.recipients.netlify.transfer': {
+    en: 'EU Standard Contractual Clauses',
+    de: 'EU-Standardvertragsklauseln'
+  },
+  'imprint.empco.recipients.google.provider': {
+    en: 'Google Ireland Ltd. / Google LLC (Google Workspace)',
+    de: 'Google Ireland Ltd. / Google LLC (Google Workspace)'
+  },
+  'imprint.empco.recipients.google.location': {
+    en: 'Ireland / USA',
+    de: 'Irland / USA'
+  },
+  'imprint.empco.recipients.google.purpose': {
+    en: 'Sending and receiving emails',
+    de: 'Versand und Empfang von E-Mails'
+  },
+  'imprint.empco.recipients.google.transfer': {
+    en: 'EU-US Data Privacy Framework (EU Commission adequacy decision of 10 July 2023) and EU Standard Contractual Clauses',
+    de: 'EU-US Data Privacy Framework (Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023) sowie EU-Standardvertragsklauseln'
+  },
+  'imprint.empco.dpa': {
+    en: 'Data processing agreements pursuant to Art. 28 GDPR are in place with all providers listed. A copy of the Standard Contractual Clauses is available on request.',
+    de: 'Mit allen genannten Anbietern bestehen Auftragsverarbeitungsverträge nach Art. 28 DSGVO. Eine Kopie der Standardvertragsklauseln stellen wir auf Anfrage zur Verfügung.'
+  },
+  'imprint.empco.thirdCountry.label': {
+    en: 'Third-country transfer:',
+    de: 'Drittlandtransfer:'
+  },
+  'imprint.empco.thirdCountry.value': {
+    en: 'Processing takes place in part in the USA. An EU Commission adequacy decision does not currently exist for Anthropic; the transfer is safeguarded by EU Standard Contractual Clauses pursuant to Art. 46 (2) (c) GDPR.',
+    de: 'Die Verarbeitung erfolgt teilweise in den USA. Ein Angemessenheitsbeschluss der EU-Kommission besteht für Anthropic derzeit nicht; der Transfer ist über EU-Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO abgesichert.'
+  },
+  'imprint.empco.pseudonymization.label': {
+    en: 'Pseudonymization before AI processing:',
+    de: 'Pseudonymisierung vor KI-Verarbeitung:'
+  },
+  'imprint.empco.pseudonymization.value': {
+    en: 'Before being transmitted to Anthropic, personal data contained in the analyzed website content (names, email addresses, phone numbers, IBANs) is automatically replaced by placeholders. Anthropic does not process any clear names or contact data from the analyzed website content. Before the audit is delivered to you, the original content is reinserted.',
+    de: 'Vor Übermittlung an Anthropic werden in den analysierten Website-Inhalten enthaltene personenbezogene Daten (Namen, E-Mail-Adressen, Telefonnummern, IBANs) automatisiert durch Platzhalter ersetzt. Anthropic verarbeitet keine Klarnamen oder Kontaktdaten aus den analysierten Website-Inhalten. Vor Auslieferung des Audits an Sie werden die ursprünglichen Inhalte wieder eingefügt.'
+  },
+  'imprint.empco.noAutomatedDecision.label': {
+    en: 'No automated decision-making within the meaning of Art. 22 GDPR:',
+    de: 'Keine automatisierte Entscheidung im Sinne Art. 22 DSGVO:'
+  },
+  'imprint.empco.noAutomatedDecision.value': {
+    en: 'The audit is created with AI support. All results are editorially reviewed before being sent. No profiling or automated decision-making with legal effect concerning you takes place.',
+    de: 'Das Audit wird KI-gestützt erstellt. Alle Ergebnisse werden vor Versand redaktionell geprüft. Es findet kein Profiling und keine automatisierte Entscheidung mit rechtlicher Wirkung Ihnen gegenüber statt.'
   },
   'imprint.source': {
     en: 'Source: eRecht24 (Attorney-at-Law Sören Siebert)',
