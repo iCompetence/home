@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowUpRight,
   ArrowDown,
@@ -13,6 +14,7 @@ import {
   Twitter,
   Github,
   ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 
 const NAVY = '#0b2231';
@@ -145,7 +147,71 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 
 /* ---------------- Top Nav ---------------- */
 
+const NAV_SECTIONS: ReadonlyArray<{ id: string; label: string }> = [
+  { id: 'services', label: 'Services' },
+  { id: 'cases', label: 'Cases' },
+  { id: 'process', label: 'Process' },
+  { id: 'privacy-led', label: 'Privacy-led AI' },
+];
+
 function TopNav() {
+  const [compact, setCompact] = useState(false);
+  const [activeId, setActiveId] = useState<string>(NAV_SECTIONS[0].id);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+
+  const { scrollY } = useScroll();
+  const fullItemsOpacity = useTransform(scrollY, [40, 70], [1, 0]);
+  const compactItemsOpacity = useTransform(scrollY, [70, 80], [0, 1]);
+
+  useEffect(() => {
+    const onScroll = () => setCompact(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+        const top = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b,
+        );
+        setActiveId(top.target.id);
+      },
+      { rootMargin: '-30% 0px -55% 0px', threshold: 0 },
+    );
+    NAV_SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!dropdownOpen && !burgerOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('[data-nav-popover]') || target.closest('[data-nav-trigger]')) return;
+      setDropdownOpen(false);
+      setBurgerOpen(false);
+    };
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, [dropdownOpen, burgerOpen]);
+
+  const activeLabel =
+    NAV_SECTIONS.find((s) => s.id === activeId)?.label ?? NAV_SECTIONS[0].label;
+  const otherSections = NAV_SECTIONS.filter((s) => s.id !== activeId);
+
+  const morphTransition = {
+    layout: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    opacity: { duration: 0.25, ease: 'easeOut' as const },
+  };
+
   return (
     <div
       style={{
@@ -153,104 +219,291 @@ function TopNav() {
         top: 0,
         zIndex: 50,
         width: '100%',
-        background: PAGE_BG,
+        background: 'transparent',
       }}
     >
       <div
         style={{
+          position: 'relative',
           width: '100%',
           maxWidth: FRAME_MAX_WIDTH,
           margin: '0 auto',
-          padding: '24px 40px 16px 40px',
+          padding: '12px 40px',
+          minHeight: 104,
           boxSizing: 'border-box',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: compact ? 'center' : 'stretch',
         }}
       >
-        <nav
-          style={{
-            width: '100%',
-            background: NAVY,
-            borderRadius: 100,
-            padding: '16px 32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 48,
-            boxSizing: 'border-box',
-            color: WHITE,
-          }}
-        >
-          <a
-            href="#top"
-            onClick={smoothAnchor}
-            style={{
-              fontSize: 16,
-              fontWeight: 500,
-              color: WHITE,
-              textDecoration: 'none',
-            }}
-          >
-            icompetence
-          </a>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 56 }}>
-            {[
-              ['Services', '#services'],
-              ['Cases', '#cases'],
-              ['Process', '#process'],
-              ['Privacy-led AI', '#privacy-led'],
-            ].map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
+        <AnimatePresence mode="popLayout" initial={false}>
+          {!compact ? (
+            <motion.nav
+              key="full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={morphTransition}
+              style={{
+                width: '100%',
+                background: NAVY,
+                borderRadius: 100,
+                padding: '16px 32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 48,
+                boxSizing: 'border-box',
+                color: WHITE,
+              }}
+            >
+              <motion.a
+                href="#top"
                 onClick={smoothAnchor}
                 style={{
+                  opacity: fullItemsOpacity,
                   fontSize: 16,
                   fontWeight: 500,
                   color: WHITE,
                   textDecoration: 'none',
                 }}
               >
-                {label}
-              </a>
-            ))}
-          </div>
+                icompetence
+              </motion.a>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-            <LanguageToggle />
-            <a
-              href={MAILTO}
+              <motion.div style={{ opacity: fullItemsOpacity, display: 'flex', alignItems: 'center', gap: 56 }}>
+                {NAV_SECTIONS.map(({ id, label }) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={smoothAnchor}
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 500,
+                      color: WHITE,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {label}
+                  </a>
+                ))}
+              </motion.div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+                <motion.div style={{ opacity: fullItemsOpacity, display: 'inline-flex', alignItems: 'center' }}>
+                  <LanguageToggle />
+                </motion.div>
+                <motion.a
+                  href={MAILTO}
+                  transition={morphTransition}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    background: BLUE,
+                    color: WHITE,
+                    borderRadius: 100,
+                    padding: '12px 24px',
+                    fontSize: 16,
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                  }}
+                >
+                  Let&apos;s talk
+                  <ArrowUpRight size={20} strokeWidth={2} />
+                </motion.a>
+                <motion.button
+                  type="button"
+                  aria-label="Menu"
+                  transition={morphTransition}
+                  style={{
+                    background: 'transparent',
+                    border: 0,
+                    color: WHITE,
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Menu size={28} strokeWidth={2} />
+                </motion.button>
+              </div>
+            </motion.nav>
+          ) : (
+            <motion.nav
+              key="compact"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={morphTransition}
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                background: BLUE,
-                color: WHITE,
+                background: NAVY,
                 borderRadius: 100,
-                padding: '12px 24px',
-                fontSize: 16,
-                fontWeight: 500,
-                textDecoration: 'none',
-              }}
-            >
-              Let&apos;s talk
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-            <button
-              aria-label="Menu"
-              style={{
-                background: 'transparent',
-                border: 0,
-                color: WHITE,
-                cursor: 'pointer',
-                padding: 0,
-                display: 'inline-flex',
+                padding: '8px 16px',
+                display: 'flex',
                 alignItems: 'center',
+                gap: 16,
+                color: WHITE,
               }}
             >
-              <Menu size={28} strokeWidth={2} />
-            </button>
-          </div>
-        </nav>
+              <motion.div style={{ opacity: compactItemsOpacity, position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  data-nav-trigger
+                  aria-haspopup="menu"
+                  aria-expanded={dropdownOpen}
+                  onClick={() => {
+                    setDropdownOpen((p) => !p);
+                    setBurgerOpen(false);
+                  }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: 'transparent',
+                    border: 0,
+                    color: WHITE,
+                    fontFamily: FONT,
+                    fontSize: 15,
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    padding: '4px 6px',
+                  }}
+                >
+                  {activeLabel}
+                  <ChevronDown
+                    size={16}
+                    strokeWidth={2}
+                    style={{
+                      transition: 'transform 0.2s ease',
+                      transform: dropdownOpen ? 'rotate(180deg)' : 'none',
+                    }}
+                  />
+                </button>
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      data-nav-popover
+                      role="menu"
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.16, ease: 'easeOut' }}
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 12px)',
+                        left: 0,
+                        background: NAVY,
+                        borderRadius: 16,
+                        padding: '10px 6px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minWidth: 180,
+                        boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
+                      }}
+                    >
+                      {otherSections.map(({ id, label }) => (
+                        <a
+                          key={id}
+                          href={`#${id}`}
+                          role="menuitem"
+                          onClick={(e) => {
+                            smoothAnchor(e);
+                            setDropdownOpen(false);
+                          }}
+                          style={{
+                            color: WHITE,
+                            fontSize: 15,
+                            fontWeight: 500,
+                            padding: '8px 12px',
+                            borderRadius: 10,
+                            textDecoration: 'none',
+                          }}
+                        >
+                          {label}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              <motion.a
+                href={MAILTO}
+                transition={morphTransition}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  background: BLUE,
+                  color: WHITE,
+                  borderRadius: 100,
+                  padding: '8px 16px',
+                  fontSize: 16,
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                }}
+              >
+                Let&apos;s talk
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </motion.a>
+
+              <div
+                onMouseEnter={() => {
+                  setBurgerOpen(true);
+                  setDropdownOpen(false);
+                }}
+                onMouseLeave={() => setBurgerOpen(false)}
+                style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
+              >
+                <motion.button
+                  type="button"
+                  aria-label="Menu"
+                  aria-haspopup="menu"
+                  aria-expanded={burgerOpen}
+                  data-nav-trigger
+                  transition={morphTransition}
+                  style={{
+                    background: 'transparent',
+                    border: 0,
+                    color: WHITE,
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Menu size={22} strokeWidth={2} />
+                </motion.button>
+                <AnimatePresence>
+                  {burgerOpen && (
+                    <motion.div
+                      data-nav-popover
+                      role="menu"
+                      initial={{ opacity: 0, y: -6, x: '-50%' }}
+                      animate={{ opacity: 1, y: 0, x: '-50%' }}
+                      exit={{ opacity: 0, y: -6, x: '-50%' }}
+                      transition={{ duration: 0.16, ease: 'easeOut' }}
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 20px)',
+                        left: '50%',
+                        background: NAVY,
+                        borderRadius: 16,
+                        padding: '12px 16px',
+                        minWidth: 140,
+                        boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
+                      }}
+                    >
+                      <LanguageToggle />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
