@@ -1257,7 +1257,7 @@ function StatementCTA() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: 8,
-            background: NAVY,
+            background: BLUE,
             color: WHITE,
             borderRadius: 100,
             padding: '12px 24px',
@@ -1266,7 +1266,7 @@ function StatementCTA() {
             textDecoration: 'none',
           }}
         >
-          Get in touch
+          Let&apos;s talk
           <ArrowUpRight size={20} strokeWidth={2} />
         </a>
       </div>
@@ -2019,7 +2019,7 @@ function CTABand() {
           display: 'inline-flex',
           alignItems: 'center',
           gap: 8,
-          background: NAVY,
+          background: BLUE,
           color: WHITE,
           borderRadius: 100,
           padding: '12px 24px',
@@ -2028,7 +2028,7 @@ function CTABand() {
           textDecoration: 'none',
         }}
       >
-        Get in touch
+        Let&apos;s talk
         <ArrowUpRight size={20} strokeWidth={2} />
       </a>
     </div>
