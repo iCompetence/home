@@ -262,13 +262,16 @@ function TopNav() {
                 onClick={smoothAnchor}
                 style={{
                   opacity: fullItemsOpacity,
-                  fontSize: 16,
-                  fontWeight: 500,
-                  color: WHITE,
+                  display: 'inline-flex',
+                  alignItems: 'center',
                   textDecoration: 'none',
                 }}
               >
-                icompetence
+                <img
+                  src="/iCompetence_white.svg"
+                  alt="iCompetence"
+                  style={{ height: 48, width: 'auto', display: 'block' }}
+                />
               </motion.a>
 
               <motion.div style={{ opacity: fullItemsOpacity, display: 'flex', alignItems: 'center', gap: 56 }}>
