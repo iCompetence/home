@@ -123,9 +123,11 @@ export default function LavenderHome() {
           __html: `
 .lavender-page a { text-decoration: none; }
 .lavender-page * { box-sizing: border-box; }
+html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 `,
         }}
       />
+      <TopNav />
       <Hero />
       <LogoCarousel />
       <ServicesGrid />
@@ -137,6 +139,119 @@ export default function LavenderHome() {
       <PrivacyLed />
       <CTABand />
       <Footer />
+    </div>
+  );
+}
+
+/* ---------------- Top Nav ---------------- */
+
+function TopNav() {
+  return (
+    <div
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        width: '100%',
+        background: PAGE_BG,
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: FRAME_MAX_WIDTH,
+          margin: '0 auto',
+          padding: '24px 40px 16px 40px',
+          boxSizing: 'border-box',
+        }}
+      >
+        <nav
+          style={{
+            width: '100%',
+            background: NAVY,
+            borderRadius: 100,
+            padding: '16px 32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 48,
+            boxSizing: 'border-box',
+            color: WHITE,
+          }}
+        >
+          <a
+            href="#top"
+            onClick={smoothAnchor}
+            style={{
+              fontSize: 16,
+              fontWeight: 500,
+              color: WHITE,
+              textDecoration: 'none',
+            }}
+          >
+            icompetence
+          </a>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 56 }}>
+            {[
+              ['Services', '#services'],
+              ['Cases', '#cases'],
+              ['Process', '#process'],
+              ['Privacy-led AI', '#privacy-led'],
+            ].map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={smoothAnchor}
+                style={{
+                  fontSize: 16,
+                  fontWeight: 500,
+                  color: WHITE,
+                  textDecoration: 'none',
+                }}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+            <LanguageToggle />
+            <a
+              href={MAILTO}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: BLUE,
+                color: WHITE,
+                borderRadius: 100,
+                padding: '12px 24px',
+                fontSize: 16,
+                fontWeight: 500,
+                textDecoration: 'none',
+              }}
+            >
+              Let&apos;s talk
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+            <button
+              aria-label="Menu"
+              style={{
+                background: 'transparent',
+                border: 0,
+                color: WHITE,
+                cursor: 'pointer',
+                padding: 0,
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
+              <Menu size={28} strokeWidth={2} />
+            </button>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
@@ -169,106 +284,6 @@ function Hero() {
           }}
         />
       </DesignFrameOverlay>
-
-      {/* Top nav (lives inside a 40px-gutter wrapper to preserve the .pen layout) */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 5,
-          width: '100%',
-          maxWidth: FRAME_MAX_WIDTH,
-          margin: '0 auto',
-          padding: '24px 40px 0 40px',
-          boxSizing: 'border-box',
-        }}
-      >
-      <nav
-        style={{
-          width: '100%',
-          background: NAVY,
-          borderRadius: 100,
-          padding: '16px 32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 48,
-          boxSizing: 'border-box',
-          color: WHITE,
-        }}
-      >
-        <a
-          href="#top"
-          onClick={smoothAnchor}
-          style={{
-            fontSize: 16,
-            fontWeight: 500,
-            color: WHITE,
-            textDecoration: 'none',
-          }}
-        >
-          icompetence
-        </a>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 56 }}>
-          {[
-            ['Services', '#services'],
-            ['Cases', '#cases'],
-            ['Process', '#process'],
-            ['Privacy-led AI', '#privacy-led'],
-          ].map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              onClick={smoothAnchor}
-              style={{
-                fontSize: 16,
-                fontWeight: 500,
-                color: WHITE,
-                textDecoration: 'none',
-              }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-          <LanguageToggle />
-          <a
-            href={MAILTO}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              background: BLUE,
-              color: WHITE,
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontSize: 16,
-              fontWeight: 500,
-              textDecoration: 'none',
-            }}
-          >
-            Let&apos;s talk
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-          <button
-            aria-label="Menu"
-            style={{
-              background: 'transparent',
-              border: 0,
-              color: WHITE,
-              cursor: 'pointer',
-              padding: 0,
-              display: 'inline-flex',
-              alignItems: 'center',
-            }}
-          >
-            <Menu size={28} strokeWidth={2} />
-          </button>
-        </div>
-      </nav>
-      </div>
 
       {/* Hero content */}
       <div
