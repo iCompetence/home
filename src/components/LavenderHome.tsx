@@ -126,6 +126,8 @@ export default function LavenderHome() {
 .lavender-page a { text-decoration: none; }
 .lavender-page * { box-sizing: border-box; }
 html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
+.lavender-page a, .lavender-page button { transition: opacity 0.15s ease; cursor: pointer; }
+.lavender-page a:hover, .lavender-page button:hover { opacity: 0.75; }
 `,
         }}
       />
@@ -272,6 +274,7 @@ function TopNav() {
         zIndex: 50,
         width: '100%',
         background: 'transparent',
+        pointerEvents: 'none',
       }}
     >
       <div
@@ -286,6 +289,7 @@ function TopNav() {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: compact ? 'center' : 'stretch',
+          pointerEvents: 'none',
         }}
       >
         <AnimatePresence mode="popLayout" initial={false}>
@@ -307,6 +311,7 @@ function TopNav() {
                 gap: 48,
                 boxSizing: 'border-box',
                 color: WHITE,
+                pointerEvents: 'auto',
               }}
             >
               <motion.a
@@ -385,6 +390,7 @@ function TopNav() {
                 alignItems: 'center',
                 gap: 16,
                 color: WHITE,
+                pointerEvents: 'auto',
               }}
             >
               <motion.div style={{ opacity: compactItemsOpacity, position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
@@ -847,24 +853,30 @@ const SERVICE_CARDS: ServiceCard[] = [
 
 function ServicesGrid() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [expandedPillIdx, setExpandedPillIdx] = useState(0);
 
-  const ordered = [
-    SERVICE_CARDS[activeIdx],
-    SERVICE_CARDS[(activeIdx + 1) % SERVICE_CARDS.length],
-    SERVICE_CARDS[(activeIdx + 2) % SERVICE_CARDS.length],
-  ];
-
+  const total = SERVICE_CARDS.length;
   const goPrev = () => {
-    setActiveIdx(
-      (i) => (i - 1 + SERVICE_CARDS.length) % SERVICE_CARDS.length
-    );
+    setDirection(-1);
+    setActiveIdx((i) => (i - 1 + total) % total);
     setExpandedPillIdx(0);
   };
   const goNext = () => {
-    setActiveIdx((i) => (i + 1) % SERVICE_CARDS.length);
+    setDirection(1);
+    setActiveIdx((i) => (i + 1) % total);
     setExpandedPillIdx(0);
   };
+
+  const CARD_GAP = 40;
+  const COLLAPSED_W = 640;
+  const prevIdx = (activeIdx - 1 + total) % total;
+  const nextIdx = (activeIdx + 1) % total;
+  const visible = [
+    { card: SERVICE_CARDS[prevIdx], idx: prevIdx, role: 'prev' as const },
+    { card: SERVICE_CARDS[activeIdx], idx: activeIdx, role: 'active' as const },
+    { card: SERVICE_CARDS[nextIdx], idx: nextIdx, role: 'next' as const },
+  ];
 
   return (
     <section
@@ -942,36 +954,40 @@ function ServicesGrid() {
         </div>
       </div>
 
-      {/* Cards (carousel — overflow clipped) */}
+      {/* Cards (carousel — wraps; active centered, prev/next peek; sliding motion on nav) */}
       <div
         style={{
-          display: 'flex',
-          gap: 40,
           width: '100%',
-          overflow: 'hidden',
+          overflow: 'visible',
         }}
       >
-        {ordered.map((card, position) => (
-          <ServiceCardView
-            key={card.title}
-            card={card}
-            expanded={position === 0}
-            expandedPillIdx={expandedPillIdx}
-            onPillClick={(pillIdx) =>
-              setExpandedPillIdx((p) => (p === pillIdx ? -1 : pillIdx))
-            }
-            onCardHeaderClick={() => {
-              if (position !== 0) {
-                setActiveIdx(
-                  (SERVICE_CARDS.findIndex((c) => c.title === card.title) +
-                    SERVICE_CARDS.length) %
-                    SERVICE_CARDS.length
-                );
-                setExpandedPillIdx(0);
+        <motion.div
+          key={activeIdx}
+          initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+          style={{
+            display: 'flex',
+            gap: CARD_GAP,
+            justifyContent: 'center',
+          }}
+        >
+          {visible.map(({ card, role }) => (
+            <ServiceCardView
+              key={role}
+              card={card}
+              isActive={role === 'active'}
+              expandedPillIdx={expandedPillIdx}
+              onPillClick={(pillIdx) =>
+                setExpandedPillIdx((p) => (p === pillIdx ? -1 : pillIdx))
               }
-            }}
-          />
-        ))}
+              onCardClick={() => {
+                if (role === 'prev') goPrev();
+                else if (role === 'next') goNext();
+              }}
+            />
+          ))}
+        </motion.div>
       </div>
     </div>
     </section>
@@ -980,82 +996,62 @@ function ServicesGrid() {
 
 function ServiceCardView({
   card,
-  expanded,
+  isActive,
   expandedPillIdx,
   onPillClick,
-  onCardHeaderClick,
+  onCardClick,
 }: {
   card: ServiceCard;
-  expanded: boolean;
+  isActive: boolean;
   expandedPillIdx: number;
   onPillClick: (idx: number) => void;
-  onCardHeaderClick: () => void;
+  onCardClick: () => void;
 }) {
   return (
     <div
       style={{
         display: 'flex',
-        flex: expanded ? '0 0 960px' : '0 0 640px',
+        flex: isActive ? '0 0 960px' : '0 0 640px',
         gap: 0,
         height: 640,
       }}
     >
       {/* Visual */}
       <div
-        onClick={onCardHeaderClick}
+        onClick={isActive ? undefined : onCardClick}
         style={{
           width: 640,
           height: 640,
-          borderRadius: expanded ? '24px 0 0 24px' : 24,
+          borderRadius: isActive ? '24px 0 0 24px' : 24,
           backgroundImage: `url(${card.image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          padding: '0 32px 32px 32px',
+          padding: '32px',
           boxSizing: 'border-box',
           flexShrink: 0,
           position: 'relative',
-          cursor: expanded ? 'default' : 'pointer',
+          cursor: isActive ? 'default' : 'pointer',
         }}
       >
         <h3
           style={{
             margin: 0,
-            paddingTop: 32,
             fontFamily: FONT,
             fontSize: 54,
             fontWeight: 500,
             lineHeight: 1.1,
             color: WHITE,
-            alignSelf: 'flex-start',
           }}
         >
           {card.title}
         </h3>
-
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            background: 'rgba(255,255,255,0.9)',
-            color: NAVY,
-            borderRadius: 100,
-            padding: '8px 16px',
-            fontSize: 14,
-            fontWeight: 600,
-          }}
-        >
-          {expanded ? 'Featured' : 'View Details'}
-        </div>
       </div>
 
-      {/* Pill list (only when expanded) */}
-      {expanded && (
+      {/* Pill list (only on the centered/active card) */}
+      {isActive && (
         <div
           style={{
             width: 320,
