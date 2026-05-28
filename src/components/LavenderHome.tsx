@@ -1397,13 +1397,12 @@ function Highlight() {
         {/* Image */}
         <div
           style={{
-            width: 640,
+            flex: 1,
             height: 640,
             borderRadius: 24,
             backgroundImage: 'url(/images/iC_Stern_Blau.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            flexShrink: 0,
           }}
         />
       </div>
@@ -1562,7 +1561,7 @@ function Testimonial() {
   const t = TESTIMONIALS[idx];
 
   return (
-    <section style={sectionOuter({ background: 'transparent' })}>
+    <section style={sectionOuter({ background: NAVY })}>
     <div
       style={sectionInner({
         display: 'flex',
@@ -1577,7 +1576,7 @@ function Testimonial() {
           fontSize: 36,
           fontWeight: 500,
           lineHeight: 1.1,
-          color: NAVY,
+          color: WHITE,
           width: '100%',
         }}
       >
@@ -1602,9 +1601,9 @@ function Testimonial() {
               width: 48,
               height: 48,
               borderRadius: 100,
-              background: 'transparent',
-              border: `1px solid ${NAVY_30}`,
-              color: NAVY,
+              background: WHITE_10,
+              border: 0,
+              color: WHITE,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
@@ -1621,9 +1620,9 @@ function Testimonial() {
               width: 48,
               height: 48,
               borderRadius: 100,
-              background: NAVY,
+              background: WHITE,
               border: 0,
-              color: WHITE,
+              color: NAVY,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
@@ -1650,7 +1649,7 @@ function Testimonial() {
               fontSize: 54,
               fontWeight: 500,
               lineHeight: 1.1,
-              color: NAVY,
+              color: WHITE,
             }}
           >
             {t.quote}
@@ -1662,7 +1661,7 @@ function Testimonial() {
                 width: 40,
                 height: 40,
                 borderRadius: '50%',
-                background: NAVY_30,
+                background: WHITE_20,
                 flexShrink: 0,
               }}
             />
@@ -1678,7 +1677,7 @@ function Testimonial() {
                   fontFamily: FONT,
                   fontSize: 16,
                   fontWeight: 500,
-                  color: NAVY,
+                  color: WHITE,
                 }}
               >
                 {t.name}
@@ -1688,7 +1687,7 @@ function Testimonial() {
                   fontFamily: FONT,
                   fontSize: 16,
                   fontWeight: 400,
-                  color: NAVY_80,
+                  color: WHITE_70,
                 }}
               >
                 {t.role}
@@ -1791,7 +1790,7 @@ function ProcessRow({
   return (
     <div
       style={{
-        background: expanded ? WHITE : 'transparent',
+        background: 'transparent',
         borderTop: `1px solid ${NAVY_20}`,
         borderBottom: isLast ? `1px solid ${NAVY_20}` : undefined,
         display: 'flex',
@@ -1911,6 +1910,7 @@ function PrivacyLed() {
         style={{
           width: '100%',
           height: 400,
+          borderRadius: 24,
           backgroundImage: 'url(/images/privacy-led.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
