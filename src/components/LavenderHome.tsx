@@ -145,6 +145,60 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
   );
 }
 
+/* ---------------- Burger Menu ---------------- */
+
+function BurgerMenu({ iconSize }: { iconSize: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
+    >
+      <button
+        type="button"
+        aria-label="Menu"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        style={{
+          background: 'transparent',
+          border: 0,
+          color: WHITE,
+          cursor: 'pointer',
+          padding: 0,
+          display: 'inline-flex',
+          alignItems: 'center',
+        }}
+      >
+        <Menu size={iconSize} strokeWidth={2} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="menu"
+            initial={{ opacity: 0, y: -6, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: -6, x: '-50%' }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+            style={{
+              position: 'absolute',
+              top: 'calc(100% + 36px)',
+              left: '50%',
+              background: NAVY,
+              borderRadius: 16,
+              padding: '12px 16px',
+              minWidth: 140,
+              boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
+            }}
+          >
+            <LanguageToggle />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 /* ---------------- Top Nav ---------------- */
 
 const NAV_SECTIONS: ReadonlyArray<{ id: string; label: string }> = [
@@ -158,7 +212,6 @@ function TopNav() {
   const [compact, setCompact] = useState(false);
   const [activeId, setActiveId] = useState<string>(NAV_SECTIONS[0].id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [burgerOpen, setBurgerOpen] = useState(false);
 
   const { scrollY } = useScroll();
   const fullItemsOpacity = useTransform(scrollY, [40, 70], [1, 0]);
@@ -191,17 +244,16 @@ function TopNav() {
   }, []);
 
   useEffect(() => {
-    if (!dropdownOpen && !burgerOpen) return;
+    if (!dropdownOpen) return;
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
       if (target.closest('[data-nav-popover]') || target.closest('[data-nav-trigger]')) return;
       setDropdownOpen(false);
-      setBurgerOpen(false);
     };
     document.addEventListener('mousedown', onDocClick);
     return () => document.removeEventListener('mousedown', onDocClick);
-  }, [dropdownOpen, burgerOpen]);
+  }, [dropdownOpen]);
 
   const activeLabel =
     NAV_SECTIONS.find((s) => s.id === activeId)?.label ?? NAV_SECTIONS[0].label;
@@ -315,22 +367,7 @@ function TopNav() {
                   Let&apos;s talk
                   <ArrowUpRight size={20} strokeWidth={2} />
                 </motion.a>
-                <motion.button
-                  type="button"
-                  aria-label="Menu"
-                  transition={morphTransition}
-                  style={{
-                    background: 'transparent',
-                    border: 0,
-                    color: WHITE,
-                    cursor: 'pointer',
-                    padding: 0,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Menu size={28} strokeWidth={2} />
-                </motion.button>
+                <BurgerMenu iconSize={28} />
               </div>
             </motion.nav>
           ) : (
@@ -356,10 +393,7 @@ function TopNav() {
                   data-nav-trigger
                   aria-haspopup="menu"
                   aria-expanded={dropdownOpen}
-                  onClick={() => {
-                    setDropdownOpen((p) => !p);
-                    setBurgerOpen(false);
-                  }}
+                  onClick={() => setDropdownOpen((p) => !p)}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -452,58 +486,7 @@ function TopNav() {
                 <ArrowUpRight size={20} strokeWidth={2} />
               </motion.a>
 
-              <div
-                onMouseEnter={() => {
-                  setBurgerOpen(true);
-                  setDropdownOpen(false);
-                }}
-                onMouseLeave={() => setBurgerOpen(false)}
-                style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
-              >
-                <motion.button
-                  type="button"
-                  aria-label="Menu"
-                  aria-haspopup="menu"
-                  aria-expanded={burgerOpen}
-                  data-nav-trigger
-                  transition={morphTransition}
-                  style={{
-                    background: 'transparent',
-                    border: 0,
-                    color: WHITE,
-                    cursor: 'pointer',
-                    padding: 0,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Menu size={22} strokeWidth={2} />
-                </motion.button>
-                <AnimatePresence>
-                  {burgerOpen && (
-                    <motion.div
-                      data-nav-popover
-                      role="menu"
-                      initial={{ opacity: 0, y: -6, x: '-50%' }}
-                      animate={{ opacity: 1, y: 0, x: '-50%' }}
-                      exit={{ opacity: 0, y: -6, x: '-50%' }}
-                      transition={{ duration: 0.16, ease: 'easeOut' }}
-                      style={{
-                        position: 'absolute',
-                        top: 'calc(100% + 20px)',
-                        left: '50%',
-                        background: NAVY,
-                        borderRadius: 16,
-                        padding: '12px 16px',
-                        minWidth: 140,
-                        boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
-                      }}
-                    >
-                      <LanguageToggle />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              <BurgerMenu iconSize={22} />
             </motion.nav>
           )}
         </AnimatePresence>
