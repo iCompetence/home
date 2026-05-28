@@ -141,8 +141,39 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       <Testimonial />
       <Process />
       <PrivacyLed />
-      <CTABand />
-      <Footer />
+      <div style={{ position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
+        <CTABand />
+        <Footer />
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '100%',
+            maxWidth: FRAME_MAX_WIDTH,
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              left: -120,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 820,
+              height: 820,
+              backgroundImage: 'url(/images/icompetence_visual_01.png)',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: 'contain',
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -2258,13 +2289,15 @@ function PrivacyLed() {
 
 function CTABand() {
   return (
-    <section style={sectionOuter({ background: BLUE })}>
+    <section style={sectionOuter({ background: '#bde3f4', overflow: 'hidden' })}>
     <div
       style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
         alignItems: 'center',
+        position: 'relative',
+        zIndex: 2,
       })}
     >
       <div
@@ -2331,6 +2364,8 @@ function Footer() {
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
+        position: 'relative',
+        zIndex: 2,
       })}
     >
       {/* Top row */}
