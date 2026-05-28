@@ -616,52 +616,70 @@ function Hero() {
 
 /* ---------------- Logo Carousel ---------------- */
 
-const LOGO_POOL = [
-  'ACME',
-  'GLOBEX',
-  'INITECH',
-  'UMBRELLA',
-  'MERIDIAN',
-  'HOOLI',
-  'WAYNE',
-  'STARK',
-  'TYRELL',
-  'VANDELAY',
-  'OSCORP',
-  'CYBERDYNE',
-  'WEYLAND',
-  'INGEN',
-  'NAKATOMI',
+const LOGO_MARKS: React.ReactNode[] = [
+  <circle key="c-fill" cx={11} cy={11} r={10} />,
+  <circle key="c-line" cx={11} cy={11} r={9} fill="none" stroke="currentColor" strokeWidth={2.5} />,
+  <rect key="sq" x={1} y={1} width={20} height={20} />,
+  <rect key="diamond" x={4} y={4} width={14} height={14} transform="rotate(45 11 11)" />,
+  <polygon key="tri" points="11,1 21,19 1,19" />,
+  <polygon key="hex" points="11,1 19,6 19,16 11,21 3,16 3,6" />,
+  <path key="plus" d="M8,1 H14 V8 H21 V14 H14 V21 H8 V14 H1 V8 H8 Z" />,
+  <g key="bars">
+    <rect x={1} y={4} width={20} height={4} />
+    <rect x={1} y={14} width={20} height={4} />
+  </g>,
+];
+
+type LogoEntry = { name: string; mark: number };
+const LOGO_POOL: LogoEntry[] = [
+  { name: 'ACME', mark: 0 },
+  { name: 'GLOBEX', mark: 1 },
+  { name: 'INITECH', mark: 2 },
+  { name: 'UMBRELLA', mark: 3 },
+  { name: 'MERIDIAN', mark: 4 },
+  { name: 'HOOLI', mark: 5 },
+  { name: 'WAYNE', mark: 6 },
+  { name: 'STARK', mark: 7 },
+  { name: 'TYRELL', mark: 1 },
+  { name: 'VANDELAY', mark: 2 },
+  { name: 'OSCORP', mark: 5 },
+  { name: 'CYBERDYNE', mark: 6 },
+  { name: 'WEYLAND', mark: 3 },
+  { name: 'INGEN', mark: 4 },
+  { name: 'NAKATOMI', mark: 0 },
 ];
 const LOGO_SLOTS = 5;
 
 function LogoCarousel() {
-  const [visible, setVisible] = useState<string[]>(() => LOGO_POOL.slice(0, LOGO_SLOTS));
+  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, LOGO_SLOTS));
 
   useEffect(() => {
-    const SLOT_PERIOD = 3000;
-    const swapSlot = (slot: number) => {
+    let lastSlot = -1;
+    const swapRandomSlot = () => {
       setVisible((current) => {
-        const pool = LOGO_POOL.filter((l) => !current.includes(l));
+        let slot = Math.floor(Math.random() * LOGO_SLOTS);
+        if (slot === lastSlot) slot = (slot + 1) % LOGO_SLOTS;
+        lastSlot = slot;
+        const visibleNames = new Set(current.map((l) => l.name));
+        const pool = LOGO_POOL.filter((l) => !visibleNames.has(l.name));
         if (pool.length === 0) return current;
         const next = [...current];
         next[slot] = pool[Math.floor(Math.random() * pool.length)];
         return next;
       });
     };
-    const intervals: ReturnType<typeof setInterval>[] = [];
-    const startTimeouts: ReturnType<typeof setTimeout>[] = [];
-    for (let slot = 0; slot < LOGO_SLOTS; slot++) {
-      startTimeouts.push(
-        setTimeout(() => {
-          swapSlot(slot);
-          intervals.push(setInterval(() => swapSlot(slot), SLOT_PERIOD));
-        }, (slot * SLOT_PERIOD) / LOGO_SLOTS),
-      );
-    }
+
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const schedule = () => {
+      const delay = 800 + Math.random() * 2400;
+      timer = setTimeout(() => {
+        swapRandomSlot();
+        schedule();
+      }, delay);
+    };
+    schedule();
     return () => {
-      startTimeouts.forEach(clearTimeout);
-      intervals.forEach(clearInterval);
+      if (timer) clearTimeout(timer);
     };
   }, []);
 
@@ -696,22 +714,39 @@ function LogoCarousel() {
             }}
           >
             <AnimatePresence mode="wait">
-              <motion.span
-                key={logo}
+              <motion.div
+                key={logo.name}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
                 style={{
-                  fontFamily: FONT,
-                  fontSize: 16,
-                  fontWeight: 500,
-                  letterSpacing: 0.5,
-                  color: NAVY_70,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  color: NAVY,
                 }}
               >
-                {logo}
-              </motion.span>
+                <svg
+                  viewBox="0 0 22 22"
+                  width={22}
+                  height={22}
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  {LOGO_MARKS[logo.mark]}
+                </svg>
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 18,
+                    fontWeight: 600,
+                    letterSpacing: 0.8,
+                  }}
+                >
+                  {logo.name}
+                </span>
+              </motion.div>
             </AnimatePresence>
           </div>
         ))}
