@@ -1058,10 +1058,10 @@ function ServiceCardView({
             height: 640,
             borderRadius: '0 24px 24px 0',
             background: NAVY,
-            padding: '0 24px',
+            padding: '32px 24px',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             gap: 8,
             flexShrink: 0,
           }}
@@ -1099,17 +1099,18 @@ function ExpandedServicePill({
       type="button"
       onClick={onClick}
       style={{
-        background: 'rgba(255,255,255,0.32)',
+        background: LAVENDER,
         borderRadius: 16,
-        padding: '20px 24px',
+        padding: 0,
         display: 'flex',
         flexDirection: 'column',
         gap: 8,
-        border: 0,
+        border: '1px solid transparent',
         cursor: 'pointer',
         textAlign: 'left',
         width: '100%',
         fontFamily: FONT,
+        boxSizing: 'border-box',
       }}
     >
       <div
@@ -1119,6 +1120,8 @@ function ExpandedServicePill({
           justifyContent: 'space-between',
           gap: 12,
           width: '100%',
+          padding: '8px 16px',
+          boxSizing: 'border-box',
         }}
       >
         <span
@@ -1126,37 +1129,22 @@ function ExpandedServicePill({
             fontFamily: FONT,
             fontSize: 16,
             fontWeight: 600,
-            color: WHITE,
+            color: NAVY,
           }}
         >
           {pill.label}
         </span>
-        <span
-          style={{
-            width: 28,
-            height: 28,
-            borderRadius: 100,
-            background: WHITE,
-            color: NAVY,
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 16,
-            fontWeight: 500,
-            lineHeight: 1,
-          }}
-        >
-          −
-        </span>
+        <Minus size={20} strokeWidth={2} color={NAVY} style={{ flexShrink: 0 }} />
       </div>
       <p
         style={{
           margin: 0,
+          padding: '0 16px 16px 16px',
           fontFamily: FONT,
           fontSize: 14,
           fontWeight: 400,
           lineHeight: 1.5,
-          color: 'rgba(255,255,255,0.7)',
+          color: 'rgba(11,34,49,0.7)',
         }}
       >
         {pill.description}
@@ -1177,17 +1165,18 @@ function CollapsedServicePill({
       type="button"
       onClick={onClick}
       style={{
-        background: 'rgba(255,255,255,0.32)',
+        background: 'transparent',
         borderRadius: 100,
         padding: '8px 16px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 12,
-        border: 0,
+        border: '1px solid rgba(255,255,255,0.25)',
         cursor: 'pointer',
         width: '100%',
         fontFamily: FONT,
+        boxSizing: 'border-box',
       }}
     >
       <span
@@ -1200,23 +1189,7 @@ function CollapsedServicePill({
       >
         {pill.label}
       </span>
-      <span
-        style={{
-          width: 28,
-          height: 28,
-          borderRadius: 100,
-          background: 'rgba(11,34,49,0.1)',
-          color: WHITE,
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 18,
-          fontWeight: 300,
-          lineHeight: 1,
-        }}
-      >
-        +
-      </span>
+      <Plus size={20} strokeWidth={2} color={WHITE} style={{ flexShrink: 0 }} />
     </button>
   );
 }
