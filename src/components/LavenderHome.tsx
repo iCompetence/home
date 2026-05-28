@@ -881,7 +881,7 @@ function ServicesGrid() {
   return (
     <section
       id="services"
-      style={sectionOuter({ background: 'transparent' })}
+      style={sectionOuter({ background: 'transparent', position: 'relative', zIndex: 1 })}
     >
     <div
       style={sectionInner({
@@ -1198,8 +1198,24 @@ function CollapsedServicePill({
 
 function Statement() {
   return (
-    <section style={sectionOuter({ background: 'transparent' })}>
-      <div style={sectionInner()}>
+    <section style={sectionOuter({ background: 'transparent', position: 'relative' })}>
+      <DesignFrameOverlay>
+        <div
+          style={{
+            position: 'absolute',
+            left: -300,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 900,
+            height: 900,
+            backgroundImage: 'url(/images/icompetence_visual_blau_01.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
+          }}
+        />
+      </DesignFrameOverlay>
+      <div style={sectionInner({ position: 'relative', zIndex: 2 })}>
         <p
           style={{
             margin: 0,
