@@ -616,8 +616,55 @@ function Hero() {
 
 /* ---------------- Logo Carousel ---------------- */
 
+const LOGO_POOL = [
+  'ACME',
+  'GLOBEX',
+  'INITECH',
+  'UMBRELLA',
+  'MERIDIAN',
+  'HOOLI',
+  'WAYNE',
+  'STARK',
+  'TYRELL',
+  'VANDELAY',
+  'OSCORP',
+  'CYBERDYNE',
+  'WEYLAND',
+  'INGEN',
+  'NAKATOMI',
+];
+const LOGO_SLOTS = 5;
+
 function LogoCarousel() {
-  const logos = ['ACME', 'GLOBEX', 'INITECH', 'UMBRELLA', 'MERIDIAN'];
+  const [visible, setVisible] = useState<string[]>(() => LOGO_POOL.slice(0, LOGO_SLOTS));
+
+  useEffect(() => {
+    const SLOT_PERIOD = 3000;
+    const swapSlot = (slot: number) => {
+      setVisible((current) => {
+        const pool = LOGO_POOL.filter((l) => !current.includes(l));
+        if (pool.length === 0) return current;
+        const next = [...current];
+        next[slot] = pool[Math.floor(Math.random() * pool.length)];
+        return next;
+      });
+    };
+    const intervals: ReturnType<typeof setInterval>[] = [];
+    const startTimeouts: ReturnType<typeof setTimeout>[] = [];
+    for (let slot = 0; slot < LOGO_SLOTS; slot++) {
+      startTimeouts.push(
+        setTimeout(() => {
+          swapSlot(slot);
+          intervals.push(setInterval(() => swapSlot(slot), SLOT_PERIOD));
+        }, (slot * SLOT_PERIOD) / LOGO_SLOTS),
+      );
+    }
+    return () => {
+      startTimeouts.forEach(clearTimeout);
+      intervals.forEach(clearInterval);
+    };
+  }, []);
+
   return (
     <section
       style={sectionOuter({
@@ -637,9 +684,9 @@ function LogoCarousel() {
           gap: 96,
         })}
       >
-        {logos.map((logo) => (
+        {visible.map((logo, i) => (
           <div
-            key={logo}
+            key={i}
             style={{
               width: 180,
               height: 80,
@@ -648,17 +695,24 @@ function LogoCarousel() {
               justifyContent: 'center',
             }}
           >
-            <span
-              style={{
-                fontFamily: FONT,
-                fontSize: 16,
-                fontWeight: 500,
-                letterSpacing: 0.5,
-                color: NAVY_70,
-              }}
-            >
-              {logo}
-            </span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={logo}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                style={{
+                  fontFamily: FONT,
+                  fontSize: 16,
+                  fontWeight: 500,
+                  letterSpacing: 0.5,
+                  color: NAVY_70,
+                }}
+              >
+                {logo}
+              </motion.span>
+            </AnimatePresence>
           </div>
         ))}
       </div>
