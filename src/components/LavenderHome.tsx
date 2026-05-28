@@ -280,11 +280,11 @@ function TopNav() {
           width: '100%',
           maxWidth: FRAME_MAX_WIDTH,
           margin: '0 auto',
-          padding: '12px 40px',
-          minHeight: 104,
+          padding: '16px 40px 0 40px',
+          minHeight: 96,
           boxSizing: 'border-box',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: compact ? 'center' : 'stretch',
         }}
       >
@@ -529,7 +529,7 @@ function Hero() {
         style={sectionInner({
           position: 'relative',
           zIndex: 2,
-          paddingTop: 105,
+          paddingTop: 64,
           paddingBottom: 64,
           display: 'flex',
           flexDirection: 'column',
