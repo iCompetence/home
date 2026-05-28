@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowUpRight,
@@ -149,8 +149,40 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 
 /* ---------------- Burger Menu ---------------- */
 
-function BurgerMenu({ iconSize }: { iconSize: number }) {
+const BURGER_LINKS: ReadonlyArray<{ label: string; href: string }> = [
+  { label: 'Analytics Agent', href: '/analytics-agent/' },
+  { label: 'iKnow', href: '/iknow/' },
+  { label: 'Intelligentic Search', href: '/intelligentic-search/' },
+  { label: 'Privacy-Led AI', href: '/privacy-led-ai/' },
+  { label: 'AI Workshop', href: '/ai-workshop/' },
+  { label: 'Campaign Tool', href: '/campaign-parameter-tool/' },
+  { label: 'User Journey Explorer', href: '/icu-user-journey-explorer/' },
+  { label: "What's New", href: '/whats-new/' },
+];
+
+function LinkedInGlyph({ size }: { size: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function BurgerMenu({
+  iconSize,
+  wide = false,
+  pillWidth = 0,
+  pillPaddingX = 0,
+  pillPaddingY = 0,
+}: {
+  iconSize: number;
+  wide?: boolean;
+  pillWidth?: number;
+  pillPaddingX?: number;
+  pillPaddingY?: number;
+}) {
   const [open, setOpen] = useState(false);
+  const dropdownTopOffset = pillPaddingY + 24;
   return (
     <div
       onMouseEnter={() => setOpen(true)}
@@ -174,26 +206,201 @@ function BurgerMenu({ iconSize }: { iconSize: number }) {
       >
         <Menu size={iconSize} strokeWidth={2} />
       </button>
+      {open && (
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: '100%',
+            right: -pillPaddingX,
+            width: pillWidth || (wide ? 1100 : 264),
+            height: dropdownTopOffset,
+            background: 'transparent',
+          }}
+        />
+      )}
       <AnimatePresence>
         {open && (
           <motion.div
             role="menu"
-            initial={{ opacity: 0, y: -6, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            exit={{ opacity: 0, y: -6, x: '-50%' }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
             style={{
               position: 'absolute',
-              top: 'calc(100% + 36px)',
-              left: '50%',
+              top: `calc(100% + ${dropdownTopOffset}px)`,
+              right: -pillPaddingX,
+              width: pillWidth || (wide ? 1100 : 264),
               background: NAVY,
-              borderRadius: 16,
-              padding: '12px 16px',
-              minWidth: 140,
+              borderRadius: wide ? 24 : 16,
+              padding: wide ? '40px 48px' : '20px 24px',
               boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: wide ? 24 : 12,
+              boxSizing: 'border-box',
             }}
           >
-            <LanguageToggle />
+            {wide ? (
+              <>
+                <a
+                  href="/"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: WHITE,
+                    textDecoration: 'none',
+                  }}
+                >
+                  Home
+                </a>
+                <div style={{ height: 1, background: WHITE_20 }} />
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 12,
+                    fontWeight: 500,
+                    letterSpacing: 1,
+                    textTransform: 'uppercase',
+                    color: WHITE_70,
+                  }}
+                >
+                  Products &amp; Tools
+                </span>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    columnGap: 32,
+                    rowGap: 16,
+                  }}
+                >
+                  {BURGER_LINKS.map(({ label, href }) => (
+                    <a
+                      key={href}
+                      href={href}
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: 18,
+                        fontWeight: 500,
+                        color: WHITE,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </div>
+                <div style={{ height: 1, background: WHITE_20 }} />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 24,
+                  }}
+                >
+                  <LanguageToggle />
+                  <a
+                    href="https://www.linkedin.com/company/icompetence/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="iCompetence on LinkedIn"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 36,
+                      height: 36,
+                      borderRadius: 100,
+                      background: WHITE_10,
+                      color: WHITE,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <LinkedInGlyph size={18} />
+                  </a>
+                </div>
+              </>
+            ) : (
+              <>
+                <a
+                  href="/"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: WHITE,
+                    textDecoration: 'none',
+                    padding: '4px 0',
+                  }}
+                >
+                  Home
+                </a>
+                <div style={{ height: 1, background: WHITE_20, margin: '4px 0' }} />
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: 1,
+                    textTransform: 'uppercase',
+                    color: WHITE_70,
+                  }}
+                >
+                  Products &amp; Tools
+                </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {BURGER_LINKS.map(({ label, href }) => (
+                    <a
+                      key={href}
+                      href={href}
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: 14,
+                        fontWeight: 500,
+                        color: WHITE,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </div>
+                <div style={{ height: 1, background: WHITE_20, margin: '4px 0' }} />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 12,
+                  }}
+                >
+                  <LanguageToggle />
+                  <a
+                    href="https://www.linkedin.com/company/icompetence/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="iCompetence on LinkedIn"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 32,
+                      height: 32,
+                      borderRadius: 100,
+                      background: WHITE_10,
+                      color: WHITE,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <LinkedInGlyph size={16} />
+                  </a>
+                </div>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -214,6 +421,26 @@ function TopNav() {
   const [compact, setCompact] = useState(false);
   const [activeId, setActiveId] = useState<string>(NAV_SECTIONS[0].id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navPillRef = useRef<HTMLElement | null>(null);
+  const [pillWidth, setPillWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = navPillRef.current;
+      if (el) setPillWidth(el.getBoundingClientRect().width);
+    };
+    measure();
+    let ro: ResizeObserver | null = null;
+    if (navPillRef.current && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(measure);
+      ro.observe(navPillRef.current);
+    }
+    window.addEventListener('resize', measure);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [compact]);
 
   const { scrollY } = useScroll();
   const fullItemsOpacity = useTransform(scrollY, [40, 70], [1, 0]);
@@ -296,6 +523,7 @@ function TopNav() {
           {!compact ? (
             <motion.nav
               key="full"
+              ref={navPillRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -350,11 +578,8 @@ function TopNav() {
               </motion.div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-                <motion.div style={{ opacity: fullItemsOpacity, display: 'inline-flex', alignItems: 'center' }}>
-                  <LanguageToggle />
-                </motion.div>
                 <motion.a
-                  href={MAILTO}
+                  href="/contact/" target="_blank" rel="noopener noreferrer"
                   transition={morphTransition}
                   style={{
                     display: 'inline-flex',
@@ -372,12 +597,13 @@ function TopNav() {
                   Let&apos;s talk
                   <ArrowUpRight size={20} strokeWidth={2} />
                 </motion.a>
-                <BurgerMenu iconSize={28} />
+                <BurgerMenu iconSize={28} wide pillWidth={pillWidth} pillPaddingX={32} pillPaddingY={16} />
               </div>
             </motion.nav>
           ) : (
             <motion.nav
               key="compact"
+              ref={navPillRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -414,7 +640,19 @@ function TopNav() {
                     padding: '4px 6px',
                   }}
                 >
-                  {activeLabel}
+                  <span style={{ display: 'grid' }}>
+                    {NAV_SECTIONS.map(({ id, label }) => (
+                      <span
+                        key={id}
+                        style={{
+                          gridArea: '1 / 1',
+                          visibility: id === activeId ? 'visible' : 'hidden',
+                        }}
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </span>
                   <ChevronDown
                     size={16}
                     strokeWidth={2}
@@ -446,6 +684,25 @@ function TopNav() {
                         boxShadow: '0 10px 30px rgba(11,34,49,0.18)',
                       }}
                     >
+                      <a
+                        key="home"
+                        href="#top"
+                        role="menuitem"
+                        onClick={(e) => {
+                          smoothAnchor(e);
+                          setDropdownOpen(false);
+                        }}
+                        style={{
+                          color: WHITE,
+                          fontSize: 15,
+                          fontWeight: 500,
+                          padding: '8px 12px',
+                          borderRadius: 10,
+                          textDecoration: 'none',
+                        }}
+                      >
+                        Home
+                      </a>
                       {otherSections.map(({ id, label }) => (
                         <a
                           key={id}
@@ -473,7 +730,7 @@ function TopNav() {
               </motion.div>
 
               <motion.a
-                href={MAILTO}
+                href="/contact/" target="_blank" rel="noopener noreferrer"
                 transition={morphTransition}
                 style={{
                   display: 'inline-flex',
@@ -492,7 +749,7 @@ function TopNav() {
                 <ArrowUpRight size={20} strokeWidth={2} />
               </motion.a>
 
-              <BurgerMenu iconSize={22} />
+              <BurgerMenu iconSize={22} pillWidth={pillWidth} pillPaddingX={16} pillPaddingY={8} />
             </motion.nav>
           )}
         </AnimatePresence>
@@ -577,7 +834,7 @@ function Hero() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a
-            href={MAILTO}
+            href="/contact/" target="_blank" rel="noopener noreferrer"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -1252,7 +1509,7 @@ function StatementCTA() {
         })}
       >
         <a
-          href={MAILTO}
+          href="/contact/" target="_blank" rel="noopener noreferrer"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -1342,6 +1599,7 @@ function Highlight() {
               fontSize: 14,
               fontWeight: 500,
               letterSpacing: 0.5,
+              textTransform: 'uppercase',
               color: NAVY_70,
             }}
           >
@@ -1474,6 +1732,7 @@ function CaseTeaser({
             fontSize: 14,
             fontWeight: 500,
             letterSpacing: 0.5,
+            textTransform: 'uppercase',
             color: WHITE_70,
           }}
         >
@@ -1561,12 +1820,30 @@ function Testimonial() {
   const t = TESTIMONIALS[idx];
 
   return (
-    <section style={sectionOuter({ background: NAVY })}>
+    <section style={sectionOuter({ background: NAVY, position: 'relative', overflow: 'hidden' })}>
+    <DesignFrameOverlay>
+      <div
+        style={{
+          position: 'absolute',
+          right: -300,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: 900,
+          height: 900,
+          backgroundImage: 'url(/images/icompetence_visual_rot_01.png)',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'contain',
+        }}
+      />
+    </DesignFrameOverlay>
     <div
       style={sectionInner({
         display: 'flex',
         flexDirection: 'column',
         gap: 40,
+        position: 'relative',
+        zIndex: 2,
       })}
     >
       <h2
@@ -1952,6 +2229,8 @@ function PrivacyLed() {
         </p>
         <a
           href="/privacy-led-ai/"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             alignSelf: 'flex-start',
             display: 'inline-flex',
@@ -1979,7 +2258,7 @@ function PrivacyLed() {
 
 function CTABand() {
   return (
-    <section style={sectionOuter({ background: LAVENDER })}>
+    <section style={sectionOuter({ background: BLUE })}>
     <div
       style={sectionInner({
         display: 'flex',
@@ -2014,12 +2293,12 @@ function CTABand() {
         </h2>
       </div>
       <a
-        href={MAILTO}
+        href="/contact/" target="_blank" rel="noopener noreferrer"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: 8,
-          background: BLUE,
+          background: NAVY,
           color: WHITE,
           borderRadius: 100,
           padding: '12px 24px',
@@ -2087,20 +2366,28 @@ function Footer() {
             gap: 32,
           }}
         >
-          <div style={{ display: 'flex', gap: 16 }}>
-            <FooterSocial href="#" label="LinkedIn">
-              <Linkedin size={20} strokeWidth={2} />
-            </FooterSocial>
-            <FooterSocial href="#" label="Twitter">
-              <Twitter size={20} strokeWidth={2} />
-            </FooterSocial>
-            <FooterSocial href="#" label="GitHub">
-              <Github size={20} strokeWidth={2} />
-            </FooterSocial>
-          </div>
+          <a
+            href="https://www.linkedin.com/company/icompetence/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="iCompetence on LinkedIn"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 36,
+              height: 36,
+              borderRadius: 100,
+              background: WHITE_10,
+              color: WHITE,
+              textDecoration: 'none',
+            }}
+          >
+            <LinkedInGlyph size={18} />
+          </a>
 
-          <FooterContactBlock label="Inquiries" value="info@icompetence.de" />
-          <FooterContactBlock label="Phone" value="+49 40 609 45 51-0" />
+          <FooterContactBlock label="Inquiries" value="info@icompetence.de" href="mailto:info@icompetence.de" />
+          <FooterContactBlock label="Phone" value="+49 40 22636380" />
         </div>
       </div>
 
@@ -2118,8 +2405,7 @@ function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
           {[
             ['Imprint', '/imprint/'],
-            ['Privacy', '#'],
-            ['Cookies', '#'],
+            ['Privacy', '/imprint/'],
           ].map(([label, href]) => (
             <a
               key={label}
@@ -2190,7 +2476,14 @@ function FooterSocial({
   );
 }
 
-function FooterContactBlock({ label, value }: { label: string; value: string }) {
+function FooterContactBlock({ label, value, href }: { label: string; value: string; href?: string }) {
+  const valueStyle: React.CSSProperties = {
+    fontFamily: FONT,
+    fontSize: 16,
+    fontWeight: 500,
+    color: WHITE,
+    textDecoration: 'none',
+  };
   return (
     <div
       style={{
@@ -2211,16 +2504,13 @@ function FooterContactBlock({ label, value }: { label: string; value: string }) 
       >
         {label}
       </span>
-      <span
-        style={{
-          fontFamily: FONT,
-          fontSize: 16,
-          fontWeight: 500,
-          color: WHITE,
-        }}
-      >
-        {value}
-      </span>
+      {href ? (
+        <a href={href} style={valueStyle}>
+          {value}
+        </a>
+      ) : (
+        <span style={valueStyle}>{value}</span>
+      )}
     </div>
   );
 }
