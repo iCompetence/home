@@ -13,6 +13,7 @@ interface BurgerMenuProps {
 const landingPages = [
   { titleKey: 'burgerMenu.analyticsAgent', href: '/analytics-agent/' },
   { titleKey: 'burgerMenu.iknow', href: '/iknow/' },
+  { titleKey: 'burgerMenu.empcoAudit', href: '/empco-audit/' },
   { titleKey: 'burgerMenu.intelligenticSearch', href: '/intelligentic-search/' },
   { titleKey: 'burgerMenu.privacyLedAi', href: '/privacy-led-ai/' },
   { titleKey: 'burgerMenu.aiWorkshop', href: '/ai-workshop/' },
