@@ -1117,7 +1117,7 @@ function EmpCoAuditPageContent() {
                           {t('footer.phone')}
                         </p>
                         <button
-                          onClick={() => window.open('tel:+494060945510', '_blank')}
+                          onClick={() => window.open('tel:+494022636380', '_blank')}
                           style={{
                             color: 'var(--gray-white)',
                             fontSize: '18px',
@@ -1136,7 +1136,7 @@ function EmpCoAuditPageContent() {
                             ((e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-white)')
                           }
                         >
-                          +49 40 609 45 51-0
+                          +49 40 22636380
                         </button>
                       </div>
                     </div>
