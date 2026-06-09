@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description:
     "We help ambitious teams cut through complexity — turning scattered data into clear decisions, and AI into the products and automated processes that deliver lasting results.",
   alternates: { canonical: '/lavender' },
+  // Soft-launch preview with placeholder content — keep out of search indexes.
+  robots: { index: false, follow: false },
 };
 
 export default function LavenderPage() {

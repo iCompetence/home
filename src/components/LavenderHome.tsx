@@ -162,6 +162,28 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 `,
         }}
       />
+      {/* Soft-launch demo marker — remove before the real public launch. */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed',
+          bottom: 12,
+          left: 12,
+          zIndex: 1000,
+          padding: '6px 12px',
+          borderRadius: 100,
+          background: 'rgba(11,34,49,0.85)',
+          color: WHITE,
+          fontFamily: FONT,
+          fontSize: 12,
+          fontWeight: 500,
+          letterSpacing: 0.3,
+          pointerEvents: 'none',
+          boxShadow: '0 4px 14px rgba(11,34,49,0.25)',
+        }}
+      >
+        Demo · placeholder content
+      </div>
       <TopNav />
       <Hero />
       <LogoCarousel />
