@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowUpRight,
@@ -54,23 +54,51 @@ function smoothAnchor(e: React.MouseEvent<HTMLAnchorElement>) {
 }
 
 const FRAME_MAX_WIDTH = 1440;
-const SECTION_VERTICAL_PADDING = 64;
-const SECTION_HORIZONTAL_PADDING = 96;
 
-const sectionOuter = (extra: React.CSSProperties = {}): React.CSSProperties => ({
+/* ---------------- Responsive breakpoints ---------------- */
+
+type Bp = 'mobile' | 'tablet' | 'desktop';
+
+const BreakpointContext = createContext<Bp>('desktop');
+const useBp = () => useContext(BreakpointContext);
+
+/** Mobile < 768 ≤ Tablet (portrait) < 1024 ≤ Desktop. Matches the Pencil artboards (390 / 768 / 1440). */
+function useBreakpoint(): Bp {
+  const [bp, setBp] = useState<Bp>('desktop');
+  useEffect(() => {
+    const compute = () => {
+      const w = window.innerWidth;
+      setBp(w < 768 ? 'mobile' : w < 1024 ? 'tablet' : 'desktop');
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
+  }, []);
+  return bp;
+}
+
+const isCompact = (bp: Bp) => bp !== 'desktop';
+
+const SECTION_PAD: Record<Bp, { v: number; h: number }> = {
+  desktop: { v: 64, h: 96 },
+  tablet: { v: 56, h: 48 },
+  mobile: { v: 48, h: 24 },
+};
+
+const sectionOuter = (bp: Bp, extra: React.CSSProperties = {}): React.CSSProperties => ({
   width: '100%',
-  paddingTop: SECTION_VERTICAL_PADDING,
-  paddingBottom: SECTION_VERTICAL_PADDING,
+  paddingTop: SECTION_PAD[bp].v,
+  paddingBottom: SECTION_PAD[bp].v,
   boxSizing: 'border-box',
   ...extra,
 });
 
-const sectionInner = (extra: React.CSSProperties = {}): React.CSSProperties => ({
+const sectionInner = (bp: Bp, extra: React.CSSProperties = {}): React.CSSProperties => ({
   width: '100%',
   maxWidth: FRAME_MAX_WIDTH,
   margin: '0 auto',
-  paddingLeft: SECTION_HORIZONTAL_PADDING,
-  paddingRight: SECTION_HORIZONTAL_PADDING,
+  paddingLeft: SECTION_PAD[bp].h,
+  paddingRight: SECTION_PAD[bp].h,
   boxSizing: 'border-box',
   ...extra,
 });
@@ -98,6 +126,8 @@ function DesignFrameOverlay({ children }: { children: React.ReactNode }) {
 }
 
 export default function LavenderHome() {
+  const bp = useBreakpoint();
+
   useEffect(() => {
     const prevBodyBg = document.body.style.backgroundColor;
     const prevHtmlBg = document.documentElement.style.backgroundColor;
@@ -110,6 +140,7 @@ export default function LavenderHome() {
   }, []);
 
   return (
+    <BreakpointContext.Provider value={bp}>
     <div
       className="lavender-page"
       style={{
@@ -161,11 +192,11 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
           <div
             style={{
               position: 'absolute',
-              left: -120,
+              left: bp === 'mobile' ? -120 : bp === 'tablet' ? -140 : -120,
               top: '50%',
               transform: 'translateY(-50%)',
-              width: 820,
-              height: 820,
+              width: bp === 'mobile' ? 420 : bp === 'tablet' ? 560 : 820,
+              height: bp === 'mobile' ? 420 : bp === 'tablet' ? 560 : 820,
               backgroundImage: 'url(/images/icompetence_visual_01.png)',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
@@ -175,6 +206,7 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
         </div>
       </div>
     </div>
+    </BreakpointContext.Provider>
   );
 }
 
@@ -205,19 +237,48 @@ function BurgerMenu({
   pillWidth = 0,
   pillPaddingX = 0,
   pillPaddingY = 0,
+  trigger = 'hover',
+  columns = 1,
 }: {
   iconSize: number;
   wide?: boolean;
   pillWidth?: number;
   pillPaddingX?: number;
   pillPaddingY?: number;
+  /** 'hover' = desktop mega-menu; 'tap' = touch sheet that toggles on click. */
+  trigger?: 'hover' | 'tap';
+  /** Columns for the product-link grid in the non-wide (tap) panel. */
+  columns?: number;
 }) {
   const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const tap = trigger === 'tap';
   const dropdownTopOffset = pillPaddingY + 24;
+  const panelWidth = pillWidth || (wide ? 1100 : 264);
+  const closeOnNav = tap ? () => setOpen(false) : undefined;
+
+  // Tap mode: close on outside click or Escape (hover mode closes on mouse-leave).
+  useEffect(() => {
+    if (!tap || !open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [tap, open]);
+
   return (
     <div
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      ref={rootRef}
+      onMouseEnter={tap ? undefined : () => setOpen(true)}
+      onMouseLeave={tap ? undefined : () => setOpen(false)}
       style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
     >
       <button
@@ -225,6 +286,7 @@ function BurgerMenu({
         aria-label="Menu"
         aria-haspopup="menu"
         aria-expanded={open}
+        onClick={tap ? () => setOpen((p) => !p) : undefined}
         style={{
           background: 'transparent',
           border: 0,
@@ -237,14 +299,14 @@ function BurgerMenu({
       >
         <Menu size={iconSize} strokeWidth={2} />
       </button>
-      {open && (
+      {!tap && open && (
         <div
           aria-hidden
           style={{
             position: 'absolute',
             top: '100%',
             right: -pillPaddingX,
-            width: pillWidth || (wide ? 1100 : 264),
+            width: panelWidth,
             height: dropdownTopOffset,
             background: 'transparent',
           }}
@@ -262,7 +324,10 @@ function BurgerMenu({
               position: 'absolute',
               top: `calc(100% + ${dropdownTopOffset}px)`,
               right: -pillPaddingX,
-              width: pillWidth || (wide ? 1100 : 264),
+              width: panelWidth,
+              maxWidth: tap ? '100vw' : undefined,
+              maxHeight: tap ? 'calc(100vh - 140px)' : undefined,
+              overflowY: tap ? 'auto' : undefined,
               background: NAVY,
               borderRadius: wide ? 24 : 16,
               padding: wide ? '40px 48px' : '20px 24px',
@@ -359,9 +424,10 @@ function BurgerMenu({
               <>
                 <a
                   href="/"
+                  onClick={closeOnNav}
                   style={{
                     fontFamily: FONT,
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: 500,
                     color: WHITE,
                     textDecoration: 'none',
@@ -383,14 +449,22 @@ function BurgerMenu({
                 >
                   Products &amp; Tools
                 </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${columns}, 1fr)`,
+                    columnGap: 24,
+                    rowGap: columns > 1 ? 14 : 10,
+                  }}
+                >
                   {BURGER_LINKS.map(({ label, href }) => (
                     <a
                       key={href}
                       href={href}
+                      onClick={closeOnNav}
                       style={{
                         fontFamily: FONT,
-                        fontSize: 14,
+                        fontSize: 15,
                         fontWeight: 500,
                         color: WHITE,
                         textDecoration: 'none',
@@ -449,6 +523,128 @@ const NAV_SECTIONS: ReadonlyArray<{ id: string; label: string }> = [
 ];
 
 function TopNav() {
+  const bp = useBp();
+  return isCompact(bp) ? <CompactNav bp={bp} /> : <DesktopNav />;
+}
+
+function CompactNav({ bp }: { bp: Bp }) {
+  const isMobile = bp === 'mobile';
+  const navRef = useRef<HTMLElement | null>(null);
+  const [pillWidth, setPillWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = navRef.current;
+      if (el) setPillWidth(el.getBoundingClientRect().width);
+    };
+    measure();
+    let ro: ResizeObserver | null = null;
+    if (navRef.current && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(measure);
+      ro.observe(navRef.current);
+    }
+    window.addEventListener('resize', measure);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        width: '100%',
+        pointerEvents: 'none',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: FRAME_MAX_WIDTH,
+          margin: '0 auto',
+          padding: isMobile ? '12px 16px 0 16px' : '14px 24px 0 24px',
+          boxSizing: 'border-box',
+        }}
+      >
+        <nav
+          ref={navRef}
+          style={{
+            width: '100%',
+            background: NAVY,
+            borderRadius: 100,
+            padding: isMobile ? '10px 16px' : '12px 24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: isMobile ? 12 : 20,
+            boxSizing: 'border-box',
+            color: WHITE,
+            pointerEvents: 'auto',
+          }}
+        >
+          <a href="#top" onClick={smoothAnchor} style={{ display: 'inline-flex', alignItems: 'center' }}>
+            <img
+              src="/iCompetence_white.svg"
+              alt="iCompetence"
+              style={{ height: isMobile ? 32 : 40, width: 'auto', display: 'block' }}
+            />
+          </a>
+
+          {!isMobile && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+              {NAV_SECTIONS.map(({ id, label }) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={smoothAnchor}
+                  style={{ fontSize: 14, fontWeight: 500, color: WHITE, textDecoration: 'none' }}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 18 }}>
+            <a
+              href="/contact/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                background: BLUE,
+                color: WHITE,
+                borderRadius: 100,
+                padding: isMobile ? '8px 14px' : '8px 16px',
+                fontSize: 14,
+                fontWeight: 500,
+                textDecoration: 'none',
+              }}
+            >
+              Let&apos;s talk
+              <ArrowUpRight size={16} strokeWidth={2} />
+            </a>
+            <BurgerMenu
+              trigger="tap"
+              columns={isMobile ? 1 : 2}
+              iconSize={isMobile ? 22 : 24}
+              pillWidth={pillWidth}
+              pillPaddingX={isMobile ? 16 : 24}
+              pillPaddingY={isMobile ? 10 : 12}
+            />
+          </div>
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+function DesktopNav() {
   const [compact, setCompact] = useState(false);
   const [activeId, setActiveId] = useState<string>(NAV_SECTIONS[0].id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -792,6 +988,27 @@ function TopNav() {
 /* ---------------- Hero ---------------- */
 
 function Hero() {
+  const bp = useBp();
+  const compact = isCompact(bp);
+  const headingSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 56 : 80;
+  const headingLs = bp === 'mobile' ? -1 : bp === 'tablet' ? -1.5 : -2;
+  const subSize = bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24;
+  const subWidth = bp === 'mobile' ? '100%' : bp === 'tablet' ? 600 : 820;
+  const blockGap = bp === 'mobile' ? 24 : bp === 'tablet' ? 32 : 40;
+  const stackButtons = bp === 'mobile';
+
+  const btnBase: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: stackButtons ? 'center' : undefined,
+    gap: 8,
+    borderRadius: 100,
+    padding: stackButtons ? '14px 24px' : '12px 24px',
+    fontSize: 16,
+    fontWeight: 500,
+    textDecoration: 'none',
+  };
+
   return (
     <section
       id="top"
@@ -801,33 +1018,51 @@ function Hero() {
         background: 'rgba(245,225,255,0.10)',
       }}
     >
-      {/* Yellow star — pinned to the 1440 design frame so original .pen coords still apply */}
-      <DesignFrameOverlay>
+      {/* Yellow star — overflow stays visible so it bleeds across sections (behind the sticky nav via z-index) */}
+      {compact ? (
         <div
+          aria-hidden
           style={{
             position: 'absolute',
-            left: 560,
-            top: -200,
-            width: 1200,
-            height: 1200,
+            top: bp === 'mobile' ? -40 : -120,
+            right: bp === 'mobile' ? -110 : -100,
+            width: bp === 'mobile' ? 380 : 720,
+            height: bp === 'mobile' ? 380 : 720,
             backgroundImage: 'url(/images/icompetence_visual_gelb.png)',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundSize: 'contain',
+            pointerEvents: 'none',
           }}
         />
-      </DesignFrameOverlay>
+      ) : (
+        <DesignFrameOverlay>
+          <div
+            style={{
+              position: 'absolute',
+              left: 560,
+              top: -200,
+              width: 1200,
+              height: 1200,
+              backgroundImage: 'url(/images/icompetence_visual_gelb.png)',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: 'contain',
+            }}
+          />
+        </DesignFrameOverlay>
+      )}
 
       {/* Hero content */}
       <div
-        style={sectionInner({
+        style={sectionInner(bp, {
           position: 'relative',
           zIndex: 2,
-          paddingTop: 64,
-          paddingBottom: 64,
+          paddingTop: SECTION_PAD[bp].v,
+          paddingBottom: SECTION_PAD[bp].v,
           display: 'flex',
           flexDirection: 'column',
-          gap: 40,
+          gap: blockGap,
         })}
       >
         <div
@@ -836,23 +1071,24 @@ function Hero() {
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 80,
+            fontSize: headingSize,
             fontWeight: 500,
             lineHeight: 1.05,
-            letterSpacing: -2,
+            letterSpacing: headingLs,
             color: NAVY,
-            whiteSpace: 'pre-line',
+            whiteSpace: compact ? 'normal' : 'pre-line',
           }}
         >
-          {'Separate the signal\nfrom the noise.'}
+          {compact ? 'Separate the signal from the noise.' : 'Separate the signal\nfrom the noise.'}
         </div>
 
         <p
           style={{
             margin: 0,
-            width: 820,
+            width: subWidth,
+            maxWidth: '100%',
             fontFamily: FONT,
-            fontSize: 24,
+            fontSize: subSize,
             fontWeight: 400,
             lineHeight: 1.5,
             color: NAVY_80,
@@ -863,21 +1099,17 @@ function Hero() {
           deliver lasting results.
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: stackButtons ? 'column' : 'row',
+            alignItems: stackButtons ? 'stretch' : 'center',
+            gap: stackButtons ? 12 : 16,
+          }}
+        >
           <a
             href="/contact/" target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              background: BLUE,
-              color: WHITE,
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontSize: 16,
-              fontWeight: 500,
-              textDecoration: 'none',
-            }}
+            style={{ ...btnBase, background: BLUE, color: WHITE }}
           >
             Let&apos;s talk
             <ArrowUpRight size={20} strokeWidth={2} />
@@ -885,19 +1117,7 @@ function Hero() {
           <a
             href="#services"
             onClick={smoothAnchor}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              border: `1px solid ${NAVY}`,
-              color: NAVY,
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontSize: 16,
-              fontWeight: 500,
-              textDecoration: 'none',
-              background: 'transparent',
-            }}
+            style={{ ...btnBase, border: `1px solid ${NAVY}`, color: NAVY, background: 'transparent' }}
           >
             See our services
             <ArrowDown size={20} strokeWidth={2} />
@@ -942,17 +1162,22 @@ const LOGO_POOL: LogoEntry[] = [
   { name: 'INGEN', mark: 4 },
   { name: 'NAKATOMI', mark: 0 },
 ];
-const LOGO_SLOTS = 5;
-
 function LogoCarousel() {
-  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, LOGO_SLOTS));
+  const bp = useBp();
+  const slots = bp === 'mobile' ? 3 : bp === 'tablet' ? 4 : 5;
+  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, 5));
+
+  useEffect(() => {
+    setVisible(LOGO_POOL.slice(0, slots));
+  }, [slots]);
 
   useEffect(() => {
     let lastSlot = -1;
     const swapRandomSlot = () => {
       setVisible((current) => {
-        let slot = Math.floor(Math.random() * LOGO_SLOTS);
-        if (slot === lastSlot) slot = (slot + 1) % LOGO_SLOTS;
+        const count = current.length;
+        let slot = Math.floor(Math.random() * count);
+        if (slot === lastSlot) slot = (slot + 1) % count;
         lastSlot = slot;
         const visibleNames = new Set(current.map((l) => l.name));
         const pool = LOGO_POOL.filter((l) => !visibleNames.has(l.name));
@@ -977,9 +1202,16 @@ function LogoCarousel() {
     };
   }, []);
 
+  const hpad = bp === 'desktop' ? 40 : SECTION_PAD[bp].h;
+  const gap = bp === 'mobile' ? 16 : bp === 'tablet' ? 24 : 96;
+  const logoW = bp === 'mobile' ? 100 : bp === 'tablet' ? 140 : 180;
+  const logoH = bp === 'mobile' ? 56 : bp === 'tablet' ? 72 : 80;
+  const markSize = bp === 'mobile' ? 16 : bp === 'tablet' ? 18 : 22;
+  const nameSize = bp === 'mobile' ? 14 : bp === 'tablet' ? 16 : 18;
+
   return (
     <section
-      style={sectionOuter({
+      style={sectionOuter(bp, {
         background: 'transparent',
         overflow: 'hidden',
         borderTop: `1px solid ${NAVY_20}`,
@@ -987,21 +1219,21 @@ function LogoCarousel() {
       })}
     >
       <div
-        style={sectionInner({
-          paddingLeft: 40,
-          paddingRight: 40,
+        style={sectionInner(bp, {
+          paddingLeft: hpad,
+          paddingRight: hpad,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: 96,
+          gap,
         })}
       >
         {visible.map((logo, i) => (
           <div
             key={i}
             style={{
-              width: 180,
-              height: 80,
+              width: logoW,
+              height: logoH,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -1023,8 +1255,8 @@ function LogoCarousel() {
               >
                 <svg
                   viewBox="0 0 22 22"
-                  width={22}
-                  height={22}
+                  width={markSize}
+                  height={markSize}
                   fill="currentColor"
                   aria-hidden="true"
                 >
@@ -1033,7 +1265,7 @@ function LogoCarousel() {
                 <span
                   style={{
                     fontFamily: FONT,
-                    fontSize: 18,
+                    fontSize: nameSize,
                     fontWeight: 600,
                     letterSpacing: 0.8,
                   }}
@@ -1140,6 +1372,8 @@ const SERVICE_CARDS: ServiceCard[] = [
 ];
 
 function ServicesGrid() {
+  const bp = useBp();
+  const compact = isCompact(bp);
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(0);
   const [expandedPillIdx, setExpandedPillIdx] = useState(0);
@@ -1166,16 +1400,23 @@ function ServicesGrid() {
     { card: SERVICE_CARDS[nextIdx], idx: nextIdx, role: 'next' as const },
   ];
 
+  const titleSize = bp === 'mobile' ? 28 : bp === 'tablet' ? 32 : 36;
+  const arrowBtn = bp === 'desktop' ? 48 : 44;
+  const arrowIcon = bp === 'desktop' ? 20 : 18;
+
+  const onPillClick = (pillIdx: number) =>
+    setExpandedPillIdx((p) => (p === pillIdx ? -1 : pillIdx));
+
   return (
     <section
       id="services"
-      style={sectionOuter({ background: 'transparent', position: 'relative', zIndex: 1 })}
+      style={sectionOuter(bp, { background: 'transparent', position: 'relative', zIndex: 1 })}
     >
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: compact ? 24 : 40,
       })}
     >
       {/* Header row */}
@@ -1191,7 +1432,7 @@ function ServicesGrid() {
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 36,
+            fontSize: titleSize,
             fontWeight: 500,
             lineHeight: 1.1,
             color: NAVY,
@@ -1200,14 +1441,14 @@ function ServicesGrid() {
           Our Services
         </h2>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: compact ? 8 : 12 }}>
           <button
             type="button"
             aria-label="Previous service"
             onClick={goPrev}
             style={{
-              width: 48,
-              height: 48,
+              width: arrowBtn,
+              height: arrowBtn,
               borderRadius: 100,
               background: 'rgba(11,34,49,0.1)',
               border: 0,
@@ -1218,15 +1459,15 @@ function ServicesGrid() {
               justifyContent: 'center',
             }}
           >
-            <ArrowLeft size={20} strokeWidth={2} />
+            <ArrowLeft size={arrowIcon} strokeWidth={2} />
           </button>
           <button
             type="button"
             aria-label="Next service"
             onClick={goNext}
             style={{
-              width: 48,
-              height: 48,
+              width: arrowBtn,
+              height: arrowBtn,
               borderRadius: 100,
               background: NAVY,
               border: 0,
@@ -1237,46 +1478,59 @@ function ServicesGrid() {
               justifyContent: 'center',
             }}
           >
-            <ArrowRight size={20} strokeWidth={2} />
+            <ArrowRight size={arrowIcon} strokeWidth={2} />
           </button>
         </div>
       </div>
 
-      {/* Cards (carousel — wraps; active centered, prev/next peek; sliding motion on nav) */}
-      <div
-        style={{
-          width: '100%',
-          overflow: 'visible',
-        }}
-      >
+      {/* Cards: desktop = peeking carousel, compact = single active card */}
+      {compact ? (
         <motion.div
           key={activeIdx}
-          initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
-          style={{
-            display: 'flex',
-            gap: CARD_GAP,
-            justifyContent: 'center',
-          }}
+          initial={{ opacity: 0, x: direction * 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+          style={{ width: '100%' }}
         >
-          {visible.map(({ card, role }) => (
-            <ServiceCardView
-              key={role}
-              card={card}
-              isActive={role === 'active'}
-              expandedPillIdx={expandedPillIdx}
-              onPillClick={(pillIdx) =>
-                setExpandedPillIdx((p) => (p === pillIdx ? -1 : pillIdx))
-              }
-              onCardClick={() => {
-                if (role === 'prev') goPrev();
-                else if (role === 'next') goNext();
-              }}
-            />
-          ))}
+          <ServiceCardView
+            card={SERVICE_CARDS[activeIdx]}
+            isActive
+            bp={bp}
+            expandedPillIdx={expandedPillIdx}
+            onPillClick={onPillClick}
+            onCardClick={() => {}}
+          />
         </motion.div>
-      </div>
+      ) : (
+        <div style={{ width: '100%', overflow: 'visible' }}>
+          <motion.div
+            key={activeIdx}
+            initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+            style={{
+              display: 'flex',
+              gap: CARD_GAP,
+              justifyContent: 'center',
+            }}
+          >
+            {visible.map(({ card, role }) => (
+              <ServiceCardView
+                key={role}
+                card={card}
+                isActive={role === 'active'}
+                bp={bp}
+                expandedPillIdx={expandedPillIdx}
+                onPillClick={onPillClick}
+                onCardClick={() => {
+                  if (role === 'prev') goPrev();
+                  else if (role === 'next') goNext();
+                }}
+              />
+            ))}
+          </motion.div>
+        </div>
+      )}
     </div>
     </section>
   );
@@ -1288,13 +1542,85 @@ function ServiceCardView({
   expandedPillIdx,
   onPillClick,
   onCardClick,
+  bp,
 }: {
   card: ServiceCard;
   isActive: boolean;
   expandedPillIdx: number;
   onPillClick: (idx: number) => void;
   onCardClick: () => void;
+  bp: Bp;
 }) {
+  // Compact (tablet/mobile): a single full-width card that always shows its pills.
+  if (isCompact(bp)) {
+    const stack = bp === 'mobile';
+    const titleSize = stack ? 40 : 48;
+    const visualH = stack ? 320 : 460;
+    const pills = card.pills.map((pill, idx) =>
+      idx === expandedPillIdx ? (
+        <ExpandedServicePill key={pill.label} pill={pill} onClick={() => onPillClick(idx)} />
+      ) : (
+        <CollapsedServicePill key={pill.label} pill={pill} onClick={() => onPillClick(idx)} />
+      ),
+    );
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: stack ? 'column' : 'row',
+          width: '100%',
+          height: stack ? 'auto' : 460,
+        }}
+      >
+        <div
+          style={{
+            flex: stack ? undefined : 1,
+            width: stack ? '100%' : undefined,
+            height: visualH,
+            borderRadius: stack ? '24px 24px 0 0' : '24px 0 0 24px',
+            backgroundImage: `url(${card.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: stack ? 24 : 28,
+            boxSizing: 'border-box',
+            flexShrink: 0,
+          }}
+        >
+          <h3
+            style={{
+              margin: 0,
+              fontFamily: FONT,
+              fontSize: titleSize,
+              fontWeight: 500,
+              lineHeight: 1.1,
+              color: WHITE,
+            }}
+          >
+            {card.title}
+          </h3>
+        </div>
+        <div
+          style={{
+            width: stack ? '100%' : 300,
+            flexShrink: 0,
+            borderRadius: stack ? '0 0 24px 24px' : '0 24px 24px 0',
+            background: NAVY,
+            padding: stack ? '24px 16px' : '28px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+            boxSizing: 'border-box',
+          }}
+        >
+          {pills}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -1485,33 +1811,43 @@ function CollapsedServicePill({
 /* ---------------- Statement ---------------- */
 
 function Statement() {
+  const bp = useBp();
+  const compact = isCompact(bp);
+  const size = bp === 'mobile' ? 28 : bp === 'tablet' ? 40 : 54;
+  const starSize = bp === 'mobile' ? 340 : bp === 'tablet' ? 600 : 900;
+  const starLeft = bp === 'mobile' ? -130 : bp === 'tablet' ? -220 : -300;
+
+  const star = (
+    <div
+      aria-hidden
+      style={{
+        position: 'absolute',
+        left: starLeft,
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: starSize,
+        height: starSize,
+        backgroundImage: 'url(/images/icompetence_visual_blau_01.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        pointerEvents: 'none',
+      }}
+    />
+  );
+
   return (
-    <section style={sectionOuter({ background: 'transparent', position: 'relative' })}>
-      <DesignFrameOverlay>
-        <div
-          style={{
-            position: 'absolute',
-            left: -300,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: 900,
-            height: 900,
-            backgroundImage: 'url(/images/icompetence_visual_blau_01.png)',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: 'contain',
-          }}
-        />
-      </DesignFrameOverlay>
-      <div style={sectionInner({ position: 'relative', zIndex: 2 })}>
+    <section style={sectionOuter(bp, { background: 'transparent', position: 'relative' })}>
+      {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
+      <div style={sectionInner(bp, { position: 'relative', zIndex: 2 })}>
         <p
           style={{
             margin: 0,
             width: '100%',
             fontFamily: FONT,
-            fontSize: 54,
+            fontSize: size,
             fontWeight: 500,
-            lineHeight: 1.1,
+            lineHeight: compact ? 1.15 : 1.1,
             color: NAVY,
             textAlign: 'center',
           }}
@@ -1524,17 +1860,18 @@ function Statement() {
 }
 
 function StatementCTA() {
+  const bp = useBp();
   return (
     <section
       id="cta"
       style={{
         width: '100%',
-        paddingBottom: SECTION_VERTICAL_PADDING,
+        paddingBottom: SECTION_PAD[bp].v,
         boxSizing: 'border-box',
       }}
     >
       <div
-        style={sectionInner({
+        style={sectionInner(bp, {
           display: 'flex',
           justifyContent: 'center',
         })}
@@ -1597,114 +1934,148 @@ function LanguageToggle() {
 /* ---------------- Highlight (iKnow + cases) ---------------- */
 
 function Highlight() {
-  return (
-    <section id="cases" style={sectionOuter({ background: 'transparent' })}>
+  const bp = useBp();
+  const stack = bp === 'mobile';
+  const titleSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 44 : 54;
+  const bodySize = bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24;
+  const imgH = bp === 'mobile' ? 280 : bp === 'tablet' ? 420 : 640;
+  const mainGap = bp === 'mobile' ? 24 : bp === 'tablet' ? 32 : 40;
+  const sectionGap = bp === 'mobile' ? 24 : 40;
+
+  const textEl = (
     <div
-      style={sectionInner({
+      style={{
+        flex: stack ? undefined : 1,
+        width: stack ? '100%' : undefined,
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: stack ? 16 : 24,
+      }}
+    >
+      <span
+        style={{
+          fontFamily: FONT,
+          fontSize: stack ? 13 : 14,
+          fontWeight: 500,
+          letterSpacing: 0.5,
+          textTransform: 'uppercase',
+          color: NAVY_70,
+        }}
+      >
+        Featured Product
+      </span>
+      <h2
+        style={{
+          margin: 0,
+          fontFamily: FONT,
+          fontSize: titleSize,
+          fontWeight: 500,
+          lineHeight: 1.1,
+          color: NAVY,
+        }}
+      >
+        iKnow
+      </h2>
+      <p
+        style={{
+          margin: 0,
+          fontFamily: FONT,
+          fontSize: bodySize,
+          fontWeight: 400,
+          lineHeight: 1.5,
+          color: NAVY_80,
+        }}
+      >
+        Your team&apos;s collective knowledge, instantly accessible. Search
+        across docs, conversations, and tools — answered with context, not just
+        links.
+      </p>
+      <a
+        href="/iknow/"
+        style={{
+          alignSelf: 'flex-start',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          background: NAVY,
+          color: WHITE,
+          borderRadius: 100,
+          padding: '12px 24px',
+          fontSize: 16,
+          fontWeight: 500,
+          textDecoration: 'none',
+        }}
+      >
+        Explore iKnow
+        <ArrowUpRight size={20} strokeWidth={2} />
+      </a>
+    </div>
+  );
+
+  const imageEl = (
+    <div
+      style={{
+        flex: stack ? undefined : 1,
+        width: stack ? '100%' : undefined,
+        height: imgH,
+        borderRadius: 24,
+        backgroundImage: 'url(/images/iC_Stern_Blau.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    />
+  );
+
+  return (
+    <section id="cases" style={sectionOuter(bp, { background: 'transparent' })}>
+    <div
+      style={sectionInner(bp, {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: sectionGap,
       })}
     >
-      {/* Main row */}
+      {/* Main row — on mobile stacked with the image on top */}
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          gap: 40,
+          flexDirection: stack ? 'column' : 'row',
+          alignItems: stack ? 'stretch' : 'center',
+          gap: mainGap,
           width: '100%',
         }}
       >
-        {/* Text column */}
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 24,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: FONT,
-              fontSize: 14,
-              fontWeight: 500,
-              letterSpacing: 0.5,
-              textTransform: 'uppercase',
-              color: NAVY_70,
-            }}
-          >
-            Featured Product
-          </span>
-          <h2
-            style={{
-              margin: 0,
-              fontFamily: FONT,
-              fontSize: 54,
-              fontWeight: 500,
-              lineHeight: 1.1,
-              color: NAVY,
-            }}
-          >
-            iKnow
-          </h2>
-          <p
-            style={{
-              margin: 0,
-              fontFamily: FONT,
-              fontSize: 24,
-              fontWeight: 400,
-              lineHeight: 1.5,
-              color: NAVY_80,
-            }}
-          >
-            Your team&apos;s collective knowledge, instantly accessible. Search
-            across docs, conversations, and tools — answered with context, not just
-            links.
-          </p>
-          <a
-            href="/iknow/"
-            style={{
-              alignSelf: 'flex-start',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              background: NAVY,
-              color: WHITE,
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontSize: 16,
-              fontWeight: 500,
-              textDecoration: 'none',
-            }}
-          >
-            Explore iKnow
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </div>
-
-        {/* Image */}
-        <div
-          style={{
-            flex: 1,
-            height: 640,
-            borderRadius: 24,
-            backgroundImage: 'url(/images/iC_Stern_Blau.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+        {stack ? (
+          <>
+            {imageEl}
+            {textEl}
+          </>
+        ) : (
+          <>
+            {textEl}
+            {imageEl}
+          </>
+        )}
       </div>
 
       {/* Teasers */}
-      <div style={{ display: 'flex', gap: 40, width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: stack ? 'column' : 'row',
+          gap: stack ? 24 : bp === 'tablet' ? 24 : 40,
+          width: '100%',
+        }}
+      >
         <CaseTeaser
+          bp={bp}
           eyebrow="Case"
           title="Real-time demand forecasting"
           description="How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets."
           image="/images/icompetence_visual_mint.png"
         />
         <CaseTeaser
+          bp={bp}
           eyebrow="Case"
           title="AI-driven quality inspection"
           description="Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste."
@@ -1721,12 +2092,18 @@ function CaseTeaser({
   title,
   description,
   image,
+  bp,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   image: string;
+  bp: Bp;
 }) {
+  const imgH = bp === 'desktop' ? 280 : 200;
+  const titleSize = bp === 'desktop' ? 24 : 22;
+  const descSize = bp === 'desktop' ? 16 : 15;
+  const eyebrowSize = bp === 'desktop' ? 14 : 13;
   return (
     <article
       style={{
@@ -1740,7 +2117,7 @@ function CaseTeaser({
     >
       <div
         style={{
-          height: 280,
+          height: imgH,
           width: '100%',
           background: LAVENDER,
           backgroundImage: `url(${image})`,
@@ -1754,13 +2131,13 @@ function CaseTeaser({
           padding: 24,
           display: 'flex',
           flexDirection: 'column',
-          gap: 20,
+          gap: bp === 'desktop' ? 20 : 16,
         }}
       >
         <span
           style={{
             fontFamily: FONT,
-            fontSize: 14,
+            fontSize: eyebrowSize,
             fontWeight: 500,
             letterSpacing: 0.5,
             textTransform: 'uppercase',
@@ -1773,7 +2150,7 @@ function CaseTeaser({
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 24,
+            fontSize: titleSize,
             fontWeight: 500,
             lineHeight: 1.15,
             color: WHITE,
@@ -1785,7 +2162,7 @@ function CaseTeaser({
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 16,
+            fontSize: descSize,
             fontWeight: 400,
             lineHeight: 1.5,
             color: WHITE_70,
@@ -1850,29 +2227,123 @@ function Testimonial() {
   const goNext = () => setIdx((i) => (i + 1) % TESTIMONIALS.length);
   const t = TESTIMONIALS[idx];
 
-  return (
-    <section style={sectionOuter({ background: NAVY, position: 'relative', overflow: 'hidden' })}>
-    <DesignFrameOverlay>
+  const bp = useBp();
+  const compact = isCompact(bp);
+  const mobile = bp === 'mobile';
+  const titleSize = mobile ? 28 : bp === 'tablet' ? 32 : 36;
+  const quoteSize = mobile ? 26 : bp === 'tablet' ? 40 : 54;
+  const quoteLh = compact ? 1.2 : 1.1;
+  const btn = bp === 'desktop' ? 48 : 44;
+  const btnIcon = bp === 'desktop' ? 20 : 18;
+  const starSize = mobile ? 360 : bp === 'tablet' ? 700 : 900;
+
+  const star = (
+    <div
+      aria-hidden
+      style={{
+        position: 'absolute',
+        right: mobile ? -120 : bp === 'tablet' ? -150 : -300,
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: starSize,
+        height: starSize,
+        backgroundImage: 'url(/images/icompetence_visual_rot_01.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        pointerEvents: 'none',
+      }}
+    />
+  );
+
+  const arrowsEl = (
+    <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
+      <button
+        type="button"
+        aria-label="Previous testimonial"
+        onClick={goPrev}
+        style={{
+          width: btn,
+          height: btn,
+          borderRadius: 100,
+          background: WHITE_10,
+          border: 0,
+          color: WHITE,
+          cursor: 'pointer',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ArrowLeft size={btnIcon} strokeWidth={2} />
+      </button>
+      <button
+        type="button"
+        aria-label="Next testimonial"
+        onClick={goNext}
+        style={{
+          width: btn,
+          height: btn,
+          borderRadius: 100,
+          background: WHITE,
+          border: 0,
+          color: NAVY,
+          cursor: 'pointer',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ArrowRight size={btnIcon} strokeWidth={2} />
+      </button>
+    </div>
+  );
+
+  const quoteEl = (
+    <p
+      style={{
+        margin: 0,
+        fontFamily: FONT,
+        fontSize: quoteSize,
+        fontWeight: 500,
+        lineHeight: quoteLh,
+        color: WHITE,
+      }}
+    >
+      {t.quote}
+    </p>
+  );
+
+  const authorEl = (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
       <div
         style={{
-          position: 'absolute',
-          right: -300,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: 900,
-          height: 900,
-          backgroundImage: 'url(/images/icompetence_visual_rot_01.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
+          width: 40,
+          height: 40,
+          borderRadius: '50%',
+          background: WHITE_20,
+          flexShrink: 0,
         }}
       />
-    </DesignFrameOverlay>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 500, color: WHITE }}>
+          {t.name}
+        </span>
+        <span style={{ fontFamily: FONT, fontSize: mobile ? 14 : 16, fontWeight: 400, color: WHITE_70 }}>
+          {t.role}
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <section style={sectionOuter(bp, { background: NAVY, position: 'relative', overflow: 'hidden' })}>
+    {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: mobile ? 24 : 40,
         position: 'relative',
         zIndex: 2,
       })}
@@ -1881,7 +2352,7 @@ function Testimonial() {
         style={{
           margin: 0,
           fontFamily: FONT,
-          fontSize: 36,
+          fontSize: titleSize,
           fontWeight: 500,
           lineHeight: 1.1,
           color: WHITE,
@@ -1891,119 +2362,35 @@ function Testimonial() {
         What our clients say
       </h2>
 
-      <div
-        style={{
-          display: 'flex',
-          gap: 40,
-          width: '100%',
-          alignItems: 'flex-start',
-        }}
-      >
-        {/* Nav arrows */}
-        <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
-          <button
-            type="button"
-            aria-label="Previous testimonial"
-            onClick={goPrev}
-            style={{
-              width: 48,
-              height: 48,
-              borderRadius: 100,
-              background: WHITE_10,
-              border: 0,
-              color: WHITE,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <ArrowLeft size={20} strokeWidth={2} />
-          </button>
-          <button
-            type="button"
-            aria-label="Next testimonial"
-            onClick={goNext}
-            style={{
-              width: 48,
-              height: 48,
-              borderRadius: 100,
-              background: WHITE,
-              border: 0,
-              color: NAVY,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <ArrowRight size={20} strokeWidth={2} />
-          </button>
-        </div>
-
-        {/* Content */}
+      {mobile ? (
+        <>
+          {arrowsEl}
+          {quoteEl}
+          {authorEl}
+        </>
+      ) : (
         <div
           style={{
-            flex: 1,
             display: 'flex',
-            flexDirection: 'column',
-            gap: 40,
+            gap: bp === 'tablet' ? 32 : 40,
+            width: '100%',
+            alignItems: 'flex-start',
           }}
         >
-          <p
+          {arrowsEl}
+          <div
             style={{
-              margin: 0,
-              fontFamily: FONT,
-              fontSize: 54,
-              fontWeight: 500,
-              lineHeight: 1.1,
-              color: WHITE,
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: bp === 'tablet' ? 32 : 40,
             }}
           >
-            {t.quote}
-          </p>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: '50%',
-                background: WHITE_20,
-                flexShrink: 0,
-              }}
-            />
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: FONT,
-                  fontSize: 16,
-                  fontWeight: 500,
-                  color: WHITE,
-                }}
-              >
-                {t.name}
-              </span>
-              <span
-                style={{
-                  fontFamily: FONT,
-                  fontSize: 16,
-                  fontWeight: 400,
-                  color: WHITE_70,
-                }}
-              >
-                {t.role}
-              </span>
-            </div>
+            {quoteEl}
+            {authorEl}
           </div>
         </div>
-      </div>
+      )}
     </div>
     </section>
   );
@@ -2043,22 +2430,24 @@ const PROCESS_ITEMS: ProcessItem[] = [
 ];
 
 function Process() {
+  const bp = useBp();
   const [expanded, setExpanded] = useState<number | null>(1);
+  const titleSize = bp === 'mobile' ? 32 : bp === 'tablet' ? 40 : 54;
 
   return (
-    <section id="process" style={sectionOuter({ background: 'transparent' })}>
+    <section id="process" style={sectionOuter(bp, { background: 'transparent' })}>
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: bp === 'mobile' ? 24 : bp === 'tablet' ? 32 : 40,
       })}
     >
       <h2
         style={{
           margin: 0,
           fontFamily: FONT,
-          fontSize: 54,
+          fontSize: titleSize,
           fontWeight: 500,
           lineHeight: 1.1,
           color: NAVY,
@@ -2073,6 +2462,7 @@ function Process() {
           <ProcessRow
             key={item.number}
             item={item}
+            bp={bp}
             isLast={idx === PROCESS_ITEMS.length - 1}
             expanded={expanded === idx}
             onToggle={() => setExpanded((e) => (e === idx ? null : idx))}
@@ -2089,12 +2479,23 @@ function ProcessRow({
   isLast,
   expanded,
   onToggle,
+  bp,
 }: {
   item: ProcessItem;
   isLast: boolean;
   expanded: boolean;
   onToggle: () => void;
+  bp: Bp;
 }) {
+  const mobile = bp === 'mobile';
+  const headPad = mobile ? '20px 0' : bp === 'tablet' ? '28px 0' : '32px 0';
+  const labelSize = mobile ? 22 : bp === 'tablet' ? 30 : 36;
+  const numMinW = mobile ? 32 : bp === 'tablet' ? 44 : 56;
+  const leftGap = mobile ? 16 : bp === 'tablet' ? 24 : 32;
+  const iconSize = mobile ? 24 : bp === 'tablet' ? 26 : 28;
+  const descPadLeft = mobile ? 0 : bp === 'tablet' ? 48 : 64;
+  const descPadV = mobile ? 0 : bp === 'tablet' ? 8 : 16;
+
   return (
     <div
       style={{
@@ -2103,7 +2504,7 @@ function ProcessRow({
         borderBottom: isLast ? `1px solid ${NAVY_20}` : undefined,
         display: 'flex',
         flexDirection: 'column',
-        gap: expanded ? 32 : 0,
+        gap: expanded ? (mobile ? 16 : 32) : 0,
       }}
     >
       <button
@@ -2114,7 +2515,7 @@ function ProcessRow({
           background: 'transparent',
           border: 0,
           cursor: 'pointer',
-          padding: '32px 0',
+          padding: headPad,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -2124,14 +2525,14 @@ function ProcessRow({
           textAlign: 'left',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: leftGap }}>
           <span
             style={{
               fontFamily: FONT,
-              fontSize: 36,
+              fontSize: labelSize,
               fontWeight: 500,
               color: NAVY_80,
-              minWidth: 56,
+              minWidth: numMinW,
             }}
           >
             {item.number}
@@ -2139,7 +2540,7 @@ function ProcessRow({
           <span
             style={{
               fontFamily: FONT,
-              fontSize: 36,
+              fontSize: labelSize,
               fontWeight: 500,
               color: NAVY,
             }}
@@ -2148,9 +2549,9 @@ function ProcessRow({
           </span>
         </div>
         {expanded ? (
-          <Minus size={28} color={NAVY} strokeWidth={2} />
+          <Minus size={iconSize} color={NAVY} strokeWidth={2} />
         ) : (
-          <Plus size={28} color={NAVY} strokeWidth={2} />
+          <Plus size={iconSize} color={NAVY} strokeWidth={2} />
         )}
       </button>
 
@@ -2158,16 +2559,17 @@ function ProcessRow({
         <div
           style={{
             display: 'flex',
-            gap: 40,
+            flexDirection: mobile ? 'column' : 'row',
+            gap: mobile ? 16 : bp === 'tablet' ? 32 : 40,
             width: '100%',
-            alignItems: 'flex-start',
-            paddingBottom: 32,
+            alignItems: mobile ? 'stretch' : 'flex-start',
+            paddingBottom: mobile ? 24 : 32,
           }}
         >
           <div
             style={{
-              flex: 1,
-              padding: '16px 0 16px 64px',
+              flex: mobile ? undefined : 1,
+              padding: `${descPadV}px 0 ${descPadV}px ${descPadLeft}px`,
               display: 'flex',
               flexDirection: 'column',
               gap: 24,
@@ -2177,7 +2579,7 @@ function ProcessRow({
               style={{
                 margin: 0,
                 fontFamily: FONT,
-                fontSize: 16,
+                fontSize: mobile ? 15 : 16,
                 fontWeight: 400,
                 lineHeight: 1.5,
                 color: NAVY_80,
@@ -2188,8 +2590,8 @@ function ProcessRow({
           </div>
           <div
             style={{
-              width: 420,
-              height: 280,
+              width: mobile ? '100%' : bp === 'tablet' ? 320 : 420,
+              height: mobile ? 200 : bp === 'tablet' ? 220 : 280,
               borderRadius: 16,
               background: `${NAVY} url(${item.image}) center/contain no-repeat`,
               flexShrink: 0,
@@ -2204,20 +2606,24 @@ function ProcessRow({
 /* ---------------- Privacy-Led ---------------- */
 
 function PrivacyLed() {
+  const bp = useBp();
+  const imgH = bp === 'mobile' ? 240 : bp === 'tablet' ? 360 : 400;
+  const titleSize = bp === 'mobile' ? 28 : bp === 'tablet' ? 32 : 36;
+  const bodySize = bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24;
   return (
-    <section id="privacy-led" style={sectionOuter({ background: 'transparent' })}>
+    <section id="privacy-led" style={sectionOuter(bp, { background: 'transparent' })}>
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: bp === 'mobile' ? 24 : bp === 'tablet' ? 32 : 40,
         alignItems: 'center',
       })}
     >
       <div
         style={{
           width: '100%',
-          height: 400,
+          height: imgH,
           borderRadius: 24,
           backgroundImage: 'url(/images/privacy-led.jpg)',
           backgroundSize: 'cover',
@@ -2229,14 +2635,14 @@ function PrivacyLed() {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          gap: 24,
+          gap: bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24,
         }}
       >
         <h2
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 36,
+            fontSize: titleSize,
             fontWeight: 500,
             lineHeight: 1.1,
             color: NAVY,
@@ -2248,7 +2654,7 @@ function PrivacyLed() {
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 24,
+            fontSize: bodySize,
             fontWeight: 400,
             lineHeight: 1.5,
             color: NAVY_80,
@@ -2288,13 +2694,16 @@ function PrivacyLed() {
 /* ---------------- CTA Band ---------------- */
 
 function CTABand() {
+  const bp = useBp();
+  const headingSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 56 : 80;
+  const headingLs = bp === 'mobile' ? -1 : bp === 'tablet' ? -1.5 : -2;
   return (
-    <section style={sectionOuter({ background: '#bde3f4', overflow: 'hidden' })}>
+    <section style={sectionOuter(bp, { background: '#bde3f4', overflow: 'hidden' })}>
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: bp === 'mobile' ? 24 : bp === 'tablet' ? 32 : 40,
         alignItems: 'center',
         position: 'relative',
         zIndex: 2,
@@ -2313,9 +2722,9 @@ function CTABand() {
           style={{
             margin: 0,
             fontFamily: FONT,
-            fontSize: 80,
+            fontSize: headingSize,
             fontWeight: 500,
-            letterSpacing: -2,
+            letterSpacing: headingLs,
             lineHeight: 1.05,
             color: NAVY,
             textAlign: 'center',
@@ -2351,19 +2760,25 @@ function CTABand() {
 /* ---------------- Footer ---------------- */
 
 function Footer() {
+  const bp = useBp();
+  const mobile = bp === 'mobile';
+  const headingSize = mobile ? 36 : bp === 'tablet' ? 48 : 80;
+  const headingLs = mobile ? -1 : bp === 'tablet' ? -1.5 : -2;
+  const leftWidth = mobile ? '100%' : bp === 'tablet' ? 400 : 720;
+  const align = mobile ? 'start' : 'end';
   return (
     <footer
-      style={sectionOuter({
+      style={sectionOuter(bp, {
         background: NAVY,
         color: WHITE,
         overflow: 'hidden',
       })}
     >
     <div
-      style={sectionInner({
+      style={sectionInner(bp, {
         display: 'flex',
         flexDirection: 'column',
-        gap: 40,
+        gap: mobile ? 32 : 40,
         position: 'relative',
         zIndex: 2,
       })}
@@ -2372,19 +2787,20 @@ function Footer() {
       <div
         style={{
           display: 'flex',
+          flexDirection: mobile ? 'column' : 'row',
           justifyContent: 'space-between',
-          gap: 40,
+          gap: mobile ? 32 : bp === 'tablet' ? 32 : 40,
           width: '100%',
         }}
       >
-        <div style={{ width: 720 }}>
+        <div style={{ width: leftWidth }}>
           <h2
             style={{
               margin: 0,
               fontFamily: FONT,
-              fontSize: 80,
+              fontSize: headingSize,
               fontWeight: 500,
-              letterSpacing: -2,
+              letterSpacing: headingLs,
               lineHeight: 1.05,
               color: WHITE,
             }}
@@ -2397,8 +2813,8 @@ function Footer() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'flex-end',
-            gap: 32,
+            alignItems: mobile ? 'flex-start' : 'flex-end',
+            gap: mobile ? 28 : 32,
           }}
         >
           <a
@@ -2421,8 +2837,8 @@ function Footer() {
             <LinkedInGlyph size={18} />
           </a>
 
-          <FooterContactBlock label="Inquiries" value="info@icompetence.de" href="mailto:info@icompetence.de" />
-          <FooterContactBlock label="Phone" value="+49 40 22636380" />
+          <FooterContactBlock align={align} label="Inquiries" value="info@icompetence.de" href="mailto:info@icompetence.de" />
+          <FooterContactBlock align={align} label="Phone" value="+49 40 22636380" />
         </div>
       </div>
 
@@ -2511,7 +2927,7 @@ function FooterSocial({
   );
 }
 
-function FooterContactBlock({ label, value, href }: { label: string; value: string; href?: string }) {
+function FooterContactBlock({ label, value, href, align = 'end' }: { label: string; value: string; href?: string; align?: 'start' | 'end' }) {
   const valueStyle: React.CSSProperties = {
     fontFamily: FONT,
     fontSize: 16,
@@ -2524,7 +2940,7 @@ function FooterContactBlock({ label, value, href }: { label: string; value: stri
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-end',
+        alignItems: align === 'start' ? 'flex-start' : 'flex-end',
         gap: 4,
       }}
     >
