@@ -1,0 +1,369 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - img
+          - generic:
+            - generic:
+              - img
+          - generic:
+            - generic:
+              - img
+      - paragraph [ref=e7]: iCompetence
+    - generic [ref=e12]:
+      - generic [ref=e13]: Be
+      - generic [ref=e14]: among
+      - generic [ref=e15]: the
+      - generic [ref=e16]: top
+      - generic [ref=e17]: "10"
+      - generic [ref=e18]: "%."
+      - generic [ref=e19]: Over
+      - generic [ref=e20]: 90%
+      - generic [ref=e21]: of
+      - generic [ref=e22]: AI
+      - generic [ref=e23]: projects
+      - generic [ref=e24]: in
+      - generic [ref=e25]: companies
+      - generic [ref=e26]: fail.*
+      - generic [ref=e27]: One
+      - generic [ref=e28]: of
+      - generic [ref=e29]: the
+      - generic [ref=e30]: main
+      - generic [ref=e31]: "reasons:"
+      - generic [ref=e32]: the
+      - generic [ref=e33]: dataset.
+      - generic [ref=e34]: With
+      - generic [ref=e35]: us
+      - generic [ref=e36]: you
+      - generic [ref=e37]: will
+      - generic [ref=e38]: get
+      - generic [ref=e39]: the
+      - generic [ref=e40]: dataset
+      - generic [ref=e41]: that
+      - generic [ref=e42]: makes
+      - generic [ref=e43]: you
+      - generic [ref=e44]: one
+      - generic [ref=e45]: of
+      - generic [ref=e46]: the
+      - generic [ref=e47]: successful
+      - generic [ref=e48]: "10%:"
+      - generic [ref=e49]: Fit
+      - generic [ref=e50]: for
+      - generic [ref=e51]: AI.
+      - generic [ref=e52]: Find
+      - generic [ref=e53]: out
+      - generic [ref=e54]: about
+      - generic [ref=e55]: the
+      - generic [ref=e56]: latest
+      - generic [ref=e57]: analytics
+      - generic [ref=e58]: hacks,
+      - generic [ref=e59]: standard
+      - generic [ref=e60]: and
+      - generic [ref=e61]: custom
+      - generic [ref=e62]: AI
+      - generic [ref=e63]: solutions
+      - generic [ref=e64]: and
+      - generic [ref=e65]: how
+      - generic [ref=e66]: to
+      - generic [ref=e67]: boost
+      - generic [ref=e68]: your
+      - generic [ref=e69]: marketing
+      - generic [ref=e70]: with
+      - generic [ref=e71]: context
+      - generic [ref=e72]: data
+      - generic [ref=e73]: while
+      - generic [ref=e74]: keeping
+      - generic [ref=e75]: your
+      - generic [ref=e76]: data
+      - generic [ref=e77]: to
+      - generic [ref=e78]: yourself.
+    - generic [ref=e81]:
+      - heading "Be Better. Be Faster. Be AI." [level=2] [ref=e82]
+      - paragraph [ref=e83]: "Thinking about the advantages of AI, but your toolstack resembles a wilderness and your database a nightmare? No need to worry, help is at hand: We help you close the gaps in your database with Context Data, boost your data to a quality-level that will see your AI Agents deliver reliable results at a speed you haven't dreamt of before."
+      - generic [ref=e84]:
+        - generic [ref=e86]:
+          - heading "How To Context Data" [level=3] [ref=e87]
+          - paragraph [ref=e88]: No effective AI without context data.
+          - paragraph [ref=e89]: AI can boost your company's performance - but more than 40% of public AI search engine results are incorrect, due to misleading data. Get the data you need for the AI performance you want to excel in the AI race! We offer everything to enhance your company's data quality and quite a few AI hacks you will find hard to get anywhere else.
+          - paragraph [ref=e90]: "Outcome: Measurable data quality, fewer silos, reliable KPIs, lower MarTech complexity."
+          - generic [ref=e91]:
+            - button "Learn more about our Core Services:" [ref=e92] [cursor=pointer]:
+              - text: "Learn more about our Core Services:"
+              - img [ref=e93]
+            - list [ref=e94]:
+              - listitem [ref=e95]:
+                - generic [ref=e96]: •
+                - text: Data layer architecture & governance
+              - listitem [ref=e97]:
+                - generic [ref=e98]: •
+                - text: Web & app tracking (Adobe, GA4, server‑side, consent integration)
+              - listitem [ref=e99]:
+                - generic [ref=e100]: •
+                - text: Analytics setups & dashboards (Adobe/Google/BI)
+              - listitem [ref=e101]:
+                - generic [ref=e102]: •
+                - text: Campaign parameter framework & taxonomy
+              - listitem [ref=e103]:
+                - generic [ref=e104]: •
+                - text: CDP/CRM/Adtech connectivity & APIs
+              - listitem [ref=e105]:
+                - generic [ref=e106]: •
+                - text: QA, tag audits & monitoring
+              - listitem [ref=e107]:
+                - generic [ref=e108]: •
+                - text: Training & enablement (Analytics, Marketing, Product)
+        - generic [ref=e110]:
+          - heading "Be Part of the Agentic Era" [level=3] [ref=e111]
+          - paragraph [ref=e112]: From experiments to productive AI workflows.
+          - paragraph [ref=e113]: Consulting and implementation of custom AI solutions — from use‑case roadmaps and agents & automations to proprietary tools built on your data foundation.
+          - paragraph [ref=e114]: "Outcome: Faster time‑to‑value, productive automations, measurable impact on revenue & efficiency."
+          - generic [ref=e115]:
+            - button "We are at your service:" [ref=e116] [cursor=pointer]:
+              - text: "We are at your service:"
+              - img [ref=e117]
+            - list [ref=e118]:
+              - listitem [ref=e119]:
+                - generic [ref=e120]: •
+                - text: AI strategy & use‑case portfolio (prioritised by value/feasibility)
+              - listitem [ref=e121]:
+                - generic [ref=e122]: •
+                - text: Agentic workflows & orchestration (prompting, tools, guardrails)
+              - listitem [ref=e123]:
+                - generic [ref=e124]: •
+                - text: Prototyping → pilot → scale
+              - listitem [ref=e125]:
+                - generic [ref=e126]: •
+                - text: Integration into existing systems (Analytics, CRM, CMS, ticketing, BI)
+              - listitem [ref=e127]:
+                - generic [ref=e128]: •
+                - text: Proprietary tools/agents (e.g., Reporting Agent, Campaign QA Agent, Knowledge Copilot)
+              - listitem [ref=e129]:
+                - generic [ref=e130]: •
+                - text: Security & compliance (PII/GDPR, access, auditability)
+    - generic [ref=e133]:
+      - heading "More context for your data" [level=2] [ref=e135]
+      - generic [ref=e136]:
+        - generic [ref=e138]:
+          - generic [ref=e141]:
+            - generic [ref=e142]: (01)
+            - generic [ref=e143]:
+              - heading "Campaign Parameter Tool" [level=3] [ref=e144]
+              - paragraph [ref=e145]: A tool that helps marketers to leverage their campaign parameter framework for better campaign data.
+              - link "Learn more" [ref=e147] [cursor=pointer]:
+                - /url: https://icompetence.de/campaign-parameter-tool/
+          - generic [ref=e150]:
+            - generic [ref=e151]: (02)
+            - generic [ref=e152]:
+              - heading "Tracking & Analytics" [level=3] [ref=e153]
+              - paragraph [ref=e154]: How do customers behave on your digital channels? How does this affect sales? Why does one campaign work and another fail? We are certified in many of the leading analytics enterprise solutions and can guide you through planning, configuration, and implementation.
+          - generic [ref=e157]:
+            - generic [ref=e158]: (03)
+            - generic [ref=e159]:
+              - heading "Consent Risk Audit" [level=3] [ref=e160]
+              - paragraph [ref=e161]: Comprehensive privacy and consent compliance assessment. Identify risks, gaps, and opportunities in your data collection practices with actionable recommendations.
+        - button "Previous" [disabled] [ref=e162]:
+          - img [ref=e163]
+          - generic [ref=e165]: Previous
+        - button "Next" [ref=e166] [cursor=pointer]:
+          - generic [ref=e167]: Next
+          - img [ref=e168]
+    - generic [ref=e172]:
+      - heading "This is how we work" [level=2] [ref=e174]
+      - generic [ref=e175]:
+        - generic [ref=e178]:
+          - generic [ref=e179]: (01)
+          - generic [ref=e180]:
+            - heading "Assess" [level=3] [ref=e181]
+            - paragraph [ref=e182]: Quick audit of tracking, data layer, parameters & systems
+        - generic [ref=e185]:
+          - generic [ref=e186]: (02)
+          - generic [ref=e187]:
+            - heading "Align" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Define target picture, use cases, KPI framework & governance
+        - generic [ref=e192]:
+          - generic [ref=e193]: (03)
+          - generic [ref=e194]:
+            - heading "Build" [level=3] [ref=e195]
+            - paragraph [ref=e196]: Implement, integrate, train; pilot/PoC for AI applications
+        - generic [ref=e199]:
+          - generic [ref=e200]: (04)
+          - generic [ref=e201]:
+            - heading "Scale" [level=3] [ref=e202]
+            - paragraph [ref=e203]: Monitoring, automations & rollout across teams
+    - generic [ref=e207]:
+      - generic [ref=e208]:
+        - generic [ref=e209]:
+          - generic [ref=e212]: 40 %
+          - paragraph [ref=e213]: Uplift in data coverage & quality
+        - generic [ref=e214]:
+          - generic [ref=e217]: < 6 weeks
+          - paragraph [ref=e218]: Time to value for your first efficient agent
+      - generic [ref=e219]:
+        - heading "Metrics that matter" [level=2] [ref=e220]
+        - paragraph [ref=e221]: Managing a small business today is already tough. Avoid further complications by ditching outdated, tedious trade methods. Our goal is to streamline SMB trade, making it easier and faster than ever.
+    - generic [ref=e224]:
+      - heading "Our Tools for the Agentic Era" [level=2] [ref=e226]
+      - generic [ref=e227]:
+        - generic [ref=e229]:
+          - generic [ref=e232]:
+            - generic [ref=e233]: (01)
+            - generic [ref=e234]:
+              - heading "ICU – Customer Journey Explorer" [level=3] [ref=e235]
+              - paragraph [ref=e236]: "A new dimension to your customer's journey: Instant oversight on each touchpoint in depth as well as the whole context at once. Easy to use, easier to comprehend. Why hasn't that been here before? With ICU you can map and analyze customer touchpoints with zero-party data insights. Understand authentic user journeys without tracking, using consented personal context for genuine experience optimization."
+              - link "Learn more" [ref=e238] [cursor=pointer]:
+                - /url: https://icompetence.de/icu-user-journey-explorer
+          - generic [ref=e241]:
+            - generic [ref=e242]: (02)
+            - generic [ref=e243]:
+              - heading "Intelligentic Search" [level=3] [ref=e244]
+              - paragraph [ref=e245]: Our semantic search for your website. Deliver dynamic, contextual personalization powered by user-owned data. Create relevant experiences that adapt in real-time while respecting privacy and user control. The better Rufus with more options and better usabilty. For your company with your CI and exactly the information you want to provide. Be more relevant for your customers with less effort.
+              - link "Learn more" [ref=e247] [cursor=pointer]:
+                - /url: https://icompetence.de/intelligentic-search/
+          - generic [ref=e250]:
+            - generic [ref=e251]: (03)
+            - generic [ref=e252]:
+              - heading "iKnow" [level=3] [ref=e253]
+              - paragraph [ref=e254]: The central knowledge platform for your organization. AI-powered, local, and secure – iKnow transforms distributed information into a structured, always-available knowledge foundation for better decisions and future AI applications.
+              - link "Learn more" [ref=e256] [cursor=pointer]:
+                - /url: https://icompetence.de/iknow/
+        - button "Previous" [disabled] [ref=e257]:
+          - img [ref=e258]
+          - generic [ref=e260]: Previous
+        - button "Next" [ref=e261] [cursor=pointer]:
+          - generic [ref=e262]: Next
+          - img [ref=e263]
+    - generic [ref=e268]:
+      - generic [ref=e269]:
+        - heading "Privacy-Led Setups" [level=3] [ref=e270]
+        - paragraph [ref=e271]: You wouldn't share the secret ingredients of your company's most successful product? Why share your customer data or strategies? With a privacy-led setup you can keep your data to yourself without a foreign company or government getting the better of you. Contact us to learn more about privacy-led setups and how to excel with AI.
+        - list [ref=e272]:
+          - listitem [ref=e273]:
+            - generic [ref=e274]: •
+            - generic [ref=e275]: GDPR‑compliant setups, consent flows & data minimisation
+          - listitem [ref=e276]:
+            - generic [ref=e277]: •
+            - generic [ref=e278]: Security & access concepts
+          - listitem [ref=e279]:
+            - generic [ref=e280]: •
+            - generic [ref=e281]: Vendor‑agnostic consulting
+        - link "See more" [ref=e282] [cursor=pointer]:
+          - /url: https://icompetence.de/privacy-led-ai/
+      - img "Privacy and data security" [ref=e285]
+    - generic [ref=e287]:
+      - heading "iCompetence is featured in:" [level=2] [ref=e289]
+      - generic [ref=e291]:
+        - generic [ref=e292]:
+          - img "Brand 1" [ref=e294]
+          - img "Brand 2" [ref=e296]
+          - img "Brand 3" [ref=e298]
+          - img "Brand 4" [ref=e300]
+          - img "Brand 5" [ref=e302]
+          - img "Brand 6" [ref=e304]
+          - img "Brand 7" [ref=e306]
+          - img "Brand 8" [ref=e308]
+          - img "Brand 9" [ref=e310]
+          - img "Brand 10" [ref=e312]
+        - generic [ref=e313]:
+          - img "Brand 1" [ref=e315]
+          - img "Brand 2" [ref=e317]
+          - img "Brand 3" [ref=e319]
+          - img "Brand 4" [ref=e321]
+          - img "Brand 5" [ref=e323]
+          - img "Brand 6" [ref=e325]
+          - img "Brand 7" [ref=e327]
+          - img "Brand 8" [ref=e329]
+          - img "Brand 9" [ref=e331]
+          - img "Brand 10" [ref=e333]
+        - generic [ref=e334]:
+          - img "Brand 1" [ref=e336]
+          - img "Brand 2" [ref=e338]
+          - img "Brand 3" [ref=e340]
+          - img "Brand 4" [ref=e342]
+          - img "Brand 5" [ref=e344]
+          - img "Brand 6" [ref=e346]
+          - img "Brand 7" [ref=e348]
+          - img "Brand 8" [ref=e350]
+          - img "Brand 9" [ref=e352]
+          - img "Brand 10" [ref=e354]
+        - generic [ref=e355]:
+          - img "Brand 1" [ref=e357]
+          - img "Brand 2" [ref=e359]
+          - img "Brand 3" [ref=e361]
+          - img "Brand 4" [ref=e363]
+          - img "Brand 5" [ref=e365]
+          - img "Brand 6" [ref=e367]
+          - img "Brand 7" [ref=e369]
+          - img "Brand 8" [ref=e371]
+          - img "Brand 9" [ref=e373]
+          - img "Brand 10" [ref=e375]
+    - generic [ref=e378]:
+      - heading "FAQ" [level=2] [ref=e380]
+      - generic [ref=e381]:
+        - button "(01) How do I know whether my data is correct?" [ref=e383] [cursor=pointer]:
+          - generic [ref=e384]:
+            - generic [ref=e385]: (01)
+            - heading "How do I know whether my data is correct?" [level=3] [ref=e386]
+          - img [ref=e388]
+        - button "(02) Do you offer special packages for first-time customers?" [ref=e390] [cursor=pointer]:
+          - generic [ref=e391]:
+            - generic [ref=e392]: (02)
+            - heading "Do you offer special packages for first-time customers?" [level=3] [ref=e393]
+          - img [ref=e395]
+        - button "(03) How much ROI?" [ref=e397] [cursor=pointer]:
+          - generic [ref=e398]:
+            - generic [ref=e399]: (03)
+            - heading "How much ROI?" [level=3] [ref=e400]
+          - img [ref=e402]
+        - button "(04) Do I have to start with Context Data Accuracy?" [ref=e404] [cursor=pointer]:
+          - generic [ref=e405]:
+            - generic [ref=e406]: (04)
+            - heading "Do I have to start with Context Data Accuracy?" [level=3] [ref=e407]
+          - img [ref=e409]
+        - button "(05) Do I need new tools?" [ref=e411] [cursor=pointer]:
+          - generic [ref=e412]:
+            - generic [ref=e413]: (05)
+            - heading "Do I need new tools?" [level=3] [ref=e414]
+          - img [ref=e416]
+        - button "(06) How long until first results?" [ref=e418] [cursor=pointer]:
+          - generic [ref=e419]:
+            - generic [ref=e420]: (06)
+            - heading "How long until first results?" [level=3] [ref=e421]
+          - img [ref=e423]
+        - button "(07) How do you handle privacy?" [ref=e425] [cursor=pointer]:
+          - generic [ref=e426]:
+            - generic [ref=e427]: (07)
+            - heading "How do you handle privacy?" [level=3] [ref=e428]
+          - img [ref=e430]
+    - generic [ref=e432]:
+      - generic:
+        - generic:
+          - img
+      - generic [ref=e434]:
+        - paragraph [ref=e435]: Ready to enable your company for the Agentic Era?
+        - button "Book your initial consultation" [ref=e436] [cursor=pointer]
+      - generic [ref=e439]:
+        - generic [ref=e440]:
+          - paragraph [ref=e442]: Separate the signal from the noise.
+          - generic [ref=e443]:
+            - button [ref=e445] [cursor=pointer]:
+              - img [ref=e446]
+            - generic [ref=e448]:
+              - generic [ref=e449]:
+                - paragraph [ref=e450]: (Inquiries)
+                - button "info@icompetence.de" [ref=e451] [cursor=pointer]
+              - generic [ref=e452]:
+                - paragraph [ref=e453]: (Phone)
+                - button "+49 40 609 45 51-0" [ref=e454] [cursor=pointer]
+        - generic [ref=e455]:
+          - generic [ref=e456]:
+            - button "Imprint" [ref=e457] [cursor=pointer]
+            - button "Privacy" [ref=e458] [cursor=pointer]
+          - button "Back to top" [ref=e459] [cursor=pointer]:
+            - text: Back to top
+            - img [ref=e460]
+  - button "Open Next.js Dev Tools" [ref=e467] [cursor=pointer]:
+    - img [ref=e468]
+  - alert [ref=e471]

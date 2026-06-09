@@ -1,0 +1,193 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e5]:
+        - link "icompetence" [ref=e6] [cursor=pointer]:
+          - /url: "#top"
+        - generic [ref=e7]:
+          - link "Services" [ref=e8] [cursor=pointer]:
+            - /url: "#services"
+          - link "Cases" [ref=e9] [cursor=pointer]:
+            - /url: "#cases"
+          - link "Process" [ref=e10] [cursor=pointer]:
+            - /url: "#process"
+          - link "Privacy-led AI" [ref=e11] [cursor=pointer]:
+            - /url: "#privacy-led"
+        - generic [ref=e12]:
+          - button "EN / DE" [ref=e13] [cursor=pointer]
+          - link "Let's talk" [ref=e14] [cursor=pointer]:
+            - /url: mailto:info@icompetence.de?subject=Let%27s%20talk
+            - text: Let's talk
+            - img [ref=e15]
+          - button "Menu" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+      - generic [ref=e20]:
+        - heading "Separate the signal from the noise." [level=1] [ref=e21]
+        - paragraph [ref=e22]: We help ambitious teams cut through complexity — turning scattered data into clear decisions, and AI into the products and automated processes that deliver lasting results.
+        - generic [ref=e23]:
+          - link "Let's talk" [ref=e24] [cursor=pointer]:
+            - /url: mailto:info@icompetence.de?subject=Let%27s%20talk
+            - text: Let's talk
+            - img [ref=e25]
+          - link "See our services" [ref=e28] [cursor=pointer]:
+            - /url: "#services"
+            - text: See our services
+            - img [ref=e29]
+    - generic [ref=e32]:
+      - generic [ref=e34]: ACME
+      - generic [ref=e36]: GLOBEX
+      - generic [ref=e38]: INITECH
+      - generic [ref=e40]: UMBRELLA
+      - generic [ref=e42]: MERIDIAN
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - heading "Our Services" [level=2] [ref=e46]
+        - generic [ref=e47]:
+          - button "Previous service" [ref=e48] [cursor=pointer]:
+            - img [ref=e49]
+          - button "Next service" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - heading "Data" [level=3] [ref=e57]
+            - generic [ref=e58]: Featured
+          - generic [ref=e59]:
+            - button "Data Strategy − Build a clear data foundation — assess sources, prioritize use cases, and align teams on outcomes." [ref=e60] [cursor=pointer]:
+              - generic [ref=e61]:
+                - generic [ref=e62]: Data Strategy
+                - generic [ref=e63]: −
+              - paragraph [ref=e64]: Build a clear data foundation — assess sources, prioritize use cases, and align teams on outcomes.
+            - button "Data Engineering +" [ref=e65] [cursor=pointer]:
+              - generic [ref=e66]: Data Engineering
+              - generic [ref=e67]: +
+            - button "Analytics +" [ref=e68] [cursor=pointer]:
+              - generic [ref=e69]: Analytics
+              - generic [ref=e70]: +
+            - button "Visualization +" [ref=e71] [cursor=pointer]:
+              - generic [ref=e72]: Visualization
+              - generic [ref=e73]: +
+        - generic [ref=e75] [cursor=pointer]:
+          - heading "AI" [level=3] [ref=e76]
+          - generic [ref=e77]: View Details
+        - generic [ref=e79] [cursor=pointer]:
+          - heading "Workshops" [level=3] [ref=e80]
+          - generic [ref=e81]: View Details
+    - paragraph [ref=e84]: We help ambitious teams turn data and AI into real business outcomes.
+    - link "Get in touch" [ref=e87] [cursor=pointer]:
+      - /url: mailto:info@icompetence.de?subject=Let%27s%20talk
+      - text: Get in touch
+      - img [ref=e88]
+    - generic [ref=e92]:
+      - generic [ref=e94]:
+        - generic [ref=e95]: Featured Product
+        - heading "iKnow" [level=2] [ref=e96]
+        - paragraph [ref=e97]: Your team's collective knowledge, instantly accessible. Search across docs, conversations, and tools — answered with context, not just links.
+        - link "Explore iKnow" [ref=e98] [cursor=pointer]:
+          - /url: /iknow/
+          - text: Explore iKnow
+          - img [ref=e99]
+      - generic [ref=e103]:
+        - article [ref=e104]:
+          - generic [ref=e106]:
+            - generic [ref=e107]: Case
+            - heading "Real-time demand forecasting" [level=3] [ref=e108]
+            - paragraph [ref=e109]: How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets.
+            - link "Read case" [ref=e110] [cursor=pointer]:
+              - /url: "#"
+              - text: Read case
+              - img [ref=e111]
+        - article [ref=e114]:
+          - generic [ref=e116]:
+            - generic [ref=e117]: Case
+            - heading "AI-driven quality inspection" [level=3] [ref=e118]
+            - paragraph [ref=e119]: Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste.
+            - link "Read case" [ref=e120] [cursor=pointer]:
+              - /url: "#"
+              - text: Read case
+              - img [ref=e121]
+    - generic [ref=e125]:
+      - heading "What our clients say" [level=2] [ref=e126]
+      - generic [ref=e127]:
+        - generic [ref=e128]:
+          - button "Previous testimonial" [ref=e129] [cursor=pointer]:
+            - img [ref=e130]
+          - button "Next testimonial" [ref=e132] [cursor=pointer]:
+            - img [ref=e133]
+        - generic [ref=e135]:
+          - paragraph [ref=e136]: “During our expansion, training and onboarding fell behind. They stepped in with consistent staffing, fair rates, and quick turnaround for urgent shifts.”
+          - generic [ref=e139]:
+            - generic [ref=e140]: Priya Menon
+            - generic [ref=e141]: Operations Director, Harbourview Senior Living
+    - generic [ref=e143]:
+      - heading "This is how we work" [level=2] [ref=e144]
+      - generic [ref=e145]:
+        - button "01 Ideation Workshop" [ref=e147] [cursor=pointer]:
+          - generic [ref=e148]:
+            - generic [ref=e149]: "01"
+            - generic [ref=e150]: Ideation Workshop
+          - img [ref=e151]
+        - generic [ref=e152]:
+          - button "02 Proof of Concept" [expanded] [ref=e153] [cursor=pointer]:
+            - generic [ref=e154]:
+              - generic [ref=e155]: "02"
+              - generic [ref=e156]: Proof of Concept
+            - img [ref=e157]
+          - paragraph [ref=e160]: We build a tangible prototype together — focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.
+        - button "03 Rollout" [ref=e163] [cursor=pointer]:
+          - generic [ref=e164]:
+            - generic [ref=e165]: "03"
+            - generic [ref=e166]: Rollout
+          - img [ref=e167]
+    - generic [ref=e171]:
+      - heading "Privacy-Led Setups" [level=2] [ref=e172]
+      - paragraph [ref=e173]: "Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you."
+      - link "Explore privacy-led" [ref=e174] [cursor=pointer]:
+        - /url: /privacy-led-ai/
+        - text: Explore privacy-led
+        - img [ref=e175]
+    - generic [ref=e179]:
+      - heading "Ready to turn ambition into outcomes?" [level=2] [ref=e181]
+      - link "Get in touch" [ref=e182] [cursor=pointer]:
+        - /url: mailto:info@icompetence.de?subject=Let%27s%20talk
+        - text: Get in touch
+        - img [ref=e183]
+    - contentinfo [ref=e186]:
+      - generic [ref=e187]:
+        - generic [ref=e188]:
+          - heading "Separate the signal from the noise." [level=2] [ref=e190]
+          - generic [ref=e191]:
+            - generic [ref=e192]:
+              - link "LinkedIn" [ref=e193] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e194]
+              - link "Twitter" [ref=e198] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e199]
+              - link "GitHub" [ref=e201] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e202]
+            - generic [ref=e205]:
+              - generic [ref=e206]: Inquiries
+              - generic [ref=e207]: info@icompetence.de
+            - generic [ref=e208]:
+              - generic [ref=e209]: Phone
+              - generic [ref=e210]: +49 40 609 45 51-0
+        - generic [ref=e211]:
+          - generic [ref=e212]:
+            - link "Imprint" [ref=e213] [cursor=pointer]:
+              - /url: /imprint/
+            - link "Privacy" [ref=e214] [cursor=pointer]:
+              - /url: "#"
+            - link "Cookies" [ref=e215] [cursor=pointer]:
+              - /url: "#"
+          - link "Back to top" [ref=e216] [cursor=pointer]:
+            - /url: "#top"
+            - text: Back to top
+            - img [ref=e217]
+  - button "Open Next.js Dev Tools" [ref=e224] [cursor=pointer]:
+    - img [ref=e225]
+  - alert [ref=e228]
+  - complementary:
+    - dialog "Datenschutzeinstellungen" [ref=e229]:
+      - button "Datenschutzeinstellungen" [ref=e230] [cursor=pointer]

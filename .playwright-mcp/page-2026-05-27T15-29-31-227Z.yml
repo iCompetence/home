@@ -1,0 +1,207 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e4]:
+        - link "icompetence" [ref=e5] [cursor=pointer]:
+          - /url: "#top"
+        - generic [ref=e6]:
+          - link "Services" [ref=e7] [cursor=pointer]:
+            - /url: "#services"
+          - link "Cases" [ref=e8] [cursor=pointer]:
+            - /url: "#cases"
+          - link "Process" [ref=e9] [cursor=pointer]:
+            - /url: "#process"
+          - link "Privacy-led AI" [ref=e10] [cursor=pointer]:
+            - /url: "#privacy-led"
+        - generic [ref=e11]:
+          - generic [ref=e12]: EN / DE
+          - link "Let's talk" [ref=e13] [cursor=pointer]:
+            - /url: "#cta"
+            - text: Let's talk
+            - img [ref=e14]
+          - button "Menu" [ref=e17] [cursor=pointer]:
+            - img [ref=e18]
+      - generic [ref=e19]:
+        - heading "Separate the signal from the noise." [level=1] [ref=e20]
+        - paragraph [ref=e21]: We help ambitious teams cut through complexity — turning scattered data into clear decisions, and AI into the products and automated processes that deliver lasting results.
+        - generic [ref=e22]:
+          - link "Let's talk" [ref=e23] [cursor=pointer]:
+            - /url: "#cta"
+            - text: Let's talk
+            - img [ref=e24]
+          - link "See our services" [ref=e27] [cursor=pointer]:
+            - /url: "#services"
+            - text: See our services
+            - img [ref=e28]
+    - generic [ref=e31]:
+      - generic [ref=e33]: ACME
+      - generic [ref=e35]: GLOBEX
+      - generic [ref=e37]: INITECH
+      - generic [ref=e39]: UMBRELLA
+      - generic [ref=e41]: MERIDIAN
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - heading "Our Services" [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - button "Previous" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+          - button "Next" [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - heading "Data" [level=3] [ref=e55]
+            - generic [ref=e56]: Close Details
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - generic [ref=e59]:
+                - generic [ref=e60]: Data Strategy
+                - generic [ref=e61]: −
+              - paragraph [ref=e62]: Build a clear data foundation — assess sources, prioritize use cases, and align teams on outcomes.
+            - generic [ref=e63]:
+              - generic [ref=e64]: Data Engineering
+              - generic [ref=e65]: +
+            - generic [ref=e66]:
+              - generic [ref=e67]: Analytics
+              - generic [ref=e68]: +
+            - generic [ref=e69]:
+              - generic [ref=e70]: Visualization
+              - generic [ref=e71]: +
+        - generic [ref=e73]:
+          - heading "AI" [level=3] [ref=e74]
+          - generic [ref=e75]: View Details
+        - generic [ref=e77]:
+          - heading "Workshops" [level=3] [ref=e78]
+          - generic [ref=e79]: View Details
+    - paragraph [ref=e81]: We help ambitious teams turn data and AI into real business outcomes.
+    - link "Get in touch" [ref=e83] [cursor=pointer]:
+      - /url: "#"
+      - text: Get in touch
+      - img [ref=e84]
+    - generic [ref=e87]:
+      - generic [ref=e89]:
+        - generic [ref=e90]: Featured Product
+        - heading "iKnow" [level=2] [ref=e91]
+        - paragraph [ref=e92]: Your team's collective knowledge, instantly accessible. Search across docs, conversations, and tools — answered with context, not just links.
+        - link "Explore iKnow" [ref=e93] [cursor=pointer]:
+          - /url: /iknow/
+          - text: Explore iKnow
+          - img [ref=e94]
+      - generic [ref=e98]:
+        - article [ref=e99]:
+          - generic [ref=e101]:
+            - generic [ref=e102]: Case
+            - heading "Real-time demand forecasting" [level=3] [ref=e103]
+            - paragraph [ref=e104]: How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets.
+            - link "Read case" [ref=e105] [cursor=pointer]:
+              - /url: "#"
+              - text: Read case
+              - img [ref=e106]
+        - article [ref=e109]:
+          - generic [ref=e111]:
+            - generic [ref=e112]: Case
+            - heading "AI-driven quality inspection" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste.
+            - link "Read case" [ref=e115] [cursor=pointer]:
+              - /url: "#"
+              - text: Read case
+              - img [ref=e116]
+    - generic [ref=e119]:
+      - heading "What our clients say" [level=2] [ref=e120]
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - button "Previous" [ref=e123] [cursor=pointer]:
+            - img [ref=e124]
+          - button "Next" [ref=e126] [cursor=pointer]:
+            - img [ref=e127]
+        - generic [ref=e129]:
+          - paragraph [ref=e130]: “During our expansion, training and onboarding fell behind. They stepped in with consistent staffing, fair rates, and quick turnaround for urgent shifts.”
+          - generic [ref=e133]:
+            - generic [ref=e134]: Priya Menon
+            - generic [ref=e135]: Operations Director, Harbourview Senior Living
+    - generic [ref=e136]:
+      - heading "This is how we work" [level=2] [ref=e137]
+      - generic [ref=e138]:
+        - generic [ref=e140]:
+          - generic [ref=e141]:
+            - generic [ref=e142]: "01"
+            - generic [ref=e143]: Ideation Workshop
+          - img [ref=e144]
+        - generic [ref=e145]:
+          - generic [ref=e146]:
+            - generic [ref=e147]:
+              - generic [ref=e148]: "02"
+              - generic [ref=e149]: Proof of Concept
+            - img [ref=e150]
+          - paragraph [ref=e153]: We build a tangible prototype together — focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - generic [ref=e158]: "03"
+            - generic [ref=e159]: Rollout
+          - img [ref=e160]
+    - generic [ref=e163]:
+      - heading "Privacy-Led Setups" [level=2] [ref=e164]
+      - paragraph [ref=e165]: "Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you."
+      - link "Explore privacy-led" [ref=e166] [cursor=pointer]:
+        - /url: /privacy-led-ai/
+        - text: Explore privacy-led
+        - img [ref=e167]
+    - generic [ref=e170]:
+      - heading "Ready to turn ambition into outcomes?" [level=2] [ref=e172]
+      - link "Get in touch" [ref=e173] [cursor=pointer]:
+        - /url: "#"
+        - text: Get in touch
+        - img [ref=e174]
+    - contentinfo [ref=e177]:
+      - generic [ref=e178]:
+        - heading "Separate the signal from the noise." [level=2] [ref=e180]
+        - generic [ref=e181]:
+          - generic [ref=e182]:
+            - link "LinkedIn" [ref=e183] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e184]
+            - link "Twitter" [ref=e188] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e189]
+            - link "GitHub" [ref=e191] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e192]
+          - generic [ref=e195]:
+            - generic [ref=e196]: Inquiries
+            - generic [ref=e197]: info@icompetence.de
+          - generic [ref=e198]:
+            - generic [ref=e199]: Phone
+            - generic [ref=e200]: +49 40 609 45 51-0
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - link "Imprint" [ref=e203] [cursor=pointer]:
+            - /url: /imprint/
+          - link "Privacy" [ref=e204] [cursor=pointer]:
+            - /url: "#"
+          - link "Cookies" [ref=e205] [cursor=pointer]:
+            - /url: "#"
+        - link "Back to top" [ref=e206] [cursor=pointer]:
+          - /url: "#top"
+          - text: Back to top
+          - img [ref=e207]
+  - button "Open Next.js Dev Tools" [ref=e214] [cursor=pointer]:
+    - img [ref=e215]
+  - alert [ref=e218]
+  - complementary [active]:
+    - dialog "Privatsphären-Einstellungen" [ref=e221]:
+      - generic [ref=e223]:
+        - img "iCompetence Logo" [ref=e224]
+        - generic [ref=e225]:
+          - heading "Privatsphären-Einstellungen" [level=2] [ref=e226]
+          - generic:
+            - generic: Um dir ein optimales Nutzungserlebnis und eine Vielzahl von Services anbieten zu können, diese für dich durch Analysen stetig zu verbessern sowie Werbung entsprechend deinen möglichen Interessen anzuzeigen z.B. auf Social-Media-Plattformen oder anderen Webseiten, setzen wir und unsere Partner Cookies und andere Technologien ein. Dies schließt gegebenenfalls die Verarbeitung deiner Daten in Drittstaaten ein. Mit deinem Klick auf „Alle akzeptieren“ willigst du der Verwendung von Cookies ein. Du kannst deine Cookie-Einstellungen jederzeit unter „Datenschutzeinstellungen“ einfach ändern bzw. widerrufen. Mehr Informationen erfährst du in unserer Datenschutzerklärung.
+        - link "Öffnen Impressum & Datenschutzerklärung" [ref=e228] [cursor=pointer]:
+          - /url: https://icompetence.de/imprint/
+          - text: Impressum & Datenschutzerklärung
+      - generic [ref=e229]:
+        - generic [ref=e231]:
+          - button "Mehr Informationen" [ref=e232] [cursor=pointer]
+          - button "Nur notwendige akzeptieren" [ref=e233] [cursor=pointer]
+          - button "Alles akzeptieren" [ref=e234] [cursor=pointer]
+        - link "Powered by Usercentrics Consent Management" [ref=e236] [cursor=pointer]:
+          - /url: https://usercentrics.com/de/consent-management-platform-powered-by-usercentrics/?utm_source=banner_uc&utm_medium=referral&utm_content=v3
