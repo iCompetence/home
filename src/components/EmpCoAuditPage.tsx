@@ -290,6 +290,7 @@ function EmpCoAuditPageContent() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
+                  data-cta='empco-probeseite'
                   onClick={() => scrollToSection('form-section')}
                   className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                   style={{
@@ -744,6 +745,7 @@ function EmpCoAuditPageContent() {
             </p>
 
             <button
+              data-cta='empco-probeseite'
               onClick={() => scrollToSection('form-section')}
               className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
               style={{
@@ -1083,6 +1085,7 @@ function EmpCoAuditPageContent() {
                           {t('footer.inquiries')}
                         </p>
                         <button
+                          data-cta='mail'
                           onClick={() => window.open('mailto:info@icompetence.de', '_blank')}
                           style={{
                             color: 'var(--gray-white)',
@@ -1117,6 +1120,7 @@ function EmpCoAuditPageContent() {
                           {t('footer.phone')}
                         </p>
                         <button
+                          data-cta='fon'
                           onClick={() => window.open('tel:+494022636380', '_blank')}
                           style={{
                             color: 'var(--gray-white)',
