@@ -1,4 +1,5 @@
 'use client'
+import { trackCtaClick } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Mail, X } from 'lucide-react';
@@ -916,7 +917,7 @@ function IntelligenticSearchPageContent() {
                         {t('footer.inquiries')}
                       </p>
                       <button
-                        onClick={() => window.open('mailto:info@icompetence.de', '_blank')}
+                        onClick={() => { trackCtaClick('footer_mail', 'info@icompetence.de'); window.open('mailto:info@icompetence.de', '_blank'); }}
                         style={{
                           color: 'var(--gray-white)',
                           fontSize: '18px',
@@ -944,7 +945,7 @@ function IntelligenticSearchPageContent() {
                         {t('footer.phone')}
                       </p>
                       <button
-                        onClick={() => window.open('tel:+494022636380', '_blank')}
+                        onClick={() => { trackCtaClick('footer_phone', '+49 40 22636380'); window.open('tel:+494022636380', '_blank'); }}
                         style={{
                           color: 'var(--gray-white)',
                           fontSize: '18px',

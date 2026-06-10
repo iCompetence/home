@@ -1,5 +1,6 @@
 'use client';
 
+import { trackCtaClick } from '@/lib/tracking';
 import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import {
@@ -2978,7 +2979,16 @@ function FooterContactBlock({ label, value, href, align = 'end' }: { label: stri
         {label}
       </span>
       {href ? (
-        <a href={href} style={valueStyle}>
+        <a
+          href={href}
+          style={valueStyle}
+          onClick={() =>
+            trackCtaClick(
+              href.startsWith('mailto:') ? 'footer_mail' : href.startsWith('tel:') ? 'footer_phone' : 'footer_link',
+              value
+            )
+          }
+        >
           {value}
         </a>
       ) : (

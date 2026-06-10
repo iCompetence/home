@@ -1,4 +1,5 @@
 'use client'
+import { trackCtaClick } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Mail, X } from 'lucide-react';
@@ -33,21 +34,6 @@ function EmpCoAuditPageContent() {
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  // Push a CTA click key event to the GTM dataLayer.
-  // Reusable across pages — keep cta_id stable & unique per button.
-  const trackCtaClick = (ctaId: string, ctaLabel: string) => {
-    if (typeof window === 'undefined') return;
-    // @ts-ignore
-    window.dataLayer = window.dataLayer || [];
-    // @ts-ignore
-    window.dataLayer.push({
-      event: 'cta_click',
-      cta_id: ctaId,
-      cta_label: ctaLabel,
-      page_id: 'empco-audit',
-    });
   };
 
   // Native Netlify submit + form_submit key event.
@@ -1160,7 +1146,7 @@ function EmpCoAuditPageContent() {
                         </p>
                         <button
                           data-cta='mail'
-                          onClick={() => window.open('mailto:info@icompetence.de', '_blank')}
+                          onClick={() => { trackCtaClick('footer_mail', 'info@icompetence.de'); window.open('mailto:info@icompetence.de', '_blank'); }}
                           style={{
                             color: 'var(--gray-white)',
                             fontSize: '18px',
@@ -1195,7 +1181,7 @@ function EmpCoAuditPageContent() {
                         </p>
                         <button
                           data-cta='fon'
-                          onClick={() => window.open('tel:+494022636380', '_blank')}
+                          onClick={() => { trackCtaClick('footer_phone', '+49 40 22636380'); window.open('tel:+494022636380', '_blank'); }}
                           style={{
                             color: 'var(--gray-white)',
                             fontSize: '18px',
