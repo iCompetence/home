@@ -643,6 +643,10 @@ const translations: Translations = {
     en: 'required',
     de: 'Pflichtfeld'
   },
+  'empco.form.recaptchaError': {
+    en: 'Please complete the reCAPTCHA before submitting.',
+    de: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.'
+  },
   'empco.form.disclaimer': {
     en: 'Note: the iC EmpCo Audit is an initial technical assessment and does not replace legal advice. For the final legal evaluation of your claims, discuss the audit results with your legal department or an external law firm.',
     de: 'Hinweis: Der iC EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine Rechtsberatung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einer Kanzlei.'

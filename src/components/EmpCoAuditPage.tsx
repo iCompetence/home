@@ -15,7 +15,7 @@ import Script from 'next/script';
 const logoImage = '/iCompetence_logo.svg';
 
 function EmpCoAuditPageContent() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -33,6 +33,63 @@ function EmpCoAuditPageContent() {
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  };
+
+  // Push a CTA click key event to the GTM dataLayer.
+  // Reusable across pages — keep cta_id stable & unique per button.
+  const trackCtaClick = (ctaId: string, ctaLabel: string) => {
+    if (typeof window === 'undefined') return;
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_id: ctaId,
+      cta_label: ctaLabel,
+      page_id: 'empco-audit',
+    });
+  };
+
+  // Native Netlify submit + form_submit key event.
+  // The browser's submit event only fires after HTML5 validation passes
+  // (required email/url/consent), so a fired event means the form was filled.
+  // We additionally require a solved reCAPTCHA so we don't count submissions
+  // that Netlify will reject server-side.
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
+
+    let recaptchaSolved = true;
+    try {
+      // @ts-ignore
+      if (typeof window !== 'undefined' && window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+        // @ts-ignore
+        recaptchaSolved = window.grecaptcha.getResponse().length > 0;
+      }
+    } catch {
+      // If grecaptcha isn't ready, fall back to letting Netlify validate.
+      recaptchaSolved = true;
+    }
+
+    if (!recaptchaSolved) {
+      e.preventDefault();
+      alert(t('empco.form.recaptchaError'));
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      // @ts-ignore
+      window.dataLayer = window.dataLayer || [];
+      // @ts-ignore
+      window.dataLayer.push({
+        event: 'form_submit',
+        form_id: 'empco-audit',
+        form_language: language,
+      });
+    }
+
+    // Redirect to the language-correct thank-you page after Netlify accepts.
+    form.action = language === 'en' ? '/thank-you' : '/danke';
+    // No preventDefault: let the native Netlify submit proceed.
   };
 
   useEffect(() => {
@@ -290,8 +347,11 @@ function EmpCoAuditPageContent() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  data-cta='empco-probeseite'
-                  onClick={() => scrollToSection('form-section')}
+                  data-cta='empco_hero_probeseite'
+                  onClick={() => {
+                    trackCtaClick('empco_hero_probeseite', t('empco.hero.ctaPrimary'));
+                    scrollToSection('form-section');
+                  }}
                   className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                   style={{
                     color: 'var(--gray-white)',
@@ -396,6 +456,9 @@ function EmpCoAuditPageContent() {
                     <button
                       key={item.id}
                       onClick={() => {
+                        if (item.id === 'form-section') {
+                          trackCtaClick('empco_nav_probeseite', item.label);
+                        }
                         if (item.id === 'hero') {
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         } else {
@@ -448,7 +511,9 @@ function EmpCoAuditPageContent() {
             }}
           >
             <button
+              data-cta='empco_header_contact'
               onClick={() => {
+                trackCtaClick('empco_header_contact', t('header.contact'));
                 window.open('/contact', '_blank');
               }}
               className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
@@ -504,7 +569,9 @@ function EmpCoAuditPageContent() {
         {/* CTA Button - Floating - Mobile only */}
         {isMobile && (
           <button
+            data-cta='empco_header_contact'
             onClick={() => {
+              trackCtaClick('empco_header_contact', t('header.contact'));
               window.open('/contact', '_blank');
             }}
             className="fixed right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
@@ -557,6 +624,9 @@ function EmpCoAuditPageContent() {
                     <button
                       key={item.id}
                       onClick={() => {
+                        if (item.id === 'form-section') {
+                          trackCtaClick('empco_nav_probeseite', item.label);
+                        }
                         if (item.id === 'hero') {
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         } else {
@@ -745,8 +815,11 @@ function EmpCoAuditPageContent() {
             </p>
 
             <button
-              data-cta='empco-probeseite'
-              onClick={() => scrollToSection('form-section')}
+              data-cta='empco_form_probeseite'
+              onClick={() => {
+                trackCtaClick('empco_form_probeseite', t('empco.test.cta'));
+                scrollToSection('form-section');
+              }}
               className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
               style={{
                 color: 'var(--gray-white)',
@@ -816,6 +889,7 @@ function EmpCoAuditPageContent() {
               method="POST"
               data-netlify="true"
               action="/danke"
+              onSubmit={handleFormSubmit}
               className="space-y-6"
             >
               <input type="hidden" name="form-name" value="empco-audit" />
