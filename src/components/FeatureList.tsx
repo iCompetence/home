@@ -26,7 +26,7 @@ export const FeatureList = ({
   return (
     <AnimatedSection 
       id={id}
-      className={`min-h-screen relative z-10 px-4 sm:px-6 lg:px-8 flex items-center ${className}`}
+      className={`relative z-10 py-16 px-4 sm:px-6 lg:px-8 ${className}`}
       animationType="fadeInUp"
       duration={0}
     >

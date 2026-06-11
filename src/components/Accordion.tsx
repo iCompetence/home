@@ -24,6 +24,8 @@ interface AccordionProps {
   className?: string;
   /** Animation type */
   animationType?: 'fadeInUp' | 'fadeIn' | 'slideInLeft' | 'slideInRight';
+  /** Tailwind max-height class applied to open content (raise for longer answers, e.g. FAQ) */
+  contentMaxHeightClass?: string;
 }
 
 export const Accordion = ({
@@ -33,7 +35,8 @@ export const Accordion = ({
   allowMultiple = false,
   defaultOpen,
   className = "",
-  animationType = "fadeInUp"
+  animationType = "fadeInUp",
+  contentMaxHeightClass = "max-h-96"
 }: AccordionProps) => {
   const [selectedItems, setSelectedItems] = useState<number[]>(
     defaultOpen !== undefined ? [defaultOpen] : []
@@ -132,7 +135,7 @@ export const Accordion = ({
                 <div
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${
                     isItemSelected(index)
-                      ? 'max-h-96 opacity-100 pb-8' 
+                      ? `${contentMaxHeightClass} opacity-100 pb-8`
                       : 'max-h-0 opacity-0'
                   }`}
                 >

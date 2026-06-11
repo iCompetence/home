@@ -2,7 +2,7 @@
 import { trackCtaClick } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Mail, X } from 'lucide-react';
+import { ChevronDown, Mail, X, Ban } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import Aurora1 from '../imports/Aurora1';
@@ -11,6 +11,10 @@ import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 import { Accordion } from './Accordion';
+import { StatisticsGrid } from './StatisticsGrid';
+import { FeatureList } from './FeatureList';
+import { ProcessList } from './ProcessList';
+import { ComparisonTable } from './ComparisonTable';
 import Script from 'next/script';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -147,6 +151,8 @@ function EmpCoAuditPageContent() {
         { id: 'features-section', element: document.getElementById('features-section') },
         { id: 'test-section', element: document.getElementById('test-section') },
         { id: 'form-section', element: document.getElementById('form-section') },
+        { id: 'empco-info-section', element: document.getElementById('empco-info-section') },
+        { id: 'faq-section', element: document.getElementById('faq-section') },
         { id: 'cta-footer-section', element: document.getElementById('cta-footer-section') },
       ];
 
@@ -186,8 +192,47 @@ function EmpCoAuditPageContent() {
     { id: 'features-section', label: t('empco.anchor.features'), number: '04' },
     { id: 'test-section', label: t('empco.anchor.test'), number: '05' },
     { id: 'form-section', label: t('empco.anchor.form'), number: '06' },
-    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '07' },
+    { id: 'empco-info-section', label: t('empco.anchor.directive'), number: '07' },
+    { id: 'faq-section', label: t('empco.anchor.faq'), number: '08' },
+    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '09' },
   ];
+
+  // SEO / knowledge section content — sourced from the EmpCo SEO module, kept in i18n.
+  // Shapes match the existing reusable components (StatisticsGrid, FeatureList,
+  // ProcessList, ComparisonTable, Accordion).
+  const empcoFacts = [
+    { value: t('empco.seo.fact1.value'), label: t('empco.seo.fact1.label') },
+    { value: t('empco.seo.fact2.value'), label: t('empco.seo.fact2.label') },
+    { value: t('empco.seo.fact3.value'), label: t('empco.seo.fact3.label') },
+    { value: t('empco.seo.fact4.value'), label: t('empco.seo.fact4.label') },
+    { value: t('empco.seo.fact5.value'), label: t('empco.seo.fact5.label') },
+    { value: t('empco.seo.fact6.value'), label: t('empco.seo.fact6.label') },
+  ];
+  const empcoBanned = [
+    t('empco.seo.banned.item1'),
+    t('empco.seo.banned.item2'),
+    t('empco.seo.banned.item3'),
+    t('empco.seo.banned.item4'),
+  ];
+  const empcoSteps = [
+    { label: t('empco.seo.step1.label'), description: t('empco.seo.step1.desc') },
+    { label: t('empco.seo.step2.label'), description: t('empco.seo.step2.desc') },
+    { label: t('empco.seo.step3.label'), description: t('empco.seo.step3.desc') },
+    { label: t('empco.seo.step4.label'), description: t('empco.seo.step4.desc') },
+    { label: t('empco.seo.step5.label'), description: t('empco.seo.step5.desc') },
+  ];
+  const empcoCompareRows = [
+    { feature: t('empco.seo.compare.r1.aspect'), primary: t('empco.seo.compare.r1.empco'), secondary: t('empco.seo.compare.r1.gcd') },
+    { feature: t('empco.seo.compare.r2.aspect'), primary: t('empco.seo.compare.r2.empco'), secondary: t('empco.seo.compare.r2.gcd') },
+    { feature: t('empco.seo.compare.r3.aspect'), primary: t('empco.seo.compare.r3.empco'), secondary: t('empco.seo.compare.r3.gcd') },
+  ];
+  const empcoFaq = Array.from({ length: 13 }, (_, i) => ({
+    title: t(`empco.seo.faq.q${i + 1}`),
+    content: t(`empco.seo.faq.a${i + 1}`),
+  }));
+  // NOTE: FAQPage + HowTo JSON-LD is rendered server-side in app/empco-audit/page.tsx
+  // (German, the SEO-target language) so it lands in the crawlable static HTML — the
+  // rich content here only renders client-side after mount.
 
   if (!mounted) {
     return (
@@ -1026,6 +1071,42 @@ function EmpCoAuditPageContent() {
           </div>
         </div>
       </AnimatedSection>
+
+      {/* Section 6: SEO / knowledge — EmpCo directive explained.
+          Reuses existing components: StatisticsGrid (facts + intro), FeatureList
+          (what it bans), ProcessList (5 steps), ComparisonTable (EmpCo vs. GCD). */}
+      <StatisticsGrid
+        id="empco-info-section"
+        title={t("empco.seo.explainer.title")}
+        description={t("empco.seo.explainer.lead")}
+        statistics={empcoFacts}
+      />
+
+      <FeatureList
+        title={t("empco.seo.banned.title")}
+        items={empcoBanned}
+        icon={Ban}
+      />
+
+      <ProcessList
+        title={t("empco.seo.steps.title")}
+        steps={empcoSteps}
+      />
+
+      <ComparisonTable
+        title={t("empco.seo.compare.title")}
+        primaryHeader={t("empco.seo.compare.colEmpco")}
+        secondaryHeader={t("empco.seo.compare.colGcd")}
+        rows={empcoCompareRows}
+      />
+
+      {/* Section 7: FAQ accordion */}
+      <Accordion
+        id="faq-section"
+        title={t('empco.seo.faq.title')}
+        items={empcoFaq}
+        contentMaxHeightClass="max-h-[600px]"
+      />
 
       {/* CTA & Footer Section */}
       <div ref={footerRef}>

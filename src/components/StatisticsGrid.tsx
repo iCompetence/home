@@ -1,6 +1,5 @@
 'use client'
 
-import { TrendingUp, TrendingDown } from 'lucide-react';
 import { AnimatedSection } from './ScrollAnimations';
 
 interface Statistic {
@@ -49,71 +48,9 @@ export const StatisticsGrid = ({
     >
       <div className="container mx-auto">
         <div className="max-w-6xl mx-auto">
-          {/* Two Column Layout */}
+          {/* Two Column Layout — text left, statistics grid right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Left Column - Statistics Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {statistics.map((stat, index) => (
-                <div
-                  key={index}
-                  className="border border-white/10 rounded-none p-6 hover:bg-white/[0.02] transition-colors duration-200"
-                  style={{ minHeight: '180px' }}
-                >
-                  {/* Icon */}
-                  <div className="mb-4">
-                    {/* {stat.isPositive ? (
-                      <TrendingUp
-                        size={20}
-                        style={{ color: 'var(--gray-light)' }}
-                      />
-                    ) : (
-                      <TrendingDown
-                        size={20}
-                        style={{ color: 'var(--gray-light)' }}
-                      />
-                    )} */}
-                  </div>
-
-                  {/* Value and Change */}
-                  <div className="mb-3">
-                    <div className="flex items-baseline gap-3">
-                      <span
-                        style={{
-                          color: 'var(--gray-white)',
-                          fontSize: '32px',
-                          fontWeight: '700',
-                          lineHeight: '110%'
-                        }}
-                      >
-                        {stat.value}
-                      </span>
-                      <span
-                        style={{
-                          color: stat.isPositive ? '#10b981' : '#ef4444',
-                          fontSize: '14px',
-                          fontWeight: '500'
-                        }}
-                      >
-                        {stat.change}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Label */}
-                  <p
-                    style={{
-                      color: 'var(--gray-light)',
-                      fontSize: '16px',
-                      lineHeight: '160%'
-                    }}
-                  >
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Right Column - Text Content */}
+            {/* Left Column - Text Content */}
             <div>
               {badge && (
                 <div className="mb-6">
@@ -157,6 +94,56 @@ export const StatisticsGrid = ({
               >
                 {description}
               </p>
+            </div>
+
+            {/* Right Column - Statistics Grid (label on top, value below) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {statistics.map((stat, index) => (
+                <div
+                  key={index}
+                  className="border border-white/10 rounded-none p-6 hover:bg-white/[0.02] transition-colors duration-200 flex flex-col justify-between"
+                  style={{ minHeight: '180px' }}
+                >
+                  {/* Label (caption) */}
+                  <p
+                    style={{
+                      color: 'var(--gray-light)',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      lineHeight: '140%'
+                    }}
+                  >
+                    {stat.label}
+                  </p>
+
+                  {/* Value and optional change */}
+                  <div className="flex items-baseline gap-3">
+                    <span
+                      style={{
+                        color: 'var(--gray-white)',
+                        fontSize: '32px',
+                        fontWeight: '700',
+                        lineHeight: '110%'
+                      }}
+                    >
+                      {stat.value}
+                    </span>
+                    {stat.change && (
+                      <span
+                        style={{
+                          color: stat.isPositive ? '#10b981' : '#ef4444',
+                          fontSize: '14px',
+                          fontWeight: '500'
+                        }}
+                      >
+                        {stat.change}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
