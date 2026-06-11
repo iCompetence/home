@@ -655,6 +655,10 @@ const translations: Translations = {
     en: 'Please complete the reCAPTCHA before submitting.',
     de: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.'
   },
+  'empco.form.submitError': {
+    en: 'Something went wrong while sending your request. Please try again.',
+    de: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.'
+  },
   'empco.form.disclaimer': {
     en: 'Note: the EmpCo Audit is an initial technical assessment and does not replace qualified legal advice. We accept no liability for the accuracy, completeness or timeliness of the results. For the final legal evaluation of your claims, please discuss the audit results with your legal department or a qualified lawyer.',
     de: 'Hinweis: Der EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine qualifizierte Rechtsberatung. Für die Richtigkeit, Vollständigkeit und Aktualität der Ergebnisse übernehmen wir keine Haftung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einem Rechtsanwalt bzw. einer Rechtsanwältin.'
