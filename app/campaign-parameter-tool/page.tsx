@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     canonical: '/campaign-parameter-tool',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 }
 

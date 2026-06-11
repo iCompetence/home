@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     canonical: '/empco-audit',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 }
 

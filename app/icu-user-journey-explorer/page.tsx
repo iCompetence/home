@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     canonical: '/icu-user-journey-explorer',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 }
 

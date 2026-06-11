@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     canonical: '/ai-workshop',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 }
 

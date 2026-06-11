@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     canonical: '/privacy-led-ai',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 }
 
