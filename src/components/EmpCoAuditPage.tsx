@@ -793,6 +793,33 @@ function EmpCoAuditPageContent() {
         </div>
       </AnimatedSection>
 
+      {/* Section 3b: EmpCo tool preview — same framed-image module as the other
+          product pages (16px rounded corners, thin border, no shadow). */}
+      <AnimatedSection
+        className="relative z-10 py-8 sm:py-12 px-4 sm:px-6 lg:px-8"
+        animationType="fadeInUp"
+        duration={0}
+      >
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <div
+              className="relative w-full overflow-hidden"
+              style={{
+                borderRadius: '16px',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              <img
+                src="/assets/empco/EmpCo-Tool-UI.png"
+                alt="EmpCo Audit Tool"
+                className="w-full h-auto"
+                style={{ display: 'block' }}
+              />
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
       {/* Section 4: Features */}
       <Accordion
         id="features-section"
