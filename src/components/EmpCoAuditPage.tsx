@@ -232,7 +232,7 @@ function EmpCoAuditPageContent() {
                   marginBottom: '1.5rem',
                 }}
               >
-                iC EmpCo Audit
+                EmpCo Audit
               </h1>
               <p
                 style={{
@@ -305,7 +305,7 @@ function EmpCoAuditPageContent() {
                   marginBottom: '1.5rem',
                 }}
               >
-                iC EmpCo Audit
+                EmpCo Audit
               </h1>
               <p
                 style={{

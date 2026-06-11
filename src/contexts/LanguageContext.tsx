@@ -420,7 +420,7 @@ const translations: Translations = {
     de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Machen Sie KI zu Ihrem Wettbewerbsvorteil!'
   },
 
-  // iC EmpCo Audit Page
+  // EmpCo Audit Page
   'empco.hero.headline': {
     en: 'Sustainability that holds up under scrutiny.',
     de: 'Nachhaltigkeit, die der Prüfung standhält.'
@@ -434,8 +434,8 @@ const translations: Translations = {
     de: 'Kostenlose Probeseite anfordern'
   },
   'empco.hero.ctaSecondary': {
-    en: 'How the iC EmpCo Audit works',
-    de: 'So funktioniert der iC EmpCo Audit'
+    en: 'How the EmpCo Audit works',
+    de: 'So funktioniert der EmpCo Audit'
   },
   'empco.anchor.intro': {
     en: 'Intro',
@@ -480,8 +480,8 @@ const translations: Translations = {
     de: 'Das Problem: Die meisten Unternehmen wissen nicht genau, was auf der eigenen Website steht. Marketing, Nachhaltigkeit und Recht arbeiten in getrennten Tools. Texte sind über Jahre gewachsen. Niemand hat die Kapazität, hunderte Seiten Zeile für Zeile zu prüfen.'
   },
   'empco.why.p4': {
-    en: 'This is exactly where the iC EmpCo Audit comes in.',
-    de: 'Genau hier setzt der iC EmpCo Audit an.'
+    en: 'This is exactly where the EmpCo Audit comes in.',
+    de: 'Genau hier setzt der EmpCo Audit an.'
   },
 
   // Section 3: What it is
@@ -494,8 +494,8 @@ const translations: Translations = {
     de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Branchenüblich liegen die Gesamtkosten je nach Unternehmensgröße im mittleren bis hohen fünfstelligen Bereich, bei großen Konzernen auch deutlich darüber.'
   },
   'empco.what.p2': {
-    en: 'The iC EmpCo Audit does not replace your lawyers. It replaces the work that comes before them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually require legal judgment.',
-    de: 'Der iC EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Arbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung benötigen.'
+    en: 'The EmpCo Audit does not replace your lawyers. It replaces the work that comes before them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually require legal judgment.',
+    de: 'Der EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Arbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung benötigen.'
   },
 
   // Section 4: Features
@@ -594,8 +594,8 @@ const translations: Translations = {
     de: 'Überzeugt das Ergebnis, beauftragen Sie den Audit für die gesamte Website. Festpreis, transparente Kostenvorschau vor Auftragserteilung.'
   },
   'empco.test.closing': {
-    en: 'The perfect lead-in for your legal team: the iC EmpCo Audit surfaces greenwashing risks up front and prepares your claims optimally for the legal review.',
-    de: 'Die perfekte Steilvorlage für die Rechtsabteilung: Unser iC EmpCo Audit liefert Greenwashing-Risiken vorab heraus und bereitet Ihre Claims optimal für die juristische Prüfung auf.'
+    en: 'The perfect lead-in for your legal team: the EmpCo Audit surfaces greenwashing risks up front and prepares your claims optimally for the legal review.',
+    de: 'Die perfekte Steilvorlage für die Rechtsabteilung: Unser EmpCo Audit liefert Greenwashing-Risiken vorab heraus und bereitet Ihre Claims optimal für die juristische Prüfung auf.'
   },
   'empco.test.cta': {
     en: 'Request a free sample page',
@@ -648,8 +648,8 @@ const translations: Translations = {
     de: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.'
   },
   'empco.form.disclaimer': {
-    en: 'Note: the iC EmpCo Audit is an initial technical assessment and does not replace legal advice. For the final legal evaluation of your claims, discuss the audit results with your legal department or an external law firm.',
-    de: 'Hinweis: Der iC EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine Rechtsberatung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einer Kanzlei.'
+    en: 'Note: the EmpCo Audit is an initial technical assessment and does not replace legal advice. For the final legal evaluation of your claims, discuss the audit results with your legal department or an external law firm.',
+    de: 'Hinweis: Der EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine Rechtsberatung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einer Kanzlei.'
   },
   'empco.form.consent': {
     en: 'I have read the privacy policy and agree to my data being processed for the purpose of creating the audit.',
@@ -962,8 +962,8 @@ const translations: Translations = {
     de: 'Wissensplattform für Unternehmen'
   },
   'burgerMenu.empcoAudit': {
-    en: 'iC EmpCo Audit',
-    de: 'iC EmpCo Audit'
+    en: 'EmpCo Audit',
+    de: 'EmpCo Audit'
   },
   'burgerMenu.empcoAudit.desc': {
     en: 'Protects your website against greenwashing risks',
