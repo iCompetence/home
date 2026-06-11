@@ -1,5 +1,5 @@
 'use client'
-import { trackCtaClick } from '@/lib/tracking';
+import { trackCtaClick, submitNetlifyForm } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, X, Mail } from 'lucide-react';
@@ -698,6 +698,14 @@ function AIWorkshopPageContent() {
                 method="POST"
                 data-netlify="true"
                 action="/danke"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  submitNetlifyForm(e.currentTarget, {
+                    formId: 'ai-workshop',
+                    recaptchaErrorMessage: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.',
+                    submitErrorMessage: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.',
+                  });
+                }}
               >
                 <input type="hidden" name="form-name" value="ai-workshop" />
 

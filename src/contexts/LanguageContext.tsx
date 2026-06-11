@@ -651,11 +651,11 @@ const translations: Translations = {
     en: 'required',
     de: 'Pflichtfeld'
   },
-  'empco.form.recaptchaError': {
+  'form.recaptchaError': {
     en: 'Please complete the reCAPTCHA before submitting.',
     de: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.'
   },
-  'empco.form.submitError': {
+  'form.submitError': {
     en: 'Something went wrong while sending your request. Please try again.',
     de: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.'
   },

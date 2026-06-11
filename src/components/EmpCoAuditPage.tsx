@@ -1,5 +1,5 @@
 'use client'
-import { trackCtaClick } from '@/lib/tracking';
+import { trackCtaClick, submitNetlifyForm } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Mail, X, Ban } from 'lucide-react';
@@ -40,66 +40,16 @@ function EmpCoAuditPageContent() {
     }
   };
 
-  // Submit the JS-rendered Netlify form via AJAX.
-  //
-  // Why AJAX instead of a native submit: Netlify only "knows" this form from
-  // the build-time declaration in public/__forms.html (action="/danke"). A
-  // native submit that mutates form.action to /thank-you posts to a path
-  // Netlify doesn't associate with the form, so the submission is NOT recorded
-  // and the language redirect is unreliable. The documented fix is to POST the
-  // url-encoded body to "/" (form-name + all fields + g-recaptcha-response,
-  // which sits inside the form) and handle the redirect ourselves.
-  // https://docs.netlify.com/manage/forms/setup/#submit-javascript-rendered-forms-with-ajax
+  // Submit the JS-rendered Netlify form via AJAX (shared helper). The submit
+  // event only fires after HTML5 validation passes (required email/url/consent).
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // The submit event only fires after HTML5 validation passes
-    // (required email/url/consent), so we know the form was filled.
     e.preventDefault();
-    const form = e.currentTarget;
-
-    // Require a solved reCAPTCHA — Netlify rejects submissions without it.
-    let recaptchaSolved = true;
-    try {
-      // @ts-ignore
-      if (typeof window !== 'undefined' && window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
-        // @ts-ignore
-        recaptchaSolved = window.grecaptcha.getResponse().length > 0;
-      }
-    } catch {
-      recaptchaSolved = true;
-    }
-    if (!recaptchaSolved) {
-      alert(t('empco.form.recaptchaError'));
-      return;
-    }
-
-    const params = new URLSearchParams();
-    new FormData(form).forEach((value, key) => {
-      params.append(key, typeof value === 'string' ? value : '');
+    submitNetlifyForm(e.currentTarget, {
+      formId: 'empco-audit',
+      language,
+      recaptchaErrorMessage: t('form.recaptchaError'),
+      submitErrorMessage: t('form.submitError'),
     });
-
-    const thankYouUrl = language === 'en' ? '/thank-you' : '/danke';
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`Netlify form submission failed: ${res.status}`);
-        // Fire the key event only once Netlify has accepted the submission.
-        if (typeof window !== 'undefined') {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'form_submit',
-            form_id: 'empco-audit',
-            form_language: language,
-          });
-        }
-        window.location.href = thankYouUrl;
-      })
-      .catch(() => {
-        alert(t('empco.form.submitError'));
-      });
   };
 
   useEffect(() => {

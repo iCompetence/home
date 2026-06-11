@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { trackFormSuccess } from '@/lib/tracking';
 
 interface CTTrialModalProps {
   isOpen: boolean;
@@ -11,7 +12,7 @@ interface CTTrialModalProps {
 }
 
 export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -81,11 +82,15 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
     const formData = new FormData(myForm);
 
     try {
-      await fetch("/", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
       });
+      if (!res.ok) throw new Error(`Netlify form submission failed: ${res.status}`);
+
+      // Fire the key event only once Netlify has accepted the submission.
+      trackFormSuccess('trial', language);
 
       // 2. Erfolg-Status setzen
       setIsSubmitting(false);

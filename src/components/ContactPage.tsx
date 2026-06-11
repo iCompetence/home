@@ -1,5 +1,5 @@
 'use client'
-import { trackCtaClick } from '@/lib/tracking';
+import { trackCtaClick, submitNetlifyForm } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, X } from 'lucide-react';
@@ -14,7 +14,7 @@ import Script from 'next/script';
 const logoImage = '/iCompetence_logo.svg';
 
 function ContactPageContent() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -324,6 +324,15 @@ function ContactPageContent() {
                     method="POST"
                     data-netlify="true"
                     action="/danke"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      submitNetlifyForm(e.currentTarget, {
+                        formId: 'contact',
+                        language,
+                        recaptchaErrorMessage: t('form.recaptchaError'),
+                        submitErrorMessage: t('form.submitError'),
+                      });
+                    }}
                     className="space-y-6"
                   >
                     <input type="hidden" name="form-name" value="contact" />
