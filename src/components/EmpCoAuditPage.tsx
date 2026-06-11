@@ -2,7 +2,7 @@
 import { trackCtaClick, submitNetlifyForm } from '@/lib/tracking';
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Mail, X, Ban } from 'lucide-react';
+import { ChevronDown, Mail, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import Aurora1 from '../imports/Aurora1';
@@ -11,10 +11,6 @@ import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
 import { Accordion } from './Accordion';
-import { StatisticsGrid } from './StatisticsGrid';
-import { FeatureList } from './FeatureList';
-import { ProcessList } from './ProcessList';
-import { ComparisonTable } from './ComparisonTable';
 import Script from 'next/script';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -167,9 +163,8 @@ function EmpCoAuditPageContent() {
     { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '09' },
   ];
 
-  // SEO / knowledge section content — sourced from the EmpCo SEO module, kept in i18n.
-  // Shapes match the existing reusable components (StatisticsGrid, FeatureList,
-  // ProcessList, ComparisonTable, Accordion).
+  // SEO / knowledge section content — kept in i18n. These arrays are flattened
+  // into plain-text Accordion items below (empcoDirectiveItems).
   const empcoFacts = [
     { value: t('empco.seo.fact1.value'), label: t('empco.seo.fact1.label') },
     { value: t('empco.seo.fact2.value'), label: t('empco.seo.fact2.label') },
@@ -195,6 +190,36 @@ function EmpCoAuditPageContent() {
     { feature: t('empco.seo.compare.r1.aspect'), primary: t('empco.seo.compare.r1.empco'), secondary: t('empco.seo.compare.r1.gcd') },
     { feature: t('empco.seo.compare.r2.aspect'), primary: t('empco.seo.compare.r2.empco'), secondary: t('empco.seo.compare.r2.gcd') },
     { feature: t('empco.seo.compare.r3.aspect'), primary: t('empco.seo.compare.r3.empco'), secondary: t('empco.seo.compare.r3.gcd') },
+  ];
+  // SEO knowledge block rendered as a single Accordion (each heading = one
+  // collapsible item). Content is plain text using the Accordion's conventions:
+  // "\n\n" splits paragraphs, a line starting with "- " becomes a bullet.
+  const empcoCompareColEmpco = t('empco.seo.compare.colEmpco');
+  const empcoCompareColGcd = t('empco.seo.compare.colGcd');
+  const empcoDirectiveItems = [
+    {
+      title: t('empco.seo.explainer.title'),
+      content:
+        t('empco.seo.explainer.lead') +
+        empcoFacts.map((f) => `\n- ${f.label}: ${f.value}`).join(''),
+    },
+    {
+      title: t('empco.seo.banned.title'),
+      content: empcoBanned.map((item) => `\n- ${item}`).join(''),
+    },
+    {
+      title: t('empco.seo.steps.title'),
+      content: empcoSteps.map((s) => `\n- ${s.label}: ${s.description}`).join(''),
+    },
+    {
+      title: t('empco.seo.compare.title'),
+      content: empcoCompareRows
+        .map(
+          (r) =>
+            `${r.feature}\n- ${empcoCompareColEmpco}: ${r.primary}\n- ${empcoCompareColGcd}: ${r.secondary}`
+        )
+        .join('\n\n'),
+    },
   ];
   const empcoFaq = Array.from({ length: 13 }, (_, i) => ({
     title: t(`empco.seo.faq.q${i + 1}`),
@@ -841,7 +866,10 @@ function EmpCoAuditPageContent() {
         duration={0}
       >
         <div className="container mx-auto">
-          <div className="max-w-2xl mx-auto">
+          {/* max-w-6xl wrapper keeps the form block left-flush with the other
+              EmpCo sections; the inner max-w-2xl keeps the form itself narrow. */}
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-2xl">
             <h2
               className="mobile-h2-title"
               style={{
@@ -1038,36 +1066,20 @@ function EmpCoAuditPageContent() {
                 </a>
               </p>
             </form>
+            </div>
           </div>
         </div>
       </AnimatedSection>
 
       {/* Section 6: SEO / knowledge — EmpCo directive explained.
-          Reuses existing components: StatisticsGrid (facts + intro), FeatureList
-          (what it bans), ProcessList (5 steps), ComparisonTable (EmpCo vs. GCD). */}
-      <StatisticsGrid
+          Rendered as a single Accordion (the component that best fits the page
+          design); each heading becomes one collapsible item. */}
+      <Accordion
         id="empco-info-section"
-        title={t("empco.seo.explainer.title")}
-        description={t("empco.seo.explainer.lead")}
-        statistics={empcoFacts}
-      />
-
-      <FeatureList
-        title={t("empco.seo.banned.title")}
-        items={empcoBanned}
-        icon={Ban}
-      />
-
-      <ProcessList
-        title={t("empco.seo.steps.title")}
-        steps={empcoSteps}
-      />
-
-      <ComparisonTable
-        title={t("empco.seo.compare.title")}
-        primaryHeader={t("empco.seo.compare.colEmpco")}
-        secondaryHeader={t("empco.seo.compare.colGcd")}
-        rows={empcoCompareRows}
+        title={t('empco.anchor.directive')}
+        items={empcoDirectiveItems}
+        allowMultiple
+        contentMaxHeightClass="max-h-[900px]"
       />
 
       {/* Section 7: FAQ accordion */}
