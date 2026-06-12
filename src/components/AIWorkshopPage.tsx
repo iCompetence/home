@@ -23,9 +23,9 @@ const experts = [
 ];
 
 const dateOptions = [
-  'Dienstag, 14.04.2026 (10:00 bis 11:30 Uhr)',
-  'Donnerstag, 16.04.2026 (10:00 bis 11:30 Uhr)',
-  'Donnerstag, 23.04.2026 (14:00 bis 15:30 Uhr)',
+  // 'Dienstag, 14.04.2026 (10:00 bis 11:30 Uhr)',
+  // 'Donnerstag, 16.04.2026 (10:00 bis 11:30 Uhr)',
+  // 'Donnerstag, 23.04.2026 (14:00 bis 15:30 Uhr)',
   'Individuellen Termin buchen',
 ];
 
@@ -644,7 +644,7 @@ function AIWorkshopPageContent() {
           </div>
         </AnimatedSection>
 
-        {/* Workshop Dates Section */}
+        {/* Workshop Dates Section — temporarily hidden
         <ProcessList
           id="dates-section"
           title="Verfügbare Termine"
@@ -657,6 +657,7 @@ function AIWorkshopPageContent() {
           layout="vertical"
           className="py-8 sm:py-16"
         />
+        */}
 
         {/* Application Form Section */}
         <section
