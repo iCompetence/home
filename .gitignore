@@ -40,3 +40,8 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+
+# Local working files / tooling artifacts
+.claude/
+.playwright-mcp/
+Stuff/
