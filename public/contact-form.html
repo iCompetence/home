@@ -94,7 +94,7 @@
   </style>
 </head>
 <body>
-  <form action="/danke" data-netlify-recaptcha="true" id="contact" method="post" name="contact">
+  <form action="/danke/" data-netlify-recaptcha="true" id="contact" method="post" name="contact">
     <input type="hidden" name="form-name" value="contact" />
 
     <!-- Honeypot field -->
@@ -125,5 +125,14 @@
 
     <button type="submit">Anfrage absenden</button>
   </form>
+<script>
+  // Set the one-time success flag the gated /danke/ page checks for,
+  // right before the native Netlify submit navigates away.
+  document.getElementById('contact').addEventListener('submit', function () {
+    try {
+      sessionStorage.setItem('ic_form_success', JSON.stringify({ formId: 'contact', language: 'de' }));
+    } catch (e) {}
+  });
+</script>
 </body>
 </html>

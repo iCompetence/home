@@ -698,11 +698,12 @@ function AIWorkshopPageContent() {
                 id="ai-workshop"
                 method="POST"
                 data-netlify="true"
-                action="/danke"
                 onSubmit={(e) => {
                   e.preventDefault();
                   submitNetlifyForm(e.currentTarget, {
                     formId: 'ai-workshop',
+                    // Page content is German-only, so the thank-you page is too.
+                    language: 'de',
                     recaptchaErrorMessage: 'Bitte bestätige zuerst das reCAPTCHA, bevor du absendest.',
                     submitErrorMessage: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.',
                   });

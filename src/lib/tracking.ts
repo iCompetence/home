@@ -51,12 +51,58 @@ export function trackFormSuccess(formId: string, formLanguage?: string): void {
 interface NetlifyFormSubmitOptions {
   /** Matches the Netlify form name / form-name hidden input. */
   formId: string;
-  /** 'en' redirects to /thank-you, anything else to /danke. */
+  /** 'en' redirects to /thank-you/, anything else to /danke/. */
   language?: string;
   /** Shown if the reCAPTCHA has not been solved. */
   recaptchaErrorMessage: string;
   /** Shown if the network request fails. */
   submitErrorMessage: string;
+}
+
+// sessionStorage handshake between submitNetlifyForm and the thank-you pages:
+// the flag is set right before the redirect and consumed (removed) on first
+// read, so /danke/ and /thank-you/ only render after a real submission and
+// a reload or direct visit falls through to the homepage.
+const FORM_SUCCESS_STORAGE_KEY = 'ic_form_success';
+
+interface PendingFormSuccess {
+  formId: string;
+  language?: string;
+}
+
+/**
+ * One-time read of the pending form-success flag. Returns the submission
+ * details once and clears the flag, or null if there was no submission
+ * (direct visit, reload, expired tab).
+ */
+export function consumePendingFormSuccess(): PendingFormSuccess | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.sessionStorage.getItem(FORM_SUCCESS_STORAGE_KEY);
+    if (!raw) return null;
+    window.sessionStorage.removeItem(FORM_SUCCESS_STORAGE_KEY);
+    const parsed = JSON.parse(raw) as PendingFormSuccess;
+    return typeof parsed.formId === 'string' ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Push the thank-you page view as its own dataLayer event. Unlike a plain
+ * page_view on /danke/ (which GTM also fires for gated direct visitors just
+ * before they are redirected away), this event only exists after a verified
+ * submission — use it as the Ads conversion trigger.
+ */
+export function trackThankYouView(formId: string, formLanguage?: string): void {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'thank_you_view',
+    form_id: formId,
+    form_language: formLanguage,
+    page_path: window.location.pathname,
+  });
 }
 
 /**
@@ -95,7 +141,7 @@ export function submitNetlifyForm(
     params.append(key, typeof value === 'string' ? value : '');
   });
 
-  const redirectTo = language === 'en' ? '/thank-you' : '/danke';
+  const redirectTo = language === 'en' ? '/thank-you/' : '/danke/';
 
   fetch('/', {
     method: 'POST',
@@ -105,6 +151,15 @@ export function submitNetlifyForm(
     .then((res) => {
       if (!res.ok) throw new Error(`Netlify form submission failed: ${res.status}`);
       trackFormSuccess(formId, language);
+      try {
+        window.sessionStorage.setItem(
+          FORM_SUCCESS_STORAGE_KEY,
+          JSON.stringify({ formId, language } satisfies PendingFormSuccess),
+        );
+      } catch {
+        // sessionStorage unavailable — the thank-you page will redirect home,
+        // but the submission itself succeeded and form_success was tracked.
+      }
       window.location.href = redirectTo;
     })
     .catch(() => {

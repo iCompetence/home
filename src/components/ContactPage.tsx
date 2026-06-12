@@ -323,7 +323,6 @@ function ContactPageContent() {
                     id="contact"
                     method="POST"
                     data-netlify="true"
-                    action="/danke"
                     onSubmit={(e) => {
                       e.preventDefault();
                       submitNetlifyForm(e.currentTarget, {

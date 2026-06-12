@@ -944,7 +944,6 @@ function EmpCoAuditPageContent() {
               id="empco-audit"
               method="POST"
               data-netlify="true"
-              action="/danke"
               onSubmit={handleFormSubmit}
               className="space-y-6"
             >
