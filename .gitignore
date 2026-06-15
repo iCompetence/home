@@ -45,3 +45,7 @@ next-env.d.ts
 .claude/
 .playwright-mcp/
 Stuff/
+
+# Claude Code + logo source assets (not for production)
+.claude/
+assets/
