@@ -1153,42 +1153,91 @@ function Hero() {
 
 /* ---------------- Logo Carousel ---------------- */
 
-const LOGO_MARKS: React.ReactNode[] = [
-  <circle key="c-fill" cx={11} cy={11} r={10} />,
-  <circle key="c-line" cx={11} cy={11} r={9} fill="none" stroke="currentColor" strokeWidth={2.5} />,
-  <rect key="sq" x={1} y={1} width={20} height={20} />,
-  <rect key="diamond" x={4} y={4} width={14} height={14} transform="rotate(45 11 11)" />,
-  <polygon key="tri" points="11,1 21,19 1,19" />,
-  <polygon key="hex" points="11,1 19,6 19,16 11,21 3,16 3,6" />,
-  <path key="plus" d="M8,1 H14 V8 H21 V14 H14 V21 H8 V14 H1 V8 H8 Z" />,
-  <g key="bars">
-    <rect x={1} y={4} width={20} height={4} />
-    <rect x={1} y={14} width={20} height={4} />
-  </g>,
-];
-
-type LogoEntry = { name: string; mark: number };
+/**
+ * Client logos. `slug` maps to /logos/<slug>.svg (official brand asset, shown
+ * nominatively as a client reference). When no SVG is available yet, set
+ * `wordmark: true` and the brand name renders as a styled text mark instead —
+ * drop an SVG into /public/logos/<slug>.svg and remove the flag to upgrade it.
+ */
+type LogoEntry = { name: string; slug: string; ext?: 'svg' | 'png'; wordmark?: boolean };
 const LOGO_POOL: LogoEntry[] = [
-  { name: 'ACME', mark: 0 },
-  { name: 'GLOBEX', mark: 1 },
-  { name: 'INITECH', mark: 2 },
-  { name: 'UMBRELLA', mark: 3 },
-  { name: 'MERIDIAN', mark: 4 },
-  { name: 'HOOLI', mark: 5 },
-  { name: 'WAYNE', mark: 6 },
-  { name: 'STARK', mark: 7 },
-  { name: 'TYRELL', mark: 1 },
-  { name: 'VANDELAY', mark: 2 },
-  { name: 'OSCORP', mark: 5 },
-  { name: 'CYBERDYNE', mark: 6 },
-  { name: 'WEYLAND', mark: 3 },
-  { name: 'INGEN', mark: 4 },
-  { name: 'NAKATOMI', mark: 0 },
+  { name: 'DHL', slug: 'dhl' },
+  { name: 'pepXpress', slug: 'pepxpress', ext: 'png' },
+  { name: 'Freudenberg', slug: 'freudenberg' },
+  { name: 'Küche&Co', slug: 'kueche-co', ext: 'png' },
+  { name: 'Lucky Bike', slug: 'luckybike' },
+  { name: 'Pixum', slug: 'pixum' },
+  { name: 'NORD', slug: 'nord' },
+  { name: 'Eventim', slug: 'eventim' },
+  { name: 'Robinson', slug: 'robinson' },
+  { name: 'GC Gruppe', slug: 'gc-gruppe' },
+  { name: 'VitalAire', slug: 'vitalaire' },
+  { name: 'Bürkert', slug: 'buerkert' },
+  { name: 'WCG', slug: 'wcg' },
+  { name: 'headacy', slug: 'headacy' },
+  { name: 'Klett', slug: 'klett' },
+  { name: 'Pentax', slug: 'pentax' },
+  { name: 'Rameder', slug: 'rameder' },
+  { name: 'REWE', slug: 'rewe' },
+  { name: 'TeamViewer', slug: 'teamviewer' },
+  { name: 'DER Touristik', slug: 'dertouristik' },
+  { name: 'CEWE', slug: 'cewe' },
+  { name: 'Miele', slug: 'miele' },
+  { name: 'Tagesspiegel', slug: 'tagesspiegel' },
+  { name: 'TUI Cruises', slug: 'tui-cruises' },
 ];
+/** Renders a client's SVG logo, falling back to a styled text wordmark when the
+ *  asset is flagged `wordmark` or fails to load (missing/broken /logos file). */
+function LogoMark({
+  logo,
+  logoW,
+  logoMaxH,
+  nameSize,
+}: {
+  logo: LogoEntry;
+  logoW: number;
+  logoMaxH: number;
+  nameSize: number;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  if (logo.wordmark || failed) {
+    return (
+      <span
+        style={{
+          fontFamily: FONT,
+          fontSize: nameSize,
+          fontWeight: 600,
+          letterSpacing: 0.4,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {logo.name}
+      </span>
+    );
+  }
+
+  return (
+    <img
+      src={`/logos/${logo.slug}.${logo.ext ?? 'svg'}`}
+      alt={logo.name}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      style={{
+        maxWidth: logoW,
+        maxHeight: logoMaxH,
+        width: 'auto',
+        height: 'auto',
+        objectFit: 'contain',
+      }}
+    />
+  );
+}
+
 function LogoCarousel() {
   const bp = useBp();
   const slots = bp === 'mobile' ? 3 : bp === 'tablet' ? 4 : 5;
-  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, 5));
+  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, slots));
 
   useEffect(() => {
     setVisible(LOGO_POOL.slice(0, slots));
@@ -1202,8 +1251,8 @@ function LogoCarousel() {
         let slot = Math.floor(Math.random() * count);
         if (slot === lastSlot) slot = (slot + 1) % count;
         lastSlot = slot;
-        const visibleNames = new Set(current.map((l) => l.name));
-        const pool = LOGO_POOL.filter((l) => !visibleNames.has(l.name));
+        const visibleSlugs = new Set(current.map((l) => l.slug));
+        const pool = LOGO_POOL.filter((l) => !visibleSlugs.has(l.slug));
         if (pool.length === 0) return current;
         const next = [...current];
         next[slot] = pool[Math.floor(Math.random() * pool.length)];
@@ -1229,8 +1278,8 @@ function LogoCarousel() {
   const gap = bp === 'mobile' ? 16 : bp === 'tablet' ? 24 : 96;
   const logoW = bp === 'mobile' ? 100 : bp === 'tablet' ? 140 : 180;
   const logoH = bp === 'mobile' ? 56 : bp === 'tablet' ? 72 : 80;
-  const markSize = bp === 'mobile' ? 16 : bp === 'tablet' ? 18 : 22;
-  const nameSize = bp === 'mobile' ? 14 : bp === 'tablet' ? 16 : 18;
+  const logoMaxH = bp === 'mobile' ? 28 : bp === 'tablet' ? 36 : 44;
+  const nameSize = bp === 'mobile' ? 16 : bp === 'tablet' ? 18 : 22;
 
   return (
     <section
@@ -1255,6 +1304,7 @@ function LogoCarousel() {
           <div
             key={i}
             style={{
+              position: 'relative',
               width: logoW,
               height: logoH,
               display: 'flex',
@@ -1262,39 +1312,30 @@ function LogoCarousel() {
               justifyContent: 'center',
             }}
           >
-            <AnimatePresence mode="wait">
+            {/* mode="sync": entering + exiting logos overlap (crossfade) so the slot
+                is never empty during a swap; absolute positioning keeps them stacked. */}
+            <AnimatePresence mode="sync">
               <motion.div
-                key={logo.name}
+                key={logo.slug}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{
-                  display: 'inline-flex',
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
+                  justifyContent: 'center',
                   color: NAVY,
                 }}
               >
-                <svg
-                  viewBox="0 0 22 22"
-                  width={markSize}
-                  height={markSize}
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  {LOGO_MARKS[logo.mark]}
-                </svg>
-                <span
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: nameSize,
-                    fontWeight: 600,
-                    letterSpacing: 0.8,
-                  }}
-                >
-                  {logo.name}
-                </span>
+                <LogoMark
+                  logo={logo}
+                  logoW={logoW}
+                  logoMaxH={logoMaxH}
+                  nameSize={nameSize}
+                />
               </motion.div>
             </AnimatePresence>
           </div>
