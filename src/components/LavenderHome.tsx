@@ -1237,7 +1237,7 @@ function LogoMark({
 function LogoCarousel() {
   const bp = useBp();
   const slots = bp === 'mobile' ? 3 : bp === 'tablet' ? 4 : 5;
-  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, 5));
+  const [visible, setVisible] = useState<LogoEntry[]>(() => LOGO_POOL.slice(0, slots));
 
   useEffect(() => {
     setVisible(LOGO_POOL.slice(0, slots));
