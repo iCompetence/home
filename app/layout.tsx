@@ -3,7 +3,7 @@ import '../src/index.css';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.icompetence.de'),
+  metadataBase: new URL('https://icompetence.de'),
   title: 'iCompetence - We enable companies for the Agentic Era',
   description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
   alternates: {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'iCompetence - We enable companies for the Agentic Era',
     description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
-    url: 'https://www.icompetence.de',
+    url: 'https://icompetence.de',
     siteName: 'iCompetence',
     images: [
       {
@@ -59,8 +59,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'iCompetence',
-  url: 'https://www.icompetence.de',
-  logo: 'https://www.icompetence.de/iCompetence_logo.svg',
+  url: 'https://icompetence.de',
+  logo: 'https://icompetence.de/iCompetence_logo.svg',
   description: 'We enable companies for the Agentic Era on a trustworthy data foundation.',
   address: {
     '@type': 'PostalAddress',
