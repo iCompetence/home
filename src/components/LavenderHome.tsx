@@ -364,7 +364,7 @@ function BurgerMenu({
             {wide ? (
               <>
                 <a
-                  href="/"
+                  href="/de/"
                   style={{
                     fontFamily: FONT,
                     fontSize: 16,
@@ -446,7 +446,7 @@ function BurgerMenu({
             ) : (
               <>
                 <a
-                  href="/"
+                  href="/de/"
                   onClick={closeOnNav}
                   style={{
                     fontFamily: FONT,
@@ -633,7 +633,7 @@ function CompactNav({ bp }: { bp: Bp }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 18 }}>
             <a
-              href="/contact/"
+              href="/de/contact/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -829,7 +829,7 @@ function DesktopNav() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
                 <motion.a
-                  href="/contact/" target="_blank" rel="noopener noreferrer"
+                  href="/de/contact/" target="_blank" rel="noopener noreferrer"
                   transition={morphTransition}
                   style={{
                     display: 'inline-flex',
@@ -980,7 +980,7 @@ function DesktopNav() {
               </motion.div>
 
               <motion.a
-                href="/contact/" target="_blank" rel="noopener noreferrer"
+                href="/de/contact/" target="_blank" rel="noopener noreferrer"
                 transition={morphTransition}
                 style={{
                   display: 'inline-flex',
@@ -1131,7 +1131,7 @@ function Hero() {
           }}
         >
           <a
-            href="/contact/" target="_blank" rel="noopener noreferrer"
+            href="/de/contact/" target="_blank" rel="noopener noreferrer"
             style={{ ...btnBase, background: BLUE, color: WHITE }}
           >
             Let&apos;s talk
@@ -1941,7 +1941,7 @@ function StatementCTA() {
         })}
       >
         <a
-          href="/contact/" target="_blank" rel="noopener noreferrer"
+          href="/de/contact/" target="_blank" rel="noopener noreferrer"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -2055,7 +2055,7 @@ function Highlight() {
         links.
       </p>
       <a
-        href="/iknow/"
+        href="/de/iknow/"
         style={{
           alignSelf: 'flex-start',
           display: 'inline-flex',
@@ -2729,7 +2729,7 @@ function PrivacyLed() {
           where it belongs: with you.
         </p>
         <a
-          href="/privacy-led-ai/"
+          href="/de/privacy-led-ai/"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -2799,7 +2799,7 @@ function CTABand() {
         </h2>
       </div>
       <a
-        href="/contact/" target="_blank" rel="noopener noreferrer"
+        href="/de/contact/" target="_blank" rel="noopener noreferrer"
         style={{
           display: 'inline-flex',
           alignItems: 'center',

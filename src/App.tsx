@@ -19,7 +19,7 @@ import { AnimatedSection } from "./components/ScrollAnimations";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 
 function AppContent() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   // const [showFooterAurora, setShowFooterAurora] = useState(false);
   const introSectionRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -186,7 +186,7 @@ function AppContent() {
             description: t('contextTools.tool1.description'),
             icon: Target,
             color: "var(--brand-accent-1)",
-            link: "https://icompetence.de/campaign-parameter-tool/"
+            link: `/${language}/campaign-parameter-tool/`
           },
           {
             title: t('contextTools.tool2.title'),
@@ -258,19 +258,19 @@ function AppContent() {
             title: t('agenticTools.tool1.title'),
             description: t('agenticTools.tool1.description'),
             color: "var(--brand-accent-1)",
-            link: "https://icompetence.de/icu-user-journey-explorer"
+            link: `/${language}/icu-user-journey-explorer/`
           },
           {
             title: t('agenticTools.tool2.title'),
             description: t('agenticTools.tool2.description'),
             color: "var(--brand-accent-2)",
-            link: "https://icompetence.de/intelligentic-search/"
+            link: `/${language}/intelligentic-search/`
           },
           {
             title: t('agenticTools.tool3.title'),
             description: t('agenticTools.tool3.description'),
             color: "var(--brand-primary-light)",
-            link: "https://icompetence.de/iknow/"
+            link: `/${language}/iknow/`
           }
         ]}
       />
@@ -290,7 +290,7 @@ function AppContent() {
         layout="image-left"
         cta={{
           text: t('privacyLed.cta'),
-          url: "https://icompetence.de/privacy-led-ai/"
+          url: `/${language}/privacy-led-ai/`
         }}
       />
 
@@ -391,7 +391,7 @@ function AppContent() {
 
             <button
               onClick={() => {
-                window.open('/contact', '_blank');
+                window.open(`/${language}/contact/`, '_blank');
               }}
               className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
               style={{
@@ -510,7 +510,7 @@ function AppContent() {
               <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                 <div className="flex gap-8 mb-4 sm:mb-0">
                   <button
-                    onClick={() => window.open('/imprint', '_blank')}
+                    onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -526,7 +526,7 @@ function AppContent() {
                     {t('footer.imprint')}
                   </button>
                   <button
-                    onClick={() => window.open('/imprint', '_blank')}
+                    onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -633,9 +633,9 @@ function AppContent() {
   );
 }
 
-export default function App() {
+export default function App({ initialLanguage }: { initialLanguage?: "en" | "de" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <AppContent />
     </LanguageProvider>
   );

@@ -205,7 +205,7 @@ function ContactPageContent() {
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
-            window.location.href = '/';
+            window.location.href = `/${language}/`;
           }}
         >
           <ImageWithFallback
@@ -505,7 +505,7 @@ function ContactPageContent() {
                 <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                   <div className="flex gap-8 mb-4 sm:mb-0">
                     <button
-                      onClick={() => window.location.href = '/imprint'}
+                      onClick={() => window.location.href = `/${language}/imprint/`}
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
@@ -521,7 +521,7 @@ function ContactPageContent() {
                       {t('footer.imprint')}
                     </button>
                     <button
-                      onClick={() => window.location.href = '/imprint'}
+                      onClick={() => window.location.href = `/${language}/imprint/`}
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
@@ -614,9 +614,9 @@ function ContactPageContent() {
   );
 }
 
-export default function ContactPage() {
+export default function ContactPage({ initialLanguage }: { initialLanguage?: "en" | "de" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <ContactPageContent />
     </LanguageProvider>
   );

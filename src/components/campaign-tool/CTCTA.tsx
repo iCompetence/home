@@ -11,7 +11,7 @@ interface CTCTAProps {
 }
 
 export const CTCTA = ({ onTrialClick }: CTCTAProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <AnimatedSection
@@ -168,7 +168,7 @@ export const CTCTA = ({ onTrialClick }: CTCTAProps) => {
             <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
               <div className="flex gap-8 mb-4 sm:mb-0">
                 <button
-                  onClick={() => window.open('/imprint', '_blank')}
+                  onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                   style={{
                     color: 'var(--gray-light)',
                     fontSize: '16px',
@@ -184,7 +184,7 @@ export const CTCTA = ({ onTrialClick }: CTCTAProps) => {
                   {t('footer.imprint')}
                 </button>
                 <button
-                  onClick={() => window.open('/imprint', '_blank')}
+                  onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                   style={{
                     color: 'var(--gray-light)',
                     fontSize: '16px',

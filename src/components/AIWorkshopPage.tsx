@@ -4,7 +4,7 @@ import { trackCtaClick, submitNetlifyForm } from '@/lib/tracking';
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, X, Mail } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { LanguageProvider } from "../contexts/LanguageContext";
+import { LanguageProvider, useLanguage } from "../contexts/LanguageContext";
 import Aurora1 from "../imports/Aurora1";
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
@@ -30,6 +30,7 @@ const dateOptions = [
 ];
 
 function AIWorkshopPageContent() {
+  const { language } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -286,7 +287,7 @@ function AIWorkshopPageContent() {
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
-            window.location.href = '/';
+            window.location.href = `/${language}/`;
           }}
         >
           <ImageWithFallback
@@ -957,7 +958,7 @@ function AIWorkshopPageContent() {
                 </p>
 
                 <a
-                  href="/contact"
+                  href={`/${language}/contact/`}
                   className="inline-block px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                   style={{
                     color: 'var(--gray-white)',
@@ -1070,7 +1071,7 @@ function AIWorkshopPageContent() {
                   <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                     <div className="flex gap-8 mb-4 sm:mb-0">
                       <button
-                        onClick={() => window.location.href = '/imprint'}
+                        onClick={() => window.location.href = `/${language}/imprint/`}
                         style={{
                           color: 'var(--gray-light)',
                           fontSize: '16px',
@@ -1086,7 +1087,7 @@ function AIWorkshopPageContent() {
                         Impressum
                       </button>
                       <button
-                        onClick={() => window.location.href = '/imprint'}
+                        onClick={() => window.location.href = `/${language}/imprint/`}
                         style={{
                           color: 'var(--gray-light)',
                           fontSize: '16px',
@@ -1258,9 +1259,9 @@ function AIWorkshopPageContent() {
   );
 }
 
-export default function AIWorkshopPage() {
+export default function AIWorkshopPage({ initialLanguage }: { initialLanguage?: "en" | "de" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <AIWorkshopPageContent />
     </LanguageProvider>
   );

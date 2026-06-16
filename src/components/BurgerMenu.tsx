@@ -27,7 +27,7 @@ type MenuItemId = 'home' | 'products' | 'contact';
 const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }: BurgerMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<MenuItemId | null>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const toggleMenu = () => {
     const newState = !isOpen;
@@ -43,7 +43,9 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
   };
 
   const handleNavigate = (href: string) => {
-    window.location.href = href;
+    // Prefix every internal target with the active language directory so menu
+    // navigation stays within /de/… or /en/… (href values start with '/').
+    window.location.href = `/${language}${href}`;
     closeMenu();
   };
 

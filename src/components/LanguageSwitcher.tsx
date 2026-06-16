@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface LanguageSwitcherProps {
@@ -9,9 +10,20 @@ interface LanguageSwitcherProps {
 
 export const LanguageSwitcher = ({ className = '', style = {} }: LanguageSwitcherProps) => {
   const { language, setLanguage } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'de' : 'en');
+    const target = language === 'en' ? 'de' : 'en';
+    // The language lives in the URL (/de/… or /en/…) — navigate to the same
+    // page under the other locale so the URL, the <html lang> and the indexed
+    // content stay in sync. Keep the state update as a fallback.
+    setLanguage(target);
+    if (pathname && /^\/(en|de)(\/|$)/.test(pathname)) {
+      router.push(pathname.replace(/^\/(en|de)/, `/${target}`));
+    } else {
+      router.push(`/${target}/`);
+    }
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Language = 'en' | 'de';
+export type Language = 'en' | 'de';
 
 interface LanguageContextType {
   language: Language;
@@ -2561,18 +2561,30 @@ const translations: Translations = {
   }
 };
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+export const LanguageProvider = ({
+  children,
+  initialLanguage,
+}: {
+  children: ReactNode;
+  initialLanguage?: Language;
+}) => {
+  // When the route provides a language (URL is /de/… or /en/…) it is the single
+  // source of truth — this keeps the server-rendered (statically exported) HTML
+  // in sync with the URL so Google indexes the right language per URL.
+  const [language, setLanguage] = useState<Language>(initialLanguage ?? 'de');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Check localStorage for saved language preference after mount
-    const savedLanguage = localStorage.getItem('preferredLanguage') as Language | null;
-    if (savedLanguage === 'en' || savedLanguage === 'de') {
-      setLanguage(savedLanguage);
+    // Only fall back to a stored preference when the route does NOT dictate a
+    // language (legacy / un-prefixed usage). With a URL language, never override.
+    if (!initialLanguage) {
+      const savedLanguage = localStorage.getItem('preferredLanguage') as Language | null;
+      if (savedLanguage === 'en' || savedLanguage === 'de') {
+        setLanguage(savedLanguage);
+      }
     }
-  }, []);
+  }, [initialLanguage]);
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);

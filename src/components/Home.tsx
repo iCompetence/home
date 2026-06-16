@@ -42,7 +42,7 @@ export const Home = ({
   entranceTiming = { logoDelay: 300, heroDelay: 1800 },
   isFooterVisible = false
 }: HomeProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -162,7 +162,7 @@ export const Home = ({
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
           }}
           onClick={() => {
-            window.location.href = '/';
+            window.location.href = `/${language}/`;
           }}
         >
           <ImageWithFallback
@@ -201,7 +201,7 @@ export const Home = ({
           {/* Contact us Button */}
           <button
             onClick={() => {
-              window.open('/contact', '_blank');
+              window.open(`/${language}/contact/`, '_blank');
             }}
             className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
             style={{
@@ -268,7 +268,7 @@ export const Home = ({
       {!showIntroLogo && isMobile && (
         <button
           onClick={() => {
-            window.open('/contact', '_blank');
+            window.open(`/${language}/contact/`, '_blank');
           }}
           className="fixed bottom-6 right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{

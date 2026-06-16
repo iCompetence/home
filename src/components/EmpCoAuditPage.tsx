@@ -432,7 +432,7 @@ function EmpCoAuditPageContent() {
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
           }}
           onClick={() => {
-            window.location.href = '/';
+            window.location.href = `/${language}/`;
           }}
         >
           <ImageWithFallback src={logoImage} alt="Logo" className="h-6" style={{ width: 'auto' }} />
@@ -540,7 +540,7 @@ function EmpCoAuditPageContent() {
               data-cta='empco_header_contact'
               onClick={() => {
                 trackCtaClick('empco_header_contact', t('header.contact'));
-                window.open('/contact', '_blank');
+                window.open(`/${language}/contact/`, '_blank');
               }}
               className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
               style={{
@@ -598,7 +598,7 @@ function EmpCoAuditPageContent() {
             data-cta='empco_header_contact'
             onClick={() => {
               trackCtaClick('empco_header_contact', t('header.contact'));
-              window.open('/contact', '_blank');
+              window.open(`/${language}/contact/`, '_blank');
             }}
             className="fixed right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
             style={{
@@ -1079,7 +1079,7 @@ function EmpCoAuditPageContent() {
               >
                 {t('empco.form.privacyNotice')}{' '}
                 <a
-                  href="/imprint"
+                  href={`/${language}/imprint/`}
                   style={{
                     color: 'var(--gray-light)',
                     textDecoration: 'underline',
@@ -1155,7 +1155,7 @@ function EmpCoAuditPageContent() {
 
               <button
                 onClick={() => {
-                  window.open('/contact', '_blank');
+                  window.open(`/${language}/contact/`, '_blank');
                 }}
                 className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                 style={{
@@ -1299,7 +1299,7 @@ function EmpCoAuditPageContent() {
                 <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                   <div className="flex gap-8 mb-4 sm:mb-0">
                     <button
-                      onClick={() => window.open('/imprint', '_blank')}
+                      onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
@@ -1317,7 +1317,7 @@ function EmpCoAuditPageContent() {
                       {t('footer.imprint')}
                     </button>
                     <button
-                      onClick={() => window.open('/imprint', '_blank')}
+                      onClick={() => window.open(`/${language}/imprint/`, '_blank')}
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
@@ -1495,9 +1495,9 @@ function EmpCoAuditPageContent() {
   );
 }
 
-export default function EmpCoAuditPage() {
+export default function EmpCoAuditPage({ initialLanguage }: { initialLanguage?: "en" | "de" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <EmpCoAuditPageContent />
     </LanguageProvider>
   );

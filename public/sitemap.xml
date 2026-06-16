@@ -1,74 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://icompetence.de/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/de/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/whats-new/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/whats-new/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/whats-new/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/empco-audit/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/whats-new/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/whats-new/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/empco-audit/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/intelligentic-search/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/empco-audit/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/icu-user-journey-explorer/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/de/intelligentic-search/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/intelligentic-search/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/intelligentic-search/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/intelligentic-search/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/campaign-parameter-tool/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/intelligentic-search/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/intelligentic-search/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/intelligentic-search/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/intelligentic-search/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/analytics-agent/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/de/icu-user-journey-explorer/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/icu-user-journey-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/icu-user-journey-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/icu-user-journey-explorer/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/ai-workshop/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/icu-user-journey-explorer/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/icu-user-journey-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/icu-user-journey-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/icu-user-journey-explorer/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/privacy-led-ai/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/de/campaign-parameter-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/campaign-parameter-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/campaign-parameter-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/campaign-parameter-tool/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/iknow/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/campaign-parameter-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/campaign-parameter-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/campaign-parameter-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/campaign-parameter-tool/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/contact/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/de/analytics-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/analytics-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/analytics-agent/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/analytics-agent/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/analytics-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/analytics-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/analytics-agent/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/analytics-agent/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/ai-workshop/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/ai-workshop/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/ai-workshop/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/ai-workshop/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/ai-workshop/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/ai-workshop/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/ai-workshop/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/ai-workshop/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/privacy-led-ai/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/privacy-led-ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/privacy-led-ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/privacy-led-ai/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/privacy-led-ai/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/privacy-led-ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/privacy-led-ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/privacy-led-ai/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/iknow/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/iknow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/iknow/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/iknow/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/iknow/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/iknow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/iknow/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/iknow/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/contact/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://icompetence.de/imprint/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://icompetence.de/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/contact/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/de/imprint/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/imprint/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/imprint/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/imprint/"/>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

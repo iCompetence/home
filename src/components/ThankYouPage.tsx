@@ -34,7 +34,7 @@ export default function ThankYouPage({ language }: ThankYouPageProps) {
   useEffect(() => {
     const submission = consumePendingFormSuccess();
     if (!submission) {
-      window.location.replace('/');
+      window.location.replace(`/${language}/`);
       return;
     }
     trackThankYouView(submission.formId, submission.language ?? language);
@@ -56,7 +56,7 @@ export default function ThankYouPage({ language }: ThankYouPageProps) {
       }}
     >
       <header className="absolute top-0 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8 py-6">
-        <a href="/" aria-label="iCompetence">
+        <a href={`/${language}/`} aria-label="iCompetence">
           <img src={logoImage} alt="iCompetence" style={{ height: '32px', width: 'auto' }} />
         </a>
       </header>
@@ -109,7 +109,7 @@ export default function ThankYouPage({ language }: ThankYouPageProps) {
               {t.message}
             </p>
             <a
-              href="/"
+              href={`/${language}/`}
               className="inline-block px-8 py-3 rounded-full transition-all duration-300"
               style={{
                 backgroundColor: '#0b99cc',

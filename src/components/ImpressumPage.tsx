@@ -182,7 +182,7 @@ function ImpressumPageContent() {
           transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
         }}
         onClick={() => {
-          window.location.href = '/';
+          window.location.href = `/${language}/`;
         }}
       >
         <ImageWithFallback
@@ -217,7 +217,7 @@ function ImpressumPageContent() {
         >
           <button
             onClick={() => {
-              window.open('/contact', '_blank');
+              window.open(`/${language}/contact/`, '_blank');
             }}
             className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
             style={{
@@ -294,7 +294,7 @@ function ImpressumPageContent() {
       {isMobile && (
         <button
           onClick={() => {
-            window.open('/contact', '_blank');
+            window.open(`/${language}/contact/`, '_blank');
           }}
           className="fixed bottom-6 right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
           style={{
@@ -680,7 +680,7 @@ function ImpressumPageContent() {
               <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                 <div className="flex gap-8 mb-4 sm:mb-0">
                   <button
-                    onClick={() => window.location.href = '/imprint'}
+                    onClick={() => window.location.href = `/${language}/imprint/`}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -696,7 +696,7 @@ function ImpressumPageContent() {
                     {t('footer.imprint')}
                   </button>
                   <button
-                    onClick={() => window.location.href = '/imprint'}
+                    onClick={() => window.location.href = `/${language}/imprint/`}
                     style={{
                       color: 'var(--gray-light)',
                       fontSize: '16px',
@@ -781,9 +781,9 @@ function ImpressumPageContent() {
   );
 }
 
-export default function ImpressumPage() {
+export default function ImpressumPage({ initialLanguage }: { initialLanguage?: "en" | "de" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <ImpressumPageContent />
     </LanguageProvider>
   );

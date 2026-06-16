@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------------------
+# Language directories (/de/, /en/) + hreflang migration
+# Old single-URL pages are 301'd to their primary-language version so existing
+# rankings carry over. German is the site default (x-default).
+# Netlify applies the FIRST matching rule, so order matters.
+# ---------------------------------------------------------------------------
+
+# Root -> German (site default / x-default)
+/                              /de/                            301
+
+# --- empco-audit: German is the indexed/primary language ---
+/empco-audit                   /de/empco-audit/                301
+/empco-audit/                  /de/empco-audit/                301
+
+# --- German-named legacy routes -> German pages ---
+/kontakt                       /de/contact/                    301
+/kontakt/                      /de/contact/                    301
+/kontakt.html                  /de/contact/                    301
+/impressum                     /de/imprint/                    301
+/impressum/                    /de/imprint/                    301
+/impressum.html                /de/imprint/                    301
+/danke                         /de/thank-you/                  301
+/danke/                        /de/thank-you/                  301
+
+# --- everything else: English was the indexed/primary language ---
+/whats-new                     /en/whats-new/                  301
+/whats-new/                    /en/whats-new/                  301
+/intelligentic-search          /en/intelligentic-search/       301
+/intelligentic-search/         /en/intelligentic-search/       301
+/icu-user-journey-explorer     /en/icu-user-journey-explorer/  301
+/icu-user-journey-explorer/    /en/icu-user-journey-explorer/  301
+/campaign-parameter-tool       /en/campaign-parameter-tool/    301
+/campaign-parameter-tool/      /en/campaign-parameter-tool/    301
+/analytics-agent               /en/analytics-agent/            301
+/analytics-agent/              /en/analytics-agent/            301
+/ai-workshop                   /en/ai-workshop/                301
+/ai-workshop/                  /en/ai-workshop/                301
+/privacy-led-ai                /en/privacy-led-ai/             301
+/privacy-led-ai/               /en/privacy-led-ai/             301
+/iknow                         /en/iknow/                      301
+/iknow/                        /en/iknow/                      301
+/contact                       /en/contact/                    301
+/contact/                      /en/contact/                    301
+/imprint                       /en/imprint/                    301
+/imprint/                      /en/imprint/                    301
+/thank-you                     /en/thank-you/                  301
+/thank-you/                    /en/thank-you/                  301
+/lavender                      /de/lavender/                   301
+/lavender/                     /de/lavender/                   301
