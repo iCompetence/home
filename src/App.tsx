@@ -255,6 +255,18 @@ function AppContent() {
         slidesToShowMobile={1}
         items={[
           {
+            title: t('agenticTools.empco.title'),
+            description: t('agenticTools.empco.description'),
+            color: "var(--brand-accent-3)",
+            link: `/${language}/empco-audit/`
+          },
+          {
+            title: t('agenticTools.analytics.title'),
+            description: t('agenticTools.analytics.description'),
+            color: "var(--brand-primary-dark)",
+            link: `/${language}/analytics-agent/`
+          },
+          {
             title: t('agenticTools.tool1.title'),
             description: t('agenticTools.tool1.description'),
             color: "var(--brand-accent-1)",

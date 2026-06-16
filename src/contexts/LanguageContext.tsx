@@ -285,6 +285,22 @@ const translations: Translations = {
     en: 'The central knowledge platform for your organization. AI-powered, local, and secure – iKnow transforms distributed information into a structured, always-available knowledge foundation for better decisions and future AI applications.',
     de: 'Die zentrale Wissensplattform für Ihr Unternehmen. KI-basiert, lokal und sicher – iKnow verwandelt verteiltes Wissen in eine strukturierte, jederzeit verfügbare Wissensgrundlage für bessere Entscheidungen und zukunftssichere KI-Anwendungen.'
   },
+  'agenticTools.empco.title': {
+    en: 'EmpCo Audit',
+    de: 'EmpCo Audit'
+  },
+  'agenticTools.empco.description': {
+    en: 'The EmpCo Directive (EU 2024/825) bans greenwashing from 27 September 2026. That includes vague claims like "climate-neutral" or "eco-friendly", unverified sustainability labels and offset-based climate promises. Our automated EmpCo Audit scans your website for risky green claims and shows, in plain language, what needs to change before the deadline, so your sustainability communication stays compliant and credible.',
+    de: 'Die EmpCo-Richtlinie (EU 2024/825) verbietet ab dem 27. September 2026 Greenwashing. Dazu zählen pauschale Aussagen wie „klimaneutral" oder „umweltfreundlich", nicht zertifizierte Nachhaltigkeitssiegel und kompensationsbasierte Klimaversprechen. Unser automatischer EmpCo-Audit prüft Ihre Website auf riskante Green Claims und zeigt verständlich, was Sie bis zum Stichtag anpassen müssen, damit Ihre Nachhaltigkeitskommunikation rechtssicher und glaubwürdig bleibt.'
+  },
+  'agenticTools.analytics.title': {
+    en: 'Analytics Agent',
+    de: 'Analytics Agent'
+  },
+  'agenticTools.analytics.description': {
+    en: 'The AI agent for your data. Connect any data source and ask questions in plain language. The Analytics Agent delivers analyses, visualizations and insights at the touch of a button. No more waiting on reports or wrestling with dashboards: get the answers you need, directly from your own data.',
+    de: 'Der KI-Agent für Ihre Daten. Verbinden Sie beliebige Datenquellen und stellen Sie Fragen in natürlicher Sprache. Der Analytics Agent liefert Analysen, Visualisierungen und Insights auf Knopfdruck. Kein Warten auf Reports, kein Ringen mit Dashboards: Erhalten Sie die Antworten, die Sie brauchen, direkt aus Ihren eigenen Daten.'
+  },
 
   // iKnow Page
   'iknow.hero.subtitle': {
