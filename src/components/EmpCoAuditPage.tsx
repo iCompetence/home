@@ -824,6 +824,7 @@ function EmpCoAuditPageContent() {
       <Accordion
         id="features-section"
         title={t('empco.features.title')}
+        lead={t('empco.features.lead')}
         items={[
           { title: t('empco.feature1.title'), content: t('empco.feature1.desc') },
           { title: t('empco.feature2.title'), content: t('empco.feature2.desc') },

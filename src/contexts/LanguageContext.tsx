@@ -528,8 +528,8 @@ const translations: Translations = {
     de: 'Kein Screenshot in ChatGPT. Ein Audit-Werkzeug mit eingebauter Qualitätssicherung.'
   },
   'empco.features.lead': {
-    en: 'The difference between an AI toy and a defensible audit lies in what happens behind the button press.',
-    de: 'Der Unterschied zwischen einem KI-Spielzeug und einem belastbaren Audit liegt darin, was hinter dem Knopfdruck steckt.'
+    en: 'Most AI checks on the market work on one principle: one prompt, one run, one result that gets taken at face value. That isn\'t reliable. The same page can produce a different finding on every run. What gets flagged once is missed the next time.\n\nWe do the opposite. For us, an AI result is never the finished finding. It is a hypothesis that has to be proven. Every statement runs through several stages: analysis, a critical counter-check, and a comparison across multiple runs. Text and the page\'s visual rendering are evaluated together. The result is an audit that is reproducible and complete. Something a single AI call cannot deliver by design.',
+    de: 'Die meisten KI-Prüfungen am Markt funktionieren nach einem Prinzip: ein Prompt, ein Durchlauf, ein Ergebnis, das ungeprüft übernommen wird. Das ist nicht verlässlich. Dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Was einmal auffällt, geht beim nächsten Mal unter.\n\nWir machen das Gegenteil. Bei uns ist ein KI-Ergebnis nie der fertige Befund, sondern erst eine Vermutung, die belegt werden muss. Jede Aussage durchläuft mehrere Stufen: Analyse, kritische Gegenprüfung und einen Abgleich über mehrere Durchläufe. Text und visuelle Darstellung der Seite werden dabei gemeinsam ausgewertet. So entsteht ein Audit, der reproduzierbar und vollständig ist. Etwas, das ein einzelner KI-Aufruf prinzipbedingt nicht leisten kann.'
   },
   'empco.feature1.title': {
     en: 'Complete coverage',

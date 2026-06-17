@@ -12,6 +12,8 @@ interface AccordionItem {
 interface AccordionProps {
   /** Section title */
   title: string;
+  /** Optional intro paragraph(s) shown under the title, before the items. Split on "\n\n" into paragraphs. */
+  lead?: string;
   /** Array of accordion items */
   items: AccordionItem[];
   /** Section ID for scrolling */
@@ -30,6 +32,7 @@ interface AccordionProps {
 
 export const Accordion = ({
   title,
+  lead,
   items,
   id = "accordion-section",
   allowMultiple = false,
@@ -81,6 +84,22 @@ export const Accordion = ({
             }}>
               {title}
             </h2>
+            {lead && (
+              <div className="max-w-3xl mx-auto space-y-4">
+                {lead.split('\n\n').map((paragraph, i) => (
+                  <p
+                    key={i}
+                    style={{
+                      color: 'var(--gray-white)',
+                      fontSize: '18px',
+                      lineHeight: '170%',
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
           
           {/* Accordion Items */}
