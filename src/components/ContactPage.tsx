@@ -84,58 +84,6 @@ function ContactPageContent() {
     }
   }, [mounted]);
 
-  if (!mounted) {
-    return (
-      <div
-        className="relative"
-        style={{
-          backgroundColor: '#012332',
-          minHeight: '100vh',
-          overflowX: 'hidden',
-          width: '100%'
-        }}
-      >
-        <section
-          className="relative flex items-center justify-center"
-          style={{
-            height: '80vh',
-            minHeight: '400px'
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(135deg, #0b99cc 0%, #012332 100%)',
-              opacity: 1.0,
-              zIndex: 0
-            }}
-          />
-
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="text-center max-w-4xl mx-auto">
-              <h1
-                className="hero-headline"
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(48px, 8vw, 96px)',
-                  fontWeight: '700',
-                  lineHeight: '110%',
-                  marginBottom: '1.5rem'
-                }}
-              >
-                {t('contact.hero.title')}
-              </h1>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
     <>
       <Script src="https://www.google.com/recaptcha/api.js?render=explicit" strategy="afterInteractive" />

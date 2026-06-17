@@ -160,21 +160,6 @@ function CampaignParameterToolPageContent() {
     { id: 'cta-footer-section', label: t('ct.anchor.contact'), number: '06' }
   ];
 
-  // Loading state
-  if (!mounted) {
-    return (
-      <div
-        className="relative"
-        style={{
-          backgroundColor: '#012332',
-          minHeight: '100vh',
-          overflowX: 'clip',
-          width: '100%'
-        }}
-      />
-    );
-  }
-
   return (
     <>
       <Script src="https://www.google.com/recaptcha/api.js?render=explicit" strategy="afterInteractive" />

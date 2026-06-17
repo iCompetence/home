@@ -206,65 +206,6 @@ function IKnowPageContent() {
     { id: 'cta-footer-section', label: t('iknow.anchor.contact'), number: '06' }
   ];
 
-  if (!mounted) {
-    return (
-      <div
-        className="relative"
-        style={{
-          backgroundColor: '#012332',
-          minHeight: '100vh',
-          overflowX: 'clip',
-          width: '100%'
-        }}
-      >
-        <section
-          className="relative flex items-center justify-center"
-          style={{ height: '80vh' }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              overflow: 'hidden',
-              zIndex: 0
-            }}
-          >
-            <Aurora1 />
-          </div>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="text-center max-w-4xl mx-auto">
-              <h1
-                className="hero-headline"
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(48px, 8vw, 96px)',
-                  fontWeight: '700',
-                  lineHeight: '110%',
-                  marginBottom: '1.5rem'
-                }}
-              >
-                iKnow
-              </h1>
-              <p
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(24px, 4vw, 48px)',
-                  fontWeight: '500',
-                  lineHeight: '130%'
-                }}
-              >
-                {t('iknow.hero.subtitle')}
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
     <div
       className="relative"

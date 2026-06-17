@@ -137,67 +137,6 @@ function IntelligenticSearchPageContent() {
     { id: 'cta-footer-section', label: t('is.anchor.contact'), number: '06' }
   ];
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return (
-      <div
-        className="relative"
-        style={{
-          backgroundColor: '#012332',
-          minHeight: '100vh',
-          overflowX: 'clip',
-          width: '100%'
-        }}
-      >
-        <section
-          className="relative flex items-center justify-center"
-          style={{ height: '80vh' }}
-        >
-          {/* Aurora Background */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              overflow: 'hidden',
-              zIndex: 0
-            }}
-          >
-            <Aurora1 />
-          </div>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="text-center max-w-4xl mx-auto">
-              <h1
-                className="hero-headline"
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(48px, 8vw, 96px)',
-                  fontWeight: '700',
-                  lineHeight: '110%',
-                  marginBottom: '1.5rem'
-                }}
-              >
-                Intelligentic Search
-              </h1>
-              <p
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(24px, 4vw, 48px)',
-                  fontWeight: '500',
-                  lineHeight: '130%'
-                }}
-              >
-                Das ideale Produkt in Minuten gefunden
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
     <div
       className="relative"
