@@ -2266,21 +2266,45 @@ type TestimonialItem = {
 const TESTIMONIALS: TestimonialItem[] = [
   {
     quote:
-      '“During our expansion, training and onboarding fell behind. They stepped in with consistent staffing, fair rates, and quick turnaround for urgent shifts.”',
-    name: 'Priya Menon',
-    role: 'Operations Director, Harbourview Senior Living',
+      '“iCompetence hat uns professionell & effizient beim Setup unserer Analytics Infrastruktur unterstützt. Auf eine bedarfsgerechte & kompetente Beratung folgte eine schnelle & zuverlässige Umsetzung der Maßnahmen mit entsprechendem Reporting. Mit iCompetence haben wir einen Partner auf Augenhöhe, mit dem wir sowohl operativ als auch strategisch zusammenarbeiten dürfen.”',
+    name: 'Sergej Kosyrev',
+    role: 'Leitung E-Commerce & Online-Marketing, Lucky Bike.de GmbH',
   },
   {
     quote:
-      '“They cut through the noise around our AI roadmap and pointed us at the two bets that actually mattered. Six months later, both are in production.”',
-    name: 'Lukas Brenner',
-    role: 'VP Data, Northwind Logistics',
+      '“iCompetence hat uns bei der Migration zu Google Analytics 360 entscheidend unterstützt: von der Konzeption über die Implementierung bis hin zu Trainings. Für uns war es von großem Nutzen, dass sich das Team mit den unterschiedlichsten Webanalyse- und Tag Management-Toolanbietern auskannte. Wir haben iCompetence stets als unabhängigen Experten kennengelernt und können das Unternehmen als kompetenten Sparringpartner nur weiterempfehlen. Gleichzeitig freuen wir uns auf die weitere Zusammenarbeit!”',
+    name: 'Michael Schneider',
+    role: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA',
   },
   {
     quote:
-      '“The team showed up as partners, not vendors. They challenged our assumptions, shipped fast, and left us self-sufficient on the platform.”',
-    name: 'Aisha Okafor',
-    role: 'Chief Product Officer, Veridian Retail',
+      '“iCompetence hat sich intensiv mit unseren Anforderungen als Finanzinstitut auseinandergesetzt und uns bei der Umsetzung einer individuellen Lösung als fachlicher und technischer Berater unterstützt. Dabei wurde die Basis für eine Nutzung unserer Analytics-Daten geschaffen, die auf vielen Ebenen des Unternehmens den Entscheidungsprozess unterstützt und effizienter macht. Vielen Dank für eine inzwischen langjährige Partnerschaft auf Augenhöhe.”',
+    name: 'Miriam Leparoux',
+    role: 'Head of User Experience Management, comdirect bank AG',
+  },
+  {
+    quote:
+      '“Seit Jahren setze ich bei Fragen operativer und vor allem auch strategischer Analytics Projekte auf iCompetence. Die profunde Kompetenz und das sehr zielstrebige und professionelle Projektmanagement überzeugen mich immer wieder!”',
+    name: 'Jomique de Vries',
+    role: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH',
+  },
+  {
+    quote:
+      '“Ich schätze das Team von iCompetence hinsichtlich Ihrer Expertise & Fachwissen, sowie strategischen Weitblicks sehr. iCompetence unterstützt uns nicht nur mit Ihrer kompetenten Beratung bei allen digitalen Fragestellungen, sondern begegnet uns auch als verlässlicher Partner in der Erreichung unserer strategischen Ziele.”',
+    name: 'Mario Löwe',
+    role: 'Teamleiter Online Marketing, Küche&Co GmbH – a member of the otto group',
+  },
+  {
+    quote:
+      '“Vielen Dank für die sehr gute partnerschaftliche Zusammenarbeit, ihr habt uns in den letzten zwei Jahren definitiv geholfen, den jeweils nächsten Schritt zu machen und uns auch im operativen Geschäft von vielen „pain points“ befreit. Wir freuen uns auf weitere gemeinsame Projekte.”',
+    name: 'Alexander Krösser',
+    role: 'Director Media & Analytics, Career Partner GmbH',
+  },
+  {
+    quote:
+      '“iCompetence ist seit Jahren ein wichtiger Partner für uns, sowohl in strategischen Fragen als auch für die operative Umsetzung rund um Digital Intelligence – von der Erhebung über die Aufbereitung bis zur Interpretation und Visualisierung von Daten. Der familiäre Umgang und ein immer offenes Ohr bereichern die professionelle Zusammenarbeit sehr und machen Spaß.”',
+    name: 'Till Büttner',
+    role: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group',
   },
 ];
 
