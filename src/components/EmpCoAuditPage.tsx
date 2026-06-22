@@ -997,7 +997,17 @@ function EmpCoAuditPageContent() {
                 </label>
               </div>
 
-              <div style={{ marginBottom: '8px' }} data-netlify-recaptcha="true"></div>
+              {/* reCAPTCHA container is rendered only after mount (client-side),
+                  so it is absent from the statically exported HTML. This prevents
+                  Netlify's deploy-time form/reCAPTCHA processing from injecting the
+                  widget script + <div class="g-recaptcha"> + <noscript> into this
+                  div — that injection made the deployed DOM differ from React's
+                  (empty div) output and caused a hydration mismatch (React #418).
+                  The reCAPTCHA is rendered client-side via grecaptcha.render in the
+                  mount effect above, so submission/spam protection is unaffected. */}
+              {mounted && (
+                <div style={{ marginBottom: '8px' }} data-netlify-recaptcha="true"></div>
+              )}
 
               <button
                 type="submit"

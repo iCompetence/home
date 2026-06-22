@@ -846,11 +846,16 @@ function AIWorkshopPageContent() {
                   </div>
                 </div>
 
-                <div
-                  className="mb-5"
-                  style={{ marginBottom: 'calc(var(--spacing) * 4)' }}
-                  data-netlify-recaptcha="true"
-                ></div>
+                {/* Client-only: keep the reCAPTCHA container out of the static HTML
+                    so Netlify's deploy-time form processing can't inject the widget
+                    into it and cause a hydration mismatch (React #418). */}
+                {mounted && (
+                  <div
+                    className="mb-5"
+                    style={{ marginBottom: 'calc(var(--spacing) * 4)' }}
+                    data-netlify-recaptcha="true"
+                  ></div>
+                )}
 
                 <button
                   type="submit"
