@@ -2330,53 +2330,88 @@ function CaseTeaser({
 /* ---------------- Testimonial ---------------- */
 
 type TestimonialItem = {
-  quote: string;
+  quote: Bilingual;
   name: string;
-  role: string;
+  role: Bilingual;
 };
 
 const TESTIMONIALS: TestimonialItem[] = [
   {
-    quote:
-      '“iCompetence hat uns professionell & effizient beim Setup unserer Analytics Infrastruktur unterstützt. Auf eine bedarfsgerechte & kompetente Beratung folgte eine schnelle & zuverlässige Umsetzung der Maßnahmen mit entsprechendem Reporting. Mit iCompetence haben wir einen Partner auf Augenhöhe, mit dem wir sowohl operativ als auch strategisch zusammenarbeiten dürfen.”',
+    quote: {
+      de: '“iCompetence hat uns professionell & effizient beim Setup unserer Analytics Infrastruktur unterstützt. Auf eine bedarfsgerechte & kompetente Beratung folgte eine schnelle & zuverlässige Umsetzung der Maßnahmen mit entsprechendem Reporting. Mit iCompetence haben wir einen Partner auf Augenhöhe, mit dem wir sowohl operativ als auch strategisch zusammenarbeiten dürfen.”',
+      en: '“iCompetence supported us professionally & efficiently in setting up our analytics infrastructure. Needs-based, competent consulting was followed by a fast & reliable implementation, with the corresponding reporting. In iCompetence we have a partner at eye level, with whom we get to work both operationally and strategically.”',
+    },
     name: 'Sergej Kosyrev',
-    role: 'Leitung E-Commerce & Online-Marketing, Lucky Bike.de GmbH',
+    role: {
+      de: 'Leitung E-Commerce & Online-Marketing, Lucky Bike.de GmbH',
+      en: 'Head of E-Commerce & Online Marketing, Lucky Bike.de GmbH',
+    },
   },
   {
-    quote:
-      '“iCompetence hat uns bei der Migration zu Google Analytics 360 entscheidend unterstützt: von der Konzeption über die Implementierung bis hin zu Trainings. Für uns war es von großem Nutzen, dass sich das Team mit den unterschiedlichsten Webanalyse- und Tag Management-Toolanbietern auskannte. Wir haben iCompetence stets als unabhängigen Experten kennengelernt und können das Unternehmen als kompetenten Sparringpartner nur weiterempfehlen. Gleichzeitig freuen wir uns auf die weitere Zusammenarbeit!”',
+    quote: {
+      de: '“iCompetence hat uns bei der Migration zu Google Analytics 360 entscheidend unterstützt: von der Konzeption über die Implementierung bis hin zu Trainings. Für uns war es von großem Nutzen, dass sich das Team mit den unterschiedlichsten Webanalyse- und Tag Management-Toolanbietern auskannte. Wir haben iCompetence stets als unabhängigen Experten kennengelernt und können das Unternehmen als kompetenten Sparringpartner nur weiterempfehlen. Gleichzeitig freuen wir uns auf die weitere Zusammenarbeit!”',
+      en: '“iCompetence played a decisive role in our migration to Google Analytics 360: from conception through implementation to training. It was of great value to us that the team was familiar with the widest range of web analytics and tag management tool providers. We have always known iCompetence as an independent expert and can only recommend the company as a competent sparring partner. At the same time, we look forward to continuing to work together!”',
+    },
     name: 'Michael Schneider',
-    role: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA',
+    role: {
+      de: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA',
+      en: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA',
+    },
   },
   {
-    quote:
-      '“iCompetence hat sich intensiv mit unseren Anforderungen als Finanzinstitut auseinandergesetzt und uns bei der Umsetzung einer individuellen Lösung als fachlicher und technischer Berater unterstützt. Dabei wurde die Basis für eine Nutzung unserer Analytics-Daten geschaffen, die auf vielen Ebenen des Unternehmens den Entscheidungsprozess unterstützt und effizienter macht. Vielen Dank für eine inzwischen langjährige Partnerschaft auf Augenhöhe.”',
+    quote: {
+      de: '“iCompetence hat sich intensiv mit unseren Anforderungen als Finanzinstitut auseinandergesetzt und uns bei der Umsetzung einer individuellen Lösung als fachlicher und technischer Berater unterstützt. Dabei wurde die Basis für eine Nutzung unserer Analytics-Daten geschaffen, die auf vielen Ebenen des Unternehmens den Entscheidungsprozess unterstützt und effizienter macht. Vielen Dank für eine inzwischen langjährige Partnerschaft auf Augenhöhe.”',
+      en: '“iCompetence engaged intensively with our requirements as a financial institution and supported us as a professional and technical advisor in implementing a tailored solution. This laid the foundation for using our analytics data in a way that supports and streamlines decision-making across many levels of the company. Thank you for what is by now a long-standing partnership at eye level.”',
+    },
     name: 'Miriam Leparoux',
-    role: 'Head of User Experience Management, comdirect bank AG',
+    role: {
+      de: 'Head of User Experience Management, comdirect bank AG',
+      en: 'Head of User Experience Management, comdirect bank AG',
+    },
   },
   {
-    quote:
-      '“Seit Jahren setze ich bei Fragen operativer und vor allem auch strategischer Analytics Projekte auf iCompetence. Die profunde Kompetenz und das sehr zielstrebige und professionelle Projektmanagement überzeugen mich immer wieder!”',
+    quote: {
+      de: '“Seit Jahren setze ich bei Fragen operativer und vor allem auch strategischer Analytics Projekte auf iCompetence. Die profunde Kompetenz und das sehr zielstrebige und professionelle Projektmanagement überzeugen mich immer wieder!”',
+      en: '“For years, I have relied on iCompetence for operational and, above all, strategic analytics projects. Their profound expertise and highly focused, professional project management impress me time and again!”',
+    },
     name: 'Jomique de Vries',
-    role: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH',
+    role: {
+      de: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH',
+      en: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH',
+    },
   },
   {
-    quote:
-      '“Ich schätze das Team von iCompetence hinsichtlich Ihrer Expertise & Fachwissen, sowie strategischen Weitblicks sehr. iCompetence unterstützt uns nicht nur mit Ihrer kompetenten Beratung bei allen digitalen Fragestellungen, sondern begegnet uns auch als verlässlicher Partner in der Erreichung unserer strategischen Ziele.”',
+    quote: {
+      de: '“Ich schätze das Team von iCompetence hinsichtlich Ihrer Expertise & Fachwissen, sowie strategischen Weitblicks sehr. iCompetence unterstützt uns nicht nur mit Ihrer kompetenten Beratung bei allen digitalen Fragestellungen, sondern begegnet uns auch als verlässlicher Partner in der Erreichung unserer strategischen Ziele.”',
+      en: '“I greatly value the iCompetence team for their expertise & know-how as well as their strategic foresight. iCompetence not only supports us with competent advice on all digital questions, but is also a reliable partner in achieving our strategic goals.”',
+    },
     name: 'Mario Löwe',
-    role: 'Teamleiter Online Marketing, Küche&Co GmbH – a member of the otto group',
+    role: {
+      de: 'Teamleiter Online Marketing, Küche&Co GmbH – a member of the otto group',
+      en: 'Team Lead Online Marketing, Küche&Co GmbH – a member of the otto group',
+    },
   },
   {
-    quote:
-      '“Vielen Dank für die sehr gute partnerschaftliche Zusammenarbeit, ihr habt uns in den letzten zwei Jahren definitiv geholfen, den jeweils nächsten Schritt zu machen und uns auch im operativen Geschäft von vielen „pain points“ befreit. Wir freuen uns auf weitere gemeinsame Projekte.”',
+    quote: {
+      de: '“Vielen Dank für die sehr gute partnerschaftliche Zusammenarbeit, ihr habt uns in den letzten zwei Jahren definitiv geholfen, den jeweils nächsten Schritt zu machen und uns auch im operativen Geschäft von vielen „pain points“ befreit. Wir freuen uns auf weitere gemeinsame Projekte.”',
+      en: '“Many thanks for the excellent, collaborative partnership. Over the past two years you have definitely helped us take the next step each time and freed us from many “pain points” in day-to-day operations as well. We look forward to more joint projects.”',
+    },
     name: 'Alexander Krösser',
-    role: 'Director Media & Analytics, Career Partner GmbH',
+    role: {
+      de: 'Director Media & Analytics, Career Partner GmbH',
+      en: 'Director Media & Analytics, Career Partner GmbH',
+    },
   },
   {
-    quote:
-      '“iCompetence ist seit Jahren ein wichtiger Partner für uns, sowohl in strategischen Fragen als auch für die operative Umsetzung rund um Digital Intelligence – von der Erhebung über die Aufbereitung bis zur Interpretation und Visualisierung von Daten. Der familiäre Umgang und ein immer offenes Ohr bereichern die professionelle Zusammenarbeit sehr und machen Spaß.”',
+    quote: {
+      de: '“iCompetence ist seit Jahren ein wichtiger Partner für uns, sowohl in strategischen Fragen als auch für die operative Umsetzung rund um Digital Intelligence – von der Erhebung über die Aufbereitung bis zur Interpretation und Visualisierung von Daten. Der familiäre Umgang und ein immer offenes Ohr bereichern die professionelle Zusammenarbeit sehr und machen Spaß.”',
+      en: '“iCompetence has been an important partner for us for years, both on strategic questions and for the operational implementation around Digital Intelligence – from data collection and preparation to the interpretation and visualization of data. The personable relationship and an always open ear greatly enrich the professional collaboration and make it fun.”',
+    },
     name: 'Till Büttner',
-    role: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group',
+    role: {
+      de: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group',
+      en: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group',
+    },
   },
 ];
 
@@ -2471,7 +2506,7 @@ function Testimonial() {
         color: WHITE,
       }}
     >
-      {active.quote}
+      {tr(lang, active.quote)}
     </p>
   );
 
@@ -2491,7 +2526,7 @@ function Testimonial() {
           {active.name}
         </span>
         <span style={{ fontFamily: FONT, fontSize: mobile ? 14 : 16, fontWeight: 400, color: WHITE_70 }}>
-          {active.role}
+          {tr(lang, active.role)}
         </span>
       </div>
     </div>
