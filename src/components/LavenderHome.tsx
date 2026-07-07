@@ -2436,7 +2436,6 @@ function Testimonial() {
   const goPrev = () =>
     setIdx((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   const goNext = () => setIdx((i) => (i + 1) % TESTIMONIALS.length);
-  const active = TESTIMONIALS[idx];
 
   const bp = useBp();
   const compact = isCompact(bp);
@@ -2510,40 +2509,57 @@ function Testimonial() {
     </div>
   );
 
-  const quoteEl = (
-    <p
-      style={{
-        margin: 0,
-        fontFamily: FONT,
-        fontSize: quoteSize,
-        fontWeight: 500,
-        lineHeight: quoteLh,
-        color: WHITE,
-      }}
-    >
-      {tr(lang, active.quote)}
-    </p>
-  );
-
-  const authorEl = (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      <div
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: '50%',
-          background: WHITE_20,
-          flexShrink: 0,
-        }}
-      />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 500, color: WHITE }}>
-          {active.name}
-        </span>
-        <span style={{ fontFamily: FONT, fontSize: mobile ? 14 : 16, fontWeight: 400, color: WHITE_70 }}>
-          {tr(lang, active.role)}
-        </span>
-      </div>
+  const contentGap = mobile ? 24 : bp === 'tablet' ? 32 : 40;
+  // All quotes are stacked in the same grid cell so the container reserves the
+  // height of the tallest one — only the active quote is visible, so switching
+  // testimonials no longer changes the section height (no layout jump).
+  const contentStack = (
+    <div style={{ display: 'grid', width: '100%', ...(mobile ? {} : { flex: 1, minWidth: 0 }) }}>
+      {TESTIMONIALS.map((item, i) => (
+        <div
+          key={i}
+          aria-hidden={i !== idx}
+          style={{
+            gridArea: '1 / 1',
+            visibility: i === idx ? 'visible' : 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: contentGap,
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              fontFamily: FONT,
+              fontSize: quoteSize,
+              fontWeight: 500,
+              lineHeight: quoteLh,
+              color: WHITE,
+            }}
+          >
+            {tr(lang, item.quote)}
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: '50%',
+                background: WHITE_20,
+                flexShrink: 0,
+              }}
+            />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 500, color: WHITE }}>
+                {item.name}
+              </span>
+              <span style={{ fontFamily: FONT, fontSize: mobile ? 14 : 16, fontWeight: 400, color: WHITE_70 }}>
+                {tr(lang, item.role)}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 
@@ -2576,8 +2592,7 @@ function Testimonial() {
       {mobile ? (
         <>
           {arrowsEl}
-          {quoteEl}
-          {authorEl}
+          {contentStack}
         </>
       ) : (
         <div
@@ -2589,17 +2604,7 @@ function Testimonial() {
           }}
         >
           {arrowsEl}
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: bp === 'tablet' ? 32 : 40,
-            }}
-          >
-            {quoteEl}
-            {authorEl}
-          </div>
+          {contentStack}
         </div>
       )}
     </div>
