@@ -1493,25 +1493,30 @@ function ServicesGrid() {
   const [expandedPillIdx, setExpandedPillIdx] = useState(0);
 
   const total = SERVICE_CARDS.length;
+  // Finite carousel: starts on the first card (Data) and clamps at both ends.
+  const atStart = activeIdx === 0;
+  const atEnd = activeIdx === total - 1;
   const goPrev = () => {
+    if (atStart) return;
     setDirection(-1);
-    setActiveIdx((i) => (i - 1 + total) % total);
+    setActiveIdx((i) => Math.max(0, i - 1));
     setExpandedPillIdx(0);
   };
   const goNext = () => {
+    if (atEnd) return;
     setDirection(1);
-    setActiveIdx((i) => (i + 1) % total);
+    setActiveIdx((i) => Math.min(total - 1, i + 1));
     setExpandedPillIdx(0);
   };
 
   const CARD_GAP = 40;
   const COLLAPSED_W = 640;
-  const prevIdx = (activeIdx - 1 + total) % total;
-  const nextIdx = (activeIdx + 1) % total;
-  const visible = [
-    { card: SERVICE_CARDS[prevIdx], idx: prevIdx, role: 'prev' as const },
-    { card: SERVICE_CARDS[activeIdx], idx: activeIdx, role: 'active' as const },
-    { card: SERVICE_CARDS[nextIdx], idx: nextIdx, role: 'next' as const },
+  // Neighbours only exist within bounds; a null slot renders as a spacer so the
+  // active card stays centred even when one side has no card to peek.
+  const slots = [
+    { card: atStart ? null : SERVICE_CARDS[activeIdx - 1], role: 'prev' as const },
+    { card: SERVICE_CARDS[activeIdx], role: 'active' as const },
+    { card: atEnd ? null : SERVICE_CARDS[activeIdx + 1], role: 'next' as const },
   ];
 
   const titleSize = bp === 'mobile' ? 28 : bp === 'tablet' ? 32 : 36;
@@ -1560,14 +1565,16 @@ function ServicesGrid() {
             type="button"
             aria-label="Previous service"
             onClick={goPrev}
+            disabled={atStart}
             style={{
               width: arrowBtn,
               height: arrowBtn,
               borderRadius: 100,
-              background: 'rgba(11,34,49,0.1)',
+              background: NAVY,
               border: 0,
-              color: NAVY,
-              cursor: 'pointer',
+              color: WHITE,
+              cursor: atStart ? 'not-allowed' : 'pointer',
+              opacity: atStart ? 0.35 : 1,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -1579,6 +1586,7 @@ function ServicesGrid() {
             type="button"
             aria-label="Next service"
             onClick={goNext}
+            disabled={atEnd}
             style={{
               width: arrowBtn,
               height: arrowBtn,
@@ -1586,7 +1594,8 @@ function ServicesGrid() {
               background: NAVY,
               border: 0,
               color: WHITE,
-              cursor: 'pointer',
+              cursor: atEnd ? 'not-allowed' : 'pointer',
+              opacity: atEnd ? 0.35 : 1,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -1628,20 +1637,26 @@ function ServicesGrid() {
               justifyContent: 'center',
             }}
           >
-            {visible.map(({ card, role }) => (
-              <ServiceCardView
-                key={role}
-                card={card}
-                isActive={role === 'active'}
-                bp={bp}
-                expandedPillIdx={expandedPillIdx}
-                onPillClick={onPillClick}
-                onCardClick={() => {
-                  if (role === 'prev') goPrev();
-                  else if (role === 'next') goNext();
-                }}
-              />
-            ))}
+            {slots.map(({ card, role }) =>
+              card === null ? (
+                // Empty side (start/end): reserve a collapsed-card slot so the
+                // active card stays centred.
+                <div key={role} aria-hidden style={{ flex: `0 0 ${COLLAPSED_W}px`, height: 640 }} />
+              ) : (
+                <ServiceCardView
+                  key={role}
+                  card={card}
+                  isActive={role === 'active'}
+                  bp={bp}
+                  expandedPillIdx={expandedPillIdx}
+                  onPillClick={onPillClick}
+                  onCardClick={() => {
+                    if (role === 'prev') goPrev();
+                    else if (role === 'next') goNext();
+                  }}
+                />
+              ),
+            )}
           </motion.div>
         </div>
       )}
@@ -2462,9 +2477,9 @@ function Testimonial() {
           width: btn,
           height: btn,
           borderRadius: 100,
-          background: WHITE_10,
+          background: WHITE,
           border: 0,
-          color: WHITE,
+          color: NAVY,
           cursor: 'pointer',
           display: 'inline-flex',
           alignItems: 'center',
