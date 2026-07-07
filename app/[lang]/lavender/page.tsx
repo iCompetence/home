@@ -18,6 +18,11 @@ export async function generateMetadata({
   }
 }
 
-export default function LavenderPage() {
-  return <LavenderHome />
+export default async function LavenderPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  return <LavenderHome initialLang={lang} />
 }
