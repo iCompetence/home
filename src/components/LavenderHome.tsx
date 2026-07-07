@@ -1362,7 +1362,7 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'Data Strategy',
         description:
-          'Build a clear data foundation — assess sources, prioritize use cases, and align teams on outcomes.',
+          'Build a clear data foundation: assess sources, prioritize use cases, and align teams on outcomes.',
       },
       {
         label: 'Data Engineering',
@@ -1372,12 +1372,12 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'Analytics',
         description:
-          'Turn raw events into decision-grade metrics — instrumentation, modelling, and trustworthy reporting.',
+          'Turn raw events into decision-grade metrics: instrumentation, modelling, and trustworthy reporting.',
       },
       {
         label: 'Visualization',
         description:
-          'Dashboards that explain themselves — for executives, operators, and analysts alike.',
+          'Self-explanatory dashboards for executives, operators, and analysts alike.',
       },
     ],
   },
@@ -1388,7 +1388,7 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'AI Strategy',
         description:
-          'Identify where AI moves the needle — and design the path from quick wins to durable capability.',
+          'Identify where AI makes the difference and design the path from quick wins to durable capability.',
       },
       {
         label: 'Generative AI',
@@ -1398,12 +1398,12 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'Agentic Systems',
         description:
-          'Multi-step agents that take action against your tools, data, and workflows — with humans in the loop.',
+          'Multi-step agents that take action with your tools, data, and workflows. Always by keeping humans in the lead.',
       },
       {
         label: 'LLM Integration',
         description:
-          'Integrate the right model into the right surface — assistants, copilots, and end-to-end automations.',
+          'Integrate the right model into the right surface: assistants, copilots, and end-to-end automations, tailored to your needs.',
       },
     ],
   },
@@ -1414,7 +1414,7 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'AI Workshops',
         description:
-          'A focused day of hands-on prototyping — your team leaves with a working AI use case, not slides.',
+          'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
       },
       {
         label: 'Team Enablement',
@@ -1424,12 +1424,12 @@ const SERVICE_CARDS: ServiceCard[] = [
       {
         label: 'Executive Briefings',
         description:
-          'A clear-eyed look at where AI changes your business and where it won\'t — tailored to your context.',
+          'A clear-eyed look at where AI changes your business for the better and where it won\'t.',
       },
       {
         label: 'Hands-on Trainings',
         description:
-          'Modular trainings on data, GenAI, and agentic systems — practice over theory, every session.',
+          'Practice over theory: modular training on data, GenAI, and agentic systems.',
       },
     ],
   },
@@ -2498,21 +2498,21 @@ const PROCESS_ITEMS: ProcessItem[] = [
     number: '01',
     title: 'Ideation Workshop',
     description:
-      'We start by aligning on the problem worth solving. In a focused workshop, we map your goals, constraints, and data — then walk away with a sharp use case and a clear next step.',
+      'With you, we identify the problem to be solved. In a focused workshop, we map your goals, constraints, and data. Then walk away with a sharp use case and a clear next step.',
     image: '/images/iC_Stern_Blau.png',
   },
   {
     number: '02',
     title: 'Proof of Concept',
     description:
-      'We build a tangible prototype together — focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
+      'We build a tangible prototype together – focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
     image: '/images/icompetence_visual_mint.png',
   },
   {
     number: '03',
     title: 'Rollout',
     description:
-      'We harden the proof into a production-ready system — integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
+      'We harden the proof into a production-ready system, integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
     image: '/images/iC_Stern_Gelb.png',
   },
 ];
