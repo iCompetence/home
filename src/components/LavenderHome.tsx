@@ -1117,8 +1117,8 @@ function Hero() {
             color: NAVY_80,
           }}
         >
-          We help ambitious teams cut through complexity — turning scattered data into
-          clear decisions, and AI into the products and automated processes that
+          We help ambitious teams cut through complexity by turning scattered data
+          into clear decisions and AI into the products &amp; automated processes that
           deliver lasting results.
         </p>
 
