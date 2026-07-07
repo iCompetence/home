@@ -36,6 +36,22 @@ const WHITE_10 = 'rgba(255,255,255,0.10)';
 const FONT = "Inter, system-ui, -apple-system, sans-serif";
 const MAILTO = "mailto:info@icompetence.de?subject=Let%27s%20talk";
 
+/* ---------------- Language (EN / DE) ---------------- */
+
+type Lang = 'en' | 'de';
+type Bilingual = { en: string; de: string };
+
+const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
+  lang: 'en',
+  setLang: () => {},
+});
+const useLang = () => useContext(LangContext).lang;
+
+/** Inline copy helper: pick the string for the active language. */
+const t = (lang: Lang, en: string, de: string) => (lang === 'de' ? de : en);
+/** Resolve a { en, de } field from a data structure. */
+const tr = (lang: Lang, v: Bilingual) => (lang === 'de' ? v.de : v.en);
+
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -126,8 +142,9 @@ function DesignFrameOverlay({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function LavenderHome() {
+export default function LavenderHome({ initialLang = 'en' }: { initialLang?: Lang }) {
   const bp = useBreakpoint();
+  const [lang, setLang] = useState<Lang>(initialLang);
 
   useEffect(() => {
     const prevBodyBg = document.body.style.backgroundColor;
@@ -141,6 +158,7 @@ export default function LavenderHome() {
   }, []);
 
   return (
+    <LangContext.Provider value={{ lang, setLang }}>
     <BreakpointContext.Provider value={bp}>
     <div
       className="lavender-page"
@@ -230,20 +248,21 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       </div>
     </div>
     </BreakpointContext.Provider>
+    </LangContext.Provider>
   );
 }
 
 /* ---------------- Burger Menu ---------------- */
 
-const BURGER_LINKS: ReadonlyArray<{ label: string; href: string }> = [
-  { label: 'Analytics Agent', href: '/analytics-agent/' },
-  { label: 'iKnow', href: '/iknow/' },
-  { label: 'Intelligentic Search', href: '/intelligentic-search/' },
-  { label: 'Privacy-Led AI', href: '/privacy-led-ai/' },
-  { label: 'AI Workshop', href: '/ai-workshop/' },
-  { label: 'Campaign Tool', href: '/campaign-parameter-tool/' },
-  { label: 'User Journey Explorer', href: '/icu-user-journey-explorer/' },
-  { label: "What's New", href: '/whats-new/' },
+const BURGER_LINKS: ReadonlyArray<{ label: Bilingual; href: string }> = [
+  { label: { en: 'Analytics Agent', de: 'Analytics Agent' }, href: '/analytics-agent/' },
+  { label: { en: 'iKnow', de: 'iKnow' }, href: '/iknow/' },
+  { label: { en: 'Intelligentic Search', de: 'Intelligentic Search' }, href: '/intelligentic-search/' },
+  { label: { en: 'Privacy-Led AI', de: 'Privacy-Led AI' }, href: '/privacy-led-ai/' },
+  { label: { en: 'AI Workshop', de: 'KI-Workshop' }, href: '/ai-workshop/' },
+  { label: { en: 'Campaign Tool', de: 'Kampagnen-Tool' }, href: '/campaign-parameter-tool/' },
+  { label: { en: 'User Journey Explorer', de: 'User Journey Explorer' }, href: '/icu-user-journey-explorer/' },
+  { label: { en: "What's New", de: 'Neuigkeiten' }, href: '/whats-new/' },
 ];
 
 function LinkedInGlyph({ size }: { size: number }) {
@@ -275,6 +294,7 @@ function BurgerMenu({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const lang = useLang();
   const tap = trigger === 'tap';
   const dropdownTopOffset = pillPaddingY + 24;
   const panelWidth = pillWidth || (wide ? 1100 : 264);
@@ -364,7 +384,7 @@ function BurgerMenu({
             {wide ? (
               <>
                 <a
-                  href="/de/"
+                  href={`/${lang}/`}
                   style={{
                     fontFamily: FONT,
                     fontSize: 16,
@@ -373,7 +393,7 @@ function BurgerMenu({
                     textDecoration: 'none',
                   }}
                 >
-                  Home
+                  {t(lang, 'Home', 'Start')}
                 </a>
                 <div style={{ height: 1, background: WHITE_20 }} />
                 <span
@@ -386,7 +406,7 @@ function BurgerMenu({
                     color: WHITE_70,
                   }}
                 >
-                  Products &amp; Tools
+                  {t(lang, 'Products & Tools', 'Produkte & Tools')}
                 </span>
                 <div
                   style={{
@@ -408,7 +428,7 @@ function BurgerMenu({
                         textDecoration: 'none',
                       }}
                     >
-                      {label}
+                      {tr(lang, label)}
                     </a>
                   ))}
                 </div>
@@ -446,7 +466,7 @@ function BurgerMenu({
             ) : (
               <>
                 <a
-                  href="/de/"
+                  href={`/${lang}/`}
                   onClick={closeOnNav}
                   style={{
                     fontFamily: FONT,
@@ -457,7 +477,7 @@ function BurgerMenu({
                     padding: '4px 0',
                   }}
                 >
-                  Home
+                  {t(lang, 'Home', 'Start')}
                 </a>
                 <div style={{ height: 1, background: WHITE_20, margin: '4px 0' }} />
                 <span
@@ -470,7 +490,7 @@ function BurgerMenu({
                     color: WHITE_70,
                   }}
                 >
-                  Products &amp; Tools
+                  {t(lang, 'Products & Tools', 'Produkte & Tools')}
                 </span>
                 <div
                   style={{
@@ -493,7 +513,7 @@ function BurgerMenu({
                         textDecoration: 'none',
                       }}
                     >
-                      {label}
+                      {tr(lang, label)}
                     </a>
                   ))}
                 </div>
@@ -538,11 +558,11 @@ function BurgerMenu({
 
 /* ---------------- Top Nav ---------------- */
 
-const NAV_SECTIONS: ReadonlyArray<{ id: string; label: string }> = [
-  { id: 'services', label: 'Services' },
-  { id: 'cases', label: 'Cases' },
-  { id: 'process', label: 'Process' },
-  { id: 'privacy-led', label: 'Privacy-led AI' },
+const NAV_SECTIONS: ReadonlyArray<{ id: string; label: Bilingual }> = [
+  { id: 'services', label: { en: 'Services', de: 'Leistungen' } },
+  { id: 'cases', label: { en: 'Cases', de: 'Referenzen' } },
+  { id: 'process', label: { en: 'Process', de: 'Vorgehen' } },
+  { id: 'privacy-led', label: { en: 'Privacy-led AI', de: 'Privacy-led AI' } },
 ];
 
 function TopNav() {
@@ -552,6 +572,7 @@ function TopNav() {
 
 function CompactNav({ bp }: { bp: Bp }) {
   const isMobile = bp === 'mobile';
+  const lang = useLang();
   const navRef = useRef<HTMLElement | null>(null);
   const [pillWidth, setPillWidth] = useState(0);
 
@@ -625,7 +646,7 @@ function CompactNav({ bp }: { bp: Bp }) {
                   onClick={smoothAnchor}
                   style={{ fontSize: 14, fontWeight: 500, color: WHITE, textDecoration: 'none' }}
                 >
-                  {label}
+                  {tr(lang, label)}
                 </a>
               ))}
             </div>
@@ -633,7 +654,7 @@ function CompactNav({ bp }: { bp: Bp }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 18 }}>
             <a
-              href="/de/contact/"
+              href={`/${lang}/contact/`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -649,7 +670,7 @@ function CompactNav({ bp }: { bp: Bp }) {
                 textDecoration: 'none',
               }}
             >
-              Let&apos;s talk
+              {t(lang, "Let's talk", 'Kontakt aufnehmen')}
               <ArrowUpRight size={16} strokeWidth={2} />
             </a>
             <BurgerMenu
@@ -668,6 +689,7 @@ function CompactNav({ bp }: { bp: Bp }) {
 }
 
 function DesktopNav() {
+  const lang = useLang();
   const [compact, setCompact] = useState(false);
   const [activeId, setActiveId] = useState<string>(NAV_SECTIONS[0].id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -734,8 +756,6 @@ function DesktopNav() {
     return () => document.removeEventListener('mousedown', onDocClick);
   }, [dropdownOpen]);
 
-  const activeLabel =
-    NAV_SECTIONS.find((s) => s.id === activeId)?.label ?? NAV_SECTIONS[0].label;
   const otherSections = NAV_SECTIONS.filter((s) => s.id !== activeId);
 
   const morphTransition = {
@@ -822,14 +842,14 @@ function DesktopNav() {
                       textDecoration: 'none',
                     }}
                   >
-                    {label}
+                    {tr(lang, label)}
                   </a>
                 ))}
               </motion.div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
                 <motion.a
-                  href="/de/contact/" target="_blank" rel="noopener noreferrer"
+                  href={`/${lang}/contact/`} target="_blank" rel="noopener noreferrer"
                   transition={morphTransition}
                   style={{
                     display: 'inline-flex',
@@ -844,7 +864,7 @@ function DesktopNav() {
                     textDecoration: 'none',
                   }}
                 >
-                  Let&apos;s talk
+                  {t(lang, "Let's talk", 'Kontakt aufnehmen')}
                   <ArrowUpRight size={20} strokeWidth={2} />
                 </motion.a>
                 <BurgerMenu iconSize={28} wide pillWidth={pillWidth} pillPaddingX={32} pillPaddingY={16} />
@@ -899,7 +919,7 @@ function DesktopNav() {
                           visibility: id === activeId ? 'visible' : 'hidden',
                         }}
                       >
-                        {label}
+                        {tr(lang, label)}
                       </span>
                     ))}
                   </span>
@@ -951,7 +971,7 @@ function DesktopNav() {
                           textDecoration: 'none',
                         }}
                       >
-                        Home
+                        {t(lang, 'Home', 'Start')}
                       </a>
                       {otherSections.map(({ id, label }) => (
                         <a
@@ -971,7 +991,7 @@ function DesktopNav() {
                             textDecoration: 'none',
                           }}
                         >
-                          {label}
+                          {tr(lang, label)}
                         </a>
                       ))}
                     </motion.div>
@@ -980,7 +1000,7 @@ function DesktopNav() {
               </motion.div>
 
               <motion.a
-                href="/de/contact/" target="_blank" rel="noopener noreferrer"
+                href={`/${lang}/contact/`} target="_blank" rel="noopener noreferrer"
                 transition={morphTransition}
                 style={{
                   display: 'inline-flex',
@@ -995,7 +1015,7 @@ function DesktopNav() {
                   textDecoration: 'none',
                 }}
               >
-                Let&apos;s talk
+                {t(lang, "Let's talk", 'Kontakt aufnehmen')}
                 <ArrowUpRight size={20} strokeWidth={2} />
               </motion.a>
 
@@ -1012,6 +1032,7 @@ function DesktopNav() {
 
 function Hero() {
   const bp = useBp();
+  const lang = useLang();
   const compact = isCompact(bp);
   const headingSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 56 : 80;
   const headingLs = bp === 'mobile' ? -1 : bp === 'tablet' ? -1.5 : -2;
@@ -1102,7 +1123,9 @@ function Hero() {
             whiteSpace: compact ? 'normal' : 'pre-line',
           }}
         >
-          {compact ? 'Separate the signal from the noise.' : 'Separate the signal\nfrom the noise.'}
+          {compact
+            ? t(lang, 'Separate the signal from the noise.', 'Trennen Sie das Signal vom Rauschen.')
+            : t(lang, 'Separate the signal\nfrom the noise.', 'Trennen Sie das Signal\nvom Rauschen.')}
         </div>
 
         <p
@@ -1117,9 +1140,11 @@ function Hero() {
             color: NAVY_80,
           }}
         >
-          We help ambitious teams cut through complexity by turning scattered data
-          into clear decisions and AI into the products &amp; automated processes that
-          deliver lasting results.
+          {t(
+            lang,
+            'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
+            'Wir helfen ambitionierten Teams, Komplexität zu durchdringen – indem wir verstreute Daten in klare Entscheidungen verwandeln und KI in Produkte & automatisierte Prozesse, die dauerhaft Ergebnisse liefern.',
+          )}
         </p>
 
         <div
@@ -1131,10 +1156,10 @@ function Hero() {
           }}
         >
           <a
-            href="/de/contact/" target="_blank" rel="noopener noreferrer"
+            href={`/${lang}/contact/`} target="_blank" rel="noopener noreferrer"
             style={{ ...btnBase, background: BLUE, color: WHITE }}
           >
-            Let&apos;s talk
+            {t(lang, "Let's talk", 'Kontakt aufnehmen')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
           <a
@@ -1142,7 +1167,7 @@ function Hero() {
             onClick={smoothAnchor}
             style={{ ...btnBase, border: `1px solid ${NAVY}`, color: NAVY, background: 'transparent' }}
           >
-            See our services
+            {t(lang, 'See our services', 'Unsere Leistungen ansehen')}
             <ArrowDown size={20} strokeWidth={2} />
           </a>
         </div>
@@ -1348,88 +1373,112 @@ function LogoCarousel() {
 /* ---------------- Services Card Grid ---------------- */
 
 type ServicePill = { label: string; description: string };
-type ServiceCard = {
-  title: string;
+type ServiceCardData = {
+  title: Bilingual;
   image: string;
-  pills: ServicePill[];
+  pills: { label: Bilingual; description: Bilingual }[];
 };
 
-const SERVICE_CARDS: ServiceCard[] = [
+const SERVICE_CARDS: ServiceCardData[] = [
   {
-    title: 'Data',
+    title: { en: 'Data', de: 'Daten' },
     image: '/images/iC_Stern_Blau.png',
     pills: [
       {
-        label: 'Data Strategy',
-        description:
-          'Build a clear data foundation: assess sources, prioritize use cases, and align teams on outcomes.',
+        label: { en: 'Data Strategy', de: 'Datenstrategie' },
+        description: {
+          en: 'Build a clear data foundation: assess sources, prioritize use cases, and align teams on outcomes.',
+          de: 'Ein klares Datenfundament schaffen: Quellen bewerten, Use Cases priorisieren und Teams auf gemeinsame Ziele ausrichten.',
+        },
       },
       {
-        label: 'Data Engineering',
-        description:
-          'Reliable pipelines, governed warehouses, and the plumbing that makes analytics and AI dependable.',
+        label: { en: 'Data Engineering', de: 'Data Engineering' },
+        description: {
+          en: 'Reliable pipelines, governed warehouses, and the plumbing that makes analytics and AI dependable.',
+          de: 'Zuverlässige Pipelines, governte Data Warehouses und die Infrastruktur, die Analytics und KI verlässlich macht.',
+        },
       },
       {
-        label: 'Analytics',
-        description:
-          'Turn raw events into decision-grade metrics: instrumentation, modelling, and trustworthy reporting.',
+        label: { en: 'Analytics', de: 'Analytics' },
+        description: {
+          en: 'Turn raw events into decision-grade metrics: instrumentation, modelling, and trustworthy reporting.',
+          de: 'Aus Rohdaten entscheidungsreife Kennzahlen machen: Tracking, Modellierung und belastbares Reporting.',
+        },
       },
       {
-        label: 'Visualization',
-        description:
-          'Self-explanatory dashboards for executives, operators, and analysts alike.',
+        label: { en: 'Visualization', de: 'Visualisierung' },
+        description: {
+          en: 'Self-explanatory dashboards for executives, operators, and analysts alike.',
+          de: 'Selbsterklärende Dashboards – für Führungskräfte, Fachbereiche und Analysten gleichermaßen.',
+        },
       },
     ],
   },
   {
-    title: 'AI',
+    title: { en: 'AI', de: 'KI' },
     image: '/images/iC_Stern_Gelb.png',
     pills: [
       {
-        label: 'AI Strategy',
-        description:
-          'Identify where AI makes the difference and design the path from quick wins to durable capability.',
+        label: { en: 'AI Strategy', de: 'KI-Strategie' },
+        description: {
+          en: 'Identify where AI makes the difference and design the path from quick wins to durable capability.',
+          de: 'Erkennen, wo KI den Unterschied macht – und den Weg von schnellen Erfolgen zu dauerhafter Leistungsfähigkeit gestalten.',
+        },
       },
       {
-        label: 'Generative AI',
-        description:
-          'Ship production-grade GenAI features with the safety, evaluation, and ops to back them.',
+        label: { en: 'Generative AI', de: 'Generative KI' },
+        description: {
+          en: 'Ship production-grade GenAI features with the safety, evaluation, and ops to back them.',
+          de: 'Produktionsreife GenAI-Funktionen ausliefern – mit der nötigen Sicherheit, Evaluierung und dem Betrieb dahinter.',
+        },
       },
       {
-        label: 'Agentic Systems',
-        description:
-          'Multi-step agents that take action with your tools, data, and workflows. Always by keeping humans in the lead.',
+        label: { en: 'Agentic Systems', de: 'Agentische Systeme' },
+        description: {
+          en: 'Multi-step agents that take action with your tools, data, and workflows. Always by keeping humans in the lead.',
+          de: 'Mehrstufige Agenten, die mit Ihren Tools, Daten und Workflows handeln – stets unter menschlicher Führung.',
+        },
       },
       {
-        label: 'LLM Integration',
-        description:
-          'Integrate the right model into the right surface: assistants, copilots, and end-to-end automations, tailored to your needs.',
+        label: { en: 'LLM Integration', de: 'LLM-Integration' },
+        description: {
+          en: 'Integrate the right model into the right surface: assistants, copilots, and end-to-end automations, tailored to your needs.',
+          de: 'Das richtige Modell an der richtigen Stelle integrieren: Assistenten, Copilots und End-to-End-Automatisierungen, zugeschnitten auf Ihren Bedarf.',
+        },
       },
     ],
   },
   {
-    title: 'Workshops',
+    title: { en: 'Workshops', de: 'Workshops' },
     image: '/images/iC_Stern_Gruen.png',
     pills: [
       {
-        label: 'AI Workshops',
-        description:
-          'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
+        label: { en: 'AI Workshops', de: 'KI-Workshops' },
+        description: {
+          en: 'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
+          de: 'Ein fokussierter Tag praktisches Prototyping. Ihr Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.',
+        },
       },
       {
-        label: 'Team Enablement',
-        description:
-          'Practical skill-building so your team can build, evaluate, and operate AI products themselves.',
+        label: { en: 'Team Enablement', de: 'Team-Enablement' },
+        description: {
+          en: 'Practical skill-building so your team can build, evaluate, and operate AI products themselves.',
+          de: 'Praxisnaher Kompetenzaufbau, damit Ihr Team KI-Produkte selbst entwickeln, bewerten und betreiben kann.',
+        },
       },
       {
-        label: 'Executive Briefings',
-        description:
-          'A clear-eyed look at where AI changes your business for the better and where it won\'t.',
+        label: { en: 'Executive Briefings', de: 'Executive Briefings' },
+        description: {
+          en: 'A clear-eyed look at where AI changes your business for the better and where it won\'t.',
+          de: 'Ein nüchterner Blick darauf, wo KI Ihr Geschäft wirklich voranbringt – und wo nicht.',
+        },
       },
       {
-        label: 'Hands-on Trainings',
-        description:
-          'Practice over theory: modular training on data, GenAI, and agentic systems.',
+        label: { en: 'Hands-on Trainings', de: 'Hands-on-Trainings' },
+        description: {
+          en: 'Practice over theory: modular training on data, GenAI, and agentic systems.',
+          de: 'Praxis vor Theorie: modulare Trainings zu Daten, GenAI und agentischen Systemen.',
+        },
       },
     ],
   },
@@ -1437,6 +1486,7 @@ const SERVICE_CARDS: ServiceCard[] = [
 
 function ServicesGrid() {
   const bp = useBp();
+  const lang = useLang();
   const compact = isCompact(bp);
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -1502,7 +1552,7 @@ function ServicesGrid() {
             color: NAVY,
           }}
         >
-          Our Services
+          {t(lang, 'Our Services', 'Unsere Leistungen')}
         </h2>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: compact ? 8 : 12 }}>
@@ -1608,25 +1658,27 @@ function ServiceCardView({
   onCardClick,
   bp,
 }: {
-  card: ServiceCard;
+  card: ServiceCardData;
   isActive: boolean;
   expandedPillIdx: number;
   onPillClick: (idx: number) => void;
   onCardClick: () => void;
   bp: Bp;
 }) {
+  const lang = useLang();
   // Compact (tablet/mobile): a single full-width card that always shows its pills.
   if (isCompact(bp)) {
     const stack = bp === 'mobile';
     const titleSize = stack ? 40 : 48;
     const visualH = stack ? 320 : 460;
-    const pills = card.pills.map((pill, idx) =>
-      idx === expandedPillIdx ? (
-        <ExpandedServicePill key={pill.label} pill={pill} onClick={() => onPillClick(idx)} />
+    const pills = card.pills.map((pill, idx) => {
+      const resolved = { label: tr(lang, pill.label), description: tr(lang, pill.description) };
+      return idx === expandedPillIdx ? (
+        <ExpandedServicePill key={idx} pill={resolved} onClick={() => onPillClick(idx)} />
       ) : (
-        <CollapsedServicePill key={pill.label} pill={pill} onClick={() => onPillClick(idx)} />
-      ),
-    );
+        <CollapsedServicePill key={idx} pill={resolved} onClick={() => onPillClick(idx)} />
+      );
+    });
     return (
       <div
         style={{
@@ -1663,7 +1715,7 @@ function ServiceCardView({
               color: WHITE,
             }}
           >
-            {card.title}
+            {tr(lang, card.title)}
           </h3>
         </div>
         <div
@@ -1724,7 +1776,7 @@ function ServiceCardView({
             color: WHITE,
           }}
         >
-          {card.title}
+          {tr(lang, card.title)}
         </h3>
       </div>
 
@@ -1744,21 +1796,22 @@ function ServiceCardView({
             flexShrink: 0,
           }}
         >
-          {card.pills.map((pill, idx) =>
-            idx === expandedPillIdx ? (
+          {card.pills.map((pill, idx) => {
+            const resolved = { label: tr(lang, pill.label), description: tr(lang, pill.description) };
+            return idx === expandedPillIdx ? (
               <ExpandedServicePill
-                key={pill.label}
-                pill={pill}
+                key={idx}
+                pill={resolved}
                 onClick={() => onPillClick(idx)}
               />
             ) : (
               <CollapsedServicePill
-                key={pill.label}
-                pill={pill}
+                key={idx}
+                pill={resolved}
                 onClick={() => onPillClick(idx)}
               />
-            )
-          )}
+            );
+          })}
         </div>
       )}
     </div>
@@ -1876,6 +1929,7 @@ function CollapsedServicePill({
 
 function Statement() {
   const bp = useBp();
+  const lang = useLang();
   const compact = isCompact(bp);
   const size = bp === 'mobile' ? 28 : bp === 'tablet' ? 40 : 54;
   const starSize = bp === 'mobile' ? 340 : bp === 'tablet' ? 600 : 900;
@@ -1916,7 +1970,11 @@ function Statement() {
             textAlign: 'center',
           }}
         >
-          We help ambitious teams turn data and AI into real business outcomes.
+          {t(
+            lang,
+            'We help ambitious teams turn data and AI into real business outcomes.',
+            'Wir verwandeln Daten und KI in echte Geschäftsergebnisse – für ambitionierte Teams.',
+          )}
         </p>
       </div>
     </section>
@@ -1925,6 +1983,7 @@ function Statement() {
 
 function StatementCTA() {
   const bp = useBp();
+  const lang = useLang();
   return (
     <section
       id="cta"
@@ -1941,7 +2000,7 @@ function StatementCTA() {
         })}
       >
         <a
-          href="/de/contact/" target="_blank" rel="noopener noreferrer"
+          href={`/${lang}/contact/`} target="_blank" rel="noopener noreferrer"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -1955,7 +2014,7 @@ function StatementCTA() {
             textDecoration: 'none',
           }}
         >
-          Let&apos;s talk
+          {t(lang, "Let's talk", 'Kontakt aufnehmen')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </a>
       </div>
@@ -1964,11 +2023,12 @@ function StatementCTA() {
 }
 
 function LanguageToggle() {
-  const [lang, setLang] = useState<'EN' | 'DE'>('EN');
+  const { lang, setLang } = useContext(LangContext);
   return (
     <button
       type="button"
-      onClick={() => setLang((p) => (p === 'EN' ? 'DE' : 'EN'))}
+      aria-label={lang === 'en' ? 'Switch to German' : 'Auf Englisch umschalten'}
+      onClick={() => setLang(lang === 'en' ? 'de' : 'en')}
       style={{
         background: 'transparent',
         border: 0,
@@ -1980,7 +2040,7 @@ function LanguageToggle() {
         color: WHITE,
       }}
     >
-      {lang === 'EN' ? (
+      {lang === 'en' ? (
         <>
           <span style={{ color: WHITE }}>EN</span>
           <span style={{ color: WHITE_70 }}> / DE</span>
@@ -1999,6 +2059,7 @@ function LanguageToggle() {
 
 function Highlight() {
   const bp = useBp();
+  const lang = useLang();
   const stack = bp === 'mobile';
   const titleSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 44 : 54;
   const bodySize = bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24;
@@ -2026,7 +2087,7 @@ function Highlight() {
           color: NAVY_70,
         }}
       >
-        Featured Product
+        {t(lang, 'Featured Product', 'Empfohlenes Produkt')}
       </span>
       <h2
         style={{
@@ -2050,12 +2111,14 @@ function Highlight() {
           color: NAVY_80,
         }}
       >
-        Your team&apos;s collective knowledge, instantly accessible. Search
-        across docs, conversations, and tools — answered with context, not just
-        links.
+        {t(
+          lang,
+          "Your team's collective knowledge, instantly accessible. Search across docs, conversations, and tools — answered with context, not just links.",
+          'Das gesammelte Wissen Ihres Teams – sofort verfügbar. Suchen Sie über Dokumente, Gespräche und Tools hinweg und erhalten Sie Antworten mit Kontext, nicht nur Links.',
+        )}
       </p>
       <a
-        href="/de/iknow/"
+        href={`/${lang}/iknow/`}
         style={{
           alignSelf: 'flex-start',
           display: 'inline-flex',
@@ -2070,7 +2133,7 @@ function Highlight() {
           textDecoration: 'none',
         }}
       >
-        Explore iKnow
+        {t(lang, 'Explore iKnow', 'iKnow entdecken')}
         <ArrowUpRight size={20} strokeWidth={2} />
       </a>
     </div>
@@ -2133,16 +2196,24 @@ function Highlight() {
       >
         <CaseTeaser
           bp={bp}
-          eyebrow="Case"
-          title="Real-time demand forecasting"
-          description="How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets."
+          eyebrow={t(lang, 'Case', 'Referenz')}
+          title={t(lang, 'Real-time demand forecasting', 'Echtzeit-Nachfrageprognosen')}
+          description={t(
+            lang,
+            'How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets.',
+            'Wie eine führende Event-Plattform die Ticketnachfrage mit einer auf volatile Märkte abgestimmten Forecasting-Pipeline vorhersieht.',
+          )}
           image="/images/icompetence_visual_mint.png"
         />
         <CaseTeaser
           bp={bp}
-          eyebrow="Case"
-          title="AI-driven quality inspection"
-          description="Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste."
+          eyebrow={t(lang, 'Case', 'Referenz')}
+          title={t(lang, 'AI-driven quality inspection', 'KI-gestützte Qualitätsprüfung')}
+          description={t(
+            lang,
+            "Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste.",
+            'Computer Vision über die Produktionslinien eines Herstellers hinweg, um Defekte früher zu erkennen und Ausschuss zu reduzieren.',
+          )}
           image="/images/icompetence_visual_gelb.png"
         />
       </div>
@@ -2164,6 +2235,7 @@ function CaseTeaser({
   image: string;
   bp: Bp;
 }) {
+  const lang = useLang();
   const imgH = bp === 'desktop' ? 280 : 200;
   const titleSize = bp === 'desktop' ? 24 : 22;
   const descSize = bp === 'desktop' ? 16 : 15;
@@ -2247,7 +2319,7 @@ function CaseTeaser({
             textDecoration: 'none',
           }}
         >
-          Read case
+          {t(lang, 'Read case', 'Case lesen')}
           <ArrowUpRight size={16} strokeWidth={2} />
         </a>
       </div>
@@ -2309,11 +2381,12 @@ const TESTIMONIALS: TestimonialItem[] = [
 ];
 
 function Testimonial() {
+  const lang = useLang();
   const [idx, setIdx] = useState(0);
   const goPrev = () =>
     setIdx((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   const goNext = () => setIdx((i) => (i + 1) % TESTIMONIALS.length);
-  const t = TESTIMONIALS[idx];
+  const active = TESTIMONIALS[idx];
 
   const bp = useBp();
   const compact = isCompact(bp);
@@ -2398,7 +2471,7 @@ function Testimonial() {
         color: WHITE,
       }}
     >
-      {t.quote}
+      {active.quote}
     </p>
   );
 
@@ -2415,10 +2488,10 @@ function Testimonial() {
       />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 500, color: WHITE }}>
-          {t.name}
+          {active.name}
         </span>
         <span style={{ fontFamily: FONT, fontSize: mobile ? 14 : 16, fontWeight: 400, color: WHITE_70 }}>
-          {t.role}
+          {active.role}
         </span>
       </div>
     </div>
@@ -2447,7 +2520,7 @@ function Testimonial() {
           width: '100%',
         }}
       >
-        What our clients say
+        {t(lang, 'What our clients say', 'Was unsere Kunden sagen')}
       </h2>
 
       {mobile ? (
@@ -2488,37 +2561,44 @@ function Testimonial() {
 
 type ProcessItem = {
   number: string;
-  title: string;
-  description: string;
+  title: Bilingual;
+  description: Bilingual;
   image: string;
 };
 
 const PROCESS_ITEMS: ProcessItem[] = [
   {
     number: '01',
-    title: 'Ideation Workshop',
-    description:
-      'With you, we identify the problem to be solved. In a focused workshop, we map your goals, constraints, and data. Then walk away with a sharp use case and a clear next step.',
+    title: { en: 'Ideation Workshop', de: 'Ideation Workshop' },
+    description: {
+      en: 'With you, we identify the problem to be solved. In a focused workshop, we map your goals, constraints, and data. Then walk away with a sharp use case and a clear next step.',
+      de: 'Gemeinsam mit Ihnen identifizieren wir das zu lösende Problem. In einem fokussierten Workshop erfassen wir Ihre Ziele, Rahmenbedingungen und Daten – und gehen mit einem klaren Use Case und einem konkreten nächsten Schritt heraus.',
+    },
     image: '/images/iC_Stern_Blau.png',
   },
   {
     number: '02',
-    title: 'Proof of Concept',
-    description:
-      'We build a tangible prototype together – focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
+    title: { en: 'Proof of Concept', de: 'Proof of Concept' },
+    description: {
+      en: 'We build a tangible prototype together – focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
+      de: 'Gemeinsam bauen wir einen greifbaren Prototyp – fokussiert, schnell und auf Basis Ihrer echten Daten. Innerhalb weniger Wochen sehen Sie, ob die Idee in der Praxis trägt, was zu verfeinern und was zu skalieren ist.',
+    },
     image: '/images/icompetence_visual_mint.png',
   },
   {
     number: '03',
-    title: 'Rollout',
-    description:
-      'We harden the proof into a production-ready system, integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
+    title: { en: 'Rollout', de: 'Rollout' },
+    description: {
+      en: 'We harden the proof into a production-ready system, integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
+      de: 'Wir überführen den Proof of Concept in ein produktionsreifes System – integriert, überwacht und in der Hand Ihres Teams. Enablement, Dokumentation und Übergabe gehören selbstverständlich dazu.',
+    },
     image: '/images/iC_Stern_Gelb.png',
   },
 ];
 
 function Process() {
   const bp = useBp();
+  const lang = useLang();
   const [expanded, setExpanded] = useState<number | null>(1);
   const titleSize = bp === 'mobile' ? 32 : bp === 'tablet' ? 40 : 54;
 
@@ -2542,7 +2622,7 @@ function Process() {
           width: '100%',
         }}
       >
-        This is how we work
+        {t(lang, 'This is how we work', 'So arbeiten wir')}
       </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -2575,6 +2655,7 @@ function ProcessRow({
   onToggle: () => void;
   bp: Bp;
 }) {
+  const lang = useLang();
   const mobile = bp === 'mobile';
   const headPad = mobile ? '20px 0' : bp === 'tablet' ? '28px 0' : '32px 0';
   const labelSize = mobile ? 22 : bp === 'tablet' ? 30 : 36;
@@ -2633,7 +2714,7 @@ function ProcessRow({
               color: NAVY,
             }}
           >
-            {item.title}
+            {tr(lang, item.title)}
           </span>
         </div>
         {expanded ? (
@@ -2673,7 +2754,7 @@ function ProcessRow({
                 color: NAVY_80,
               }}
             >
-              {item.description}
+              {tr(lang, item.description)}
             </p>
           </div>
           <div
@@ -2695,6 +2776,7 @@ function ProcessRow({
 
 function PrivacyLed() {
   const bp = useBp();
+  const lang = useLang();
   const imgH = bp === 'mobile' ? 240 : bp === 'tablet' ? 360 : 400;
   const titleSize = bp === 'mobile' ? 28 : bp === 'tablet' ? 32 : 36;
   const bodySize = bp === 'mobile' ? 16 : bp === 'tablet' ? 20 : 24;
@@ -2736,7 +2818,7 @@ function PrivacyLed() {
             color: NAVY,
           }}
         >
-          Privacy-Led Setups
+          {t(lang, 'Privacy-Led Setups', 'Privacy-Led-Setups')}
         </h2>
         <p
           style={{
@@ -2748,12 +2830,14 @@ function PrivacyLed() {
             color: NAVY_80,
           }}
         >
-          Why share your customer data or strategies with foreign infrastructure?
-          A privacy-led setup keeps your data — and your competitive edge — exactly
-          where it belongs: with you.
+          {t(
+            lang,
+            'Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you.',
+            'Warum sollten Sie Ihre Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält Ihre Daten – und Ihren Wettbewerbsvorteil – genau dort, wo sie hingehören: bei Ihnen.',
+          )}
         </p>
         <a
-          href="/de/privacy-led-ai/"
+          href={`/${lang}/privacy-led-ai/`}
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -2770,7 +2854,7 @@ function PrivacyLed() {
             textDecoration: 'none',
           }}
         >
-          Explore privacy-led
+          {t(lang, 'Explore privacy-led', 'Privacy-Led entdecken')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </a>
       </div>
@@ -2783,6 +2867,7 @@ function PrivacyLed() {
 
 function CTABand() {
   const bp = useBp();
+  const lang = useLang();
   const headingSize = bp === 'mobile' ? 40 : bp === 'tablet' ? 56 : 80;
   const headingLs = bp === 'mobile' ? -1 : bp === 'tablet' ? -1.5 : -2;
   return (
@@ -2819,11 +2904,11 @@ function CTABand() {
             width: '100%',
           }}
         >
-          Ready to turn ambition into outcomes?
+          {t(lang, 'Ready to turn ambition into outcomes?', 'Bereit, Ambition in Ergebnisse zu verwandeln?')}
         </h2>
       </div>
       <a
-        href="/de/contact/" target="_blank" rel="noopener noreferrer"
+        href={`/${lang}/contact/`} target="_blank" rel="noopener noreferrer"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -2837,7 +2922,7 @@ function CTABand() {
           textDecoration: 'none',
         }}
       >
-        Let&apos;s talk
+        {t(lang, "Let's talk", 'Kontakt aufnehmen')}
         <ArrowUpRight size={20} strokeWidth={2} />
       </a>
     </div>
@@ -2849,6 +2934,7 @@ function CTABand() {
 
 function Footer() {
   const bp = useBp();
+  const lang = useLang();
   const mobile = bp === 'mobile';
   const headingSize = mobile ? 36 : bp === 'tablet' ? 48 : 80;
   const headingLs = mobile ? -1 : bp === 'tablet' ? -1.5 : -2;
@@ -2893,7 +2979,7 @@ function Footer() {
               color: WHITE,
             }}
           >
-            Separate the signal from the noise.
+            {t(lang, 'Separate the signal from the noise.', 'Trennen Sie das Signal vom Rauschen.')}
           </h2>
         </div>
 
@@ -2925,8 +3011,8 @@ function Footer() {
             <LinkedInGlyph size={18} />
           </a>
 
-          <FooterContactBlock align={align} label="Inquiries" value="info@icompetence.de" href="mailto:info@icompetence.de" />
-          <FooterContactBlock align={align} label="Phone" value="+49 40 22636380" />
+          <FooterContactBlock align={align} label={t(lang, 'Inquiries', 'Anfragen')} value="info@icompetence.de" href="mailto:info@icompetence.de" />
+          <FooterContactBlock align={align} label={t(lang, 'Phone', 'Telefon')} value="+49 40 22636380" />
         </div>
       </div>
 
@@ -2943,8 +3029,8 @@ function Footer() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
           {[
-            ['Imprint', '/imprint/'],
-            ['Privacy', '/imprint/'],
+            [t(lang, 'Imprint', 'Impressum'), `/${lang}/imprint/`],
+            [t(lang, 'Privacy', 'Datenschutz'), `/${lang}/imprint/`],
           ].map(([label, href]) => (
             <a
               key={label}
@@ -2976,7 +3062,7 @@ function Footer() {
             textDecoration: 'none',
           }}
         >
-          Back to top
+          {t(lang, 'Back to top', 'Nach oben')}
           <ChevronUp size={16} strokeWidth={2} />
         </a>
       </div>
