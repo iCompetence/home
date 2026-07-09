@@ -255,6 +255,7 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 /* ---------------- Burger Menu ---------------- */
 
 const BURGER_LINKS: ReadonlyArray<{ label: Bilingual; href: string }> = [
+  { label: { en: 'EmpCo Audit', de: 'EmpCo Audit' }, href: '/empco-audit/' },
   { label: { en: 'Analytics Agent', de: 'Analytics Agent' }, href: '/analytics-agent/' },
   { label: { en: 'iKnow', de: 'iKnow' }, href: '/iknow/' },
   { label: { en: 'Intelligentic Search', de: 'Intelligentic Search' }, href: '/intelligentic-search/' },
@@ -295,6 +296,10 @@ function BurgerMenu({
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const lang = useLang();
+  // Alphabetical by the label in the active language (DE vs EN order differ).
+  const sortedLinks = [...BURGER_LINKS].sort((a, b) =>
+    tr(lang, a.label).localeCompare(tr(lang, b.label), lang),
+  );
   const tap = trigger === 'tap';
   const dropdownTopOffset = pillPaddingY + 24;
   const panelWidth = pillWidth || (wide ? 1100 : 264);
@@ -416,7 +421,7 @@ function BurgerMenu({
                     rowGap: 16,
                   }}
                 >
-                  {BURGER_LINKS.map(({ label, href }) => (
+                  {sortedLinks.map(({ label, href }) => (
                     <a
                       key={href}
                       href={href}
@@ -500,7 +505,7 @@ function BurgerMenu({
                     rowGap: columns > 1 ? 14 : 10,
                   }}
                 >
-                  {BURGER_LINKS.map(({ label, href }) => (
+                  {sortedLinks.map(({ label, href }) => (
                     <a
                       key={href}
                       href={href}
@@ -560,7 +565,7 @@ function BurgerMenu({
 
 const NAV_SECTIONS: ReadonlyArray<{ id: string; label: Bilingual }> = [
   { id: 'services', label: { en: 'Services', de: 'Leistungen' } },
-  { id: 'cases', label: { en: 'Cases', de: 'Referenzen' } },
+  { id: 'products', label: { en: 'Products', de: 'Produkte' } },
   { id: 'process', label: { en: 'Process', de: 'Vorgehen' } },
   { id: 'privacy-led', label: { en: 'Privacy-led AI', de: 'Privacy-led AI' } },
 ];
@@ -1123,9 +1128,8 @@ function Hero() {
             whiteSpace: compact ? 'normal' : 'pre-line',
           }}
         >
-          {compact
-            ? t(lang, 'Separate the signal from the noise.', 'Trennen Sie das Signal vom Rauschen.')
-            : t(lang, 'Separate the signal\nfrom the noise.', 'Trennen Sie das Signal\nvom Rauschen.')}
+          {/* Brand headline — intentionally kept in English in both languages. */}
+          {compact ? 'Separate the signal from the noise.' : 'Separate the signal\nfrom the noise.'}
         </div>
 
         <p
@@ -1436,14 +1440,14 @@ const SERVICE_CARDS: ServiceCardData[] = [
         label: { en: 'Agentic Systems', de: 'Agentische Systeme' },
         description: {
           en: 'Multi-step agents that take action with your tools, data, and workflows. Always by keeping humans in the lead.',
-          de: 'Mehrstufige Agenten, die mit Ihren Tools, Daten und Workflows handeln – stets unter menschlicher Führung.',
+          de: 'Mehrstufige Agenten, die mit deinen Tools, Daten und Workflows handeln – stets unter menschlicher Führung.',
         },
       },
       {
         label: { en: 'LLM Integration', de: 'LLM-Integration' },
         description: {
           en: 'Integrate the right model into the right surface: assistants, copilots, and end-to-end automations, tailored to your needs.',
-          de: 'Das richtige Modell an der richtigen Stelle integrieren: Assistenten, Copilots und End-to-End-Automatisierungen, zugeschnitten auf Ihren Bedarf.',
+          de: 'Das richtige Modell an der richtigen Stelle integrieren: Assistenten, Copilots und End-to-End-Automatisierungen, zugeschnitten auf deinen Bedarf.',
         },
       },
     ],
@@ -1456,21 +1460,21 @@ const SERVICE_CARDS: ServiceCardData[] = [
         label: { en: 'AI Workshops', de: 'KI-Workshops' },
         description: {
           en: 'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
-          de: 'Ein fokussierter Tag praktisches Prototyping. Ihr Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.',
+          de: 'Ein fokussierter Tag praktisches Prototyping. Dein Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.',
         },
       },
       {
         label: { en: 'Team Enablement', de: 'Team-Enablement' },
         description: {
           en: 'Practical skill-building so your team can build, evaluate, and operate AI products themselves.',
-          de: 'Praxisnaher Kompetenzaufbau, damit Ihr Team KI-Produkte selbst entwickeln, bewerten und betreiben kann.',
+          de: 'Praxisnaher Kompetenzaufbau, damit dein Team KI-Produkte selbst entwickeln, bewerten und betreiben kann.',
         },
       },
       {
         label: { en: 'Executive Briefings', de: 'Executive Briefings' },
         description: {
           en: 'A clear-eyed look at where AI changes your business for the better and where it won\'t.',
-          de: 'Ein nüchterner Blick darauf, wo KI Ihr Geschäft wirklich voranbringt – und wo nicht.',
+          de: 'Ein nüchterner Blick darauf, wo KI dein Geschäft wirklich voranbringt – und wo nicht.',
         },
       },
       {
@@ -2039,11 +2043,21 @@ function StatementCTA() {
 
 function LanguageToggle() {
   const { lang, setLang } = useContext(LangContext);
+  const toggle = () => {
+    const next = lang === 'en' ? 'de' : 'en';
+    setLang(next);
+    // Reflect the language in the URL (/de/… ↔ /en/…) without a full reload;
+    // a refresh then re-renders in the matching language via initialLang.
+    if (typeof window !== 'undefined') {
+      const nextPath = window.location.pathname.replace(/^\/(de|en)(?=\/|$)/, `/${next}`);
+      window.history.replaceState(null, '', nextPath + window.location.search + window.location.hash);
+    }
+  };
   return (
     <button
       type="button"
       aria-label={lang === 'en' ? 'Switch to German' : 'Auf Englisch umschalten'}
-      onClick={() => setLang(lang === 'en' ? 'de' : 'en')}
+      onClick={toggle}
       style={{
         background: 'transparent',
         border: 0,
@@ -2114,7 +2128,7 @@ function Highlight() {
           color: NAVY,
         }}
       >
-        iKnow
+        EmpCo Audit
       </h2>
       <p
         style={{
@@ -2128,12 +2142,12 @@ function Highlight() {
       >
         {t(
           lang,
-          "Your team's collective knowledge, instantly accessible. Search across docs, conversations, and tools — answered with context, not just links.",
-          'Das gesammelte Wissen Ihres Teams – sofort verfügbar. Suchen Sie über Dokumente, Gespräche und Tools hinweg und erhalten Sie Antworten mit Kontext, nicht nur Links.',
+          'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',
+          'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.',
         )}
       </p>
       <a
-        href={`/${lang}/iknow/`}
+        href={`/${lang}/empco-audit/`}
         style={{
           alignSelf: 'flex-start',
           display: 'inline-flex',
@@ -2148,7 +2162,7 @@ function Highlight() {
           textDecoration: 'none',
         }}
       >
-        {t(lang, 'Explore iKnow', 'iKnow entdecken')}
+        {t(lang, 'Explore EmpCo Audit', 'EmpCo Audit entdecken')}
         <ArrowUpRight size={20} strokeWidth={2} />
       </a>
     </div>
@@ -2161,15 +2175,17 @@ function Highlight() {
         width: stack ? '100%' : undefined,
         height: imgH,
         borderRadius: 24,
-        backgroundImage: 'url(/images/iC_Stern_Blau.png)',
+        background: LAVENDER,
+        backgroundImage: 'url(/images/lavender-empco.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     />
   );
 
   return (
-    <section id="cases" style={sectionOuter(bp, { background: 'transparent' })}>
+    <section id="products" style={sectionOuter(bp, { background: 'transparent' })}>
     <div
       style={sectionInner(bp, {
         display: 'flex',
@@ -2209,27 +2225,29 @@ function Highlight() {
           width: '100%',
         }}
       >
-        <CaseTeaser
+        <ProductTeaser
           bp={bp}
-          eyebrow={t(lang, 'Case', 'Referenz')}
-          title={t(lang, 'Real-time demand forecasting', 'Echtzeit-Nachfrageprognosen')}
+          eyebrow={t(lang, 'Product', 'Produkt')}
+          title="iKnow"
           description={t(
             lang,
-            'How a leading event platform anticipates ticket demand with a forecasting pipeline tuned to volatile markets.',
-            'Wie eine führende Event-Plattform die Ticketnachfrage mit einer auf volatile Märkte abgestimmten Forecasting-Pipeline vorhersieht.',
+            'The central knowledge platform for enterprises. AI-based, secure, local – turn scattered information into a structured knowledge base.',
+            'Die zentrale Wissensplattform für Unternehmen. KI-basiert, sicher, lokal – verwandle verteilte Informationen in eine strukturierte Wissensgrundlage.',
           )}
-          image="/images/icompetence_visual_mint.png"
+          image="/images/lavender-iknow.png"
+          href={`/${lang}/iknow/`}
         />
-        <CaseTeaser
+        <ProductTeaser
           bp={bp}
-          eyebrow={t(lang, 'Case', 'Referenz')}
-          title={t(lang, 'AI-driven quality inspection', 'KI-gestützte Qualitätsprüfung')}
+          eyebrow={t(lang, 'Product', 'Produkt')}
+          title="Analytics Agent"
           description={t(
             lang,
-            "Computer vision deployed across a manufacturer's production lines to catch defects earlier and reduce waste.",
-            'Computer Vision über die Produktionslinien eines Herstellers hinweg, um Defekte früher zu erkennen und Ausschuss zu reduzieren.',
+            'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualisations and insights at the touch of a button.',
+            'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.',
           )}
-          image="/images/icompetence_visual_gelb.png"
+          image="/images/lavender-analytics-agent.png"
+          href={`/${lang}/analytics-agent/`}
         />
       </div>
     </div>
@@ -2237,17 +2255,19 @@ function Highlight() {
   );
 }
 
-function CaseTeaser({
+function ProductTeaser({
   eyebrow,
   title,
   description,
   image,
+  href,
   bp,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   image: string;
+  href: string;
   bp: Bp;
 }) {
   const lang = useLang();
@@ -2322,7 +2342,7 @@ function CaseTeaser({
           {description}
         </p>
         <a
-          href="#"
+          href={href}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -2334,7 +2354,7 @@ function CaseTeaser({
             textDecoration: 'none',
           }}
         >
-          {t(lang, 'Read case', 'Case lesen')}
+          {t(lang, 'Learn more', 'Mehr erfahren')}
           <ArrowUpRight size={16} strokeWidth={2} />
         </a>
       </div>
@@ -2627,7 +2647,7 @@ const PROCESS_ITEMS: ProcessItem[] = [
     title: { en: 'Ideation Workshop', de: 'Ideation Workshop' },
     description: {
       en: 'With you, we identify the problem to be solved. In a focused workshop, we map your goals, constraints, and data. Then walk away with a sharp use case and a clear next step.',
-      de: 'Gemeinsam mit Ihnen identifizieren wir das zu lösende Problem. In einem fokussierten Workshop erfassen wir Ihre Ziele, Rahmenbedingungen und Daten – und gehen mit einem klaren Use Case und einem konkreten nächsten Schritt heraus.',
+      de: 'Gemeinsam mit dir identifizieren wir das zu lösende Problem. In einem fokussierten Workshop erfassen wir deine Ziele, Rahmenbedingungen und Daten – und gehen mit einem klaren Use Case und einem konkreten nächsten Schritt heraus.',
     },
     image: '/images/iC_Stern_Blau.png',
   },
@@ -2636,7 +2656,7 @@ const PROCESS_ITEMS: ProcessItem[] = [
     title: { en: 'Proof of Concept', de: 'Proof of Concept' },
     description: {
       en: 'We build a tangible prototype together – focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
-      de: 'Gemeinsam bauen wir einen greifbaren Prototyp – fokussiert, schnell und auf Basis Ihrer echten Daten. Innerhalb weniger Wochen sehen Sie, ob die Idee in der Praxis trägt, was zu verfeinern und was zu skalieren ist.',
+      de: 'Gemeinsam bauen wir einen greifbaren Prototyp – fokussiert, schnell und auf Basis deiner echten Daten. Innerhalb weniger Wochen siehst du, ob die Idee in der Praxis trägt, was zu verfeinern und was zu skalieren ist.',
     },
     image: '/images/icompetence_visual_mint.png',
   },
@@ -2645,7 +2665,7 @@ const PROCESS_ITEMS: ProcessItem[] = [
     title: { en: 'Rollout', de: 'Rollout' },
     description: {
       en: 'We harden the proof into a production-ready system, integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
-      de: 'Wir überführen den Proof of Concept in ein produktionsreifes System – integriert, überwacht und in der Hand Ihres Teams. Enablement, Dokumentation und Übergabe gehören selbstverständlich dazu.',
+      de: 'Wir überführen den Proof of Concept in ein produktionsreifes System – integriert, überwacht und in der Hand deines Teams. Enablement, Dokumentation und Übergabe gehören selbstverständlich dazu.',
     },
     image: '/images/iC_Stern_Gelb.png',
   },
@@ -2812,7 +2832,9 @@ function ProcessRow({
               {tr(lang, item.description)}
             </p>
           </div>
-          <div
+          {/* Process step image — hidden until suitable images are available.
+              Re-enable by uncommenting; `item.image` is still defined per step. */}
+          {/* <div
             style={{
               width: mobile ? '100%' : bp === 'tablet' ? 320 : 420,
               height: mobile ? 200 : bp === 'tablet' ? 220 : 280,
@@ -2820,7 +2842,7 @@ function ProcessRow({
               background: `${NAVY} url(${item.image}) center/contain no-repeat`,
               flexShrink: 0,
             }}
-          />
+          /> */}
         </div>
       )}
     </div>
@@ -2888,7 +2910,7 @@ function PrivacyLed() {
           {t(
             lang,
             'Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you.',
-            'Warum sollten Sie Ihre Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält Ihre Daten – und Ihren Wettbewerbsvorteil – genau dort, wo sie hingehören: bei Ihnen.',
+            'Warum solltest du deine Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält deine Daten – und deinen Wettbewerbsvorteil – genau dort, wo sie hingehören: bei dir.',
           )}
         </p>
         <a
@@ -3034,7 +3056,8 @@ function Footer() {
               color: WHITE,
             }}
           >
-            {t(lang, 'Separate the signal from the noise.', 'Trennen Sie das Signal vom Rauschen.')}
+            {/* Brand headline — intentionally kept in English in both languages. */}
+            Separate the signal from the noise.
           </h2>
         </div>
 
