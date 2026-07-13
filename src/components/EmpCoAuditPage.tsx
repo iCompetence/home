@@ -1071,7 +1071,7 @@ function EmpCoAuditPageContent() {
       {language === 'de' && (
         <AnimatedSection
           id="knowledge-section"
-          className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
           animationType="fadeInUp"
           duration={0}
         >

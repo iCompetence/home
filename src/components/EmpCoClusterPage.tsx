@@ -99,12 +99,18 @@ function TextWithLinks({ text }: { text: string }) {
   );
 }
 
+// Spacing note: src/index.css is a precompiled Tailwind snapshot — utilities
+// that no existing component uses (e.g. space-y-6, py-12) are NOT in the CSS.
+// All vertical rhythm here therefore uses inline margins.
 function ClusterParagraphs({ paragraphs }: { paragraphs?: string[] }) {
   if (!paragraphs?.length) return null;
   return (
     <>
       {paragraphs.map((p, i) => (
-        <p key={i} style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%' }}>
+        <p
+          key={i}
+          style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', margin: '0 0 1.5rem 0' }}
+        >
           <TextWithLinks text={p} />
         </p>
       ))}
@@ -115,11 +121,18 @@ function ClusterParagraphs({ paragraphs }: { paragraphs?: string[] }) {
 function ClusterBullets({ bullets }: { bullets?: string[] }) {
   if (!bullets?.length) return null;
   return (
-    <ul style={{ listStyle: 'none', paddingLeft: 0, margin: 0 }} className="space-y-3">
+    <ul style={{ listStyle: 'none', paddingLeft: 0, margin: '0 0 1.5rem 0' }}>
       {bullets.map((item, i) => (
         <li
           key={i}
-          style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', paddingLeft: '24px', position: 'relative' }}
+          style={{
+            color: 'var(--gray-white)',
+            fontSize: '18px',
+            lineHeight: '170%',
+            paddingLeft: '24px',
+            position: 'relative',
+            marginBottom: '0.75rem',
+          }}
         >
           <span style={{ position: 'absolute', left: 0, color: '#E19B74' }}>•</span>
           <TextWithLinks text={item} />
@@ -397,7 +410,7 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
               </p>
             )}
 
-            <div className="space-y-6">
+            <div>
               <ClusterParagraphs paragraphs={content.intro} />
             </div>
           </div>
@@ -406,69 +419,69 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
 
       {/* Article sections */}
       {content.sections.map((section) => (
-        <AnimatedSection
-          key={section.id}
-          id={section.id}
-          className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8"
-          animationType="fadeInUp"
-          duration={0}
-        >
-          <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto">
-              <h2
-                className="mobile-h2-title"
-                style={{
-                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  marginBottom: '2rem',
-                  fontSize: '32px',
-                  fontWeight: '700',
-                  lineHeight: '110%',
-                }}
-              >
-                {section.heading}
-              </h2>
+        <Fragment key={section.id}>
+          <AnimatedSection
+            id={section.id}
+            className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
+            animationType="fadeInUp"
+            duration={0}
+          >
+            <div className="container mx-auto">
+              <div className="max-w-4xl mx-auto">
+                <h2
+                  className="mobile-h2-title"
+                  style={{
+                    background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    marginBottom: '2rem',
+                    fontSize: '32px',
+                    fontWeight: '700',
+                    lineHeight: '110%',
+                  }}
+                >
+                  {section.heading}
+                </h2>
 
-              <div className="space-y-6">
-                <ClusterParagraphs paragraphs={section.paragraphs} />
-                <ClusterBullets bullets={section.bullets} />
+                <div>
+                  <ClusterParagraphs paragraphs={section.paragraphs} />
+                  <ClusterBullets bullets={section.bullets} />
 
-                {section.subsections?.map((sub, i) => (
-                  <div key={i} className="space-y-4" style={{ paddingTop: '0.5rem' }}>
-                    <h3
-                      style={{
-                        color: 'var(--gray-white)',
-                        fontSize: '22px',
-                        fontWeight: '600',
-                        lineHeight: '130%',
-                      }}
-                    >
-                      {sub.heading}
-                    </h3>
-                    <ClusterParagraphs paragraphs={sub.paragraphs} />
-                    <ClusterBullets bullets={sub.bullets} />
-                  </div>
-                ))}
-              </div>
-
-              {section.table && (
-                <div style={{ marginTop: '1rem' }}>
-                  {/* ComparisonTable brings its own section padding; keep it inside
-                      the article column so the table aligns with the text. */}
-                  <ComparisonTable
-                    id={`${section.id}-table`}
-                    primaryHeader={section.table.primaryHeader}
-                    secondaryHeader={section.table.secondaryHeader}
-                    rows={section.table.rows}
-                    className="!py-4 !px-0"
-                  />
+                  {section.subsections?.map((sub, i) => (
+                    <div key={i} style={{ marginTop: '2.5rem' }}>
+                      <h3
+                        style={{
+                          color: 'var(--gray-white)',
+                          fontSize: '22px',
+                          fontWeight: '600',
+                          lineHeight: '130%',
+                          margin: '0 0 1rem 0',
+                        }}
+                      >
+                        {sub.heading}
+                      </h3>
+                      <ClusterParagraphs paragraphs={sub.paragraphs} />
+                      <ClusterBullets bullets={sub.bullets} />
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        </AnimatedSection>
+          </AnimatedSection>
+
+          {/* ComparisonTable is a standalone section module (own padding/width,
+              like on the Intelligentic Search page) — render it as a sibling,
+              not nested inside the article column. */}
+          {section.table && (
+            <ComparisonTable
+              id={`${section.id}-table`}
+              primaryHeader={section.table.primaryHeader}
+              secondaryHeader={section.table.secondaryHeader}
+              rows={section.table.rows}
+            />
+          )}
+        </Fragment>
       ))}
 
       {/* People also ask / FAQ — JSON-LD for this block is rendered server-side
@@ -483,7 +496,7 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
       {/* Related reading: pillar + cluster cross-links */}
       <AnimatedSection
         id="related-section"
-        className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8"
+        className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
         animationType="fadeInUp"
         duration={0}
       >
