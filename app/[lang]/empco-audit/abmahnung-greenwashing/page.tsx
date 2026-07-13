@@ -94,6 +94,23 @@ const content: EmpCoClusterContent = {
       ],
     },
     {
+      id: 'risiko-einschaetzung',
+      heading: 'Wie realistisch ist das Risiko? Ein Blick in die öffentliche Diskussion',
+      paragraphs: [
+        'Wer einschätzen will, wie wahrscheinlich eine Abmahnung ist, sollte nicht nur auf Gerichte schauen, sondern auf die Öffentlichkeit, die Verstöße meldet. Die Greenwashing-Diskussion ist riesig – sie läuft nur selten unter dem Begriff „EmpCo“: In r/Anticonsumption sammelt der Thread „What are some examples of greenwashing you’ve seen?“ über 270 Kommentare, in r/ZeroWaste diskutieren mehr als 530 Kommentatoren, warum die Nachhaltigkeits-Community Herstellerangaben grundsätzlich misstraut, und in r/science wurde eine Untersuchung mit der Schlagzeile diskutiert, 98 % der geprüften Umweltaussagen seien irreführendes Greenwashing.',
+        'Diese Skepsis ist der Nährboden, auf dem Wettbewerber und Verbände Verstöße finden: Was Verbraucher öffentlich als Greenwashing markieren, ist für einen Abmahner leicht zu verwerten. Je sichtbarer eine Marke mit grünen Claims wirbt, desto genauer schaut die Gegenseite hin.',
+      ],
+      subsections: [
+        {
+          heading: 'Sonderfall kleine Unternehmen: keine Ausnahme, aber besondere Härte',
+          paragraphs: [
+            'Anders als bei der CSRD gibt es bei den EmpCo-Werberegeln keine generelle Ausnahme für KMU: Die Regeln knüpfen an die Aussage an, nicht an die Bilanzsumme. Für kleine Unternehmen trifft eine Abmahnung dabei besonders hart – die Kosten und der Aufwand fallen ins Gewicht, und oft ist die beanstandete Aussage aus ehrlicher Überzeugung entstanden. In r/SustainableFashion beschreibt eine Kleinunternehmerin mit natürlich gefärbten Waren ihre Wut über die neue Regulierung in einem Thread mit über 300 Kommentaren: „I’m a small business owner… and I’m PISSED“.',
+            'Die Konsequenz daraus ist nicht, auf Nachhaltigkeitskommunikation zu verzichten – sondern sie belegbar zu machen, bevor jemand anderes sie prüft.',
+          ],
+        },
+      ],
+    },
+    {
       id: 'vermeiden',
       heading: 'Wie Sie die nächste Abmahnung vermeiden',
       paragraphs: [

@@ -112,6 +112,22 @@ const content: EmpCoClusterContent = {
       },
     },
     {
+      id: 'wer-prueft',
+      heading: 'Wer im Unternehmen prüft – und warum es liegen bleibt',
+      paragraphs: [
+        'Die Frage „Who owns greenwashing risk: marketing, legal or sustainability?“ aus den ESG-Foren trifft den organisatorischen Kern des Problems. Rechtlich haftet das Unternehmen; intern liegt das Risiko in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten: Marketing formuliert, Nachhaltigkeit liefert Daten, Recht prüft – aber niemand hat den Gesamtüberblick über die Website.',
+        'Genau deshalb bleibt die Bestandsprüfung so oft liegen: Sie gehört formal niemandem. Ein gemeinsamer Audit als „Single Source of Truth“ schließt diese Lücke – alle drei Abteilungen arbeiten mit derselben priorisierten Fundstellen-Liste statt mit drei verschiedenen Tabellenständen.',
+      ],
+      subsections: [
+        {
+          heading: 'Der Reporting-Blickwinkel: Website und CSRD müssen zusammenpassen',
+          paragraphs: [
+            'Für ESG- und Reporting-Teams kommt eine zweite Dimension dazu: „How do you keep website claims consistent with CSRD reporting?“ Wer im Nachhaltigkeitsbericht präzise bilanziert, auf der Website aber pauschal wirbt, schafft eine dokumentierte Inkonsistenz – und liefert damit genau das Material, das Abmahner und Behörden suchen. Ein systematischer Website-Audit macht diese Abweichungen sichtbar, bevor sie jemand anderes findet.',
+          ],
+        },
+      ],
+    },
+    {
       id: 'ablauf',
       heading: 'So starten Sie: mit einer kostenlosen Probeseite',
       paragraphs: [

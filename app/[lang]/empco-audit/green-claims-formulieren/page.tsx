@@ -100,6 +100,22 @@ const content: EmpCoClusterContent = {
       ],
     },
     {
+      id: 'zielgruppe-misstrauen',
+      heading: 'Warum pauschale Claims ohnehin nicht mehr funktionieren',
+      paragraphs: [
+        'Unabhängig von der Rechtslage haben pauschale Green Claims ein Wirkungsproblem: Die Zielgruppe glaubt sie nicht mehr. In r/ZeroWaste diskutieren über 530 Kommentatoren, warum die Nachhaltigkeits-Community Herstellerangaben grundsätzlich misstraut. In r/BeautyGuruChatter bringt es der Top-Kommentar zur Frage „Do you trust the claims beauty brands make?“ auf den Punkt: „‚Clean‘, ‚sustainable‘ und ‚green‘ sind keine regulierten Begriffe.“ Und in r/sustainability wird unter „Brands who claim to be special because they’re sustainable“ (40+ Kommentare) genau die Beliebigkeit seziert, die die EmpCo jetzt verbietet.',
+        'Für Marketing-Teams ist die Regulierung deshalb auch eine Chance: Eine spezifische, belegte Aussage unterscheidet sich ab 2026 nicht nur juristisch von der Konkurrenz-Pauschale – sie ist das einzige Format, dem die skeptische Zielgruppe noch zuhört.',
+      ],
+    },
+    {
+      id: 'siegel-verpackung',
+      heading: 'Sonderfall Siegel und Verpackung',
+      paragraphs: [
+        'Zwei Punkte verdienen im Formulierungs-Workflow besondere Aufmerksamkeit. Erstens die Siegel: Nachhaltigkeitssiegel sind ab 2026 nur noch zulässig, wenn sie auf einem anerkannten Zertifizierungssystem beruhen oder von einer Behörde eingeführt wurden – selbst gestaltete „Trust“- oder „Öko“-Labels ohne unabhängige Drittprüfung müssen aus Werbung, Verpackung und Website entfernt werden.',
+        'Zweitens der Faktor Zeit bei physischen Materialien: Eine Übergangsfrist für Bestandsprodukte gibt es nicht. Verpackungen, Kataloge und POS-Materialien, die heute mit einem pauschalen Claim produziert werden, sind am 27. September 2026 voraussichtlich noch im Umlauf – sie müssen deshalb schon jetzt nach den neuen Regeln formuliert werden.',
+      ],
+    },
+    {
       id: 'agentur-fall',
       heading: '„Client wants climate neutral on packaging – how do I push back?“',
       paragraphs: [

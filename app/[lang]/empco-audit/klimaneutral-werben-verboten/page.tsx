@@ -110,6 +110,28 @@ const content: EmpCoClusterContent = {
       },
     },
     {
+      id: 'herkunft',
+      heading: 'Wie es zu den Verboten kam',
+      paragraphs: [
+        'Die Begriffsverbote fallen nicht vom Himmel: Die EmpCo-Richtlinie ist seit März 2024 in Kraft und ändert die UGP-Richtlinie (2005/29/EG) sowie die Verbraucherrechte-Richtlinie (2011/83/EU). Ihr Kern ist die Beweislast-Logik – wer gegenüber Verbrauchern mit Umweltvorteilen wirbt, muss sie belegen können, bevor die Aussage öffentlich wird.',
+        'Häufige Verwechslung dabei: Die Green Claims Directive, der separate und deutlich detailliertere Vorschlag mit verpflichtender Vorab-Prüfung jeder grünen Aussage, wurde im Juni 2025 von der EU-Kommission zurückgezogen. An den Begriffsverboten ändert das nichts – sie kommen über die EmpCo, nicht über die Green Claims Directive.',
+        'Und der Reddit-Frage „Is ‚biodegradable‘ even regulated?“ lässt sich damit eine präzise Antwort geben: Ab dem 27. September 2026 ja – „biologisch abbaubar“ steht ausdrücklich auf der Liste der ohne Nachweis unzulässigen Aussagen.',
+      ],
+    },
+    {
+      id: 'branchen',
+      heading: 'Wo die Begriffe im Alltag auffallen: Beispiele aus den Foren',
+      paragraphs: [
+        'Wie flächendeckend pauschale Umweltbegriffe im Einsatz sind, zeigt die Verbraucherdiskussion – die Threads sind zugleich eine Vorschau darauf, welche Branchen besonders im Fokus stehen:',
+      ],
+      bullets: [
+        'Verpackung: In r/sustainability macht sich ein Thread über einzeln in Plastik verpackte Socken mit Nachhaltigkeits-Branding lustig (70+ Kommentare) – das klassische Auseinanderfallen von Botschaft und Produkt.',
+        'Textil: In r/knitting ärgern sich über 170 Kommentatoren über das „Greenwashing rund um Bambus-Garn“ – ein Material, das pauschal als öko vermarktet wird.',
+        'Beauty: In r/BeautyGuruChatter gilt „clean“ als Paradebeispiel für einen wohlklingenden, bislang unregulierten Begriff.',
+        'Mode: „Is this greenwashing?“-Posts mit Produktfotos sind in r/ethicalfashion ein wiederkehrendes Format – Verbraucher prüfen Claims längst selbst.',
+      ],
+    },
+    {
       id: 'zeitplan',
       heading: 'Zeitplan und Rechtsrahmen: die Daten, die zählen',
       bullets: [

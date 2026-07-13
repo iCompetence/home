@@ -114,6 +114,22 @@ const content: EmpCoClusterContent = {
       },
     },
     {
+      id: 'rechtsgrundlagen',
+      heading: 'Die Rechtsgrundlagen im Überblick',
+      paragraphs: [
+        'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist seit März 2024 in Kraft. Sie ändert zwei bestehende EU-Regelwerke – die UGP-Richtlinie (2005/29/EG) und die Verbraucherrechte-Richtlinie (2011/83/EU) – und verbietet irreführende Umweltaussagen sowie unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern.',
+        'Die EU-Mitgliedstaaten müssen die Richtlinie bis zum 27. März 2026 in nationales Recht umsetzen; verbindlich gelten die Regeln ab dem 27. September 2026. Häufige Verwechslung dabei: Die Green Claims Directive – der separate, detailliertere Vorschlag mit Vorab-Prüfsystem – wurde im Juni 2025 von der EU-Kommission zurückgezogen. Die EmpCo ist davon unberührt; das Greenwashing-Verbot kommt über die EmpCo statt über die Green Claims Directive.',
+      ],
+    },
+    {
+      id: 'reputationsrisiko',
+      heading: 'Die Strafe neben der Strafe: öffentliche Aufmerksamkeit',
+      paragraphs: [
+        'Was die Fälle zusätzlich teuer macht: Sie werden öffentlich verhandelt. Der Apple-Fall erzeugte auf Reddit Threads mit weit über hundert Kommentaren – quer durch r/apple, r/EU_Economics und r/BuyFromEU („Germany says Apple can’t claim Apple Watch is carbon neutral“, 160+ Kommentare). Die Debatte erreicht damit genau die kaufkräftige, nachhaltigkeitsaffine Zielgruppe, für die die grünen Claims ursprünglich gedacht waren.',
+        'Für die Risikoabwägung heißt das: Selbst wenn ein Verfahren glimpflich ausgeht, bleibt der öffentliche Befund „beim Greenwashing erwischt“ bestehen – und der lässt sich, anders als eine Werbeaussage, nicht zurückziehen.',
+      ],
+    },
+    {
       id: 'wer-betroffen',
       heading: 'Wer betroffen ist – auch kleine Unternehmen',
       paragraphs: [
