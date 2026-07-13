@@ -1065,6 +1065,75 @@ function EmpCoAuditPageContent() {
         contentMaxHeightClass="max-h-[600px]"
       />
 
+      {/* Section 7b: Knowledge hub links — the pillar page links out to every
+          cluster page (hub-and-spoke). The articles are German-only, so the
+          block is only rendered on the German page. */}
+      {language === 'de' && (
+        <AnimatedSection
+          id="knowledge-section"
+          className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8"
+          animationType="fadeInUp"
+          duration={0}
+        >
+          <div className="container mx-auto">
+            <div className="max-w-6xl mx-auto">
+              <h2
+                className="mobile-h2-title"
+                style={{
+                  background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  marginBottom: '1.5rem',
+                  fontSize: '32px',
+                  fontWeight: '700',
+                  lineHeight: '110%',
+                }}
+              >
+                {t('empco.knowledge.title')}
+              </h2>
+              <p
+                style={{
+                  color: 'var(--gray-light)',
+                  fontSize: '18px',
+                  lineHeight: '170%',
+                  marginBottom: '2rem',
+                  maxWidth: '720px',
+                }}
+              >
+                {t('empco.knowledge.lead')}
+              </p>
+              <ul style={{ listStyle: 'none', paddingLeft: 0, margin: 0 }} className="space-y-4">
+                {[
+                  { label: 'Abmahnung wegen Greenwashing: Was tun? Kosten, Fristen, Reaktion', href: '/de/empco-audit/abmahnung-greenwashing/' },
+                  { label: 'Greenwashing-Bußgelder in der EU: bis zu 4 % vom Jahresumsatz – die Fälle', href: '/de/empco-audit/greenwashing-strafe/' },
+                  { label: 'Green Claims rechtssicher formulieren: erlaubte vs. verbotene Aussagen', href: '/de/empco-audit/green-claims-formulieren/' },
+                  { label: 'Website auf Green Claims prüfen: EmpCo-Audit manuell vs. automatisiert', href: '/de/empco-audit/website-green-claims-pruefen/' },
+                  { label: '„Klimaneutral“, „nachhaltig“, „umweltfreundlich“ – welche Werbebegriffe ab 2026 verboten sind', href: '/de/empco-audit/klimaneutral-werben-verboten/' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      style={{
+                        color: 'var(--gray-white)',
+                        fontSize: '18px',
+                        lineHeight: '160%',
+                        textDecoration: 'none',
+                        transition: 'color 0.3s ease',
+                      }}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-white)')}
+                    >
+                      → {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </AnimatedSection>
+      )}
+
       {/* CTA & Footer Section */}
       <div ref={footerRef}>
         <AnimatedSection

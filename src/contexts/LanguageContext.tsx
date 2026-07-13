@@ -888,6 +888,16 @@ const translations: Translations = {
     de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Marketing formuliert, Nachhaltigkeit liefert Daten, Recht prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.'
   },
 
+  // EmpCo knowledge hub (cluster page links; the articles themselves are German-only)
+  'empco.knowledge.title': {
+    en: 'EmpCo knowledge: further reading',
+    de: 'EmpCo Wissen: weiterführende Beiträge'
+  },
+  'empco.knowledge.lead': {
+    en: 'In-depth German-language guides on green claims, warning letters and fines around the EmpCo Directive.',
+    de: 'Vertiefende Beiträge zu Green Claims, Abmahnungen und Bußgeldern rund um die EmpCo-Richtlinie.'
+  },
+
   // Analytics Agent Page
   'analyticsAgent.hero.subtitle': {
     en: 'Your data. Your questions. Instant answers.',
