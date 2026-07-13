@@ -221,7 +221,7 @@ function EmpCoAuditPageContent() {
         .join('\n\n'),
     },
   ];
-  const empcoFaq = Array.from({ length: 13 }, (_, i) => ({
+  const empcoFaq = Array.from({ length: 19 }, (_, i) => ({
     title: t(`empco.seo.faq.q${i + 1}`),
     content: t(`empco.seo.faq.a${i + 1}`),
   }));
