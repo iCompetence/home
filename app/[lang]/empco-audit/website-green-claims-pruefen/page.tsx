@@ -1,32 +1,47 @@
 import type { Metadata } from 'next'
 import EmpCoClusterPage, { type EmpCoClusterContent } from '@/components/EmpCoClusterPage'
+import { alternates, toLang, type Lang } from '@/lib/i18n-meta'
 
 // Cluster page #10 (Content-Matrix): Cluster C/D – Prozess, BOFU, Prio Hoch.
 // Primär-Keyword: "website green claims pruefen"
 // Sekundär: "empco audit", "greenwashing pruefung website"
-// German-only (DACH focus) — no /en variant yet, so no en hreflang.
+// The /en variant is a 1:1 translation (accessibility); legal statements are
+// shared between both languages, so the German legal review covers both.
 
 export async function generateStaticParams() {
-  return [{ lang: 'de' }]
+  return [{ lang: 'de' }, { lang: 'en' }]
 }
 
 export const dynamicParams = false
 
-export const metadata: Metadata = {
-  title: 'Website auf Green Claims prüfen: EmpCo-Audit manuell vs. automatisiert | iCompetence',
-  description:
-    'Website auf Green Claims prüfen, bevor die EmpCo-Richtlinie ab 27.09.2026 gilt: manueller Audit vs. automatisierter EmpCo-Audit im Vergleich – Ablauf, Aufwand, Ergebnis. Mit kostenloser Probeseite.',
-  alternates: {
-    canonical: '/de/empco-audit/website-green-claims-pruefen/',
-    languages: {
-      de: '/de/empco-audit/website-green-claims-pruefen/',
-      'x-default': '/de/empco-audit/website-green-claims-pruefen/',
-    },
+const meta: Record<Lang, { title: string; description: string }> = {
+  de: {
+    title: 'Website auf Green Claims prüfen: EmpCo-Audit manuell vs. automatisiert | iCompetence',
+    description:
+      'Website auf Green Claims prüfen, bevor die EmpCo-Richtlinie ab 27.09.2026 gilt: manueller Audit vs. automatisierter EmpCo-Audit im Vergleich – Ablauf, Aufwand, Ergebnis. Mit kostenloser Probeseite.',
   },
-  robots: { index: true, follow: true },
+  en: {
+    title: 'Checking your website for green claims: EmpCo audit, manual vs. automated | iCompetence',
+    description:
+      'Check your website for green claims before the EmpCo Directive applies from 27 Sep 2026: manual review vs. automated EmpCo audit compared – process, effort, outcome. With a free sample page.',
+  },
 }
 
-const content: EmpCoClusterContent = {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}): Promise<Metadata> {
+  const lang = toLang((await params).lang)
+  return {
+    title: meta[lang].title,
+    description: meta[lang].description,
+    alternates: alternates('empco-audit/website-green-claims-pruefen', lang),
+    robots: { index: true, follow: true },
+  }
+}
+
+const contentDe: EmpCoClusterContent = {
   title: 'Website auf Green Claims prüfen: So macht man einen EmpCo-Audit – manuell vs. automatisiert',
   quote: {
     text: '„AI tool now does 80% of my ESG job. I’m gatekeeping it.“ – ein ESG-Profi in r/Environmental_Careers über Automatisierung der mühsamen Prüfarbeit (60+ Kommentare).',
@@ -174,29 +189,191 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_pruefen',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  inLanguage: 'de',
-  mainEntity: content.faq.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-}
-
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
-    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
-    { '@type': 'ListItem', position: 3, name: 'Website auf Green Claims prüfen', item: 'https://icompetence.de/de/empco-audit/website-green-claims-pruefen/' },
+const contentEn: EmpCoClusterContent = {
+  title: 'Checking your website for green claims: how to run an EmpCo audit – manual vs. automated',
+  quote: {
+    text: '“AI tool now does 80% of my ESG job. I’m gatekeeping it.” – an ESG professional in r/Environmental_Careers on automating the tedious review work (60+ comments).',
+    source: 'Discussion on Reddit, r/Environmental_Careers',
+  },
+  intro: [
+    '**A website is checked for green claims by recording all public environmental statements – text, labels and imagery – matching them against evidence and prioritising them by risk. Done manually, this takes weeks; an automated EmpCo audit delivers the complete overview within hours.** This becomes necessary because from 27 September 2026 every environmental claim towards consumers must be substantiated – including on legacy pages, product copy and landing pages that have grown over years.',
+    '“How do you audit hundreds of pages of claims?” – this question from the ESG forums describes the core problem of the [EmpCo Directive](/en/empco-audit/) precisely: most companies do not know what is written on hundreds of their own pages. This page compares the two routes to an overview – manual review vs. automated audit – with process, effort and what each one actually delivers.',
   ],
+  sections: [
+    {
+      id: 'was-pruefen',
+      heading: 'What needs to be checked in the first place',
+      paragraphs: [
+        'A green-claims audit covers more than the obvious advertising slogans. Relevant is everything that attributes an ecological benefit to a product, a service or the company:',
+      ],
+      bullets: [
+        'Text claims on all page types: homepage, product pages, category copy, landing pages, blog, “About us” – including phrases like “sustainable”, “eco-friendly” or “eco”. [Which terms are banned from 2026](/en/empco-audit/klimaneutral-werben-verboten/) is listed in its own article.',
+        'Climate claims such as “climate-neutral” – in particular whether they rest on offsetting or on substantiated reductions.',
+        'Labels, logos and badges: own labels without independent certification must be removed.',
+        'The visual presentation: imagery and design can also convey an environmental claim – a robust audit evaluates text and visual presentation together.',
+        'Future promises (“by 2030 …”): permissible only with verifiable, public interim targets.',
+      ],
+    },
+    {
+      id: 'manuell',
+      heading: 'The manual route: page by page',
+      paragraphs: [
+        'The classic process: marketing, sustainability and legal read the website page by page, collect claims in a spreadsheet and match them against the available evidence. The industry norm for this is a mid to high five-figure effort – spread over weeks for large websites.',
+        'A bigger problem than the cost is reliability: three departments assess the same phrase differently, thoroughness depends on the day, and the website keeps changing during the review. The end result is rarely a complete picture – but a snapshot with gaps, from which the [next warning letter](/en/empco-audit/abmahnung-greenwashing/) can still emerge.',
+      ],
+    },
+    {
+      id: 'ki-einzeldurchlauf',
+      heading: 'Why a single AI pass is not enough',
+      paragraphs: [
+        'The obvious middle way – dropping screenshots into ChatGPT and asking about greenwashing – fails on reproducibility: a single AI pass can produce a different result for the same page on every run. For a legally relevant review, that is not enough.',
+        'A robust audit checks every claim in multiple stages – analysis, critical cross-examination, reconciliation across several runs – and evaluates text and visual presentation together. Only that makes the findings complete and traceable: they must still hold up when the legal department or an external law firm questions them.',
+      ],
+    },
+    {
+      id: 'automatisiert',
+      heading: 'The automated EmpCo audit: multi-stage quality assurance',
+      paragraphs: [
+        'The [EmpCo Audit](/en/empco-audit/) is an automated, multi-stage quality-assured website audit. It detects sustainability claims that become a legal risk under EU Directive 2024/825 (EmpCo), the UWG and green-claims case law – and hands them to marketing, sustainability and legal as a prioritised, evidence-focused list of findings.',
+        'Important for context: the audit does not replace the lawyer. It replaces the weeks of manual groundwork before. The final legal review builds directly on the prioritised list instead of having to read hundreds of pages – exactly the division of labour the ESG professional in the Reddit quote above discovered for themselves.',
+      ],
+      table: {
+        primaryHeader: 'Automated EmpCo audit',
+        secondaryHeader: 'Manual review',
+        rows: [
+          {
+            feature: 'Duration',
+            primary: 'Complete overview within hours',
+            secondary: 'Weeks, depending on site size',
+          },
+          {
+            feature: 'Effort',
+            primary: 'Groundwork largely eliminated',
+            secondary: 'Industry norm: mid to high five-figure effort',
+          },
+          {
+            feature: 'Reliability',
+            primary: 'Multi-stage review, reconciled across several runs',
+            secondary: 'Depends on the person and the day',
+          },
+          {
+            feature: 'Scope',
+            primary: 'Text and visual presentation together',
+            secondary: 'Mostly text only, labels upon inspection',
+          },
+          {
+            feature: 'Outcome',
+            primary: 'Prioritised list of findings with rule reference',
+            secondary: 'Scattered notes and spreadsheets',
+          },
+          {
+            feature: 'Final legal review',
+            primary: 'Builds directly on the list',
+            secondary: 'Has to work through the raw material itself',
+          },
+        ],
+      },
+    },
+    {
+      id: 'wer-prueft',
+      heading: 'Who does the checking – and why it stays undone',
+      paragraphs: [
+        'The question “Who owns greenwashing risk: marketing, legal or sustainability?” from the ESG forums hits the organisational core of the problem. Legally, the company is liable; internally, the risk sits in the gap between departments working in separate tools: marketing writes the copy, sustainability supplies the data, legal reviews – but nobody has the full overview of the website.',
+        'That is exactly why the legacy review so often stays undone: formally, it belongs to no one. A shared audit as a single source of truth closes this gap – all three departments work from the same prioritised list of findings instead of three different spreadsheet versions.',
+      ],
+      subsections: [
+        {
+          heading: 'The reporting angle: website and CSRD must match',
+          paragraphs: [
+            'For ESG and reporting teams there is a second dimension: “How do you keep website claims consistent with CSRD reporting?” Whoever reports precisely in the sustainability report but advertises generically on the website creates a documented inconsistency – and thereby supplies exactly the material that warning parties and authorities look for. A systematic website audit makes these deviations visible before someone else finds them.',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'ablauf',
+      heading: 'How to start: with a free sample page',
+      paragraphs: [
+        'The easiest entry point is the free sample page: you give us the URL of your website, we check one page with the full multi-stage process, and you see on a concrete example which claims are flagged as critical – with location and rule reference.',
+        'This is the fastest way to clarify internally how big the topic actually is for your website – before you decide on the full audit. And if individual phrases are already known to be risky: [how to rewrite green claims legally](/en/empco-audit/green-claims-formulieren/) is covered in the article with the permitted-vs.-banned examples.',
+      ],
+    },
+  ],
+  faqTitle: 'Frequently asked questions about green-claims checks',
+  faq: [
+    {
+      q: 'How do I check my website for green-claims risks?',
+      a: 'Manually, several departments read the website page by page, collect claims and match them against evidence – typically a mid to high five-figure effort. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
+    },
+    {
+      q: 'Isn’t it enough to show ChatGPT a screenshot?',
+      a: 'No. A single AI pass is not reproducible – the same page can produce a different result on every run. A robust audit checks every claim in multiple stages (analysis, critical cross-examination, reconciliation across several runs) and evaluates text and visual presentation together. Only that makes the findings complete and traceable.',
+    },
+    {
+      q: 'Do I also have to review old website pages and legacy content?',
+      a: 'Yes. The rules apply to all claims that are public from the cut-off date – including legacy pages, product copy and landing pages that have grown over years. This is exactly the core problem: most companies do not know what is written on hundreds of their own pages. An automated audit provides a complete overview within hours.',
+    },
+    {
+      q: 'Who is liable for greenwashing – marketing, legal or sustainability?',
+      a: 'Legally, the company is liable; internally, the problem usually sits in the gap between departments working in separate tools. Marketing writes the copy, sustainability supplies the data, legal reviews – but nobody has the full overview of the website. A shared audit as a single source of truth closes exactly this gap.',
+    },
+    {
+      q: 'What should companies do now?',
+      a: 'Inventory all environmental claims and review them before the cut-off date. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended.',
+    },
+  ],
+  relatedTitle: 'Further reading',
+  related: [
+    { label: 'EmpCo Directive 2026: the guide with FAQ and audit', href: '/en/empco-audit/' },
+    { label: 'Formulating green claims legally: permitted vs. banned statements', href: '/en/empco-audit/green-claims-formulieren/' },
+    { label: '“Climate-neutral”, “sustainable”, “eco-friendly” – which advertising terms are banned from 2026', href: '/en/empco-audit/klimaneutral-werben-verboten/' },
+    { label: 'Greenwashing cease-and-desist warning: what to do? Costs, deadlines, response', href: '/en/empco-audit/abmahnung-greenwashing/' },
+    { label: 'Greenwashing fines in the EU: up to 4% of annual turnover – the cases', href: '/en/empco-audit/greenwashing-strafe/' },
+  ],
+  cta: {
+    headline: 'How many critical claims are hiding on your website?',
+    button: 'Request a free sample page',
+  },
+  ctaIdPrefix: 'empco_pruefen',
 }
 
-export default function WebsiteGreenClaimsPruefen() {
+const content: Record<Lang, EmpCoClusterContent> = { de: contentDe, en: contentEn }
+
+const pageNames: Record<Lang, string> = {
+  de: 'Website auf Green Claims prüfen',
+  en: 'Checking your website for green claims',
+}
+
+export default async function WebsiteGreenClaimsPruefen({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const c = content[lang]
+
+  // FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: c.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'iCompetence', item: `https://icompetence.de/${lang}/` },
+      { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: `https://icompetence.de/${lang}/empco-audit/` },
+      { '@type': 'ListItem', position: 3, name: pageNames[lang], item: `https://icompetence.de/${lang}/empco-audit/website-green-claims-pruefen/` },
+    ],
+  }
+
   return (
     <>
       <script
@@ -207,7 +384,7 @@ export default function WebsiteGreenClaimsPruefen() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <EmpCoClusterPage content={content} initialLanguage="de" />
+      <EmpCoClusterPage content={c} initialLanguage={lang} />
     </>
   )
 }

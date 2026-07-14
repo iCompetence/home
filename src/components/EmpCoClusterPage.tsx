@@ -394,7 +394,7 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
               >
                 EmpCo Audit
               </a>
-              {' · EmpCo Wissen'}
+              {` · ${t('empco.cluster.kicker')}`}
             </p>
             <h1
               className="cluster-headline"

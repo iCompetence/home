@@ -55,46 +55,96 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- EmpCo cluster pages (hub-and-spoke content, German-only) -->
+  <!-- EmpCo cluster pages (hub-and-spoke content, de + en) -->
   <url>
     <loc>https://icompetence.de/de/empco-audit/abmahnung-greenwashing/</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/abmahnung-greenwashing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/abmahnung-greenwashing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/abmahnung-greenwashing/"/>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/empco-audit/abmahnung-greenwashing/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/abmahnung-greenwashing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/abmahnung-greenwashing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/abmahnung-greenwashing/"/>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://icompetence.de/de/empco-audit/greenwashing-strafe/</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/greenwashing-strafe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/greenwashing-strafe/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/greenwashing-strafe/"/>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/empco-audit/greenwashing-strafe/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/greenwashing-strafe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/greenwashing-strafe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/greenwashing-strafe/"/>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://icompetence.de/de/empco-audit/green-claims-formulieren/</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/green-claims-formulieren/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/green-claims-formulieren/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/green-claims-formulieren/"/>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/empco-audit/green-claims-formulieren/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/green-claims-formulieren/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/green-claims-formulieren/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/green-claims-formulieren/"/>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://icompetence.de/de/empco-audit/website-green-claims-pruefen/</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/website-green-claims-pruefen/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/website-green-claims-pruefen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/website-green-claims-pruefen/"/>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://icompetence.de/en/empco-audit/website-green-claims-pruefen/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/website-green-claims-pruefen/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/website-green-claims-pruefen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/website-green-claims-pruefen/"/>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/klimaneutral-werben-verboten/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/"/>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://icompetence.de/en/empco-audit/klimaneutral-werben-verboten/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://icompetence.de/en/empco-audit/klimaneutral-werben-verboten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/"/>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://icompetence.de/de/intelligentic-search/</loc>
