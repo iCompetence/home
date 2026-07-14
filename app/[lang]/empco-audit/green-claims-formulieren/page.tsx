@@ -48,7 +48,7 @@ const contentDe: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/AskMarketing',
   },
   intro: [
-    '**Green Claims sind rechtssicher formuliert, wenn drei Bedingungen erfüllt sind: Die Aussage ist spezifisch statt pauschal, der nachprüfbare Beleg liegt vor der Veröffentlichung vor, und der zentrale Begriff wird im Werbeumfeld erläutert.** Die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) verbietet ab dem 27. September 2026 pauschale Umweltaussagen ohne Nachweis – sie verbietet nicht die Umweltkommunikation an sich.',
+    '**Green Claims sind rechtssicher formuliert, wenn drei Bedingungen erfüllt sind: Die Aussage ist spezifisch statt pauschal, der nachprüfbare Beleg liegt vor der Veröffentlichung vor, und der zentrale Begriff wird in der Werbung selbst erläutert.** Die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) verbietet ab dem 27. September 2026 pauschale Umweltaussagen ohne Nachweis – sie verbietet nicht die Umweltkommunikation an sich.',
     'Die Frage „Can I still say eco-friendly in ads after 2026?“ taucht in Marketing-Foren immer häufiger auf. Diese Seite zeigt, wie Marketing-Teams und Agenturen Green Claims so formulieren, dass sie auch nach 2026 halten: die Grundregel, konkrete erlaubte vs. verbotene Beispiel-Formulierungen und eine Checkliste für den Freigabeprozess.',
   ],
   sections: [
@@ -57,7 +57,7 @@ const contentDe: EmpCoClusterContent = {
       heading: 'Die Grundregel ab 2026: spezifisch und belegt statt pauschal',
       paragraphs: [
         'Verboten sind pauschale, nicht belegte Umweltaussagen wie „klimaneutral“, „grün“, „nachhaltig“, „umweltfreundlich“, „öko“ oder „biologisch abbaubar“, wenn kein anerkannter, nachprüfbarer Nachweis vorliegt. Ebenfalls unzulässig: Klimaneutralitäts-Aussagen, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne überprüfbare, öffentliche Zwischenziele.',
-        'Im Umkehrschluss ergibt sich die Formel für rechtssichere Green Claims: eine konkrete, abgegrenzte Eigenschaft benennen, den Nachweis vorher sichern und die Aussage im Werbeumfeld erläutern. Der BGH hat für „klimaneutral“ bereits entschieden, dass der Begriff nur verwendet werden darf, wenn er im Werbeumfeld klar erläutert wird – diese Linie wird ab 2026 zur Regel für die gesamte Umweltkommunikation.',
+        'Im Umkehrschluss ergibt sich die Formel für rechtssichere Green Claims: eine konkrete, abgegrenzte Eigenschaft benennen, den Nachweis vorher sichern und die Aussage in der Werbung selbst erläutern. Der BGH hat für „klimaneutral“ bereits entschieden, dass der Begriff nur verwendet werden darf, wenn er in der Werbung selbst klar erläutert wird – diese Linie wird ab 2026 zur Regel für die gesamte Umweltkommunikation.',
         'Wichtig für den Workflow: Belege müssen vorliegen, bevor die Aussage online geht – nicht erst, wenn ein Wettbewerber [abmahnt](/de/empco-audit/abmahnung-greenwashing/).',
       ],
     },
@@ -79,7 +79,7 @@ const contentDe: EmpCoClusterContent = {
           {
             feature: 'Klimaaussage',
             primary: '„Klimaneutral“ (durch Kompensation)',
-            secondary: 'Belegte Reduktionsaussage, im Werbeumfeld erläutert',
+            secondary: 'Belegte Reduktionsaussage, in der Werbung selbst erläutert',
           },
           {
             feature: 'Siegel',
@@ -111,7 +111,7 @@ const contentDe: EmpCoClusterContent = {
         'Bezieht sich die Aussage auf das ganze Produkt oder nur einen Aspekt? Was nur für die Verpackung gilt, darf nicht wie eine Produkteigenschaft klingen.',
         'Beruht eine Klimaaussage auf Reduktion oder auf Kompensation? Offsetting taugt ab 2026 nicht mehr als alleinige Grundlage einer Umweltwerbung.',
         'Ist jedes verwendete Siegel unabhängig zertifiziert oder behördlich eingeführt? Eigen-Labels ohne Drittprüfung müssen entfernt werden.',
-        'Wird der zentrale Begriff im Werbeumfeld erläutert? Für „klimaneutral“ verlangt das der BGH ausdrücklich.',
+        'Wird der zentrale Begriff in der Werbung selbst erläutert? Für „klimaneutral“ verlangt das der BGH ausdrücklich.',
       ],
     },
     {
@@ -138,7 +138,7 @@ const contentDe: EmpCoClusterContent = {
       ],
       bullets: [
         'Die Rechtslage hat ein Datum: Ab dem 27. September 2026 ist kompensationsbasierte „klimaneutral“-Werbung verboten – ohne Übergangsfrist für Bestandsmaterialien. Eine Verpackung, die jetzt gestaltet wird, ist zum Stichtag noch im Markt.',
-        'Das Risiko ist beziffert: [Bußgelder bis zu 4 % des Jahresumsatzes und die Fälle Shein, Armani und Apple](/de/empco-audit/greenwashing-strafe/) machen das Argument konkret – gerichtlich untersagte Werbung trifft am Ende den Kunden und die Agentur.',
+        'Das Risiko ist beziffert: [Bußgelder bis zu 4 % des Jahresumsatzes und die Fälle Shein und Apple](/de/empco-audit/greenwashing-strafe/) machen das Argument konkret – untersagte Werbung trifft am Ende den Kunden und die Agentur.',
         'Es gibt eine bessere Alternative: Eine spezifische, belegte Aussage ist nicht schwächer, sondern glaubwürdiger – gerade bei einer Zielgruppe, die pauschalen Claims ohnehin misstraut.',
       ],
     },
@@ -159,7 +159,7 @@ const contentDe: EmpCoClusterContent = {
     },
     {
       q: 'Ist „klimaneutral“ ab 2026 noch erlaubt?',
-      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff im Werbeumfeld klar erläutert wird.',
+      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff in der Werbung selbst klar erläutert wird.',
     },
     {
       q: 'Was passiert mit Nachhaltigkeitssiegeln und Eigen-Labels?',
@@ -196,7 +196,7 @@ const contentEn: EmpCoClusterContent = {
     source: 'Discussion on Reddit, r/AskMarketing',
   },
   intro: [
-    '**Green claims are legally sound when three conditions are met: the statement is specific rather than generic, the verifiable evidence exists before publication, and the central term is explained in the advertising context.** The [EmpCo Directive (EU 2024/825)](/en/empco-audit/) bans generic environmental claims without proof from 27 September 2026 – it does not ban environmental communication as such.',
+    '**Green claims are legally sound when three conditions are met: the statement is specific rather than generic, the verifiable evidence exists before publication, and the central term is explained in the advertising itself.** The [EmpCo Directive (EU 2024/825)](/en/empco-audit/) bans generic environmental claims without proof from 27 September 2026 – it does not ban environmental communication as such.',
     'The question “Can I still say eco-friendly in ads after 2026?” comes up more and more often in marketing forums. This page shows how marketing teams and agencies formulate green claims that hold up after 2026: the ground rule, concrete permitted vs. banned example formulations, and a checklist for the approval process.',
   ],
   sections: [
@@ -205,7 +205,7 @@ const contentEn: EmpCoClusterContent = {
       heading: 'The ground rule from 2026: specific and substantiated instead of generic',
       paragraphs: [
         'Banned are generic, unsubstantiated environmental claims such as “climate-neutral”, “green”, “sustainable”, “eco-friendly”, “eco” or “biodegradable” where no recognised, verifiable proof exists. Also prohibited: climate-neutrality claims based on carbon offsetting, sustainability labels without independent certification, and promises about future environmental performance without verifiable, public interim targets.',
-        'Inverted, this yields the formula for legally sound green claims: name a concrete, clearly delimited property, secure the evidence beforehand, and explain the claim in the advertising context. For “climate-neutral”, the German Federal Court of Justice (BGH) has already ruled that the term may only be used if it is clearly explained in the advertising context – from 2026 this line becomes the rule for all environmental communication.',
+        'Inverted, this yields the formula for legally sound green claims: name a concrete, clearly delimited property, secure the evidence beforehand, and explain the claim in the advertising itself. For “climate-neutral”, the German Federal Court of Justice (BGH) has already ruled that the term may only be used if it is clearly explained in the advertising itself – from 2026 this line becomes the rule for all environmental communication.',
         'Important for the workflow: evidence must be in place before the claim goes online – not only once a competitor [sends a warning letter](/en/empco-audit/abmahnung-greenwashing/).',
       ],
     },
@@ -259,7 +259,7 @@ const contentEn: EmpCoClusterContent = {
         'Does the claim refer to the whole product or only one aspect? What applies only to the packaging must not sound like a product property.',
         'Is a climate claim based on reduction or on offsetting? From 2026, offsetting no longer suffices as the sole basis of environmental advertising.',
         'Is every label used independently certified or officially established? Own labels without third-party verification must be removed.',
-        'Is the central term explained in the advertising context? For “climate-neutral” the BGH explicitly requires this.',
+        'Is the central term explained in the advertising itself? For “climate-neutral” the BGH explicitly requires this.',
       ],
     },
     {
@@ -286,7 +286,7 @@ const contentEn: EmpCoClusterContent = {
       ],
       bullets: [
         'The legal situation has a date: from 27 September 2026, offsetting-based “climate-neutral” advertising is banned – with no transition period for existing materials. Packaging designed now will still be on the market at the cut-off date.',
-        'The risk is quantified: [fines of up to 4% of annual turnover and the Shein, Armani and Apple cases](/en/empco-audit/greenwashing-strafe/) make the argument concrete – advertising banned by a court ultimately hits both the client and the agency.',
+        'The risk is quantified: [fines of up to 4% of annual turnover and the Shein and Apple cases](/en/empco-audit/greenwashing-strafe/) make the argument concrete – banned advertising ultimately hits both the client and the agency.',
         'There is a better alternative: a specific, substantiated claim is not weaker but more credible – especially with an audience that distrusts generic claims anyway.',
       ],
     },
@@ -307,7 +307,7 @@ const contentEn: EmpCoClusterContent = {
     },
     {
       q: 'Is “climate-neutral” still allowed from 2026?',
-      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising context.',
+      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising itself.',
     },
     {
       q: 'What happens to sustainability labels and own labels?',

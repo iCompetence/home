@@ -18,7 +18,7 @@ const meta: Record<Lang, { title: string; description: string }> = {
   de: {
     title: 'Greenwashing-Strafe: Bußgelder bis 4 % vom Jahresumsatz – die Fälle | iCompetence',
     description:
-      'Welche Strafen bei Greenwashing drohen: Bußgelder bis zu 4 % des Jahresumsatzes, Abmahnungen, Klagen. Die Fälle Shein (1 Mio. €), Armani (3,5 Mio. €) und Apple – und was ab 27.09.2026 gilt.',
+      'Welche Strafen bei Greenwashing drohen: Abmahnungen, Klagen, Bußgelder bis zu 4 % des Jahresumsatzes. Die Fälle Shein (1 Mio. €), Armani (3,5 Mio. €) und Apple im Überblick – und was ab 27.09.2026 gilt.',
   },
   en: {
     title: 'Greenwashing penalties: fines of up to 4% of annual turnover – the cases | iCompetence',
@@ -48,7 +48,7 @@ const contentDe: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/de',
   },
   intro: [
-    '**Bei Greenwashing drohen in der EU Abmahnungen, Unterlassungsklagen und Bußgelder von bis zu 4 % des Jahresumsatzes (in grenzüberschreitenden Fällen) – dazu die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.** Reale Fälle zeigen die Größenordnung: Shein zahlte 1 Mio. €, Armani 3,5 Mio. €, und Apple wurde in Deutschland die „klimaneutral“-Werbung gerichtlich untersagt.',
+    '**Bei Greenwashing drohen in der EU Abmahnungen, Unterlassungsklagen und – bei weitverbreiteten Verstößen mit EU-Dimension – Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten; dazu die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.** Reale Fälle zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, Armani 3,5 Mio. € für irreführende Ethik-Aussagen, und Apple wurde die „CO₂-neutral“-Werbung in Deutschland erstinstanzlich untersagt.',
     'Greenwashing war lange vor allem ein Reputationsthema – mit der EmpCo-Richtlinie (EU 2024/825) bekommt die Durchsetzung ab dem 27. September 2026 eine deutlich schärfere Grundlage. Diese Seite ordnet ein, welche Strafen konkret drohen, was die Fälle über die Größenordnung verraten – und was Unternehmen jetzt tun sollten, bevor Wettbewerber, Verbände oder Behörden es für sie tun.',
   ],
   sections: [
@@ -59,9 +59,9 @@ const contentDe: EmpCoClusterContent = {
         'Die Sanktionen bei irreführender Umweltwerbung staffeln sich von der privaten Rechtsdurchsetzung bis zum behördlichen Bußgeld. Bei Verstößen gegen die EmpCo-Regeln drohen:',
       ],
       bullets: [
-        '[Abmahnungen](/de/empco-audit/abmahnung-greenwashing/) durch Wettbewerber und Verbände – schon heute auf Basis von § 5 UWG (Irreführung), ab dem 27.09.2026 zusätzlich gestützt auf die EmpCo-Umsetzung im UWG.',
+        '[Abmahnungen](/de/empco-audit/abmahnung-greenwashing/) durch Wettbewerber und Verbände – schon heute auf Basis von § 5 UWG (Irreführung), ab dem 27.09.2026 zusätzlich gestützt auf die EmpCo-Umsetzung im UWG. Das ist in Deutschland der Normalfall der Durchsetzung.',
         'Unterlassungsklagen, wenn keine Unterlassungserklärung abgegeben wird.',
-        'Bußgelder von bis zu 4 % des Jahresumsatzes des Unternehmens (in grenzüberschreitenden Fällen).',
+        'Behördliche Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten – bei weitverbreiteten Verstößen mit EU-Dimension (koordinierte Durchsetzung nach der CPC-Verordnung; in Deutschland § 19 UWG, zuständig u. a. das Bundesamt für Justiz).',
         'Die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen – inklusive Verpackungen, Kampagnen und Website-Inhalten.',
         'Reputationsschäden, die gerade bei Nachhaltigkeitsthemen überproportional ausfallen: Wer beim Greenwashing erwischt wird, verliert genau die Zielgruppe, die er mit grünen Claims gewinnen wollte.',
       ],
@@ -74,27 +74,27 @@ const contentDe: EmpCoClusterContent = {
       ],
       subsections: [
         {
-          heading: 'Shein: 1 Mio. € Bußgeld',
+          heading: 'Shein: 1 Mio. € Bußgeld für irreführende Umweltaussagen',
           paragraphs: [
-            // TODO: juristisch prüfen — Behörde und Verfahrensdetails des Shein-Falls sind in der
-            // Strategie (§8: Ethical Brand Marketing) nicht spezifiziert. Vor Livegang Details
-            // ergänzen lassen oder bewusst bei der Summe belassen. (Gilt identisch für EN.)
-            'Der Fast-Fashion-Konzern Shein zahlte 1 Mio. € wegen irreführender Nachhaltigkeitsaussagen. Der Fall zeigt: Auch Anbieter aus Drittländern werden erfasst, sobald sie EU-Konsumenten ansprechen – der Firmensitz schützt nicht.',
+            // Juristisch validiert (Juli 2026): AGCM-PM vom 04.08.2025, Verfahren PS12709.
+            'Die italienische Wettbewerbs- und Verbraucherschutzbehörde AGCM verhängte im August 2025 ein Bußgeld von 1 Mio. € gegen die Betreiberin der europäischen Shein-Websites. Gegenstand waren vage und übertriebene Umweltaussagen – unter anderem zu Kreislauffähigkeit und Recycling – sowie Klimaziele, die im Widerspruch zu den tatsächlich gestiegenen Emissionen des Konzerns standen. Der Fall zeigt: Auch Anbieter aus Drittländern werden erfasst, sobald sie EU-Konsumenten ansprechen – der Firmensitz schützt nicht.',
           ],
         },
         {
-          heading: 'Armani: 3,5 Mio. € Bußgeld',
+          heading: 'Armani: 3,5 Mio. € Bußgeld für irreführende Ethik-Aussagen',
           paragraphs: [
-            // TODO: juristisch prüfen — wie oben: Behörde/Verfahren des Armani-Falls in der
-            // Strategie nicht näher belegt, nur die Summe.
-            'Gegen Armani wurde ein Bußgeld von 3,5 Mio. € verhängt. Der Fall macht die Größenordnung greifbar, in der sich Greenwashing-Sanktionen für große Marken inzwischen bewegen – deutlich jenseits von symbolischen Beträgen.',
+            // Juristisch validiert (Juli 2026): AGCM-PM vom 04.08.2025, Verfahren PS12793.
+            // Bewusst NICHT als Greenwashing gelabelt — Gegenstand waren Sozial-/Ethik-Aussagen.
+            'Der Nachbarfall zu den Green Claims: Ebenfalls im August 2025 verhängte die AGCM 3,5 Mio. € Bußgeld gegen Armani – nicht für Umwelt-, sondern für irreführende Ethik- und Sozialverantwortungs-Aussagen, die im Widerspruch zu den tatsächlichen Arbeitsbedingungen bei Subunternehmern standen (Entscheidung angefochten, nicht rechtskräftig). Für Unternehmen ist die Lehre dieselbe: Die Sanktionslogik trifft jede unbelegte Nachhaltigkeitsaussage – ökologisch wie sozial.',
           ],
         },
         {
-          heading: 'Apple: „klimaneutral“-Werbung in Deutschland gerichtlich untersagt',
+          heading: 'Apple: „CO₂-neutral“-Werbung in Deutschland erstinstanzlich untersagt',
           paragraphs: [
-            'Der wirkungsstärkste Präzedenzfall für den DACH-Raum: Apple wurde in Deutschland die „klimaneutral“-Werbung für die Apple Watch gerichtlich untersagt. Auf Reddit erzeugte der Fall hunderte Kommentare – in r/apple brachte es ein Top-Kommentar auf den Punkt: „carbon credits and carbon neutral are largely BS marketing buzzwords“.',
-            'Die Linie dahinter hat der BGH vorgezeichnet: Mit „klimaneutral“ darf nur geworben werden, wenn der Begriff im Werbeumfeld klar erläutert wird. Kompensationsbasierte Klimaneutralitäts-Werbung ohne Erläuterung ist damit schon heute angreifbar – [ab 2026 ist sie ausdrücklich verboten](/de/empco-audit/klimaneutral-werben-verboten/).',
+            // Juristisch validiert (Juli 2026): LG Frankfurt a. M., Urt. v. 26.08.2025 – 3-06 O 8/24
+            // (Klage der Deutschen Umwelthilfe); nicht rechtskräftig.
+            'Der wirkungsstärkste Präzedenzfall für den DACH-Raum: Das Landgericht Frankfurt am Main untersagte Apple im August 2025 auf Klage der Deutschen Umwelthilfe erstinstanzlich, die Apple Watch als „CO₂-neutrales Produkt“ zu bewerben (Urteil vom 26.08.2025, nicht rechtskräftig) – die zugrunde liegende Kompensation über ein Waldprojekt in Paraguay war nicht langfristig gesichert. Auf Reddit erzeugte der Fall hunderte Kommentare – in r/apple brachte es ein Top-Kommentar auf den Punkt: „carbon credits and carbon neutral are largely BS marketing buzzwords“.',
+            'Die Linie dahinter hat der BGH vorgezeichnet (Urteil vom 27.06.2024 – I ZR 98/23): Mit dem mehrdeutigen Begriff „klimaneutral“ darf nur geworben werden, wenn er in der Werbung selbst klar erläutert wird. Kompensationsbasierte Klimaneutralitäts-Werbung ohne Erläuterung ist damit schon heute angreifbar – [ab 2026 ist sie ausdrücklich verboten](/de/empco-audit/klimaneutral-werben-verboten/).',
           ],
         },
       ],
@@ -104,7 +104,7 @@ const contentDe: EmpCoClusterContent = {
       heading: 'Die Rechtsgrundlagen im Überblick',
       paragraphs: [
         'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist seit März 2024 in Kraft. Sie ändert zwei bestehende EU-Regelwerke – die UGP-Richtlinie (2005/29/EG) und die Verbraucherrechte-Richtlinie (2011/83/EU) – und verbietet irreführende Umweltaussagen sowie unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern.',
-        'Die EU-Mitgliedstaaten müssen die Richtlinie bis zum 27. März 2026 in nationales Recht umsetzen; verbindlich gelten die Regeln ab dem 27. September 2026. Häufige Verwechslung dabei: Die Green Claims Directive – der separate, detailliertere Vorschlag mit Vorab-Prüfsystem – wurde im Juni 2025 von der EU-Kommission zurückgezogen. Die EmpCo ist davon unberührt; das Greenwashing-Verbot kommt über die EmpCo statt über die Green Claims Directive.',
+        'Die EU-Mitgliedstaaten müssen die Richtlinie bis zum 27. März 2026 in nationales Recht umsetzen; verbindlich gelten die Regeln ab dem 27. September 2026. Häufige Verwechslung dabei: Für die Green Claims Directive – den separaten, detaillierteren Vorschlag mit Vorab-Prüfsystem – hat die EU-Kommission im Juni 2025 die Rücknahme angekündigt; das Verfahren liegt seither auf Eis. Die EmpCo ist davon unberührt; das Greenwashing-Verbot kommt über die EmpCo statt über die Green Claims Directive.',
       ],
     },
     {
@@ -136,7 +136,7 @@ const contentDe: EmpCoClusterContent = {
   faq: [
     {
       q: 'Welche Strafen drohen bei Verstößen gegen die EmpCo-Richtlinie?',
-      a: 'Neben Abmahnungen und Unterlassungsklagen drohen Bußgelder von bis zu 4 % des Jahresumsatzes des Unternehmens (in grenzüberschreitenden Fällen). Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. €, Armani 3,5 Mio. €, und Apple wurde in Deutschland die „klimaneutral“-Werbung gerichtlich untersagt.',
+      a: 'Neben Abmahnungen und Unterlassungsklagen drohen bei weitverbreiteten Verstößen mit EU-Dimension Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, Armani 3,5 Mio. € für irreführende Ethik-Aussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt.',
     },
     {
       q: 'Gilt die EmpCo auch für kleine Unternehmen?',
@@ -152,7 +152,7 @@ const contentDe: EmpCoClusterContent = {
     },
     {
       q: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?',
-      a: 'Das wird oft verwechselt. Die Green Claims Directive (der separate Vorschlag mit Vorab-Prüfsystem) wurde im Juni 2025 von der EU-Kommission zurückgezogen. Die EmpCo-Richtlinie (EU 2024/825) ist davon unberührt, bereits beschlossen und gilt ab dem 27. September 2026. Das Greenwashing-Verbot kommt also – nur eben über die EmpCo statt über die Green Claims Directive.',
+      a: 'Das wird oft verwechselt. Für die Green Claims Directive (den separaten Vorschlag mit Vorab-Prüfsystem) hat die EU-Kommission im Juni 2025 die Rücknahme angekündigt; das Verfahren liegt seither auf Eis. Die EmpCo-Richtlinie (EU 2024/825) ist davon unberührt, bereits beschlossen und gilt ab dem 27. September 2026. Das Greenwashing-Verbot kommt also – nur eben über die EmpCo statt über die Green Claims Directive.',
     },
   ],
   relatedTitle: 'Weiterlesen',
@@ -177,7 +177,7 @@ const contentEn: EmpCoClusterContent = {
     source: 'Discussion on Reddit, r/de',
   },
   intro: [
-    '**Greenwashing in the EU can trigger cease-and-desist warnings, injunctions and fines of up to 4% of annual turnover (in cross-border cases) – plus the obligation to correct or withdraw the contested advertising.** Real cases show the scale: Shein paid €1 million, Armani €3.5 million, and a German court banned Apple’s “carbon neutral” advertising.',
+    '**Greenwashing in the EU can trigger cease-and-desist warnings, injunctions and – for widespread infringements with an EU dimension – fines of up to 4% of annual turnover in the member states concerned; plus the obligation to correct or withdraw the contested advertising.** Real cases show the scale: Shein was fined €1 million for misleading environmental claims, Armani €3.5 million for misleading ethics claims, and a German court banned Apple’s “carbon neutral” advertising at first instance.',
     'For a long time greenwashing was mainly a reputational issue – with the EmpCo Directive (EU 2024/825), enforcement gets a much sharper basis from 27 September 2026. This page lays out which penalties apply in practice, what the cases reveal about the magnitudes – and what companies should do now, before competitors, associations or authorities do it for them.',
   ],
   sections: [
@@ -188,9 +188,9 @@ const contentEn: EmpCoClusterContent = {
         'The sanctions for misleading environmental advertising range from private enforcement to regulatory fines. Breaches of the EmpCo rules can trigger:',
       ],
       bullets: [
-        '[Cease-and-desist warnings](/en/empco-audit/abmahnung-greenwashing/) from competitors and associations – already today based on Section 5 UWG (misleading practices), from 27 Sep 2026 additionally based on the EmpCo transposition in the UWG.',
+        '[Cease-and-desist warnings](/en/empco-audit/abmahnung-greenwashing/) from competitors and associations – already today based on Section 5 UWG (misleading practices), from 27 Sep 2026 additionally based on the EmpCo transposition in the UWG. In Germany, this is the normal enforcement route.',
         'Injunction lawsuits if no cease-and-desist declaration is submitted.',
-        'Fines of up to 4% of the company’s annual turnover (in cross-border cases).',
+        'Regulatory fines of up to 4% of annual turnover in the member states concerned – for widespread infringements with an EU dimension (coordinated enforcement under the CPC Regulation; in Germany Section 19 UWG, with the Federal Office of Justice among the competent authorities).',
         'The obligation to correct or withdraw the contested advertising – including packaging, campaigns and website content.',
         'Reputational damage, which is disproportionately severe for sustainability topics: whoever is caught greenwashing loses exactly the audience the green claims were meant to win.',
       ],
@@ -203,22 +203,27 @@ const contentEn: EmpCoClusterContent = {
       ],
       subsections: [
         {
-          heading: 'Shein: €1 million fine',
+          heading: 'Shein: €1 million fine for misleading environmental claims',
           paragraphs: [
-            'The fast-fashion group Shein paid €1 million over misleading sustainability claims. The case shows: providers from third countries are also covered as soon as they address EU consumers – the place of incorporation offers no protection.',
+            // Legally validated (July 2026): AGCM press release of 4 Aug 2025, case PS12709.
+            'In August 2025, the Italian competition and consumer authority AGCM imposed a €1 million fine on the operator of Shein’s European websites. At issue were vague and exaggerated environmental claims – including on circularity and recycling – and climate targets that contradicted the group’s actually rising emissions. The case shows: providers from third countries are also covered as soon as they address EU consumers – the place of incorporation offers no protection.',
           ],
         },
         {
-          heading: 'Armani: €3.5 million fine',
+          heading: 'Armani: €3.5 million fine for misleading ethics claims',
           paragraphs: [
-            'A fine of €3.5 million was imposed on Armani. The case makes tangible the magnitude at which greenwashing sanctions for major brands now operate – well beyond symbolic amounts.',
+            // Legally validated (July 2026): AGCM press release of 4 Aug 2025, case PS12793.
+            // Deliberately NOT labelled as greenwashing — the case concerned social/ethics claims.
+            'The neighbouring case to the green claims: also in August 2025, the AGCM fined Armani €3.5 million – not for environmental claims, but for misleading ethics and social-responsibility statements that contradicted the actual working conditions at subcontractors (decision challenged, not final). For companies the lesson is the same: the sanction logic hits every unsubstantiated sustainability claim – environmental and social alike.',
           ],
         },
         {
-          heading: 'Apple: “carbon neutral” advertising banned by a German court',
+          heading: 'Apple: “carbon neutral” advertising banned at first instance in Germany',
           paragraphs: [
-            'The most impactful precedent for the DACH region: a German court banned Apple from advertising the Apple Watch as “carbon neutral”. On Reddit the case generated hundreds of comments – in r/apple, a top comment put it bluntly: “carbon credits and carbon neutral are largely BS marketing buzzwords”.',
-            'The underlying line was drawn by the German Federal Court of Justice (BGH): “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising context. Offsetting-based climate-neutrality advertising without explanation is thus already contestable today – [from 2026 it is explicitly banned](/en/empco-audit/klimaneutral-werben-verboten/).',
+            // Legally validated (July 2026): Frankfurt Regional Court, judgment of 26 Aug 2025 –
+            // 3-06 O 8/24 (action brought by Deutsche Umwelthilfe); not final.
+            'The most impactful precedent for the DACH region: in August 2025, the Frankfurt Regional Court, on an action brought by Deutsche Umwelthilfe, banned Apple at first instance from advertising the Apple Watch as a “carbon neutral product” (judgment of 26 August 2025, not final) – the underlying offsetting via a forestry project in Paraguay was not secured for the long term. On Reddit the case generated hundreds of comments – in r/apple, a top comment put it bluntly: “carbon credits and carbon neutral are largely BS marketing buzzwords”.',
+            'The underlying line was drawn by the German Federal Court of Justice (BGH, judgment of 27 June 2024 – I ZR 98/23): the ambiguous term “climate-neutral” may only be used in advertising if it is clearly explained in the advertising itself. Offsetting-based climate-neutrality advertising without explanation is thus already contestable today – [from 2026 it is explicitly banned](/en/empco-audit/klimaneutral-werben-verboten/).',
           ],
         },
       ],
@@ -228,7 +233,7 @@ const contentEn: EmpCoClusterContent = {
       heading: 'The legal framework at a glance',
       paragraphs: [
         'The EmpCo Directive (Directive (EU) 2024/825, “Empowering Consumers for the Green Transition”) has been in force since March 2024. It amends two existing EU frameworks – the Unfair Commercial Practices Directive (2005/29/EC) and the Consumer Rights Directive (2011/83/EU) – and bans misleading environmental claims and unsubstantiated sustainability labels in advertising to consumers.',
-        'EU member states must transpose the directive into national law by 27 March 2026; the rules apply bindingly from 27 September 2026. A common source of confusion: the Green Claims Directive – the separate, more detailed proposal with an ex-ante verification system – was withdrawn by the European Commission in June 2025. EmpCo is unaffected; the greenwashing ban arrives via EmpCo rather than via the Green Claims Directive.',
+        'EU member states must transpose the directive into national law by 27 March 2026; the rules apply bindingly from 27 September 2026. A common source of confusion: for the Green Claims Directive – the separate, more detailed proposal with an ex-ante verification system – the European Commission announced its withdrawal in June 2025; the procedure has been on hold since. EmpCo is unaffected; the greenwashing ban arrives via EmpCo rather than via the Green Claims Directive.',
       ],
     },
     {
@@ -260,7 +265,7 @@ const contentEn: EmpCoClusterContent = {
   faq: [
     {
       q: 'What penalties apply for breaching the EmpCo Directive?',
-      a: 'Besides cease-and-desist warnings and injunctions, fines of up to 4% of the company’s annual turnover are possible (in cross-border cases). Real cases show the scale: Shein paid €1 million, Armani €3.5 million, and Apple was banned by a German court from advertising with “carbon neutral”.',
+      a: 'Besides cease-and-desist warnings and injunctions, widespread infringements with an EU dimension can trigger fines of up to 4% of annual turnover in the member states concerned. Real cases show the scale: Shein was fined €1 million for misleading environmental claims, Armani €3.5 million for misleading ethics claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance.',
     },
     {
       q: 'Does EmpCo also apply to small companies?',
@@ -276,7 +281,7 @@ const contentEn: EmpCoClusterContent = {
     },
     {
       q: 'Was the Green Claims Directive withdrawn – what applies now?',
-      a: 'This is often confused. The Green Claims Directive (the separate proposal with an ex-ante verification system) was withdrawn by the European Commission in June 2025. The EmpCo Directive (EU 2024/825) is unaffected, already adopted, and applies from 27 September 2026. The greenwashing ban is coming – just via EmpCo instead of the Green Claims Directive.',
+      a: 'This is often confused. For the Green Claims Directive (the separate proposal with an ex-ante verification system) the European Commission announced its withdrawal in June 2025; the procedure has been on hold since. The EmpCo Directive (EU 2024/825) is unaffected, already adopted, and applies from 27 September 2026. The greenwashing ban is coming – just via EmpCo instead of the Green Claims Directive.',
     },
   ],
   relatedTitle: 'Further reading',

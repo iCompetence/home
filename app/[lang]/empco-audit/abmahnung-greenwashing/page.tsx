@@ -59,7 +59,7 @@ const contentDe: EmpCoClusterContent = {
       paragraphs: [
         'Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Wer mit „umweltfreundlich“ oder „klimaneutral“ wirbt, ohne das belegen zu können, riskiert also bereits jetzt eine Abmahnung, ganz ohne neue EU-Regeln.',
         'Ab dem 27. September 2026 verschärft sich die Lage deutlich: Dann gilt die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) EU-weit. Deutschland setzt sie über das Dritte Gesetz zur Änderung des UWG um, verkündet im Bundesgesetzblatt am 19. Februar 2026. Pauschale Umweltaussagen ohne Nachweis wandern damit in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken – die Erfolgsaussichten einer Abmahnung steigen, der Argumentationsspielraum des Abgemahnten schrumpft.',
-        'Die Rechtsprechung ist bereits vorgeprescht: Der BGH hat entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff im Werbeumfeld klar erläutert wird. Und die Behörden ziehen nach – Shein zahlte 1 Mio. €, Armani 3,5 Mio. €, und Apple wurde in Deutschland die „klimaneutral“-Werbung für die Apple Watch gerichtlich untersagt. [Welche Bußgelder in der EU drohen](/de/empco-audit/greenwashing-strafe/), zeigt die Fallübersicht im Detail.',
+        'Die Rechtsprechung ist bereits vorgeprescht: Der BGH hat entschieden (Urteil vom 27.06.2024 – I ZR 98/23), dass mit dem mehrdeutigen Begriff „klimaneutral“ nur geworben werden darf, wenn er in der Werbung selbst klar erläutert wird. Und die Durchsetzung zieht nach – die italienische Wettbewerbsbehörde AGCM verhängte gegen Shein 1 Mio. € Bußgeld wegen irreführender Umweltaussagen, und Apple wurde in Deutschland die „CO₂-neutral“-Werbung für die Apple Watch erstinstanzlich untersagt. [Welche Bußgelder in der EU drohen](/de/empco-audit/greenwashing-strafe/), zeigt die Fallübersicht im Detail.',
       ],
     },
     {
@@ -67,11 +67,10 @@ const contentDe: EmpCoClusterContent = {
       heading: 'Was in einer Abmahnung steht – und was sie kostet',
       paragraphs: [
         'Eine wettbewerbsrechtliche Abmahnung enthält typischerweise drei Dinge: die Beschreibung des beanstandeten Verstoßes (die konkrete Umweltaussage mit Fundstelle), eine vorformulierte strafbewehrte Unterlassungserklärung und eine Frist, innerhalb derer Sie reagieren sollen.',
-        // TODO: juristisch prüfen — Kostenbestandteile/Gegenstandswert-Logik ist allgemeines
-        // Wettbewerbsrecht und nicht durch die Strategie-Quellen (§8) belegt. Vor Livegang
-        // durch Anwalt verifizieren oder streichen. (Gilt identisch für die EN-Übersetzung.)
-        'Dazu kommt in der Regel eine Kostennote: Der Abmahnende verlangt Ersatz seiner Anwaltskosten. Die konkrete Höhe hängt vom Einzelfall ab. Wirtschaftlich relevanter als die Abmahnkosten selbst ist meist die Unterlassungserklärung – denn bei jedem späteren Verstoß gegen die abgegebene Erklärung wird eine empfindliche Vertragsstrafe fällig.',
-        'Zur Einordnung der Größenordnungen: Die Abmahnung ist das mildere Instrument. Bei Verstößen gegen die EmpCo-Regeln drohen daneben Bußgelder von bis zu 4 % des Jahresumsatzes des Unternehmens (in grenzüberschreitenden Fällen), außerdem Unterlassungsklagen, Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.',
+        // Juristisch validiert (Juli 2026): § 13 Abs. 2/3 UWG (Inhalt/Kostenerstattung),
+        // § 13a UWG (Vertragsstrafen-Grenzen für kleine Unternehmen).
+        'Dazu kommt in der Regel eine Kostennote: Der Abmahnende verlangt Ersatz seiner Anwaltskosten (§ 13 Abs. 3 UWG). Die konkrete Höhe hängt vom Einzelfall ab. Wirtschaftlich relevanter als die Abmahnkosten selbst ist meist die Unterlassungserklärung – denn bei einem späteren Verstoß gegen die abgegebene Erklärung wird regelmäßig eine Vertragsstrafe fällig; für kleine Unternehmen sieht § 13a UWG dabei Grenzen vor.',
+        'Zur Einordnung der Größenordnungen: Die Abmahnung ist das mildere Instrument – und in Deutschland der Normalfall der Durchsetzung. Behördliche Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten kommen daneben bei weitverbreiteten Verstößen mit EU-Dimension in Betracht; hinzu kommen Unterlassungsklagen, Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.',
       ],
       table: {
         primaryHeader: 'Abmahnung',
@@ -80,17 +79,17 @@ const contentDe: EmpCoClusterContent = {
           {
             feature: 'Wer geht vor?',
             primary: 'Wettbewerber und Verbände',
-            secondary: 'Behörden',
+            secondary: 'Behörden (in Deutschland u. a. das Bundesamt für Justiz)',
           },
           {
             feature: 'Rechtsgrundlage',
             primary: '§ 5 UWG (Irreführung)',
-            secondary: 'EmpCo-Umsetzung im UWG (ab 27.09.2026)',
+            secondary: '§ 19 UWG / CPC-Verordnung (weitverbreitete Verstöße mit EU-Dimension)',
           },
           {
             feature: 'Typische Folge',
             primary: 'Unterlassungserklärung + Kostenerstattung',
-            secondary: 'Bußgeld bis zu 4 % des Jahresumsatzes (grenzüberschreitende Fälle)',
+            secondary: 'Bußgeld bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten',
           },
         ],
       },
@@ -160,7 +159,7 @@ const contentDe: EmpCoClusterContent = {
     },
     {
       q: 'Welche Strafen drohen bei Verstößen gegen die EmpCo-Richtlinie?',
-      a: 'Neben Abmahnungen und Unterlassungsklagen drohen Bußgelder von bis zu 4 % des Jahresumsatzes des Unternehmens (in grenzüberschreitenden Fällen). Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. €, Armani 3,5 Mio. €, und Apple wurde in Deutschland die „klimaneutral“-Werbung gerichtlich untersagt.',
+      a: 'Neben Abmahnungen und Unterlassungsklagen drohen bei weitverbreiteten Verstößen mit EU-Dimension Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt.',
     },
     {
       q: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?',
@@ -168,7 +167,7 @@ const contentDe: EmpCoClusterContent = {
     },
     {
       q: 'Ist „klimaneutral“ ab 2026 noch erlaubt?',
-      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff im Werbeumfeld klar erläutert wird.',
+      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff in der Werbung selbst klar erläutert wird.',
     },
   ],
   relatedTitle: 'Weiterlesen',
@@ -203,7 +202,7 @@ const contentEn: EmpCoClusterContent = {
       paragraphs: [
         'Unsubstantiated or generic environmental claims are already actionable as misleading under Section 5 UWG – through competitors and associations. Anyone advertising with “eco-friendly” or “climate-neutral” without being able to prove it already risks a warning letter today, even without any new EU rules.',
         'From 27 September 2026 the situation tightens considerably: the [EmpCo Directive (EU 2024/825)](/en/empco-audit/) then applies EU-wide. Germany implements it via the Third Act Amending the UWG, published in the Federal Law Gazette on 19 February 2026. Generic environmental claims without proof move onto the “blacklist” of commercial practices that are always unfair – the chances of a warning letter succeeding rise, and the recipient’s room for argument shrinks.',
-        'Case law has already moved ahead: the German Federal Court of Justice (BGH) has ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising context. And the authorities are following – Shein paid €1 million, Armani €3.5 million, and a German court banned Apple from advertising the Apple Watch as “carbon neutral”. [Which fines apply in the EU](/en/empco-audit/greenwashing-strafe/) is covered in detail in the case overview.',
+        'Case law has already moved ahead: the German Federal Court of Justice (BGH) has ruled (judgment of 27 June 2024 – I ZR 98/23) that the ambiguous term “climate-neutral” may only be used in advertising if it is clearly explained in the advertising itself. And enforcement is following – the Italian competition authority AGCM fined Shein €1 million for misleading environmental claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance. [Which fines apply in the EU](/en/empco-audit/greenwashing-strafe/) is covered in detail in the case overview.',
       ],
     },
     {
@@ -211,10 +210,10 @@ const contentEn: EmpCoClusterContent = {
       heading: 'What a warning letter contains – and what it costs',
       paragraphs: [
         'A competition-law warning letter typically contains three things: a description of the alleged infringement (the specific environmental claim and where it appears), a pre-formulated cease-and-desist declaration with a contractual penalty, and a deadline within which you are expected to respond.',
-        // TODO: juristisch prüfen — identical to the German version: the cost/fee mechanics are
-        // general competition law and not backed by the strategy sources (§8).
-        'A fee note is usually attached: the warning party demands reimbursement of its legal fees. The exact amount depends on the individual case. Economically more significant than the warning costs is usually the cease-and-desist declaration itself – every later breach of the signed declaration triggers a substantial contractual penalty.',
-        'To put the magnitudes in perspective: the warning letter is the milder instrument. Breaches of the EmpCo rules can additionally trigger fines of up to 4% of the company’s annual turnover (in cross-border cases), plus injunctions, reputational damage and the obligation to correct or withdraw the contested advertising.',
+        // Legally validated (July 2026): Sec. 13(2)/(3) UWG (content/cost reimbursement),
+        // Sec. 13a UWG (contractual-penalty limits for small businesses).
+        'A fee note is usually attached: the warning party demands reimbursement of its legal fees (Section 13(3) UWG). The exact amount depends on the individual case. Economically more significant than the warning costs is usually the cease-and-desist declaration itself – a later breach of the signed declaration regularly triggers a contractual penalty; for small businesses, Section 13a UWG sets limits.',
+        'To put the magnitudes in perspective: the warning letter is the milder instrument – and in Germany the normal enforcement route. Regulatory fines of up to 4% of annual turnover in the member states concerned come into play for widespread infringements with an EU dimension; injunctions, reputational damage and the obligation to correct or withdraw the contested advertising add to this.',
       ],
       table: {
         primaryHeader: 'Warning letter (Abmahnung)',
@@ -223,17 +222,17 @@ const contentEn: EmpCoClusterContent = {
           {
             feature: 'Who acts?',
             primary: 'Competitors and associations',
-            secondary: 'Authorities',
+            secondary: 'Authorities (in Germany incl. the Federal Office of Justice)',
           },
           {
             feature: 'Legal basis',
             primary: 'Section 5 UWG (misleading practices)',
-            secondary: 'EmpCo transposition in the UWG (from 27 Sep 2026)',
+            secondary: 'Section 19 UWG / CPC Regulation (widespread infringements with an EU dimension)',
           },
           {
             feature: 'Typical consequence',
             primary: 'Cease-and-desist declaration + cost reimbursement',
-            secondary: 'Fine of up to 4% of annual turnover (cross-border cases)',
+            secondary: 'Fine of up to 4% of annual turnover in the member states concerned',
           },
         ],
       },
@@ -303,7 +302,7 @@ const contentEn: EmpCoClusterContent = {
     },
     {
       q: 'What penalties apply for breaching the EmpCo Directive?',
-      a: 'Besides cease-and-desist warnings and injunctions, fines of up to 4% of the company’s annual turnover are possible (in cross-border cases). Real cases show the scale: Shein paid €1 million, Armani €3.5 million, and Apple was banned by a German court from advertising with “carbon neutral”.',
+      a: 'Besides cease-and-desist warnings and injunctions, widespread infringements with an EU dimension can trigger fines of up to 4% of annual turnover in the member states concerned. Real cases show the scale: Shein was fined €1 million for misleading environmental claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance.',
     },
     {
       q: 'Do I also have to review old website pages and legacy content?',
@@ -311,7 +310,7 @@ const contentEn: EmpCoClusterContent = {
     },
     {
       q: 'Is “climate-neutral” still allowed from 2026?',
-      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising context.',
+      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising itself.',
     },
   ],
   relatedTitle: 'Further reading',

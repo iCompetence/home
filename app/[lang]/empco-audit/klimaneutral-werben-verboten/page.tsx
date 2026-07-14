@@ -56,7 +56,7 @@ const contentDe: EmpCoClusterContent = {
       id: 'begriffsliste',
       heading: 'Die Begriffsliste: was ohne Nachweis verboten ist',
       paragraphs: [
-        'Verboten sind ab dem Stichtag pauschale, nicht belegte Umweltaussagen. Dazu gehören insbesondere:',
+        'Verboten ist ab dem Stichtag das Treffen allgemeiner Umweltaussagen, deren anerkannte hervorragende Umweltleistung nicht nachgewiesen werden kann (neue Nr. 4a der „schwarzen Liste“). Die Erwägungsgründe der Richtlinie nennen als Beispiele solcher Begriffe unter anderem:',
       ],
       bullets: [
         '„klimaneutral“ – als pauschale Produktaussage, insbesondere wenn sie allein auf CO₂-Kompensation beruht',
@@ -82,8 +82,8 @@ const contentDe: EmpCoClusterContent = {
       id: 'klimaneutral-sonderfall',
       heading: '„Klimaneutral“: der Sonderfall mit Vorgeschichte',
       paragraphs: [
-        'Kein Begriff steht so im Zentrum der Durchsetzung wie „klimaneutral“. Der BGH hat bereits entschieden, dass damit nur geworben werden darf, wenn der Begriff im Werbeumfeld klar erläutert wird. Und der prominenteste Fall kommt aus Deutschland: Apple wurde die „klimaneutral“-Werbung für die Apple Watch gerichtlich untersagt – auf Reddit einer der meistdiskutierten Greenwashing-Threads überhaupt.',
-        'Der Hintergrund ist die Offsetting-Skepsis: CO₂-Kompensationen sind nicht per se Betrug, stehen aber massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb zieht die EmpCo hier die klarste Linie – Kompensation allein taugt ab 2026 nicht mehr als Grundlage einer Klimaneutralitäts-Aussage. [Welche Bußgelder bei Verstößen drohen](/de/empco-audit/greenwashing-strafe/), zeigen die Fälle Shein, Armani und Apple.',
+        'Kein Begriff steht so im Zentrum der Durchsetzung wie „klimaneutral“. Der BGH hat bereits entschieden (Urteil vom 27.06.2024 – I ZR 98/23), dass mit dem mehrdeutigen Begriff nur geworben werden darf, wenn er in der Werbung selbst klar erläutert wird. Und der prominenteste Fall kommt aus Deutschland: Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch erstinstanzlich untersagt (LG Frankfurt a. M., August 2025; nicht rechtskräftig) – auf Reddit einer der meistdiskutierten Greenwashing-Threads überhaupt.',
+        'Der Hintergrund ist die Offsetting-Skepsis: CO₂-Kompensationen sind nicht per se Betrug, stehen aber massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb zieht die EmpCo hier die klarste Linie – Kompensation allein taugt ab 2026 nicht mehr als Grundlage einer Klimaneutralitäts-Aussage. [Welche Bußgelder bei Verstößen drohen](/de/empco-audit/greenwashing-strafe/), zeigen die Fälle Shein und Apple.',
       ],
     },
     {
@@ -129,7 +129,7 @@ const contentDe: EmpCoClusterContent = {
       heading: 'Wie es zu den Verboten kam',
       paragraphs: [
         'Die Begriffsverbote fallen nicht vom Himmel: Die EmpCo-Richtlinie ist seit März 2024 in Kraft und ändert die UGP-Richtlinie (2005/29/EG) sowie die Verbraucherrechte-Richtlinie (2011/83/EU). Ihr Kern ist die Beweislast-Logik – wer gegenüber Verbrauchern mit Umweltvorteilen wirbt, muss sie belegen können, bevor die Aussage öffentlich wird.',
-        'Häufige Verwechslung dabei: Die Green Claims Directive, der separate und deutlich detailliertere Vorschlag mit verpflichtender Vorab-Prüfung jeder grünen Aussage, wurde im Juni 2025 von der EU-Kommission zurückgezogen. An den Begriffsverboten ändert das nichts – sie kommen über die EmpCo, nicht über die Green Claims Directive.',
+        'Häufige Verwechslung dabei: Für die Green Claims Directive, den separaten und deutlich detaillierteren Vorschlag mit verpflichtender Vorab-Prüfung jeder grünen Aussage, hat die EU-Kommission im Juni 2025 die Rücknahme angekündigt; das Verfahren liegt seither auf Eis. An den Begriffsverboten ändert das nichts – sie kommen über die EmpCo, nicht über die Green Claims Directive.',
         'Und der Reddit-Frage „Is ‚biodegradable‘ even regulated?“ lässt sich damit eine präzise Antwort geben: Ab dem 27. September 2026 ja – „biologisch abbaubar“ steht ausdrücklich auf der Liste der ohne Nachweis unzulässigen Aussagen.',
       ],
     },
@@ -152,7 +152,7 @@ const contentDe: EmpCoClusterContent = {
       bullets: [
         'Seit März 2024: Die EmpCo-Richtlinie (EU 2024/825) ist in Kraft.',
         'Bis 27. März 2026: Frist für die EU-Mitgliedstaaten zur Umsetzung in nationales Recht.',
-        '19. Februar 2026: Deutschland verkündet das Dritte Gesetz zur Änderung des UWG im Bundesgesetzblatt.',
+        '19. Februar 2026: Deutschland verkündet das Dritte Gesetz zur Änderung des UWG im Bundesgesetzblatt (BGBl. 2026 I Nr. 43).',
         'Ab 27. September 2026: Die neuen Regeln gelten verbindlich – ohne Übergangsfrist für Produkte oder Aussagen, die bereits im Markt sind.',
         'Schon heute: Unbelegte Umweltaussagen sind nach § 5 UWG als Irreführung [abmahnfähig](/de/empco-audit/abmahnung-greenwashing/) – durch Wettbewerber und Verbände.',
       ],
@@ -176,7 +176,7 @@ const contentDe: EmpCoClusterContent = {
   faq: [
     {
       q: 'Ist „klimaneutral“ ab 2026 noch erlaubt?',
-      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff im Werbeumfeld klar erläutert wird.',
+      a: 'Ja, aber nur unter strengen Bedingungen. Verboten ist ab dem 27. September 2026 die pauschale Produktaussage „klimaneutral“, wenn sie allein auf CO₂-Kompensation (Offsetting) beruht. Erlaubt bleiben Aussagen, die auf tatsächlichen Emissionsreduktionen in der Wertschöpfungskette basieren und nachprüfbar belegt sind. Schon heute hat der BGH entschieden, dass mit „klimaneutral“ nur geworben werden darf, wenn der Begriff in der Werbung selbst klar erläutert wird.',
     },
     {
       q: 'Welche Werbebegriffe sind ab 2026 konkret verboten?',
@@ -192,7 +192,7 @@ const contentDe: EmpCoClusterContent = {
     },
     {
       q: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?',
-      a: 'Das wird oft verwechselt. Die Green Claims Directive (der separate Vorschlag mit Vorab-Prüfsystem) wurde im Juni 2025 von der EU-Kommission zurückgezogen. Die EmpCo-Richtlinie (EU 2024/825) ist davon unberührt, bereits beschlossen und gilt ab dem 27. September 2026. Das Greenwashing-Verbot kommt also – nur eben über die EmpCo statt über die Green Claims Directive.',
+      a: 'Das wird oft verwechselt. Für die Green Claims Directive (den separaten Vorschlag mit Vorab-Prüfsystem) hat die EU-Kommission im Juni 2025 die Rücknahme angekündigt; das Verfahren liegt seither auf Eis. Die EmpCo-Richtlinie (EU 2024/825) ist davon unberührt, bereits beschlossen und gilt ab dem 27. September 2026. Das Greenwashing-Verbot kommt also – nur eben über die EmpCo statt über die Green Claims Directive.',
     },
   ],
   relatedTitle: 'Weiterlesen',
@@ -225,7 +225,7 @@ const contentEn: EmpCoClusterContent = {
       id: 'begriffsliste',
       heading: 'The list of terms: what is banned without proof',
       paragraphs: [
-        'From the cut-off date, generic, unsubstantiated environmental claims are banned. These include in particular:',
+        'From the cut-off date, making generic environmental claims whose recognised excellent environmental performance cannot be demonstrated is banned (new point 4a of the “blacklist”). The directive’s recitals name as examples of such terms, among others:',
       ],
       bullets: [
         '“climate-neutral” – as a generic product claim, especially where it rests solely on carbon offsetting',
@@ -251,8 +251,8 @@ const contentEn: EmpCoClusterContent = {
       id: 'klimaneutral-sonderfall',
       heading: '“Climate-neutral”: the special case with a history',
       paragraphs: [
-        'No term is as central to enforcement as “climate-neutral”. The German Federal Court of Justice (BGH) has already ruled that it may only be used in advertising if the term is clearly explained in the advertising context. And the most prominent case comes from Germany: a court banned Apple from advertising the Apple Watch as “carbon neutral” – on Reddit one of the most-discussed greenwashing threads of all.',
-        'The background is offsetting scepticism: carbon offsets are not a scam per se, but they are under heavy criticism because their actual climate impact is often hard to measure and sometimes overstated. This is exactly why EmpCo draws its clearest line here – from 2026, offsetting alone no longer suffices as the basis of a climate-neutrality claim. [Which fines apply for violations](/en/empco-audit/greenwashing-strafe/) is shown by the Shein, Armani and Apple cases.',
+        'No term is as central to enforcement as “climate-neutral”. The German Federal Court of Justice (BGH) has already ruled (judgment of 27 June 2024 – I ZR 98/23) that the ambiguous term may only be used in advertising if it is clearly explained in the advertising itself. And the most prominent case comes from Germany: Apple was banned at first instance from advertising the Apple Watch as “carbon neutral” (Frankfurt Regional Court, August 2025; not final) – on Reddit one of the most-discussed greenwashing threads of all.',
+        'The background is offsetting scepticism: carbon offsets are not a scam per se, but they are under heavy criticism because their actual climate impact is often hard to measure and sometimes overstated. This is exactly why EmpCo draws its clearest line here – from 2026, offsetting alone no longer suffices as the basis of a climate-neutrality claim. [Which fines apply for violations](/en/empco-audit/greenwashing-strafe/) is shown by the Shein and Apple cases.',
       ],
     },
     {
@@ -298,7 +298,7 @@ const contentEn: EmpCoClusterContent = {
       heading: 'How the bans came about',
       paragraphs: [
         'The term bans do not come out of nowhere: the EmpCo Directive has been in force since March 2024 and amends the Unfair Commercial Practices Directive (2005/29/EC) and the Consumer Rights Directive (2011/83/EU). Its core is the burden-of-proof logic – whoever advertises environmental benefits to consumers must be able to prove them before the claim becomes public.',
-        'A common source of confusion: the Green Claims Directive, the separate and much more detailed proposal with mandatory ex-ante verification of every green claim, was withdrawn by the European Commission in June 2025. That changes nothing about the term bans – they arrive via EmpCo, not via the Green Claims Directive.',
+        'A common source of confusion: for the Green Claims Directive, the separate and much more detailed proposal with mandatory ex-ante verification of every green claim, the European Commission announced its withdrawal in June 2025; the procedure has been on hold since. That changes nothing about the term bans – they arrive via EmpCo, not via the Green Claims Directive.',
         'And the Reddit question “Is ‘biodegradable’ even regulated?” can now be answered precisely: from 27 September 2026, yes – “biodegradable” is explicitly on the list of claims that are impermissible without proof.',
       ],
     },
@@ -321,7 +321,7 @@ const contentEn: EmpCoClusterContent = {
       bullets: [
         'Since March 2024: the EmpCo Directive (EU 2024/825) is in force.',
         'By 27 March 2026: deadline for EU member states to transpose it into national law.',
-        '19 February 2026: Germany publishes the Third Act Amending the UWG in the Federal Law Gazette.',
+        '19 February 2026: Germany publishes the Third Act Amending the UWG in the Federal Law Gazette (BGBl. 2026 I No. 43).',
         'From 27 September 2026: the new rules apply bindingly – with no transition period for products or claims already on the market.',
         'Already today: unsubstantiated environmental claims are [actionable](/en/empco-audit/abmahnung-greenwashing/) as misleading under Section 5 UWG – through competitors and associations.',
       ],
@@ -345,7 +345,7 @@ const contentEn: EmpCoClusterContent = {
   faq: [
     {
       q: 'Is “climate-neutral” still allowed from 2026?',
-      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising context.',
+      a: 'Yes, but only under strict conditions. From 27 September 2026, the generic product claim “climate-neutral” is banned if it rests solely on carbon offsetting. Claims based on actual emission reductions in the value chain that are verifiably substantiated remain permitted. The German Federal Court of Justice (BGH) has already ruled that “climate-neutral” may only be used in advertising if the term is clearly explained in the advertising itself.',
     },
     {
       q: 'Which advertising terms are specifically banned from 2026?',
@@ -361,7 +361,7 @@ const contentEn: EmpCoClusterContent = {
     },
     {
       q: 'Was the Green Claims Directive withdrawn – what applies now?',
-      a: 'This is often confused. The Green Claims Directive (the separate proposal with an ex-ante verification system) was withdrawn by the European Commission in June 2025. The EmpCo Directive (EU 2024/825) is unaffected, already adopted, and applies from 27 September 2026. The greenwashing ban is coming – just via EmpCo instead of the Green Claims Directive.',
+      a: 'This is often confused. For the Green Claims Directive (the separate proposal with an ex-ante verification system) the European Commission announced its withdrawal in June 2025; the procedure has been on hold since. The EmpCo Directive (EU 2024/825) is unaffected, already adopted, and applies from 27 September 2026. The greenwashing ban is coming – just via EmpCo instead of the Green Claims Directive.',
     },
   ],
   relatedTitle: 'Further reading',
