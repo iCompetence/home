@@ -142,7 +142,7 @@ const contentDe: EmpCoClusterContent = {
       id: 'audit',
       heading: 'Der schnellste Weg zum Überblick: automatisierter EmpCo-Audit',
       paragraphs: [
-        'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – branchenüblich ein mittlerer bis hoher fünfstelliger Aufwand. Genau diese Vorarbeit übernimmt der [EmpCo Audit](/de/empco-audit/): Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte, belegpflichtige Liste, auf der die juristische Letztprüfung gezielt aufsetzt.',
+        'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Genau diese Vorarbeit übernimmt der [EmpCo Audit](/de/empco-audit/): Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte, belegpflichtige Liste, auf der die juristische Letztprüfung gezielt aufsetzt.',
         'Der Audit ersetzt nicht den Anwalt – er ersetzt die wochenlange manuelle Vorarbeit davor. Nach einer Abmahnung verschafft er in Stunden den vollständigen Überblick, den Sie für die Reaktion und die Bereinigung der restlichen Website brauchen.',
       ],
     },
@@ -285,7 +285,7 @@ const contentEn: EmpCoClusterContent = {
       id: 'audit',
       heading: 'The fastest route to an overview: the automated EmpCo audit',
       paragraphs: [
-        'Manually, several departments read the website page by page, collect claims and match them against evidence – typically a mid to high five-figure effort. This is exactly the groundwork the [EmpCo Audit](/en/empco-audit/) takes over: it identifies critical claims with their exact location and rule reference and delivers a prioritised, evidence-focused list on which the final legal review can build.',
+        'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. This is exactly the groundwork the [EmpCo Audit](/en/empco-audit/) takes over: it identifies critical claims with their exact location and rule reference and delivers a prioritised, evidence-focused list on which the final legal review can build.',
         'The audit does not replace the lawyer – it replaces the weeks of manual groundwork before. After a warning letter it provides, within hours, the complete overview you need for the response and for cleaning up the rest of the website.',
       ],
     },

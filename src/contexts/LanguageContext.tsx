@@ -514,8 +514,8 @@ const translations: Translations = {
     de: 'Die Vorarbeit, die sonst Monate dauert. In Stunden erledigt.'
   },
   'empco.what.p1': {
-    en: 'A complete EmpCo or unfair-competition audit is costly and resource-intensive for most companies. Multiple departments read through their own website page by page for weeks, collect statements, match them with evidence, and hand the result over to the legal department or an external law firm. Industry-typical total costs sit in the mid- to high five-figure range depending on company size, and significantly higher for large corporations.',
-    de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Branchenüblich liegen die Gesamtkosten je nach Unternehmensgröße im mittleren bis hohen fünfstelligen Bereich, bei großen Konzernen auch deutlich darüber.'
+    en: 'A complete EmpCo or unfair-competition audit is costly and resource-intensive for most companies. Multiple departments read through their own website page by page for weeks, collect statements, match them with evidence, and hand the result over to the legal department or an external law firm. Depending on company size, total costs can quickly reach five figures, and significantly more for large corporations.',
+    de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Die Gesamtkosten können dabei je nach Unternehmensgröße schnell einen fünfstelligen Betrag erreichen, bei großen Konzernen auch deutlich mehr.'
   },
   'empco.what.p2': {
     en: 'The EmpCo Audit does not replace your lawyers. It replaces the work that comes before them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually require legal judgment.',
@@ -874,8 +874,8 @@ const translations: Translations = {
   },
   'empco.seo.faq.q17': { en: 'How do I check my website for green-claims risks?', de: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?' },
   'empco.seo.faq.a17': {
-    en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – typically a mid to high five-figure effort. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
-    de: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – branchenüblich ein mittlerer bis hoher fünfstelliger Aufwand. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.'
+    en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
+    de: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.'
   },
   'empco.seo.faq.q18': { en: 'Isn’t it enough to show ChatGPT a screenshot?', de: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?' },
   'empco.seo.faq.a18': {

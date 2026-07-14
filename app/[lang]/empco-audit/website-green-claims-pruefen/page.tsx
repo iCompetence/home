@@ -70,7 +70,7 @@ const contentDe: EmpCoClusterContent = {
       id: 'manuell',
       heading: 'Der manuelle Weg: Seite für Seite',
       paragraphs: [
-        'Der klassische Ablauf: Marketing, Nachhaltigkeit und Recht lesen die Website Seite für Seite, sammeln Aussagen in einer Tabelle und gleichen sie mit den vorhandenen Belegen ab. Branchenüblich ist dafür ein mittlerer bis hoher fünfstelliger Aufwand – bei großen Websites verteilt über Wochen.',
+        'Der klassische Ablauf: Marketing, Nachhaltigkeit und Recht lesen die Website Seite für Seite, sammeln Aussagen in einer Tabelle und gleichen sie mit den vorhandenen Belegen ab. Der Aufwand dafür kann schnell einen fünfstelligen Betrag erreichen – bei großen Websites verteilt über Wochen.',
         'Das größere Problem als die Kosten ist die Verlässlichkeit: Drei Abteilungen bewerten dieselbe Formulierung unterschiedlich, die Tagesform entscheidet über die Gründlichkeit, und während der Prüfung ändert sich die Website weiter. Am Ende steht selten ein vollständiges Bild – sondern eine Momentaufnahme mit Lücken, aus der die [nächste Abmahnung](/de/empco-audit/abmahnung-greenwashing/) trotzdem entstehen kann.',
       ],
     },
@@ -101,7 +101,7 @@ const contentDe: EmpCoClusterContent = {
           {
             feature: 'Aufwand',
             primary: 'Vorarbeit entfällt weitgehend',
-            secondary: 'Branchenüblich mittlerer bis hoher fünfstelliger Aufwand',
+            secondary: 'Kann schnell einen fünfstelligen Betrag erreichen',
           },
           {
             feature: 'Verlässlichkeit',
@@ -155,7 +155,7 @@ const contentDe: EmpCoClusterContent = {
   faq: [
     {
       q: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?',
-      a: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – branchenüblich ein mittlerer bis hoher fünfstelliger Aufwand. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.',
+      a: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.',
     },
     {
       q: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?',
@@ -218,7 +218,7 @@ const contentEn: EmpCoClusterContent = {
       id: 'manuell',
       heading: 'The manual route: page by page',
       paragraphs: [
-        'The classic process: marketing, sustainability and legal read the website page by page, collect claims in a spreadsheet and match them against the available evidence. The industry norm for this is a mid to high five-figure effort – spread over weeks for large websites.',
+        'The classic process: marketing, sustainability and legal read the website page by page, collect claims in a spreadsheet and match them against the available evidence. The effort for this can quickly reach five figures – spread over weeks for large websites.',
         'A bigger problem than the cost is reliability: three departments assess the same phrase differently, thoroughness depends on the day, and the website keeps changing during the review. The end result is rarely a complete picture – but a snapshot with gaps, from which the [next warning letter](/en/empco-audit/abmahnung-greenwashing/) can still emerge.',
       ],
     },
@@ -249,7 +249,7 @@ const contentEn: EmpCoClusterContent = {
           {
             feature: 'Effort',
             primary: 'Groundwork largely eliminated',
-            secondary: 'Industry norm: mid to high five-figure effort',
+            secondary: 'Can quickly reach five figures',
           },
           {
             feature: 'Reliability',
@@ -303,7 +303,7 @@ const contentEn: EmpCoClusterContent = {
   faq: [
     {
       q: 'How do I check my website for green-claims risks?',
-      a: 'Manually, several departments read the website page by page, collect claims and match them against evidence – typically a mid to high five-figure effort. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
+      a: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
     },
     {
       q: 'Isn’t it enough to show ChatGPT a screenshot?',
