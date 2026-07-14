@@ -481,6 +481,10 @@ const translations: Translations = {
     en: 'FAQ',
     de: 'FAQ'
   },
+  'empco.anchor.knowledge': {
+    en: 'Knowledge',
+    de: 'Wissen'
+  },
   'empco.anchor.contact': {
     en: 'Contact',
     de: 'Kontakt'

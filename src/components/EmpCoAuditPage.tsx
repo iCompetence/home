@@ -119,6 +119,7 @@ function EmpCoAuditPageContent() {
         { id: 'form-section', element: document.getElementById('form-section') },
         { id: 'empco-info-section', element: document.getElementById('empco-info-section') },
         { id: 'faq-section', element: document.getElementById('faq-section') },
+        { id: 'knowledge-section', element: document.getElementById('knowledge-section') },
         { id: 'cta-footer-section', element: document.getElementById('cta-footer-section') },
       ];
 
@@ -160,7 +161,8 @@ function EmpCoAuditPageContent() {
     { id: 'form-section', label: t('empco.anchor.form'), number: '06' },
     { id: 'empco-info-section', label: t('empco.anchor.directive'), number: '07' },
     { id: 'faq-section', label: t('empco.anchor.faq'), number: '08' },
-    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '09' },
+    { id: 'knowledge-section', label: t('empco.anchor.knowledge'), number: '09' },
+    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '10' },
   ];
 
   // SEO / knowledge section content — kept in i18n. These arrays are flattened
