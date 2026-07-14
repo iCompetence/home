@@ -1147,7 +1147,7 @@ function Hero() {
           {t(
             lang,
             'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
-            'Wir helfen ambitionierten Teams, Komplexität zu durchdringen – indem wir verstreute Daten in klare Entscheidungen verwandeln und KI in Produkte & automatisierte Prozesse, die dauerhaft Ergebnisse liefern.',
+            'Mit uns bekommen Teams den Überblick: So werden verstreute Daten zu klaren Entscheidungen, KI zu Produkten und Automatisierung liefert zuverlässige Ergebnisse.',
           )}
         </p>
 
@@ -1992,7 +1992,7 @@ function Statement() {
           {t(
             lang,
             'We help ambitious teams turn data and AI into real business outcomes.',
-            'Wir verwandeln Daten und KI in echte Geschäftsergebnisse – für ambitionierte Teams.',
+            'Wir verwandeln Daten und KI in echte Geschäftsergebnisse – für sichtbare Erfolge.',
           )}
         </p>
       </div>
@@ -2981,7 +2981,7 @@ function CTABand() {
             width: '100%',
           }}
         >
-          {t(lang, 'Ready to turn ambition into outcomes?', 'Bereit, Ambition in Ergebnisse zu verwandeln?')}
+          {t(lang, 'Ready to turn ambition into outcomes?', 'Bereit, Anspruch in Ergebnisse zu verwandeln?')}
         </h2>
       </div>
       <a
