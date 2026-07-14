@@ -143,7 +143,7 @@ export function submitNetlifyForm(
 
   const redirectTo = language === 'en' ? '/thank-you/' : '/danke/';
 
-  fetch('/', {
+  fetch('/__forms.html', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
