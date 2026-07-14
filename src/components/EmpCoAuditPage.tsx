@@ -119,6 +119,7 @@ function EmpCoAuditPageContent() {
         { id: 'form-section', element: document.getElementById('form-section') },
         { id: 'empco-info-section', element: document.getElementById('empco-info-section') },
         { id: 'faq-section', element: document.getElementById('faq-section') },
+        { id: 'knowledge-section', element: document.getElementById('knowledge-section') },
         { id: 'cta-footer-section', element: document.getElementById('cta-footer-section') },
       ];
 
@@ -160,7 +161,8 @@ function EmpCoAuditPageContent() {
     { id: 'form-section', label: t('empco.anchor.form'), number: '06' },
     { id: 'empco-info-section', label: t('empco.anchor.directive'), number: '07' },
     { id: 'faq-section', label: t('empco.anchor.faq'), number: '08' },
-    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '09' },
+    { id: 'knowledge-section', label: t('empco.anchor.knowledge'), number: '09' },
+    { id: 'cta-footer-section', label: t('empco.anchor.contact'), number: '10' },
   ];
 
   // SEO / knowledge section content — kept in i18n. These arrays are flattened
@@ -221,7 +223,7 @@ function EmpCoAuditPageContent() {
         .join('\n\n'),
     },
   ];
-  const empcoFaq = Array.from({ length: 13 }, (_, i) => ({
+  const empcoFaq = Array.from({ length: 19 }, (_, i) => ({
     title: t(`empco.seo.faq.q${i + 1}`),
     content: t(`empco.seo.faq.a${i + 1}`),
   }));
@@ -1064,6 +1066,81 @@ function EmpCoAuditPageContent() {
         items={empcoFaq}
         contentMaxHeightClass="max-h-[600px]"
       />
+
+      {/* Section 7b: Knowledge hub links — the pillar page links out to every
+          cluster page (hub-and-spoke), in the page's own language. */}
+      <AnimatedSection
+        id="knowledge-section"
+        className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
+        animationType="fadeInUp"
+        duration={0}
+      >
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <h2
+              className="mobile-h2-title"
+              style={{
+                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                marginBottom: '1.5rem',
+                fontSize: '32px',
+                fontWeight: '700',
+                lineHeight: '110%',
+              }}
+            >
+              {t('empco.knowledge.title')}
+            </h2>
+            <p
+              style={{
+                color: 'var(--gray-light)',
+                fontSize: '18px',
+                lineHeight: '170%',
+                marginBottom: '2rem',
+                maxWidth: '720px',
+              }}
+            >
+              {t('empco.knowledge.lead')}
+            </p>
+            <ul style={{ listStyle: 'none', paddingLeft: 0, margin: 0 }} className="space-y-4">
+              {(language === 'de'
+                ? [
+                    { label: 'Abmahnung wegen Greenwashing: Was tun? Kosten, Fristen, Reaktion', slug: 'abmahnung-greenwashing' },
+                    { label: 'Greenwashing-Bußgelder in der EU: bis zu 4 % vom Jahresumsatz – die Fälle', slug: 'greenwashing-strafe' },
+                    { label: 'Green Claims rechtssicher formulieren: erlaubte vs. verbotene Aussagen', slug: 'green-claims-formulieren' },
+                    { label: 'Website auf Green Claims prüfen: EmpCo-Audit manuell vs. automatisiert', slug: 'website-green-claims-pruefen' },
+                    { label: '„Klimaneutral“, „nachhaltig“, „umweltfreundlich“ – welche Werbebegriffe ab 2026 verboten sind', slug: 'klimaneutral-werben-verboten' },
+                  ]
+                : [
+                    { label: 'Greenwashing cease-and-desist warning (Abmahnung): what to do? Costs, deadlines, response', slug: 'abmahnung-greenwashing' },
+                    { label: 'Greenwashing fines in the EU: up to 4% of annual turnover – the cases', slug: 'greenwashing-strafe' },
+                    { label: 'Formulating green claims legally: permitted vs. banned statements', slug: 'green-claims-formulieren' },
+                    { label: 'Checking your website for green claims: EmpCo audit, manual vs. automated', slug: 'website-green-claims-pruefen' },
+                    { label: '“Climate-neutral”, “sustainable”, “eco-friendly” – which advertising terms are banned from 2026', slug: 'klimaneutral-werben-verboten' },
+                  ]
+              ).map((link) => (
+                <li key={link.slug}>
+                  <a
+                    href={`/${language}/empco-audit/${link.slug}/`}
+                    style={{
+                      color: 'var(--gray-white)',
+                      fontSize: '18px',
+                      lineHeight: '160%',
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-white)')}
+                  >
+                    → {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* CTA & Footer Section */}
       <div ref={footerRef}>

@@ -481,6 +481,10 @@ const translations: Translations = {
     en: 'FAQ',
     de: 'FAQ'
   },
+  'empco.anchor.knowledge': {
+    en: 'Knowledge',
+    de: 'Wissen'
+  },
   'empco.anchor.contact': {
     en: 'Contact',
     de: 'Kontakt'
@@ -514,8 +518,8 @@ const translations: Translations = {
     de: 'Die Vorarbeit, die sonst Monate dauert. In Stunden erledigt.'
   },
   'empco.what.p1': {
-    en: 'A complete EmpCo or unfair-competition audit is costly and resource-intensive for most companies. Multiple departments read through their own website page by page for weeks, collect statements, match them with evidence, and hand the result over to the legal department or an external law firm. Industry-typical total costs sit in the mid- to high five-figure range depending on company size, and significantly higher for large corporations.',
-    de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Branchenüblich liegen die Gesamtkosten je nach Unternehmensgröße im mittleren bis hohen fünfstelligen Bereich, bei großen Konzernen auch deutlich darüber.'
+    en: 'A complete EmpCo or unfair-competition audit is costly and resource-intensive for most companies. Multiple departments read through their own website page by page for weeks, collect statements, match them with evidence, and hand the result over to the legal department or an external law firm. Depending on company size, total costs can quickly reach five figures, and significantly more for large corporations.',
+    de: 'Ein vollständiger EmpCo- oder UWG-Audit ist für die meisten Unternehmen kostspielig und ressourcenintensiv. Mehrere Abteilungen lesen wochenlang die eigene Website Seite für Seite, sammeln Aussagen, gleichen sie mit Belegen ab und übergeben das Ergebnis an die Rechtsabteilung oder eine Kanzlei. Die Gesamtkosten können dabei je nach Unternehmensgröße schnell einen fünfstelligen Betrag erreichen, bei großen Konzernen auch deutlich mehr.'
   },
   'empco.what.p2': {
     en: 'The EmpCo Audit does not replace your lawyers. It replaces the work that comes before them. Instead of reading through the entire website, your team gets a pre-prioritized list on the table — with every critical statement, every source location, every regulatory reference. The legal review then runs only on the passages that actually require legal judgment.',
@@ -839,13 +843,13 @@ const translations: Translations = {
   },
   'empco.seo.faq.q10': { en: 'What penalties apply for breaching EmpCo?', de: 'Welche Strafen drohen bei Verstößen gegen die EmpCo?' },
   'empco.seo.faq.a10': {
-    en: 'Breaches can trigger cease-and-desist warnings, injunctions and fines of up to 4% of annual turnover in the member states concerned. Competitors and associations can issue warnings. Reputational damage and the obligation to correct or withdraw the contested advertising add to this.',
-    de: 'Bei Verstößen drohen Abmahnungen, Unterlassungsklagen und Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Abmahnen können Wettbewerber und Verbände. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.'
+    en: 'Besides cease-and-desist warnings and injunctions, widespread infringements with an EU dimension can trigger fines of up to 4% of annual turnover in the member states concerned. Real cases show the scale: Shein was fined €1 million for misleading environmental claims, Armani €3.5 million for misleading ethics claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance. Reputational damage and the obligation to correct or withdraw the contested advertising add to this.',
+    de: 'Neben Abmahnungen und Unterlassungsklagen drohen bei weitverbreiteten Verstößen mit EU-Dimension Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, Armani 3,5 Mio. € für irreführende Ethik-Aussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.'
   },
   'empco.seo.faq.q11': { en: 'How is EmpCo implemented in Germany?', de: 'Wie wird die EmpCo in Deutschland umgesetzt?' },
   'empco.seo.faq.a11': {
-    en: 'Germany implements EmpCo via an amendment to the Act against Unfair Competition (UWG). The banned practices are added to the “blacklist” of commercial practices that are always unfair. What matters for companies is the EU-wide start of application on 27 September 2026.',
-    de: 'Deutschland setzt die EmpCo über eine Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG) um. Die verbotenen Praktiken werden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Maßgeblich für Unternehmen ist der EU-weite Geltungsbeginn am 27. September 2026.'
+    en: 'Via the Third Act Amending the Act against Unfair Competition (UWG), published in the Federal Law Gazette on 19 February 2026. It essentially enters into force on 27 September 2026, in step with the EU-wide start of application. The banned practices are added to the “blacklist” of commercial practices that are always unfair. A general transition period for existing claims is not provided – all sustainability communication must be compliant by then.',
+    de: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es tritt im Wesentlichen am 27. September 2026 in Kraft – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken werden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss bis dahin angepasst sein.'
   },
   'empco.seo.faq.q12': { en: 'Is there a transition period for existing products?', de: 'Gibt es eine Übergangsfrist für Bestandsprodukte?' },
   'empco.seo.faq.a12': {
@@ -856,6 +860,50 @@ const translations: Translations = {
   'empco.seo.faq.a13': {
     en: 'Inventory all environmental claims and review them before the cut-off date. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended – the 5 steps above summarise the approach.',
     de: 'Alle Umweltaussagen inventarisieren und vor dem Stichtag prüfen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.'
+  },
+  'empco.seo.faq.q14': { en: 'Are carbon offsets a scam?', de: 'Sind CO₂-Kompensationen (Carbon Offsets) Betrug?' },
+  'empco.seo.faq.a14': {
+    en: 'Not per se, but they are under heavy criticism because their actual climate impact is often hard to measure and sometimes overstated. That is exactly why the EmpCo Directive bans advertising a product as “climate-neutral” from 2026 based solely on offsetting. For companies this means: offsetting can be part of a strategy, but it is no longer sufficient as the sole basis for an environmental claim.',
+    de: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie ab 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.'
+  },
+  'empco.seo.faq.q15': { en: 'Can I be sued or receive a cease-and-desist warning for an “eco-friendly” claim?', de: 'Kann ich für eine „umweltfreundlich“-Aussage abgemahnt oder verklagt werden?' },
+  'empco.seo.faq.a15': {
+    en: 'Yes. Unsubstantiated or generic environmental claims are already actionable as misleading under Section 5 UWG (German Act against Unfair Competition) – through competitors and associations. From 27 September 2026, the EmpCo transposition in the UWG tightens this further. Evidence must be in place before the claim goes online.',
+    de: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Ab dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.'
+  },
+  'empco.seo.faq.q16': { en: 'Do I also have to review old website pages and legacy content?', de: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?' },
+  'empco.seo.faq.a16': {
+    en: 'Yes. The rules apply to all claims that are public from the cut-off date – including legacy pages, product copy and landing pages that have grown over years. This is exactly the core problem: most companies do not know what is written on hundreds of their own pages. An automated audit provides a complete overview within hours.',
+    de: 'Ja. Die Regeln gelten für alle Aussagen, die ab dem Stichtag öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.'
+  },
+  'empco.seo.faq.q17': { en: 'How do I check my website for green-claims risks?', de: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?' },
+  'empco.seo.faq.a17': {
+    en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritised list on which the final legal review can build.',
+    de: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.'
+  },
+  'empco.seo.faq.q18': { en: 'Isn’t it enough to show ChatGPT a screenshot?', de: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?' },
+  'empco.seo.faq.a18': {
+    en: 'No. A single AI pass is not reproducible – the same page can produce a different result on every run. A robust audit checks every claim in multiple stages (analysis, critical cross-examination, reconciliation across several runs) and evaluates text and visual presentation together. Only that makes the findings complete and traceable.',
+    de: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Aussage mehrstufig (Analyse, kritische Gegenprüfung, Abgleich über mehrere Durchläufe) und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.'
+  },
+  'empco.seo.faq.q19': { en: 'Who is liable for greenwashing – marketing, legal or sustainability?', de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Recht oder Nachhaltigkeit?' },
+  'empco.seo.faq.a19': {
+    en: 'Legally, the company is liable; internally, the problem usually sits in the gap between departments working in separate tools. Marketing writes the copy, sustainability supplies the data, legal reviews – but nobody has the full overview of the website. A shared audit as a single source of truth closes exactly this gap.',
+    de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Marketing formuliert, Nachhaltigkeit liefert Daten, Recht prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.'
+  },
+
+  // EmpCo knowledge hub (cluster page links)
+  'empco.knowledge.title': {
+    en: 'EmpCo knowledge: further reading',
+    de: 'EmpCo Wissen: weiterführende Beiträge'
+  },
+  'empco.knowledge.lead': {
+    en: 'In-depth guides on green claims, cease-and-desist warnings and fines around the EmpCo Directive.',
+    de: 'Vertiefende Beiträge zu Green Claims, Abmahnungen und Bußgeldern rund um die EmpCo-Richtlinie.'
+  },
+  'empco.cluster.kicker': {
+    en: 'EmpCo Knowledge',
+    de: 'EmpCo Wissen'
   },
 
   // Analytics Agent Page
