@@ -33,8 +33,8 @@ const content: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/de',
   },
   intro: [
-    'Greenwashing war lange vor allem ein Reputationsthema. Das ändert sich gerade grundlegend: Aufsichtsbehörden und Gerichte in der EU sanktionieren irreführende Umweltwerbung inzwischen mit Millionenbeträgen – und mit der EmpCo-Richtlinie (EU 2024/825) bekommt die Durchsetzung ab dem 27. September 2026 eine deutlich schärfere Grundlage.',
-    'Diese Seite ordnet ein, welche Strafen bei Greenwashing konkret drohen, was die Fälle Shein, Armani und Apple über die Größenordnung verraten – und was Unternehmen jetzt tun sollten, bevor Wettbewerber, Verbände oder Behörden es für sie tun.',
+    '**Bei Greenwashing drohen in der EU Abmahnungen, Unterlassungsklagen und Bußgelder von bis zu 4 % des Jahresumsatzes (in grenzüberschreitenden Fällen) – dazu die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.** Reale Fälle zeigen die Größenordnung: Shein zahlte 1 Mio. €, Armani 3,5 Mio. €, und Apple wurde in Deutschland die „klimaneutral“-Werbung gerichtlich untersagt.',
+    'Greenwashing war lange vor allem ein Reputationsthema – mit der EmpCo-Richtlinie (EU 2024/825) bekommt die Durchsetzung ab dem 27. September 2026 eine deutlich schärfere Grundlage. Diese Seite ordnet ein, welche Strafen konkret drohen, was die Fälle über die Größenordnung verraten – und was Unternehmen jetzt tun sollten, bevor Wettbewerber, Verbände oder Behörden es für sie tun.',
   ],
   sections: [
     {
@@ -184,7 +184,7 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_strafe',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ accordion 1:1 (Google policy).
+// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -196,12 +196,26 @@ const faqJsonLd = {
   })),
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
+    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
+    { '@type': 'ListItem', position: 3, name: 'Greenwashing-Bußgelder in der EU', item: 'https://icompetence.de/de/empco-audit/greenwashing-strafe/' },
+  ],
+}
+
 export default function GreenwashingStrafe() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <EmpCoClusterPage content={content} initialLanguage="de" />
     </>

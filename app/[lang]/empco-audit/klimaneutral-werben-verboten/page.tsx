@@ -33,8 +33,8 @@ const content: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/BeautyGuruChatter',
   },
   intro: [
-    '„Darf ich noch mit ‚klimaneutral‘ werben?“ – die Frage beschäftigt Marketing-Teams und Agenturen im gesamten DACH-Raum. Die Antwort hat ein festes Datum: Ab dem 27. September 2026 verbietet die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) pauschale Umweltaussagen ohne Nachweis – EU-weit und ohne Übergangsfrist für Bestandsinhalte.',
-    'Diese Seite listet auf, welche Werbebegriffe konkret betroffen sind, warum „klimaneutral“ der schärfste Sonderfall ist, was weiterhin erlaubt bleibt – und wie Sie Ihre bestehenden Texte rechtzeitig umstellen.',
+    '**Ab dem 27. September 2026 sind pauschale, nicht belegte Umweltaussagen wie „klimaneutral“, „nachhaltig“, „umweltfreundlich“, „grün“, „öko“, „biologisch abbaubar“ und „klimapositiv“ in der Werbung verboten – „klimaneutral“ zusätzlich immer dann, wenn die Aussage allein auf CO₂-Kompensation beruht.** So regelt es die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) – EU-weit und ohne Übergangsfrist für Bestandsinhalte.',
+    '„Darf ich noch mit ‚klimaneutral‘ werben?“ – die Frage beschäftigt Marketing-Teams und Agenturen im gesamten DACH-Raum. Diese Seite listet auf, welche Werbebegriffe konkret betroffen sind, warum „klimaneutral“ der schärfste Sonderfall ist, was weiterhin erlaubt bleibt – und wie Sie Ihre bestehenden Texte rechtzeitig umstellen.',
   ],
   sections: [
     {
@@ -195,7 +195,7 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_begriffe',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ accordion 1:1 (Google policy).
+// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -207,12 +207,26 @@ const faqJsonLd = {
   })),
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
+    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
+    { '@type': 'ListItem', position: 3, name: 'Verbotene Werbebegriffe ab 2026', item: 'https://icompetence.de/de/empco-audit/klimaneutral-werben-verboten/' },
+  ],
+}
+
 export default function KlimaneutralWerbenVerboten() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <EmpCoClusterPage content={content} initialLanguage="de" />
     </>

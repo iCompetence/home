@@ -33,8 +33,8 @@ const content: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/selbststaendig',
   },
   intro: [
-    'Eine Abmahnung wegen einer Umweltaussage trifft die meisten Unternehmen unvorbereitet: Ein Wettbewerber oder ein Verband beanstandet eine Formulierung wie „klimaneutral“, „nachhaltig“ oder „umweltfreundlich“ auf der Website, im Shop oder in einer Anzeige – und verlangt Unterlassung, oft verbunden mit einer kurzen Frist und einer Kostennote.',
-    'Diese Seite erklärt, warum Greenwashing-Abmahnungen gerade jetzt zunehmen, was in einer Abmahnung steht, wie Sie richtig reagieren – und wie Sie verhindern, dass die nächste kommt. Sie ersetzt keine Rechtsberatung im Einzelfall, gibt Ihnen aber die Orientierung, die in Foren wie r/de unter dem Titel „EU macht Greenwashing für Firmen zum Millionenrisiko“ heiß diskutiert wird.',
+    '**Wenn Sie eine Abmahnung wegen Greenwashing erhalten haben, gilt: Frist notieren, nichts vorschnell unterschreiben, die beanstandete Aussage mit Screenshot dokumentieren und die Unterlassungserklärung anwaltlich prüfen lassen.** Unbelegte Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – abmahnen können Wettbewerber und Verbände.',
+    'Die Abmahnung trifft die meisten Unternehmen unvorbereitet: Beanstandet wird eine Formulierung wie „klimaneutral“, „nachhaltig“ oder „umweltfreundlich“ auf der Website, im Shop oder in einer Anzeige – verbunden mit einer kurzen Frist und einer Kostennote. Diese Seite erklärt, warum Greenwashing-Abmahnungen gerade jetzt zunehmen, was in einer Abmahnung steht, wie Sie richtig reagieren – und wie Sie verhindern, dass die nächste kommt. Sie ersetzt keine Rechtsberatung im Einzelfall.',
   ],
   sections: [
     {
@@ -170,7 +170,7 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_abmahnung',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ accordion 1:1 (Google policy).
+// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -182,12 +182,26 @@ const faqJsonLd = {
   })),
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
+    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
+    { '@type': 'ListItem', position: 3, name: 'Abmahnung wegen Greenwashing', item: 'https://icompetence.de/de/empco-audit/abmahnung-greenwashing/' },
+  ],
+}
+
 export default function AbmahnungGreenwashing() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <EmpCoClusterPage content={content} initialLanguage="de" />
     </>

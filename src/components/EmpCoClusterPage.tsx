@@ -9,7 +9,6 @@ import Aurora1 from '../imports/Aurora1';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
-import { Accordion } from './Accordion';
 import { ComparisonTable } from './ComparisonTable';
 
 const logoImage = '/iCompetence_logo.svg';
@@ -67,8 +66,27 @@ export interface EmpCoClusterContent {
   ctaIdPrefix: string;
 }
 
-// Renders plain text with inline [label](/path/) links so body copy can carry
-// keyword anchor texts to the pillar/cluster pages.
+// Renders plain text with inline [label](/path/) links (keyword anchor texts
+// to the pillar/cluster pages) and **bold** segments (answer-first emphasis).
+function BoldSegments({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = part.match(/^\*\*([^*]+)\*\*$/);
+        if (match) {
+          return (
+            <strong key={i} style={{ fontWeight: '600' }}>
+              {match[1]}
+            </strong>
+          );
+        }
+        return <Fragment key={i}>{part}</Fragment>;
+      })}
+    </>
+  );
+}
+
 function TextWithLinks({ text }: { text: string }) {
   const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
   return (
@@ -89,11 +107,11 @@ function TextWithLinks({ text }: { text: string }) {
               onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')}
               onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-white)')}
             >
-              {match[1]}
+              <BoldSegments text={match[1]} />
             </a>
           );
         }
-        return <Fragment key={i}>{part}</Fragment>;
+        return <BoldSegments key={i} text={part} />;
       })}
     </>
   );
@@ -391,6 +409,11 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
               {content.title}
             </h1>
 
+            {/* Answer-first: the direct answer paragraph precedes the Reddit hook */}
+            <div>
+              <ClusterParagraphs paragraphs={content.intro} />
+            </div>
+
             {content.quote && (
               <p
                 style={{
@@ -400,7 +423,7 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
                   fontStyle: 'italic',
                   borderLeft: '2px solid rgba(225, 155, 116, 0.5)',
                   paddingLeft: '16px',
-                  marginBottom: '2rem',
+                  margin: '0.5rem 0 0 0',
                 }}
               >
                 {content.quote.text}
@@ -409,10 +432,6 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
                 </span>
               </p>
             )}
-
-            <div>
-              <ClusterParagraphs paragraphs={content.intro} />
-            </div>
           </div>
         </div>
       </section>
@@ -484,14 +503,70 @@ function EmpCoClusterPageContent({ content }: { content: EmpCoClusterContent }) 
         </Fragment>
       ))}
 
-      {/* People also ask / FAQ — JSON-LD for this block is rendered server-side
-          in the route's page.tsx and must stay 1:1 with these items. */}
-      <Accordion
+      {/* People also ask / FAQ — rendered as an always-visible Q&A section
+          (H3 question + answer) instead of an Accordion: the Accordion mounts
+          answer text only on expand, so it would be missing from the crawlable
+          static HTML. The FAQPage JSON-LD in the route's page.tsx must stay
+          1:1 with these items (Google policy). */}
+      <AnimatedSection
         id="faq-section"
-        title={content.faqTitle}
-        items={content.faq.map((f) => ({ title: f.q, content: f.a }))}
-        contentMaxHeightClass="max-h-[600px]"
-      />
+        className="relative z-10 py-16 px-4 sm:px-6 lg:px-8"
+        animationType="fadeInUp"
+        duration={0}
+      >
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto">
+            <h2
+              className="mobile-h2-title"
+              style={{
+                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                marginBottom: '2rem',
+                fontSize: '32px',
+                fontWeight: '700',
+                lineHeight: '110%',
+              }}
+            >
+              {content.faqTitle}
+            </h2>
+
+            {content.faq.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  paddingTop: i === 0 ? 0 : '2rem',
+                  paddingBottom: '2rem',
+                  borderBottom: i < content.faq.length - 1 ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+                }}
+              >
+                <h3
+                  style={{
+                    color: 'var(--gray-white)',
+                    fontSize: '22px',
+                    fontWeight: '600',
+                    lineHeight: '130%',
+                    margin: '0 0 1rem 0',
+                  }}
+                >
+                  {item.q}
+                </h3>
+                <p
+                  style={{
+                    color: 'var(--gray-light)',
+                    fontSize: '18px',
+                    lineHeight: '170%',
+                    margin: 0,
+                  }}
+                >
+                  <TextWithLinks text={item.a} />
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* Related reading: pillar + cluster cross-links */}
       <AnimatedSection

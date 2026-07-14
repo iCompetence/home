@@ -33,8 +33,8 @@ const content: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/AskMarketing',
   },
   intro: [
-    'Die Frage „Can I still say eco-friendly in ads after 2026?“ taucht in Marketing-Foren immer häufiger auf – und die kurze Antwort lautet: ja, aber nur mit Beleg und nur spezifisch. Die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) verbietet ab dem 27. September 2026 pauschale Umweltaussagen ohne Nachweis; sie verbietet nicht die Umweltkommunikation an sich.',
-    'Diese Seite zeigt, wie Marketing-Teams und Agenturen Green Claims so formulieren, dass sie auch nach 2026 halten: die Grundregel, konkrete erlaubte vs. verbotene Beispiel-Formulierungen und eine Checkliste für den Freigabeprozess.',
+    '**Green Claims sind rechtssicher formuliert, wenn drei Bedingungen erfüllt sind: Die Aussage ist spezifisch statt pauschal, der nachprüfbare Beleg liegt vor der Veröffentlichung vor, und der zentrale Begriff wird im Werbeumfeld erläutert.** Die [EmpCo-Richtlinie (EU 2024/825)](/de/empco-audit/) verbietet ab dem 27. September 2026 pauschale Umweltaussagen ohne Nachweis – sie verbietet nicht die Umweltkommunikation an sich.',
+    'Die Frage „Can I still say eco-friendly in ads after 2026?“ taucht in Marketing-Foren immer häufiger auf. Diese Seite zeigt, wie Marketing-Teams und Agenturen Green Claims so formulieren, dass sie auch nach 2026 halten: die Grundregel, konkrete erlaubte vs. verbotene Beispiel-Formulierungen und eine Checkliste für den Freigabeprozess.',
   ],
   sections: [
     {
@@ -174,7 +174,7 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_formulieren',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ accordion 1:1 (Google policy).
+// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -186,12 +186,26 @@ const faqJsonLd = {
   })),
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
+    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
+    { '@type': 'ListItem', position: 3, name: 'Green Claims rechtssicher formulieren', item: 'https://icompetence.de/de/empco-audit/green-claims-formulieren/' },
+  ],
+}
+
 export default function GreenClaimsFormulieren() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <EmpCoClusterPage content={content} initialLanguage="de" />
     </>

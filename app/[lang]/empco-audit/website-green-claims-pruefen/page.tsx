@@ -33,8 +33,8 @@ const content: EmpCoClusterContent = {
     source: 'Diskussion auf Reddit, r/Environmental_Careers',
   },
   intro: [
-    '„How do you audit hundreds of pages of claims?“ – diese Frage aus den ESG-Foren beschreibt das Kernproblem der [EmpCo-Richtlinie](/de/empco-audit/) präzise: Ab dem 27. September 2026 muss jede Umweltaussage gegenüber Verbrauchern belegt sein. Das gilt für alle Aussagen, die ab dem Stichtag öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages.',
-    'Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Diese Seite vergleicht die beiden Wege zum Überblick: die manuelle Prüfung durch die eigenen Teams und den automatisierten EmpCo-Audit – mit Ablauf, Aufwand und dem, was am Ende jeweils herauskommt.',
+    '**Eine Website wird auf Green Claims geprüft, indem alle öffentlichen Umweltaussagen – Texte, Siegel und Bildsprache – erfasst, mit Belegen abgeglichen und nach Risiko priorisiert werden. Manuell dauert das Wochen; ein automatisierter EmpCo-Audit liefert den vollständigen Überblick in Stunden.** Nötig wird das, weil ab dem 27. September 2026 jede Umweltaussage gegenüber Verbrauchern belegt sein muss – auch auf über Jahre gewachsenen Bestandsseiten, Produkttexten und Landingpages.',
+    '„How do you audit hundreds of pages of claims?“ – diese Frage aus den ESG-Foren beschreibt das Kernproblem der [EmpCo-Richtlinie](/de/empco-audit/) präzise: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Diese Seite vergleicht die beiden Wege zum Überblick – manuelle Prüfung vs. automatisierter Audit – mit Ablauf, Aufwand und dem, was am Ende jeweils herauskommt.',
   ],
   sections: [
     {
@@ -174,7 +174,7 @@ const content: EmpCoClusterContent = {
   ctaIdPrefix: 'empco_pruefen',
 }
 
-// FAQPage JSON-LD — must mirror the visible FAQ accordion 1:1 (Google policy).
+// FAQPage JSON-LD — must mirror the visible FAQ section 1:1 (Google policy).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -186,12 +186,26 @@ const faqJsonLd = {
   })),
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'iCompetence', item: 'https://icompetence.de/de/' },
+    { '@type': 'ListItem', position: 2, name: 'EmpCo Audit', item: 'https://icompetence.de/de/empco-audit/' },
+    { '@type': 'ListItem', position: 3, name: 'Website auf Green Claims prüfen', item: 'https://icompetence.de/de/empco-audit/website-green-claims-pruefen/' },
+  ],
+}
+
 export default function WebsiteGreenClaimsPruefen() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <EmpCoClusterPage content={content} initialLanguage="de" />
     </>
