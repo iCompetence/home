@@ -52,6 +52,25 @@ const t = (lang: Lang, en: string, de: string) => (lang === 'de' ? de : en);
 /** Resolve a { en, de } field from a data structure. */
 const tr = (lang: Lang, v: Bilingual) => (lang === 'de' ? v.de : v.en);
 
+/**
+ * Visually hidden but present in the (statically exported) HTML and the
+ * accessibility tree. Used to mirror content that the interactive UI only
+ * mounts on demand (carousel cards, collapsed accordion bodies) so search
+ * crawlers and LLM bots — which don't run the click handlers — still get the
+ * full text. Standard "sr-only" technique.
+ */
+const srOnly: React.CSSProperties = {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'normal',
+  border: 0,
+};
+
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1114,9 +1133,7 @@ function Hero() {
           gap: blockGap,
         })}
       >
-        <div
-          role="heading"
-          aria-level={1}
+        <h1
           style={{
             margin: 0,
             fontFamily: FONT,
@@ -1130,7 +1147,7 @@ function Hero() {
         >
           {/* Brand headline — intentionally kept in English in both languages. */}
           {compact ? 'Separate the signal from the noise.' : 'Separate the signal\nfrom the noise.'}
-        </div>
+        </h1>
 
         <p
           style={{
@@ -1664,6 +1681,25 @@ function ServicesGrid() {
           </motion.div>
         </div>
       )}
+
+      {/* SEO/LLM mirror: the carousel only mounts the active + neighbouring
+          cards and collapses pill descriptions, so crawlers/LLM bots (no JS)
+          would miss most of it. This visually-hidden block carries the full
+          service catalogue as semantic markup (H3 + lists) in the static HTML. */}
+      <div style={srOnly}>
+        {SERVICE_CARDS.map((card, i) => (
+          <div key={i}>
+            <h3>{tr(lang, card.title)}</h3>
+            <ul>
+              {card.pills.map((pill, j) => (
+                <li key={j}>
+                  <strong>{tr(lang, pill.label)}</strong> — {tr(lang, pill.description)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
     </section>
   );
@@ -2169,17 +2205,23 @@ function Highlight() {
   );
 
   const imageEl = (
-    <div
+    <img
+      src="/images/lavender-empco.png"
+      alt={t(
+        lang,
+        'EmpCo Audit — automated audit of the sustainability claims on your website',
+        'EmpCo Audit — automatisierter Audit der Nachhaltigkeitsaussagen auf deiner Website',
+      )}
+      loading="lazy"
       style={{
         flex: stack ? undefined : 1,
         width: stack ? '100%' : undefined,
+        minWidth: 0,
         height: imgH,
         borderRadius: 24,
         background: LAVENDER,
-        backgroundImage: 'url(/images/lavender-empco.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        objectFit: 'cover',
+        objectPosition: 'center',
       }}
     />
   );
@@ -2235,6 +2277,7 @@ function Highlight() {
             'Die zentrale Wissensplattform für Unternehmen. KI-basiert, sicher, lokal – verwandle verteilte Informationen in eine strukturierte Wissensgrundlage.',
           )}
           image="/images/lavender-iknow.png"
+          imageAlt={t(lang, 'iKnow — AI knowledge platform interface', 'iKnow — Oberfläche der KI-Wissensplattform')}
           href={`/${lang}/iknow/`}
         />
         <ProductTeaser
@@ -2247,6 +2290,7 @@ function Highlight() {
             'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.',
           )}
           image="/images/lavender-analytics-agent.png"
+          imageAlt={t(lang, 'Analytics Agent — conversational data analytics interface', 'Analytics Agent — Oberfläche für dialogbasierte Datenanalyse')}
           href={`/${lang}/analytics-agent/`}
         />
       </div>
@@ -2260,6 +2304,7 @@ function ProductTeaser({
   title,
   description,
   image,
+  imageAlt,
   href,
   bp,
 }: {
@@ -2267,6 +2312,7 @@ function ProductTeaser({
   title: string;
   description: string;
   image: string;
+  imageAlt: string;
   href: string;
   bp: Bp;
 }) {
@@ -2286,15 +2332,16 @@ function ProductTeaser({
         flexDirection: 'column',
       }}
     >
-      <div
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
         style={{
           height: imgH,
           width: '100%',
           background: LAVENDER,
-          backgroundImage: `url(${image})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
+          objectFit: 'contain',
+          objectPosition: 'center',
         }}
       />
       <div
@@ -2798,6 +2845,10 @@ function ProcessRow({
           <Plus size={iconSize} color={NAVY} strokeWidth={2} />
         )}
       </button>
+
+      {/* Collapsed rows keep their description in the static HTML for crawlers /
+          LLM bots (the visible copy only mounts when the row is expanded). */}
+      {!expanded && <p style={srOnly}>{tr(lang, item.description)}</p>}
 
       {expanded && (
         <div
