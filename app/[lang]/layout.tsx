@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import '../../src/index.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import { usePathname } from 'next/navigation';
 
 type Lang = 'en' | 'de';
 
@@ -102,9 +101,6 @@ export default async function RootLayout({
   if (lang !== 'en' && lang !== 'de') notFound();
   const l: Lang = lang === 'de' ? 'de' : 'en';
   
-  const pathname = usePathname();
-  const isImprint = pathname?.endsWith('/imprint') || pathname?.endsWith('/imprint/');
-  
   const GTM_ID = 'GTM-WMTT46J';
   const USERCENTRICS_ID = 'gRxSmB1lD';
 
@@ -136,13 +132,15 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {isImprint && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.UC_UI_SUPPRESS_CMP_DISPLAY = true;`,
-            }}
-          />
-        )}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.location.pathname.endsWith('/imprint') || window.location.pathname.endsWith('/imprint/')) {
+                window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
+              }
+            `,
+          }}
+        />        
         <Script
           id="usercentrics-cmp"
           src="https://web.cmp.usercentrics.eu/ui/loader.js"
