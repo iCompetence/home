@@ -47,3 +47,16 @@
 /thank-you/                    /en/thank-you/                  301
 /lavender                      /de/lavender/                   301
 /lavender/                     /de/lavender/                   301
+
+# --- EmpCo cluster pages (wave 1) taken offline 2026-07-15: redirect to pillar.
+# Non-forced rules: they stop applying automatically if the pages return. ---
+/de/empco-audit/abmahnung-greenwashing/          /de/empco-audit/    301
+/en/empco-audit/abmahnung-greenwashing/          /en/empco-audit/    301
+/de/empco-audit/greenwashing-strafe/          /de/empco-audit/    301
+/en/empco-audit/greenwashing-strafe/          /en/empco-audit/    301
+/de/empco-audit/green-claims-formulieren/          /de/empco-audit/    301
+/en/empco-audit/green-claims-formulieren/          /en/empco-audit/    301
+/de/empco-audit/website-green-claims-pruefen/          /de/empco-audit/    301
+/en/empco-audit/website-green-claims-pruefen/          /en/empco-audit/    301
+/de/empco-audit/klimaneutral-werben-verboten/          /de/empco-audit/    301
+/en/empco-audit/klimaneutral-werben-verboten/          /en/empco-audit/    301
