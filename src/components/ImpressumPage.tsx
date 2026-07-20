@@ -9,7 +9,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import BurgerMenu from './BurgerMenu';
 import AuroraFooter from './AuroraFooter';
 import { AnimatedSection } from './ScrollAnimations';
-import { ServiceAccordion } from './ServiceAccordion';
+import { UsercentricsEmbed } from './UsercentricsEmbed';
 
 const logoImage = '/iCompetence_logo.svg';
 
@@ -502,8 +502,8 @@ function ImpressumPageContent() {
                   {t('imprint.source')}
                 </p>
 
-                {/* Service Details Accordions */}
-                <ServiceAccordion language={language} />
+                {/* Service-Liste live aus dem Usercentrics-CMP */}
+                <UsercentricsEmbed language={language} />
               </div>
             </div>
           </div>
