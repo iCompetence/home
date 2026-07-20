@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 declare global {
   interface Window {
@@ -17,14 +17,48 @@ interface UsercentricsEmbedProps {
   language: 'en' | 'de';
 }
 
-// Rendert die Service-Liste des Usercentrics-CMP (Settings-ID aus dem Layout-Loader)
-// über das offizielle uc-embed-Element. Der CMP-v3-Loader scannt nur beim Init nach
-// .uc-embed-Divs; ein von React nach der Hydration gerendertes Div muss daher explizit
-// per __ucCmp.hydrateEmbeddings() befüllt werden. Das Div darf nicht im Server-HTML
-// stehen, sonst schreibt der CMP vor der React-Hydration hinein (Mismatch #418,
-// gleiches Muster wie bei den Netlify-reCAPTCHA-Divs).
+const OVERRIDE_STYLE_ID = 'uc-embed-dark-theme';
+
+// Das Embed rendert im Shadow DOM mit dem hellen CMP-Theme (dunkler Text auf
+// weißem Grund). Diese Overrides gleichen es ans dunkle Seitendesign an, im
+// Stil der früheren hartcodierten Liste: cyanfarbene Überschrift, helle
+// Schrift, dezente Trennlinien, transparenter Hintergrund. Fließtexte ohne
+// eigene Farbe erben var(--gray-white) von der Seite und sind damit hell.
+const OVERRIDE_CSS = `
+  .uc-embeddings {
+    --color-main-text: #fcfcfc;
+    --color-links-anchor: #0b99cc;
+    --color-cmp-background: transparent;
+    --color-main-border: rgba(255, 255, 255, 0.2);
+  }
+  .uc-embeddings .list-header-title-container,
+  .uc-embeddings .list-header-title,
+  .uc-embeddings .uc-details-title {
+    color: #0b99cc !important;
+  }
+  .uc-embeddings .embedding-list-item,
+  .uc-embeddings .embedding-list-item-header,
+  .uc-embeddings .list-header {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .uc-embeddings .uc-details-title {
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+  }
+  .uc-embeddings .embedding-list-item-header-title {
+    font-weight: 600;
+  }
+  /* Chip-Schrift unabhängig vom Embed-Breakpoint (mobile/desktop) auf
+     Fließtextgröße pinnen; 1rem = Seiten-Basisgröße wie der übrige Text */
+  .uc-embeddings .details-tags li,
+  .uc-embeddings .uc-details-tag {
+    font-size: 1rem !important;
+  }
+`;
+
 export const UsercentricsEmbed = ({ language }: UsercentricsEmbedProps) => {
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -33,6 +67,30 @@ export const UsercentricsEmbed = ({ language }: UsercentricsEmbedProps) => {
   useEffect(() => {
     if (!mounted) return;
     let cancelled = false;
+
+    const ensureOverrideStyle = () => {
+      const shadow = containerRef.current?.querySelector(
+        '.embeddings-shadow-wrapper'
+      )?.shadowRoot;
+      if (shadow && !shadow.getElementById(OVERRIDE_STYLE_ID)) {
+        const style = document.createElement('style');
+        style.id = OVERRIDE_STYLE_ID;
+        style.textContent = OVERRIDE_CSS;
+        shadow.appendChild(style);
+      }
+    };
+
+    // hydrateEmbeddings() ersetzt den Shadow-Wrapper bei jedem Aufruf (auch
+    // CMP-intern), was injizierte Styles verwirft. Der Observer fängt
+    // Wrapper-Ersetzungen im Light DOM ab; CMP-Re-Renders innerhalb des
+    // Shadow DOM erzeugen dort aber keine Mutation, daher zusätzlich ein
+    // dauerhafter Interval-Wächter (No-op solange der Style vorhanden ist).
+    const observer = new MutationObserver(ensureOverrideStyle);
+    if (containerRef.current) {
+      observer.observe(containerRef.current, { childList: true, subtree: true });
+    }
+    const styleGuard = setInterval(ensureOverrideStyle, 400);
+    ensureOverrideStyle();
 
     const hydrate = async () => {
       // Bis zu 15s auf die CMP-Initialisierung warten (Loader lädt asynchron)
@@ -53,6 +111,7 @@ export const UsercentricsEmbed = ({ language }: UsercentricsEmbedProps) => {
                 // Sprachabgleich ist best effort; Embed rendert sonst in CMP-Sprache
               }
               await cmp.hydrateEmbeddings();
+              ensureOverrideStyle();
               return;
             }
           } catch {
@@ -66,21 +125,15 @@ export const UsercentricsEmbed = ({ language }: UsercentricsEmbedProps) => {
     hydrate();
     return () => {
       cancelled = true;
+      observer.disconnect();
+      clearInterval(styleGuard);
     };
   }, [mounted, language]);
 
   if (!mounted) return null;
 
   return (
-    <div
-      style={{
-        marginTop: '3rem',
-        background: 'var(--gray-white)',
-        borderRadius: '12px',
-        padding: '1.5rem 2rem'
-      }}
-    >
-      {/* Embed rendert mit CMP-Theme-Farben (dunkler Text) und braucht hellen Grund */}
+    <div ref={containerRef} style={{ marginTop: '3rem' }}>
       <div className="uc-embed" {...{ 'uc-data': 'all' }} />
     </div>
   );
