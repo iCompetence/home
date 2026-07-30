@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LavenderHome from '@/components/LavenderHome'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import { alternates, toLang } from '@/lib/i18n-meta'
 
 const SITE_URL = 'https://icompetence.de'
@@ -81,7 +82,9 @@ export default async function LavenderPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LavenderHome initialLang={lang} />
+      <LanguageProvider initialLanguage={lang}>
+        <LavenderHome />
+      </LanguageProvider>
     </>
   )
 }

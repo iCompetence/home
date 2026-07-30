@@ -30,13 +30,13 @@ icompetence.de-Seiten nach und nach auf dieses Design zu ziehen.
       Farben (`bg-lav-navy`, `-lavender`, `-page`, `-blue`, `-white`; Alphas via `/opacity`),
       `font-brand`, Typo (`text-mega/h1/h2/h3/sub/body`), Radien (`rounded-pill/card/card-sm`),
       Section-Spacing-Vars, `max-w-frame` (1440).
-- [ ] **PR 2 – Layout-Primitiven + Basis-UI.** `<Section>` (Außen/Innen-Padding, `max-w-frame`),
+- [x] **PR 2 – Layout-Primitiven + Basis-UI.** `<Section>` (Außen/Innen-Padding, `max-w-frame`),
       Button/CTA-Pill, Eyebrow/Typo-Helper — in Tailwind auf den Tokens.
-- [ ] **PR 3 – Chrome:** `TopNav` + `Footer` + Sprach-Toggle als geteilte Komponenten,
+- [x] **PR 3 – Chrome:** `TopNav` + `Footer` + Sprach-Toggle als geteilte Komponenten,
       an `useLanguage` angebunden.
-- [ ] **PR 4 – Reiche Komponenten:** Accordion, (finites) Carousel, Testimonial-Slider,
+- [x] **PR 4 – Reiche Komponenten:** Accordion, (finites) Carousel, Testimonial-Slider,
       ProductTeaser, LogoCarousel, Aurora-Visuals.
-- [ ] **PR 5 – `LavenderHome` auf die Library umbauen** + Texte nach `useLanguage` migrieren
+- [x] **PR 5 – `LavenderHome` auf die Library umbauen** + Texte nach `useLanguage` migrieren
       (Beweis: Optik 1:1; erledigt die i18n-Konvergenz für Lavender).
 
 ### Phase 2 — Shell vereinheitlichen
