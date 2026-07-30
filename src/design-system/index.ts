@@ -6,6 +6,18 @@ export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
 export { ProductTeaser, type ProductTeaserProps } from './ProductTeaser';
+export { DesignFrameOverlay } from './DesignFrameOverlay';
+export {
+  ServicesCarousel,
+  type ServiceCard,
+  type ServicePill,
+  type ServicesCarouselProps,
+} from './ServicesCarousel';
+export {
+  ProcessAccordion,
+  type ProcessStep,
+  type ProcessAccordionProps,
+} from './ProcessAccordion';
 export { LogoCarousel, CLIENT_LOGOS, type LogoEntry } from './LogoCarousel';
 export {
   TestimonialSlider,
