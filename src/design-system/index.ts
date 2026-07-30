@@ -5,6 +5,13 @@ export { Section } from './Section';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
+export { ProductTeaser, type ProductTeaserProps } from './ProductTeaser';
+export { LogoCarousel, CLIENT_LOGOS, type LogoEntry } from './LogoCarousel';
+export {
+  TestimonialSlider,
+  type Testimonial,
+  type TestimonialSliderProps,
+} from './TestimonialSlider';
 export { TopNav, type TopNavProps } from './TopNav';
 export { BurgerMenu } from './BurgerMenu';
 export { LanguageToggle } from './LanguageToggle';
