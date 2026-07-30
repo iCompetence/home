@@ -4,3 +4,5 @@
 export { Section } from './Section';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
+export { Footer } from './Footer';
+export { LinkedInGlyph } from './icons';
