@@ -1170,6 +1170,40 @@ const translations: Translations = {
     de: 'Nach oben'
   },
 
+  // Top navigation (new design system) — section anchors + primary CTA
+  'topNav.services': {
+    en: 'Services',
+    de: 'Leistungen'
+  },
+  'topNav.products': {
+    en: 'Products',
+    de: 'Produkte'
+  },
+  'topNav.process': {
+    en: 'Process',
+    de: 'Vorgehen'
+  },
+  'topNav.privacyLed': {
+    en: 'Privacy-led AI',
+    de: 'Privacy-led AI'
+  },
+  'topNav.letsTalk': {
+    en: "Let's talk",
+    de: 'Kontakt aufnehmen'
+  },
+  'topNav.menu': {
+    en: 'Menu',
+    de: 'Menü'
+  },
+  'topNav.switchToGerman': {
+    en: 'Switch to German',
+    de: 'Auf Deutsch umschalten'
+  },
+  'topNav.switchToEnglish': {
+    en: 'Switch to English',
+    de: 'Auf Englisch umschalten'
+  },
+
   // Burger Menu
   'burgerMenu.home': {
     en: 'Home',
