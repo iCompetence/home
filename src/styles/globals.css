@@ -211,7 +211,6 @@
     background-color: #012332 !important;
     color: #FCFCFC;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
     width: 100%;
     /* overscroll-behavior: none was never actually in effect: the frozen
        src/index.css snapshot did not contain it, so the site has always run
@@ -219,6 +218,16 @@
        broke the expected scroll feel (no rubber-banding, scroll chaining
        blocked). Left out deliberately to keep the long-standing behaviour. */
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* overflow-x belongs on the root only. Setting it on <body> as well turns
+     body into its own scroll container whose content is exactly as tall as
+     itself — the wheel then lands in a container with nothing to scroll and
+     the page does not move (measured: 93 wheel events, zero scroll, while
+     window.scrollBy still worked). The root's overflow propagates to the
+     viewport, so horizontal overflow stays suppressed either way. */
+  html {
+    overflow-x: hidden;
   }
 
   /* Fix for mobile step-by-step appearance without breaking backgrounds */
