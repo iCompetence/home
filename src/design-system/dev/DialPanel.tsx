@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 /**
  * DEV-ONLY design token dial panel.
@@ -95,13 +96,21 @@ const isSize = (d: Dial): d is Extract<Dial, { kind: 'size' }> => d.kind === 'si
 type Scopes = Record<string, Record<string, string>>;
 type Selection = { name: string; path: string } | null;
 
-/** Stable-ish CSS path so an instance selection survives a reload. */
+const PORTAL_ID = 'ic-dev-dials-root';
+
+/**
+ * Stable-ish CSS path so an instance selection survives a reload.
+ * The panel lives in a portal appended last to <body>, and is skipped when
+ * counting siblings — otherwise showing/hiding the picker overlay would shift
+ * nth-child indices and invalidate every stored path.
+ */
 function cssPath(el: Element): string {
   const parts: string[] = [];
   let cur: Element | null = el;
   while (cur && cur !== document.body && cur.parentElement) {
     const parent: HTMLElement = cur.parentElement;
-    const idx = Array.prototype.indexOf.call(parent.children, cur) + 1;
+    const siblings = Array.from(parent.children).filter((c) => c.id !== PORTAL_ID);
+    const idx = siblings.indexOf(cur) + 1;
     parts.unshift(`${cur.tagName.toLowerCase()}:nth-child(${idx})`);
     cur = parent;
   }
@@ -175,6 +184,18 @@ export function DialPanel() {
   const [showAll, setShowAll] = useState(false);
   const [relevant, setRelevant] = useState<Set<string> | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const [portalEl] = useState<HTMLDivElement | null>(() =>
+    typeof document === 'undefined' ? null : document.createElement('div'),
+  );
+
+  // Render outside the page tree so the panel never disturbs the DOM it is
+  // measuring (see cssPath).
+  useEffect(() => {
+    if (!portalEl) return;
+    portalEl.id = PORTAL_ID;
+    document.body.appendChild(portalEl);
+    return () => portalEl.remove();
+  }, [portalEl]);
 
   useEffect(() => {
     const h = window.location.hostname;
@@ -185,10 +206,11 @@ export function DialPanel() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
-        const p = JSON.parse(raw);
-        setScopes(p.scopes ?? {});
-        setSelection(p.selection ?? null);
-        setAllOfType(!!p.allOfType);
+        // Only the tuned values are restored — never the selection. A session
+        // always starts global (all dials visible), which is what you expect
+        // after a reload and avoids resurrecting a path that may no longer
+        // resolve.
+        setScopes(JSON.parse(raw).scopes ?? {});
       }
     } catch {
       /* ignore corrupt storage */
@@ -232,7 +254,7 @@ export function DialPanel() {
     }
     el.textContent = css;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ scopes, selection, allOfType }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ scopes }));
     } catch {
       /* ignore quota errors */
     }
@@ -244,7 +266,14 @@ export function DialPanel() {
     const roots = allOfType
       ? Array.from(document.querySelectorAll(`[data-ds="${selection.name}"]`))
       : [document.querySelector(selection.path)].filter(Boolean as unknown as (v: Element | null) => v is Element);
-    setRelevant(roots.length ? usedVars(roots) : new Set<string>());
+    if (!roots.length) {
+      // The element is gone (page changed) — fall back to global rather than
+      // leaving the panel stuck on an empty list.
+      setSelection(null);
+      setRelevant(null);
+      return;
+    }
+    setRelevant(usedVars(roots));
   }, [selection, allOfType, scopes]);
 
   // Element picker.
@@ -335,14 +364,17 @@ export function DialPanel() {
 
   // With a selection, show only the dials that actually reach it (unless the
   // user asks for all — handy to force a token that is not used *yet*).
-  const visibleGroups =
+  const filtered =
     relevant && !showAll
       ? GROUPS.map((g) => ({ ...g, dials: g.dials.filter((d) => relevant.has(d.varName)) })).filter(
           (g) => g.dials.length,
         )
       : GROUPS;
+  // Never strand the user with an empty panel: a component that uses no tokens
+  // falls back to the full set.
+  const visibleGroups = filtered.length ? filtered : GROUPS;
 
-  if (!allowed) return null;
+  if (!allowed || !portalEl) return null;
 
   const changedHere = Object.keys(current).length;
   const changedTotal = Object.values(scopes).reduce((n, v) => n + Object.keys(v).length, 0);
@@ -373,7 +405,7 @@ export function DialPanel() {
   };
 
   if (!open) {
-    return (
+    return createPortal(
       <div ref={panelRef} style={shell}>
         <button
           type="button"
@@ -382,11 +414,12 @@ export function DialPanel() {
         >
           ⚙︎ Dials{changedTotal ? ` (${changedTotal})` : ''}
         </button>
-      </div>
+      </div>,
+      portalEl,
     );
   }
 
-  return (
+  return createPortal(
     <>
       {picking && hover && (
         <div
@@ -564,6 +597,7 @@ export function DialPanel() {
           )}
         </div>
       </div>
-    </>
+    </>,
+    portalEl,
   );
 }
