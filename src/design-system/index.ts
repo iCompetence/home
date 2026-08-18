@@ -37,3 +37,6 @@ export {
   type NavSection,
   type ProductLink,
 } from './nav-links';
+
+// Dev-only tooling (compiled out of production builds).
+export { DevDials } from './dev/DevDials';

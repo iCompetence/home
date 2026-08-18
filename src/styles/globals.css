@@ -173,12 +173,32 @@
   --radius-card: 24px;
   --radius-card-sm: 16px;
 
-  /* Section rhythm (desktop reference; see SECTION_PAD for tablet/mobile) */
+  /* Section rhythm — see the responsive :root block below for the live values. */
   --spacing-section-v: 64px;
   --spacing-section-h: 96px;
 
   /* Layout frame (FRAME_MAX_WIDTH) → max-w-frame */
   --container-frame: 1440px;
+}
+
+/* Live section padding, consumed by the shared <Section> component. Kept as
+   plain custom properties (not @theme) so the dev dial panel can override them
+   per breakpoint at runtime. Mobile 48/24 · tablet 56/48 · desktop 64/96. */
+:root {
+  --section-pad-v: 48px;
+  --section-pad-h: 24px;
+}
+@media (min-width: 768px) {
+  :root {
+    --section-pad-v: 56px;
+    --section-pad-h: 48px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --section-pad-v: 64px;
+    --section-pad-h: 96px;
+  }
 }
 
 @layer base {
