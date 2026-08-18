@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { TextEditor } from './TextEditor';
 
 /**
  * DEV-ONLY design token dial panel.
@@ -182,6 +183,7 @@ export function DialPanel() {
   const [exported, setExported] = useState<string | null>(null);
   const [allowed, setAllowed] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [tab, setTab] = useState<'design' | 'text'>('design');
   const [relevant, setRelevant] = useState<Set<string> | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [portalEl] = useState<HTMLDivElement | null>(() =>
@@ -472,7 +474,31 @@ export function DialPanel() {
           </button>
         </div>
 
+        <div style={{ display: 'flex', borderBottom: '1px solid #2b3540' }}>
+          {(['design', 'text'] as const).map((id) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setTab(id)}
+              style={{
+                all: 'unset',
+                cursor: 'pointer',
+                flex: 1,
+                textAlign: 'center',
+                padding: '6px 0',
+                color: tab === id ? '#e6edf3' : '#8b97a5',
+                borderBottom: tab === id ? '2px solid #1f6feb' : '2px solid transparent',
+              }}
+            >
+              {id === 'design' ? 'Design' : 'Text'}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'text' && <TextEditor panelEl={panelRef.current} />}
+
         {/* Scope */}
+        {tab === 'design' && (
         <div style={{ padding: '8px 10px', borderBottom: '1px solid #2b3540' }}>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             <button
@@ -505,7 +531,9 @@ export function DialPanel() {
             </label>
           )}
         </div>
+        )}
 
+        {tab === 'design' && (
         <div style={{ padding: '8px 10px' }}>
           {relevant && !showAll && (
             <div style={{ color: '#8b97a5', marginBottom: 8 }}>
@@ -596,6 +624,7 @@ export function DialPanel() {
             </>
           )}
         </div>
+        )}
       </div>
     </>,
     portalEl,

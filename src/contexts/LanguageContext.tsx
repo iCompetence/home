@@ -19,7 +19,7 @@ interface Translations {
   };
 }
 
-const translations: Translations = {
+export const translations: Translations = {
   // Header
   'header.contact': {
     en: 'Contact us',
@@ -2920,6 +2920,15 @@ export const LanguageProvider = ({
     }
   }, [initialLanguage]);
 
+  // Dev-only: re-render when the text jig changes an override.
+  const [, setDevTextVersion] = useState(0);
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+    const bump = () => setDevTextVersion((v) => v + 1);
+    window.addEventListener('icdev:text', bump);
+    return () => window.removeEventListener('icdev:text', bump);
+  }, []);
+
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
     if (typeof window !== 'undefined') {
@@ -2928,6 +2937,15 @@ export const LanguageProvider = ({
   };
 
   const t = (key: string): string => {
+    if (process.env.NODE_ENV !== 'production') {
+      // Dev-only text jig: the design/text panel writes overrides here so copy
+      // can be edited live on the page. Statically removed in production.
+      const dev = (globalThis as Record<string, unknown>).__ICDEV_TEXT__ as
+        | Record<string, Record<string, string>>
+        | undefined;
+      const override = dev?.[language]?.[key];
+      if (override !== undefined) return override;
+    }
     return translations[key]?.[language] || key;
   };
 
