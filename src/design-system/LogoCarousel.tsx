@@ -108,7 +108,7 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
   }, [logos]);
 
   return (
-    <section className="w-full overflow-hidden border-y border-lav-navy/20 py-12 md:py-14 lg:py-16">
+    <section data-ds="LogoCarousel" className="w-full overflow-hidden border-y border-lav-navy/20 py-12 md:py-14 lg:py-16">
       <div className="mx-auto flex w-full max-w-frame items-center justify-between gap-4 px-6 md:gap-6 md:px-12 lg:gap-24 lg:px-10">
         {visible.map((logo, i) => (
           <div

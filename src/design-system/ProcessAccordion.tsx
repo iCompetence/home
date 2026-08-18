@@ -32,7 +32,7 @@ export function ProcessAccordion({
   const [expanded, setExpanded] = useState<number | null>(defaultExpanded);
 
   return (
-    <Section id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
+    <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
       <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
         {title}
       </h2>

@@ -60,6 +60,7 @@ export function Footer() {
 
   return (
     <Section
+      dsName="Footer"
       as="footer"
       className="overflow-hidden bg-lav-navy text-lav-white"
       innerClassName="relative z-[2] flex flex-col gap-8 md:gap-10"

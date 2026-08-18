@@ -75,7 +75,7 @@ function CompactNav({ bp, sections }: { bp: Bp; sections: readonly NavSection[] 
   return (
     <div className="pointer-events-none sticky top-0 z-50 w-full">
       <div className="mx-auto w-full max-w-frame px-4 pt-3 md:px-6 md:pt-3.5">
-        <nav
+        <nav data-ds="TopNav"
           ref={ref as React.Ref<HTMLElement>}
           className="pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill bg-lav-navy px-4 py-2.5 text-lav-white md:gap-5 md:px-6 md:py-3"
         >

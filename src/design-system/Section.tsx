@@ -10,6 +10,8 @@ type SectionProps = {
   className?: string;
   /** Extra classes on the centred inner container. */
   innerClassName?: string;
+  /** Component name exposed as data-ds (used by the dev dial panel's picker). */
+  dsName?: string;
 };
 
 /**
@@ -24,9 +26,14 @@ export function Section({
   as: Tag = 'section',
   className,
   innerClassName,
+  dsName = 'Section',
 }: SectionProps) {
   return (
-    <Tag id={id} className={cn('w-full py-[var(--section-pad-v)]', className)}>
+    <Tag
+      id={id}
+      data-ds={dsName}
+      className={cn('w-full py-[var(--section-pad-v)]', className)}
+    >
       <div
         className={cn(
           'mx-auto w-full max-w-frame px-[var(--section-pad-h)]',

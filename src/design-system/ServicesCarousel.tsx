@@ -77,7 +77,7 @@ export function ServicesCarousel({
     'inline-flex h-11 w-11 items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white lg:h-12 lg:w-12';
 
   return (
-    <Section id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
+    <Section dsName="ServicesCarousel" id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
       {/* Header */}
       <div className="flex w-full items-center justify-between">
         <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
