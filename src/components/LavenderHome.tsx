@@ -6,7 +6,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Button,
   DesignFrameOverlay,
-  DevDials,
   Eyebrow,
   Footer,
   LogoCarousel,
@@ -60,9 +59,6 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       >
         Demo · placeholder content
       </div>
-
-      {/* Dev-only design token dials — compiled out of production builds. */}
-      <DevDials />
 
       <TopNav />
       <Hero />

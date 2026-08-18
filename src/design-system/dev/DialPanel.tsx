@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TextEditor } from './TextEditor';
+import { MigrateTab } from './MigrateTab';
 
 /**
  * DEV-ONLY design token dial panel.
@@ -230,7 +231,7 @@ export function DialPanel() {
   const [exported, setExported] = useState<string | null>(null);
   const [allowed, setAllowed] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [tab, setTab] = useState<'design' | 'text'>('design');
+  const [tab, setTab] = useState<'design' | 'text' | 'migrate'>('design');
   const [relevant, setRelevant] = useState<Set<string> | null>(null);
   /** Current computed spacing of the selection — the dials start from reality. */
   const [spaceBase, setSpaceBase] = useState<Record<string, number> | null>(null);
@@ -574,7 +575,7 @@ export function DialPanel() {
         </div>
 
         <div style={{ display: 'flex', borderBottom: '1px solid #2b3540' }}>
-          {(['design', 'text'] as const).map((id) => (
+          {(['design', 'text', 'migrate'] as const).map((id) => (
             <button
               key={id}
               type="button"
@@ -589,12 +590,13 @@ export function DialPanel() {
                 borderBottom: tab === id ? '2px solid #1f6feb' : '2px solid transparent',
               }}
             >
-              {id === 'design' ? 'Design' : 'Text'}
+              {id === 'design' ? 'Design' : id === 'text' ? 'Text' : 'Migrieren'}
             </button>
           ))}
         </div>
 
         {tab === 'text' && <TextEditor panelEl={panelRef.current} />}
+        {tab === 'migrate' && <MigrateTab panelEl={panelRef.current} />}
 
         {/* Scope */}
         {tab === 'design' && (

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { translations } from '@/contexts/LanguageContext';
+import { REVERSE } from './devI18n';
 
 /**
  * DEV-ONLY copy editor.
@@ -18,21 +19,6 @@ type Overrides = Record<Lang, Record<string, string>>;
 
 const EMPTY: Overrides = { de: {}, en: {} };
 
-/** value → key(s); a value may legitimately map to several keys. */
-const REVERSE: Map<string, string[]> = (() => {
-  const m = new Map<string, string[]>();
-  for (const [key, langs] of Object.entries(translations)) {
-    for (const v of Object.values(langs as Record<string, string>)) {
-      if (typeof v !== 'string') continue;
-      const norm = v.replace(/\s+/g, ' ').trim();
-      if (!norm) continue;
-      const list = m.get(norm) ?? [];
-      list.push(key);
-      m.set(norm, list);
-    }
-  }
-  return m;
-})();
 
 function publish(o: Overrides) {
   (globalThis as Record<string, unknown>).__ICDEV_TEXT__ = o;

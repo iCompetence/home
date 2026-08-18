@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '../../src/styles/globals.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
+import { DevDials } from '@/design-system';
 
 type Lang = 'en' | 'de';
 
@@ -166,6 +167,8 @@ export default async function RootLayout({
           ></iframe>
         </noscript>
         {children}
+        {/* Dev-only design/copy/migration panel — compiled out of production. */}
+        <DevDials />
       </body>
     </html>
   );
