@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { Button, Eyebrow, ProductTeaser, Section } from '../index';
+import { Button, ProductTeaser, Section } from '../index';
 import { keyForText } from './devI18n';
 
 /**
@@ -190,19 +190,18 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       return (
         <Section innerClassName="flex">
           <ProductTeaser
-            eyebrow="Produkt"
+            eyebrow="⟨eyebrow⟩"
             title={head}
             description={copy[0] ?? ''}
             image={data.images[0]?.src ?? '/images/iC_Stern_Blau.png'}
             imageAlt={data.images[0]?.alt ?? head}
             href={cta?.href ?? '#'}
-            ctaLabel={cta?.text ?? 'Mehr erfahren'}
+            ctaLabel={cta?.text ?? '⟨CTA⟩'}
           />
         </Section>
       );
     return (
       <Section innerClassName="flex flex-col gap-4 md:gap-6">
-        <Eyebrow>Section</Eyebrow>
         <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
           {head}
         </h2>
