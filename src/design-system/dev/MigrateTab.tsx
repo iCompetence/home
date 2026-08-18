@@ -3,7 +3,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { Button, ProductTeaser, Section } from '../index';
+import {
+  Button,
+  LogoCarousel,
+  ProcessAccordion,
+  ProductTeaser,
+  Section,
+  ServicesCarousel,
+  TestimonialSlider,
+} from '../index';
 import { keyForText } from './devI18n';
 
 /**
@@ -20,25 +28,51 @@ import { keyForText } from './devI18n';
 
 type Extracted = {
   heading: string | null;
+  /** Repeating sub-items (h3/h4/h5 + the copy that follows) — what the
+   *  structured components need: carousel pills, process steps, … */
+  items: { title: string; text: string }[];
   paragraphs: string[];
   links: { text: string; href: string }[];
   images: { src: string; alt: string }[];
 };
 
-type Target = 'section' | 'hero' | 'cta' | 'teaser';
+type Target =
+  | 'section'
+  | 'hero'
+  | 'cta'
+  | 'teaser'
+  | 'services'
+  | 'process'
+  | 'testimonials'
+  | 'logos';
 
-const TARGETS: { id: Target; label: string; hint: string }[] = [
+/** `needsItems` targets only make sense when sub-items were found. */
+const TARGETS: { id: Target; label: string; hint: string; needsItems?: boolean }[] = [
   { id: 'section', label: 'Section', hint: 'Überschrift + Fließtext' },
   { id: 'hero', label: 'Hero', hint: 'große Headline + Subline + CTA' },
   { id: 'cta', label: 'CTA-Band', hint: 'zentrierte Headline + Button' },
   { id: 'teaser', label: 'ProductTeaser', hint: 'Karte mit Bild + Link' },
+  { id: 'services', label: 'ServicesCarousel', hint: 'Karte mit aufklappbaren Pills', needsItems: true },
+  { id: 'process', label: 'ProcessAccordion', hint: 'nummerierte Schritte', needsItems: true },
+  { id: 'testimonials', label: 'TestimonialSlider', hint: 'Zitate — Name/Rolle fehlen' },
+  { id: 'logos', label: 'LogoCarousel', hint: 'eigene Logo-Liste, kein Inhalt nötig' },
 ];
 
 function extract(el: Element): Extracted {
   const txt = (n: Element | null) => n?.textContent?.replace(/\s+/g, ' ').trim() || '';
   const heading = el.querySelector('h1, h2, h3');
+  // Walk in document order: every sub-heading claims the next paragraph.
+  const items: { title: string; text: string }[] = [];
+  const nodes = Array.from(el.querySelectorAll('h3, h4, h5, p'));
+  for (let i = 0; i < nodes.length; i++) {
+    const n = nodes[i];
+    if (n === heading || !/^H[345]$/.test(n.tagName)) continue;
+    const next = nodes[i + 1];
+    items.push({ title: txt(n), text: next?.tagName === 'P' ? txt(next) : '' });
+  }
   return {
     heading: heading ? txt(heading) : null,
+    items: items.slice(0, 6),
     paragraphs: Array.from(el.querySelectorAll('p'))
       .map((p) => txt(p))
       .filter((t) => t.length > 2)
@@ -186,6 +220,45 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           )}
         </Section>
       );
+    if (target === 'services')
+      return (
+        <ServicesCarousel
+          title={head}
+          cards={[
+            {
+              title: head || '⟨Titel⟩',
+              image: data.images[0]?.src ?? '/images/iC_Stern_Blau.png',
+              pills: data.items.map((it) => ({
+                label: it.title,
+                description: it.text || '⟨Beschreibung⟩',
+              })),
+            },
+          ]}
+        />
+      );
+    if (target === 'process')
+      return (
+        <ProcessAccordion
+          title={head}
+          steps={data.items.map((it, i) => ({
+            number: String(i + 1).padStart(2, '0'),
+            title: it.title,
+            description: it.text || '⟨Beschreibung⟩',
+          }))}
+        />
+      );
+    if (target === 'testimonials')
+      return (
+        <TestimonialSlider
+          title={head}
+          items={(data.items.length ? data.items.map((i) => i.text || i.title) : copy).map((q) => ({
+            quote: q,
+            name: '⟨Name⟩',
+            role: '⟨Rolle⟩',
+          }))}
+        />
+      );
+    if (target === 'logos') return <LogoCarousel />;
     if (target === 'teaser')
       return (
         <Section innerClassName="flex">
@@ -233,15 +306,34 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
     const head = data.heading ? ref(data.heading, 'title') : null;
     const copy = data.paragraphs.map((p) => ref(p, 'copy'));
     const cta = data.links[0] ? ref(data.links[0].text, 'cta') : null;
+    const items = data.items.map((it, i) => ({
+      label: ref(it.title, `item${i + 1}Label`),
+      desc: it.text ? ref(it.text, `item${i + 1}Desc`) : "''",
+    }));
 
+    const structured =
+      target === 'services'
+        ? `<ServicesCarousel\n  title={${head}}\n  cards={[{\n    title: {${head}},\n    image: '…',\n    pills: [\n${items.map((i) => `      { label: ${i.label}, description: ${i.desc} },`).join('\n')}\n    ],\n  }]}\n/>`
+        : target === 'process'
+          ? `<ProcessAccordion\n  title={${head}}\n  steps={[\n${items.map((i, n) => `    { number: '${String(n + 1).padStart(2, '0')}', title: ${i.label}, description: ${i.desc} },`).join('\n')}\n  ]}\n/>`
+          : target === 'testimonials'
+            ? `<TestimonialSlider\n  title={${head}}\n  items={[\n${items.map((i) => `    { quote: ${i.desc}, name: '…', role: '…' },`).join('\n')}\n  ]}\n/>  {/* Name und Rolle sind in der alten Sektion nicht enthalten */}`
+            : target === 'logos'
+              ? `<LogoCarousel />  {/* nutzt CLIENT_LOGOS, kein Inhalt aus der alten Sektion */}`
+              : null;
+
+    // NB: `??` binds tighter than `?:` — the fallback chain must be wrapped,
+    // otherwise a non-null `structured` makes the condition truthy and the
+    // hero scaffold wins.
     const jsx =
-      target === 'hero'
+      structured ??
+      (target === 'hero'
         ? `<Section innerClassName="flex flex-col gap-6 lg:gap-10">\n  <h1 className="font-brand text-[40px] md:text-[56px] lg:text-h1 …">{${head}}</h1>\n${copy[0] ? `  <p className="font-brand text-body md:text-sub …">{${copy[0]}}</p>\n` : ''}${cta ? `  <Button asChild variant="primary"><a href="…">{${cta}}</a></Button>\n` : ''}</Section>`
         : target === 'cta'
           ? `<Section className="bg-[#bde3f4]" innerClassName="flex flex-col items-center gap-6">\n  <h2 className="text-center font-brand lg:text-h1 …">{${head}}</h2>\n${cta ? `  <Button asChild variant="dark"><a href="…">{${cta}}</a></Button>\n` : ''}</Section>`
           : target === 'teaser'
             ? `<ProductTeaser\n  eyebrow={t('…')}\n  title={${head}}\n  description={${copy[0] ?? "''"}}\n  image="${data.images[0]?.src ?? '…'}"\n  imageAlt={t('…')}\n  href="…"\n  ctaLabel={t('…')}\n/>`
-            : `<Section innerClassName="flex flex-col gap-4 md:gap-6">\n  <h2 className="font-brand text-[28px] md:text-[32px] lg:text-h3 …">{${head}}</h2>\n${copy.map((c) => `  <p className="font-brand text-body md:text-sub …">{${c}}</p>`).join('\n')}\n</Section>`;
+            : `<Section innerClassName="flex flex-col gap-4 md:gap-6">\n  <h2 className="font-brand text-[28px] md:text-[32px] lg:text-h3 …">{${head}}</h2>\n${copy.map((c) => `  <p className="font-brand text-body md:text-sub …">{${c}}</p>`).join('\n')}\n</Section>`);
 
     return [
       `/* ${location.pathname}  §  ${el?.id || path}`,
@@ -302,11 +394,12 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           <>
             <div style={{ color: '#8b97a5', marginTop: 8 }}>
               gefunden: {data.heading ? '1 Überschrift, ' : ''}
+              {data.items.length > 0 && `${data.items.length} Unterelemente, `}
               {data.paragraphs.length} Absätze, {data.links.length} Links, {data.images.length} Bilder
             </div>
 
             <div style={{ color: '#8b97a5', margin: '8px 0 4px', letterSpacing: 0.4 }}>ERSETZEN DURCH</div>
-            {TARGETS.map((t) => (
+            {TARGETS.filter((t) => !t.needsItems || data.items.length > 0).map((t) => (
               <label key={t.id} style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 3, cursor: 'pointer' }}>
                 <input type="radio" name="ds-target" checked={target === t.id} onChange={() => { setTarget(t.id); setExported(null); }} />
                 <span style={{ color: target === t.id ? '#e6edf3' : '#8b97a5' }}>
