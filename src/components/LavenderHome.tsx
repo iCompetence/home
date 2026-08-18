@@ -52,14 +52,6 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
         }}
       />
 
-      {/* Soft-launch demo marker — remove before the real public launch. */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed bottom-3 left-3 z-[1000] rounded-pill bg-lav-navy/85 px-3 py-1.5 font-brand text-[12px] font-medium tracking-[0.3px] text-lav-white shadow-[0_4px_14px_rgba(11,34,49,0.25)]"
-      >
-        Demo · placeholder content
-      </div>
-
       <TopNav />
       <Hero />
       <LogoCarousel />
