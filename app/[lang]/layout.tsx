@@ -139,6 +139,16 @@ export default async function RootLayout({
               if (window.location.pathname.endsWith('/imprint') || window.location.pathname.endsWith('/imprint/')) {
                 window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
               }
+              ${
+                process.env.NODE_ENV === 'production'
+                  ? ''
+                  : `/* Local development only: the consent overlay blocks the page
+                       until it is answered, which makes every dev reload a chore.
+                       This clause is not emitted in production builds. */
+                     if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+                       window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
+                     }`
+              }
             `,
           }}
         />        
