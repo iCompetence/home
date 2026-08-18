@@ -20,8 +20,17 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
  * additionally refuses to run on a non-local host.
  */
 
+/**
+ * How to tell whether a subtree actually uses a token: utility classes are
+ * scanned after stripping variants (md:, hover:) and opacity suffixes (/70).
+ *   suffix → class ends with it   (bg-lav-navy, text-lav-navy/70)
+ *   exact  → class equals it      (text-h2, rounded-card — not rounded-card-sm)
+ *   raw    → raw class contains it (py-[var(--section-pad-v)])
+ */
+type Detect = { kind: 'suffix' | 'exact' | 'raw'; value: string };
+
 type Dial =
-  | { kind: 'color'; varName: string; label: string; def: string }
+  | { kind: 'color'; varName: string; label: string; def: string; detect: Detect }
   | {
       kind: 'size';
       varName: string;
@@ -32,44 +41,45 @@ type Dial =
       step?: number;
       /** 'desktop' → override is emitted inside @media (min-width:1024px). */
       scope?: 'root' | 'desktop';
+      detect: Detect;
     };
 
 const GROUPS: { title: string; dials: Dial[] }[] = [
   {
     title: 'Farben',
     dials: [
-      { kind: 'color', varName: '--color-lav-navy', label: 'Navy', def: '#0b2231' },
-      { kind: 'color', varName: '--color-lav-lavender', label: 'Lavender', def: '#f5e1ff' },
-      { kind: 'color', varName: '--color-lav-page', label: 'Page', def: '#fdfafe' },
-      { kind: 'color', varName: '--color-lav-blue', label: 'Blue', def: '#24a1da' },
-      { kind: 'color', varName: '--color-lav-white', label: 'White', def: '#ffffff' },
+      { kind: 'color', varName: '--color-lav-navy', label: 'Navy', def: '#0b2231', detect: { kind: 'suffix', value: '-lav-navy' } },
+      { kind: 'color', varName: '--color-lav-lavender', label: 'Lavender', def: '#f5e1ff', detect: { kind: 'suffix', value: '-lav-lavender' } },
+      { kind: 'color', varName: '--color-lav-page', label: 'Page', def: '#fdfafe', detect: { kind: 'suffix', value: '-lav-page' } },
+      { kind: 'color', varName: '--color-lav-blue', label: 'Blue', def: '#24a1da', detect: { kind: 'suffix', value: '-lav-blue' } },
+      { kind: 'color', varName: '--color-lav-white', label: 'White', def: '#ffffff', detect: { kind: 'suffix', value: '-lav-white' } },
     ],
   },
   {
     title: 'Typografie',
     dials: [
-      { kind: 'size', varName: '--text-mega', label: 'Mega', def: 120, min: 40, max: 200 },
-      { kind: 'size', varName: '--text-h1', label: 'H1', def: 80, min: 24, max: 160 },
-      { kind: 'size', varName: '--text-h2', label: 'H2', def: 54, min: 20, max: 120 },
-      { kind: 'size', varName: '--text-h3', label: 'H3', def: 36, min: 16, max: 90 },
-      { kind: 'size', varName: '--text-sub', label: 'Sub', def: 24, min: 12, max: 60 },
-      { kind: 'size', varName: '--text-body', label: 'Body', def: 16, min: 10, max: 32 },
+      { kind: 'size', varName: '--text-mega', label: 'Mega', def: 120, min: 40, max: 200, detect: { kind: 'exact', value: 'text-mega' } },
+      { kind: 'size', varName: '--text-h1', label: 'H1', def: 80, min: 24, max: 160, detect: { kind: 'exact', value: 'text-h1' } },
+      { kind: 'size', varName: '--text-h2', label: 'H2', def: 54, min: 20, max: 120, detect: { kind: 'exact', value: 'text-h2' } },
+      { kind: 'size', varName: '--text-h3', label: 'H3', def: 36, min: 16, max: 90, detect: { kind: 'exact', value: 'text-h3' } },
+      { kind: 'size', varName: '--text-sub', label: 'Sub', def: 24, min: 12, max: 60, detect: { kind: 'exact', value: 'text-sub' } },
+      { kind: 'size', varName: '--text-body', label: 'Body', def: 16, min: 10, max: 32, detect: { kind: 'exact', value: 'text-body' } },
     ],
   },
   {
     title: 'Radien',
     dials: [
-      { kind: 'size', varName: '--radius-pill', label: 'Pill', def: 100, min: 0, max: 100 },
-      { kind: 'size', varName: '--radius-card', label: 'Card', def: 24, min: 0, max: 64 },
-      { kind: 'size', varName: '--radius-card-sm', label: 'Card S', def: 16, min: 0, max: 48 },
+      { kind: 'size', varName: '--radius-pill', label: 'Pill', def: 100, min: 0, max: 100, detect: { kind: 'exact', value: 'rounded-pill' } },
+      { kind: 'size', varName: '--radius-card', label: 'Card', def: 24, min: 0, max: 64, detect: { kind: 'exact', value: 'rounded-card' } },
+      { kind: 'size', varName: '--radius-card-sm', label: 'Card S', def: 16, min: 0, max: 48, detect: { kind: 'exact', value: 'rounded-card-sm' } },
     ],
   },
   {
     title: 'Layout (Desktop)',
     dials: [
-      { kind: 'size', varName: '--section-pad-v', label: 'Section ↕', def: 64, min: 0, max: 200, step: 4, scope: 'desktop' },
-      { kind: 'size', varName: '--section-pad-h', label: 'Section ↔', def: 96, min: 0, max: 240, step: 4, scope: 'desktop' },
-      { kind: 'size', varName: '--container-frame', label: 'Frame', def: 1440, min: 960, max: 1920, step: 20 },
+      { kind: 'size', varName: '--section-pad-v', label: 'Section ↕', def: 64, min: 0, max: 200, step: 4, scope: 'desktop', detect: { kind: 'raw', value: 'var(--section-pad-v)' } },
+      { kind: 'size', varName: '--section-pad-h', label: 'Section ↔', def: 96, min: 0, max: 240, step: 4, scope: 'desktop', detect: { kind: 'raw', value: 'var(--section-pad-h)' } },
+      { kind: 'size', varName: '--container-frame', label: 'Frame', def: 1440, min: 960, max: 1920, step: 20, detect: { kind: 'exact', value: 'max-w-frame' } },
     ],
   },
 ];
@@ -96,6 +106,40 @@ function cssPath(el: Element): string {
     cur = parent;
   }
   return parts.length ? `body > ${parts.join(' > ')}` : 'body';
+}
+
+/** Utility class → comparable core: strip variants (md:, hover:) and /opacity. */
+function coreOf(cls: string) {
+  const noVariant = cls.slice(cls.lastIndexOf(':') + 1);
+  const slash = noVariant.indexOf('/');
+  return slash === -1 ? noVariant : noVariant.slice(0, slash);
+}
+
+/** Tokens actually referenced by the given roots and their descendants. */
+function usedVars(roots: Element[]): Set<string> {
+  const classes = new Set<string>();
+  const raw: string[] = [];
+  for (const root of roots) {
+    for (const el of [root, ...Array.from(root.querySelectorAll('*'))]) {
+      const cn = el.getAttribute('class');
+      if (!cn) continue;
+      raw.push(cn);
+      for (const c of cn.split(/\s+/)) if (c) classes.add(coreOf(c));
+    }
+  }
+  const rawJoined = raw.join(' ');
+  const found = new Set<string>();
+  for (const d of ALL) {
+    const { kind, value } = d.detect;
+    const hit =
+      kind === 'raw'
+        ? rawJoined.includes(value)
+        : kind === 'exact'
+          ? classes.has(value)
+          : Array.from(classes).some((c) => c.endsWith(value));
+    if (hit) found.add(d.varName);
+  }
+  return found;
 }
 
 function declsFor(vals: Record<string, string>) {
@@ -128,6 +172,8 @@ export function DialPanel() {
   const [hover, setHover] = useState<{ rect: DOMRect; name: string } | null>(null);
   const [exported, setExported] = useState<string | null>(null);
   const [allowed, setAllowed] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [relevant, setRelevant] = useState<Set<string> | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -191,6 +237,15 @@ export function DialPanel() {
       /* ignore quota errors */
     }
   }, [scopes, selection, allOfType, allowed]);
+
+  // Which dials actually affect the current selection?
+  useEffect(() => {
+    if (!selection) return setRelevant(null);
+    const roots = allOfType
+      ? Array.from(document.querySelectorAll(`[data-ds="${selection.name}"]`))
+      : [document.querySelector(selection.path)].filter(Boolean as unknown as (v: Element | null) => v is Element);
+    setRelevant(roots.length ? usedVars(roots) : new Set<string>());
+  }, [selection, allOfType, scopes]);
 
   // Element picker.
   useEffect(() => {
@@ -277,6 +332,15 @@ export function DialPanel() {
       })
       .join('\n');
   }, [scopes]);
+
+  // With a selection, show only the dials that actually reach it (unless the
+  // user asks for all — handy to force a token that is not used *yet*).
+  const visibleGroups =
+    relevant && !showAll
+      ? GROUPS.map((g) => ({ ...g, dials: g.dials.filter((d) => relevant.has(d.varName)) })).filter(
+          (g) => g.dials.length,
+        )
+      : GROUPS;
 
   if (!allowed) return null;
 
@@ -410,7 +474,33 @@ export function DialPanel() {
         </div>
 
         <div style={{ padding: '8px 10px' }}>
-          {GROUPS.map((g) => (
+          {relevant && !showAll && (
+            <div style={{ color: '#8b97a5', marginBottom: 8 }}>
+              {relevant.size
+                ? `${relevant.size} von ${ALL.length} Reglern wirken hier.`
+                : 'Diese Komponente nutzt keinen der Tokens.'}{' '}
+              <button
+                type="button"
+                onClick={() => setShowAll(true)}
+                style={{ all: 'unset', cursor: 'pointer', color: '#1f6feb' }}
+              >
+                alle anzeigen
+              </button>
+            </div>
+          )}
+          {relevant && showAll && (
+            <div style={{ color: '#8b97a5', marginBottom: 8 }}>
+              alle Regler{' '}
+              <button
+                type="button"
+                onClick={() => setShowAll(false)}
+                style={{ all: 'unset', cursor: 'pointer', color: '#1f6feb' }}
+              >
+                nur wirksame
+              </button>
+            </div>
+          )}
+          {visibleGroups.map((g) => (
             <div key={g.title} style={{ marginBottom: 12 }}>
               <div style={{ color: '#8b97a5', margin: '6px 0 4px', letterSpacing: 0.4 }}>{g.title.toUpperCase()}</div>
               {g.dials.map((d) => {
