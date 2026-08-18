@@ -213,9 +213,11 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     width: 100%;
-    overscroll-behavior-y: none;
-    overscroll-behavior-x: none;
-    overscroll-behavior: none;
+    /* overscroll-behavior: none was never actually in effect: the frozen
+       src/index.css snapshot did not contain it, so the site has always run
+       without it. Once Tailwind compiled for real it started applying and
+       broke the expected scroll feel (no rubber-banding, scroll chaining
+       blocked). Left out deliberately to keep the long-standing behaviour. */
     -webkit-overflow-scrolling: touch;
   }
 
