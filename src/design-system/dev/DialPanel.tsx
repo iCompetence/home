@@ -86,6 +86,36 @@ const GROUPS: { title: string; dials: Dial[] }[] = [
   },
 ];
 
+/**
+ * Spacing dials are different in kind: they set real CSS properties on the
+ * selected component (gap/padding/margin) rather than design tokens, because
+ * the layout utilities behind them are not tokenised. Keys are prefixed with
+ * '#' so they never collide with the '--token' keys.
+ */
+type SpaceDial = { key: string; label: string; props: string[]; max: number };
+
+const SPACE_DIALS: SpaceDial[] = [
+  { key: '#gap', label: 'Gap', props: ['gap'], max: 160 },
+  { key: '#padY', label: 'Padding ↕', props: ['padding-top', 'padding-bottom'], max: 200 },
+  { key: '#padX', label: 'Padding ↔', props: ['padding-left', 'padding-right'], max: 200 },
+  { key: '#marY', label: 'Margin ↕', props: ['margin-top', 'margin-bottom'], max: 200 },
+];
+const SPACE_BY_KEY = new Map(SPACE_DIALS.map((d) => [d.key, d]));
+
+/** Tailwind's default spacing scale, for turning a dialled px value back into a class. */
+const TW_SCALE: [string, number][] = [
+  ['0', 0], ['0.5', 2], ['1', 4], ['1.5', 6], ['2', 8], ['2.5', 10], ['3', 12], ['3.5', 14],
+  ['4', 16], ['5', 20], ['6', 24], ['7', 28], ['8', 32], ['9', 36], ['10', 40], ['11', 44],
+  ['12', 48], ['14', 56], ['16', 64], ['20', 80], ['24', 96], ['28', 112], ['32', 128],
+];
+const TW_PREFIX: Record<string, string> = { '#gap': 'gap', '#padY': 'py', '#padX': 'px', '#marY': 'my' };
+
+function twClass(key: string, px: number) {
+  const prefix = TW_PREFIX[key];
+  const hit = TW_SCALE.find(([, v]) => v === px);
+  return hit ? `${prefix}-${hit[0]}` : `${prefix}-[${px}px]`;
+}
+
 const ALL = GROUPS.flatMap((g) => g.dials);
 const BY_VAR = new Map(ALL.map((d) => [d.varName, d]));
 const STORAGE_KEY = 'ic-dev-dials-v2';
@@ -95,7 +125,17 @@ const INST_ATTR = 'data-ds-inst';
 const isSize = (d: Dial): d is Extract<Dial, { kind: 'size' }> => d.kind === 'size';
 
 type Scopes = Record<string, Record<string, string>>;
-type Selection = { name: string; path: string } | null;
+type Selection = { name: string; path: string; isComponent: boolean } | null;
+
+/** Readable label for an arbitrary element: div.flex.gap-6 */
+function elementLabel(el: Element) {
+  const cls = (el.getAttribute('class') || '')
+    .split(/\s+/)
+    .filter((c) => c && !c.includes('[') && !c.includes(':'))
+    .slice(0, 2)
+    .join('.');
+  return cls ? `${el.tagName.toLowerCase()}.${cls}` : el.tagName.toLowerCase();
+}
 
 const PORTAL_ID = 'ic-dev-dials-root';
 
@@ -155,10 +195,15 @@ function usedVars(roots: Element[]): Set<string> {
 function declsFor(vals: Record<string, string>) {
   const root: string[] = [];
   const desktop: string[] = [];
-  for (const [varName, v] of Object.entries(vals)) {
-    const d = BY_VAR.get(varName);
+  for (const [key, v] of Object.entries(vals)) {
+    if (key.startsWith('#')) {
+      const sd = SPACE_BY_KEY.get(key);
+      if (sd) root.push(...sd.props.map((prop) => `${prop}: ${v}px;`));
+      continue;
+    }
+    const d = BY_VAR.get(key);
     if (!d) continue;
-    const decl = `${varName}: ${isSize(d) ? `${v}px` : v};`;
+    const decl = `${key}: ${isSize(d) ? `${v}px` : v};`;
     (isSize(d) && d.scope === 'desktop' ? desktop : root).push(decl);
   }
   return { root, desktop };
@@ -179,12 +224,16 @@ export function DialPanel() {
   const [selection, setSelection] = useState<Selection>(null);
   const [allOfType, setAllOfType] = useState(false);
   const [picking, setPicking] = useState(false);
+  /** 'component' picks the nearest [data-ds]; 'element' picks any node inside it. */
+  const [pickMode, setPickMode] = useState<'component' | 'element'>('component');
   const [hover, setHover] = useState<{ rect: DOMRect; name: string } | null>(null);
   const [exported, setExported] = useState<string | null>(null);
   const [allowed, setAllowed] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [tab, setTab] = useState<'design' | 'text'>('design');
   const [relevant, setRelevant] = useState<Set<string> | null>(null);
+  /** Current computed spacing of the selection — the dials start from reality. */
+  const [spaceBase, setSpaceBase] = useState<Record<string, number> | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [portalEl] = useState<HTMLDivElement | null>(() =>
     typeof document === 'undefined' ? null : document.createElement('div'),
@@ -264,11 +313,15 @@ export function DialPanel() {
 
   // Which dials actually affect the current selection?
   useEffect(() => {
-    if (!selection) return setRelevant(null);
+    if (!selection) {
+      setSpaceBase(null);
+      return setRelevant(null);
+    }
     const roots = allOfType
       ? Array.from(document.querySelectorAll(`[data-ds="${selection.name}"]`))
       : [document.querySelector(selection.path)].filter(Boolean as unknown as (v: Element | null) => v is Element);
     if (!roots.length) {
+      setSpaceBase(null);
       // The element is gone (page changed) — fall back to global rather than
       // leaving the panel stuck on an empty list.
       setSelection(null);
@@ -276,6 +329,17 @@ export function DialPanel() {
       return;
     }
     setRelevant(usedVars(roots));
+
+    const el = roots[0];
+    const cs = getComputedStyle(el);
+    const num = (v: string) => (v.endsWith('px') ? Math.round(parseFloat(v)) : 0);
+    const isFlexOrGrid = /flex|grid/.test(cs.display);
+    setSpaceBase({
+      ...(isFlexOrGrid ? { '#gap': num(cs.rowGap) } : {}),
+      '#padY': num(cs.paddingTop),
+      '#padX': num(cs.paddingLeft),
+      '#marY': num(cs.marginTop),
+    });
   }, [selection, allOfType, scopes]);
 
   // Element picker.
@@ -283,18 +347,39 @@ export function DialPanel() {
     if (!picking) return;
     const inPanel = (t: EventTarget | null) =>
       t instanceof Node && panelRef.current?.contains(t);
+    const root = pickMode === 'element' && selection ? document.querySelector(selection.path) : null;
+    const resolve = (target: EventTarget | null): Element | null => {
+      const t = target as Element | null;
+      if (!t?.closest) return null;
+      if (pickMode === 'component') return t.closest('[data-ds]');
+      // Element mode: any node, but it must sit inside the selected component.
+      return root && root.contains(t) ? t : null;
+    };
     const onMove = (e: MouseEvent) => {
       if (inPanel(e.target)) return setHover(null);
-      const el = (e.target as Element)?.closest?.('[data-ds]');
-      setHover(el ? { rect: el.getBoundingClientRect(), name: el.getAttribute('data-ds')! } : null);
+      const el = resolve(e.target);
+      setHover(
+        el
+          ? {
+              rect: el.getBoundingClientRect(),
+              name: pickMode === 'component' ? el.getAttribute('data-ds')! : elementLabel(el),
+            }
+          : null,
+      );
     };
     const onClick = (e: MouseEvent) => {
       if (inPanel(e.target)) return;
       e.preventDefault();
       e.stopPropagation();
-      const el = (e.target as Element)?.closest?.('[data-ds]');
+      const el = resolve(e.target);
       if (el) {
-        setSelection({ name: el.getAttribute('data-ds')!, path: cssPath(el) });
+        const isComponent = pickMode === 'component';
+        setSelection({
+          name: isComponent ? el.getAttribute('data-ds')! : elementLabel(el),
+          path: cssPath(el),
+          isComponent,
+        });
+        if (!isComponent) setAllOfType(false);
         setExported(null);
       }
       setPicking(false);
@@ -314,18 +399,27 @@ export function DialPanel() {
       document.removeEventListener('click', onClick, true);
       document.removeEventListener('keydown', onKey, true);
     };
-  }, [picking]);
+  }, [picking, pickMode, selection]);
 
   const walk = useCallback(
     (dir: 'up' | 'down') => {
       if (!selection) return;
       const el = document.querySelector(selection.path);
       if (!el) return;
-      const next =
-        dir === 'up'
+      const next = selection.isComponent
+        ? dir === 'up'
           ? el.parentElement?.closest('[data-ds]')
-          : el.querySelector('[data-ds]');
-      if (next) setSelection({ name: next.getAttribute('data-ds')!, path: cssPath(next) });
+          : el.querySelector('[data-ds]')
+        : dir === 'up'
+          ? el.parentElement
+          : el.firstElementChild;
+      if (!next || next === document.body) return;
+      const isComponent = next.hasAttribute('data-ds') && selection.isComponent;
+      setSelection({
+        name: isComponent ? next.getAttribute('data-ds')! : elementLabel(next),
+        path: cssPath(next),
+        isComponent,
+      });
     },
     [selection],
   );
@@ -357,9 +451,14 @@ export function DialPanel() {
       .map((k) => {
         const vals = scopes[k];
         if (k === 'global') return `/* global (Design-Tokens) */\n${rule(':root', vals)}`;
+        const hints = Object.entries(vals)
+          .filter(([key]) => key.startsWith('#'))
+          .map(([key, v]) => `   ${twClass(key, Number(v))}`)
+          .join('\n');
+        const suffix = hints ? `/* Tailwind-Klassen für die Komponente:\n${hints}\n*/\n` : '';
         if (k.startsWith('type:'))
-          return `/* alle <${k.slice(5)}> */\n${rule(`[data-ds="${k.slice(5)}"]`, vals)}`;
-        return `/* eine Instanz — Pfad: ${k.slice(5)} */\n${rule(k.slice(5), vals)}`;
+          return `/* alle <${k.slice(5)}> */\n${suffix}${rule(`[data-ds="${k.slice(5)}"]`, vals)}`;
+        return `/* eine Instanz — Pfad: ${k.slice(5)} */\n${suffix}${rule(k.slice(5), vals)}`;
       })
       .join('\n');
   }, [scopes]);
@@ -503,11 +602,37 @@ export function DialPanel() {
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             <button
               type="button"
-              onClick={() => setPicking((p) => !p)}
-              style={{ ...btn, color: picking ? '#fff' : '#8b97a5', borderColor: picking ? '#1f6feb' : '#2b3540', background: picking ? '#1f6feb' : 'transparent' }}
+              onClick={() => {
+                setPickMode('component');
+                setPicking((p) => !(p && pickMode === 'component'));
+              }}
+              style={{
+                ...btn,
+                color: picking && pickMode === 'component' ? '#fff' : '#8b97a5',
+                borderColor: picking && pickMode === 'component' ? '#1f6feb' : '#2b3540',
+                background: picking && pickMode === 'component' ? '#1f6feb' : 'transparent',
+              }}
             >
-              ⌖ {picking ? 'Klicke…' : 'Auswählen'}
+              ⌖ {picking && pickMode === 'component' ? 'Klicke…' : 'Komponente'}
             </button>
+            {selection && (
+              <button
+                type="button"
+                onClick={() => {
+                  setPickMode('element');
+                  setPicking((p) => !(p && pickMode === 'element'));
+                }}
+                title="Element innerhalb der Auswahl anklicken"
+                style={{
+                  ...btn,
+                  color: picking && pickMode === 'element' ? '#fff' : '#8b97a5',
+                  borderColor: picking && pickMode === 'element' ? '#a371f7' : '#2b3540',
+                  background: picking && pickMode === 'element' ? '#a371f7' : 'transparent',
+                }}
+              >
+                ⌗ {picking && pickMode === 'element' ? 'Klicke…' : 'Element'}
+              </button>
+            )}
             {selection && (
               <>
                 <button type="button" onClick={() => walk('up')} style={btn} title="Elternkomponente">↑</button>
@@ -520,11 +645,17 @@ export function DialPanel() {
           <div style={{ marginTop: 6, color: '#8b97a5' }}>
             Ziel:{' '}
             <span style={{ color: '#7ee787' }}>
-              {selection ? (allOfType ? `alle <${selection.name}>` : `<${selection.name}> (diese)`) : 'global · alle Tokens'}
+              {selection
+                ? allOfType
+                  ? `alle <${selection.name}>`
+                  : selection.isComponent
+                    ? `<${selection.name}> (diese)`
+                    : `${selection.name} (Element)`
+                : 'global · alle Tokens'}
             </span>
           </div>
 
-          {selection && (
+          {selection?.isComponent && (
             <label style={{ display: 'flex', gap: 6, alignItems: 'center', marginTop: 6, cursor: 'pointer' }}>
               <input type="checkbox" checked={allOfType} onChange={(e) => { setAllOfType(e.target.checked); setExported(null); }} />
               <span>alle Instanzen dieses Typs</span>
@@ -591,6 +722,45 @@ export function DialPanel() {
               })}
             </div>
           ))}
+
+          {spaceBase && (
+            <div style={{ marginBottom: 12 }}>
+              <div style={{ color: '#8b97a5', margin: '6px 0 4px', letterSpacing: 0.4 }}>
+                ABSTÄNDE · NUR AUSWAHL
+              </div>
+              {SPACE_DIALS.filter((d) => spaceBase[d.key] !== undefined).map((d) => {
+                const raw = current[d.key];
+                const val = raw ?? String(spaceBase[d.key]);
+                const dirty = raw !== undefined;
+                return (
+                  <div key={d.key} style={{ marginBottom: 6 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ color: dirty ? '#7ee787' : '#e6edf3' }}>
+                        {d.label}
+                        {dirty && (
+                          <button type="button" onClick={() => resetOne(d.key)} title="zurücksetzen" style={{ all: 'unset', cursor: 'pointer', marginLeft: 6, color: '#8b97a5' }}>
+                            ↺
+                          </button>
+                        )}
+                      </span>
+                      <span style={{ color: '#8b97a5' }}>
+                        {val}px{dirty ? ` · ${twClass(d.key, Number(val))}` : ''}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min={0}
+                      max={d.max}
+                      step={2}
+                      value={Number(val)}
+                      onChange={(e) => set(d.key, e.target.value)}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
             <button
