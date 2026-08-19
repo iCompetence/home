@@ -33,3 +33,27 @@ export const EASE = {
 } as const;
 
 export type EaseName = keyof typeof EASE;
+
+/* ---------------------------------------------------------------- */
+
+import { useReducedMotion } from 'framer-motion';
+
+/**
+ * Motion preferences, honouring `prefers-reduced-motion`.
+ *
+ * The rule we follow is "gentler, not zero": opacity and colour keep
+ * animating, movement is dropped and durations are shortened. Killing all
+ * motion outright removes the state cues the animation was carrying.
+ */
+export function useMotionPrefs() {
+  const reduced = useReducedMotion() ?? false;
+  return {
+    reduced,
+    /** Duration, capped at `fast` when the user asked for less motion. */
+    d: (v: number) => (reduced ? DURATION.fast : v),
+    /** A movement offset in px — dropped entirely under reduced motion. */
+    move: (px: number) => (reduced ? 0 : px),
+    /** For scrollTo/scrollIntoView: smooth scrolling is a vestibular trigger. */
+    scrollBehavior: (reduced ? 'auto' : 'smooth') as ScrollBehavior,
+  };
+}

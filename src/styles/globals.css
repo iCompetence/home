@@ -211,6 +211,24 @@
   }
 }
 
+/* Honour prefers-reduced-motion. The rule is "gentler, not zero": opacity and
+   colour keep transitioning so state changes stay legible, while movement
+   (transform) and smooth scrolling — the parts that trigger vestibular
+   discomfort — are dropped. framer-motion is handled in motion.ts. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    transition-duration: var(--duration-fast) !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

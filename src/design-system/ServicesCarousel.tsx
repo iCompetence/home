@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 import { Section } from './Section';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
-import { DURATION, EASE } from './motion';
+import { DURATION, EASE, useMotionPrefs } from './motion';
 
 export type ServicePill = { label: string; description: string };
 export type ServiceCard = {
@@ -44,6 +44,7 @@ export function ServicesCarousel({
   nextLabel = 'Next service',
 }: ServicesCarouselProps) {
   const bp = useBreakpoint();
+  const prefs = useMotionPrefs();
   const compact = isCompact(bp);
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -110,9 +111,9 @@ export function ServicesCarousel({
       {compact ? (
         <motion.div
           key={activeIdx}
-          initial={{ opacity: 0, x: direction * 40 }}
+          initial={{ opacity: 0, x: prefs.move(direction * 40) }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASE.emphasized }}
+          transition={{ duration: prefs.d(DURATION.slow), ease: EASE.emphasized }}
           className="w-full"
         >
           <ServiceCardView
@@ -128,9 +129,9 @@ export function ServicesCarousel({
         <div className="w-full overflow-visible">
           <motion.div
             key={activeIdx}
-            initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
+            initial={{ x: prefs.move(direction * (COLLAPSED_W + CARD_GAP)) }}
             animate={{ x: 0 }}
-            transition={{ duration: DURATION.slower, ease: EASE.emphasized }}
+            transition={{ duration: prefs.d(DURATION.slower), ease: EASE.emphasized }}
             className="flex justify-center"
             style={{ gap: CARD_GAP }}
           >

@@ -40,14 +40,21 @@ export const PRODUCT_LINKS: readonly ProductLink[] = [
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/icompetence/';
 
 /** Smooth-scroll for in-page `#anchor` links. */
+/** Smooth scrolling is a common vestibular trigger — jump instead when asked. */
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 export function smoothAnchor(e: React.MouseEvent<HTMLAnchorElement>) {
   const href = e.currentTarget.getAttribute('href') || '';
   if (!href.startsWith('#')) return;
   e.preventDefault();
   const id = href.slice(1);
   if (!id || id === 'top') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
     return;
   }
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document
+    .getElementById(id)
+    ?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
 }
