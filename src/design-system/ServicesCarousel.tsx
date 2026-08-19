@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 import { Section } from './Section';
@@ -195,13 +195,14 @@ function ServiceCardView({
   onCardClick: () => void;
   bp: Bp;
 }) {
-  const pills = card.pills.map((pill, idx) =>
-    idx === expandedPillIdx ? (
-      <ExpandedPill key={idx} pill={pill} onClick={() => onPillClick(idx)} />
-    ) : (
-      <CollapsedPill key={idx} pill={pill} onClick={() => onPillClick(idx)} />
-    ),
-  );
+  const pills = card.pills.map((pill, idx) => (
+    <ServicePill
+      key={idx}
+      pill={pill}
+      expanded={idx === expandedPillIdx}
+      onClick={() => onPillClick(idx)}
+    />
+  ));
 
   // Compact (tablet/mobile): one full-width card that always shows its pills.
   if (isCompact(bp)) {
@@ -262,33 +263,66 @@ function ServiceCardView({
   );
 }
 
-function ExpandedPill({ pill, onClick }: { pill: ServicePill; onClick: () => void }) {
+/**
+ * One pill in both states, so opening it transitions rather than swapping two
+ * components: background, radius and border ease over, and the description
+ * reveals by height + opacity instead of shoving the pills below it down.
+ */
+function ServicePill({
+  pill,
+  expanded,
+  onClick,
+}: {
+  pill: ServicePill;
+  expanded: boolean;
+  onClick: () => void;
+}) {
+  const prefs = useMotionPrefs();
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full cursor-pointer flex-col gap-2 rounded-card-sm border border-transparent bg-lav-lavender p-0 text-left font-brand"
+      aria-expanded={expanded}
+      className={cn(
+        'flex w-full cursor-pointer flex-col border p-0 text-left font-brand',
+        'transition-[background-color,border-color,border-radius] duration-[var(--duration-fast)]',
+        expanded
+          ? 'rounded-card-sm border-transparent bg-lav-lavender'
+          : 'rounded-pill border-lav-white/25 bg-transparent',
+      )}
     >
       <div className="flex w-full items-center justify-between gap-3 px-4 py-2">
-        <span className="font-brand text-body font-semibold text-lav-navy">{pill.label}</span>
-        <Minus size={20} strokeWidth={2} className="shrink-0 text-lav-navy" />
+        <span
+          className={cn(
+            'font-brand text-body',
+            expanded ? 'font-semibold text-lav-navy' : 'font-medium text-lav-white',
+          )}
+        >
+          {pill.label}
+        </span>
+        {expanded ? (
+          <Minus size={20} strokeWidth={2} className="shrink-0 text-lav-navy" />
+        ) : (
+          <Plus size={20} strokeWidth={2} className="shrink-0 text-lav-white" />
+        )}
       </div>
-      <p className="m-0 px-4 pb-4 font-brand text-[14px] font-normal leading-[1.5] text-lav-navy/70">
-        {pill.description}
-      </p>
-    </button>
-  );
-}
 
-function CollapsedPill({ pill, onClick }: { pill: ServicePill; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-pill border border-lav-white/25 bg-transparent px-4 py-2 font-brand"
-    >
-      <span className="font-brand text-body font-medium text-lav-white">{pill.label}</span>
-      <Plus size={20} strokeWidth={2} className="shrink-0 text-lav-white" />
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="desc"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: prefs.d(DURATION.fast), ease: EASE.out }}
+            className="w-full overflow-hidden"
+          >
+            <p className="m-0 px-4 pb-4 pt-2 font-brand text-[14px] font-normal leading-[1.5] text-lav-navy/70">
+              {pill.description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </button>
   );
 }
