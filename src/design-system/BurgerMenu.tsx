@@ -8,6 +8,7 @@ import { cn } from '@/components/ui/utils';
 import { LanguageToggle } from './LanguageToggle';
 import { LinkedInGlyph } from './icons';
 import { LINKEDIN_URL, PRODUCT_LINKS } from './nav-links';
+import { DURATION, EASE } from './motion';
 
 /**
  * Burger menu with the "Products & Tools" grid.
@@ -95,7 +96,7 @@ export function BurgerMenu({
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.16, ease: 'easeOut' }}
+            transition={{ duration: DURATION.fast, ease: EASE.out }}
             className={cn(
               'absolute flex flex-col bg-lav-navy shadow-[0_10px_30px_rgba(11,34,49,0.18)]',
               wide ? 'gap-6 rounded-card px-12 py-10' : 'gap-3 rounded-card-sm px-6 py-5',

@@ -179,6 +179,16 @@
 
   /* Layout frame (FRAME_MAX_WIDTH) → max-w-frame */
   --container-frame: 1440px;
+
+  /* Motion — mirrors src/design-system/motion.ts, which is the source of
+     truth (framer-motion drives most of the motion and needs seconds).
+     Used from CSS as duration-[var(--duration-fast)] / ease-[var(--ease-…)]. */
+  --duration-fast: 160ms;
+  --duration-base: 300ms;
+  --duration-slow: 450ms;
+  --duration-slower: 550ms;
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Live section padding, consumed by the shared <Section> component. Kept as

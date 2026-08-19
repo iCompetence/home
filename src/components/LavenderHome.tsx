@@ -46,7 +46,7 @@ export default function LavenderHome() {
 .lavender-page a { text-decoration: none; }
 .lavender-page * { box-sizing: border-box; }
 html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
-.lavender-page a, .lavender-page button { transition: opacity 0.15s ease; cursor: pointer; }
+.lavender-page a, .lavender-page button { transition: opacity var(--duration-fast) ease; cursor: pointer; }
 .lavender-page a:hover, .lavender-page button:hover { opacity: 0.75; }
 `,
         }}

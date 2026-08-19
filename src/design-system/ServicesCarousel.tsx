@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 import { Section } from './Section';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
+import { DURATION, EASE } from './motion';
 
 export type ServicePill = { label: string; description: string };
 export type ServiceCard = {
@@ -111,7 +112,7 @@ export function ServicesCarousel({
           key={activeIdx}
           initial={{ opacity: 0, x: direction * 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+          transition={{ duration: DURATION.slow, ease: EASE.emphasized }}
           className="w-full"
         >
           <ServiceCardView
@@ -129,7 +130,7 @@ export function ServicesCarousel({
             key={activeIdx}
             initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
             animate={{ x: 0 }}
-            transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ duration: DURATION.slower, ease: EASE.emphasized }}
             className="flex justify-center"
             style={{ gap: CARD_GAP }}
           >

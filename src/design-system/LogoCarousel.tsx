@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useBreakpoint } from './useBreakpoint';
+import { DURATION, EASE } from './motion';
 
 /**
  * Client logos. `slug` maps to /logos/<slug>.<ext> (official brand asset, shown
@@ -123,7 +124,7 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
+                transition={{ duration: DURATION.base, ease: EASE.out }}
                 className="absolute inset-0 flex items-center justify-center text-lav-navy"
               >
                 <LogoMark logo={logo} />
