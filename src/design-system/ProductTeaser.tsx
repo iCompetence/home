@@ -27,6 +27,7 @@ export function ProductTeaser({
 }: ProductTeaserProps) {
   return (
     <article
+      data-ds="ProductTeaser"
       className={cn(
         'flex flex-1 flex-col overflow-hidden rounded-card bg-lav-navy',
         className,

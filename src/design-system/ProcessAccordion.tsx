@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 import { Section } from './Section';
+import { DURATION, EASE, useMotionPrefs } from './motion';
 
 export type ProcessStep = {
   /** Step number, e.g. "01". */
@@ -17,6 +19,8 @@ export type ProcessStep = {
 export type ProcessAccordionProps = {
   steps: readonly ProcessStep[];
   title: string;
+  /** Optional intro below the title. */
+  subline?: string;
   id?: string;
   /** Index of the step expanded on first render (default: the second one). */
   defaultExpanded?: number | null;
@@ -26,16 +30,24 @@ export type ProcessAccordionProps = {
 export function ProcessAccordion({
   steps,
   title,
+  subline,
   id = 'process',
   defaultExpanded = 1,
 }: ProcessAccordionProps) {
   const [expanded, setExpanded] = useState<number | null>(defaultExpanded);
 
   return (
-    <Section id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
-      <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
-        {title}
-      </h2>
+    <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
+      <div className="flex w-full flex-col gap-3 md:gap-4">
+        <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
+          {title}
+        </h2>
+        {subline && (
+          <p className="m-0 max-w-[820px] font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
+            {subline}
+          </p>
+        )}
+      </div>
 
       <div className="flex w-full flex-col">
         {steps.map((step, idx) => (
@@ -64,13 +76,10 @@ function ProcessRow({
   onToggle: () => void;
 }) {
   const Icon = expanded ? Minus : Plus;
+  const prefs = useMotionPrefs();
   return (
     <div
-      className={cn(
-        'flex flex-col border-t border-lav-navy/20',
-        isLast && 'border-b',
-        expanded ? 'gap-4 lg:gap-8' : 'gap-0',
-      )}
+      className={cn('flex flex-col border-t border-lav-navy/20', isLast && 'border-b')}
     >
       <button
         type="button"
@@ -92,8 +101,19 @@ function ProcessRow({
       {/* Collapsed rows keep their copy in the static HTML for crawlers/LLM bots. */}
       {!expanded && <p className="sr-only">{step.description}</p>}
 
-      {expanded && (
-        <div className="flex w-full flex-col items-stretch gap-4 pb-6 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:pb-8">
+      {/* Height + opacity so the step does not teleport in and shove the rest
+          of the list down. Under reduced motion only the fade remains. */}
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: prefs.d(DURATION.base), ease: EASE.out }}
+            className="w-full overflow-hidden"
+          >
+        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-4 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:pb-8 lg:pt-8">
           <div className="flex flex-1 flex-col gap-6 md:py-2 md:pl-12 lg:py-4 lg:pl-16">
             <p className="m-0 font-brand text-[15px] font-normal leading-[1.5] text-lav-navy/80 md:text-body">
               {step.description}
@@ -106,7 +126,9 @@ function ProcessRow({
             />
           )}
         </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

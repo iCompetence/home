@@ -1,7 +1,10 @@
 // New design-system primitives (Lavender design). Built on the Tailwind
 // tokens from PR 1 (bg-lav-*, text-h*, rounded-pill, max-w-frame, …).
 // Consumed by pages as the design rolls out — see docs/design-migration.md.
+export { DURATION, EASE, type EaseName } from './motion';
 export { Section } from './Section';
+export { Hero, type HeroProps } from './Hero';
+export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
@@ -37,3 +40,6 @@ export {
   type NavSection,
   type ProductLink,
 } from './nav-links';
+
+// Dev-only tooling (compiled out of production builds).
+export { DevDials } from './dev/DevDials';

@@ -10,13 +10,15 @@ type SectionProps = {
   className?: string;
   /** Extra classes on the centred inner container. */
   innerClassName?: string;
+  /** Component name exposed as data-ds (used by the dev dial panel's picker). */
+  dsName?: string;
 };
 
 /**
  * Full-bleed section with a centred, `max-w-frame` (1440px) inner container.
- * Responsive padding mirrors LavenderHome's SECTION_PAD:
- *   vertical   mobile 48 / tablet 56 / desktop 64  → py-12 md:py-14 lg:py-16
- *   horizontal mobile 24 / tablet 48 / desktop 96  → px-6  md:px-12 lg:px-24
+ * Padding comes from the --section-pad-v / --section-pad-h custom properties
+ * (defined per breakpoint in globals.css: 48/24 · 56/48 · 64/96), so the dev
+ * dial panel can tune section rhythm live.
  */
 export function Section({
   children,
@@ -24,10 +26,20 @@ export function Section({
   as: Tag = 'section',
   className,
   innerClassName,
+  dsName = 'Section',
 }: SectionProps) {
   return (
-    <Tag id={id} className={cn('w-full py-12 md:py-14 lg:py-16', className)}>
-      <div className={cn('mx-auto w-full max-w-frame px-6 md:px-12 lg:px-24', innerClassName)}>
+    <Tag
+      id={id}
+      data-ds={dsName}
+      className={cn('w-full py-[var(--section-pad-v)]', className)}
+    >
+      <div
+        className={cn(
+          'mx-auto w-full max-w-frame px-[var(--section-pad-h)]',
+          innerClassName,
+        )}
+      >
         {children}
       </div>
     </Tag>

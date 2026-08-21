@@ -10,7 +10,7 @@ import { cn } from '@/components/ui/utils';
  * Use `asChild` to render as a link: <Button asChild><a href="…">…</a></Button>.
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-opacity hover:opacity-75 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-opacity duration-[var(--duration-fast)] hover:opacity-75 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -39,6 +39,7 @@ function Button({
   return (
     <Comp
       data-slot="lav-button"
+      data-ds="Button"
       className={cn(buttonVariants({ variant }), className)}
       {...props}
     />

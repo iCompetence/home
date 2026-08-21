@@ -4,6 +4,7 @@ import { ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackCtaClick } from '@/lib/tracking';
 import { Section } from './Section';
+import { useMotionPrefs } from './motion';
 import { LinkedInGlyph } from './icons';
 
 const EMAIL = 'info@icompetence.de';
@@ -56,10 +57,13 @@ function ContactBlock({
  */
 export function Footer() {
   const { t, language } = useLanguage();
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const prefs = useMotionPrefs();
+  const scrollTop = () =>
+    window.scrollTo({ top: 0, behavior: prefs.scrollBehavior });
 
   return (
     <Section
+      dsName="Footer"
       as="footer"
       className="overflow-hidden bg-lav-navy text-lav-white"
       innerClassName="relative z-[2] flex flex-col gap-8 md:gap-10"

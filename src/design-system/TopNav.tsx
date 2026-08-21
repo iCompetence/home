@@ -7,6 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { BurgerMenu } from './BurgerMenu';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 import { HOME_NAV_SECTIONS, smoothAnchor, type NavSection } from './nav-links';
+import { DURATION, EASE } from './motion';
 
 export type TopNavProps = {
   /**
@@ -75,7 +76,7 @@ function CompactNav({ bp, sections }: { bp: Bp; sections: readonly NavSection[] 
   return (
     <div className="pointer-events-none sticky top-0 z-50 w-full">
       <div className="mx-auto w-full max-w-frame px-4 pt-3 md:px-6 md:pt-3.5">
-        <nav
+        <nav data-ds="TopNav"
           ref={ref as React.Ref<HTMLElement>}
           className="pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill bg-lav-navy px-4 py-2.5 text-lav-white md:gap-5 md:px-6 md:py-3"
         >
@@ -173,8 +174,8 @@ function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
 
   const otherSections = sections.filter((s) => s.id !== activeId);
   const morphTransition = {
-    layout: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-    opacity: { duration: 0.25, ease: 'easeOut' as const },
+    layout: { duration: DURATION.slow, ease: EASE.settle as unknown as [number, number, number, number] },
+    opacity: { duration: DURATION.base, ease: EASE.out },
   };
 
   return (
@@ -265,7 +266,7 @@ function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
                     <ChevronDown
                       size={16}
                       strokeWidth={2}
-                      className="transition-transform duration-200"
+                      className="transition-transform duration-[var(--duration-fast)]"
                       style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}
                     />
                   </button>
@@ -278,7 +279,7 @@ function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
                         initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -6 }}
-                        transition={{ duration: 0.16, ease: 'easeOut' }}
+                        transition={{ duration: DURATION.fast, ease: EASE.out }}
                         className="absolute left-0 top-[calc(100%+12px)] flex min-w-[180px] flex-col rounded-card-sm bg-lav-navy px-1.5 py-2.5 shadow-[0_10px_30px_rgba(11,34,49,0.18)]"
                       >
                         <a

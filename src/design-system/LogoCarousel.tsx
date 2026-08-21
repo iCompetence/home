@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useBreakpoint } from './useBreakpoint';
+import { DURATION, EASE, useMotionPrefs } from './motion';
 
 /**
  * Client logos. `slug` maps to /logos/<slug>.<ext> (official brand asset, shown
@@ -66,6 +67,8 @@ function LogoMark({ logo }: { logo: LogoEntry }) {
  */
 export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEntry[] }) {
   const bp = useBreakpoint();
+  const prefs = useMotionPrefs();
+  const rowRef = useRef<HTMLElement | null>(null);
   const slots = bp === 'mobile' ? 3 : bp === 'tablet' ? 4 : 5;
   const [visible, setVisible] = useState<LogoEntry[]>(() => logos.slice(0, slots));
 
@@ -73,8 +76,21 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
     setVisible(logos.slice(0, slots));
   }, [slots, logos]);
 
+  // The row used to swap logos for as long as the page was open. Perpetual
+  // motion in the viewport earns nothing after the first read and pulls the
+  // eye away from the content, so it now runs a limited number of swaps,
+  // only while the row is actually on screen, and not at all when the user
+  // asked for reduced motion.
   useEffect(() => {
+    if (prefs.reduced) return;
+    const node = rowRef.current;
+    if (!node) return;
+
+    let swapsLeft = logos.length;
     let lastSlot = -1;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let onScreen = false;
+
     const swapRandomSlot = () => {
       setVisible((current) => {
         const count = current.length;
@@ -91,24 +107,40 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
       });
     };
 
-    let timer: ReturnType<typeof setTimeout> | null = null;
+    const stop = () => {
+      if (timer) clearTimeout(timer);
+      timer = null;
+    };
     const schedule = () => {
+      if (!onScreen || swapsLeft <= 0) return;
       timer = setTimeout(
         () => {
+          swapsLeft--;
           swapRandomSlot();
           schedule();
         },
-        800 + Math.random() * 2400,
+        1200 + Math.random() * 2400,
       );
     };
-    schedule();
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (onScreen) schedule();
+        else stop();
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(node);
+
     return () => {
-      if (timer) clearTimeout(timer);
+      io.disconnect();
+      stop();
     };
-  }, [logos]);
+  }, [logos, prefs.reduced]);
 
   return (
-    <section className="w-full overflow-hidden border-y border-lav-navy/20 py-12 md:py-14 lg:py-16">
+    <section ref={rowRef} data-ds="LogoCarousel" className="w-full overflow-hidden border-y border-lav-navy/20 py-12 md:py-14 lg:py-16">
       <div className="mx-auto flex w-full max-w-frame items-center justify-between gap-4 px-6 md:gap-6 md:px-12 lg:gap-24 lg:px-10">
         {visible.map((logo, i) => (
           <div
@@ -120,10 +152,10 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
             <AnimatePresence mode="sync">
               <motion.div
                 key={logo.slug}
-                initial={{ opacity: 0, y: 6 }}
+                initial={{ opacity: 0, y: prefs.move(6) }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
+                exit={{ opacity: 0, y: prefs.move(-6) }}
+                transition={{ duration: prefs.d(DURATION.base), ease: EASE.out }}
                 className="absolute inset-0 flex items-center justify-center text-lav-navy"
               >
                 <LogoMark logo={logo} />

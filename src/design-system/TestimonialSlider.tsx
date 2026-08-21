@@ -81,6 +81,7 @@ export function TestimonialSlider({
 
   return (
     <Section
+      dsName="TestimonialSlider"
       className="relative overflow-hidden bg-lav-navy"
       innerClassName="relative z-[2] flex flex-col gap-6 md:gap-10"
     >

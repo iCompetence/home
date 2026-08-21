@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 import { Section } from './Section';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
+import { DURATION, EASE, useMotionPrefs } from './motion';
 
 export type ServicePill = { label: string; description: string };
 export type ServiceCard = {
@@ -18,6 +19,8 @@ export type ServiceCard = {
 export type ServicesCarouselProps = {
   cards: readonly ServiceCard[];
   title: string;
+  /** Optional intro below the title — several pages lead in before the cards. */
+  subline?: string;
   id?: string;
   prevLabel?: string;
   nextLabel?: string;
@@ -38,11 +41,13 @@ const COLLAPSED_W = 640;
 export function ServicesCarousel({
   cards,
   title,
+  subline,
   id = 'services',
   prevLabel = 'Previous service',
   nextLabel = 'Next service',
 }: ServicesCarouselProps) {
   const bp = useBreakpoint();
+  const prefs = useMotionPrefs();
   const compact = isCompact(bp);
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -77,12 +82,19 @@ export function ServicesCarousel({
     'inline-flex h-11 w-11 items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white lg:h-12 lg:w-12';
 
   return (
-    <Section id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
+    <Section dsName="ServicesCarousel" id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
       {/* Header */}
-      <div className="flex w-full items-center justify-between">
-        <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
-          {title}
-        </h2>
+      <div className="flex w-full items-start justify-between gap-6">
+        <div className="flex flex-col gap-3 md:gap-4">
+          <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
+            {title}
+          </h2>
+          {subline && (
+            <p className="m-0 max-w-[720px] font-brand text-body font-normal leading-[1.5] text-lav-navy/80">
+              {subline}
+            </p>
+          )}
+        </div>
         <div className="flex items-center gap-2 lg:gap-3">
           <button
             type="button"
@@ -109,9 +121,9 @@ export function ServicesCarousel({
       {compact ? (
         <motion.div
           key={activeIdx}
-          initial={{ opacity: 0, x: direction * 40 }}
+          initial={{ opacity: 0, x: prefs.move(direction * 40) }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+          transition={{ duration: prefs.d(DURATION.slow), ease: EASE.emphasized }}
           className="w-full"
         >
           <ServiceCardView
@@ -127,9 +139,9 @@ export function ServicesCarousel({
         <div className="w-full overflow-visible">
           <motion.div
             key={activeIdx}
-            initial={{ x: direction * (COLLAPSED_W + CARD_GAP) }}
+            initial={{ x: prefs.move(direction * (COLLAPSED_W + CARD_GAP)) }}
             animate={{ x: 0 }}
-            transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ duration: prefs.d(DURATION.slower), ease: EASE.emphasized }}
             className="flex justify-center"
             style={{ gap: CARD_GAP }}
           >
@@ -193,13 +205,14 @@ function ServiceCardView({
   onCardClick: () => void;
   bp: Bp;
 }) {
-  const pills = card.pills.map((pill, idx) =>
-    idx === expandedPillIdx ? (
-      <ExpandedPill key={idx} pill={pill} onClick={() => onPillClick(idx)} />
-    ) : (
-      <CollapsedPill key={idx} pill={pill} onClick={() => onPillClick(idx)} />
-    ),
-  );
+  const pills = card.pills.map((pill, idx) => (
+    <ServicePill
+      key={idx}
+      pill={pill}
+      expanded={idx === expandedPillIdx}
+      onClick={() => onPillClick(idx)}
+    />
+  ));
 
   // Compact (tablet/mobile): one full-width card that always shows its pills.
   if (isCompact(bp)) {
@@ -260,33 +273,66 @@ function ServiceCardView({
   );
 }
 
-function ExpandedPill({ pill, onClick }: { pill: ServicePill; onClick: () => void }) {
+/**
+ * One pill in both states, so opening it transitions rather than swapping two
+ * components: background, radius and border ease over, and the description
+ * reveals by height + opacity instead of shoving the pills below it down.
+ */
+function ServicePill({
+  pill,
+  expanded,
+  onClick,
+}: {
+  pill: ServicePill;
+  expanded: boolean;
+  onClick: () => void;
+}) {
+  const prefs = useMotionPrefs();
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full cursor-pointer flex-col gap-2 rounded-card-sm border border-transparent bg-lav-lavender p-0 text-left font-brand"
+      aria-expanded={expanded}
+      className={cn(
+        'flex w-full cursor-pointer flex-col border p-0 text-left font-brand',
+        'transition-[background-color,border-color,border-radius] duration-[var(--duration-fast)]',
+        expanded
+          ? 'rounded-card-sm border-transparent bg-lav-lavender'
+          : 'rounded-pill border-lav-white/25 bg-transparent',
+      )}
     >
       <div className="flex w-full items-center justify-between gap-3 px-4 py-2">
-        <span className="font-brand text-body font-semibold text-lav-navy">{pill.label}</span>
-        <Minus size={20} strokeWidth={2} className="shrink-0 text-lav-navy" />
+        <span
+          className={cn(
+            'font-brand text-body',
+            expanded ? 'font-semibold text-lav-navy' : 'font-medium text-lav-white',
+          )}
+        >
+          {pill.label}
+        </span>
+        {expanded ? (
+          <Minus size={20} strokeWidth={2} className="shrink-0 text-lav-navy" />
+        ) : (
+          <Plus size={20} strokeWidth={2} className="shrink-0 text-lav-white" />
+        )}
       </div>
-      <p className="m-0 px-4 pb-4 font-brand text-[14px] font-normal leading-[1.5] text-lav-navy/70">
-        {pill.description}
-      </p>
-    </button>
-  );
-}
 
-function CollapsedPill({ pill, onClick }: { pill: ServicePill; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-pill border border-lav-white/25 bg-transparent px-4 py-2 font-brand"
-    >
-      <span className="font-brand text-body font-medium text-lav-white">{pill.label}</span>
-      <Plus size={20} strokeWidth={2} className="shrink-0 text-lav-white" />
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="desc"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: prefs.d(DURATION.fast), ease: EASE.out }}
+            className="w-full overflow-hidden"
+          >
+            <p className="m-0 px-4 pb-4 pt-2 font-brand text-[14px] font-normal leading-[1.5] text-lav-navy/70">
+              {pill.description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </button>
   );
 }

@@ -16,6 +16,7 @@ export function Eyebrow({
 }) {
   return (
     <span
+      data-ds="Eyebrow"
       className={cn(
         'font-brand text-[14px] font-medium uppercase tracking-[0.5px]',
         tone === 'navy' ? 'text-lav-navy/70' : 'text-lav-white/70',

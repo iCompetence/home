@@ -173,12 +173,60 @@
   --radius-card: 24px;
   --radius-card-sm: 16px;
 
-  /* Section rhythm (desktop reference; see SECTION_PAD for tablet/mobile) */
+  /* Section rhythm — see the responsive :root block below for the live values. */
   --spacing-section-v: 64px;
   --spacing-section-h: 96px;
 
   /* Layout frame (FRAME_MAX_WIDTH) → max-w-frame */
   --container-frame: 1440px;
+
+  /* Motion — mirrors src/design-system/motion.ts, which is the source of
+     truth (framer-motion drives most of the motion and needs seconds).
+     Used from CSS as duration-[var(--duration-fast)] / ease-[var(--ease-…)]. */
+  --duration-fast: 160ms;
+  --duration-base: 300ms;
+  --duration-slow: 450ms;
+  --duration-slower: 550ms;
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Live section padding, consumed by the shared <Section> component. Kept as
+   plain custom properties (not @theme) so the dev dial panel can override them
+   per breakpoint at runtime. Mobile 48/24 · tablet 56/48 · desktop 64/96. */
+:root {
+  --section-pad-v: 48px;
+  --section-pad-h: 24px;
+}
+@media (min-width: 768px) {
+  :root {
+    --section-pad-v: 56px;
+    --section-pad-h: 48px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --section-pad-v: 64px;
+    --section-pad-h: 96px;
+  }
+}
+
+/* Honour prefers-reduced-motion. The rule is "gentler, not zero": opacity and
+   colour keep transitioning so state changes stay legible, while movement
+   (transform) and smooth scrolling — the parts that trigger vestibular
+   discomfort — are dropped. framer-motion is handled in motion.ts. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    transition-duration: var(--duration-fast) !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer base {
@@ -191,12 +239,23 @@
     background-color: #012332 !important;
     color: #FCFCFC;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
     width: 100%;
-    overscroll-behavior-y: none;
-    overscroll-behavior-x: none;
-    overscroll-behavior: none;
+    /* overscroll-behavior: none was never actually in effect: the frozen
+       src/index.css snapshot did not contain it, so the site has always run
+       without it. Once Tailwind compiled for real it started applying and
+       broke the expected scroll feel (no rubber-banding, scroll chaining
+       blocked). Left out deliberately to keep the long-standing behaviour. */
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* overflow-x belongs on the root only. Setting it on <body> as well turns
+     body into its own scroll container whose content is exactly as tall as
+     itself — the wheel then lands in a container with nothing to scroll and
+     the page does not move (measured: 93 wheel events, zero scroll, while
+     window.scrollBy still worked). The root's overflow propagates to the
+     viewport, so horizontal overflow stays suppressed either way. */
+  html {
+    overflow-x: hidden;
   }
 
   /* Fix for mobile step-by-step appearance without breaking backgrounds */
