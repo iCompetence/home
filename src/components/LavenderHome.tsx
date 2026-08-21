@@ -5,9 +5,10 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Button,
+  ClosingBlock,
   DesignFrameOverlay,
   Eyebrow,
-  Footer,
+  Hero as HeroSection,
   LogoCarousel,
   ProcessAccordion,
   ProductTeaser,
@@ -63,16 +64,7 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       <Process />
       <PrivacyLed />
 
-      <div className="relative isolate overflow-hidden">
-        <CTABand />
-        <Footer />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 z-[1] h-full w-full max-w-frame -translate-x-1/2"
-        >
-          <div className="absolute top-1/2 h-[420px] w-[420px] -translate-y-1/2 bg-[url('/images/icompetence_visual_01.png')] bg-contain bg-center bg-no-repeat -left-[120px] md:h-[560px] md:w-[560px] md:-left-[140px] lg:h-[820px] lg:w-[820px]" />
-        </div>
-      </div>
+      <Closing />
     </div>
   );
 }
@@ -102,22 +94,13 @@ function Hero() {
   );
 
   return (
-    <section id="top" className="relative w-full bg-lav-lavender/10">
-      {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
-
-      <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-6 px-6 py-12 md:gap-8 md:px-12 md:py-14 lg:gap-10 lg:px-24 lg:py-16">
-        {/* Brand headline — intentionally identical in both languages. */}
-        <h1 className="m-0 whitespace-normal font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] md:tracking-[-1.5px] lg:whitespace-pre-line lg:text-h1 lg:tracking-[-2px]">
-          {compact
-            ? t('lavender.hero.headline').replace('\n', ' ')
-            : t('lavender.hero.headline')}
-        </h1>
-
-        <p className="m-0 w-full max-w-full font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:w-[600px] md:text-sub lg:w-[820px] lg:text-sub">
-          {t('lavender.hero.subline')}
-        </p>
-
-        <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
+    <HeroSection
+      /* Brand headline — intentionally identical in both languages. */
+      title={t('lavender.hero.headline')}
+      subline={t('lavender.hero.subline')}
+      decoration={star}
+      actions={
+        <>
           <Button asChild variant="primary">
             <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
               {t('topNav.letsTalk')}
@@ -130,9 +113,9 @@ function Hero() {
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>
-        </div>
-      </div>
-    </section>
+        </>
+      }
+    />
   );
 }
 
@@ -383,22 +366,19 @@ function PrivacyLed() {
 
 /* ---------------- Closing CTA band ---------------- */
 
-function CTABand() {
+function Closing() {
   const { t, language } = useLanguage();
   return (
-    <Section
-      className="overflow-hidden bg-[#bde3f4]"
-      innerClassName="relative z-[2] flex flex-col items-center gap-6 md:gap-8 lg:gap-10"
-    >
-      <h2 className="m-0 w-full text-center font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] md:tracking-[-1.5px] lg:text-h1 lg:tracking-[-2px]">
-        {t('lavender.cta.heading')}
-      </h2>
-      <Button asChild variant="dark">
-        <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
-          {t('topNav.letsTalk')}
-          <ArrowUpRight size={20} strokeWidth={2} />
-        </a>
-      </Button>
-    </Section>
+    <ClosingBlock
+      heading={t('lavender.cta.heading')}
+      action={
+        <Button asChild variant="dark">
+          <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
+            {t('topNav.letsTalk')}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </a>
+        </Button>
+      }
+    />
   );
 }

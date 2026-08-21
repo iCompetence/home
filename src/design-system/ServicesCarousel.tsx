@@ -19,6 +19,8 @@ export type ServiceCard = {
 export type ServicesCarouselProps = {
   cards: readonly ServiceCard[];
   title: string;
+  /** Optional intro below the title — several pages lead in before the cards. */
+  subline?: string;
   id?: string;
   prevLabel?: string;
   nextLabel?: string;
@@ -39,6 +41,7 @@ const COLLAPSED_W = 640;
 export function ServicesCarousel({
   cards,
   title,
+  subline,
   id = 'services',
   prevLabel = 'Previous service',
   nextLabel = 'Next service',
@@ -81,10 +84,17 @@ export function ServicesCarousel({
   return (
     <Section dsName="ServicesCarousel" id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
       {/* Header */}
-      <div className="flex w-full items-center justify-between">
-        <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
-          {title}
-        </h2>
+      <div className="flex w-full items-start justify-between gap-6">
+        <div className="flex flex-col gap-3 md:gap-4">
+          <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
+            {title}
+          </h2>
+          {subline && (
+            <p className="m-0 max-w-[720px] font-brand text-body font-normal leading-[1.5] text-lav-navy/80">
+              {subline}
+            </p>
+          )}
+        </div>
         <div className="flex items-center gap-2 lg:gap-3">
           <button
             type="button"

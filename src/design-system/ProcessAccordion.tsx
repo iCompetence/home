@@ -19,6 +19,8 @@ export type ProcessStep = {
 export type ProcessAccordionProps = {
   steps: readonly ProcessStep[];
   title: string;
+  /** Optional intro below the title. */
+  subline?: string;
   id?: string;
   /** Index of the step expanded on first render (default: the second one). */
   defaultExpanded?: number | null;
@@ -28,6 +30,7 @@ export type ProcessAccordionProps = {
 export function ProcessAccordion({
   steps,
   title,
+  subline,
   id = 'process',
   defaultExpanded = 1,
 }: ProcessAccordionProps) {
@@ -35,9 +38,16 @@ export function ProcessAccordion({
 
   return (
     <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
-      <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
-        {title}
-      </h2>
+      <div className="flex w-full flex-col gap-3 md:gap-4">
+        <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
+          {title}
+        </h2>
+        {subline && (
+          <p className="m-0 max-w-[820px] font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
+            {subline}
+          </p>
+        )}
+      </div>
 
       <div className="flex w-full flex-col">
         {steps.map((step, idx) => (

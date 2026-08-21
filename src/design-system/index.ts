@@ -3,6 +3,8 @@
 // Consumed by pages as the design rolls out — see docs/design-migration.md.
 export { DURATION, EASE, type EaseName } from './motion';
 export { Section } from './Section';
+export { Hero, type HeroProps } from './Hero';
+export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
