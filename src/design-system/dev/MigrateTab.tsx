@@ -111,6 +111,8 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
   const [lightBg, setLightBg] = useState(true);
   const [mount, setMount] = useState<HTMLElement | null>(null);
   const [exported, setExported] = useState<string | null>(null);
+  /** What the last pick attempt hit — the panel used to fail silently. */
+  const [lastHit, setLastHit] = useState<string | null>(null);
 
   // Picker: sections on an old page (or any element as a fallback).
   useEffect(() => {
@@ -125,11 +127,17 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       const el = pick(e.target);
       setHover(el ? el.getBoundingClientRect() : null);
     };
-    const onClick = (e: MouseEvent) => {
+    const select = (e: Event) => {
       if (inPanel(e.target)) return;
       e.preventDefault();
       e.stopPropagation();
       const el = pick(e.target);
+      const hit = e.target as Element | null;
+      setLastHit(
+        el
+          ? `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}`
+          : `${hit?.tagName?.toLowerCase() ?? '?'} — keine Sektion gefunden`,
+      );
       if (el) {
         pickedRef.current = el;
         const sels: string[] = [];
@@ -149,12 +157,21 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       setHover(null);
     };
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setPicking(false);
+    // pointerdown is the trigger; the click that follows is swallowed so a
+    // link or button inside the section cannot navigate away mid-pick.
+    const swallow = (e: Event) => {
+      if (inPanel(e.target)) return;
+      e.preventDefault();
+      e.stopPropagation();
+    };
     document.addEventListener('mousemove', onMove, true);
-    document.addEventListener('click', onClick, true);
+    document.addEventListener('pointerdown', select, true);
+    document.addEventListener('click', swallow, true);
     document.addEventListener('keydown', onKey, true);
     return () => {
       document.removeEventListener('mousemove', onMove, true);
-      document.removeEventListener('click', onClick, true);
+      document.removeEventListener('pointerdown', select, true);
+      document.removeEventListener('click', swallow, true);
       document.removeEventListener('keydown', onKey, true);
     };
   }, [picking, panelEl]);
@@ -390,9 +407,21 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           ⧉ {picking ? 'Sektion anklicken…' : 'Sektion wählen'}
         </button>
 
+        {picking && (
+          <div style={{ color: '#3fb950', marginTop: 6 }}>
+            Picker aktiv — fahre über die Seite, klicke eine Sektion (Esc bricht ab)
+          </div>
+        )}
+        {!picking && lastHit && !data && (
+          <div style={{ color: '#d29922', marginTop: 6 }}>zuletzt getroffen: {lastHit}</div>
+        )}
+
         {data && (
           <>
-            <div style={{ color: '#8b97a5', marginTop: 8 }}>
+            <div style={{ color: '#7ee787', marginTop: 8 }}>
+              ✓ ausgewählt: {lastHit ?? 'Sektion'} — jetzt Ziel wählen, dann A/B
+            </div>
+            <div style={{ color: '#8b97a5', marginTop: 4 }}>
               gefunden: {data.heading ? '1 Überschrift, ' : ''}
               {data.items.length > 0 && `${data.items.length} Unterelemente, `}
               {data.paragraphs.length} Absätze, {data.links.length} Links, {data.images.length} Bilder
