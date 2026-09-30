@@ -4,6 +4,11 @@
 export { DURATION, EASE, type EaseName } from './motion';
 export { Section } from './Section';
 export { Hero, type HeroProps } from './Hero';
+export { BrandStar, type BrandStarVariant } from './BrandStar';
+export { Statement, type StatementProps } from './Statement';
+export { FeatureBlock, type FeatureBlockProps } from './FeatureBlock';
+export { ProductShowcase, type ProductShowcaseProps } from './ProductShowcase';
+export { CTABand, type CTABandProps } from './CTABand';
 export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';

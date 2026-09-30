@@ -6,18 +6,16 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Button,
   ClosingBlock,
-  DesignFrameOverlay,
-  Eyebrow,
+  FeatureBlock,
   Hero as HeroSection,
   LogoCarousel,
   ProcessAccordion,
-  ProductTeaser,
+  ProductShowcase,
   Section,
   ServicesCarousel,
+  Statement as StatementSection,
   TestimonialSlider,
   TopNav,
-  isCompact,
-  useBreakpoint,
 } from '@/design-system';
 
 const PAGE_BG = '#fdfafe';
@@ -58,7 +56,6 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       <LogoCarousel />
       <Services />
       <Statement />
-      <StatementCTA />
       <Products />
       <Testimonials />
       <Process />
@@ -73,32 +70,12 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 
 function Hero() {
   const { t, language } = useLanguage();
-  const bp = useBreakpoint();
-  const compact = isCompact(bp);
-
-  const star = (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute bg-[url('/images/icompetence_visual_gelb.png')] bg-contain bg-center bg-no-repeat"
-      style={
-        compact
-          ? {
-              top: bp === 'mobile' ? -40 : -120,
-              right: bp === 'mobile' ? -110 : -100,
-              width: bp === 'mobile' ? 380 : 720,
-              height: bp === 'mobile' ? 380 : 720,
-            }
-          : { left: 560, top: -200, width: 1200, height: 1200 }
-      }
-    />
-  );
 
   return (
     <HeroSection
       /* Brand headline — intentionally identical in both languages. */
       title={t('lavender.hero.headline')}
       subline={t('lavender.hero.subline')}
-      decoration={star}
       actions={
         <>
           <Button asChild variant="primary">
@@ -162,45 +139,20 @@ function Services() {
 /* ---------------- Statement ---------------- */
 
 function Statement() {
-  const { t } = useLanguage();
-  const bp = useBreakpoint();
-  const compact = isCompact(bp);
-
-  const star = (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute top-1/2 -translate-y-1/2 bg-[url('/images/icompetence_visual_blau_01.png')] bg-contain bg-center bg-no-repeat"
-      style={{
-        left: bp === 'mobile' ? -130 : bp === 'tablet' ? -220 : -300,
-        width: bp === 'mobile' ? 340 : bp === 'tablet' ? 600 : 900,
-        height: bp === 'mobile' ? 340 : bp === 'tablet' ? 600 : 900,
-      }}
-    />
-  );
-
-  return (
-    <Section className="relative" innerClassName="relative z-[2]">
-      {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
-      <p className="m-0 w-full text-center font-brand text-[28px] font-medium leading-[1.15] text-lav-navy md:text-[40px] lg:text-h2 lg:leading-[1.1]">
-        {t('lavender.statement')}
-      </p>
-    </Section>
-  );
-}
-
-function StatementCTA() {
   const { t, language } = useLanguage();
+
   return (
-    <section id="cta" className="w-full pb-12 md:pb-14 lg:pb-16">
-      <div className="mx-auto flex w-full max-w-frame justify-center px-6 md:px-12 lg:px-24">
+    <StatementSection
+      text={t('lavender.statement')}
+      action={
         <Button asChild variant="primary">
           <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
         </Button>
-      </div>
-    </section>
+      }
+    />
   );
 }
 
@@ -209,53 +161,43 @@ function StatementCTA() {
 function Products() {
   const { t, language } = useLanguage();
   return (
-    <Section id="products" innerClassName="flex flex-col gap-6 lg:gap-10">
-      {/* Featured product — image first on mobile, text-left on larger screens. */}
-      <div className="flex w-full flex-col items-stretch gap-6 md:flex-row md:items-center md:gap-8 lg:gap-10">
-        <img
-          src="/images/lavender-empco.png"
-          alt={t('lavender.products.empco.imageAlt')}
-          loading="lazy"
-          className="order-first h-[280px] w-full min-w-0 rounded-card bg-lav-lavender object-cover object-center md:order-last md:h-[420px] md:flex-1 lg:h-[640px]"
-        />
-        <div className="flex flex-col gap-4 md:flex-1 md:gap-6">
-          <Eyebrow>{t('lavender.products.featuredEyebrow')}</Eyebrow>
-          <h2 className="m-0 font-brand text-[40px] font-medium leading-[1.1] text-lav-navy md:text-[44px] lg:text-h2">
-            {t('lavender.products.empco.title')}
-          </h2>
-          <p className="m-0 font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
-            {t('lavender.products.empco.desc')}
-          </p>
+    <ProductShowcase
+      featured={{
+        eyebrow: t('lavender.products.featuredEyebrow'),
+        title: t('lavender.products.empco.title'),
+        description: t('lavender.products.empco.desc'),
+        image: '/images/lavender-empco.png',
+        imageAlt: t('lavender.products.empco.imageAlt'),
+        action: (
           <Button asChild variant="dark" className="self-start">
             <a href={`/${language}/empco-audit/`}>
               {t('lavender.products.empco.cta')}
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-        </div>
-      </div>
-
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={`/${language}/iknow/`}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={`/${language}/analytics-agent/`}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
+        ),
+      }}
+      teasers={[
+        {
+          eyebrow: t('lavender.products.eyebrow'),
+          title: 'iKnow',
+          description: t('lavender.products.iknow.desc'),
+          image: '/images/lavender-iknow.png',
+          imageAlt: t('lavender.products.iknow.imageAlt'),
+          href: `/${language}/iknow/`,
+          ctaLabel: t('lavender.products.learnMore'),
+        },
+        {
+          eyebrow: t('lavender.products.eyebrow'),
+          title: 'Analytics Agent',
+          description: t('lavender.products.analyticsAgent.desc'),
+          image: '/images/lavender-analytics-agent.png',
+          imageAlt: t('lavender.products.analyticsAgent.imageAlt'),
+          href: `/${language}/analytics-agent/`,
+          ctaLabel: t('lavender.products.learnMore'),
+        },
+      ]}
+    />
   );
 }
 
@@ -283,8 +225,6 @@ const TESTIMONIAL_NAMES: Record<(typeof TESTIMONIAL_KEYS)[number], string> = {
 
 function Testimonials() {
   const { t } = useLanguage();
-  const bp = useBreakpoint();
-  const compact = isCompact(bp);
 
   const items = TESTIMONIAL_KEYS.map((k) => ({
     quote: t(`lavender.testimonials.${k}.quote`),
@@ -292,25 +232,12 @@ function Testimonials() {
     role: t(`lavender.testimonials.${k}.role`),
   }));
 
-  const star = (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute top-1/2 -translate-y-1/2 bg-[url('/images/icompetence_visual_rot_01.png')] bg-contain bg-center bg-no-repeat"
-      style={{
-        right: bp === 'mobile' ? -120 : bp === 'tablet' ? -150 : -300,
-        width: bp === 'mobile' ? 360 : bp === 'tablet' ? 700 : 900,
-        height: bp === 'mobile' ? 360 : bp === 'tablet' ? 700 : 900,
-      }}
-    />
-  );
-
   return (
     <TestimonialSlider
       items={items}
       title={t('lavender.testimonials.title')}
       prevLabel={t('lavender.testimonials.prev')}
       nextLabel={t('lavender.testimonials.next')}
-      decoration={compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
     />
   );
 }
@@ -344,22 +271,26 @@ function Process() {
 function PrivacyLed() {
   const { t, language } = useLanguage();
   return (
-    <Section id="privacy-led" innerClassName="flex flex-col items-center gap-6 md:gap-8 lg:gap-10">
-      <div className="h-[240px] w-full rounded-card bg-[url('/images/privacy-led.jpg')] bg-cover bg-center md:h-[360px] lg:h-[400px]" />
-      <div className="flex w-full flex-col gap-4 md:gap-5 lg:gap-6">
-        <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
-          {t('lavender.privacyLed.title')}
-        </h2>
-        <p className="m-0 font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
-          {t('lavender.privacyLed.desc')}
-        </p>
-        <Button asChild variant="dark" className="self-start">
-          <a href={`/${language}/privacy-led-ai/`} target="_blank" rel="noopener noreferrer">
-            {t('lavender.privacyLed.cta')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-      </div>
+    <Section id="privacy-led">
+      <FeatureBlock
+        layout="stacked"
+        title={t('lavender.privacyLed.title')}
+        description={t('lavender.privacyLed.desc')}
+        image="/images/privacy-led.jpg"
+        imageAlt={t('lavender.privacyLed.title')}
+        action={
+          <Button asChild variant="dark" className="self-start">
+            <a
+              href={`/${language}/privacy-led-ai/`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('lavender.privacyLed.cta')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        }
+      />
     </Section>
   );
 }

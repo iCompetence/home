@@ -3,6 +3,9 @@
 import { useState, type ReactNode } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Section } from './Section';
+import { BrandStar } from './BrandStar';
+import { DesignFrameOverlay } from './DesignFrameOverlay';
+import { isCompact, useBreakpoint } from './useBreakpoint';
 
 export type Testimonial = {
   quote: string;
@@ -15,6 +18,10 @@ export type TestimonialSliderProps = {
   /** Section heading, e.g. t('testimonials.title'). */
   title: string;
   /** Decorative background (e.g. a star visual); rendered behind the content. */
+  /**
+   * Decorative visual behind the quotes. Defaults to the section's brand star,
+   * pinned to the design frame on desktop — pass `null` to opt out.
+   */
   decoration?: ReactNode;
   prevLabel?: string;
   nextLabel?: string;
@@ -31,10 +38,11 @@ export type TestimonialSliderProps = {
 export function TestimonialSlider({
   items,
   title,
-  decoration,
+  decoration = <BrandStar variant="testimonials" />,
   prevLabel = 'Previous testimonial',
   nextLabel = 'Next testimonial',
 }: TestimonialSliderProps) {
+  const bp = useBreakpoint();
   const [idx, setIdx] = useState(0);
   const goPrev = () => setIdx((i) => (i - 1 + items.length) % items.length);
   const goNext = () => setIdx((i) => (i + 1) % items.length);
@@ -85,7 +93,8 @@ export function TestimonialSlider({
       className="relative overflow-hidden bg-lav-navy"
       innerClassName="relative z-[2] flex flex-col gap-6 md:gap-10"
     >
-      {decoration}
+      {decoration &&
+        (isCompact(bp) ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
       <h2 className="m-0 w-full font-brand text-[28px] font-medium leading-[1.1] text-lav-white md:text-[32px] lg:text-h3">
         {title}
       </h2>

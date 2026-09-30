@@ -301,8 +301,12 @@
     line-height: 110% !important;
   }
 
-  /* Direct h1 styling to ensure it applies */
-  h1 {
+  /* Direct h1 styling to ensure it applies.
+     Scoped away from the new design: these !important declarations beat every
+     Tailwind font-size utility regardless of layer order, so inside
+     .lavender-page they would pin every hero headline to 40px/700 and silently
+     disable text-h1 & friends. */
+  h1:not(.lavender-page h1) {
     font-size: 40px !important;
     font-weight: 700 !important;
     line-height: 110% !important;
@@ -314,7 +318,7 @@
       font-size: 40px !important;
     }
     
-    h1 {
+    h1:not(.lavender-page h1) {
       font-size: 32px !important;
     }
   }

@@ -39,6 +39,15 @@ icompetence.de-Seiten nach und nach auf dieses Design zu ziehen.
 - [x] **PR 5 – `LavenderHome` auf die Library umbauen** + Texte nach `useLanguage` migrieren
       (Beweis: Optik 1:1; erledigt die i18n-Konvergenz für Lavender).
 
+- [x] **PR 6 – Lücken schließen: alles, was Lavender ausmacht, ist jetzt Komponente.**
+      Vier Bausteine lagen noch inline in `LavenderHome` und fehlten damit im
+      Design-System (und im Migrationstool): `BrandStar` (der großflächige
+      Marken-Stern, vorher 4× dupliziert), `Statement` (+ eigenes CTA-Band),
+      `FeatureBlock` (Bild + Text + CTA, `side`/`stacked` — deckt sowohl das
+      Feature-Produkt als auch die Privacy-Led-Sektion ab), `ProductShowcase`
+      (Feature + Teaser-Reihe) und `CTABand` (aus `ClosingBlock` herausgelöst).
+      `LavenderHome` komponiert nur noch; Optik auf 1440/800/420 pixelgleich.
+
 ### Phase 2 — Shell vereinheitlichen
 - [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.
 
@@ -60,6 +69,22 @@ icompetence.de-Seiten nach und nach auf dieses Design zu ziehen.
   Inhalt (kein reines JS-Rendering von Kerncontent), Schema/JSON-LD, hreflang, `img alt`.
 - **Live-Seiten nie brechen** — auf Branch bauen, gegen Alt-Design verifizieren, dann mergen.
 - `/lavender` bleibt `noindex`, bis die echte Homepage steht.
+
+## Fallstricke, die uns schon Zeit gekostet haben
+
+- **`!important` in `@layer base` schlägt jede Utility.** `h1 { font-size: 40px !important }`
+  aus dem alten Design hat die Lavender-Hero-Headline seit dem ersten Build auf
+  40px/700 statt 80px/500 gehalten — unauffällig, weil h2/h3 korrekt blieben.
+  Die Regel ist jetzt auf `h1:not(.lavender-page h1)` eingegrenzt. Merke: eine
+  `!important`-Deklaration gewinnt gegen *alle* normalen Deklarationen, egal in
+  welchem Layer und in welcher Reihenfolge.
+- **`cn()` verwirft `leading-*` vor `text-*`.** tailwind-merge behandelt
+  font-size als konfliktierend mit line-height, entfernt also ein früher
+  gelistetes `leading-[1.1]`. In `cn()` gehört das Leading **hinter** die
+  Größenklassen. (Traf `FeatureBlock` und `ServicesCarousel`.)
+- **Utilities prüft man am Element, nicht am Stylesheet.** `document.styleSheets`
+  zu durchlaufen führt in die Irre; ein Probe-Element mit der fraglichen Klasse
+  und `getComputedStyle` beantwortet die Frage in einem Schritt.
 
 ## Offene Aufräumpunkte (Follow-up, nicht dringend)
 - `src/index.css` (alter, eingefrorener Snapshot) wird nicht mehr importiert → in einem

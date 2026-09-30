@@ -230,8 +230,11 @@ function ServiceCardView({
         >
           <h3
             className={cn(
-              'm-0 font-brand font-medium leading-[1.1] text-lav-white',
+              'm-0 font-brand font-medium text-lav-white',
               stack ? 'text-[40px]' : 'text-[48px]',
+              // After the size on purpose — tailwind-merge drops a leading that
+              // is listed before a conflicting text-* font-size class.
+              'leading-[1.1]',
             )}
           >
             {card.title}

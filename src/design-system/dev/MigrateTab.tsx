@@ -5,13 +5,22 @@ import { createPortal } from 'react-dom';
 import { ArrowUpRight } from 'lucide-react';
 import {
   Button,
+  CTABand,
+  ClosingBlock,
+  FeatureBlock,
+  Footer,
+  Hero,
   LogoCarousel,
   ProcessAccordion,
+  ProductShowcase,
   ProductTeaser,
   Section,
   ServicesCarousel,
+  Statement,
   TestimonialSlider,
+  TopNav,
 } from '../index';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import { keyForText } from './devI18n';
 
 /**
@@ -39,24 +48,68 @@ type Extracted = {
 type Target =
   | 'section'
   | 'hero'
-  | 'cta'
+  | 'statement'
+  | 'feature'
+  | 'featureStacked'
+  | 'products'
   | 'teaser'
   | 'services'
   | 'process'
   | 'testimonials'
-  | 'logos';
+  | 'logos'
+  | 'cta'
+  | 'closing'
+  | 'nav'
+  | 'footer';
 
-/** `needsItems` targets only make sense when sub-items were found. */
-const TARGETS: { id: Target; label: string; hint: string; needsItems?: boolean }[] = [
-  { id: 'section', label: 'Section', hint: 'Überschrift + Fließtext' },
-  { id: 'hero', label: 'Hero', hint: 'große Headline + Subline + CTA' },
-  { id: 'cta', label: 'CTA-Band', hint: 'zentrierte Headline + Button' },
-  { id: 'teaser', label: 'ProductTeaser', hint: 'Karte mit Bild + Link' },
+/**
+ * Every slot the new design actually has, in page order — the list doubles as
+ * the migration checklist for a page. `needsItems` targets only make sense
+ * when sub-items were found; `selfContained` ones ignore the old copy.
+ */
+const TARGETS: {
+  id: Target;
+  label: string;
+  hint: string;
+  needsItems?: boolean;
+  selfContained?: boolean;
+}[] = [
+  { id: 'nav', label: 'TopNav', hint: 'Kopfzeile — eigene Navigation', selfContained: true },
+  { id: 'hero', label: 'Hero', hint: 'Headline + Subline + CTA + Marken-Stern' },
+  { id: 'logos', label: 'LogoCarousel', hint: 'eigene Logo-Liste', selfContained: true },
   { id: 'services', label: 'ServicesCarousel', hint: 'Karte mit aufklappbaren Pills', needsItems: true },
-  { id: 'process', label: 'ProcessAccordion', hint: 'nummerierte Schritte', needsItems: true },
+  { id: 'statement', label: 'Statement', hint: 'ein großer Satz über dem Stern + CTA' },
+  { id: 'feature', label: 'FeatureBlock', hint: 'Bild neben Text + CTA' },
+  { id: 'featureStacked', label: 'FeatureBlock (gestapelt)', hint: 'breites Bild über Text + CTA' },
+  { id: 'products', label: 'ProductShowcase', hint: 'Feature-Produkt + Teaser-Reihe' },
+  { id: 'teaser', label: 'ProductTeaser', hint: 'einzelne Karte mit Bild + Link' },
   { id: 'testimonials', label: 'TestimonialSlider', hint: 'Zitate — Name/Rolle fehlen' },
-  { id: 'logos', label: 'LogoCarousel', hint: 'eigene Logo-Liste, kein Inhalt nötig' },
+  { id: 'process', label: 'ProcessAccordion', hint: 'nummerierte Schritte', needsItems: true },
+  { id: 'closing', label: 'ClosingBlock', hint: 'CTA-Band + Footer + Stern' },
+  { id: 'cta', label: 'CTA-Band', hint: 'nur das Band, ohne Footer' },
+  { id: 'footer', label: 'Footer', hint: 'nur der Footer', selfContained: true },
+  { id: 'section', label: 'Section', hint: 'Notnagel: Überschrift + Fließtext' },
 ];
+
+/**
+ * Stand-in visual for blocks whose old section has no image of its own.
+ *
+ * Drawn rather than borrowed from the brand assets: a real image cropped by
+ * object-cover reads as an empty coloured panel, which makes the A/B look
+ * worse than the finished migration would. A labelled, dashed placeholder
+ * shows the format the block reserves *and* that content is still missing.
+ */
+const PLACEHOLDER_IMAGE =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+       <rect width="1600" height="900" fill="#efe4f7"/>
+       <rect x="24" y="24" width="1552" height="852" fill="none" stroke="#0b2231" stroke-opacity="0.35"
+             stroke-width="6" stroke-dasharray="24 18" rx="16"/>
+       <text x="800" y="470" text-anchor="middle" font-family="Inter, sans-serif" font-size="92"
+             font-weight="500" fill="#0b2231" fill-opacity="0.55">&#10216;Bild&#10217;</text>
+     </svg>`,
+  );
 
 function extract(el: Element): Extracted {
   const txt = (n: Element | null) => n?.textContent?.replace(/\s+/g, ' ').trim() || '';
@@ -185,6 +238,9 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
     old.style.display = 'none';
     const holder = document.createElement('div');
     holder.setAttribute('data-ds-preview', '');
+    // Same marker the new design uses, so the preview inherits its scoped base
+    // styles instead of the legacy ones the old page still carries.
+    holder.className = 'lavender-page';
     if (lightBg) holder.style.background = 'var(--color-lav-page)';
     old.parentElement?.insertBefore(holder, old);
     setMount(holder);
@@ -195,56 +251,123 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
     };
   }, [preview, path, lightBg]);
 
+  /**
+   * Renders the picked copy with the REAL design-system component — never a
+   * lookalike. That is the whole point of the A/B: it has to answer "would
+   * this section work as a Hero", and a hand-built text stand-in answers a
+   * different, easier question (it drops the brand star, the hero surface and
+   * the section's own rhythm, so it always looks tamer than the real thing).
+   *
+   * Where the old section has nothing to fill a slot, an explicit ⟨…⟩
+   * placeholder goes in rather than the slot silently disappearing.
+   */
   const rendered = () => {
     if (!data) return null;
-    const head = data.heading ?? '';
+    const head = data.heading ?? '⟨Überschrift⟩';
     const copy = data.paragraphs;
     const cta = data.links[0];
+    const image = data.images[0]?.src ?? PLACEHOLDER_IMAGE;
+    const imageAlt = data.images[0]?.alt ?? head;
+
+    const ctaButton = (variant: 'primary' | 'dark', className?: string) => (
+      <Button asChild variant={variant} className={className}>
+        <a href={cta?.href ?? '#'}>
+          {cta?.text ?? '⟨CTA⟩'}
+          <ArrowUpRight size={20} strokeWidth={2} />
+        </a>
+      </Button>
+    );
+
+    if (target === 'nav') return <TopNav />;
+    if (target === 'footer') return <Footer />;
+    if (target === 'logos') return <LogoCarousel />;
+
     if (target === 'hero')
       return (
-        <Section innerClassName="flex flex-col gap-6 lg:gap-10">
-          <h1 className="m-0 font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] lg:text-h1 lg:tracking-[-2px]">
-            {head}
-          </h1>
-          {copy[0] && (
-            <p className="m-0 max-w-full font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub lg:w-[820px]">
-              {copy[0]}
-            </p>
-          )}
-          {cta && (
-            <Button asChild variant="primary" className="self-start">
-              <a href={cta.href}>
-                {cta.text}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
-          )}
-        </Section>
+        <Hero
+          title={head}
+          subline={copy[0] ?? '⟨Subline⟩'}
+          actions={ctaButton('primary')}
+        />
       );
-    if (target === 'cta')
+
+    if (target === 'statement')
       return (
-        <Section className="bg-[#bde3f4]" innerClassName="flex flex-col items-center gap-6 lg:gap-10">
-          <h2 className="m-0 w-full text-center font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] lg:text-h1 lg:tracking-[-2px]">
-            {head}
-          </h2>
-          {cta && (
-            <Button asChild variant="dark">
-              <a href={cta.href}>
-                {cta.text}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
-          )}
+        <Statement
+          text={data.heading ?? copy[0] ?? '⟨Aussage⟩'}
+          action={ctaButton('primary')}
+          actionId="preview-cta"
+        />
+      );
+
+    if (target === 'feature' || target === 'featureStacked')
+      return (
+        <Section>
+          <FeatureBlock
+            layout={target === 'feature' ? 'side' : 'stacked'}
+            title={head}
+            description={copy[0] ?? '⟨Fließtext⟩'}
+            image={image}
+            imageAlt={imageAlt}
+            action={ctaButton('dark', 'self-start')}
+          />
         </Section>
       );
+
+    if (target === 'products')
+      return (
+        <ProductShowcase
+          featured={{
+            eyebrow: '⟨Eyebrow⟩',
+            title: head,
+            description: copy[0] ?? '⟨Fließtext⟩',
+            image,
+            imageAlt,
+            action: ctaButton('dark', 'self-start'),
+          }}
+          /* Falls die alte Sektion keine Unterpunkte hat, zwei Platzhalter-
+             Karten — sonst fehlt die halbe Komponente im A/B. */
+          teasers={(data.items.length
+            ? data.items.slice(0, 2)
+            : [
+                { title: '⟨Produkt 1⟩', text: '' },
+                { title: '⟨Produkt 2⟩', text: '' },
+              ]
+          ).map((it, i) => ({
+            eyebrow: '⟨Eyebrow⟩',
+            title: it.title,
+            description: it.text || '⟨Beschreibung⟩',
+            image: data.images[i + 1]?.src ?? PLACEHOLDER_IMAGE,
+            imageAlt: it.title,
+            href: cta?.href ?? '#',
+            ctaLabel: '⟨CTA⟩',
+          }))}
+        />
+      );
+
+    if (target === 'teaser')
+      return (
+        <Section innerClassName="flex">
+          <ProductTeaser
+            eyebrow="⟨Eyebrow⟩"
+            title={head}
+            description={copy[0] ?? '⟨Beschreibung⟩'}
+            image={image}
+            imageAlt={imageAlt}
+            href={cta?.href ?? '#'}
+            ctaLabel={cta?.text ?? '⟨CTA⟩'}
+          />
+        </Section>
+      );
+
     if (target === 'services')
       return (
         <ServicesCarousel
           title={head}
           cards={[
             {
-              title: head || '⟨Titel⟩',
-              image: data.images[0]?.src ?? '/images/iC_Stern_Blau.png',
+              title: head,
+              image,
               pills: data.items.map((it) => ({
                 label: it.title,
                 description: it.text || '⟨Beschreibung⟩',
@@ -253,6 +376,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           ]}
         />
       );
+
     if (target === 'process')
       return (
         <ProcessAccordion
@@ -264,6 +388,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           }))}
         />
       );
+
     if (target === 'testimonials')
       return (
         <TestimonialSlider
@@ -275,28 +400,19 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           }))}
         />
       );
-    if (target === 'logos') return <LogoCarousel />;
-    if (target === 'teaser')
-      return (
-        <Section innerClassName="flex">
-          <ProductTeaser
-            eyebrow="⟨eyebrow⟩"
-            title={head}
-            description={copy[0] ?? ''}
-            image={data.images[0]?.src ?? '/images/iC_Stern_Blau.png'}
-            imageAlt={data.images[0]?.alt ?? head}
-            href={cta?.href ?? '#'}
-            ctaLabel={cta?.text ?? '⟨CTA⟩'}
-          />
-        </Section>
-      );
+
+    if (target === 'closing')
+      return <ClosingBlock heading={head} action={ctaButton('dark')} />;
+
+    if (target === 'cta') return <CTABand heading={head} action={ctaButton('dark')} />;
+
     return (
       <Section innerClassName="flex flex-col gap-4 md:gap-6">
-        <h2 className="m-0 font-brand text-[28px] font-medium leading-[1.1] text-lav-navy md:text-[32px] lg:text-h3">
+        <h2 className="m-0 font-brand text-[28px] font-medium text-lav-navy md:text-[32px] lg:text-h3 leading-[1.1]">
           {head}
         </h2>
         {copy.map((c, i) => (
-          <p key={i} className="m-0 font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
+          <p key={i} className="m-0 font-brand font-normal text-lav-navy/80 text-body md:text-sub leading-[1.5]">
             {c}
           </p>
         ))}
@@ -320,7 +436,9 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       return `t('${key}')`;
     };
 
-    const head = data.heading ? ref(data.heading, 'title') : null;
+    // Never null: the scaffolds interpolate it, and "null" in the output reads
+    // as a bug rather than as "this section had no heading".
+    const head = data.heading ? ref(data.heading, 'title') : "'⟨Überschrift⟩'";
     const copy = data.paragraphs.map((p) => ref(p, 'copy'));
     const cta = data.links[0] ? ref(data.links[0].text, 'cta') : null;
     const items = data.items.map((it, i) => ({
@@ -328,29 +446,46 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       desc: it.text ? ref(it.text, `item${i + 1}Desc`) : "''",
     }));
 
-    const structured =
-      target === 'services'
-        ? `<ServicesCarousel\n  title={${head}}\n  cards={[{\n    title: {${head}},\n    image: '…',\n    pills: [\n${items.map((i) => `      { label: ${i.label}, description: ${i.desc} },`).join('\n')}\n    ],\n  }]}\n/>`
-        : target === 'process'
-          ? `<ProcessAccordion\n  title={${head}}\n  steps={[\n${items.map((i, n) => `    { number: '${String(n + 1).padStart(2, '0')}', title: ${i.label}, description: ${i.desc} },`).join('\n')}\n  ]}\n/>`
-          : target === 'testimonials'
-            ? `<TestimonialSlider\n  title={${head}}\n  items={[\n${items.map((i) => `    { quote: ${i.desc}, name: '…', role: '…' },`).join('\n')}\n  ]}\n/>  {/* Name und Rolle sind in der alten Sektion nicht enthalten */}`
-            : target === 'logos'
-              ? `<LogoCarousel />  {/* nutzt CLIENT_LOGOS, kein Inhalt aus der alten Sektion */}`
-              : null;
+    const img = data.images[0]?.src ?? '…';
+    const ctaJsx = (variant: string, extra = '') =>
+      cta
+        ? `<Button asChild variant="${variant}"${extra}><a href="…">{${cta}}</a></Button>`
+        : `{/* CTA: in der alten Sektion nicht vorhanden */}`;
 
-    // NB: `??` binds tighter than `?:` — the fallback chain must be wrapped,
-    // otherwise a non-null `structured` makes the condition truthy and the
-    // hero scaffold wins.
-    const jsx =
-      structured ??
-      (target === 'hero'
-        ? `<Section innerClassName="flex flex-col gap-6 lg:gap-10">\n  <h1 className="font-brand text-[40px] md:text-[56px] lg:text-h1 …">{${head}}</h1>\n${copy[0] ? `  <p className="font-brand text-body md:text-sub …">{${copy[0]}}</p>\n` : ''}${cta ? `  <Button asChild variant="primary"><a href="…">{${cta}}</a></Button>\n` : ''}</Section>`
-        : target === 'cta'
-          ? `<Section className="bg-[#bde3f4]" innerClassName="flex flex-col items-center gap-6">\n  <h2 className="text-center font-brand lg:text-h1 …">{${head}}</h2>\n${cta ? `  <Button asChild variant="dark"><a href="…">{${cta}}</a></Button>\n` : ''}</Section>`
-          : target === 'teaser'
-            ? `<ProductTeaser\n  eyebrow={t('…')}\n  title={${head}}\n  description={${copy[0] ?? "''"}}\n  image="${data.images[0]?.src ?? '…'}"\n  imageAlt={t('…')}\n  href="…"\n  ctaLabel={t('…')}\n/>`
-            : `<Section innerClassName="flex flex-col gap-4 md:gap-6">\n  <h2 className="font-brand text-[28px] md:text-[32px] lg:text-h3 …">{${head}}</h2>\n${copy.map((c) => `  <p className="font-brand text-body md:text-sub …">{${c}}</p>`).join('\n')}\n</Section>`);
+    /** One scaffold per target — the same component the preview rendered. */
+    const SCAFFOLD: Record<Target, () => string> = {
+      nav: () => `<TopNav />`,
+      footer: () => `<Footer />`,
+      logos: () => `<LogoCarousel />  {/* nutzt CLIENT_LOGOS, kein Inhalt aus der alten Sektion */}`,
+      hero: () =>
+        `<Hero\n  title={${head}}\n  subline={${copy[0] ?? "'…'"}}\n  actions={${ctaJsx('primary')}}\n/>  {/* Stern kommt per Default aus <BrandStar variant="hero" /> */}`,
+      statement: () =>
+        `<Statement\n  text={${head}}\n  action={${ctaJsx('primary')}}\n/>`,
+      feature: () =>
+        `<Section>\n  <FeatureBlock\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('dark', ' className="self-start"')}}\n  />\n</Section>`,
+      featureStacked: () =>
+        `<Section>\n  <FeatureBlock\n    layout="stacked"\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('dark', ' className="self-start"')}}\n  />\n</Section>`,
+      products: () =>
+        `<ProductShowcase\n  featured={{\n    eyebrow: t('…'),\n    title: ${head},\n    description: ${copy[0] ?? "'…'"},\n    image: '${img}',\n    imageAlt: t('…'),\n    action: ${ctaJsx('dark', ' className="self-start"')},\n  }}\n  teasers={[\n${items
+          .slice(0, 2)
+          .map((i) => `    { eyebrow: t('…'), title: ${i.label}, description: ${i.desc}, image: '…', imageAlt: t('…'), href: '…', ctaLabel: t('…') },`)
+          .join('\n')}\n  ]}\n/>`,
+      teaser: () =>
+        `<ProductTeaser\n  eyebrow={t('…')}\n  title={${head}}\n  description={${copy[0] ?? "'…'"}}\n  image="${img}"\n  imageAlt={t('…')}\n  href="…"\n  ctaLabel={t('…')}\n/>`,
+      services: () =>
+        `<ServicesCarousel\n  title={${head}}\n  cards={[{\n    title: ${head},\n    image: '${img}',\n    pills: [\n${items.map((i) => `      { label: ${i.label}, description: ${i.desc} },`).join('\n')}\n    ],\n  }]}\n/>`,
+      process: () =>
+        `<ProcessAccordion\n  title={${head}}\n  steps={[\n${items.map((i, n) => `    { number: '${String(n + 1).padStart(2, '0')}', title: ${i.label}, description: ${i.desc} },`).join('\n')}\n  ]}\n/>`,
+      testimonials: () =>
+        `<TestimonialSlider\n  title={${head}}\n  items={[\n${items.map((i) => `    { quote: ${i.desc}, name: '…', role: '…' },`).join('\n')}\n  ]}\n/>  {/* Name und Rolle sind in der alten Sektion nicht enthalten */}`,
+      closing: () =>
+        `<ClosingBlock\n  heading={${head}}\n  action={${ctaJsx('dark')}}\n/>  {/* enthält bereits den Footer */}`,
+      cta: () => `<CTABand\n  heading={${head}}\n  action={${ctaJsx('dark')}}\n/>`,
+      section: () =>
+        `<Section innerClassName="flex flex-col gap-4 md:gap-6">\n  <h2 className="font-brand text-[28px] md:text-[32px] lg:text-h3 leading-[1.1] …">{${head}}</h2>\n${copy.map((c) => `  <p className="font-brand text-body md:text-sub leading-[1.5] …">{${c}}</p>`).join('\n')}\n</Section>`,
+    };
+
+    const jsx = SCAFFOLD[target]();
 
     return [
       `/* ${location.pathname}  §  ${el?.id || path}`,
@@ -391,7 +526,20 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
           }}
         />
       )}
-      {mount && preview && createPortal(rendered(), mount)}
+      {/* The panel is mounted in the root layout, outside the page's
+          LanguageProvider, so components that read i18n (Footer, TopNav,
+          ClosingBlock) would throw when previewed. The preview brings its own
+          provider, seeded from the URL. */}
+      {mount &&
+        preview &&
+        createPortal(
+          <LanguageProvider
+            initialLanguage={location.pathname.startsWith('/en') ? 'en' : 'de'}
+          >
+            {rendered()}
+          </LanguageProvider>,
+          mount,
+        )}
 
       <div style={{ padding: '8px 10px' }}>
         <button

@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/components/ui/utils';
+import { BrandStar } from './BrandStar';
 import { DesignFrameOverlay } from './DesignFrameOverlay';
 import { isCompact, useBreakpoint } from './useBreakpoint';
 
@@ -13,9 +14,10 @@ export type HeroProps = {
   /** CTAs — composed by the page so each one picks its own buttons. */
   actions?: ReactNode;
   /**
-   * Decorative visual (a brand star, a gradient). Pinned to the 1440 design
-   * frame on desktop; rendered plainly on compact, where the frame does not
-   * apply.
+   * Decorative visual, pinned to the 1440 design frame on desktop and rendered
+   * plainly on compact, where the frame does not apply. Defaults to the hero
+   * brand star — the large-format visual is part of what a hero *is*, so a
+   * page has to opt out (`decoration={null}`) rather than remember to opt in.
    */
   decoration?: ReactNode;
   id?: string;
@@ -31,7 +33,7 @@ export function Hero({
   title,
   subline,
   actions,
-  decoration,
+  decoration = <BrandStar variant="hero" />,
   id = 'top',
   className,
 }: HeroProps) {
@@ -39,7 +41,11 @@ export function Hero({
   const compact = isCompact(bp);
 
   return (
-    <section id={id} className={cn('relative w-full bg-lav-lavender/10', className)}>
+    <section
+      id={id}
+      data-ds="Hero"
+      className={cn('relative w-full bg-lav-lavender/10', className)}
+    >
       {decoration &&
         (compact ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
 
