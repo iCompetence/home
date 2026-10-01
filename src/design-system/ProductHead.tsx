@@ -7,8 +7,11 @@ import { MediaGallery, type GalleryImage } from './MediaGallery';
 export type ProductHeadProps = {
   breadcrumb: readonly Crumb[];
   breadcrumbLabel: string;
-  images: readonly GalleryImage[];
-  thumbLabel: (index: number) => string;
+  /** Gallery images (with `thumbLabel`) — or pass `media` instead. */
+  images?: readonly GalleryImage[];
+  thumbLabel?: (index: number) => string;
+  /** Replaces the gallery, e.g. the experts of a workshop. */
+  media?: ReactNode;
   eyebrow: string;
   /** Product name — the page's h1. */
   title: string;
@@ -31,6 +34,7 @@ export function ProductHead({
   breadcrumbLabel,
   images,
   thumbLabel,
+  media,
   eyebrow,
   title,
   subline,
@@ -44,7 +48,8 @@ export function ProductHead({
         <Breadcrumb items={breadcrumb} label={breadcrumbLabel} />
         <div className="flex flex-col gap-8 md:gap-10 lg:flex-row lg:gap-16">
           <div className="w-full lg:w-[56.4%]">
-            <MediaGallery images={images} thumbLabel={thumbLabel} />
+            {media ??
+              (images && thumbLabel && <MediaGallery images={images} thumbLabel={thumbLabel} />)}
           </div>
           <div className="relative flex w-full flex-col gap-8 lg:flex-1">
             {/* Negative z keeps the star behind gallery and copy; the section's

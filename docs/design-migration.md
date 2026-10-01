@@ -100,6 +100,11 @@ Stand:
       Zeilenumbrüchen; `LoopVideo` (Architektur-Video); `ComparisonTable icons` (Häkchen/Minus).
       Zweites Galeriebild: Standbild aus `ICS_Image_Search.mp4` (`public/images/is-image-search.jpg`).
       Mitkorrigiert: Tabellenkopf in der H3-Stufe und mit 12 px Abstand oben (Tablet/Mobil, auch EmpCo).
+- [x] **KI-Workshop** — `/de|en/lavender/ai-workshop/`. Die Live-Seite ist nur deutsch und fest
+      verdrahtet; die Vorschau nutzt neue `workshop.*`-Schlüssel (DE in „du", EN = Entwurf aus
+      `docs/i18n-luecken.md` §2, wie in Figma). Neu: `ProductHead media` (Experten-Bühne statt
+      Galerie), `Badge`, `ConsentCheckbox value`. Formular `ai-workshop` wie live (gleiche Feldnamen,
+      Terminwert bleibt „Individuellen Termin buchen"); Danke-Seite jetzt in der Seitensprache.
 - [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen

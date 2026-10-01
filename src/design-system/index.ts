@@ -11,6 +11,7 @@ export { Statement, type StatementProps } from './Statement';
 export { FeatureBlock, type FeatureBlockProps } from './FeatureBlock';
 export { ProductShowcase, type ProductShowcaseProps } from './ProductShowcase';
 export { CTABand, type CTABandProps } from './CTABand';
+export { Badge } from './Badge';
 export { Breadcrumb, type Crumb } from './Breadcrumb';
 export { MediaGallery, type GalleryImage } from './MediaGallery';
 export { CheckItem } from './CheckItem';

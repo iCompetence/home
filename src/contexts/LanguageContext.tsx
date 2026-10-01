@@ -2774,6 +2774,42 @@ export const translations: Translations = {
   // Alt texts: EN as hard-coded on the live page, DE per docs/i18n-luecken.md §3.
   'lavender.icu.layersAlt': { en: 'From overview to every detail', de: 'Vom Überblick bis ins Detail' },
   'lavender.icu.agentAlt': { en: 'iCU Agent chat interface', de: 'Chat-Oberfläche des ICU-Agenten' },
+  // AI Workshop — the live page is hard-coded German; these keys carry the
+  // DE copy (in "du") and the EN drafts from docs/i18n-luecken.md §2 as in Figma.
+  'workshop.hero.title': { en: 'The AI Workshop', de: 'Der KI-Workshop' },
+  'workshop.hero.subline': { en: 'An AI boost for brands', de: 'KI-Boost für Marken' },
+  'workshop.anchor.about': { en: 'About the workshop', de: 'Über den Workshop' },
+  'workshop.anchor.experts': { en: 'Experts', de: 'Experten' },
+  'workshop.anchor.apply': { en: 'Apply now', de: 'Jetzt bewerben' },
+  'workshop.anchor.contact': { en: 'Contact', de: 'Kontakt' },
+  'workshop.intro.run1': {
+    en: 'From the makers of \u201ciKnow\u201d, the first self-learning, privacy-compliant German data platform, and \u201cIntelligentic Search\u201d.',
+    de: 'Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform \u201eiKnow" und der \u201eIntelligentic Search".'
+  },
+  'workshop.intro.run2': {
+    en: 'In the race for the top spots in the market, AI plays a central role. But how do you use it safely? What are the prerequisites \u2013 including data volume and quality? What visibility, benefits and ROI can you expect? We answer the key questions for brands and marketers.',
+    de: 'Im Rennen um die vorderen Plätze auf dem Markt spielt KI eine zentrale Rolle. Aber wie sie sicher nutzen? Was sind die Voraussetzungen - auch hinsichtlich der Datenmenge und -qualität? Welche Sichtbarkeit, welchen Nutzen und ROI kann ich erwarten? Wir klären die zentralen Fragen für Marken und Marketers.'
+  },
+  'workshop.intro.run3': {
+    en: 'The workshop that gives you the big picture, from experts at the forefront of AI development in Germany. Insights and room for your questions.',
+    de: 'Der Workshop, der dir einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI Entwicklung mitwirken. Einblicke und Platz für deine Fragen.'
+  },
+  'workshop.intro.run4': { en: 'Free. Limited seats!', de: 'Gratis. Nur wenige Plätze!' },
+  'workshop.experts.title': { en: 'Our experts', de: 'Unsere Experten' },
+  'workshop.experts.photoCredit': { en: 'Source: Frank Krems', de: 'Foto: Frank Krems' },
+  'workshop.form.title': { en: 'Apply now', de: 'Jetzt bewerben' },
+  'workshop.form.intro': {
+    en: 'Secure your seat at the AI Workshop.',
+    de: 'Sichere dir deinen Platz beim KI-Workshop.'
+  },
+  'workshop.form.name': { en: 'Name', de: 'Name' },
+  'workshop.form.email': { en: 'Email', de: 'E-Mail' },
+  'workshop.form.phone': { en: 'Phone (optional)', de: 'Telefon (optional)' },
+  'workshop.form.position': { en: 'Position', de: 'Position' },
+  'workshop.form.company': { en: 'Company', de: 'Firma' },
+  'workshop.form.dates': { en: 'Preferred date(s)', de: 'Bevorzugte(r) Termin(e)' },
+  'workshop.form.dateCustom': { en: 'Book an individual date', de: 'Individuellen Termin buchen' },
+  'workshop.form.submit': { en: 'Submit application', de: 'Bewerbung absenden' },
   'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {

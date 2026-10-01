@@ -43,11 +43,14 @@ export function FormField({
 export function ConsentCheckbox({
   id,
   name,
+  value,
   children,
   required,
 }: {
   id: string;
   name: string;
+  /** Submitted value (defaults to "on"). */
+  value?: string;
   children: ReactNode;
   required?: boolean;
 }) {
@@ -57,6 +60,7 @@ export function ConsentCheckbox({
         type="checkbox"
         id={id}
         name={name}
+        value={value}
         required={required}
         className="mt-0 h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border border-lav-navy/50 bg-lav-white bg-center bg-no-repeat checked:border-lav-navy checked:bg-lav-navy checked:bg-[url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M20%206%209%2017l-5-5%22%2F%3E%3C%2Fsvg%3E')]"
       />
