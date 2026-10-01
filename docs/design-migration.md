@@ -112,7 +112,13 @@ Stand:
       mobil 16 px Innenabstand, damit reCAPTCHA passt). Gleiches Netlify-Formular „trial" wie live,
       gesendet an `/__forms.html` (live: `/`, das per 301 nach `/de/` umleitet — prüfen).
       Abschnitte Use Cases, Why now und Demo-CTA der Live-Seite sind in Figma nicht vorgesehen.
-- [ ] Privacy-led AI, Kontakt, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
+- [x] **Privacy-led AI** — `/de|en/lavender/privacy-led-ai/`. Prinzip-Seite (Hero, Statement,
+      ProcessAccordion). Live fest auf Englisch; neue `privacy.*`-Schlüssel (DE = Entwurf §1 wie in
+      Figma, EN mit „organization" und Satzschreibung). `TopNav sectionsHref/activeSection`: die
+      Abschnittslinks führen zur Startseite, „Privacy-led AI" gilt als aktiv.
+- [ ] Trim-Durchgang für die älteren Bausteine von der Startseite (Hero, ProcessAccordion,
+      ProductTeaser, ClosingBlock/Footer) — sie sind 10–90 px höher als Figma.
+- [ ] Kontakt, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen
 - [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.

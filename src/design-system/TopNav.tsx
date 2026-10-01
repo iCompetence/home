@@ -24,15 +24,32 @@ export type TopNavProps = {
    * pages pass the home URL.
    */
   logoHref?: string;
+  /**
+   * When the sections live on another page (the homepage), their links lead
+   * there: `${sectionsHref}#${id}`. Unset = in-page anchors.
+   */
+  sectionsHref?: string;
+  /** Section shown as current in the scrolled pill when it is not on this page. */
+  activeSection?: string;
 };
 
 /** Sticky site header in the new design. Compact (mobile/tablet) vs desktop. */
-export function TopNav({ sections = HOME_NAV_SECTIONS, logoHref = '#top' }: TopNavProps) {
+export function TopNav({
+  sections = HOME_NAV_SECTIONS,
+  logoHref = '#top',
+  sectionsHref,
+  activeSection,
+}: TopNavProps) {
   const bp = useBreakpoint();
   return isCompact(bp) ? (
     <CompactNav bp={bp} logoHref={logoHref} />
   ) : (
-    <DesktopNav sections={sections} logoHref={logoHref} />
+    <DesktopNav
+      sections={sections}
+      logoHref={logoHref}
+      sectionsHref={sectionsHref}
+      activeSection={activeSection}
+    />
   );
 }
 
@@ -120,13 +137,18 @@ function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
 function DesktopNav({
   sections,
   logoHref,
+  sectionsHref,
+  activeSection,
 }: {
   sections: readonly NavSection[];
   logoHref: string;
+  sectionsHref?: string;
+  activeSection?: string;
 }) {
   const { t } = useLanguage();
   const [compact, setCompact] = useState(false);
-  const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
+  const [activeId, setActiveId] = useState<string>(activeSection ?? sections[0]?.id ?? '');
+  const sectionHref = (id: string) => (sectionsHref ? `${sectionsHref}#${id}` : `#${id}`);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { ref, width } = usePillWidth([compact]);
   const hasSections = sections.length > 0;
@@ -218,7 +240,7 @@ function DesktopNav({
                 {sections.map(({ id, labelKey }) => (
                   <a
                     key={id}
-                    href={`#${id}`}
+                    href={sectionHref(id)}
                     onClick={smoothAnchor}
                     className="font-brand text-body font-medium text-lav-white no-underline"
                   >
@@ -289,7 +311,7 @@ function DesktopNav({
                         className="absolute left-0 top-[calc(100%+12px)] flex min-w-[180px] flex-col rounded-card-sm bg-lav-navy px-1.5 py-2.5 shadow-[0_10px_30px_rgba(11,34,49,0.18)]"
                       >
                         <a
-                          href="#top"
+                          href={sectionsHref ?? '#top'}
                           role="menuitem"
                           onClick={(e) => {
                             smoothAnchor(e);
@@ -302,7 +324,7 @@ function DesktopNav({
                         {otherSections.map(({ id, labelKey }) => (
                           <a
                             key={id}
-                            href={`#${id}`}
+                            href={sectionHref(id)}
                             role="menuitem"
                             onClick={(e) => {
                               smoothAnchor(e);

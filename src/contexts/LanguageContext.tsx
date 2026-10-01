@@ -2775,6 +2775,44 @@ export const translations: Translations = {
   // Alt texts: EN as hard-coded on the live page, DE per docs/i18n-luecken.md §3.
   'lavender.icu.layersAlt': { en: 'From overview to every detail', de: 'Vom Überblick bis ins Detail' },
   'lavender.icu.agentAlt': { en: 'iCU Agent chat interface', de: 'Chat-Oberfläche des ICU-Agenten' },
+  // Privacy-led AI — the live page is hard-coded English; DE = drafts from
+  // docs/i18n-luecken.md §1 (as in Figma), EN with US spelling and sentence case.
+  'privacy.hero.title': { en: 'Privacy-led AI', de: 'Privacy-led AI' },
+  'privacy.hero.subline': { en: 'Intelligence without exposure', de: 'Intelligenz ohne Datenpreisgabe' },
+  'privacy.intro.line1': { en: 'AI is ready. Your data is not.', de: 'KI ist bereit. Deine Daten sind es nicht.' },
+  'privacy.intro.text': {
+    en: 'AI is becoming a fundamental driver of efficiency and competitiveness. But every organization working with sensitive data faces the same barrier: AI cannot go where the data lives \u2014 and the data cannot go where the AI runs.',
+    de: 'KI wird zum grundlegenden Treiber für Effizienz und Wettbewerbsfähigkeit. Doch jede Organisation, die mit sensiblen Daten arbeitet, stößt auf dieselbe Hürde: Die KI kann nicht dorthin, wo die Daten liegen \u2013 und die Daten können nicht dorthin, wo die KI läuft.'
+  },
+  'privacy.intro.solution': { en: 'The solution: Bring AI to your data.', de: 'Die Lösung: Bring die KI zu deinen Daten.' },
+  'privacy.guidance.title': {
+    en: "If you're unsure where to start, we're here to guide you.",
+    de: 'Wenn du unsicher bist, wo du anfangen sollst, begleiten wir dich.'
+  },
+  'privacy.guidance.subline': {
+    en: "AI in sensitive environments raises questions. We help you understand what's possible, what's safe, and what creates real value in your organization.",
+    de: 'KI in sensiblen Umgebungen wirft Fragen auf. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was in deiner Organisation echten Mehrwert schafft.'
+  },
+  'privacy.guidance.step1.label': { en: 'Clarity', de: 'Klarheit' },
+  'privacy.guidance.step1.desc': {
+    en: "AI raises big questions \u2014 and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty.",
+    de: 'KI wirft große Fragen auf \u2013 und Klarheit ist der Anfang von allem. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was wirklich Wert schafft, damit du ohne Unsicherheit vorankommst.'
+  },
+  'privacy.guidance.step2.label': { en: 'Responsibility', de: 'Verantwortung' },
+  'privacy.guidance.step2.desc': {
+    en: 'AI should serve your organization, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees.',
+    de: 'KI soll deiner Organisation dienen, nicht ihre Prinzipien untergraben. Wir gestalten interne KI-Systeme, die deine Governance, deine Datengrenzen und deine Verantwortung gegenüber Kundinnen, Kunden und Mitarbeitenden respektieren.'
+  },
+  'privacy.guidance.step3.label': { en: 'Transparency', de: 'Transparenz' },
+  'privacy.guidance.step3.desc': {
+    en: 'Understanding how AI works is essential \u2014 especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why.',
+    de: 'Zu verstehen, wie KI funktioniert, ist entscheidend \u2013 gerade in sensiblen Umgebungen. Wir machen Architekturen, Datenflüsse und Entscheidungswege sichtbar, damit du jederzeit weißt, was wo und warum geschieht.'
+  },
+  'privacy.guidance.step4.label': { en: 'Security', de: 'Sicherheit' },
+  'privacy.guidance.step4.desc': {
+    en: 'Your data never leaves your environment. We implement AI inside your infrastructure \u2014 secure, compliant, auditable \u2014 giving you the confidence and control you need to innovate safely.',
+    de: 'Deine Daten verlassen niemals deine Umgebung. Wir implementieren KI in deiner Infrastruktur \u2013 sicher, konform, prüfbar \u2013 und geben dir das Vertrauen und die Kontrolle, die du für sichere Innovation brauchst.'
+  },
   // AI Workshop — the live page is hard-coded German; these keys carry the
   // DE copy (in "du") and the EN drafts from docs/i18n-luecken.md §2 as in Figma.
   'workshop.hero.title': { en: 'The AI Workshop', de: 'Der KI-Workshop' },
