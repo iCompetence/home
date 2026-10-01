@@ -32,9 +32,23 @@ export default function PrivacyLedLavender() {
   );
 
   return (
-    <PageShell>
-      <TopNav logoHref={home} sectionsHref={home} activeSection="privacy-led" />
-
+    <PageShell
+      nav={<TopNav logoHref={home} sectionsHref={home} activeSection="privacy-led" />}
+      footer={
+        <ClosingBlock
+          id="contact"
+          heading={t('cta.headline')}
+          action={
+            <Button asChild variant="dark">
+              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+                {t('cta.button')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          }
+        />
+      }
+    >
       <Hero title={t('privacy.hero.title')} subline={t('privacy.hero.subline')} actions={contact} />
 
       <Statement
@@ -52,19 +66,6 @@ export default function PrivacyLedLavender() {
           title: t(`privacy.guidance.step${n}.label`),
           description: t(`privacy.guidance.step${n}.desc`),
         }))}
-      />
-
-      <ClosingBlock
-        id="contact"
-        heading={t('cta.headline')}
-        action={
-          <Button asChild variant="dark">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        }
       />
     </PageShell>
   );

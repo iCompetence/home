@@ -31,15 +31,16 @@ export default function ContactLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell>
+    <PageShell
+      nav={<TopNav logoHref={home} sectionsHref={home} />}
+      footer={<Footer />}
+    >
       <Script
         src="https://www.google.com/recaptcha/api.js?render=explicit"
         strategy="afterInteractive"
       />
-      <TopNav logoHref={home} sectionsHref={home} />
       <Hero title={t('contact.hero.title')} />
       <ContactForm />
-      <Footer />
     </PageShell>
   );
 }

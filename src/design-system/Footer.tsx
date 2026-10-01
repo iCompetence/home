@@ -83,7 +83,7 @@ export function Footer() {
             href={LINKEDIN}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="iCompetence on LinkedIn"
+            aria-label={t('lavender.common.linkedin')}
             className="inline-flex h-9 w-9 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline"
           >
             <LinkedInGlyph size={18} />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -103,7 +103,7 @@ function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
   const { ref, width } = usePillWidth();
 
   return (
-    <div className="pointer-events-none sticky top-0 z-50 w-full">
+    <header className="pointer-events-none sticky top-0 z-50 w-full">
       <div className="mx-auto w-full max-w-frame px-4 pt-3 md:px-6 md:pt-3.5">
         <nav data-ds="TopNav"
           ref={ref as React.Ref<HTMLElement>}
@@ -130,7 +130,7 @@ function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
           </div>
         </nav>
       </div>
-    </div>
+    </header>
   );
 }
 
@@ -150,6 +150,8 @@ function DesktopNav({
   const [activeId, setActiveId] = useState<string>(activeSection ?? sections[0]?.id ?? '');
   const sectionHref = (id: string) => (sectionsHref ? `${sectionsHref}#${id}` : `#${id}`);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownId = useId();
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const { ref, width } = usePillWidth([compact]);
   const hasSections = sections.length > 0;
 
@@ -194,8 +196,17 @@ function DesktopNav({
       if (target.closest('[data-nav-popover]') || target.closest('[data-nav-trigger]')) return;
       setDropdownOpen(false);
     };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setDropdownOpen(false);
+      triggerRef.current?.focus();
+    };
     document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+    };
   }, [dropdownOpen]);
 
   const otherSections = sections.filter((s) => s.id !== activeId);
@@ -205,7 +216,7 @@ function DesktopNav({
   };
 
   return (
-    <div className="pointer-events-none sticky top-0 z-50 w-full bg-transparent">
+    <header className="pointer-events-none sticky top-0 z-50 w-full bg-transparent">
       <div
         className={cn(
           'pointer-events-none relative mx-auto flex min-h-24 w-full max-w-frame items-start px-10',
@@ -272,10 +283,11 @@ function DesktopNav({
                   className="relative inline-flex items-center"
                 >
                   <button
+                    ref={triggerRef}
                     type="button"
                     data-nav-trigger
-                    aria-haspopup="menu"
                     aria-expanded={dropdownOpen}
+                    aria-controls={dropdownId}
                     onClick={() => setDropdownOpen((p) => !p)}
                     className="inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent px-1.5 py-1 font-brand text-[15px] font-medium text-lav-white"
                   >
@@ -302,8 +314,8 @@ function DesktopNav({
                   <AnimatePresence>
                     {dropdownOpen && (
                       <motion.div
+                        id={dropdownId}
                         data-nav-popover
-                        role="menu"
                         initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -6 }}
@@ -312,7 +324,6 @@ function DesktopNav({
                       >
                         <a
                           href={sectionsHref ?? '#top'}
-                          role="menuitem"
                           onClick={(e) => {
                             smoothAnchor(e);
                             setDropdownOpen(false);
@@ -325,7 +336,6 @@ function DesktopNav({
                           <a
                             key={id}
                             href={sectionHref(id)}
-                            role="menuitem"
                             onClick={(e) => {
                               smoothAnchor(e);
                               setDropdownOpen(false);
@@ -349,6 +359,6 @@ function DesktopNav({
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </header>
   );
 }

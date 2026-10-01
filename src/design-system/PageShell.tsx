@@ -1,18 +1,34 @@
 'use client';
 
 import { useEffect, type ReactNode } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const PAGE_BG = '#fdfafe';
 
 /**
- * Root wrapper of every page in the new design.
+ * Root wrapper of every page in the new design: skip link, the page's
+ * `nav` (TopNav, itself the <header>), the content as <main>, then `footer`
+ * (Footer or ClosingBlock, which ends in the <footer>). Every page gets the
+ * same landmarks this way.
  *
  * `.lavender-page` is the scope the redesign's global rules hang on (link and
  * hover behaviour, focus ring, the h1 escape hatch in globals.css) — keeping
  * them scoped is what lets old and new pages coexist. The effect swaps the
  * document background, which the old design pins to navy.
+ *
+ * The nav must stay a direct child of `.lavender-page`: it is sticky, and a
+ * wrapper only as tall as the nav would end the stickiness right away.
  */
-export function PageShell({ children }: { children: ReactNode }) {
+export function PageShell({
+  nav,
+  footer,
+  children,
+}: {
+  nav: ReactNode;
+  footer: ReactNode;
+  children: ReactNode;
+}) {
+  const { t } = useLanguage();
   useEffect(() => {
     const prevBody = document.body.style.backgroundColor;
     const prevHtml = document.documentElement.style.backgroundColor;
@@ -39,7 +55,19 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 `,
         }}
       />
-      {children}
+      <a
+        href="#main"
+        // not-sr-only resets padding, hence the focus: padding.
+        // Lavender, not navy: it opens on top of the navy nav pill.
+        className="sr-only z-[100] rounded-pill bg-lav-lavender font-brand text-body font-medium text-lav-navy no-underline focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:px-5 focus:py-3"
+      >
+        {t('lavender.common.skipToContent')}
+      </a>
+      {nav}
+      <main id="main" tabIndex={-1} className="outline-none">
+        {children}
+      </main>
+      {footer}
     </div>
   );
 }

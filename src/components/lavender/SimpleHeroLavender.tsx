@@ -14,8 +14,10 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
   const { language } = useLanguage();
   const home = siteHref(language, '/');
   return (
-    <PageShell>
-      <TopNav logoHref={home} sectionsHref={home} />
+    <PageShell
+      nav={<TopNav logoHref={home} sectionsHref={home} />}
+      footer={<Footer />}
+    >
       <Hero
         title={title}
         subline={message}
@@ -28,7 +30,6 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
           </Button>
         }
       />
-      <Footer />
     </PageShell>
   );
 }

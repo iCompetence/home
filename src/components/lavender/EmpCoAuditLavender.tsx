@@ -96,7 +96,22 @@ export default function EmpCoAuditLavender() {
       : [];
 
   return (
-    <PageShell>
+    <PageShell
+      nav={<TopNav sections={[]} logoHref={siteHref(language, '/')} />}
+      footer={
+        <ClosingBlock
+          heading={t('cta.headline')}
+          action={
+            <Button asChild variant="dark">
+              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+                {t('cta.button')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          }
+        />
+      }
+    >
       {jsonLd.map((entry) => (
         <script
           key={entry['@type']}
@@ -108,7 +123,6 @@ export default function EmpCoAuditLavender() {
         src="https://www.google.com/recaptcha/api.js?render=explicit"
         strategy="afterInteractive"
       />
-      <TopNav sections={[]} logoHref={siteHref(language, '/')} />
 
       <ProductHead
         breadcrumbLabel={t('lavender.common.breadcrumb')}
@@ -201,18 +215,6 @@ export default function EmpCoAuditLavender() {
       <Directive />
       <Faq />
       <MoreProducts />
-
-      <ClosingBlock
-        heading={t('cta.headline')}
-        action={
-          <Button asChild variant="dark">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        }
-      />
     </PageShell>
   );
 }

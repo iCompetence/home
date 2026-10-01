@@ -56,9 +56,24 @@ export default function IntelligenticSearchLavender() {
   ];
 
   return (
-    <PageShell>
-      <TopNav sections={[]} logoHref={siteHref(language, '/')} />
-
+    <PageShell
+      nav={<TopNav sections={[]} logoHref={siteHref(language, '/')} />}
+      footer={
+        <ClosingBlock
+          id="contact"
+          className={ANCHOR_SCROLL_MARGIN}
+          heading={t('cta.headline')}
+          action={
+            <Button asChild variant="dark">
+              <a href={contactHref} target="_blank" rel="noopener noreferrer">
+                {t('cta.button')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          }
+        />
+      }
+    >
       <ProductHead
         breadcrumbLabel={t('lavender.common.breadcrumb')}
         breadcrumb={[
@@ -126,20 +141,6 @@ export default function IntelligenticSearchLavender() {
 
       <Benefits />
       <MoreProducts />
-
-      <ClosingBlock
-        id="contact"
-        className={ANCHOR_SCROLL_MARGIN}
-        heading={t('cta.headline')}
-        action={
-          <Button asChild variant="dark">
-            <a href={contactHref} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        }
-      />
     </PageShell>
   );
 }

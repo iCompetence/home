@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -15,6 +15,10 @@ import { DURATION, EASE, useMotionPrefs } from './motion';
  * Burger menu with the "Products & Tools" grid.
  * `trigger="hover"` = desktop mega-menu, `trigger="tap"` = touch sheet.
  * Width/offsets are measured from the nav pill, so they stay inline styles.
+ *
+ * A disclosure (button + panel), not an ARIA menu: Enter/Space toggle it in
+ * both modes, Escape closes it and returns focus to the button, tabbing out
+ * or clicking elsewhere closes it too.
  */
 export function BurgerMenu({
   iconSize,
@@ -37,6 +41,8 @@ export function BurgerMenu({
   const [open, setOpen] = useState(false);
   const prefs = useMotionPrefs();
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelId = useId();
   const tap = trigger === 'tap';
   const dropdownTopOffset = pillPaddingY + 24;
   const panelWidth = pillWidth || (wide ? 1100 : 264);
@@ -47,14 +53,17 @@ export function BurgerMenu({
     t(a.labelKey).localeCompare(t(b.labelKey), language),
   );
 
-  // Tap mode closes on outside click / Escape (hover mode closes on mouse-leave).
+  // Outside click / Escape close it in both modes (hover mode also closes on
+  // mouse-leave) — a keyboard user opens the desktop menu without hovering.
   useEffect(() => {
-    if (!tap || !open) return;
+    if (!open) return;
     const onDocClick = (e: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key !== 'Escape') return;
+      setOpen(false);
+      buttonRef.current?.focus();
     };
     document.addEventListener('mousedown', onDocClick);
     document.addEventListener('keydown', onKey);
@@ -62,22 +71,33 @@ export function BurgerMenu({
       document.removeEventListener('mousedown', onDocClick);
       document.removeEventListener('keydown', onKey);
     };
-  }, [tap, open]);
+  }, [open]);
 
   return (
     <div
       ref={rootRef}
       onMouseEnter={tap ? undefined : () => setOpen(true)}
       onMouseLeave={tap ? undefined : () => setOpen(false)}
+      onBlur={(e) => {
+        if (!rootRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
       className="relative inline-flex items-center"
     >
       <button
+        ref={buttonRef}
         type="button"
         aria-label={t('topNav.menu')}
-        aria-haspopup="menu"
         aria-expanded={open}
-        onClick={tap ? () => setOpen((p) => !p) : undefined}
-        className="inline-flex cursor-pointer items-center border-0 bg-transparent p-0 text-lav-white"
+        aria-controls={panelId}
+        // Hover mode: a mouse click only opens (hover already did); Enter/Space
+        // (detail 0) toggle, so the desktop menu works without a mouse.
+        onClick={(e) => setOpen((p) => (tap || e.detail === 0 ? !p : true))}
+        className={cn(
+          'relative inline-flex cursor-pointer items-center border-0 bg-transparent p-0 text-lav-white',
+          // Touch: 44×44 hit area around the 22/24 icon without moving it (Figma).
+          tap &&
+            "before:absolute before:left-1/2 before:top-1/2 before:h-11 before:w-11 before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
+        )}
       >
         <Menu size={iconSize} strokeWidth={2} />
       </button>
@@ -94,7 +114,7 @@ export function BurgerMenu({
       <AnimatePresence>
         {open && (
           <motion.div
-            role="menu"
+            id={panelId}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
@@ -162,7 +182,7 @@ export function BurgerMenu({
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="iCompetence on LinkedIn"
+                aria-label={t('lavender.common.linkedin')}
                 className={cn(
                   'inline-flex items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline',
                   wide ? 'h-9 w-9' : 'h-8 w-8',

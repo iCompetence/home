@@ -63,8 +63,23 @@ export default function WhatsNewLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell>
-      <TopNav logoHref={home} sectionsHref={home} />
+    <PageShell
+      nav={<TopNav logoHref={home} sectionsHref={home} />}
+      footer={
+        <ClosingBlock
+          id="contact"
+          heading={t('cta.headline')}
+          action={
+            <Button asChild variant="dark">
+              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+                {t('cta.button')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          }
+        />
+      }
+    >
       <Hero title={t('whatsNew.hero.title')} subline={t('whatsNew.hero.subtitle')} />
 
       <Section dsName="NewsMonths">
@@ -89,19 +104,6 @@ export default function WhatsNewLavender() {
           </SplitBlock>
         ))}
       </Section>
-
-      <ClosingBlock
-        id="contact"
-        heading={t('cta.headline')}
-        action={
-          <Button asChild variant="dark">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        }
-      />
     </PageShell>
   );
 }

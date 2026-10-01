@@ -78,12 +78,27 @@ export default function CampaignParameterToolLavender() {
   ];
 
   return (
-    <PageShell>
+    <PageShell
+      nav={<TopNav sections={[]} logoHref={siteHref(language, '/')} />}
+      footer={
+        <ClosingBlock
+          id="contact"
+          heading={t('cta.headline')}
+          action={
+            <Button asChild variant="dark">
+              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+                {t('cta.button')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          }
+        />
+      }
+    >
       <Script
         src="https://www.google.com/recaptcha/api.js?render=explicit"
         strategy="afterInteractive"
       />
-      <TopNav sections={[]} logoHref={siteHref(language, '/')} />
 
       <ProductHead
         breadcrumbLabel={t('lavender.common.breadcrumb')}
@@ -250,19 +265,6 @@ export default function CampaignParameterToolLavender() {
         }))}
       />
       <MoreProducts />
-
-      <ClosingBlock
-        id="contact"
-        heading={t('cta.headline')}
-        action={
-          <Button asChild variant="dark">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        }
-      />
 
       <TrialModal
         open={modal.open}

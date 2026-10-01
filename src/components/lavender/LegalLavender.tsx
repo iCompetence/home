@@ -14,11 +14,12 @@ function LegalPage({ title, children }: { title: string; children: ReactNode }) 
   const { language } = useLanguage();
   const home = siteHref(language, '/');
   return (
-    <PageShell>
-      <TopNav logoHref={home} sectionsHref={home} />
+    <PageShell
+      nav={<TopNav logoHref={home} sectionsHref={home} />}
+      footer={<Footer />}
+    >
       <Hero title={title} />
       <Section dsName="LegalText">{children}</Section>
-      <Footer />
     </PageShell>
   );
 }

@@ -2789,6 +2789,9 @@ export const translations: Translations = {
     de: 'Die Seite, die du suchst, existiert nicht oder wurde verschoben.'
   },
   'notFound.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  // Shell: skip link and the LinkedIn icon link (live hard-coded in English).
+  'lavender.common.skipToContent': { en: 'Skip to content', de: 'Zum Inhalt springen' },
+  'lavender.common.linkedin': { en: 'iCompetence on LinkedIn', de: 'iCompetence auf LinkedIn' },
   // Privacy policy page — new in the redesign (live, the privacy text sits on
   // the imprint page); title as in Figma. The soft hyphen breaks the word where
   // Figma does once it is wider than a phone at display size.

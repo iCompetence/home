@@ -26,8 +26,10 @@ import {
  */
 export default function LavenderHome() {
   return (
-    <PageShell>
-      <TopNav />
+    <PageShell
+      nav={<TopNav />}
+      footer={<Closing />}
+    >
       <Hero />
       <LogoCarousel />
       <Services />
@@ -36,8 +38,6 @@ export default function LavenderHome() {
       <Testimonials />
       <Process />
       <PrivacyLed />
-
-      <Closing />
     </PageShell>
   );
 }

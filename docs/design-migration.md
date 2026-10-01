@@ -132,9 +132,20 @@ Stand:
       (Kontakt, Impressum, Datenschutz, Neuigkeiten) sind im Code weggelassen.
 
 ### Phase 2 — Shell vereinheitlichen
-- [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.
+Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
+Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
+- [x] Eine Hülle für alle Vorschauseiten: `PageShell nav={…} footer={…}` ordnet Sprungmarke
+      („Zum Inhalt springen"), `<header>` (TopNav), `<main id="main">` und Footer an — jede Seite
+      hat dieselben Landmarken, der Footer steht nie in `main`.
+- [x] Burger-Menü als Disclosure statt ARIA-Menü: Enter/Leertaste öffnen es auch auf Desktop,
+      Escape schließt und gibt den Fokus zurück, Wegtabben/Klick daneben schließt; auf Touch
+      44 × 44 px Trefferfläche um das 22/24-px-Icon (wie Figma). Abschnitts-Dropdown der
+      kompakten Pille ebenso. LinkedIn-Label übersetzt.
+- [x] Schon vorher erledigt: Tablet nur Burger, globaler Fokusring, Schlussstern 70 %.
 
 ### Phase 3 — Seiten migrieren (je eine pro PR)
+Durch den Vorschau-Bereich ersetzt: Jede Seite ist unter `/lavender/` fertig und zieht beim
+Livegang nach oben (siehe „Livegang einer Seite" oben). Die Liste bleibt als Reihenfolge.
 - [ ] Homepage `/` (Flaggschiff; Lavender-Inhalt wandert nach `/`)
 - [ ] Info-Seiten: contact, imprint, thank-you
 - [ ] Produkt-/Tool-Seiten: empco-audit, iknow, analytics-agent, intelligentic-search,
