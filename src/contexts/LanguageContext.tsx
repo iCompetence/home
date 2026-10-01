@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { lavenderOverrides } from './lavender-overrides';
 
 export type Language = 'en' | 'de';
 
@@ -2760,6 +2761,11 @@ export const translations: Translations = {
     de: 'Empfohlenes Produkt'
   },
   'lavender.products.eyebrow': { en: 'Product', de: 'Produkt' },
+  // Shared by the redesigned product pages
+  'lavender.products.moreTitle': { en: 'Products & tools', de: 'Produkte & Tools' },
+  'lavender.common.breadcrumb': { en: 'Breadcrumb', de: 'Brotkrumen-Navigation' },
+  'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
+  'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
   'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {
@@ -2898,9 +2904,16 @@ export const translations: Translations = {
 export const LanguageProvider = ({
   children,
   initialLanguage,
+  variant,
 }: {
   children: ReactNode;
   initialLanguage?: Language;
+  /**
+   * 'lavender' = the redesigned pages: copy overrides from
+   * lavender-overrides.ts win over the shared strings, so the live pages keep
+   * their wording while both designs exist side by side.
+   */
+  variant?: 'lavender';
 }) => {
   // When the route provides a language (URL is /de/… or /en/…) it is the single
   // source of truth — this keeps the server-rendered (statically exported) HTML
@@ -2944,6 +2957,10 @@ export const LanguageProvider = ({
         | Record<string, Record<string, string>>
         | undefined;
       const override = dev?.[language]?.[key];
+      if (override !== undefined) return override;
+    }
+    if (variant === 'lavender') {
+      const override = lavenderOverrides[key]?.[language];
       if (override !== undefined) return override;
     }
     return translations[key]?.[language] || key;

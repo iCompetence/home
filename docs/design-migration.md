@@ -48,6 +48,41 @@ icompetence.de-Seiten nach und nach auf dieses Design zu ziehen.
       (Feature + Teaser-Reihe) und `CTABand` (aus `ClosingBlock` herausgelöst).
       `LavenderHome` komponiert nur noch; Optik auf 1440/800/420 pixelgleich.
 
+### Vorschau-Bereich `/lavender/…` (entschieden 2026-10-01)
+
+Die bestehenden Seiten werden **nicht** umgebaut. Jede neu gestaltete Seite entsteht
+daneben unter `/<lang>/lavender/<route>/` und zieht erst zum Livegang an ihren
+endgültigen Platz.
+
+- **Rahmen:** `app/[lang]/lavender/layout.tsx` setzt für alles darunter `noindex` und
+  stellt den `LanguageProvider` mit `variant="lavender"` bereit.
+- **Links:** Das Design-System baut interne Links über `siteHref(language, route)`
+  (`src/design-system/routes.ts`). Routen, die es in der Vorschau schon gibt
+  (`PREVIEW_ROUTES`), bleiben in der Vorschau; alle anderen zeigen auf die Live-Seite.
+  Neue Vorschau-Seite = Route dort eintragen.
+- **Texte:** Geänderter Wortlaut (du-Form, EN Satzschreibung/US-Schreibweise) steht in
+  `src/contexts/lavender-overrides.ts` und gilt nur mit `variant="lavender"`. Die
+  gemeinsamen Schlüssel in `LanguageContext.tsx` bleiben für die Live-Seiten unverändert.
+- **Seiten-Komponenten:** `src/components/lavender/<Seite>Lavender.tsx`, komponiert aus
+  `src/design-system`. Die alten Komponenten bleiben unangetastet.
+- **Globale Regeln** (Fokusring, Hover, Typo-Klassen `lav-*`) hängen an `.lavender-page`
+  bzw. an eigenen Klassen und wirken nicht auf die Live-Seiten.
+- **Formulare** posten an dieselben Netlify-Formulare wie die Live-Seiten.
+
+Livegang einer Seite: Ordner `app/[lang]/lavender/<route>` eine Ebene nach oben, alte
+Komponente löschen, Route aus `PREVIEW_ROUTES` nehmen, Overrides in `translations`
+übernehmen, `noindex` fällt mit dem Layout weg, Sitemap ergänzen. Für alle auf einmal:
+`PREVIEW_BASE = ''`.
+
+Stand:
+- [x] Rahmen, Link-Helfer, Text-Overrides, `PageShell`
+- [x] **EmpCo Audit** (Pilot, Figma „Entwurf B") — `/de|en/lavender/empco-audit/`.
+      Neue Bausteine: `ProductHead`, `MediaGallery`, `Breadcrumb`, `CheckItem`,
+      `AnchorTabs` (haftend), `SectionHeader`, `FactsBand`, `IconCard`, `SpecItem`,
+      `FaqList`, `FormField`/`ConsentCheckbox`, `ComparisonTable`; `Statement layout="feature"`;
+      `BrandStar` `product` | `facts` | `statementRight`; `TopNav sections={[]}` (Pille rechts).
+- [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
+
 ### Phase 2 — Shell vereinheitlichen
 - [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.
 

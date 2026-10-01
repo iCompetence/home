@@ -3,12 +3,26 @@
 // Consumed by pages as the design rolls out — see docs/design-migration.md.
 export { DURATION, EASE, type EaseName } from './motion';
 export { Section } from './Section';
+export { PageShell } from './PageShell';
+export { siteHref, PREVIEW_BASE } from './routes';
 export { Hero, type HeroProps } from './Hero';
 export { BrandStar, type BrandStarVariant } from './BrandStar';
 export { Statement, type StatementProps } from './Statement';
 export { FeatureBlock, type FeatureBlockProps } from './FeatureBlock';
 export { ProductShowcase, type ProductShowcaseProps } from './ProductShowcase';
 export { CTABand, type CTABandProps } from './CTABand';
+export { Breadcrumb, type Crumb } from './Breadcrumb';
+export { MediaGallery, type GalleryImage } from './MediaGallery';
+export { CheckItem } from './CheckItem';
+export { ProductHead, type ProductHeadProps } from './ProductHead';
+export { AnchorTabs, ANCHOR_SCROLL_MARGIN, type AnchorTab } from './AnchorTabs';
+export { SectionHeader } from './SectionHeader';
+export { IconCard } from './IconCard';
+export { SpecItem } from './SpecItem';
+export { FaqList, type FaqEntry } from './FaqList';
+export { FormField, ConsentCheckbox } from './FormField';
+export { ComparisonTable, type ComparisonRow } from './ComparisonTable';
+export { FactsBand, type Fact } from './FactsBand';
 export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
 export { Button, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';

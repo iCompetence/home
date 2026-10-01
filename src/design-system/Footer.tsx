@@ -4,6 +4,7 @@ import { ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackCtaClick } from '@/lib/tracking';
 import { Section } from './Section';
+import { siteHref } from './routes';
 import { useMotionPrefs } from './motion';
 import { LinkedInGlyph } from './icons';
 
@@ -98,7 +99,7 @@ export function Footer() {
           {(['footer.imprint', 'footer.privacy'] as const).map((key) => (
             <a
               key={key}
-              href={`/${language}/imprint/`}
+              href={siteHref(language, 'imprint')}
               className="font-brand text-body font-medium text-lav-white/70 no-underline"
             >
               {t(key)}

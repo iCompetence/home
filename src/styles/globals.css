@@ -394,3 +394,61 @@
 html {
   font-size: var(--font-size);
 }
+
+/* ------------------------------------------------------------------ *
+ * Lavender type steps (Figma "Lavender · Responsive": mobile / tablet /
+ * desktop). One class per step so pages stop re-deriving
+ * `text-[32px] md:text-[40px] lg:text-h2` by hand.
+ *
+ * `text-box: trim-both cap alphabetic` removes the half-leading above the
+ * cap height and below the baseline, which is how the design file measures
+ * text: a gap between two text blocks is then the visible distance. In
+ * browsers without support the same gaps simply read a little wider.
+ * Only used by the new design's components — nothing here touches the live
+ * pages.
+ * ------------------------------------------------------------------ */
+@layer components {
+  .lav-display, .lav-h1, .lav-h2, .lav-h3, .lav-statement, .lav-lead,
+  .lav-body, .lav-paragraph, .lav-small, .lav-caption {
+    margin: 0;
+    font-family: var(--font-brand);
+    text-box: trim-both cap alphabetic;
+  }
+  .lav-h1 { font-size: 32px; line-height: 35.2px; font-weight: 500; }
+  .lav-h2 { font-size: 28px; line-height: 30.8px; font-weight: 500; }
+  .lav-h3 { font-size: 22px; line-height: 25.3px; font-weight: 500; }
+  .lav-statement { font-size: 28px; line-height: 32.2px; font-weight: 500; }
+  .lav-lead { font-size: 16px; line-height: 24px; }
+  .lav-body { font-size: 16px; line-height: 24px; }
+  .lav-paragraph { font-size: 15px; line-height: 22.5px; }
+  .lav-small { font-size: 14px; line-height: 21px; }
+  .lav-caption { font-size: 13px; line-height: 19.5px; letter-spacing: 0.5px; }
+
+  @media (min-width: 768px) {
+    .lav-h1 { font-size: 40px; line-height: 44px; }
+    .lav-h2 { font-size: 32px; line-height: 35.2px; }
+    .lav-h3 { font-size: 22px; line-height: 25.3px; }
+    .lav-statement { font-size: 40px; line-height: 46px; }
+    .lav-lead { font-size: 24px; line-height: 36px; }
+    .lav-paragraph { font-size: 16px; line-height: 24px; }
+  }
+  @media (min-width: 1024px) {
+    .lav-h1 { font-size: 54px; line-height: 59.4px; }
+    .lav-h2 { font-size: 36px; line-height: 39.6px; }
+    .lav-h3 { font-size: 24px; line-height: 27.6px; }
+    .lav-statement { font-size: 54px; line-height: 59.4px; }
+    .lav-caption { font-size: 14px; line-height: 21px; }
+  }
+  /* Long German compounds (Nachhaltigkeitswerbung) are wider than a phone at
+     heading sizes: hyphenate, but only words of 14+ letters, so ordinary
+     headlines never break mid-word. */
+  .lav-h1,
+  .lav-h2,
+  .lav-h3,
+  .lav-statement {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 14 6 6;
+    overflow-wrap: break-word;
+  }
+}

@@ -14,6 +14,12 @@ export type StatementProps = {
   id?: string;
   /** id of the action band — the home page anchors #cta here. */
   actionId?: string;
+  /**
+   * 'band' (default): star on the left, the action in its own band below.
+   * 'feature': a tall block that carries the page's key statement mid-page —
+   * star on the right, the action directly under the sentence.
+   */
+  layout?: 'band' | 'feature';
 };
 
 /**
@@ -25,10 +31,26 @@ export type StatementProps = {
  * side only. Emitting both from one component is what keeps that pairing from
  * being re-guessed on every page.
  */
-export function Statement({ text, action, id, actionId = 'cta' }: StatementProps) {
+export function Statement({ text, action, id, actionId = 'cta', layout = 'band' }: StatementProps) {
   const bp = useBreakpoint();
   const compact = isCompact(bp);
-  const star = <BrandStar variant="statement" />;
+  const star = <BrandStar variant={layout === 'feature' ? 'statementRight' : 'statement'} />;
+
+  if (layout === 'feature') {
+    return (
+      <section
+        id={id}
+        data-ds="Statement"
+        className="relative flex min-h-[440px] w-full items-center overflow-hidden py-12 md:min-h-[560px] md:py-14 lg:min-h-[760px] lg:py-24"
+      >
+        {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
+        <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col items-center gap-10 px-[var(--section-pad-h)] lg:gap-12">
+          <p className="lav-statement w-full text-center text-lav-navy">{text}</p>
+          {action}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>

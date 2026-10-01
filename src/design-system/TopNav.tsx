@@ -7,23 +7,32 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { BurgerMenu } from './BurgerMenu';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 import { HOME_NAV_SECTIONS, smoothAnchor, type NavSection } from './nav-links';
+import { siteHref } from './routes';
 import { DURATION, EASE } from './motion';
+import { cn } from '@/components/ui/utils';
 
 export type TopNavProps = {
   /**
-   * In-page section anchors. Defaults to the homepage sections; pass your own
-   * (or `[]`) on pages that don't have them.
+   * In-page section anchors (desktop only). Defaults to the homepage sections.
+   * Pages with their own section navigation (AnchorTabs — every product page)
+   * pass `[]`: the bar then carries logo, CTA and burger only, and the
+   * scrolled pill docks to the right so it shares one row with the stuck tabs.
    */
   sections?: readonly NavSection[];
+  /**
+   * Where the logo leads. '#top' (default) scrolls the homepage back up; other
+   * pages pass the home URL.
+   */
+  logoHref?: string;
 };
 
 /** Sticky site header in the new design. Compact (mobile/tablet) vs desktop. */
-export function TopNav({ sections = HOME_NAV_SECTIONS }: TopNavProps) {
+export function TopNav({ sections = HOME_NAV_SECTIONS, logoHref = '#top' }: TopNavProps) {
   const bp = useBreakpoint();
   return isCompact(bp) ? (
-    <CompactNav bp={bp} sections={sections} />
+    <CompactNav bp={bp} logoHref={logoHref} />
   ) : (
-    <DesktopNav sections={sections} />
+    <DesktopNav sections={sections} logoHref={logoHref} />
   );
 }
 
@@ -55,10 +64,10 @@ function CtaButton({ compact }: { compact?: boolean }) {
   const { t, language } = useLanguage();
   return (
     <a
-      href={`/${language}/contact/`}
+      href={siteHref(language, 'contact')}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1.5 rounded-pill bg-lav-blue font-brand font-medium text-lav-white no-underline ${
+      className={`inline-flex items-center gap-1.5 rounded-pill bg-lav-blue font-brand font-medium text-lav-navy no-underline ${
         compact ? 'px-3.5 py-2 text-[14px] md:px-4' : 'gap-2 px-6 py-3 text-body'
       }`}
     >
@@ -68,8 +77,11 @@ function CtaButton({ compact }: { compact?: boolean }) {
   );
 }
 
-function CompactNav({ bp, sections }: { bp: Bp; sections: readonly NavSection[] }) {
-  const { t } = useLanguage();
+/**
+ * Mobile and tablet: logo, CTA, burger. Section links only exist on desktop —
+ * at 768px four of them wrap onto two lines (decided 2026-09-30).
+ */
+function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
   const isMobile = bp === 'mobile';
   const { ref, width } = usePillWidth();
 
@@ -80,28 +92,13 @@ function CompactNav({ bp, sections }: { bp: Bp; sections: readonly NavSection[] 
           ref={ref as React.Ref<HTMLElement>}
           className="pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill bg-lav-navy px-4 py-2.5 text-lav-white md:gap-5 md:px-6 md:py-3"
         >
-          <a href="#top" onClick={smoothAnchor} className="inline-flex items-center">
+          <a href={logoHref} onClick={smoothAnchor} className="inline-flex items-center">
             <img
               src="/iCompetence_white.svg"
               alt="iCompetence"
               className="block h-8 w-auto md:h-10"
             />
           </a>
-
-          {!isMobile && sections.length > 0 && (
-            <div className="flex items-center gap-5">
-              {sections.map(({ id, labelKey }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={smoothAnchor}
-                  className="font-brand text-[14px] font-medium text-lav-white no-underline"
-                >
-                  {t(labelKey)}
-                </a>
-              ))}
-            </div>
-          )}
 
           <div className="flex items-center gap-3.5 md:gap-[18px]">
             <CtaButton compact />
@@ -120,12 +117,19 @@ function CompactNav({ bp, sections }: { bp: Bp; sections: readonly NavSection[] 
   );
 }
 
-function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
+function DesktopNav({
+  sections,
+  logoHref,
+}: {
+  sections: readonly NavSection[];
+  logoHref: string;
+}) {
   const { t } = useLanguage();
   const [compact, setCompact] = useState(false);
   const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { ref, width } = usePillWidth([compact]);
+  const hasSections = sections.length > 0;
 
   const { scrollY } = useScroll();
   const fullItemsOpacity = useTransform(scrollY, [40, 70], [1, 0]);
@@ -181,9 +185,11 @@ function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
   return (
     <div className="pointer-events-none sticky top-0 z-50 w-full bg-transparent">
       <div
-        className={`pointer-events-none relative mx-auto flex min-h-24 w-full max-w-frame items-start px-10 pt-4 ${
-          compact ? 'justify-center' : 'justify-stretch'
-        }`}
+        className={cn(
+          'pointer-events-none relative mx-auto flex min-h-24 w-full max-w-frame items-start px-10',
+          !compact && 'justify-stretch pt-4',
+          compact && (hasSections ? 'justify-center pt-4' : 'justify-end pt-2'),
+        )}
       >
         <AnimatePresence mode="popLayout" initial={false}>
           {!compact ? (
@@ -197,7 +203,7 @@ function DesktopNav({ sections }: { sections: readonly NavSection[] }) {
               className="pointer-events-auto flex w-full items-center justify-between gap-12 rounded-pill bg-lav-navy px-8 py-4 text-lav-white"
             >
               <motion.a
-                href="#top"
+                href={logoHref}
                 onClick={smoothAnchor}
                 style={{ opacity: fullItemsOpacity }}
                 className="inline-flex items-center no-underline"

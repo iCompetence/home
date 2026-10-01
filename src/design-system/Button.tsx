@@ -10,14 +10,15 @@ import { cn } from '@/components/ui/utils';
  * Use `asChild` to render as a link: <Button asChild><a href="…">…</a></Button>.
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-opacity duration-[var(--duration-fast)] hover:opacity-75 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'inline-flex min-h-12 items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-opacity duration-[var(--duration-fast)] hover:opacity-75 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        primary: 'bg-lav-blue text-lav-white',
+        // Navy on blue: white fails AA here (2.92:1), navy reaches 5.58:1.
+        primary: 'bg-lav-blue text-lav-navy',
         dark: 'bg-lav-navy text-lav-white',
         white: 'bg-lav-white text-lav-navy',
-        outline: 'border border-lav-navy text-lav-navy bg-transparent',
+        outline: 'border border-lav-navy py-[11px] text-lav-navy bg-transparent',
       },
     },
     defaultVariants: {

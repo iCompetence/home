@@ -8,6 +8,7 @@ import { cn } from '@/components/ui/utils';
 import { LanguageToggle } from './LanguageToggle';
 import { LinkedInGlyph } from './icons';
 import { LINKEDIN_URL, PRODUCT_LINKS } from './nav-links';
+import { siteHref } from './routes';
 import { DURATION, EASE, useMotionPrefs } from './motion';
 
 /**
@@ -110,7 +111,7 @@ export function BurgerMenu({
             }}
           >
             <a
-              href={`/${language}/`}
+              href={siteHref(language, '/')}
               onClick={closeOnNav}
               className={cn(
                 'font-brand font-medium text-lav-white no-underline',
@@ -141,7 +142,7 @@ export function BurgerMenu({
               {sortedLinks.map(({ labelKey, href }) => (
                 <a
                   key={href}
-                  href={href}
+                  href={siteHref(language, href)}
                   onClick={closeOnNav}
                   className={cn(
                     'font-brand font-medium text-lav-white no-underline',

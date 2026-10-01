@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -9,6 +8,7 @@ import {
   FeatureBlock,
   Hero as HeroSection,
   LogoCarousel,
+  PageShell,
   ProcessAccordion,
   ProductShowcase,
   Section,
@@ -16,9 +16,8 @@ import {
   Statement as StatementSection,
   TestimonialSlider,
   TopNav,
+  siteHref,
 } from '@/design-system';
-
-const PAGE_BG = '#fdfafe';
 
 /**
  * The new site design ("Lavender"). Composes the shared design system
@@ -26,31 +25,8 @@ const PAGE_BG = '#fdfafe';
  * See docs/design-migration.md for the rollout plan.
  */
 export default function LavenderHome() {
-  useEffect(() => {
-    const prevBody = document.body.style.backgroundColor;
-    const prevHtml = document.documentElement.style.backgroundColor;
-    document.body.style.backgroundColor = PAGE_BG;
-    document.documentElement.style.backgroundColor = PAGE_BG;
-    return () => {
-      document.body.style.backgroundColor = prevBody;
-      document.documentElement.style.backgroundColor = prevHtml;
-    };
-  }, []);
-
   return (
-    <div className="lavender-page w-full bg-lav-page font-brand font-medium text-lav-navy">
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-.lavender-page a { text-decoration: none; }
-.lavender-page * { box-sizing: border-box; }
-html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
-.lavender-page a, .lavender-page button { transition: opacity var(--duration-fast) ease; cursor: pointer; }
-.lavender-page a:hover, .lavender-page button:hover { opacity: 0.75; }
-`,
-        }}
-      />
-
+    <PageShell>
       <TopNav />
       <Hero />
       <LogoCarousel />
@@ -62,7 +38,7 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
       <PrivacyLed />
 
       <Closing />
-    </div>
+    </PageShell>
   );
 }
 
@@ -79,7 +55,7 @@ function Hero() {
       actions={
         <>
           <Button asChild variant="primary">
-            <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
+            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
               {t('topNav.letsTalk')}
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
@@ -146,7 +122,7 @@ function Statement() {
       text={t('lavender.statement')}
       action={
         <Button asChild variant="primary">
-          <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
+          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
@@ -170,7 +146,7 @@ function Products() {
         imageAlt: t('lavender.products.empco.imageAlt'),
         action: (
           <Button asChild variant="dark" className="self-start">
-            <a href={`/${language}/empco-audit/`}>
+            <a href={siteHref(language, 'empco-audit')}>
               {t('lavender.products.empco.cta')}
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
@@ -184,7 +160,7 @@ function Products() {
           description: t('lavender.products.iknow.desc'),
           image: '/images/lavender-iknow.png',
           imageAlt: t('lavender.products.iknow.imageAlt'),
-          href: `/${language}/iknow/`,
+          href: siteHref(language, 'iknow'),
           ctaLabel: t('lavender.products.learnMore'),
         },
         {
@@ -193,7 +169,7 @@ function Products() {
           description: t('lavender.products.analyticsAgent.desc'),
           image: '/images/lavender-analytics-agent.png',
           imageAlt: t('lavender.products.analyticsAgent.imageAlt'),
-          href: `/${language}/analytics-agent/`,
+          href: siteHref(language, 'analytics-agent'),
           ctaLabel: t('lavender.products.learnMore'),
         },
       ]}
@@ -281,7 +257,7 @@ function PrivacyLed() {
         action={
           <Button asChild variant="dark" className="self-start">
             <a
-              href={`/${language}/privacy-led-ai/`}
+              href={siteHref(language, 'privacy-led-ai')}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -304,7 +280,7 @@ function Closing() {
       heading={t('lavender.cta.heading')}
       action={
         <Button asChild variant="dark">
-          <a href={`/${language}/contact/`} target="_blank" rel="noopener noreferrer">
+          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>

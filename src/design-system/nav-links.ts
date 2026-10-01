@@ -9,7 +9,7 @@ export type NavSection = {
 
 export type ProductLink = {
   labelKey: string;
-  /** Un-prefixed path; Netlify redirects to the language version. */
+  /** Un-prefixed route; rendered through siteHref (language + preview base). */
   href: string;
 };
 
