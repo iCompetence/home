@@ -21,10 +21,10 @@ function ContactBlock({
   value: string;
   href?: string;
 }) {
-  const valueCls = 'font-brand text-body font-medium text-lav-white no-underline';
+  const valueCls = 'lav-body font-medium text-lav-white no-underline';
   return (
-    <div className="flex flex-col items-start gap-1 md:items-end">
-      <span className="font-brand text-[14px] font-medium tracking-[0.5px] text-lav-white/70">
+    <div className="flex flex-col items-start gap-4 md:items-end">
+      <span className="lav-small font-medium text-lav-white/70">
         {label}
       </span>
       {href ? (
@@ -67,18 +67,18 @@ export function Footer() {
       dsName="Footer"
       as="footer"
       className="overflow-hidden bg-lav-navy text-lav-white"
-      innerClassName="relative z-[2] flex flex-col gap-8 md:gap-10"
+      innerClassName="relative z-[2] flex flex-col gap-10 md:gap-12"
     >
       {/* Top row */}
-      <div className="flex w-full flex-col justify-between gap-8 md:flex-row lg:gap-10">
+      <div className="flex w-full flex-col justify-between gap-10 md:flex-row md:gap-8 lg:gap-10">
         <div className="w-full md:w-[400px] lg:w-[720px]">
           {/* Brand headline — intentionally kept in English in both languages. */}
-          <h2 className="font-brand text-h3 font-medium leading-[1.05] tracking-[-1px] text-lav-white md:text-[48px] md:tracking-[-1.5px] lg:text-h1 lg:tracking-[-2px]">
+          <h2 className="lav-display text-lav-white">
             {t('footer.tagline')}
           </h2>
         </div>
 
-        <div className="flex flex-col items-start gap-7 md:items-end md:gap-8">
+        <div className="flex flex-col items-start gap-8 md:items-end md:gap-10">
           <a
             href={LINKEDIN}
             target="_blank"
@@ -100,7 +100,7 @@ export function Footer() {
             <a
               key={key}
               href={siteHref(language, 'imprint')}
-              className="font-brand text-body font-medium text-lav-white/70 no-underline"
+              className="lav-body font-medium text-lav-white/70 no-underline"
             >
               {t(key)}
             </a>
@@ -110,9 +110,9 @@ export function Footer() {
         <button
           type="button"
           onClick={scrollTop}
-          className="inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent font-brand text-body font-medium text-lav-white/70"
+          className="inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent text-lav-white/70"
         >
-          {t('footer.backToTop')}
+          <span className="lav-body font-medium">{t('footer.backToTop')}</span>
           <ChevronUp size={16} strokeWidth={2} />
         </button>
       </div>

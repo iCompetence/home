@@ -414,6 +414,7 @@ html {
     font-family: var(--font-brand);
     text-box: trim-both cap alphabetic;
   }
+  .lav-display { font-size: 40px; line-height: 42px; letter-spacing: -1px; font-weight: 500; }
   .lav-h1 { font-size: 32px; line-height: 35.2px; font-weight: 500; }
   .lav-h2 { font-size: 28px; line-height: 30.8px; font-weight: 500; }
   .lav-h3 { font-size: 22px; line-height: 25.3px; font-weight: 500; }
@@ -425,6 +426,7 @@ html {
   .lav-caption { font-size: 13px; line-height: 19.5px; letter-spacing: 0.5px; }
 
   @media (min-width: 768px) {
+    .lav-display { font-size: 56px; line-height: 58.8px; letter-spacing: -1.5px; }
     .lav-h1 { font-size: 40px; line-height: 44px; }
     .lav-h2 { font-size: 32px; line-height: 35.2px; }
     .lav-h3 { font-size: 22px; line-height: 25.3px; }
@@ -433,6 +435,7 @@ html {
     .lav-paragraph { font-size: 16px; line-height: 24px; }
   }
   @media (min-width: 1024px) {
+    .lav-display { font-size: 80px; line-height: 84px; letter-spacing: -2px; }
     .lav-h1 { font-size: 54px; line-height: 59.4px; }
     .lav-h2 { font-size: 36px; line-height: 39.6px; }
     .lav-h3 { font-size: 24px; line-height: 27.6px; }

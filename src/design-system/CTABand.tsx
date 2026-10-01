@@ -20,9 +20,9 @@ export function CTABand({ heading, action, className }: CTABandProps) {
     <Section
       dsName="CTABand"
       className={cn('overflow-hidden bg-[#bde3f4]', className)}
-      innerClassName="relative z-[2] flex flex-col items-center gap-6 md:gap-8 lg:gap-10"
+      innerClassName="relative z-[2] flex flex-col items-center gap-8 md:gap-10 lg:gap-14"
     >
-      <h2 className="m-0 w-full text-center font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] md:tracking-[-1.5px] lg:text-h1 lg:tracking-[-2px]">
+      <h2 className="lav-display w-full text-center text-lav-navy">
         {heading}
       </h2>
       {action}

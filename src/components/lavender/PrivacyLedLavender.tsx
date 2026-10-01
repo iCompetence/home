@@ -44,6 +44,7 @@ export default function PrivacyLedLavender() {
 
       <ProcessAccordion
         id="guidance"
+        defaultExpanded={0}
         title={t('privacy.guidance.title')}
         subline={t('privacy.guidance.subline')}
         steps={[1, 2, 3, 4].map((n) => ({

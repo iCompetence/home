@@ -37,13 +37,13 @@ export function ProcessAccordion({
   const [expanded, setExpanded] = useState<number | null>(defaultExpanded);
 
   return (
-    <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-6 md:gap-8 lg:gap-10">
-      <div className="flex w-full flex-col gap-3 md:gap-4">
-        <h2 className="m-0 w-full font-brand text-[32px] font-medium leading-[1.1] text-lav-navy md:text-[40px] lg:text-h2">
+    <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-8 md:gap-10 lg:gap-12">
+      <div className="flex w-full flex-col gap-6 md:gap-8">
+        <h2 className="lav-h1 w-full text-lav-navy">
           {title}
         </h2>
         {subline && (
-          <p className="m-0 max-w-[820px] font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:text-sub">
+          <p className="lav-lead max-w-[820px] font-normal text-lav-navy/80">
             {subline}
           </p>
         )}
@@ -85,17 +85,17 @@ function ProcessRow({
         type="button"
         onClick={onToggle}
         aria-expanded={expanded}
-        className="flex w-full cursor-pointer items-center justify-between gap-4 border-0 bg-transparent py-5 text-left font-brand md:py-7 lg:py-8"
+        className="flex min-h-[71px] w-full cursor-pointer items-center justify-between gap-4 border-0 bg-transparent py-5 text-left md:min-h-[84px] md:py-6 lg:min-h-[104px] lg:py-8"
       >
         <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
-          <span className="min-w-8 font-brand text-[22px] font-medium text-lav-navy/80 md:min-w-11 md:text-[30px] lg:min-w-14 lg:text-h3">
+          <span className="lav-h2 min-w-10 shrink-0 text-lav-navy/80 md:min-w-11 lg:min-w-14">
             {step.number}
           </span>
-          <span className="font-brand text-[22px] font-medium text-lav-navy md:text-[30px] lg:text-h3">
+          <span className="lav-h2 text-lav-navy">
             {step.title}
           </span>
         </div>
-        <Icon size={24} strokeWidth={2} className="text-lav-navy md:size-6 lg:size-7" />
+        <Icon size={24} strokeWidth={2} className="shrink-0 text-lav-navy lg:size-7" />
       </button>
 
       {/* Collapsed rows keep their copy in the static HTML for crawlers/LLM bots. */}
@@ -113,9 +113,9 @@ function ProcessRow({
             transition={{ duration: prefs.d(DURATION.base), ease: EASE.out }}
             className="w-full overflow-hidden"
           >
-        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-4 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:pb-8 lg:pt-8">
-          <div className="flex flex-1 flex-col gap-6 md:py-2 md:pl-12 lg:py-4 lg:pl-16">
-            <p className="m-0 font-brand text-[15px] font-normal leading-[1.5] text-lav-navy/80 md:text-body">
+        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-4 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:py-8">
+          <div className="flex flex-1 flex-col gap-4 md:gap-6 md:py-2 md:pl-12 lg:py-4 lg:pl-16">
+            <p className="lav-paragraph font-normal text-lav-navy/80">
               {step.description}
             </p>
           </div>

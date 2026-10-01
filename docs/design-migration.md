@@ -116,8 +116,9 @@ Stand:
       ProcessAccordion). Live fest auf Englisch; neue `privacy.*`-Schlüssel (DE = Entwurf §1 wie in
       Figma, EN mit „organization" und Satzschreibung). `TopNav sectionsHref/activeSection`: die
       Abschnittslinks führen zur Startseite, „Privacy-led AI" gilt als aktiv.
-- [ ] Trim-Durchgang für die älteren Bausteine von der Startseite (Hero, ProcessAccordion,
-      ProductTeaser, ClosingBlock/Footer) — sie sind 10–90 px höher als Figma.
+- [x] Trim-Durchgang: Hero, CTABand, Footer (neue Stufe `lav-display` 40/56/80 mit Laufweite),
+      ProcessAccordion/ProcessRow und ProductTeaser auf die Figma-Stufen und -Abstände gebracht —
+      Startseite und Unterseiten jetzt auf 0–4 px genau (vorher bis +90 px).
 - [ ] Kontakt, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen

@@ -49,13 +49,13 @@ export function Hero({
       {decoration &&
         (compact ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
 
-      <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-6 px-6 py-12 md:gap-8 md:px-12 md:py-14 lg:gap-10 lg:px-24 lg:py-16">
-        <h1 className="m-0 whitespace-normal font-brand text-[40px] font-medium leading-[1.05] tracking-[-1px] text-lav-navy md:text-[56px] md:tracking-[-1.5px] lg:whitespace-pre-line lg:text-h1 lg:tracking-[-2px]">
+      <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-12 md:gap-12 md:px-12 md:py-14 lg:gap-14 lg:px-24 lg:py-16">
+        <h1 className="lav-display whitespace-normal text-lav-navy lg:whitespace-pre-line">
           {compact ? title.replace('\n', ' ') : title}
         </h1>
 
         {subline && (
-          <p className="m-0 w-full max-w-full font-brand text-body font-normal leading-[1.5] text-lav-navy/80 md:w-[600px] md:text-sub lg:w-[820px] lg:text-sub">
+          <p className="lav-lead w-full max-w-full font-normal text-lav-navy/80 md:w-[600px] lg:w-[820px]">
             {subline}
           </p>
         )}
