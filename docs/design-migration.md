@@ -86,6 +86,9 @@ Stand:
       `SectionHeader leadIn`; `MediaGallery aspectClassName`; `ClosingBlock id` (Reiter „Kontakt").
       Abweichung von Figma: Der Bildschirm-Rundgang (6 Screenshots) hat Vorschaubilder wie
       die Produktgalerie; Figma zeigt nur das erste Bild ohne Steuerung.
+- [x] **Analytics Agent** — `/de|en/lavender/analytics-agent/`. Gleicher Aufbau wie iKnow;
+      Zitat-Abschnitt als gemeinsamer Baustein `QuoteIntro` (auch auf iKnow), Bilder statt
+      Videos in `ImageText`. Abweichung wie bei iKnow: Vorschaubilder unter dem Rundgang.
 - [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen

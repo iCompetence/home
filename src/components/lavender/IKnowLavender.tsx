@@ -13,6 +13,7 @@ import {
   PageShell,
   ProductHead,
   ProductTeaser,
+  QuoteIntro,
   Section,
   SectionHeader,
   TopNav,
@@ -94,7 +95,14 @@ export default function IKnowLavender() {
 
       <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
-      <StatusQuo />
+      <QuoteIntro
+        id="status-quo"
+        className={ANCHOR_SCROLL_MARGIN}
+        quote={t('iknow.intro.quote')}
+        author={t('iknow.intro.quoteAuthor').trim()}
+        paragraphs={[t('iknow.intro.p1'), t('iknow.intro.p2')]}
+        conclusion={t('iknow.intro.p3')}
+      />
       <About />
       <Benefits />
 
@@ -127,32 +135,6 @@ export default function IKnowLavender() {
         }
       />
     </PageShell>
-  );
-}
-
-/* ---------------- Status quo: quote + why it matters ---------------- */
-
-function StatusQuo() {
-  const { t } = useLanguage();
-  const lead = 'lav-lead font-normal text-lav-navy/80';
-  return (
-    <Section id="status-quo" className={ANCHOR_SCROLL_MARGIN}>
-      <div className="flex flex-col gap-8 md:flex-row lg:gap-16">
-        <figure className="m-0 flex flex-col gap-8 md:flex-1">
-          <blockquote className="m-0">
-            <p className="lav-statement text-lav-navy">{t('iknow.intro.quote')}</p>
-          </blockquote>
-          <figcaption className="lav-body font-normal text-lav-navy/70">
-            {t('iknow.intro.quoteAuthor').trim()}
-          </figcaption>
-        </figure>
-        <div className="flex flex-col gap-8 md:flex-1 md:gap-10">
-          <p className={lead}>{t('iknow.intro.p1')}</p>
-          <p className={lead}>{t('iknow.intro.p2')}</p>
-          <p className="lav-lead font-medium text-lav-navy">{t('iknow.intro.p3')}</p>
-        </div>
-      </div>
-    </Section>
   );
 }
 

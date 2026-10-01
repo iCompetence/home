@@ -105,6 +105,58 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Mach KI zu deinem Wettbewerbsvorteil!',
   },
 
+  // --- Analytics Agent ---
+  'analyticsAgent.hero.subtitle': { de: 'Deine Daten. Deine Fragen. Sofortige Antworten.' },
+  'analyticsAgent.anchor.challenge': { en: 'The challenge' },
+  'analyticsAgent.anchor.inAction': { en: 'In action' },
+  // The quote is commonly attributed to Deming; no verified source.
+  'analyticsAgent.intro.quoteAuthor': {
+    en: '– attributed to W. Edwards Deming',
+    de: '– W. Edwards Deming zugeschrieben',
+  },
+  'analyticsAgent.intro.p1': {
+    de: 'Dein Unternehmen sammelt jeden Tag riesige Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
+  },
+  'analyticsAgent.intro.p2': {
+    de: 'Was wäre, wenn jeder in deinem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.',
+  },
+  'analyticsAgent.what.p1': {
+    de: 'Der Analytics Agent ist ein eigenständiger KI-Agent, der sich mit jeder beliebigen Datenquelle verbinden lässt. Er versteht deine Daten, deinen Business-Kontext und deine Fragen – alles in natürlicher Sprache.',
+  },
+  'analyticsAgent.what.p2': {
+    de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit deinen Web-Analytics-Daten im Dialog. Frag alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.',
+  },
+  'analyticsAgent.what.p3': {
+    de: 'Aber GA4 ist nur der Anfang. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
+  },
+  'analyticsAgent.what.p4': {
+    de: '→ Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in deiner Sprache.',
+  },
+  'analyticsAgent.features.title': { de: 'Das kannst du erwarten' },
+  'analyticsAgent.card1.description': {
+    de: 'Der Analytics Agent verbindet sich mit Google Analytics 4, Datenbanken, CRM-Systemen, Spreadsheets, APIs und Data Warehouses. Alle deine Datenquellen – zugänglich über eine einzige Konversationsschnittstelle.',
+  },
+  'analyticsAgent.card2.description': {
+    de: 'Kein SQL, keine Query-Builder, kein technisches Wissen nötig. Stell deine Frage einfach so, wie du einen Kollegen fragen würdest: „Was waren unsere Top-Landingpages letzten Monat?" oder „Vergleiche die Conversion-Raten über alle Kanäle."',
+  },
+  'analyticsAgent.card4.description': {
+    de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis deiner Daten im Kontext. Sie weiß, was deine Metriken bedeuten, wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
+  },
+  'analyticsAgent.card5.description': {
+    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle. Verbinde dich direkt mit der GA4-API und stelle Fragen zu deinem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.',
+  },
+  'analyticsAgent.card6.title': { de: 'Für dein Unternehmen gebaut' },
+  'analyticsAgent.card6.description': {
+    de: 'Der Analytics Agent läuft als eigenständige Lösung, die sich in deine bestehende Infrastruktur integriert. Sicher, skalierbar und darauf ausgelegt, mit deiner Datenlandschaft zu wachsen.',
+  },
+  'analyticsAgent.howItWorks.title': { de: 'Sieh den Analytics Agent in Aktion' },
+  'analyticsAgent.howItWorks.p1': {
+    de: 'Die Frage ist nicht, ob du Daten hast. Sondern ob du sie nutzen kannst.',
+  },
+  'analyticsAgent.howItWorks.p2': {
+    de: 'Mit dem Analytics Agent wird jedes Teammitglied zum Datenanalysten. Entscheidungen basieren nicht mehr auf Bauchgefühl – sondern auf Echtzeit-Erkenntnissen aus deinen tatsächlichen Daten.',
+  },
+
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
   'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
   'burgerMenu.products': { en: 'Products & tools' },
