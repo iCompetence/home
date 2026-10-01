@@ -62,7 +62,7 @@ export function ImageText({
  * Muted loop that only plays while it is on screen, and not at all when the
  * reader asked for reduced motion (then it rests on its first frame).
  */
-function LoopVideo({ src, className }: { src: string; className?: string }) {
+export function LoopVideo({ src, className }: { src: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const { reduced } = useMotionPrefs();
 

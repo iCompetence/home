@@ -178,6 +178,23 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'icu.faq.q5.content': { en: 'ICU integrates seamlessly with common setups:\nTag Managers, event pipelines, backend events, CRM data, and custom tracking.\nIf your system emits behavioral data, ICU can process it.', de: 'ICU integriert sich nahtlos mit gängigen Setups:\nTag Manager, Event-Pipelines, Backend-Events, CRM-Daten und Custom Tracking.\nWenn dein System Verhaltensdaten ausgibt, kann ICU sie verarbeiten.' },
   'icu.faq.q6.content': { en: 'ICU never requires unnecessary personal data.\nAll analyses are based on behavioral signals, handled within secure environments, and processed according to privacy-first principles.\nWe show journeys, not identities.' },
 
+  // --- Intelligentic Search ---
+  'is.anchor.statusQuo': { en: 'Status quo' },
+  'is.anchor.howItWorks': { en: 'How it works' },
+  'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google: KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein: Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen.' },
+  'is.quote.conclusion': { de: 'Wir wissen, dass du es kannst. Intelligentic Search.' },
+  'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
+  'is.features.subline3': { de: "Starre Filter? Tausende von „Ergebnissen\" zum Durchklicken? So gestern!\n\nSei auf dem neuesten Stand mit Intelligentic Search. It's a match!" },
+  'is.features.step2.label': { en: 'Integrated image search' },
+  'is.features.step3.label': { en: 'Intelligentic Search is the real AI' },
+  'is.modular.text1': { de: 'Unsere Mission ist es für jeden die perfekt zugeschnittene Lösung zu finden. Die Intelligentic Search ist ein Modulares System, das um eigene Wünsche und Funktionen erweitert und auf die Eigenschaften deines Unternehmens angepasst werden kann.' },
+  'is.howItWorks.title': { en: 'Under the hood: How the Intelligentic Search engine works' },
+  'is.comparison.title': { de: 'Die Vorteile für dich' },
+  'is.comparison.secondaryHeader': { en: 'Traditional search' },
+  'is.comparison.row1.feature': { en: 'Time to product' },
+  'is.comparison.row2.feature': { en: 'Search style' },
+  'is.comparison.row3.feature': { en: 'Recommended products' },
+
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
   'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
   'burgerMenu.products': { en: 'Products & tools' },

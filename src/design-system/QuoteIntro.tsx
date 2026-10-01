@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import { Section } from './Section';
 
 /**
@@ -15,8 +16,8 @@ export function QuoteIntro({
 }: {
   id?: string;
   quote: string;
-  /** Attribution, e.g. "– Jensen Huang, 2024". */
-  author: string;
+  /** Attribution, e.g. "– Jensen Huang, 2024" (may contain a source link). */
+  author: ReactNode;
   paragraphs: readonly string[];
   /** Last line, set in medium. */
   conclusion?: string;
@@ -33,7 +34,7 @@ export function QuoteIntro({
         </figure>
         <div className="flex flex-col gap-8 md:flex-1 md:gap-10">
           {paragraphs.map((paragraph) => (
-            <p key={paragraph} className="lav-lead font-normal text-lav-navy/80">
+            <p key={paragraph} className="lav-lead whitespace-pre-line font-normal text-lav-navy/80">
               {paragraph}
             </p>
           ))}

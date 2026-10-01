@@ -95,6 +95,11 @@ Stand:
       Standbild aus `ic_layers.mov` (`public/images/icu-layers.jpg`; `public/assets/` ist per `.gitignore` ausgeschlossen), wie in Figma.
       Mitkorrigiert: `Statement` (Band) mit Trim, FAQ-Zeile auf Tablet/Mobil 74 px und Antwort
       ohne rechten Abstand, FAQ-Abstand Titel→Liste auf Mobil 32 px.
+- [x] **Intelligentic Search** — `/de|en/lavender/intelligentic-search/`. Amazon-Zitat wörtlich
+      (englisch auf beiden Sprachen, Quelle verlinkt wie live); `QuoteIntro` mit Quellen-Link und
+      Zeilenumbrüchen; `LoopVideo` (Architektur-Video); `ComparisonTable icons` (Häkchen/Minus).
+      Zweites Galeriebild: Standbild aus `ICS_Image_Search.mp4` (`public/images/is-image-search.jpg`).
+      Mitkorrigiert: Tabellenkopf in der H3-Stufe und mit 12 px Abstand oben (Tablet/Mobil, auch EmpCo).
 - [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen
