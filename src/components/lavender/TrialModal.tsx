@@ -5,7 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Check, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackFormSuccess } from '@/lib/tracking';
-import { Button, FormField, TextAreaField } from '@/design-system';
+import { Button, FormError, FormField, TextAreaField, ValidatedForm } from '@/design-system';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 
@@ -52,11 +52,13 @@ export function TrialModal({
     return () => clearTimeout(timer);
   }, [open, state]);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onValidSubmit = async (
+    form: HTMLFormElement,
+    setFormError: (message: string | null) => void,
+  ) => {
     setState('submitting');
     const params = new URLSearchParams();
-    new FormData(e.currentTarget).forEach((value, key) => {
+    new FormData(form).forEach((value, key) => {
       params.append(key, typeof value === 'string' ? value : '');
     });
     try {
@@ -72,7 +74,7 @@ export function TrialModal({
       setTimeout(() => onOpenChange(false), 2000);
     } catch {
       setState('form');
-      alert(t('form.submitError'));
+      setFormError(t('form.submitError'));
     }
   };
 
@@ -118,11 +120,11 @@ export function TrialModal({
                   </p>
                 </div>
               ) : (
-                <form
+                <ValidatedForm
                   name="trial"
                   method="POST"
                   data-netlify="true"
-                  onSubmit={onSubmit}
+                  onValidSubmit={onValidSubmit}
                   className="flex flex-col gap-8"
                 >
                   <input type="hidden" name="form-name" value="trial" />
@@ -157,10 +159,11 @@ export function TrialModal({
                     label={`${t('ct.trial.modal.message')} (${t('ct.trial.modal.optional')})`}
                   />
                   <div data-trial-recaptcha="true" data-netlify-recaptcha="true" />
+                  <FormError />
                   <Button type="submit" className="w-full" disabled={state === 'submitting'}>
                     {state === 'submitting' ? t('ct.trial.modal.submitting') : submit}
                   </Button>
-                </form>
+                </ValidatedForm>
               )}
             </Dialog.Content>
           </div>

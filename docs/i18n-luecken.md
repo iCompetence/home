@@ -280,3 +280,16 @@ Die Liste enthält nur Texte, die auf den Figma-Seiten vorkommen. Weitere `en`-W
 | `lavender.products.analyticsAgent.desc` | visualisations → visualizations |
 
 „analyses“ als Substantiv im Plural bleibt unverändert. Fest im Code statt in `LanguageContext.tsx`: „organisation“ → „organization“ auf der Privacy-led-AI-Seite (`PrivacyLedAIPage.tsx`).
+
+## 12. Fehlermeldungen der Formulare (Entwurf, 01.10.2026)
+
+Die neuen Formulare (Kontakt, EmpCo-Audit, KI-Workshop, Testzugang/Demo) zeigen Fehler unter dem Feld statt als Browser-Blase oder `alert()` (Figma: FormField, State=error). Aus Figma stammt nur der E-Mail-Text; die übrigen sind Entwürfe und warten auf Freigabe.
+
+| Schlüssel | Wann | DE | EN |
+|---|---|---|---|
+| form.error.required | Pflichtfeld leer | Bitte fülle dieses Feld aus. | Please fill in this field. |
+| form.error.email | E-Mail ungültig | Bitte gib eine gültige E-Mail-Adresse ein. (Figma) | Please enter a valid email address. |
+| form.error.url | Webadresse ungültig (EmpCo) | Bitte gib eine gültige Webadresse ein. | Please enter a valid web address. |
+| form.error.consent | Einwilligung fehlt (EmpCo) | Bitte bestätige deine Einwilligung. | Please give your consent. |
+
+reCAPTCHA- und Sendefehler nutzen weiter `form.recaptchaError` / `form.submitError`, erscheinen aber über dem Absende-Knopf.

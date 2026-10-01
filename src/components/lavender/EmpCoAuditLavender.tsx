@@ -25,6 +25,7 @@ import {
   ConsentCheckbox,
   FactsBand,
   FaqSection,
+  FormError,
   FormField,
   IconCard,
   PageShell,
@@ -36,6 +37,7 @@ import {
   SpecItem,
   Statement,
   TopNav,
+  ValidatedForm,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
@@ -322,15 +324,14 @@ function SampleForm() {
     return () => clearTimeout(timer);
   }, [mounted]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitNetlifyForm(e.currentTarget, {
+  const onValidSubmit = (form: HTMLFormElement, setFormError: (message: string) => void) =>
+    submitNetlifyForm(form, {
       formId: 'empco-audit',
       language,
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
+      onError: setFormError,
     });
-  };
 
   return (
     <Section
@@ -345,11 +346,11 @@ function SampleForm() {
         </p>
       </div>
 
-      <form
+      <ValidatedForm
         name="empco-audit"
         method="POST"
         data-netlify="true"
-        onSubmit={onSubmit}
+        onValidSubmit={onValidSubmit}
         className="flex flex-1 flex-col gap-8 rounded-card bg-lav-lavender p-4 md:p-10"
       >
         <input type="hidden" name="form-name" value="empco-audit" />
@@ -387,16 +388,17 @@ function SampleForm() {
             here and break hydration (React #418). */}
         {mounted && <div data-netlify-recaptcha="true" />}
 
+        <FormError />
         <Button type="submit" className="w-full">
           {t('empco.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>
 
         <p className="lav-small font-normal text-lav-navy/70">{t('empco.form.privacyNotice')}</p>
-        <a href={siteHref(language, 'imprint')} className="lav-small font-medium text-lav-navy">
+        <a href={siteHref(language, 'privacy-policy')} className="lav-small font-medium text-lav-navy">
           → {t('empco.form.privacyLink')}
         </a>
-      </form>
+      </ValidatedForm>
     </Section>
   );
 }

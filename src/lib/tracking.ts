@@ -57,6 +57,11 @@ interface NetlifyFormSubmitOptions {
   recaptchaErrorMessage: string;
   /** Shown if the network request fails. */
   submitErrorMessage: string;
+  /**
+   * Shows those two messages. Default: alert() (the live pages); the
+   * redesigned forms show them inline (<FormError>).
+   */
+  onError?: (message: string) => void;
 }
 
 // sessionStorage handshake between submitNetlifyForm and the thank-you pages:
@@ -119,7 +124,13 @@ export function trackThankYouView(formId: string, formLanguage?: string): void {
  */
 export function submitNetlifyForm(
   form: HTMLFormElement,
-  { formId, language, recaptchaErrorMessage, submitErrorMessage }: NetlifyFormSubmitOptions,
+  {
+    formId,
+    language,
+    recaptchaErrorMessage,
+    submitErrorMessage,
+    onError = (message) => alert(message),
+  }: NetlifyFormSubmitOptions,
 ): void {
   let recaptchaSolved = true;
   try {
@@ -132,7 +143,7 @@ export function submitNetlifyForm(
     recaptchaSolved = true;
   }
   if (!recaptchaSolved) {
-    alert(recaptchaErrorMessage);
+    onError(recaptchaErrorMessage);
     return;
   }
 
@@ -163,6 +174,6 @@ export function submitNetlifyForm(
       window.location.href = redirectTo;
     })
     .catch(() => {
-      alert(submitErrorMessage);
+      onError(submitErrorMessage);
     });
 }

@@ -680,6 +680,15 @@ export const translations: Translations = {
     en: 'Something went wrong while sending your request. Please try again.',
     de: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.'
   },
+  // Field errors of the redesigned forms (FormField State=error). DE e-mail
+  // text from Figma; the others are drafts (docs/i18n-luecken.md §12).
+  'form.error.required': { en: 'Please fill in this field.', de: 'Bitte fülle dieses Feld aus.' },
+  'form.error.email': {
+    en: 'Please enter a valid email address.',
+    de: 'Bitte gib eine gültige E-Mail-Adresse ein.'
+  },
+  'form.error.url': { en: 'Please enter a valid web address.', de: 'Bitte gib eine gültige Webadresse ein.' },
+  'form.error.consent': { en: 'Please give your consent.', de: 'Bitte bestätige deine Einwilligung.' },
   'empco.form.disclaimer': {
     en: 'Note: the EmpCo Audit is an initial technical assessment and does not replace qualified legal advice. We accept no liability for the accuracy, completeness or timeliness of the results. For the final legal evaluation of your claims, please discuss the audit results with your legal department or a qualified lawyer.',
     de: 'Hinweis: Der EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine qualifizierte Rechtsberatung. Für die Richtigkeit, Vollständigkeit und Aktualität der Ergebnisse übernehmen wir keine Haftung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einem Rechtsanwalt bzw. einer Rechtsanwältin.'

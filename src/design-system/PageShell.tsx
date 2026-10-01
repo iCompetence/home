@@ -50,7 +50,8 @@ export function PageShell({
 html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 .lavender-page a, .lavender-page button { transition: opacity var(--duration-fast) ease; cursor: pointer; }
 .lavender-page a:hover, .lavender-page button:hover { opacity: 0.75; }
-.lavender-page :is(a, button, [role="button"], input, textarea):focus-visible { outline: 2px solid var(--color-lav-navy); outline-offset: 2px; }
+/* Text fields show focus as a 2 px border (FormField), not as this ring. */
+.lavender-page :is(a, button, [role="button"], input[type="checkbox"], input[type="radio"]):focus-visible { outline: 2px solid var(--color-lav-navy); outline-offset: 2px; }
 .lavender-page :is(.bg-lav-navy, [data-surface="inverse"]) :is(a, button, [role="button"]):focus-visible { outline-color: var(--color-lav-white); }
 `,
         }}

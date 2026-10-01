@@ -156,6 +156,8 @@
   --color-lav-page: #fdfafe;
   --color-lav-blue: #24a1da;
   --color-lav-white: #ffffff;
+  /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
+  --color-lav-error: #b3433d;
 
   /* Brand font */
   --font-brand: 'Inter', system-ui, -apple-system, sans-serif;

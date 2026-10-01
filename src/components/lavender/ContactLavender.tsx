@@ -7,12 +7,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { submitNetlifyForm, trackCtaClick } from '@/lib/tracking';
 import {
   Button,
+  FormError,
   FormField,
   Hero,
   PageShell,
   Section,
   TextAreaField,
   TopNav,
+  ValidatedForm,
   Footer,
   siteHref,
 } from '@/design-system';
@@ -65,15 +67,14 @@ function ContactForm() {
     return () => clearTimeout(timer);
   }, [mounted]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitNetlifyForm(e.currentTarget, {
+  const onValidSubmit = (form: HTMLFormElement, setFormError: (message: string) => void) =>
+    submitNetlifyForm(form, {
       formId: 'contact',
       language,
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
+      onError: setFormError,
     });
-  };
 
   const detail = (label: string, value: string, href: string, trackId: string) => (
     <div className="flex flex-col gap-4">
@@ -95,11 +96,11 @@ function ContactForm() {
         {detail(t('footer.phone'), PHONE, 'tel:+494022636380', 'contact_phone')}
       </address>
 
-      <form
+      <ValidatedForm
         name="contact"
         method="POST"
         data-netlify="true"
-        onSubmit={onSubmit}
+        onValidSubmit={onValidSubmit}
         className="flex flex-1 flex-col gap-6 rounded-card bg-lav-lavender p-4 md:p-8 lg:p-10"
       >
         <input type="hidden" name="form-name" value="contact" />
@@ -135,11 +136,12 @@ function ContactForm() {
             here and break hydration (React #418). */}
         {mounted && <div data-netlify-recaptcha="true" />}
 
+        <FormError />
         <Button type="submit" className="w-full">
           {t('contact.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>
-      </form>
+      </ValidatedForm>
     </Section>
   );
 }

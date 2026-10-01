@@ -12,6 +12,7 @@ import {
   Button,
   ClosingBlock,
   ConsentCheckbox,
+  FormError,
   FormField,
   PageShell,
   ProductHead,
@@ -19,6 +20,7 @@ import {
   Section,
   SectionHeader,
   TopNav,
+  ValidatedForm,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
@@ -172,15 +174,14 @@ function ApplicationForm() {
     return () => clearTimeout(timer);
   }, [mounted]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitNetlifyForm(e.currentTarget, {
+  const onValidSubmit = (form: HTMLFormElement, setFormError: (message: string) => void) =>
+    submitNetlifyForm(form, {
       formId: 'ai-workshop',
       language,
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
+      onError: setFormError,
     });
-  };
 
   return (
     <Section
@@ -193,12 +194,12 @@ function ApplicationForm() {
         <p className="lav-lead font-normal text-lav-navy/80">{t('workshop.form.intro')}</p>
       </div>
 
-      <form
+      <ValidatedForm
         name="ai-workshop"
         id="ai-workshop"
         method="POST"
         data-netlify="true"
-        onSubmit={onSubmit}
+        onValidSubmit={onValidSubmit}
         className="flex flex-1 flex-col gap-6 rounded-card bg-lav-lavender p-4 md:p-8 lg:p-10"
       >
         <input type="hidden" name="form-name" value="ai-workshop" />
@@ -236,11 +237,12 @@ function ApplicationForm() {
             here and break hydration (React #418). */}
         {mounted && <div data-netlify-recaptcha="true" />}
 
+        <FormError />
         <Button type="submit" className="w-full">
           {t('workshop.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>
-      </form>
+      </ValidatedForm>
     </Section>
   );
 }

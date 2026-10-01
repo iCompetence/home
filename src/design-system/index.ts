@@ -30,7 +30,7 @@ export { FaqList, type FaqEntry } from './FaqList';
 export { FaqSection } from './FaqSection';
 export { SplitBlock } from './SplitBlock';
 export { NewsEntry } from './NewsEntry';
-export { FormField, TextAreaField, ConsentCheckbox } from './FormField';
+export { FormField, TextAreaField, ConsentCheckbox, ValidatedForm, FormError } from './FormField';
 export { ComparisonTable, type ComparisonRow } from './ComparisonTable';
 export { FactsBand, type Fact } from './FactsBand';
 export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';

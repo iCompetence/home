@@ -142,6 +142,13 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       44 × 44 px Trefferfläche um das 22/24-px-Icon (wie Figma). Abschnitts-Dropdown der
       kompakten Pille ebenso. LinkedIn-Label übersetzt.
 - [x] Schon vorher erledigt: Tablet nur Burger, globaler Fokusring, Schlussstern 70 %.
+- [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
+      globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
+      (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den
+      Browser-Regeln (Pflicht, E-Mail, URL) ohne Browser-Blasen, setzt `aria-invalid`/
+      `aria-describedby` und fokussiert das erste fehlerhafte Feld; `FormError` zeigt reCAPTCHA-
+      und Sendefehler über dem Knopf (`submitNetlifyForm` hat dafür `onError`, live bleibt
+      `alert()`). Texte: `form.error.*`, Entwürfe in `docs/i18n-luecken.md` §12.
 
 ### Phase 3 — Seiten migrieren (je eine pro PR)
 Durch den Vorschau-Bereich ersetzt: Jede Seite ist unter `/lavender/` fertig und zieht beim
