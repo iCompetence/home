@@ -136,13 +136,13 @@ Privacy-led AI ist ein Prinzip, kein Produkt. Der Eintrag „Privacy-Led AI — 
 
 ## 9. 404-Seite: nur Englisch, fest im JSX (`app/[lang]/not-found.tsx`)
 
-Die 404-Seite hat keine `t()`-Keys, ist noch im alten Design und verlinkt fest auf `/de/`. In Figma ist sie im Lavender-Design nachgebaut (Hero mit Titel, Subline, Button; Desktop/Tablet/Mobil) — mit den englischen Strings aus dem Code. DE-Entwurf:
+Die 404-Seite hat keine `t()`-Keys, ist noch im alten Design und verlinkt fest auf `/de/`. In Figma ist sie im Lavender-Design nachgebaut (Hero mit Titel, Subline, Button; Desktop/Tablet/Mobil) — die DE-Seiten seit 30.09.2026 mit dem DE-Entwurf unten (der Code ist weiter nur englisch). DE-Entwurf:
 
 | Stelle | EN (Code) | DE (Entwurf) |
 |---|---|---|
 | Titel | 404 / Page not found | 404 / Seite nicht gefunden |
 | Text | The page you are looking for doesn't exist or has been moved. | Die Seite, die du suchst, existiert nicht oder wurde verschoben. |
-| Button | Back to home | Zur Startseite |
+| Button | Back to home | Zurück zur Startseite (wie auf der Danke-Seite, `ThankYouPage.tsx`) |
 
 Hinweis: der Button sollte auf `/${language}/` zeigen statt fest auf `/de/`.
 
