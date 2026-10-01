@@ -81,6 +81,11 @@ Stand:
       `AnchorTabs` (haftend), `SectionHeader`, `FactsBand`, `IconCard`, `SpecItem`,
       `FaqList`, `FormField`/`ConsentCheckbox`, `ComparisonTable`; `Statement layout="feature"`;
       `BrandStar` `product` | `facts` | `statementRight`; `TopNav sections={[]}` (Pille rechts).
+- [x] **iKnow** — `/de|en/lavender/iknow/`. Neu: `ImageText` (16:9-Video oder Bild neben
+      Titel und Text, Video spielt nur im Sichtbereich und nicht bei reduzierter Bewegung);
+      `SectionHeader leadIn`; `MediaGallery aspectClassName`; `ClosingBlock id` (Reiter „Kontakt").
+      Abweichung von Figma: Der Bildschirm-Rundgang (6 Screenshots) hat Vorschaubilder wie
+      die Produktgalerie; Figma zeigt nur das erste Bild ohne Steuerung.
 - [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen

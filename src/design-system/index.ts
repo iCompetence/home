@@ -18,6 +18,7 @@ export { ProductHead, type ProductHeadProps } from './ProductHead';
 export { AnchorTabs, ANCHOR_SCROLL_MARGIN, type AnchorTab } from './AnchorTabs';
 export { SectionHeader } from './SectionHeader';
 export { IconCard } from './IconCard';
+export { ImageText, type ImageTextProps } from './ImageText';
 export { SpecItem } from './SpecItem';
 export { FaqList, type FaqEntry } from './FaqList';
 export { FormField, ConsentCheckbox } from './FormField';

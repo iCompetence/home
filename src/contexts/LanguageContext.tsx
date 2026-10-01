@@ -2789,7 +2789,7 @@ export const translations: Translations = {
     de: 'iKnow — Oberfläche der KI-Wissensplattform'
   },
   'lavender.products.analyticsAgent.desc': {
-    en: 'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualisations and insights at the touch of a button.',
+    en: 'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualizations and insights at the touch of a button.',
     de: 'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.'
   },
   'lavender.products.analyticsAgent.imageAlt': {

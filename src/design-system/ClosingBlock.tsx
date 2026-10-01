@@ -1,6 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
+import { cn } from '@/components/ui/utils';
 import { BrandStar } from './BrandStar';
 import { CTABand } from './CTABand';
 import { Footer } from './Footer';
@@ -12,6 +13,9 @@ export type ClosingBlockProps = {
   action?: ReactNode;
   /** Band background; the brand light blue by default. */
   bandClassName?: string;
+  /** Anchor target, e.g. for a "Contact" tab in the page's AnchorTabs. */
+  id?: string;
+  className?: string;
 };
 
 /**
@@ -23,9 +27,9 @@ export type ClosingBlockProps = {
  * mean re-deriving `relative isolate overflow-hidden` and the overlay every
  * time, and getting it subtly wrong.
  */
-export function ClosingBlock({ heading, action, bandClassName }: ClosingBlockProps) {
+export function ClosingBlock({ heading, action, bandClassName, id, className }: ClosingBlockProps) {
   return (
-    <div className="relative isolate overflow-hidden">
+    <div id={id} className={cn('relative isolate overflow-hidden', className)}>
       <CTABand heading={heading} action={action} className={bandClassName} />
 
       <Footer />

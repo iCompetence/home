@@ -66,4 +66,46 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'empco.seo.faq.a17': {
     en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritized list on which the final legal review can build.',
   },
+
+  // --- iKnow ---
+  'iknow.anchor.statusQuo': { en: 'Status quo' },
+  'iknow.anchor.benefits': { en: 'Your benefits', de: 'Dein Mehrwert' },
+  'iknow.intro.p1': {
+    de: 'Dein Unternehmen besitzt eine Goldmine: Das kollektive Wissen deiner Organisation und deiner Mitarbeiter, das du über Jahre aufgebaut hast.',
+  },
+  'iknow.intro.p2': {
+    de: 'Hebe diesen Schatz! KI ermöglicht dir, das personengebundene Wissen allen verfügbar zu machen. Ein Wissenspool statt einer Insel, Struktur statt Silo, zugänglich für alle.',
+  },
+  'iknow.what.p2': {
+    de: 'Sie wächst mit dem Wissen deines Unternehmens. Kontinuierlich lernen? Selbstverständlich, das tust du ja auch.',
+  },
+  'iknow.what.p3': {
+    de: 'Aber bitte transparent: Du behältst die volle Kontrolle über Inhalte, Quellen und Verarbeitung. Alle Daten bleiben lokal im Unternehmen, ohne Anbindung nach außen, also ohne öffentliche KI-APIs.',
+  },
+  'iknow.guidance.title': { de: 'Das hast du nun davon!' },
+  'iknow.card3.title': { de: 'Optional: Nutze auch Gespräche' },
+  'iknow.card3.description': {
+    de: 'iKnow kann Meetings und Workshops transkribieren und so neues Wissen direkt in das System integrieren. So kannst du, wenn gewünscht, Wissen sichern, bevor es verloren geht.',
+  },
+  'iknow.card4.description': {
+    de: 'Sichere Wissen heutiger Generationen für künftige: iKnow bewahrt deine wertvollste Ressource dauerhaft und sichert so das kollektive Gedächtnis deines Unternehmens.',
+  },
+  'iknow.card5.description': {
+    de: 'iKnow arbeitet lokal: Als Desktop-Software verarbeitet es Daten sicher vor Ort. Behalte die Kontrolle über deine Daten und dein Wissen, jederzeit.',
+  },
+  'iknow.card6.title': { de: 'Bereit für deine Unternehmens-KI' },
+  'iknow.card6.description': {
+    de: 'iKnow baut für dich die Datengrundlage, die du für die Nutzung von KI-Agenten benötigst. So wird dein Unternehmen in kurzer Zeit bereit für die Zukunft mit KI – automatisiert, einfach, datensicher und auf der Höhe der Zeit.',
+  },
+  'iknow.howItWorks.title': { de: 'Entdecke iKnow: Der Blick ins Tool' },
+  'iknow.howItWorks.p1': {
+    de: 'Die Frage ist nicht, ob du KI einsetzt. Sondern worauf du sie aufbaust.',
+  },
+  'iknow.howItWorks.p2': {
+    de: 'Erfolg und Sicherheit bedingen sich gegenseitig: Nur mit einer sicheren, internen Wissensbasis kann KI sicher und erfolgreich sein. Mach KI zu deinem Wettbewerbsvorteil!',
+  },
+
+  // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
+  'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
+  'burgerMenu.products': { en: 'Products & tools' },
 };
