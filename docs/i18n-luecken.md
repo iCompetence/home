@@ -281,9 +281,9 @@ Die Liste enthält nur Texte, die auf den Figma-Seiten vorkommen. Weitere `en`-W
 
 „analyses“ als Substantiv im Plural bleibt unverändert. Fest im Code statt in `LanguageContext.tsx`: „organisation“ → „organization“ auf der Privacy-led-AI-Seite (`PrivacyLedAIPage.tsx`).
 
-## 12. Fehlermeldungen der Formulare (Entwurf, 01.10.2026)
+## 12. Fehlermeldungen der Formulare (freigegeben 01.10.2026)
 
-Die neuen Formulare (Kontakt, EmpCo-Audit, KI-Workshop, Testzugang/Demo) zeigen Fehler unter dem Feld statt als Browser-Blase oder `alert()` (Figma: FormField, State=error). Aus Figma stammt nur der E-Mail-Text; die übrigen sind Entwürfe und warten auf Freigabe.
+Die neuen Formulare (Kontakt, EmpCo-Audit, KI-Workshop, Testzugang/Demo) zeigen Fehler unter dem Feld statt als Browser-Blase oder `alert()` (Figma: FormField, State=error). Der E-Mail-Text stammt aus Figma, die übrigen sind am 01.10.2026 freigegeben und in Figma eingetragen (Content-Guidelines → Formulare, Beispiele im Block „Formular“).
 
 | Schlüssel | Wann | DE | EN |
 |---|---|---|---|

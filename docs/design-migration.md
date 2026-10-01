@@ -148,7 +148,7 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       Browser-Regeln (Pflicht, E-Mail, URL) ohne Browser-Blasen, setzt `aria-invalid`/
       `aria-describedby` und fokussiert das erste fehlerhafte Feld; `FormError` zeigt reCAPTCHA-
       und Sendefehler über dem Knopf (`submitNetlifyForm` hat dafür `onError`, live bleibt
-      `alert()`). Texte: `form.error.*`, Entwürfe in `docs/i18n-luecken.md` §12.
+      `alert()`). Texte: `form.error.*` (`docs/i18n-luecken.md` §12, freigegeben).
 
 ### Phase 3 — Seiten migrieren (je eine pro PR)
 Durch den Vorschau-Bereich ersetzt: Jede Seite ist unter `/lavender/` fertig und zieht beim

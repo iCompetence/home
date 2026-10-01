@@ -680,8 +680,8 @@ export const translations: Translations = {
     en: 'Something went wrong while sending your request. Please try again.',
     de: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.'
   },
-  // Field errors of the redesigned forms (FormField State=error). DE e-mail
-  // text from Figma; the others are drafts (docs/i18n-luecken.md §12).
+  // Field errors of the redesigned forms (FormField State=error), approved
+  // 01.10.2026; also in Figma (Content-Guidelines → Formulare).
   'form.error.required': { en: 'Please fill in this field.', de: 'Bitte fülle dieses Feld aus.' },
   'form.error.email': {
     en: 'Please enter a valid email address.',
