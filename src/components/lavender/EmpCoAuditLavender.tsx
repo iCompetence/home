@@ -24,7 +24,7 @@ import {
   ComparisonTable,
   ConsentCheckbox,
   FactsBand,
-  FaqList,
+  FaqSection,
   FormField,
   IconCard,
   PageShell,
@@ -466,16 +466,7 @@ function Faq() {
     answer: t(`empco.seo.faq.a${i + 1}`),
   }));
   return (
-    <Section
-      id="faq"
-      className={ANCHOR_SCROLL_MARGIN}
-      innerClassName="flex flex-col gap-10 lg:flex-row"
-    >
-      <h2 className="lav-h1 text-lav-navy lg:w-[31.4%]">{t('empco.seo.faq.title')}</h2>
-      <div className="lg:flex-1">
-        <FaqList items={items} />
-      </div>
-    </Section>
+    <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('empco.seo.faq.title')} items={items} />
   );
 }
 

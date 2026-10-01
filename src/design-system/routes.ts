@@ -15,7 +15,7 @@ import type { Language } from '@/contexts/LanguageContext';
 export const PREVIEW_BASE = '/lavender';
 
 /** Routes (without slashes) that already exist in the preview. '' = home. */
-const PREVIEW_ROUTES: ReadonlySet<string> = new Set(['', 'analytics-agent', 'empco-audit', 'iknow']);
+const PREVIEW_ROUTES: ReadonlySet<string> = new Set(['', 'analytics-agent', 'empco-audit', 'icu-user-journey-explorer', 'iknow']);
 
 /**
  * Language-prefixed internal link. `path` is the un-prefixed route with or

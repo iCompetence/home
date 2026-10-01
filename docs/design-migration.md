@@ -89,6 +89,12 @@ Stand:
 - [x] **Analytics Agent** — `/de|en/lavender/analytics-agent/`. Gleicher Aufbau wie iKnow;
       Zitat-Abschnitt als gemeinsamer Baustein `QuoteIntro` (auch auf iKnow), Bilder statt
       Videos in `ImageText`. Abweichung wie bei iKnow: Vorschaubilder unter dem Rundgang.
+- [x] **User Journey Explorer** — `/de|en/lavender/icu-user-journey-explorer/`. Neu: `FaqSection`
+      (auch auf EmpCo); Ankerleiste und Alt-Texte, die live fest auf Englisch stehen, als
+      `lavender.icu.*`-Schlüssel (DE nach `docs/i18n-luecken.md` §3). Zweites Galeriebild ist ein
+      Standbild aus `ic_layers.mov` (`public/images/icu-layers.jpg`; `public/assets/` ist per `.gitignore` ausgeschlossen), wie in Figma.
+      Mitkorrigiert: `Statement` (Band) mit Trim, FAQ-Zeile auf Tablet/Mobil 74 px und Antwort
+      ohne rechten Abstand, FAQ-Abstand Titel→Liste auf Mobil 32 px.
 - [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen

@@ -56,7 +56,7 @@ export function Statement({ text, action, id, actionId = 'cta', layout = 'band' 
     <>
       <Section dsName="Statement" id={id} className="relative" innerClassName="relative z-[2]">
         {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
-        <p className="m-0 w-full text-center font-brand text-[28px] font-medium leading-[1.15] text-lav-navy md:text-[40px] lg:text-h2 lg:leading-[1.1]">
+        <p className="lav-statement w-full text-center text-lav-navy">
           {text}
         </p>
       </Section>

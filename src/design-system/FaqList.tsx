@@ -35,7 +35,7 @@ export function FaqList({
                 aria-expanded={expanded}
                 aria-controls={`${baseId}-a${i}`}
                 onClick={() => setOpen((o) => (o === i ? null : i))}
-                className="flex min-h-[76px] w-full cursor-pointer items-center justify-between gap-6 border-0 bg-transparent py-6 text-left"
+                className="flex min-h-[74px] w-full cursor-pointer items-center justify-between gap-6 border-0 bg-transparent py-6 text-left lg:min-h-[76px]"
               >
                 <span className="lav-h3 text-lav-navy">{item.question}</span>
                 <Icon aria-hidden size={24} strokeWidth={2} className="shrink-0 text-lav-navy" />
@@ -51,7 +51,7 @@ export function FaqList({
               )}
             >
               <div className={cn('min-h-0 overflow-hidden', !expanded && 'invisible')}>
-                <p className="lav-body whitespace-pre-line pb-6 pr-0 pt-1 font-normal text-lav-navy/80 md:pr-16">
+                <p className="lav-body whitespace-pre-line pb-6 pr-0 pt-1 font-normal text-lav-navy/80 lg:pr-16">
                   {item.answer}
                 </p>
               </div>

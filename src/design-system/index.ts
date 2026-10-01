@@ -22,6 +22,7 @@ export { ImageText, type ImageTextProps } from './ImageText';
 export { QuoteIntro } from './QuoteIntro';
 export { SpecItem } from './SpecItem';
 export { FaqList, type FaqEntry } from './FaqList';
+export { FaqSection } from './FaqSection';
 export { FormField, ConsentCheckbox } from './FormField';
 export { ComparisonTable, type ComparisonRow } from './ComparisonTable';
 export { FactsBand, type Fact } from './FactsBand';

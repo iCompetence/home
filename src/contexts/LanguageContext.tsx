@@ -2766,6 +2766,14 @@ export const translations: Translations = {
   'lavender.common.breadcrumb': { en: 'Breadcrumb', de: 'Brotkrumen-Navigation' },
   'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
+  'lavender.icu.anchor.statusQuo': { en: 'Status quo', de: 'Status quo' },
+  'lavender.icu.anchor.benefits': { en: 'Benefits', de: 'Vorteile' },
+  'lavender.icu.anchor.more': { en: 'More about ICU', de: 'Mehr über ICU' },
+  'lavender.icu.anchor.faq': { en: 'FAQ', de: 'FAQ' },
+  'lavender.icu.anchor.contact': { en: 'Contact', de: 'Kontakt' },
+  // Alt texts: EN as hard-coded on the live page, DE per docs/i18n-luecken.md §3.
+  'lavender.icu.layersAlt': { en: 'From overview to every detail', de: 'Vom Überblick bis ins Detail' },
+  'lavender.icu.agentAlt': { en: 'iCU Agent chat interface', de: 'Chat-Oberfläche des ICU-Agenten' },
   'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {
