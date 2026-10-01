@@ -39,6 +39,33 @@ export function FormField({
   );
 }
 
+/** Label + multi-line text area (three to four lines). */
+export function TextAreaField({
+  label,
+  id,
+  required,
+  className,
+  ...textarea
+}: {
+  label: string;
+  id: string;
+} & ComponentProps<'textarea'>) {
+  return (
+    <div data-ds="FormField" className={cn('flex flex-col gap-3', className)}>
+      <label htmlFor={id} className="lav-small font-medium text-lav-navy">
+        {label}
+        {required && <span aria-hidden> *</span>}
+      </label>
+      <textarea
+        id={id}
+        required={required}
+        className={cn(inputCls, 'h-36 resize-y py-3')}
+        {...textarea}
+      />
+    </div>
+  );
+}
+
 /** Required consent line: a 20px checkbox and its label. */
 export function ConsentCheckbox({
   id,

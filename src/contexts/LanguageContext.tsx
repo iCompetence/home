@@ -2766,6 +2766,7 @@ export const translations: Translations = {
   'lavender.common.breadcrumb': { en: 'Breadcrumb', de: 'Brotkrumen-Navigation' },
   'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
+  'lavender.common.close': { en: 'Close', de: 'Schließen' },
   'lavender.icu.anchor.statusQuo': { en: 'Status quo', de: 'Status quo' },
   'lavender.icu.anchor.benefits': { en: 'Benefits', de: 'Vorteile' },
   'lavender.icu.anchor.more': { en: 'More about ICU', de: 'Mehr über ICU' },

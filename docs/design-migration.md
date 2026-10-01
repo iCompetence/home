@@ -105,7 +105,14 @@ Stand:
       `docs/i18n-luecken.md` §2, wie in Figma). Neu: `ProductHead media` (Experten-Bühne statt
       Galerie), `Badge`, `ConsentCheckbox value`. Formular `ai-workshop` wie live (gleiche Feldnamen,
       Terminwert bleibt „Individuellen Termin buchen"); Danke-Seite jetzt in der Seitensprache.
-- [ ] übrige Produktseiten, Infoseiten, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
+- [x] **Campaign Parameter Tool** — `/de|en/lavender/campaign-parameter-tool/`. Kaufbox mit
+      Preisstufen-Umschalter (`SegmentedControl`) und `PriceTag`; `PricingCard`, `ReviewCard`,
+      `TextAreaField`, `Badge tone`, `ComparisonTable firstColumn="number"`. Testzugang/Demo als
+      `TrialModal` (Radix Dialog: Fokusfalle, Escape, Scroll-Sperre; scrollt auf kleinen Bildschirmen,
+      mobil 16 px Innenabstand, damit reCAPTCHA passt). Gleiches Netlify-Formular „trial" wie live,
+      gesendet an `/__forms.html` (live: `/`, das per 301 nach `/de/` umleitet — prüfen).
+      Abschnitte Use Cases, Why now und Demo-CTA der Live-Seite sind in Figma nicht vorgesehen.
+- [ ] Privacy-led AI, Kontakt, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
 
 ### Phase 2 — Shell vereinheitlichen
 - [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.
