@@ -2775,6 +2775,24 @@ export const translations: Translations = {
   // Alt texts: EN as hard-coded on the live page, DE per docs/i18n-luecken.md §3.
   'lavender.icu.layersAlt': { en: 'From overview to every detail', de: 'Vom Überblick bis ins Detail' },
   'lavender.icu.agentAlt': { en: 'iCU Agent chat interface', de: 'Chat-Oberfläche des ICU-Agenten' },
+  // Thank-you and 404 pages — hard-coded on the live site; DE in "du" and the
+  // 404 DE draft from docs/i18n-luecken.md §9, as in Figma.
+  'thankYou.title': { en: 'Thank you!', de: 'Vielen Dank!' },
+  'thankYou.message': {
+    en: 'Your message has been sent successfully. We will get back to you as soon as possible.',
+    de: 'Deine Nachricht wurde erfolgreich gesendet. Wir werden uns schnellstmöglich bei dir melden.'
+  },
+  'thankYou.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  'notFound.title': { en: '404\nPage not found', de: '404\nSeite nicht gefunden' },
+  'notFound.message': {
+    en: "The page you are looking for doesn't exist or has been moved.",
+    de: 'Die Seite, die du suchst, existiert nicht oder wurde verschoben.'
+  },
+  'notFound.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  // Privacy policy page — new in the redesign (live, the privacy text sits on
+  // the imprint page); title as in Figma. The soft hyphen breaks the word where
+  // Figma does once it is wider than a phone at display size.
+  'privacyPolicy.title': { en: 'Privacy policy', de: 'Datenschutz\u00ADerklärung' },
   // Privacy-led AI — the live page is hard-coded English; DE = drafts from
   // docs/i18n-luecken.md §1 (as in Figma), EN with US spelling and sentence case.
   'privacy.hero.title': { en: 'Privacy-led AI', de: 'Privacy-led AI' },

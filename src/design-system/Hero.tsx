@@ -5,10 +5,7 @@ import { DesignFrameOverlay } from './DesignFrameOverlay';
 import { isCompact, useBreakpoint } from './useBreakpoint';
 
 export type HeroProps = {
-  /**
-   * Headline. A `\n` marks the desktop line break; compact viewports collapse
-   * it to a space, so callers can keep one string per language.
-   */
+  /** Headline. A `\n` is a line break on every breakpoint, as in Figma. */
   title: string;
   subline?: string;
   /** CTAs — composed by the page so each one picks its own buttons. */
@@ -50,9 +47,7 @@ export function Hero({
         (compact ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
 
       <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-12 md:gap-12 md:px-12 md:py-14 lg:gap-14 lg:px-24 lg:py-16">
-        <h1 className="lav-display whitespace-normal text-lav-navy lg:whitespace-pre-line">
-          {compact ? title.replace('\n', ' ') : title}
-        </h1>
+        <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
 
         {subline && (
           <p className="lav-lead w-full max-w-full font-normal text-lav-navy/80 md:w-[600px] lg:w-[820px]">

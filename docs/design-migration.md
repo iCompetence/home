@@ -119,7 +119,17 @@ Stand:
 - [x] Trim-Durchgang: Hero, CTABand, Footer (neue Stufe `lav-display` 40/56/80 mit Laufweite),
       ProcessAccordion/ProcessRow und ProductTeaser auf die Figma-Stufen und -Abstände gebracht —
       Startseite und Unterseiten jetzt auf 0–4 px genau (vorher bis +90 px).
-- [ ] Kontakt, Danke, Neuigkeiten, Impressum, Datenschutz, 404-Vorschau
+- [x] **Kontakt, Danke, 404** — `/de|en/lavender/contact/`, `…/thank-you/`, `…/404/`. Kontakt: Hero
+      nur mit Titel, Adressspalte neben dem Netlify-Formular „contact" (Felder ohne Sternchen).
+      Danke/404: Hero mit Button zur Startseite. Die Danke-Seite prüft live wieder den Formular-
+      Erfolg (nur in der Vorschau immer sichtbar). `Hero` bricht `\n` jetzt auf allen Breiten um.
+- [x] **Impressum, Datenschutzerklärung, Neuigkeiten** — `…/imprint/`, `…/privacy-policy/` (neue
+      Seite; Slug vorläufig), `…/whats-new/`. Neu: `SplitBlock` (H2 links, Inhalt rechts, Linie oben)
+      und `NewsEntry`. Der Datenschutzteil des Live-Impressums ist jetzt eigene Seite; die sechs
+      Dienste stehen als FAQ-Akkordeon (`FaqList` nimmt jetzt auch Links in der Antwort). DE in „du",
+      TMG → DDG; EN-Dienste-Texte bleiben englisch wie im Code (Figma-EN zeigt sie deutsch).
+      Footer-Link „Datenschutz" zeigt auf die neue Seite. Leere Aktionsrahmen der Figma-Heroes
+      (Kontakt, Impressum, Datenschutz, Neuigkeiten) sind im Code weggelassen.
 
 ### Phase 2 — Shell vereinheitlichen
 - [ ] Neue `TopNav`+`Footer` ins geteilte Layout → jede Seite bekommt die neue Hülle.

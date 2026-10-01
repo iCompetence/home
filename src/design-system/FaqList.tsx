@@ -1,10 +1,11 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/components/ui/utils';
 
-export type FaqEntry = { question: string; answer: string };
+/** `answer` may carry inline links; `\n` breaks lines as in Figma. */
+export type FaqEntry = { question: string; answer: ReactNode };
 
 /**
  * FAQ accordion. Answers stay in the DOM when collapsed (grid-rows 0fr → 1fr)

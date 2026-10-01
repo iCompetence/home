@@ -96,10 +96,15 @@ export function Footer() {
       {/* Bottom strip */}
       <div className="flex w-full items-center justify-between border-t border-lav-white/[0.32] pt-6">
         <div className="flex items-center gap-8">
-          {(['footer.imprint', 'footer.privacy'] as const).map((key) => (
+          {(
+            [
+              ['footer.imprint', 'imprint'],
+              ['footer.privacy', 'privacy-policy'],
+            ] as const
+          ).map(([key, route]) => (
             <a
               key={key}
-              href={siteHref(language, 'imprint')}
+              href={siteHref(language, route)}
               className="lav-body font-medium text-lav-white/70 no-underline"
             >
               {t(key)}

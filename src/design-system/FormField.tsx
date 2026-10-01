@@ -10,18 +10,21 @@ export function FormField({
   hint,
   id,
   required,
+  requiredMark = true,
   className,
   ...input
 }: {
   label: string;
   hint?: ReactNode;
   id: string;
+  /** Show the `*` after the label of a required field (default). */
+  requiredMark?: boolean;
 } & ComponentProps<'input'>) {
   return (
     <div data-ds="FormField" className={cn('flex flex-col gap-3', className)}>
       <label htmlFor={id} className="lav-small font-medium text-lav-navy">
         {label}
-        {required && <span aria-hidden> *</span>}
+        {required && requiredMark && <span aria-hidden> *</span>}
       </label>
       <input
         id={id}
@@ -44,17 +47,20 @@ export function TextAreaField({
   label,
   id,
   required,
+  requiredMark = true,
   className,
   ...textarea
 }: {
   label: string;
   id: string;
+  /** Show the `*` after the label of a required field (default). */
+  requiredMark?: boolean;
 } & ComponentProps<'textarea'>) {
   return (
     <div data-ds="FormField" className={cn('flex flex-col gap-3', className)}>
       <label htmlFor={id} className="lav-small font-medium text-lav-navy">
         {label}
-        {required && <span aria-hidden> *</span>}
+        {required && requiredMark && <span aria-hidden> *</span>}
       </label>
       <textarea
         id={id}

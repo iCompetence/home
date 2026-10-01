@@ -252,6 +252,35 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   },
   'ct.cta.button': { en: 'Request demo' },
 
+  // --- Contact ---
+  'contact.form.email': { en: 'Email address', de: 'E-Mail-Adresse' },
+  'contact.form.submit': { en: 'Send request' },
+
+  // --- Imprint, privacy policy, what's new — DE in "du", TMG → DDG, EN in sentence case (as in Figma) ---
+  'imprint.hero.title': { en: 'Imprint', de: 'Impressum' },
+  'imprint.section1.title': { en: 'Information according to § 5 DDG (German Digital Services Act)', de: 'Angaben gemäß § 5 DDG' },
+  'imprint.section2.title': { en: 'Register entry' },
+  'imprint.section3.title': { en: 'Image credits' },
+  'imprint.section4.content.title': { en: 'Liability for content' },
+  'imprint.section4.content.text': { en: 'The contents of our pages were created with the greatest care. However, we cannot guarantee the accuracy, completeness, or topicality of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 Para. 1 DDG under general law. According to §§ 8 to 10 DDG, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general law remain unaffected. However, liability in this regard is only possible from the time of knowledge of a specific infringement. Upon notification of such violations, we will remove this content immediately.', de: 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.' },
+  'imprint.section4.links.title': { en: 'Liability for links' },
+  'imprint.section4.copyright.text': { de: 'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.' },
+  'imprint.section4.privacy.title': { en: 'Privacy' },
+  'imprint.section4.privacy.text1': { de: 'Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne deine ausdrückliche Zustimmung nicht an Dritte weitergegeben.' },
+  'imprint.empco.title': { en: 'EmpCo Audit (greenwashing check)' },
+  'imprint.empco.intro': { de: 'Über das EmpCo-Audit-Formular auf dieser Website kannst du eine kostenlose, KI-gestützte Prüfung deiner Website auf Nachhaltigkeits-/Greenwashing-Aussagen anfordern. Für diese Verarbeitung gelten ergänzend zu den allgemeinen Hinweisen die folgenden Angaben.' },
+  'imprint.empco.purpose.value': { de: 'Erstellung eines kostenlosen EmpCo-Audits deiner Website als unverbindliche Marketing-Leistung der iCompetence GmbH.' },
+  'imprint.empco.legalBasis.value': { de: 'Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen auf deine Anfrage hin).' },
+  'imprint.empco.pseudonymization.value': { de: 'Vor Übermittlung an Anthropic werden in den analysierten Website-Inhalten enthaltene personenbezogene Daten (Namen, E-Mail-Adressen, Telefonnummern, IBANs) automatisiert durch Platzhalter ersetzt. Anthropic verarbeitet keine Klarnamen oder Kontaktdaten aus den analysierten Website-Inhalten. Vor Auslieferung des Audits an dich werden die ursprünglichen Inhalte wieder eingefügt.' },
+  'imprint.empco.noAutomatedDecision.value': { de: 'Das Audit wird KI-gestützt erstellt. Alle Ergebnisse werden vor Versand redaktionell geprüft. Es findet kein Profiling und keine automatisierte Entscheidung mit rechtlicher Wirkung dir gegenüber statt.' },
+  'whatsNew.hero.title': { en: "What's new at iCompetence" },
+  'whatsNew.hero.subtitle': { de: 'Entdecke unsere neuesten Produkte, Features und Updates.' },
+  'whatsNew.march2026.item1.description': { de: 'Unser KI-gestützter Analytics Agent ist jetzt für alle Kunden verfügbar. Verbinde beliebige Datenquellen, stelle Fragen in natürlicher Sprache und erhalte sofortige Visualisierungen und Insights.' },
+  'whatsNew.february2026.item1.description': { de: 'iKnow unterstützt jetzt die Aufnahme mehrsprachiger Dokumente und eine verbesserte semantische Suche über deine gesamte Wissensbasis. Finde die richtigen Informationen schneller als je zuvor.' },
+  'whatsNew.february2026.item2.title': { en: 'Privacy-led AI — our principle for AI with sensitive data', de: 'Privacy-led AI — unser Prinzip für KI mit sensiblen Daten' },
+  'whatsNew.february2026.item2.description': { en: 'AI comes to your data, not the other way around. Clarity, responsibility, transparency and security: the four principles we follow when implementing AI inside your infrastructure.', de: 'KI kommt zu deinen Daten, nicht umgekehrt. Klarheit, Verantwortung, Transparenz und Sicherheit: Nach diesen vier Prinzipien setzen wir KI in deiner Infrastruktur um.' },
+  'whatsNew.january2026.item2.description': { de: 'Speichere und verwende deine häufigsten UTM-Parameter-Konfigurationen mit unserer neuen Vorlagenbibliothek. Teile Vorlagen im Team für konsistentes Kampagnen-Tracking.' },
+
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
   'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
   'burgerMenu.products': { en: 'Products & tools' },

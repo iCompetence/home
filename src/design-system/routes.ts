@@ -15,7 +15,7 @@ import type { Language } from '@/contexts/LanguageContext';
 export const PREVIEW_BASE = '/lavender';
 
 /** Routes (without slashes) that already exist in the preview. '' = home. */
-const PREVIEW_ROUTES: ReadonlySet<string> = new Set(['', 'ai-workshop', 'analytics-agent', 'campaign-parameter-tool', 'empco-audit', 'icu-user-journey-explorer', 'iknow', 'intelligentic-search', 'privacy-led-ai']);
+const PREVIEW_ROUTES: ReadonlySet<string> = new Set(['', 'ai-workshop', 'analytics-agent', 'campaign-parameter-tool', 'contact', 'empco-audit', 'icu-user-journey-explorer', 'iknow', 'imprint', 'intelligentic-search', 'privacy-led-ai', 'privacy-policy', 'thank-you', 'whats-new']);
 
 /**
  * Language-prefixed internal link. `path` is the un-prefixed route with or
