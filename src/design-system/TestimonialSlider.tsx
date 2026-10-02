@@ -93,8 +93,13 @@ export function TestimonialSlider({
       className="relative overflow-hidden bg-lav-navy"
       innerClassName="relative z-[2] flex flex-col gap-6 md:gap-10"
     >
-      {decoration &&
-        (isCompact(bp) ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
+      {/* Behind title and quotes, like in the Statement: without its own
+          layer the positioned star would paint over the static text. */}
+      {decoration && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          {isCompact(bp) ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>}
+        </div>
+      )}
       <h2 className="m-0 w-full font-brand text-[28px] font-medium leading-[1.1] text-lav-white md:text-[32px] lg:text-h3">
         {title}
       </h2>

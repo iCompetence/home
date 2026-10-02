@@ -55,7 +55,12 @@ export function Statement({ text, action, id, actionId = 'cta', layout = 'band' 
   return (
     <>
       <Section dsName="Statement" id={id} className="relative" innerClassName="relative z-[2]">
-        {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
+        {/* The star shares the container with the sentence: as a positioned
+            box it would paint over the (static) text, so it gets its own
+            layer behind it — the star always stays in the background. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
+        </div>
         <p className="lav-statement w-full text-center text-lav-navy">
           {text}
         </p>
