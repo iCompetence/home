@@ -124,7 +124,7 @@ Stand:
       Danke/404: Hero mit Button zur Startseite. Die Danke-Seite prüft live wieder den Formular-
       Erfolg (nur in der Vorschau immer sichtbar). `Hero` bricht `\n` jetzt auf allen Breiten um.
 - [x] **Impressum, Datenschutzerklärung, Neuigkeiten** — `…/imprint/`, `…/privacy-policy/` (neue
-      Seite; Slug vorläufig), `…/whats-new/`. Neu: `SplitBlock` (H2 links, Inhalt rechts, Linie oben)
+      Seite; Adresse am 02.10.2026 bestätigt), `…/whats-new/`. Neu: `SplitBlock` (H2 links, Inhalt rechts, Linie oben)
       und `NewsEntry`. Der Datenschutzteil des Live-Impressums ist jetzt eigene Seite; die sechs
       Dienste stehen als FAQ-Akkordeon (`FaqList` nimmt jetzt auch Links in der Antwort). DE in „du",
       TMG → DDG; EN-Dienste-Texte bleiben englisch wie im Code (Figma-EN zeigt sie deutsch).
