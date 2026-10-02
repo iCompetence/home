@@ -142,6 +142,15 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       44 × 44 px Trefferfläche um das 22/24-px-Icon (wie Figma). Abschnitts-Dropdown der
       kompakten Pille ebenso. LinkedIn-Label übersetzt.
 - [x] Schon vorher erledigt: Tablet nur Burger, globaler Fokusring, Schlussstern 70 %.
+- [x] Haftende Ankerleiste in Navy (Idee/Entscheidung 02.10.2026, Figma zuerst): sobald die Reiter
+      oben haften, wird die Leiste Navy (weiße Reiter, keine Linie). Desktop: Die Menüleiste der
+      Produktseiten bleibt groß, bis die Reiter haften, und wird erst dann zur Pille, die rechts in
+      der Navy-Leiste aufgeht (`useAnchorTabsStuck` in AnchorTabs.tsx, gelesen von TopNav).
+      Tablet/Mobil (nachgeschärft, zu viel Höhe): eine 56-px-Zeile statt Pille + Reiter — die
+      Pille weicht „Kontakt aufnehmen“ + Burger (Tablet) bzw. dem Burger (Mobil) an derselben
+      Stelle; die Pille bleibt unsichtbar im Layout, damit nichts springt. Reiter haften überall
+      bei top 0 und enden vor der Navigation. Haftende Zeilen 56 / 80 px wie Figma.
+      Startseite und Infoseiten unverändert (schrumpfen nach 80 px). Burger: „Privacy-led AI“.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den

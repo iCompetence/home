@@ -4,6 +4,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAnchorTabsStuck } from './AnchorTabs';
 import { BurgerMenu } from './BurgerMenu';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 import { HOME_NAV_SECTIONS, smoothAnchor, type NavSection } from './nav-links';
@@ -15,8 +16,9 @@ export type TopNavProps = {
   /**
    * In-page section anchors (desktop only). Defaults to the homepage sections.
    * Pages with their own section navigation (AnchorTabs — every product page)
-   * pass `[]`: the bar then carries logo, CTA and burger only, and the
-   * scrolled pill docks to the right so it shares one row with the stuck tabs.
+   * pass `[]`: the bar then carries logo, CTA and burger only, stays full until
+   * the tabs stick, and then becomes the pill that docks into the navy tab row
+   * on the right.
    */
   sections?: readonly NavSection[];
   /**
@@ -97,14 +99,40 @@ function CtaButton({ compact }: { compact?: boolean }) {
 /**
  * Mobile and tablet: logo, CTA, burger. Section links only exist on desktop —
  * at 768px four of them wrap onto two lines (decided 2026-09-30).
+ *
+ * On a product page, once the AnchorTabs stick, the pill gives way to just
+ * CTA + burger (tablet) or the burger (mobile) inside the navy tab row — one
+ * 56px row instead of pill plus tabs (decided 2026-10-02). Both sit exactly
+ * where they sat in the pill, so the burger panel opens in the same place.
+ * The pill stays in the layout, hidden, so the header keeps its height and
+ * nothing below moves.
  */
 function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
   const isMobile = bp === 'mobile';
   const { ref, width } = usePillWidth();
+  const docked = useAnchorTabsStuck();
 
   return (
     <header className="pointer-events-none sticky top-0 z-50 w-full">
-      <div className="mx-auto w-full max-w-frame px-4 pt-3 md:px-6 md:pt-3.5">
+      {docked && (
+        <div className="absolute inset-x-0 top-0 mx-auto flex h-14 w-full max-w-frame items-center justify-end px-8 md:px-12">
+          <div className="pointer-events-auto flex items-center gap-3.5 text-lav-white md:gap-[18px]">
+            {!isMobile && <CtaButton compact />}
+            <BurgerMenu
+              trigger="tap"
+              columns={isMobile ? 1 : 2}
+              iconSize={isMobile ? 22 : 24}
+              pillWidth={width}
+              pillPaddingX={isMobile ? 16 : 24}
+              // Panel 16px below the 56px row, as below the pill.
+              pillPaddingY={isMobile ? 9 : 8}
+            />
+          </div>
+        </div>
+      )}
+      <div
+        className={cn('mx-auto w-full max-w-frame px-4 pt-3 md:px-6 md:pt-3.5', docked && 'invisible')}
+      >
         <nav data-ds="TopNav"
           ref={ref as React.Ref<HTMLElement>}
           className="pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill bg-lav-navy px-4 py-2.5 text-lav-white md:gap-5 md:px-6 md:py-3"
@@ -146,14 +174,18 @@ function DesktopNav({
   activeSection?: string;
 }) {
   const { t } = useLanguage();
-  const [compact, setCompact] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const tabsStuck = useAnchorTabsStuck();
   const [activeId, setActiveId] = useState<string>(activeSection ?? sections[0]?.id ?? '');
   const sectionHref = (id: string) => (sectionsHref ? `${sectionsHref}#${id}` : `#${id}`);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownId = useId();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const { ref, width } = usePillWidth([compact]);
   const hasSections = sections.length > 0;
+  // With section links: compact after 80 px. Product pages (no section links,
+  // AnchorTabs instead): compact only once the tabs stick.
+  const compact = hasSections ? scrolled : tabsStuck;
+  const { ref, width } = usePillWidth([compact]);
 
   const { scrollY } = useScroll();
   const fullItemsOpacity = useTransform(scrollY, [40, 70], [1, 0]);
@@ -161,7 +193,7 @@ function DesktopNav({
 
   // Shrink into a centred pill after scrolling past the hero.
   useEffect(() => {
-    const onScroll = () => setCompact(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -238,7 +270,7 @@ function DesktopNav({
               <motion.a
                 href={logoHref}
                 onClick={smoothAnchor}
-                style={{ opacity: fullItemsOpacity }}
+                style={{ opacity: hasSections ? fullItemsOpacity : 1 }}
                 className="inline-flex items-center no-underline"
               >
                 <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-12 w-auto" />

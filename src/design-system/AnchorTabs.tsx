@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { cn } from '@/components/ui/utils';
 import { useMotionPrefs } from './motion';
 
@@ -11,33 +11,52 @@ export type AnchorTab = {
 };
 
 /**
- * Jump targets need the height of everything that sticks to the top as scroll
- * margin: on desktop the 80px tab row (the nav pill shares it), on tablet and
- * mobile the nav pill plus the tab row. AnchorTabs measures that at runtime
- * (the pill grows when its label wraps) and publishes it as --anchor-offset;
- * put this class on every section a tab points to.
+ * Jump targets need the height of the stuck tab row as scroll margin (the nav
+ * shares that row). AnchorTabs publishes it as --anchor-offset; put this class
+ * on every section a tab points to.
  */
 export const ANCHOR_SCROLL_MARGIN = 'scroll-mt-[var(--anchor-offset,112px)]';
 
 /** Height of the stuck tab row: tablet/mobile and desktop. */
-const ROW = { compact: 48, desktop: 80 } as const;
+const ROW = { compact: 56, desktop: 80 } as const;
+
+/*
+ * Whether the tabs currently stick. The TopNav of a product page reads it: it
+ * stays as it is until this moment and then docks into the navy tab row —
+ * desktop as the pill, tablet/mobile as CTA + burger / burger (2026-10-02).
+ */
+let stuckNow = false;
+const stuckListeners = new Set<() => void>();
+function publishStuck(value: boolean) {
+  if (value === stuckNow) return;
+  stuckNow = value;
+  stuckListeners.forEach((listener) => listener());
+}
+export function useAnchorTabsStuck(): boolean {
+  return useSyncExternalStore(
+    (listener) => {
+      stuckListeners.add(listener);
+      return () => stuckListeners.delete(listener);
+    },
+    () => stuckNow,
+    () => false,
+  );
+}
 
 /**
  * The section navigation of a product page — the only one there (the TopNav
  * carries no section links on such pages).
  *
- * Static it sits under the product head. Scrolled past, it sticks: on desktop
- * as an 80px row that shares the line with the right-docked nav pill, on
- * tablet and mobile directly under the nav pill with an opaque page-coloured
- * backdrop. A click scrolls to the section; the active tab follows the
- * scroll position. Where the tabs do not fit they scroll horizontally and the
- * active one is kept in view.
+ * Static it sits under the product head on the page colour. Scrolled past, it
+ * sticks to the top and turns navy, and the nav docks into it on the right, so
+ * the navigation is one dark row: 80px on desktop, 56px (as tall as the static
+ * row) on tablet and mobile. A click scrolls to the section; the active tab
+ * follows the scroll position. The tabs scroll horizontally where they do not
+ * fit and end before the docked nav; the active one is kept in view.
  */
 export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; label: string }) {
   const [active, setActive] = useState(items[0]?.id ?? '');
   const [stuck, setStuck] = useState(false);
-  // Sticky offset: 0 on desktop, the bottom edge of the nav pill otherwise.
-  const [top, setTop] = useState(0);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
   const prefs = useMotionPrefs();
@@ -47,13 +66,14 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
     const measure = () => {
       frame = 0;
       const desktop = window.innerWidth >= 1024;
-      const pill = document.querySelector('[data-ds="TopNav"]');
-      const top = desktop || !pill ? 0 : Math.round(pill.getBoundingClientRect().bottom);
-      setTop(top);
       const sentinel = sentinelRef.current;
-      if (sentinel) setStuck(sentinel.getBoundingClientRect().top <= top);
+      if (sentinel) {
+        const isStuck = sentinel.getBoundingClientRect().top <= 0;
+        setStuck(isStuck);
+        publishStuck(isStuck);
+      }
 
-      const offset = top + (desktop ? ROW.desktop : ROW.compact);
+      const offset = desktop ? ROW.desktop : ROW.compact;
       document.documentElement.style.setProperty('--anchor-offset', `${offset}px`);
 
       // The active tab is the last section whose top has passed the sticky
@@ -77,6 +97,7 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       document.documentElement.style.removeProperty('--anchor-offset');
+      publishStuck(false);
     };
   }, [items]);
 
@@ -104,22 +125,20 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
         aria-label={label}
         data-ds="AnchorTabs"
         data-stuck={stuck || undefined}
-        style={{ top, ['--anchor-top' as string]: `${top}px` }}
         className={cn(
-          'sticky z-40 w-full bg-lav-page',
-          // Tablet/mobile: the hairline is full-bleed. Desktop: only when stuck.
-          'border-b border-lav-navy/20 lg:border-b-0',
-          stuck && 'lg:border-b',
-          // Opaque backdrop behind the nav pill above the stuck row.
-          stuck &&
-            "before:absolute before:inset-x-0 before:bottom-full before:h-[var(--anchor-top)] before:bg-lav-page before:content-[''] lg:before:hidden",
+          'sticky top-0 z-40 w-full border-b lg:border-b-0',
+          stuck
+            ? // Navy, no visible hairline (the transparent one keeps the height).
+              'border-transparent bg-lav-navy'
+            : // Tablet/mobile: full-bleed hairline; desktop: under the tabs only.
+              'border-lav-navy/20 bg-lav-page',
         )}
       >
         <div
           className={cn(
             'mx-auto w-full max-w-frame lg:px-[var(--section-pad-h)]',
-            // Desktop stuck: leave room for the right-docked nav pill.
-            stuck && 'lg:pr-[368px]',
+            // Stuck: the tabs end before the docked nav (burger · CTA + burger · pill).
+            stuck && 'pr-[70px] md:pr-[291px] lg:pr-[368px]',
           )}
         >
           <div
@@ -139,13 +158,28 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
                   onClick={(e) => jump(e, id)}
                   className={cn(
                     'lav-body relative shrink-0 whitespace-nowrap font-medium',
-                    current ? 'text-lav-navy' : 'text-lav-navy/70',
-                    stuck ? 'pb-4 pt-4 lg:pb-8 lg:pt-[34px]' : 'pb-5 pt-6',
+                    stuck
+                      ? current
+                        ? 'text-lav-white'
+                        : 'text-lav-white/70'
+                      : current
+                        ? 'text-lav-navy'
+                        : 'text-lav-navy/70',
+                    // Rows as in Figma: 56 px, desktop stuck 80 px (the 2px underline
+                    // sits in the padding).
+                    'pb-5 pt-6',
+                    stuck && 'lg:pb-[34px] lg:pt-[34px]',
                   )}
                 >
                   {text}
                   {current && (
-                    <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-lav-navy" />
+                    <span
+                      aria-hidden
+                      className={cn(
+                        'absolute inset-x-0 bottom-0 h-0.5',
+                        stuck ? 'bg-lav-white' : 'bg-lav-navy',
+                      )}
+                    />
                   )}
                 </a>
               );
