@@ -30,12 +30,18 @@ export const PRODUCT_LINKS: readonly ProductLink[] = [
   { labelKey: 'burgerMenu.analyticsAgent', href: '/analytics-agent/' },
   { labelKey: 'burgerMenu.iknow', href: '/iknow/' },
   { labelKey: 'burgerMenu.intelligenticSearch', href: '/intelligentic-search/' },
-  { labelKey: 'burgerMenu.privacyLedAi', href: '/privacy-led-ai/' },
   { labelKey: 'burgerMenu.aiWorkshop', href: '/ai-workshop/' },
   { labelKey: 'burgerMenu.campaignTool', href: '/campaign-parameter-tool/' },
   { labelKey: 'burgerMenu.userJourney', href: '/icu-user-journey-explorer/' },
-  { labelKey: 'burgerMenu.whatsNew', href: '/whats-new/' },
 ];
+
+/** The burger menu's own group below the products (Dennis, 2026-10-02). */
+export const PRINCIPLE_LINKS: readonly ProductLink[] = [
+  { labelKey: 'burgerMenu.privacyLedAi', href: '/privacy-led-ai/' },
+];
+
+/** Sits next to Home in the burger menu's first row, on the right. */
+export const NEWS_LINK: ProductLink = { labelKey: 'burgerMenu.whatsNew', href: '/whats-new/' };
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/icompetence/';
 

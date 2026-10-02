@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { Fragment, useEffect, useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/components/ui/utils';
 import { LanguageToggle } from './LanguageToggle';
 import { LinkedInGlyph } from './icons';
-import { LINKEDIN_URL, PRODUCT_LINKS } from './nav-links';
+import { LINKEDIN_URL, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS } from './nav-links';
 import { siteHref } from './routes';
 import { DURATION, EASE, useMotionPrefs } from './motion';
 
 /**
- * Burger menu with the "Products & Tools" grid.
+ * Burger menu: Home · What's new, the "Products & Tools" grid, "Principles".
  * `trigger="hover"` = desktop mega-menu, `trigger="tap"` = touch sheet.
  * Width/offsets are measured from the nav pill, so they stay inline styles.
  *
@@ -130,49 +130,62 @@ export function BurgerMenu({
               width: panelWidth,
             }}
           >
-            <a
-              href={siteHref(language, '/')}
-              onClick={closeOnNav}
-              className={cn(
-                'font-brand font-medium text-lav-white no-underline',
-                wide ? 'text-body' : 'py-1 text-[15px]',
-              )}
-            >
-              {t('burgerMenu.home')}
-            </a>
-
-            <div className={cn('h-px bg-lav-white/20', !wide && 'my-1')} />
-
-            <span
-              className={cn(
-                'font-brand font-medium uppercase tracking-[1px] text-lav-white/70',
-                wide ? 'text-[12px]' : 'text-[11px]',
-              )}
-            >
-              {t('burgerMenu.products')}
-            </span>
-
-            <div
-              className={cn('grid', wide ? 'gap-x-8 gap-y-4' : 'gap-x-6')}
-              style={{
-                gridTemplateColumns: `repeat(${wide ? 4 : columns}, 1fr)`,
-                rowGap: wide ? undefined : columns > 1 ? 14 : 10,
-              }}
-            >
-              {sortedLinks.map(({ labelKey, href }) => (
+            {/* Home left, What's new right — the same level (Dennis, 2026-10-02). */}
+            <div className={cn('flex items-center justify-between gap-6', !wide && 'py-1')}>
+              {[{ labelKey: 'burgerMenu.home', href: '/' }, NEWS_LINK].map(({ labelKey, href }) => (
                 <a
                   key={href}
                   href={siteHref(language, href)}
                   onClick={closeOnNav}
                   className={cn(
                     'font-brand font-medium text-lav-white no-underline',
-                    wide ? 'text-[18px]' : 'text-[15px]',
+                    wide ? 'text-body' : 'text-[15px]',
                   )}
                 >
                   {t(labelKey)}
                 </a>
               ))}
             </div>
+
+            {[
+              { labelKey: 'burgerMenu.products', links: sortedLinks },
+              { labelKey: 'burgerMenu.principles', links: PRINCIPLE_LINKS },
+            ].map((group) => (
+              <Fragment key={group.labelKey}>
+                <div className={cn('h-px bg-lav-white/20', !wide && 'my-1')} />
+
+                <span
+                  className={cn(
+                    'font-brand font-medium uppercase tracking-[1px] text-lav-white/70',
+                    wide ? 'text-[12px]' : 'text-[11px]',
+                  )}
+                >
+                  {t(group.labelKey)}
+                </span>
+
+                <div
+                  className={cn('grid', wide ? 'gap-x-8 gap-y-4' : 'gap-x-6')}
+                  style={{
+                    gridTemplateColumns: `repeat(${wide ? 4 : columns}, 1fr)`,
+                    rowGap: wide ? undefined : columns > 1 ? 14 : 10,
+                  }}
+                >
+                  {group.links.map(({ labelKey, href }) => (
+                    <a
+                      key={href}
+                      href={siteHref(language, href)}
+                      onClick={closeOnNav}
+                      className={cn(
+                        'font-brand font-medium text-lav-white no-underline',
+                        wide ? 'text-[18px]' : 'text-[15px]',
+                      )}
+                    >
+                      {t(labelKey)}
+                    </a>
+                  ))}
+                </div>
+              </Fragment>
+            ))}
 
             <div className={cn('h-px bg-lav-white/20', !wide && 'my-1')} />
 

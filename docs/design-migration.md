@@ -171,6 +171,10 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       `.lav-hyphenate` (Regel der Überschriften: Wörter ab 14 Buchstaben) für IconCard, SpecItem,
       EmpCo-Verbotsliste und Datenschutz-Tabelle; CPT-Mehrwerte 4 und EmpCo-Schritte 5 nebeneinander
       erst ab 1200 px (`min-[75rem]`), darunter 2 bzw. 3 (02.10.2026).
+- [x] Hinweise Dennis (02.10.2026): Intelligentic Search „Funktionsweise“ → „So funktioniert's“
+      (wie iKnow/CPT, Override); alle Unterseiten TopNav ohne Abschnittslinks — ohne AnchorTabs nach
+      80 px kompakt rechts; BurgerMenu mit Kopfzeile Home | Neuigkeiten und eigener Gruppe
+      „Prinzipien“/„Principles“ (Privacy-led AI), neuer Key `burgerMenu.principles`.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der

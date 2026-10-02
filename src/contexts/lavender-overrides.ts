@@ -285,6 +285,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
   'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
   'burgerMenu.products': { en: 'Products & tools' },
+  'burgerMenu.whatsNew': { en: "What's new" },
   // Content-Guidelines: „Privacy-led AI“, never „Privacy-Led AI“ (as in the nav).
   'burgerMenu.privacyLedAi': { en: 'Privacy-led AI', de: 'Privacy-led AI' },
   // Labels above the contact data are eyebrows (uppercase via CSS), without

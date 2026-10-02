@@ -1231,6 +1231,11 @@ export const translations: Translations = {
     en: 'Products & Tools',
     de: 'Produkte & Tools'
   },
+  // Redesign: own group for the principles page (2026-10-02).
+  'burgerMenu.principles': {
+    en: 'Principles',
+    de: 'Prinzipien'
+  },
   'burgerMenu.analyticsAgent': {
     en: 'Analytics Agent',
     de: 'Analytics Agent'
