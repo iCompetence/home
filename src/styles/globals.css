@@ -446,11 +446,13 @@ html {
   }
   /* Long German compounds (Nachhaltigkeitswerbung) are wider than a phone at
      heading sizes: hyphenate, but only words of 14+ letters, so ordinary
-     headlines never break mid-word. */
+     headlines never break mid-word. .lav-hyphenate applies the same rule to
+     smaller text in narrow columns (cards, steps, table cells). */
   .lav-h1,
   .lav-h2,
   .lav-h3,
-  .lav-statement {
+  .lav-statement,
+  .lav-hyphenate {
     -webkit-hyphens: auto;
     hyphens: auto;
     hyphenate-limit-chars: 14 6 6;

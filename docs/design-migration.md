@@ -155,6 +155,9 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       „Aktionen“, space/16; Entscheidung 02.10.2026, zuerst 24), zum übrigen Inhalt bleiben 32 px.
 - [x] Produktkopf ohne Eyebrow „Produkt“ über dem Namen — der Breadcrumb „Produkte › …“ ordnet schon
       ein (02.10.2026). Die Teaser „Weitere Produkte“ behalten ihr Eyebrow.
+- [x] CPT „Mehrwerte“: 24 statt 40 px zwischen den Karten auch auf Desktop (Figma von Dennis). IconCard-
+      Text trennt Wörter ab 14 Buchstaben — bei 1250 px liefen „Kampagnenbezeichnungen“ und
+      „Entscheidungsgrundlagen“ über den Kartenrand.
 - [x] CPT ohne Preis-Section und Reiter „Preise“ — Stufen und Preis stehen schon in der Kaufbox
       (Idee Dennis, 02.10.2026). Den Text von `ct.pricing.description` erklärt jetzt der neue
       Baustein `InfoTip` hinter „1 Parameter-Raum“ (Info-Icon, Karte per Klick; Escape/Klick
@@ -164,6 +167,10 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       live unverändert). Damit steht im Impressum „Telefon: …“ statt „(Telefon): …“. Eyebrow nutzt
       jetzt `lav-small` (Text-Trim wie Figma, vorher 21 statt 10 px hoch). E-Mail auf der
       Kontaktseite ohne Silbentrennung, bricht bei 1024–1090 px nach dem „@“.
+- [x] Überlauf zwischen 1024 und 1250 px (Scan aller Vorschau-Seiten DE/EN, 390–1440 px):
+      `.lav-hyphenate` (Regel der Überschriften: Wörter ab 14 Buchstaben) für IconCard, SpecItem,
+      EmpCo-Verbotsliste und Datenschutz-Tabelle; CPT-Mehrwerte 4 und EmpCo-Schritte 5 nebeneinander
+      erst ab 1200 px (`min-[75rem]`), darunter 2 bzw. 3 (02.10.2026).
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der

@@ -168,7 +168,8 @@ function ProcessorTable() {
   const { t } = useLanguage();
   const cols = ['provider', 'location', 'purpose', 'transfer'] as const;
   const row = 'flex flex-col gap-3 border-b border-lav-navy/20 py-3 md:table-row md:py-0';
-  const cell = 'block p-0 text-left align-top md:table-cell md:py-3 md:pr-4 md:last:pr-0';
+  // Hyphenated: „Standardvertragsklauseln“ is wider than a column below 1250px.
+  const cell = 'lav-hyphenate block p-0 text-left align-top md:table-cell md:py-3 md:pr-4 md:last:pr-0';
   return (
     <table role="table" className="block w-full border-collapse md:table md:table-fixed">
       <colgroup>

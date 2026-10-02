@@ -18,8 +18,11 @@ export function IconCard({
       >
         <Icon size={24} strokeWidth={2} />
       </span>
-      <h3 className="lav-lead font-medium text-lav-navy">{title}</h3>
-      <p className="lav-body font-normal text-lav-navy/80">{description}</p>
+      {/* Narrow cards cannot fit long German compounds such as
+          „Kampagnenbezeichnungen“ or „Kontextverständnis“: hyphenate words of
+          14+ letters, like the heading steps do. */}
+      <h3 className="lav-lead lav-hyphenate font-medium text-lav-navy">{title}</h3>
+      <p className="lav-body lav-hyphenate font-normal text-lav-navy/80">{description}</p>
     </article>
   );
 }

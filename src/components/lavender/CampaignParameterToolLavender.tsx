@@ -161,7 +161,9 @@ export default function CampaignParameterToolLavender() {
 
       <Section id="values" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.values.title')} />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+        {/* Four in a row only from 1200px (75rem, sorts after md): below,
+            „Maintenance“ is wider than a card's text column. */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 min-[75rem]:grid-cols-4">
           {VALUE_ICONS.map((icon, i) => (
             <IconCard
               key={i}

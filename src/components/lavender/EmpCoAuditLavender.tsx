@@ -423,7 +423,7 @@ function Directive() {
               >
                 <Ban size={24} strokeWidth={2} />
               </span>
-              <p className="lav-body font-normal text-lav-navy">{t(`empco.seo.banned.item${n}`)}</p>
+              <p className="lav-body lav-hyphenate font-normal text-lav-navy">{t(`empco.seo.banned.item${n}`)}</p>
             </li>
           ))}
         </ul>
@@ -431,7 +431,10 @@ function Directive() {
 
       <div className={block}>
         <h3 className="lav-h2 text-lav-navy">{t('empco.seo.steps.title')}</h3>
-        <ol className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+        {/* Five in a row only from 1200px (75rem — in rem so it sorts after
+            lg): below, „Klimaaussagen“ (too short to hyphenate) is wider than
+            a column. */}
+        <ol className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 min-[75rem]:grid-cols-5">
           {[1, 2, 3, 4, 5].map((n) => (
             <SpecItem
               key={n}
