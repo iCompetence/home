@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAnchorTabsPresent, useAnchorTabsStuck } from './AnchorTabs';
+import { NAV_TONE, NavSurfaceContext, useNavSurface, type NavSurface } from './nav-surface';
 import { BurgerMenu } from './BurgerMenu';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 import { HOME_NAV_SECTIONS, smoothAnchor, type NavSection } from './nav-links';
@@ -33,6 +34,11 @@ export type TopNavProps = {
   sectionsHref?: string;
   /** Section shown as current in the scrolled pill when it is not on this page. */
   activeSection?: string;
+  /**
+   * 'light' = white pill, black logo, light burger panel — for dark pages
+   * (the principles page), where the navy pill would vanish (2026-10-02).
+   */
+  surface?: NavSurface;
 };
 
 /** Sticky site header in the new design. Compact (mobile/tablet) vs desktop. */
@@ -41,17 +47,22 @@ export function TopNav({
   logoHref = '#top',
   sectionsHref,
   activeSection,
+  surface = 'dark',
 }: TopNavProps) {
   const bp = useBreakpoint();
-  return isCompact(bp) ? (
-    <CompactNav bp={bp} logoHref={logoHref} />
-  ) : (
-    <DesktopNav
-      sections={sections}
-      logoHref={logoHref}
-      sectionsHref={sectionsHref}
-      activeSection={activeSection}
-    />
+  return (
+    <NavSurfaceContext.Provider value={surface}>
+      {isCompact(bp) ? (
+        <CompactNav bp={bp} logoHref={logoHref} />
+      ) : (
+        <DesktopNav
+          sections={sections}
+          logoHref={logoHref}
+          sectionsHref={sectionsHref}
+          activeSection={activeSection}
+        />
+      )}
+    </NavSurfaceContext.Provider>
   );
 }
 
@@ -109,6 +120,8 @@ function CtaButton({ compact }: { compact?: boolean }) {
  */
 function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
   const isMobile = bp === 'mobile';
+  const surface = useNavSurface();
+  const tone = NAV_TONE[surface];
   const { ref, width } = usePillWidth();
   const docked = useAnchorTabsStuck();
 
@@ -136,11 +149,12 @@ function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
       >
         <nav data-ds="TopNav"
           ref={ref as React.Ref<HTMLElement>}
-          className="pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill bg-lav-navy px-4 py-2.5 text-lav-white md:gap-5 md:px-6 md:py-3"
+          data-surface={surface}
+          className={cn('pointer-events-auto flex w-full items-center justify-between gap-3 rounded-pill px-4 py-2.5 md:gap-5 md:px-6 md:py-3', tone.pill)}
         >
           <a href={logoHref} onClick={smoothAnchor} className="inline-flex items-center">
             <img
-              src="/iCompetence_white.svg"
+              src={tone.logo}
               alt="iCompetence"
               className="block h-8 w-auto md:h-10"
             />
@@ -175,6 +189,8 @@ function DesktopNav({
   activeSection?: string;
 }) {
   const { t } = useLanguage();
+  const surface = useNavSurface();
+  const tone = NAV_TONE[surface];
   const [scrolled, setScrolled] = useState(false);
   const tabsStuck = useAnchorTabsStuck();
   const tabsPresent = useAnchorTabsPresent();
@@ -270,7 +286,8 @@ function DesktopNav({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={morphTransition}
-              className="pointer-events-auto flex w-full items-center justify-between gap-12 rounded-pill bg-lav-navy px-8 py-4 text-lav-white"
+              data-surface={surface}
+              className={cn('pointer-events-auto flex w-full items-center justify-between gap-12 rounded-pill px-8 py-4', tone.pill)}
             >
               <motion.a
                 href={logoHref}
@@ -278,7 +295,7 @@ function DesktopNav({
                 style={{ opacity: docksIntoTabs ? 1 : fullItemsOpacity }}
                 className="inline-flex items-center no-underline"
               >
-                <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-12 w-auto" />
+                <img src={tone.logo} alt="iCompetence" className="block h-12 w-auto" />
               </motion.a>
 
               <motion.div
@@ -312,7 +329,8 @@ function DesktopNav({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={morphTransition}
-              className="pointer-events-auto flex items-center gap-4 rounded-pill bg-lav-navy px-4 py-2 text-lav-white"
+              data-surface={surface}
+              className={cn('pointer-events-auto flex items-center gap-4 rounded-pill px-4 py-2', tone.pill)}
             >
               {sections.length > 0 && (
                 <motion.div

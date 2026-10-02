@@ -178,6 +178,12 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
 - [x] „Buche dein Erstgespräch“ öffnet überall das `ConsultModal` statt der Kontaktseite (9 Seiten,
       ClosingBlock und Kaufboxen): Netlify-Formular „contact“ + Feld `topic` (in public/__forms.html
       ergänzt), auf Produktseiten mit dem Produkt vorausgefüllt. Neuer Key `lavender.consult.topic`.
+- [x] Privacy-led AI als dunkle Prinzipien-Seite (Entwurf B, abgestimmt 02.10.2026): `PageShell
+      surface="inverse"`, helle Nav (`TopNav surface="light"`, schwarzes Logo, helles BurgerMenu),
+      Hero mit Eyebrow „Prinzipien“ und Mint-Stern (`BrandStar principles`, nur Desktop),
+      Problem zweispaltig (Lösung in Blau), vier `PrincipleCard`s — ab 1200 px 2×2 Schachbrett,
+      darunter einzeln abwechselnd. Texte unverändert (privacy.*). Figma DE/EN × 3 Breiten, alte
+      Frames als „Stand vor Prinzipien-Seite“ darunter.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der

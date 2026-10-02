@@ -24,6 +24,7 @@ export { ProductHead, type ProductHeadProps } from './ProductHead';
 export { AnchorTabs, ANCHOR_SCROLL_MARGIN, type AnchorTab } from './AnchorTabs';
 export { SectionHeader } from './SectionHeader';
 export { IconCard } from './IconCard';
+export { PrincipleCard } from './PrincipleCard';
 export { ImageText, LoopVideo, type ImageTextProps } from './ImageText';
 export { QuoteIntro } from './QuoteIntro';
 export { SpecItem } from './SpecItem';

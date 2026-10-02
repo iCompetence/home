@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { NAV_TONE, useNavSurface } from './nav-surface';
 
 /**
  * EN / DE toggle. Switches the project-wide language and keeps the URL in sync
@@ -8,6 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
  */
 export function LanguageToggle() {
   const { language, setLanguage, t } = useLanguage();
+  const tone = NAV_TONE[useNavSurface()];
   const next = language === 'en' ? 'de' : 'en';
 
   const toggle = () => {
@@ -23,11 +25,11 @@ export function LanguageToggle() {
       type="button"
       aria-label={t(next === 'de' ? 'topNav.switchToGerman' : 'topNav.switchToEnglish')}
       onClick={toggle}
-      className="cursor-pointer border-0 bg-transparent p-0 font-brand text-body font-medium text-lav-white"
+      className={`cursor-pointer border-0 bg-transparent p-0 font-brand text-body font-medium ${tone.text}`}
     >
-      <span className={language === 'en' ? 'text-lav-white' : 'text-lav-white/70'}>EN</span>
-      <span className="text-lav-white/70"> / </span>
-      <span className={language === 'de' ? 'text-lav-white' : 'text-lav-white/70'}>DE</span>
+      <span className={language === 'en' ? tone.text : tone.muted}>EN</span>
+      <span className={tone.muted}> / </span>
+      <span className={language === 'de' ? tone.text : tone.muted}>DE</span>
     </button>
   );
 }

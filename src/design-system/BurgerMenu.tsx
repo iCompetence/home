@@ -9,6 +9,7 @@ import { LanguageToggle } from './LanguageToggle';
 import { LinkedInGlyph } from './icons';
 import { LINKEDIN_URL, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS } from './nav-links';
 import { siteHref } from './routes';
+import { NAV_TONE, useNavSurface } from './nav-surface';
 import { DURATION, EASE, useMotionPrefs } from './motion';
 
 /**
@@ -44,6 +45,7 @@ export function BurgerMenu({
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelId = useId();
   const tap = trigger === 'tap';
+  const tone = NAV_TONE[useNavSurface()];
   const dropdownTopOffset = pillPaddingY + 24;
   const panelWidth = pillWidth || (wide ? 1100 : 264);
   const closeOnNav = tap ? () => setOpen(false) : undefined;
@@ -93,7 +95,8 @@ export function BurgerMenu({
         // (detail 0) toggle, so the desktop menu works without a mouse.
         onClick={(e) => setOpen((p) => (tap || e.detail === 0 ? !p : true))}
         className={cn(
-          'relative inline-flex cursor-pointer items-center border-0 bg-transparent p-0 text-lav-white',
+          'relative inline-flex cursor-pointer items-center border-0 bg-transparent p-0',
+          tone.text,
           // Touch: 44×44 hit area around the 22/24 icon without moving it (Figma).
           tap &&
             "before:absolute before:left-1/2 before:top-1/2 before:h-11 before:w-11 before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
@@ -120,7 +123,8 @@ export function BurgerMenu({
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: prefs.d(DURATION.fast), ease: EASE.out }}
             className={cn(
-              'absolute flex flex-col bg-lav-navy shadow-[0_10px_30px_rgba(11,34,49,0.18)]',
+              'absolute flex flex-col shadow-[0_10px_30px_rgba(11,34,49,0.18)]',
+              tone.pill,
               wide ? 'gap-6 rounded-card px-12 py-10' : 'gap-3 rounded-card-sm px-6 py-5',
               tap && 'max-h-[calc(100vh-140px)] max-w-[100vw] overflow-y-auto',
             )}
@@ -138,7 +142,8 @@ export function BurgerMenu({
                   href={siteHref(language, href)}
                   onClick={closeOnNav}
                   className={cn(
-                    'font-brand font-medium text-lav-white no-underline',
+                    'font-brand font-medium no-underline',
+                    tone.text,
                     wide ? 'text-body' : 'text-[15px]',
                   )}
                 >
@@ -152,11 +157,12 @@ export function BurgerMenu({
               { labelKey: 'burgerMenu.principles', links: PRINCIPLE_LINKS },
             ].map((group) => (
               <Fragment key={group.labelKey}>
-                <div className={cn('h-px bg-lav-white/20', !wide && 'my-1')} />
+                <div className={cn('h-px', tone.divider, !wide && 'my-1')} />
 
                 <span
                   className={cn(
-                    'font-brand font-medium uppercase tracking-[1px] text-lav-white/70',
+                    'font-brand font-medium uppercase tracking-[1px]',
+                    tone.muted,
                     wide ? 'text-[12px]' : 'text-[11px]',
                   )}
                 >
@@ -176,7 +182,8 @@ export function BurgerMenu({
                       href={siteHref(language, href)}
                       onClick={closeOnNav}
                       className={cn(
-                        'font-brand font-medium text-lav-white no-underline',
+                        'font-brand font-medium no-underline',
+                        tone.text,
                         wide ? 'text-[18px]' : 'text-[15px]',
                       )}
                     >
@@ -187,7 +194,7 @@ export function BurgerMenu({
               </Fragment>
             ))}
 
-            <div className={cn('h-px bg-lav-white/20', !wide && 'my-1')} />
+            <div className={cn('h-px', tone.divider, !wide && 'my-1')} />
 
             <div className={cn('flex items-center justify-between', wide ? 'gap-6' : 'gap-3')}>
               <LanguageToggle />
@@ -197,7 +204,8 @@ export function BurgerMenu({
                 rel="noopener noreferrer"
                 aria-label={t('lavender.common.linkedin')}
                 className={cn(
-                  'inline-flex items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline',
+                  'inline-flex items-center justify-center rounded-pill no-underline',
+                  tone.chip,
                   wide ? 'h-9 w-9' : 'h-8 w-8',
                 )}
               >

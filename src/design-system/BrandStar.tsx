@@ -21,7 +21,8 @@ export type BrandStarVariant =
   | 'testimonials'
   | 'closing'
   | 'product'
-  | 'facts';
+  | 'facts'
+  | 'principles';
 
 const PLACEMENT: Record<BrandStarVariant, string> = {
   hero:
@@ -63,6 +64,13 @@ const PLACEMENT: Record<BrandStarVariant, string> = {
     'top-[-117px] left-[-99px] h-[260px] w-[260px] ' +
     'md:top-[-153px] md:left-[-129px] md:h-[340px] md:w-[340px] ' +
     'lg:top-1/2 lg:left-[-300px] lg:h-[900px] lg:w-[900px] lg:-translate-y-1/2',
+  // Mint star of the dark principles hero, right of the title — never closer
+  // than 736px to the frame's left edge, where „Privacy-led AI“ ends. Desktop
+  // only: on compact the title spans the width and the top corner sits under
+  // the nav pill, so there is no free place (2026-10-02).
+  principles:
+    "hidden lg:block bg-[url('/images/icompetence_visual_mint.png')] " +
+    'lg:top-[-206px] lg:left-[max(736px,calc(100%-560px))] lg:h-[620px] lg:w-[620px]',
   closing:
     "bg-[url('/images/icompetence_visual_01.png')] " +
     // 70 % so the white footer claim keeps 3:1 over the star's bright core.

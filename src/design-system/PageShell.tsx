@@ -3,7 +3,7 @@
 import { useEffect, type ReactNode } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const PAGE_BG = '#fdfafe';
+const PAGE_BG = { page: '#fdfafe', inverse: '#0b2231' } as const;
 
 /**
  * Root wrapper of every page in the new design: skip link, the page's
@@ -23,25 +23,33 @@ export function PageShell({
   nav,
   footer,
   children,
+  surface = 'page',
 }: {
   nav: ReactNode;
   footer: ReactNode;
   children: ReactNode;
+  /** 'inverse' = a dark page (navy, white text) — the principles page. */
+  surface?: 'page' | 'inverse';
 }) {
   const { t } = useLanguage();
   useEffect(() => {
     const prevBody = document.body.style.backgroundColor;
     const prevHtml = document.documentElement.style.backgroundColor;
-    document.body.style.backgroundColor = PAGE_BG;
-    document.documentElement.style.backgroundColor = PAGE_BG;
+    document.body.style.backgroundColor = PAGE_BG[surface];
+    document.documentElement.style.backgroundColor = PAGE_BG[surface];
     return () => {
       document.body.style.backgroundColor = prevBody;
       document.documentElement.style.backgroundColor = prevHtml;
     };
-  }, []);
+  }, [surface]);
 
   return (
-    <div className="lavender-page w-full bg-lav-page font-brand font-medium text-lav-navy">
+    <div
+      data-surface={surface === 'inverse' ? 'inverse' : undefined}
+      className={`lavender-page w-full font-brand font-medium ${
+        surface === 'inverse' ? 'bg-lav-navy text-lav-white' : 'bg-lav-page text-lav-navy'
+      }`}
+    >
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -53,6 +61,7 @@ html:has(.lavender-page), html:has(.lavender-page) body { overflow-x: clip; }
 /* Text fields show focus as a 2 px border (FormField), not as this ring. */
 .lavender-page :is(a, button, [role="button"], input[type="checkbox"], input[type="radio"]):focus-visible { outline: 2px solid var(--color-lav-navy); outline-offset: 2px; }
 .lavender-page :is(.bg-lav-navy, [data-surface="inverse"]) :is(a, button, [role="button"]):focus-visible { outline-color: var(--color-lav-white); }
+.lavender-page [data-surface="light"] :is(a, button, [role="button"]):focus-visible { outline-color: var(--color-lav-navy); }
 `,
         }}
       />
