@@ -7,6 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { submitNetlifyForm, trackCtaClick } from '@/lib/tracking';
 import {
   Button,
+  Eyebrow,
   FormError,
   FormField,
   Hero,
@@ -78,13 +79,15 @@ function ContactForm() {
 
   const detail = (label: string, value: string, href: string, trackId: string) => (
     <div className="flex flex-col gap-4">
-      <span className="lav-body font-normal text-lav-navy/70">{label}</span>
+      <Eyebrow>{label}</Eyebrow>
       <a
         href={href}
         onClick={() => trackCtaClick(trackId, value)}
-        className="lav-h2 text-lav-navy no-underline"
+        // H2 hyphenates long words; an address must never get a hyphen. Where
+        // the column is too narrow (1024–1090px) it breaks after the "@".
+        className="lav-h2 text-lav-navy no-underline hyphens-none [overflow-wrap:anywhere]"
       >
-        {value}
+        {value.split('@').flatMap((part, i) => (i === 0 ? [part] : ['@', <wbr key={i} />, part]))}
       </a>
     </div>
   );

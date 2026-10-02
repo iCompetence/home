@@ -3,6 +3,7 @@
 import { ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackCtaClick } from '@/lib/tracking';
+import { Eyebrow } from './Eyebrow';
 import { Section } from './Section';
 import { siteHref } from './routes';
 import { useMotionPrefs } from './motion';
@@ -24,9 +25,7 @@ function ContactBlock({
   const valueCls = 'lav-body font-medium text-lav-white no-underline';
   return (
     <div className="flex flex-col items-start gap-4 md:items-end">
-      <span className="lav-small font-medium text-lav-white/70">
-        {label}
-      </span>
+      <Eyebrow tone="white">{label}</Eyebrow>
       {href ? (
         <a
           href={href}

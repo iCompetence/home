@@ -159,6 +159,11 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       (Idee Dennis, 02.10.2026). Den Text von `ct.pricing.description` erklärt jetzt der neue
       Baustein `InfoTip` hinter „1 Parameter-Raum“ (Info-Icon, Karte per Klick; Escape/Klick
       daneben schließt). Neu: `lavender.common.moreInfo` als Name des Icon-Buttons.
+- [x] Labels über Kontaktdaten (Footer, Kontaktseite) als Eyebrow „ANFRAGEN/TELEFON“ statt
+      „(Anfragen)/(Telefon)“ (Entscheidung Dennis, 02.10.2026; Override in lavender-overrides.ts,
+      live unverändert). Damit steht im Impressum „Telefon: …“ statt „(Telefon): …“. Eyebrow nutzt
+      jetzt `lav-small` (Text-Trim wie Figma, vorher 21 statt 10 px hoch). E-Mail auf der
+      Kontaktseite ohne Silbentrennung, bricht bei 1024–1090 px nach dem „@“.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den

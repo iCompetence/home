@@ -286,4 +286,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'burgerMenu.products': { en: 'Products & tools' },
   // Content-Guidelines: „Privacy-led AI“, never „Privacy-Led AI“ (as in the nav).
   'burgerMenu.privacyLedAi': { en: 'Privacy-led AI', de: 'Privacy-led AI' },
+  // Labels above the contact data are eyebrows (uppercase via CSS), without
+  // the live site's parentheses — this also reads "Telefon: …" in the imprint.
+  'footer.inquiries': { en: 'Inquiries', de: 'Anfragen' },
+  'footer.phone': { en: 'Phone', de: 'Telefon' },
 };
