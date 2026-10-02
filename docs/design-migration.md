@@ -184,6 +184,12 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       Problem zweispaltig (Lösung in Blau), vier `PrincipleCard`s — ab 1200 px 2×2 Schachbrett,
       darunter einzeln abwechselnd. Texte unverändert (privacy.*). Figma DE/EN × 3 Breiten, alte
       Frames als „Stand vor Prinzipien-Seite“ darunter.
+- [x] Startseite wie die Produktseiten (Idee Dennis, 02.10.2026): keine Abschnittslinks mehr in
+      der TopNav; AnchorTabs unter dem Kunden-Carousel (Leistungen, Produkte, Vorgehen,
+      Privacy-led AI — Labels der früheren Nav-Links), die beim Scrollen haften, die Nav dockt
+      ein. ServicesCarousel/ProductShowcase/ProcessAccordion nehmen dafür `className`
+      (ANCHOR_SCROLL_MARGIN). Der Abschnitts-Pfad der TopNav (Links, mittige Pille, Dropdown)
+      ist damit unbenutzt — Aufräumen offen.
 - [x] Kompakte Desktop-Pille ohne Abschnitte (beginnt mit dem CTA): links 8 statt 16 px, wie
       oben/unten — der CTA sitzt konzentrisch (Dennis, 02.10.2026). Startseite unverändert.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm

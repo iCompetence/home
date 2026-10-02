@@ -22,6 +22,8 @@ export type ServicesCarouselProps = {
   /** Optional intro below the title — several pages lead in before the cards. */
   subline?: string;
   id?: string;
+  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when AnchorTabs point here. */
+  className?: string;
   prevLabel?: string;
   nextLabel?: string;
 };
@@ -43,6 +45,7 @@ export function ServicesCarousel({
   title,
   subline,
   id = 'services',
+  className,
   prevLabel = 'Previous service',
   nextLabel = 'Next service',
 }: ServicesCarouselProps) {
@@ -82,7 +85,7 @@ export function ServicesCarousel({
     'inline-flex h-11 w-11 items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white lg:h-12 lg:w-12';
 
   return (
-    <Section dsName="ServicesCarousel" id={id} className="relative z-[1]" innerClassName="flex flex-col gap-6 lg:gap-10">
+    <Section dsName="ServicesCarousel" id={id} className={cn('relative z-[1]', className)} innerClassName="flex flex-col gap-6 lg:gap-10">
       {/* Header */}
       <div className="flex w-full items-start justify-between gap-6">
         <div className="flex flex-col gap-3 md:gap-4">

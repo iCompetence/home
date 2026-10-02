@@ -3,6 +3,8 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
+  ANCHOR_SCROLL_MARGIN,
+  AnchorTabs,
   Button,
   ClosingBlock,
   FeatureBlock,
@@ -16,6 +18,7 @@ import {
   Statement as StatementSection,
   TestimonialSlider,
   TopNav,
+  HOME_NAV_SECTIONS,
   siteHref,
 } from '@/design-system';
 
@@ -27,11 +30,12 @@ import {
 export default function LavenderHome() {
   return (
     <PageShell
-      nav={<TopNav />}
+      nav={<TopNav sections={[]} />}
       footer={<Closing />}
     >
       <Hero />
       <LogoCarousel />
+      <HomeTabs />
       <Services />
       <Statement />
       <Products />
@@ -39,6 +43,23 @@ export default function LavenderHome() {
       <Process />
       <PrivacyLed />
     </PageShell>
+  );
+}
+
+/* ---------------- Anchor tabs ---------------- */
+
+/**
+ * Section navigation under the client logos (2026-10-02): the homepage works
+ * like the product pages now — the tabs stick and the nav docks into them,
+ * instead of section links in the nav. Labels as the former nav links.
+ */
+function HomeTabs() {
+  const { t } = useLanguage();
+  return (
+    <AnchorTabs
+      label={t('lavender.common.onThisPage')}
+      items={HOME_NAV_SECTIONS.map(({ id, labelKey }) => ({ id, label: t(labelKey) }))}
+    />
   );
 }
 
@@ -109,7 +130,13 @@ function Services() {
     },
   ];
 
-  return <ServicesCarousel cards={cards} title={t('lavender.services.title')} />;
+  return (
+    <ServicesCarousel
+      cards={cards}
+      title={t('lavender.services.title')}
+      className={ANCHOR_SCROLL_MARGIN}
+    />
+  );
 }
 
 /* ---------------- Statement ---------------- */
@@ -138,6 +165,7 @@ function Products() {
   const { t, language } = useLanguage();
   return (
     <ProductShowcase
+      className={ANCHOR_SCROLL_MARGIN}
       featured={{
         eyebrow: t('lavender.products.featuredEyebrow'),
         title: t('lavender.products.empco.title'),
@@ -239,7 +267,13 @@ function Process() {
       description: t('lavender.process.rollout.desc'),
     },
   ];
-  return <ProcessAccordion steps={steps} title={t('lavender.process.title')} />;
+  return (
+    <ProcessAccordion
+      steps={steps}
+      title={t('lavender.process.title')}
+      className={ANCHOR_SCROLL_MARGIN}
+    />
+  );
 }
 
 /* ---------------- Privacy-Led ---------------- */
@@ -247,7 +281,7 @@ function Process() {
 function PrivacyLed() {
   const { t, language } = useLanguage();
   return (
-    <Section id="privacy-led">
+    <Section id="privacy-led" className={ANCHOR_SCROLL_MARGIN}>
       <FeatureBlock
         layout="stacked"
         title={t('lavender.privacyLed.title')}

@@ -8,6 +8,8 @@ export type ProductShowcaseProps = {
   /** The remaining products as a row of equal cards. */
   teasers?: readonly ProductTeaserProps[];
   id?: string;
+  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when AnchorTabs point here. */
+  className?: string;
 };
 
 /**
@@ -15,9 +17,9 @@ export type ProductShowcaseProps = {
  * and the cards share a single vertical rhythm instead of stacking two
  * sections' padding on top of each other.
  */
-export function ProductShowcase({ featured, teasers = [], id = 'products' }: ProductShowcaseProps) {
+export function ProductShowcase({ featured, teasers = [], id = 'products', className }: ProductShowcaseProps) {
   return (
-    <Section dsName="ProductShowcase" id={id} innerClassName="flex flex-col gap-6 lg:gap-10">
+    <Section dsName="ProductShowcase" id={id} className={className} innerClassName="flex flex-col gap-6 lg:gap-10">
       {featured && <FeatureBlock {...featured} layout="side" />}
       {teasers.length > 0 && (
         <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">

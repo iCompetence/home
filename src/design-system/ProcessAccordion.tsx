@@ -22,6 +22,8 @@ export type ProcessAccordionProps = {
   /** Optional intro below the title. */
   subline?: string;
   id?: string;
+  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when AnchorTabs point here. */
+  className?: string;
   /** Index of the step expanded on first render (default: the second one). */
   defaultExpanded?: number | null;
 };
@@ -32,12 +34,13 @@ export function ProcessAccordion({
   title,
   subline,
   id = 'process',
+  className,
   defaultExpanded = 1,
 }: ProcessAccordionProps) {
   const [expanded, setExpanded] = useState<number | null>(defaultExpanded);
 
   return (
-    <Section dsName="ProcessAccordion" id={id} innerClassName="flex flex-col gap-8 md:gap-10 lg:gap-12">
+    <Section dsName="ProcessAccordion" id={id} className={className} innerClassName="flex flex-col gap-8 md:gap-10 lg:gap-12">
       <div className="flex w-full flex-col gap-6 md:gap-8">
         <h2 className="lav-h1 w-full text-lav-navy">
           {title}
