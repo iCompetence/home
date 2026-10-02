@@ -155,6 +155,10 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       „Aktionen“, space/16; Entscheidung 02.10.2026, zuerst 24), zum übrigen Inhalt bleiben 32 px.
 - [x] Produktkopf ohne Eyebrow „Produkt“ über dem Namen — der Breadcrumb „Produkte › …“ ordnet schon
       ein (02.10.2026). Die Teaser „Weitere Produkte“ behalten ihr Eyebrow.
+- [x] CPT ohne Preis-Section und Reiter „Preise“ — Stufen und Preis stehen schon in der Kaufbox
+      (Idee Dennis, 02.10.2026). Den Text von `ct.pricing.description` erklärt jetzt der neue
+      Baustein `InfoTip` hinter „1 Parameter-Raum“ (Info-Icon, Karte per Klick; Escape/Klick
+      daneben schließt). Neu: `lavender.common.moreInfo` als Name des Icon-Buttons.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den

@@ -15,9 +15,9 @@ import {
   ComparisonTable,
   FaqSection,
   IconCard,
+  InfoTip,
   PageShell,
   PriceTag,
-  PricingCard,
   ProductHead,
   ProductTeaser,
   ReviewCard,
@@ -51,8 +51,9 @@ const CLIENTS = [
 /**
  * Campaign Parameter Tool product page in the new design (preview under
  * /lavender/). Same copy as the live page; wording that changed with the
- * redesign comes from lavender-overrides.ts. The buy box gets the tier
- * switch and price from the pricing section, as designed in Figma.
+ * redesign comes from lavender-overrides.ts. The buy box carries the tier
+ * switch and price; the live page's pricing section is gone, its text now
+ * explains "parameter space" behind the info icon (as designed in Figma).
  */
 export default function CampaignParameterToolLavender() {
   const { t, language } = useLanguage();
@@ -74,7 +75,6 @@ export default function CampaignParameterToolLavender() {
     { id: 'values', label: t('ct.anchor.values') },
     { id: 'how', label: t('ct.anchor.howItWorks') },
     { id: 'features', label: t('ct.anchor.features') },
-    { id: 'pricing', label: t('ct.anchor.pricing') },
     { id: 'faq', label: t('ct.anchor.faq') },
   ];
 
@@ -133,9 +133,9 @@ export default function CampaignParameterToolLavender() {
           onChange={setTier}
           options={TIERS.map((x) => ({ value: x.id, label: t(`ct.pricing.${x.id}.name`) }))}
         />
-        <p className="lav-body font-normal text-lav-navy/80" aria-live="polite">
+        <InfoTip live text={t('ct.pricing.description')} label={t('lavender.common.moreInfo')}>
           {t(`ct.pricing.${tier}.rooms`)}
-        </p>
+        </InfoTip>
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-4">
           <PriceTag {...price(current)} />
           {current.trialBadge && <Badge>{t('ct.pricing.trialBadge')}</Badge>}
@@ -211,35 +211,6 @@ export default function CampaignParameterToolLavender() {
             secondary: t(`ct.why.problem.item${n}`),
           }))}
         />
-      </Section>
-
-      <Section id="pricing" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
-        <SectionHeader title={t('ct.pricing.title')} intro={[t('ct.pricing.description')]} />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {TIERS.map((x) => {
-            const highlight = x.id === 'tier1';
-            return (
-              <PricingCard
-                key={x.id}
-                name={t(`ct.pricing.${x.id}.name`)}
-                scope={t(`ct.pricing.${x.id}.rooms`)}
-                {...price(x)}
-                badge={x.trialBadge ? t('ct.pricing.trialBadge') : undefined}
-                highlight={highlight}
-                action={
-                  <Button
-                    variant={highlight ? 'white' : 'dark'}
-                    className="w-full"
-                    onClick={() => openModal('trial')}
-                  >
-                    {t('ct.pricing.cta')}
-                    <ArrowUpRight size={20} strokeWidth={2} />
-                  </Button>
-                }
-              />
-            );
-          })}
-        </div>
       </Section>
 
       <Section id="reviews" innerClassName="flex flex-col gap-12">

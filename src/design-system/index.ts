@@ -19,6 +19,7 @@ export { ReviewCard } from './ReviewCard';
 export { Breadcrumb, type Crumb } from './Breadcrumb';
 export { MediaGallery, type GalleryImage } from './MediaGallery';
 export { CheckItem } from './CheckItem';
+export { InfoTip } from './InfoTip';
 export { ProductHead, type ProductHeadProps } from './ProductHead';
 export { AnchorTabs, ANCHOR_SCROLL_MARGIN, type AnchorTab } from './AnchorTabs';
 export { SectionHeader } from './SectionHeader';
