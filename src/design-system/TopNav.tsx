@@ -330,7 +330,14 @@ function DesktopNav({
               exit={{ opacity: 0 }}
               transition={morphTransition}
               data-surface={surface}
-              className={cn('pointer-events-auto flex items-center gap-4 rounded-pill px-4 py-2', tone.pill)}
+              className={cn(
+                'pointer-events-auto flex items-center gap-4 rounded-pill py-2 pr-4',
+                // Starting with the CTA pill: 8px left like top/bottom, so it
+                // sits concentric in the nav pill; with the section menu (text)
+                // first, 16px.
+                hasSections ? 'pl-4' : 'pl-2',
+                tone.pill,
+              )}
             >
               {sections.length > 0 && (
                 <motion.div

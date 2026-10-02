@@ -184,6 +184,8 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       Problem zweispaltig (Lösung in Blau), vier `PrincipleCard`s — ab 1200 px 2×2 Schachbrett,
       darunter einzeln abwechselnd. Texte unverändert (privacy.*). Figma DE/EN × 3 Breiten, alte
       Frames als „Stand vor Prinzipien-Seite“ darunter.
+- [x] Kompakte Desktop-Pille ohne Abschnitte (beginnt mit dem CTA): links 8 statt 16 px, wie
+      oben/unten — der CTA sitzt konzentrisch (Dennis, 02.10.2026). Startseite unverändert.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
