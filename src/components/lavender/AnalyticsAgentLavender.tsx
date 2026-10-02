@@ -84,7 +84,6 @@ export default function AnalyticsAgentLavender() {
         ]}
         images={SCREENS.slice(0, 2)}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title="Analytics Agent"
         subline={t('analyticsAgent.hero.subtitle')}
       >

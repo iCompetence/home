@@ -88,7 +88,6 @@ export default function IntelligenticSearchLavender() {
           { src: '/images/is-image-search.jpg', alt: t('is.features.step2.label') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title={t('is.hero.title')}
         subline={t('is.hero.subline')}
       >

@@ -113,7 +113,6 @@ export default function CampaignParameterToolLavender() {
           { src: '/assets/how-it-works.png', alt: 'How it works' },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title="Campaign Parameter Tool"
         subline={t('ct.hero.headline')}
       >

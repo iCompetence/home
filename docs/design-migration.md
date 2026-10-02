@@ -153,6 +153,8 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       Startseite und Infoseiten unverändert (schrumpfen nach 80 px). Burger: „Privacy-led AI“.
 - [x] Kaufbox: Primary- und Outline-Button als Gruppe mit 16 statt 32 px (`ButtonStack`, Figma-Gruppe
       „Aktionen“, space/16; Entscheidung 02.10.2026, zuerst 24), zum übrigen Inhalt bleiben 32 px.
+- [x] Produktkopf ohne Eyebrow „Produkt“ über dem Namen — der Breadcrumb „Produkte › …“ ordnet schon
+      ein (02.10.2026). Die Teaser „Weitere Produkte“ behalten ihr Eyebrow.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den

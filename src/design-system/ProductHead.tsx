@@ -1,7 +1,6 @@
 import { type ReactNode } from 'react';
 import { BrandStar } from './BrandStar';
 import { Breadcrumb, type Crumb } from './Breadcrumb';
-import { Eyebrow } from './Eyebrow';
 import { MediaGallery, type GalleryImage } from './MediaGallery';
 
 export type ProductHeadProps = {
@@ -12,7 +11,6 @@ export type ProductHeadProps = {
   thumbLabel?: (index: number) => string;
   /** Replaces the gallery, e.g. the experts of a workshop. */
   media?: ReactNode;
-  eyebrow: string;
   /** Product name — the page's h1. */
   title: string;
   /** One-line claim below the name. */
@@ -27,7 +25,8 @@ export type ProductHeadProps = {
 /**
  * Head of a product page (template A): gallery on the left, the "buy box"
  * with name, claim and calls to action on the right; stacked on tablet and
- * mobile. Opens the page with the yellow brand star behind the buy box.
+ * mobile. Opens the page with the yellow brand star behind the buy box. No
+ * eyebrow above the name: the breadcrumb already says "Products" (2026-10-02).
  */
 export function ProductHead({
   breadcrumb,
@@ -35,7 +34,6 @@ export function ProductHead({
   images,
   thumbLabel,
   media,
-  eyebrow,
   title,
   subline,
   description,
@@ -57,7 +55,6 @@ export function ProductHead({
             <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
               <BrandStar variant="product" />
             </div>
-            <Eyebrow className="lav-caption text-lav-navy/70">{eyebrow}</Eyebrow>
             <h1 className="lav-h1 text-lav-navy">{title}</h1>
             {subline && <p className="lav-lead font-normal text-lav-navy/80">{subline}</p>}
             {description && <p className="lav-body font-normal text-lav-navy/80">{description}</p>}

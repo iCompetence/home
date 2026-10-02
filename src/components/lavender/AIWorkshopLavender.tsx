@@ -89,7 +89,6 @@ export default function AIWorkshopLavender() {
           { label: t('workshop.hero.title') },
         ]}
         media={<Experts />}
-        eyebrow={t('lavender.products.eyebrow')}
         title={t('workshop.hero.title')}
         subline={t('workshop.hero.subline')}
       >

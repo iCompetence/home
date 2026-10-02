@@ -86,7 +86,6 @@ export default function IKnowLavender() {
         ]}
         images={SCREENS.slice(0, 2)}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title="iKnow"
         subline={t('iknow.hero.subtitle')}
       >

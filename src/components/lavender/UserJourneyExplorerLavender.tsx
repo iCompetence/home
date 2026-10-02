@@ -83,7 +83,6 @@ export default function UserJourneyExplorerLavender() {
           { src: '/images/icu-layers.jpg', alt: t('lavender.icu.layersAlt') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title={t('icu.hero.title')}
         subline={t('icu.hero.subline')}
       >

@@ -137,7 +137,6 @@ export default function EmpCoAuditLavender() {
           { src: '/assets/empco/EmpCo-Tool-UI.png', alt: t('lavender.products.empco.imageAlt') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
-        eyebrow={t('lavender.products.eyebrow')}
         title="EmpCo Audit"
         subline={t('empco.hero.headline')}
         description={t('empco.hero.subtitle')}
