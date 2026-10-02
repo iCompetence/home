@@ -48,9 +48,10 @@ export default function LavenderHome() {
 /* ---------------- Anchor tabs ---------------- */
 
 /**
- * Section navigation under the client logos (2026-10-02): the homepage works
- * like the product pages now — the tabs stick and the nav docks into them,
- * instead of section links in the nav. Labels as the former nav links.
+ * Section navigation after the client logos (2026-10-02): the homepage works
+ * like the product pages now — once the logos have scrolled past, the tab row
+ * slides in at the top and the nav docks into it, instead of section links in
+ * the nav. Labels as the former nav links.
  */
 function HomeTabs() {
   const { t } = useLanguage();

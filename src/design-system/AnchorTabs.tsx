@@ -60,21 +60,22 @@ function subscribe(listener: () => void) {
  * The section navigation of a page (homepage, product pages) — the only one
  * there; the TopNav carries no section links.
  *
- * Static it sits under the product head on the page colour. Scrolled past, it
- * sticks to the top and turns navy, and the nav docks into it on the right, so
- * the navigation is one dark row: 80px on desktop, 56px (as tall as the static
- * row) on tablet and mobile. A click scrolls to the section; the active tab
- * follows the scroll position. The tabs scroll horizontally where they do not
- * fit and end before the docked nav; the active one is kept in view. Where
- * the content ends (closing block, footer) the row scrolls away and takes the
- * docked nav with it.
+ * It takes no room in the page (Dennis, 2026-10-02): where it is rendered it
+ * leaves only a marker. Once the marker (the end of the hero or product head)
+ * has scrolled past the top, a navy row slides in, fixed at the top, and the
+ * nav docks into it on the right — one dark row, 80px on desktop, 56px on
+ * tablet and mobile. A click scrolls to the section; the active tab follows
+ * the scroll position. The tabs scroll horizontally where they do not fit and
+ * end before the docked nav; the active one is kept in view. Where the
+ * content ends (closing block, footer) the row is pushed away and takes the
+ * docked nav with it. Tabbing into the hidden row scrolls to the marker, so
+ * it shows with the docked nav.
  */
 export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; label: string }) {
   const [active, setActive] = useState(items[0]?.id ?? '');
   const [stuck, setStuck] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
-  const navRef = useRef<HTMLElement | null>(null);
   const prefs = useMotionPrefs();
 
   useEffect(() => {
@@ -92,10 +93,11 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
         const isStuck = sentinel.getBoundingClientRect().top <= 0;
         setStuck(isStuck);
         publishStuck(isStuck);
-        // At the end of <main> the content pushes the stuck row up and out;
-        // the docked nav follows it pixel for pixel (--anchor-push, ≤ 0).
-        const top = navRef.current?.getBoundingClientRect().top ?? 0;
-        const push = isStuck ? Math.min(0, Math.round(top)) : 0;
+        // At the end of <main> the content pushes the row up and out; row and
+        // docked nav follow it pixel for pixel (--anchor-push, ≤ 0).
+        const rowHeight = desktop ? ROW.desktop : ROW.compact;
+        const mainBottom = sentinel.closest('main')?.getBoundingClientRect().bottom ?? Infinity;
+        const push = isStuck ? Math.min(0, Math.round(mainBottom - rowHeight)) : 0;
         document.documentElement.style.setProperty('--anchor-push', `${push}px`);
       }
 
@@ -137,6 +139,20 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
     row.scrollTo({ left: Math.max(0, left), behavior: prefs.scrollBehavior });
   }, [active, prefs.scrollBehavior]);
 
+  // Keyboard users reach the row before it shows: bring the page to the
+  // marker, so the row appears with the docked nav around the focused tab.
+  const revealOnFocus = (e: React.FocusEvent<HTMLElement>) => {
+    const sentinel = sentinelRef.current;
+    const nav = e.currentTarget;
+    if (stuck || !sentinel) return;
+    // After the browser's own scroll-into-view of the focused tab, which would
+    // otherwise undo this — and only if the focus is still in the row.
+    setTimeout(() => {
+      if (!nav.contains(document.activeElement)) return;
+      window.scrollTo({ top: window.scrollY + sentinel.getBoundingClientRect().top + 1, behavior: 'auto' });
+    }, 0);
+  };
+
   const jump = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -148,73 +164,52 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
   return (
     <>
       <div ref={sentinelRef} aria-hidden className="h-0 w-full" />
-      <nav
-        ref={navRef}
-        aria-label={label}
-        data-ds="AnchorTabs"
-        data-stuck={stuck || undefined}
-        className={cn(
-          'sticky top-0 z-40 w-full border-b lg:border-b-0',
-          stuck
-            ? // Navy, no visible hairline (the transparent one keeps the height).
-              'border-transparent bg-lav-navy'
-            : // Tablet/mobile: full-bleed hairline; desktop: under the tabs only.
-              'border-lav-navy/20 bg-lav-page',
-        )}
-      >
-        <div
+      {/* Outer layer: the scroll-linked push at the footer (no transition);
+          inner nav: slides in and out. */}
+      <div className="fixed inset-x-0 top-0 z-40 translate-y-[var(--anchor-push,0px)]">
+        <nav
+          aria-label={label}
+          data-ds="AnchorTabs"
+          data-stuck={stuck || undefined}
+          onFocus={revealOnFocus}
           className={cn(
-            'mx-auto w-full max-w-frame lg:px-[var(--section-pad-h)]',
-            // Stuck: the tabs end before the docked nav (burger · CTA + burger · pill).
-            stuck && 'pr-[70px] md:pr-[291px] lg:pr-[368px]',
+            'w-full bg-lav-navy transition-transform duration-[var(--duration-base)] motion-reduce:transition-none',
+            stuck ? 'translate-y-0' : 'pointer-events-none -translate-y-full',
           )}
         >
-          <div
-            ref={rowRef}
-            className={cn(
-              'flex gap-10 overflow-x-auto px-[var(--section-pad-h)] [scrollbar-width:none] lg:px-0 [&::-webkit-scrollbar]:hidden',
-              !stuck && 'lg:border-b lg:border-lav-navy/20',
-            )}
-          >
-            {items.map(({ id, label: text }) => {
-              const current = id === active;
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  aria-current={current ? 'true' : undefined}
-                  onClick={(e) => jump(e, id)}
-                  className={cn(
-                    'lav-body relative shrink-0 whitespace-nowrap font-medium',
-                    stuck
-                      ? current
-                        ? 'text-lav-white'
-                        : 'text-lav-white/70'
-                      : current
-                        ? 'text-lav-navy'
-                        : 'text-lav-navy/70',
-                    // Rows as in Figma: 56 px, desktop stuck 80 px (the 2px underline
-                    // sits in the padding).
-                    'pb-5 pt-6',
-                    stuck && 'lg:pb-[34px] lg:pt-[34px]',
-                  )}
-                >
-                  {text}
-                  {current && (
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'absolute inset-x-0 bottom-0 h-0.5',
-                        stuck ? 'bg-lav-white' : 'bg-lav-navy',
-                      )}
-                    />
-                  )}
-                </a>
-              );
-            })}
+          {/* The tabs end before the docked nav (burger · CTA + burger · pill). */}
+          <div className="mx-auto w-full max-w-frame pr-[70px] md:pr-[291px] lg:px-[var(--section-pad-h)] lg:pr-[368px]">
+            <div
+              ref={rowRef}
+              className="flex gap-10 overflow-x-auto px-[var(--section-pad-h)] [scrollbar-width:none] lg:px-0 [&::-webkit-scrollbar]:hidden"
+            >
+              {items.map(({ id, label: text }) => {
+                const current = id === active;
+                return (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    aria-current={current ? 'true' : undefined}
+                    onClick={(e) => jump(e, id)}
+                    className={cn(
+                      'lav-body relative shrink-0 whitespace-nowrap font-medium',
+                      current ? 'text-lav-white' : 'text-lav-white/70',
+                      // Rows as in Figma: 56 px, desktop 80 px (the 2px underline
+                      // sits in the padding).
+                      'pb-5 pt-6 lg:pb-[34px] lg:pt-[34px]',
+                    )}
+                  >
+                    {text}
+                    {current && (
+                      <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-lav-white" />
+                    )}
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </>
   );
 }

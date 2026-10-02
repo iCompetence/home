@@ -78,7 +78,7 @@ Stand:
 - [x] Rahmen, Link-Helfer, Text-Overrides, `PageShell`
 - [x] **EmpCo Audit** (Pilot, Figma „Entwurf B") — `/de|en/lavender/empco-audit/`.
       Neue Bausteine: `ProductHead`, `MediaGallery`, `Breadcrumb`, `CheckItem`,
-      `AnchorTabs` (haftend), `SectionHeader`, `FactsBand`, `IconCard`, `SpecItem`,
+      `AnchorTabs` (fix nach dem Hero), `SectionHeader`, `FactsBand`, `IconCard`, `SpecItem`,
       `FaqList`, `FormField`/`ConsentCheckbox`, `ComparisonTable`; `Statement layout="feature"`;
       `BrandStar` `product` | `facts` | `statementRight`; `TopNav` ohne Abschnittslinks (Pille rechts).
 - [x] **iKnow** — `/de|en/lavender/iknow/`. Neu: `ImageText` (16:9-Video oder Bild neben
@@ -201,6 +201,13 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       bleibt bewusst höher.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
+- [x] Ankerleiste nur noch fix (Idee Dennis, 02.10.2026): AnchorTabs nimmt keinen Platz mehr im
+      Seitenfluss ein, wo sie steht, bleibt nur eine Marke (Ende Hero/ProductHead, auf der
+      Startseite nach den Logos). Ist die Marke oben vorbei, fährt die Navy-Leiste oben ein und
+      die Nav dockt ein (80 / 56 px); davor läuft die Nav wie gehabt. ProductHead → erster
+      Baustein damit 160 statt Leiste dazwischen. Am Footer schiebt `main` die Leiste hinaus.
+      Tab in die versteckte Leiste scrollt zur Marke, damit sie mit der Nav erscheint.
+      Figma: statische Leisten aus allen Seiten-Frames entfernt, Beschreibung am Baustein.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den
