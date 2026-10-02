@@ -46,7 +46,7 @@ export function Hero({
       {decoration &&
         (compact ? decoration : <DesignFrameOverlay>{decoration}</DesignFrameOverlay>)}
 
-      <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-12 md:gap-12 md:px-12 md:py-14 lg:gap-14 lg:px-24 lg:py-16">
+      <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-[var(--section-pad-v)] md:gap-12 md:px-12 lg:gap-14 lg:px-24">
         <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
 
         {subline && (

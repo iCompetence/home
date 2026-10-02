@@ -194,6 +194,11 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       `tabs` in LavenderHome (`HOME_NAV_SECTIONS`/`NavSection` entfallen).
 - [x] Kompakte Desktop-Pille ohne Abschnitte (beginnt mit dem CTA): links 8 statt 16 px, wie
       oben/unten — der CTA sitzt konzentrisch (Dennis, 02.10.2026). Startseite unverändert.
+- [x] Abstände (Dennis, 02.10.2026): `--section-pad-v` Desktop 64 → 80, zwischen zwei Bausteinen
+      also 160 (Tablet 112, Mobil 96 unverändert). Hero, ProductHead, Statement-Button, FactsBand
+      (vorher 96) und LogoCarousel hängen jetzt an derselben Variable; Logo-Felder so hoch wie das
+      größte erlaubte Logo (44/36/28), damit Hero → Logos sichtbar 160 sind. Großes EmpCo-Statement
+      bleibt bewusst höher.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der

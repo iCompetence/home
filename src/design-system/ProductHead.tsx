@@ -42,7 +42,7 @@ export function ProductHead({
 }: ProductHeadProps) {
   return (
     <section id={id} data-ds="ProductHead" className="relative w-full">
-      <div className="mx-auto flex w-full max-w-frame flex-col gap-6 px-[var(--section-pad-h)] pb-12 pt-6 md:pb-14 md:pt-8 lg:pb-16">
+      <div className="mx-auto flex w-full max-w-frame flex-col gap-6 px-[var(--section-pad-h)] pb-[var(--section-pad-v)] pt-6 md:pt-8">
         <Breadcrumb items={breadcrumb} label={breadcrumbLabel} />
         <div className="flex flex-col gap-8 md:gap-10 lg:flex-row lg:gap-16">
           <div className="w-full lg:w-[56.4%]">

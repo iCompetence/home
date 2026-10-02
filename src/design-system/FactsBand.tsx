@@ -27,7 +27,7 @@ export function FactsBand({
       data-surface="inverse"
       className="relative w-full overflow-hidden bg-lav-navy text-lav-white"
     >
-      <div className="relative mx-auto w-full max-w-frame px-6 pb-12 pt-[144px] md:px-12 md:pb-14 md:pt-[186px] lg:px-24 lg:py-24">
+      <div className="relative mx-auto w-full max-w-frame px-6 pb-[var(--section-pad-v)] pt-[144px] md:px-12 md:pt-[186px] lg:px-24 lg:pt-[var(--section-pad-v)]">
         <BrandStar variant="facts" />
         <div className="relative flex flex-col gap-12 lg:ml-auto lg:w-[65.4%]">
           <div className="flex flex-col gap-6">

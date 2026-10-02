@@ -67,7 +67,7 @@ export function Statement({ text, action, id, actionId = 'cta', layout = 'band' 
       </Section>
 
       {action && (
-        <section id={actionId} data-ds="StatementCTA" className="w-full pb-12 md:pb-14 lg:pb-16">
+        <section id={actionId} data-ds="StatementCTA" className="w-full pb-[var(--section-pad-v)]">
           <div className="mx-auto flex w-full max-w-frame justify-center px-6 md:px-12 lg:px-24">
             {action}
           </div>

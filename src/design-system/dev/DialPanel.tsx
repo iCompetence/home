@@ -80,7 +80,7 @@ const GROUPS: { title: string; dials: Dial[] }[] = [
   {
     title: 'Layout (Desktop)',
     dials: [
-      { kind: 'size', varName: '--section-pad-v', label: 'Section ↕', def: 64, min: 0, max: 200, step: 4, scope: 'desktop', detect: { kind: 'raw', value: 'var(--section-pad-v)' } },
+      { kind: 'size', varName: '--section-pad-v', label: 'Section ↕', def: 80, min: 0, max: 200, step: 4, scope: 'desktop', detect: { kind: 'raw', value: 'var(--section-pad-v)' } },
       { kind: 'size', varName: '--section-pad-h', label: 'Section ↔', def: 96, min: 0, max: 240, step: 4, scope: 'desktop', detect: { kind: 'raw', value: 'var(--section-pad-h)' } },
       { kind: 'size', varName: '--container-frame', label: 'Frame', def: 1440, min: 960, max: 1920, step: 20, detect: { kind: 'exact', value: 'max-w-frame' } },
     ],

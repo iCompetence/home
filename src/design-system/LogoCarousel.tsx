@@ -140,12 +140,14 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
   }, [logos, prefs.reduced]);
 
   return (
-    <section ref={rowRef} data-ds="LogoCarousel" className="w-full overflow-hidden border-y border-lav-navy/20 py-12 md:py-14 lg:py-16">
+    <section ref={rowRef} data-ds="LogoCarousel" className="w-full overflow-hidden border-y border-lav-navy/20 py-[var(--section-pad-v)]">
       <div className="mx-auto flex w-full max-w-frame items-center justify-between gap-4 px-6 md:gap-6 md:px-12 lg:gap-24 lg:px-10">
         {visible.map((logo, i) => (
           <div
             key={i}
-            className="relative flex h-14 w-[100px] items-center justify-center md:h-[72px] md:w-[140px] lg:h-20 lg:w-[180px]"
+            // Slot as tall as the largest allowed logo (max-h-7/9/11), so the
+            // band padding is the visible gap to the neighbours (2026-10-02).
+            className="relative flex h-7 w-[100px] items-center justify-center md:h-9 md:w-[140px] lg:h-11 lg:w-[180px]"
           >
             {/* mode="sync": entering + exiting logos overlap (crossfade) so the
                 slot is never empty during a swap. */}
