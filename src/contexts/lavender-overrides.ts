@@ -180,7 +180,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
 
   // --- Intelligentic Search ---
   'is.anchor.statusQuo': { en: 'Status quo' },
-  'is.anchor.howItWorks': { en: 'How it works' },
+  // Same wording as iKnow and CPT (Dennis, 02.10.2026); tab and buy-box button.
+  'is.anchor.howItWorks': { en: 'How it works', de: "So funktioniert's" },
   'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google: KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein: Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen.' },
   'is.quote.conclusion': { de: 'Wir wissen, dass du es kannst. Intelligentic Search.' },
   'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
