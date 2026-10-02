@@ -49,12 +49,13 @@ function Button({
 
 /**
  * Two buttons stacked as one group — the primary and the outline button of a
- * product page's buy box (Figma: group "Aktionen", space/24). Tighter than the
- * buy box's own 32px rhythm, so the pair reads as one choice.
+ * product page's buy box (Figma: group "Aktionen", space/16, as the hero's
+ * buttons side by side). Tighter than the buy box's own 32px rhythm, so the
+ * pair reads as one choice.
  */
 function ButtonStack({ children }: { children: React.ReactNode }) {
   return (
-    <div data-ds="ButtonStack" className="flex flex-col gap-6">
+    <div data-ds="ButtonStack" className="flex flex-col gap-4">
       {children}
     </div>
   );
