@@ -52,13 +52,16 @@ export function useAnchorTabsStuck(): boolean {
  * the navigation is one dark row: 80px on desktop, 56px (as tall as the static
  * row) on tablet and mobile. A click scrolls to the section; the active tab
  * follows the scroll position. The tabs scroll horizontally where they do not
- * fit and end before the docked nav; the active one is kept in view.
+ * fit and end before the docked nav; the active one is kept in view. Where
+ * the content ends (closing block, footer) the row scrolls away and takes the
+ * docked nav with it.
  */
 export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; label: string }) {
   const [active, setActive] = useState(items[0]?.id ?? '');
   const [stuck, setStuck] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
   const prefs = useMotionPrefs();
 
   useEffect(() => {
@@ -71,6 +74,11 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
         const isStuck = sentinel.getBoundingClientRect().top <= 0;
         setStuck(isStuck);
         publishStuck(isStuck);
+        // At the end of <main> the content pushes the stuck row up and out;
+        // the docked nav follows it pixel for pixel (--anchor-push, ≤ 0).
+        const top = navRef.current?.getBoundingClientRect().top ?? 0;
+        const push = isStuck ? Math.min(0, Math.round(top)) : 0;
+        document.documentElement.style.setProperty('--anchor-push', `${push}px`);
       }
 
       const offset = desktop ? ROW.desktop : ROW.compact;
@@ -97,6 +105,7 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       document.documentElement.style.removeProperty('--anchor-offset');
+      document.documentElement.style.removeProperty('--anchor-push');
       publishStuck(false);
     };
   }, [items]);
@@ -122,6 +131,7 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
     <>
       <div ref={sentinelRef} aria-hidden className="h-0 w-full" />
       <nav
+        ref={navRef}
         aria-label={label}
         data-ds="AnchorTabs"
         data-stuck={stuck || undefined}

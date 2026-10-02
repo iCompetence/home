@@ -113,7 +113,8 @@ function CompactNav({ bp, logoHref }: { bp: Bp; logoHref: string }) {
   const docked = useAnchorTabsStuck();
 
   return (
-    <header className="pointer-events-none sticky top-0 z-50 w-full">
+    // Docked, the nav leaves with the tab row at the footer (--anchor-push).
+    <header className="pointer-events-none sticky top-0 z-50 w-full translate-y-[var(--anchor-push,0px)]">
       {docked && (
         <div className="absolute inset-x-0 top-0 mx-auto flex h-14 w-full max-w-frame items-center justify-end px-8 md:px-12">
           <div className="pointer-events-auto flex items-center gap-3.5 text-lav-white md:gap-[18px]">
@@ -248,7 +249,8 @@ function DesktopNav({
   };
 
   return (
-    <header className="pointer-events-none sticky top-0 z-50 w-full bg-transparent">
+    // Docked, the nav leaves with the tab row at the footer (--anchor-push).
+    <header className="pointer-events-none sticky top-0 z-50 w-full translate-y-[var(--anchor-push,0px)] bg-transparent">
       <div
         className={cn(
           'pointer-events-none relative mx-auto flex min-h-24 w-full max-w-frame items-start px-10',

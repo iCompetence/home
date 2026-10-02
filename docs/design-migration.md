@@ -164,6 +164,8 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       live unverändert). Damit steht im Impressum „Telefon: …“ statt „(Telefon): …“. Eyebrow nutzt
       jetzt `lav-small` (Text-Trim wie Figma, vorher 21 statt 10 px hoch). E-Mail auf der
       Kontaktseite ohne Silbentrennung, bricht bei 1024–1090 px nach dem „@“.
+- [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
+      (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den
