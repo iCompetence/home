@@ -136,7 +136,8 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if (window.location.pathname.endsWith('/imprint') || window.location.pathname.endsWith('/imprint/')) {
+              /* No consent banner over the legal pages: imprint and (redesign) privacy policy. */
+              if (['/imprint', '/imprint/', '/privacy-policy', '/privacy-policy/'].some((p) => window.location.pathname.endsWith(p))) {
                 window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
               }
               ${
