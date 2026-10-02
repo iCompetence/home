@@ -4,7 +4,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAnchorTabsStuck } from './AnchorTabs';
+import { useAnchorTabsPresent, useAnchorTabsStuck } from './AnchorTabs';
 import { BurgerMenu } from './BurgerMenu';
 import { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 import { HOME_NAV_SECTIONS, smoothAnchor, type NavSection } from './nav-links';
@@ -177,15 +177,18 @@ function DesktopNav({
   const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const tabsStuck = useAnchorTabsStuck();
+  const tabsPresent = useAnchorTabsPresent();
   const [activeId, setActiveId] = useState<string>(activeSection ?? sections[0]?.id ?? '');
   const sectionHref = (id: string) => (sectionsHref ? `${sectionsHref}#${id}` : `#${id}`);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownId = useId();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const hasSections = sections.length > 0;
-  // With section links: compact after 80 px. Product pages (no section links,
-  // AnchorTabs instead): compact only once the tabs stick.
-  const compact = hasSections ? scrolled : tabsStuck;
+  // Home (section links): compact after 80 px, centred. Product pages
+  // (AnchorTabs): compact once the tabs stick, docked into them. Other
+  // subpages: compact after 80 px, on the right (2026-10-02).
+  const docksIntoTabs = !hasSections && tabsPresent;
+  const compact = docksIntoTabs ? tabsStuck : scrolled;
   const { ref, width } = usePillWidth([compact]);
 
   const { scrollY } = useScroll();
@@ -255,7 +258,7 @@ function DesktopNav({
         className={cn(
           'pointer-events-none relative mx-auto flex min-h-24 w-full max-w-frame items-start px-10',
           !compact && 'justify-stretch pt-4',
-          compact && (hasSections ? 'justify-center pt-4' : 'justify-end pt-2'),
+          compact && (hasSections ? 'justify-center pt-4' : docksIntoTabs ? 'justify-end pt-2' : 'justify-end pt-4'),
         )}
       >
         <AnimatePresence mode="popLayout" initial={false}>
@@ -272,7 +275,7 @@ function DesktopNav({
               <motion.a
                 href={logoHref}
                 onClick={smoothAnchor}
-                style={{ opacity: hasSections ? fullItemsOpacity : 1 }}
+                style={{ opacity: docksIntoTabs ? 1 : fullItemsOpacity }}
                 className="inline-flex items-center no-underline"
               >
                 <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-12 w-auto" />

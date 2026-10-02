@@ -33,14 +33,27 @@ function publishStuck(value: boolean) {
   stuckListeners.forEach((listener) => listener());
 }
 export function useAnchorTabsStuck(): boolean {
-  return useSyncExternalStore(
-    (listener) => {
-      stuckListeners.add(listener);
-      return () => stuckListeners.delete(listener);
-    },
-    () => stuckNow,
-    () => false,
-  );
+  return useSyncExternalStore(subscribe, () => stuckNow, () => false);
+}
+
+/*
+ * Whether the page has tabs at all: subpages without them shrink the TopNav
+ * after 80 px instead (2026-10-02).
+ */
+let mounted = 0;
+function publishMounted(delta: 1 | -1) {
+  mounted += delta;
+  stuckListeners.forEach((listener) => listener());
+}
+export function useAnchorTabsPresent(): boolean {
+  return useSyncExternalStore(subscribe, () => mounted > 0, () => false);
+}
+
+function subscribe(listener: () => void) {
+  stuckListeners.add(listener);
+  return () => {
+    stuckListeners.delete(listener);
+  };
 }
 
 /**
@@ -63,6 +76,11 @@ export function AnchorTabs({ items, label }: { items: readonly AnchorTab[]; labe
   const rowRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
   const prefs = useMotionPrefs();
+
+  useEffect(() => {
+    publishMounted(1);
+    return () => publishMounted(-1);
+  }, []);
 
   useEffect(() => {
     let frame = 0;
