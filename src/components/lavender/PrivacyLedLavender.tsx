@@ -28,7 +28,7 @@ export default function PrivacyLedLavender() {
   return (
     <PageShell
       surface="inverse"
-      nav={<TopNav sections={[]} logoHref={home} surface="light" />}
+      nav={<TopNav logoHref={home} surface="light" />}
       footer={
         <ClosingBlock
           id="contact"

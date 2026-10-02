@@ -15,7 +15,7 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
   const home = siteHref(language, '/');
   return (
     <PageShell
-      nav={<TopNav sections={[]} logoHref={home} />}
+      nav={<TopNav logoHref={home} />}
       footer={<Footer />}
     >
       <Hero

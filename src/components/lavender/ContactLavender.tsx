@@ -35,7 +35,7 @@ export default function ContactLavender() {
 
   return (
     <PageShell
-      nav={<TopNav sections={[]} logoHref={home} />}
+      nav={<TopNav logoHref={home} />}
       footer={<Footer />}
     >
       <Script

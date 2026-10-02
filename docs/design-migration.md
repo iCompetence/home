@@ -80,7 +80,7 @@ Stand:
       Neue Bausteine: `ProductHead`, `MediaGallery`, `Breadcrumb`, `CheckItem`,
       `AnchorTabs` (haftend), `SectionHeader`, `FactsBand`, `IconCard`, `SpecItem`,
       `FaqList`, `FormField`/`ConsentCheckbox`, `ComparisonTable`; `Statement layout="feature"`;
-      `BrandStar` `product` | `facts` | `statementRight`; `TopNav sections={[]}` (Pille rechts).
+      `BrandStar` `product` | `facts` | `statementRight`; `TopNav` ohne Abschnittslinks (Pille rechts).
 - [x] **iKnow** — `/de|en/lavender/iknow/`. Neu: `ImageText` (16:9-Video oder Bild neben
       Titel und Text, Video spielt nur im Sichtbereich und nicht bei reduzierter Bewegung);
       `SectionHeader leadIn`; `MediaGallery aspectClassName`; `ClosingBlock id` (Reiter „Kontakt").
@@ -115,7 +115,7 @@ Stand:
 - [x] **Privacy-led AI** — `/de|en/lavender/privacy-led-ai/`. Prinzip-Seite (Hero, Statement,
       ProcessAccordion). Live fest auf Englisch; neue `privacy.*`-Schlüssel (DE = Entwurf §1 wie in
       Figma, EN mit „organization" und Satzschreibung). `TopNav sectionsHref/activeSection`: die
-      Abschnittslinks führen zur Startseite, „Privacy-led AI" gilt als aktiv.
+      Abschnittslinks führen zur Startseite, „Privacy-led AI" gilt als aktiv (entfallen 02.10.2026).
 - [x] Trim-Durchgang: Hero, CTABand, Footer (neue Stufe `lav-display` 40/56/80 mit Laufweite),
       ProcessAccordion/ProcessRow und ProductTeaser auf die Figma-Stufen und -Abstände gebracht —
       Startseite und Unterseiten jetzt auf 0–4 px genau (vorher bis +90 px).
@@ -140,7 +140,7 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
 - [x] Burger-Menü als Disclosure statt ARIA-Menü: Enter/Leertaste öffnen es auch auf Desktop,
       Escape schließt und gibt den Fokus zurück, Wegtabben/Klick daneben schließt; auf Touch
       44 × 44 px Trefferfläche um das 22/24-px-Icon (wie Figma). Abschnitts-Dropdown der
-      kompakten Pille ebenso. LinkedIn-Label übersetzt.
+      kompakten Pille ebenso (entfallen 02.10.2026). LinkedIn-Label übersetzt.
 - [x] Schon vorher erledigt: Tablet nur Burger, globaler Fokusring, Schlussstern 70 %.
 - [x] Haftende Ankerleiste in Navy (Idee/Entscheidung 02.10.2026, Figma zuerst): sobald die Reiter
       oben haften, wird die Leiste Navy (weiße Reiter, keine Linie). Desktop: Die Menüleiste der
@@ -188,8 +188,10 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       der TopNav; AnchorTabs unter dem Kunden-Carousel (Leistungen, Produkte, Vorgehen,
       Privacy-led AI — Labels der früheren Nav-Links), die beim Scrollen haften, die Nav dockt
       ein. ServicesCarousel/ProductShowcase/ProcessAccordion nehmen dafür `className`
-      (ANCHOR_SCROLL_MARGIN). Der Abschnitts-Pfad der TopNav (Links, mittige Pille, Dropdown)
-      ist damit unbenutzt — Aufräumen offen.
+      (ANCHOR_SCROLL_MARGIN). Der Abschnitts-Pfad der TopNav (Links, mittige Pille, Dropdown,
+      Props `sections`/`sectionsHref`/`activeSection`) ist entfernt; TopNav nimmt nur noch
+      `logoHref` und `surface`. Die Reiter der Startseite stehen wie bei den Produktseiten als
+      `tabs` in LavenderHome (`HOME_NAV_SECTIONS`/`NavSection` entfallen).
 - [x] Kompakte Desktop-Pille ohne Abschnitte (beginnt mit dem CTA): links 8 statt 16 px, wie
       oben/unten — der CTA sitzt konzentrisch (Dennis, 02.10.2026). Startseite unverändert.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm

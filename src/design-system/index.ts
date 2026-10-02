@@ -64,13 +64,11 @@ export { LanguageToggle } from './LanguageToggle';
 export { LinkedInGlyph } from './icons';
 export { useBreakpoint, isCompact, type Bp } from './useBreakpoint';
 export {
-  HOME_NAV_SECTIONS,
   PRODUCT_LINKS,
   PRINCIPLE_LINKS,
   NEWS_LINK,
   LINKEDIN_URL,
   smoothAnchor,
-  type NavSection,
   type ProductLink,
 } from './nav-links';
 

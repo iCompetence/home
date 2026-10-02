@@ -61,7 +61,7 @@ export default function AIWorkshopLavender() {
 
   return (
     <PageShell
-      nav={<TopNav sections={[]} logoHref={siteHref(language, '/')} />}
+      nav={<TopNav logoHref={siteHref(language, '/')} />}
       footer={
         <ClosingBlock
           id="contact"

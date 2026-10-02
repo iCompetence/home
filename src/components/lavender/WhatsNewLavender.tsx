@@ -63,7 +63,7 @@ export default function WhatsNewLavender() {
 
   return (
     <PageShell
-      nav={<TopNav sections={[]} logoHref={home} />}
+      nav={<TopNav logoHref={home} />}
       footer={
         <ClosingBlock
           id="contact"

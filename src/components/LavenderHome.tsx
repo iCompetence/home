@@ -18,7 +18,6 @@ import {
   Statement as StatementSection,
   TestimonialSlider,
   TopNav,
-  HOME_NAV_SECTIONS,
   siteHref,
 } from '@/design-system';
 
@@ -30,7 +29,7 @@ import {
 export default function LavenderHome() {
   return (
     <PageShell
-      nav={<TopNav sections={[]} />}
+      nav={<TopNav />}
       footer={<Closing />}
     >
       <Hero />
@@ -55,12 +54,13 @@ export default function LavenderHome() {
  */
 function HomeTabs() {
   const { t } = useLanguage();
-  return (
-    <AnchorTabs
-      label={t('lavender.common.onThisPage')}
-      items={HOME_NAV_SECTIONS.map(({ id, labelKey }) => ({ id, label: t(labelKey) }))}
-    />
-  );
+  const tabs = [
+    { id: 'services', label: t('topNav.services') },
+    { id: 'products', label: t('topNav.products') },
+    { id: 'process', label: t('topNav.process') },
+    { id: 'privacy-led', label: t('topNav.privacyLed') },
+  ];
+  return <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />;
 }
 
 /* ---------------- Hero ---------------- */

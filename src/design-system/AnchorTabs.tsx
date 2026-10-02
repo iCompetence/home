@@ -57,8 +57,8 @@ function subscribe(listener: () => void) {
 }
 
 /**
- * The section navigation of a product page — the only one there (the TopNav
- * carries no section links on such pages).
+ * The section navigation of a page (homepage, product pages) — the only one
+ * there; the TopNav carries no section links.
  *
  * Static it sits under the product head on the page colour. Scrolled past, it
  * sticks to the top and turns navy, and the nav docks into it on the right, so

@@ -1,28 +1,10 @@
-/** Nav data for the shared TopNav. Labels are i18n keys (project useLanguage). */
-
-export type NavSection = {
-  /** Element id of the section on the page (anchor target). */
-  id: string;
-  /** Translation key for the label. */
-  labelKey: string;
-};
+/** Link data for the shared nav (BurgerMenu). Labels are i18n keys (project useLanguage). */
 
 export type ProductLink = {
   labelKey: string;
   /** Un-prefixed route; rendered through siteHref (language + preview base). */
   href: string;
 };
-
-/**
- * Section anchors of the new homepage. Pages without these sections should pass
- * their own `sections` (or an empty array) to <TopNav>.
- */
-export const HOME_NAV_SECTIONS: readonly NavSection[] = [
-  { id: 'services', labelKey: 'topNav.services' },
-  { id: 'products', labelKey: 'topNav.products' },
-  { id: 'process', labelKey: 'topNav.process' },
-  { id: 'privacy-led', labelKey: 'topNav.privacyLed' },
-];
 
 /** Products & tools shown in the burger menu (sorted alphabetically at render). */
 export const PRODUCT_LINKS: readonly ProductLink[] = [

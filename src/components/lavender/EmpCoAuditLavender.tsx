@@ -101,7 +101,7 @@ export default function EmpCoAuditLavender() {
 
   return (
     <PageShell
-      nav={<TopNav sections={[]} logoHref={siteHref(language, '/')} />}
+      nav={<TopNav logoHref={siteHref(language, '/')} />}
       footer={
         <ClosingBlock
           heading={t('cta.headline')}
