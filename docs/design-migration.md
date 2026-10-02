@@ -151,6 +151,8 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       Stelle; die Pille bleibt unsichtbar im Layout, damit nichts springt. Reiter haften überall
       bei top 0 und enden vor der Navigation. Haftende Zeilen 56 / 80 px wie Figma.
       Startseite und Infoseiten unverändert (schrumpfen nach 80 px). Burger: „Privacy-led AI“.
+- [x] Kaufbox: Primary- und Outline-Button als Gruppe mit 24 statt 32 px (`ButtonStack`, Figma-Gruppe
+      „Aktionen“, space/24; Entscheidung 02.10.2026), zum übrigen Inhalt bleiben 32 px.
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der
       globale Ring gilt nur noch für Links, Knöpfe, Checkboxen), Fehler = 2 px `lav-error`
       (#b3433d, 5,55 : 1) + Meldung statt Hinweis. `ValidatedForm` prüft beim Absenden mit den

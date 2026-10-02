@@ -6,6 +6,7 @@ import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
   Button,
+  ButtonStack,
   CheckItem,
   ClosingBlock,
   FaqSection,
@@ -86,18 +87,20 @@ export default function UserJourneyExplorerLavender() {
         title={t('icu.hero.title')}
         subline={t('icu.hero.subline')}
       >
-        <Button asChild className="w-full">
-          <a href={contactHref} target="_blank" rel="noopener noreferrer">
-            {t('cta.button')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          <a href="#guidance" onClick={smoothAnchor}>
-            {t('lavender.icu.anchor.more')}
-            <ArrowDown size={20} strokeWidth={2} />
-          </a>
-        </Button>
+        <ButtonStack>
+          <Button asChild className="w-full">
+            <a href={contactHref} target="_blank" rel="noopener noreferrer">
+              {t('cta.button')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <a href="#guidance" onClick={smoothAnchor}>
+              {t('lavender.icu.anchor.more')}
+              <ArrowDown size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        </ButtonStack>
         <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {[1, 2, 3].map((n) => (
             <CheckItem key={n}>{t(`icu.carousel.item${n}.title`)}</CheckItem>

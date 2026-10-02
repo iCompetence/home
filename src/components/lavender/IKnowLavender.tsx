@@ -6,6 +6,7 @@ import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
   Button,
+  ButtonStack,
   CheckItem,
   ClosingBlock,
   ImageText,
@@ -89,18 +90,20 @@ export default function IKnowLavender() {
         title="iKnow"
         subline={t('iknow.hero.subtitle')}
       >
-        <Button asChild className="w-full">
-          <a href={contactHref} target="_blank" rel="noopener noreferrer">
-            {t('cta.button')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          <a href="#tool" onClick={smoothAnchor}>
-            {t('iknow.anchor.intoTool')}
-            <ArrowDown size={20} strokeWidth={2} />
-          </a>
-        </Button>
+        <ButtonStack>
+          <Button asChild className="w-full">
+            <a href={contactHref} target="_blank" rel="noopener noreferrer">
+              {t('cta.button')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <a href="#tool" onClick={smoothAnchor}>
+              {t('iknow.anchor.intoTool')}
+              <ArrowDown size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        </ButtonStack>
         <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <CheckItem key={n}>{t(`iknow.card${n}.title`)}</CheckItem>

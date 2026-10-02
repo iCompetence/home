@@ -10,6 +10,7 @@ import {
   AnchorTabs,
   Badge,
   Button,
+  ButtonStack,
   ClosingBlock,
   ConsentCheckbox,
   FormError,
@@ -93,18 +94,20 @@ export default function AIWorkshopLavender() {
         subline={t('workshop.hero.subline')}
       >
         <Badge>{t('workshop.intro.run4')}</Badge>
-        <Button asChild className="w-full">
-          <a href="#form" onClick={smoothAnchor}>
-            {t('workshop.anchor.apply')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          <a href="#intro" onClick={smoothAnchor}>
-            {t('workshop.anchor.about')}
-            <ArrowDown size={20} strokeWidth={2} />
-          </a>
-        </Button>
+        <ButtonStack>
+          <Button asChild className="w-full">
+            <a href="#form" onClick={smoothAnchor}>
+              {t('workshop.anchor.apply')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <a href="#intro" onClick={smoothAnchor}>
+              {t('workshop.anchor.about')}
+              <ArrowDown size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        </ButtonStack>
       </ProductHead>
 
       <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />

@@ -6,6 +6,7 @@ import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
   Button,
+  ButtonStack,
   CheckItem,
   ClosingBlock,
   ComparisonTable,
@@ -91,18 +92,20 @@ export default function IntelligenticSearchLavender() {
         title={t('is.hero.title')}
         subline={t('is.hero.subline')}
       >
-        <Button asChild className="w-full">
-          <a href={contactHref} target="_blank" rel="noopener noreferrer">
-            {t('cta.button')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          <a href="#how-it-works" onClick={smoothAnchor}>
-            {t('is.anchor.howItWorks')}
-            <ArrowDown size={20} strokeWidth={2} />
-          </a>
-        </Button>
+        <ButtonStack>
+          <Button asChild className="w-full">
+            <a href={contactHref} target="_blank" rel="noopener noreferrer">
+              {t('cta.button')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <a href="#how-it-works" onClick={smoothAnchor}>
+              {t('is.anchor.howItWorks')}
+              <ArrowDown size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        </ButtonStack>
         <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {[1, 2, 3, 4].map((n) => (
             <CheckItem key={n}>{t(`is.features.step${n}.label`)}</CheckItem>

@@ -19,6 +19,7 @@ import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
   Button,
+  ButtonStack,
   CheckItem,
   ClosingBlock,
   ComparisonTable,
@@ -141,7 +142,7 @@ export default function EmpCoAuditLavender() {
         subline={t('empco.hero.headline')}
         description={t('empco.hero.subtitle')}
       >
-        <div className="flex flex-col gap-8">
+        <ButtonStack>
           <Button asChild className="w-full">
             <a
               href="#form"
@@ -160,7 +161,7 @@ export default function EmpCoAuditLavender() {
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>
-        </div>
+        </ButtonStack>
         <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <CheckItem key={n}>{t(`empco.feature${n}.title`)}</CheckItem>

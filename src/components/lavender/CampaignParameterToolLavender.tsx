@@ -9,6 +9,7 @@ import {
   AnchorTabs,
   Badge,
   Button,
+  ButtonStack,
   CheckItem,
   ClosingBlock,
   ComparisonTable,
@@ -140,14 +141,16 @@ export default function CampaignParameterToolLavender() {
           <PriceTag {...price(current)} />
           {current.trialBadge && <Badge>{t('ct.pricing.trialBadge')}</Badge>}
         </div>
-        <Button className="w-full" onClick={() => openModal('trial')}>
-          {t('ct.hero.cta1')}
-          <ArrowUpRight size={20} strokeWidth={2} />
-        </Button>
-        <Button variant="outline" className="w-full" onClick={() => openModal('demo')}>
-          {t('ct.cta.button')}
-          <ArrowUpRight size={20} strokeWidth={2} />
-        </Button>
+        <ButtonStack>
+          <Button className="w-full" onClick={() => openModal('trial')}>
+            {t('ct.hero.cta1')}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </Button>
+          <Button variant="outline" className="w-full" onClick={() => openModal('demo')}>
+            {t('ct.cta.button')}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </Button>
+        </ButtonStack>
         <ul className="m-0 flex list-none flex-col gap-3 p-0">
           {[1, 2, 3, 4].map((n) => (
             <CheckItem key={n}>{t(`ct.hero.bullet${n}`)}</CheckItem>

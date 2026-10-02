@@ -34,7 +34,7 @@ export { FormField, TextAreaField, ConsentCheckbox, ValidatedForm, FormError } f
 export { ComparisonTable, type ComparisonRow } from './ComparisonTable';
 export { FactsBand, type Fact } from './FactsBand';
 export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
-export { Button, buttonVariants } from './Button';
+export { Button, ButtonStack, buttonVariants } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
 export { ProductTeaser, type ProductTeaserProps } from './ProductTeaser';
