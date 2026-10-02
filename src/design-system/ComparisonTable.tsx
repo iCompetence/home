@@ -31,7 +31,10 @@ export function ComparisonTable({
 }) {
   const numbered = firstColumn === 'number';
   const firstCol = numbered ? 'lg:w-[120px] lg:shrink-0' : 'lg:w-[40%]';
-  const valueCol = numbered ? 'lg:flex-1' : 'lg:w-[30%]';
+  // Fixed widths, not flex-1: with flex the cells' padding counts towards the
+  // width, and the heads (no right padding on the second) drifted 12px off
+  // the columns below.
+  const valueCol = numbered ? 'lg:w-[calc(50%-60px)] lg:shrink-0' : 'lg:w-[30%]';
   const cell = 'gap-3 px-3 py-3 lg:px-6 lg:py-5';
   const icon = 'shrink-0';
   return (
