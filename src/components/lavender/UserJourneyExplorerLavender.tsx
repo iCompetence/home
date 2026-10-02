@@ -1,7 +1,8 @@
 'use client';
 
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -42,7 +43,6 @@ const FAQ_COUNT = 6;
  */
 export default function UserJourneyExplorerLavender() {
   const { t, language } = useLanguage();
-  const contactHref = siteHref(language, 'contact');
 
   const tabs = [
     { id: 'offer', label: t('lavender.icu.anchor.statusQuo') },
@@ -61,12 +61,7 @@ export default function UserJourneyExplorerLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={contactHref} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.userJourney')} />
           }
         />
       }
@@ -87,12 +82,7 @@ export default function UserJourneyExplorerLavender() {
         subline={t('icu.hero.subline')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
-            <a href={contactHref} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+          <ConsultButton className="w-full" topic={t('burgerMenu.userJourney')} />
           <Button asChild variant="outline" className="w-full">
             <a href="#guidance" onClick={smoothAnchor}>
               {t('lavender.icu.anchor.more')}

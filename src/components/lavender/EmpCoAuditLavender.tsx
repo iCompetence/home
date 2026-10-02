@@ -14,6 +14,7 @@ import {
   Scale,
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm, trackCtaClick } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
@@ -105,12 +106,7 @@ export default function EmpCoAuditLavender() {
         <ClosingBlock
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.empcoAudit')} />
           }
         />
       }

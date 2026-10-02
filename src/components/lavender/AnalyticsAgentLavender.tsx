@@ -1,7 +1,8 @@
 'use client';
 
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -47,7 +48,6 @@ const SCREENS = [
  */
 export default function AnalyticsAgentLavender() {
   const { t, language } = useLanguage();
-  const contactHref = siteHref(language, 'contact');
 
   const tabs = [
     { id: 'challenge', label: t('analyticsAgent.anchor.challenge') },
@@ -66,12 +66,7 @@ export default function AnalyticsAgentLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={contactHref} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.analyticsAgent')} />
           }
         />
       }
@@ -88,12 +83,7 @@ export default function AnalyticsAgentLavender() {
         subline={t('analyticsAgent.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
-            <a href={contactHref} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+          <ConsultButton className="w-full" topic={t('burgerMenu.analyticsAgent')} />
           <Button asChild variant="outline" className="w-full">
             <a href="#in-action" onClick={smoothAnchor}>
               {t('analyticsAgent.anchor.inAction')}

@@ -175,6 +175,9 @@ Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
       (wie iKnow/CPT, Override); alle Unterseiten TopNav ohne Abschnittslinks — ohne AnchorTabs nach
       80 px kompakt rechts; BurgerMenu mit Kopfzeile Home | Neuigkeiten und eigener Gruppe
       „Prinzipien“/„Principles“ (Privacy-led AI), neuer Key `burgerMenu.principles`.
+- [x] „Buche dein Erstgespräch“ öffnet überall das `ConsultModal` statt der Kontaktseite (9 Seiten,
+      ClosingBlock und Kaufboxen): Netlify-Formular „contact“ + Feld `topic` (in public/__forms.html
+      ergänzt), auf Produktseiten mit dem Produkt vorausgefüllt. Neuer Key `lavender.consult.topic`.
 - [x] Am Footer verlässt die eingebettete Menüleiste mit der Ankerleiste den Bildschirm
       (`--anchor-push` aus AnchorTabs, TopNav folgt pixelgenau; Hinweis Dennis, 02.10.2026).
 - [x] Formularzustände wie Figma (FormField State=focus|error): Fokus = 2 px Navy-Rand (der

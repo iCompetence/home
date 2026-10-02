@@ -1,7 +1,8 @@
 'use client';
 
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -46,7 +47,6 @@ const lead = 'lav-lead font-normal text-lav-navy/80';
  */
 export default function IntelligenticSearchLavender() {
   const { t, language } = useLanguage();
-  const contactHref = siteHref(language, 'contact');
 
   const tabs = [
     { id: 'intro', label: t('is.anchor.statusQuo') },
@@ -65,12 +65,7 @@ export default function IntelligenticSearchLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={contactHref} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.intelligenticSearch')} />
           }
         />
       }
@@ -92,12 +87,7 @@ export default function IntelligenticSearchLavender() {
         subline={t('is.hero.subline')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
-            <a href={contactHref} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+          <ConsultButton className="w-full" topic={t('burgerMenu.intelligenticSearch')} />
           <Button asChild variant="outline" className="w-full">
             <a href="#how-it-works" onClick={smoothAnchor}>
               {t('is.anchor.howItWorks')}

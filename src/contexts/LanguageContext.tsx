@@ -2782,6 +2782,8 @@ export const translations: Translations = {
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
   'lavender.common.close': { en: 'Close', de: 'Schließen' },
   'lavender.common.moreInfo': { en: 'More information', de: 'Mehr Informationen' },
+  // ConsultModal ("Book your initial consultation"), 2026-10-02.
+  'lavender.consult.topic': { en: 'Topic', de: 'Thema' },
   'lavender.icu.anchor.statusQuo': { en: 'Status quo', de: 'Status quo' },
   'lavender.icu.anchor.benefits': { en: 'Benefits', de: 'Vorteile' },
   'lavender.icu.anchor.more': { en: 'More about ICU', de: 'Mehr über ICU' },

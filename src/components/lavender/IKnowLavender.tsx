@@ -1,7 +1,8 @@
 'use client';
 
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -49,7 +50,6 @@ const SCREENS = [
  */
 export default function IKnowLavender() {
   const { t, language } = useLanguage();
-  const contactHref = siteHref(language, 'contact');
 
   const tabs = [
     { id: 'status-quo', label: t('iknow.anchor.statusQuo') },
@@ -68,12 +68,7 @@ export default function IKnowLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={contactHref} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.iknow')} />
           }
         />
       }
@@ -90,12 +85,7 @@ export default function IKnowLavender() {
         subline={t('iknow.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
-            <a href={contactHref} target="_blank" rel="noopener noreferrer">
-              {t('cta.button')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+          <ConsultButton className="w-full" topic={t('burgerMenu.iknow')} />
           <Button asChild variant="outline" className="w-full">
             <a href="#tool" onClick={smoothAnchor}>
               {t('iknow.anchor.intoTool')}

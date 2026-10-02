@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -86,12 +87,7 @@ export default function CampaignParameterToolLavender() {
           id="contact"
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={'Campaign Parameter Tool'} />
           }
         />
       }

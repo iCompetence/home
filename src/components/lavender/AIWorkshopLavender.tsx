@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
@@ -67,12 +68,7 @@ export default function AIWorkshopLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <Button asChild variant="dark">
-              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-                {t('cta.button')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
+            <ConsultButton variant="dark" topic={t('burgerMenu.aiWorkshop')} />
           }
         />
       }
