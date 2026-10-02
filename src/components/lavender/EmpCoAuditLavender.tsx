@@ -324,6 +324,7 @@ function SampleForm() {
     submitNetlifyForm(form, {
       formId: 'empco-audit',
       language,
+      thankYouHref: siteHref(language, 'thank-you'),
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
       onError: setFormError,

@@ -72,6 +72,7 @@ function ContactForm() {
     submitNetlifyForm(form, {
       formId: 'contact',
       language,
+      thankYouHref: siteHref(language, 'thank-you'),
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
       onError: setFormError,

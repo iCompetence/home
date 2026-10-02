@@ -53,6 +53,11 @@ interface NetlifyFormSubmitOptions {
   formId: string;
   /** 'en' redirects to /thank-you/, anything else to /danke/. */
   language?: string;
+  /**
+   * Where to go after a successful submission instead of the language's live
+   * thank-you page — the redesign preview passes its own.
+   */
+  thankYouHref?: string;
   /** Shown if the reCAPTCHA has not been solved. */
   recaptchaErrorMessage: string;
   /** Shown if the network request fails. */
@@ -127,6 +132,7 @@ export function submitNetlifyForm(
   {
     formId,
     language,
+    thankYouHref,
     recaptchaErrorMessage,
     submitErrorMessage,
     onError = (message) => alert(message),
@@ -152,7 +158,7 @@ export function submitNetlifyForm(
     params.append(key, typeof value === 'string' ? value : '');
   });
 
-  const redirectTo = language === 'en' ? '/thank-you/' : '/danke/';
+  const redirectTo = thankYouHref ?? (language === 'en' ? '/thank-you/' : '/danke/');
 
   fetch('/__forms.html', {
     method: 'POST',

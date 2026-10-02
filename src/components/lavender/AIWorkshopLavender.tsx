@@ -176,6 +176,7 @@ function ApplicationForm() {
     submitNetlifyForm(form, {
       formId: 'ai-workshop',
       language,
+      thankYouHref: siteHref(language, 'thank-you'),
       recaptchaErrorMessage: t('form.recaptchaError'),
       submitErrorMessage: t('form.submitError'),
       onError: setFormError,
