@@ -1,0 +1,7 @@
+# The redesign preview must stay out of search engines. Its pages also carry
+# <meta name="robots" content="noindex, nofollow"> (app/[lang]/lavender/layout.tsx);
+# the header covers every file served there as well. Remove at go-live.
+/de/lavender/*
+  X-Robots-Tag: noindex, nofollow
+/en/lavender/*
+  X-Robots-Tag: noindex, nofollow
