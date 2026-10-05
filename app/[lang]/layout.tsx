@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import '../../src/styles/globals.css';
+// Live pages: the frozen Tailwind snapshot, exactly as on main. The redesign
+// adds the compiled design system in app/[lang]/lavender/layout.tsx.
+import '../../src/index.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { DevDials } from '@/design-system';

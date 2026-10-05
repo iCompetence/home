@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Tailwind v4 — compiled at build time via @tailwindcss/postcss.
-   Explicit sources so utilities used in app/ and src/ are always generated
-   (replaces the old, hand-maintained src/index.css snapshot). */
+   Loaded by the redesign only (app/[lang]/lavender/layout.tsx), on top of
+   the live pages' frozen src/index.css snapshot. The live pages keep the
+   snapshot alone: compiled for real, classes that never had an effect
+   there (sm:py-24, mb-6, …) would start to apply.
+   Explicit sources so utilities used in app/ and src/ are always generated. */
 @import 'tailwindcss';
 @source '../../app';
 @source '..';
@@ -259,6 +262,10 @@
      viewport, so horizontal overflow stays suppressed either way. */
   html {
     overflow-x: hidden;
+  }
+  /* src/index.css (loaded underneath) still sets it on html, body. */
+  body {
+    overflow-x: visible;
   }
 
   /* Fix for mobile step-by-step appearance without breaking backgrounds */

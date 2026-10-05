@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import '@/styles/globals.css'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { toLang } from '@/lib/i18n-meta'
 
@@ -8,6 +9,11 @@ import { toLang } from '@/lib/i18n-meta'
  *
  * - `noindex` for the whole subtree — a page must not opt back in before
  *   go-live (see docs/design-migration.md).
+ * - The compiled design system (src/styles/globals.css) on top of the live
+ *   pages' frozen src/index.css, so the live pages keep their exact CSS.
+ *   The redesign only uses plain <a> links, so moving between preview and
+ *   live is always a full page load and the two stylesheets never mix on a
+ *   live page.
  * - One LanguageProvider with `variant="lavender"`, so the redesign's wording
  *   (src/contexts/lavender-overrides.ts) applies without touching the strings
  *   the live pages share.
