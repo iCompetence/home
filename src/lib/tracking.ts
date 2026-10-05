@@ -8,6 +8,8 @@
 // - page_path: auto-captured so the same cta_id (e.g. footer mail/phone,
 //   which is duplicated across pages) stays distinguishable per page in GA4.
 
+import { PREVIEW_BASE } from '@/design-system/routes';
+
 interface DataLayerObject {
   [key: string]: unknown;
 }
@@ -37,9 +39,15 @@ export function trackCtaClick(ctaId: string, ctaLabel?: string): void {
  * `form_submit` event on every native submit. Using a distinct name keeps our
  * validated-submission key event separate and clean, so it never overrides or
  * mixes with the GA default. Safe to call on the server (no-op).
+ *
+ * Not sent from the redesign preview (/<lang>/lavender/…): it is reviewed
+ * internally and GTM turns form_success into a GA4 lead conversion, so test
+ * submissions would count as leads. Back on by itself at go-live, when
+ * PREVIEW_BASE becomes ''.
  */
 export function trackFormSuccess(formId: string, formLanguage?: string): void {
   if (typeof window === 'undefined') return;
+  if (PREVIEW_BASE && window.location.pathname.includes(`${PREVIEW_BASE}/`)) return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: 'form_success',
