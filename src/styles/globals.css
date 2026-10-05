@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Tailwind v4 — compiled at build time via @tailwindcss/postcss.
+   Loaded by the redesign only (app/[lang]/lavender/layout.tsx), on top of
+   the live pages' frozen src/index.css snapshot. The live pages keep the
+   snapshot alone: compiled for real, classes that never had an effect
+   there (sm:py-24, mb-6, …) would start to apply.
+   Explicit sources so utilities used in app/ and src/ are always generated. */
+@import 'tailwindcss';
+@source '../../app';
+@source '..';
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -135,6 +145,96 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ------------------------------------------------------------------ *
+ * Lavender design tokens (the new site design, from LavenderHome).
+ * Foundation for the design-system rollout — components consume these
+ * as Tailwind utilities (bg-lav-navy, text-h2, rounded-pill, …) and/or
+ * CSS variables (var(--color-lav-navy)). Alphas via opacity modifiers,
+ * e.g. bg-lav-navy/80, text-lav-white/70.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Brand colours */
+  --color-lav-navy: #0b2231;
+  --color-lav-lavender: #f5e1ff;
+  --color-lav-page: #fdfafe;
+  --color-lav-blue: #24a1da;
+  --color-lav-white: #ffffff;
+  /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
+  --color-lav-error: #b3433d;
+
+  /* Brand font */
+  --font-brand: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Type scale (desktop reference sizes; responsive handled per component) */
+  --text-mega: 120px;
+  --text-h1: 80px;
+  --text-h2: 54px;
+  --text-h3: 36px;
+  --text-sub: 24px;
+  --text-body: 16px;
+
+  /* Radii */
+  --radius-pill: 100px;
+  --radius-card: 24px;
+  --radius-card-sm: 16px;
+
+  /* Section rhythm — see the responsive :root block below for the live values. */
+  --spacing-section-v: 64px;
+  --spacing-section-h: 96px;
+
+  /* Layout frame (FRAME_MAX_WIDTH) → max-w-frame */
+  --container-frame: 1440px;
+
+  /* Motion — mirrors src/design-system/motion.ts, which is the source of
+     truth (framer-motion drives most of the motion and needs seconds).
+     Used from CSS as duration-[var(--duration-fast)] / ease-[var(--ease-…)]. */
+  --duration-fast: 160ms;
+  --duration-base: 300ms;
+  --duration-slow: 450ms;
+  --duration-slower: 550ms;
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Live section padding, consumed by the shared <Section> component. Kept as
+   plain custom properties (not @theme) so the dev dial panel can override them
+   per breakpoint at runtime. Mobile 48/24 · tablet 56/48 · desktop 80/96 (80 since
+   2026-10-02, before 64). */
+:root {
+  --section-pad-v: 48px;
+  --section-pad-h: 24px;
+}
+@media (min-width: 768px) {
+  :root {
+    --section-pad-v: 56px;
+    --section-pad-h: 48px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --section-pad-v: 80px;
+    --section-pad-h: 96px;
+  }
+}
+
+/* Honour prefers-reduced-motion. The rule is "gentler, not zero": opacity and
+   colour keep transitioning so state changes stay legible, while movement
+   (transform) and smooth scrolling — the parts that trigger vestibular
+   discomfort — are dropped. framer-motion is handled in motion.ts. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    transition-duration: var(--duration-fast) !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -145,12 +245,27 @@
     background-color: #012332 !important;
     color: #FCFCFC;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
     width: 100%;
-    overscroll-behavior-y: none;
-    overscroll-behavior-x: none;
-    overscroll-behavior: none;
+    /* overscroll-behavior: none was never actually in effect: the frozen
+       src/index.css snapshot did not contain it, so the site has always run
+       without it. Once Tailwind compiled for real it started applying and
+       broke the expected scroll feel (no rubber-banding, scroll chaining
+       blocked). Left out deliberately to keep the long-standing behaviour. */
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* overflow-x belongs on the root only. Setting it on <body> as well turns
+     body into its own scroll container whose content is exactly as tall as
+     itself — the wheel then lands in a container with nothing to scroll and
+     the page does not move (measured: 93 wheel events, zero scroll, while
+     window.scrollBy still worked). The root's overflow propagates to the
+     viewport, so horizontal overflow stays suppressed either way. */
+  html {
+    overflow-x: hidden;
+  }
+  /* src/index.css (loaded underneath) still sets it on html, body. */
+  body {
+    overflow-x: visible;
   }
 
   /* Fix for mobile step-by-step appearance without breaking backgrounds */
@@ -196,8 +311,12 @@
     line-height: 110% !important;
   }
 
-  /* Direct h1 styling to ensure it applies */
-  h1 {
+  /* Direct h1 styling to ensure it applies.
+     Scoped away from the new design: these !important declarations beat every
+     Tailwind font-size utility regardless of layer order, so inside
+     .lavender-page they would pin every hero headline to 40px/700 and silently
+     disable text-h1 & friends. */
+  h1:not(.lavender-page h1) {
     font-size: 40px !important;
     font-weight: 700 !important;
     line-height: 110% !important;
@@ -209,7 +328,7 @@
       font-size: 40px !important;
     }
     
-    h1 {
+    h1:not(.lavender-page h1) {
       font-size: 32px !important;
     }
   }
@@ -284,4 +403,67 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* ------------------------------------------------------------------ *
+ * Lavender type steps (Figma "Lavender · Responsive": mobile / tablet /
+ * desktop). One class per step so pages stop re-deriving
+ * `text-[32px] md:text-[40px] lg:text-h2` by hand.
+ *
+ * `text-box: trim-both cap alphabetic` removes the half-leading above the
+ * cap height and below the baseline, which is how the design file measures
+ * text: a gap between two text blocks is then the visible distance. In
+ * browsers without support the same gaps simply read a little wider.
+ * Only used by the new design's components — nothing here touches the live
+ * pages.
+ * ------------------------------------------------------------------ */
+@layer components {
+  .lav-display, .lav-h1, .lav-h2, .lav-h3, .lav-statement, .lav-lead,
+  .lav-body, .lav-paragraph, .lav-small, .lav-caption {
+    margin: 0;
+    font-family: var(--font-brand);
+    text-box: trim-both cap alphabetic;
+  }
+  .lav-display { font-size: 40px; line-height: 42px; letter-spacing: -1px; font-weight: 500; }
+  .lav-h1 { font-size: 32px; line-height: 35.2px; font-weight: 500; }
+  .lav-h2 { font-size: 28px; line-height: 30.8px; font-weight: 500; }
+  .lav-h3 { font-size: 22px; line-height: 25.3px; font-weight: 500; }
+  .lav-statement { font-size: 28px; line-height: 32.2px; font-weight: 500; }
+  .lav-lead { font-size: 16px; line-height: 24px; }
+  .lav-body { font-size: 16px; line-height: 24px; }
+  .lav-paragraph { font-size: 15px; line-height: 22.5px; }
+  .lav-small { font-size: 14px; line-height: 21px; }
+  .lav-caption { font-size: 13px; line-height: 19.5px; letter-spacing: 0.5px; }
+
+  @media (min-width: 768px) {
+    .lav-display { font-size: 56px; line-height: 58.8px; letter-spacing: -1.5px; }
+    .lav-h1 { font-size: 40px; line-height: 44px; }
+    .lav-h2 { font-size: 32px; line-height: 35.2px; }
+    .lav-h3 { font-size: 22px; line-height: 25.3px; }
+    .lav-statement { font-size: 40px; line-height: 46px; }
+    .lav-lead { font-size: 24px; line-height: 36px; }
+    .lav-paragraph { font-size: 16px; line-height: 24px; }
+  }
+  @media (min-width: 1024px) {
+    .lav-display { font-size: 80px; line-height: 84px; letter-spacing: -2px; }
+    .lav-h1 { font-size: 54px; line-height: 59.4px; }
+    .lav-h2 { font-size: 36px; line-height: 39.6px; }
+    .lav-h3 { font-size: 24px; line-height: 27.6px; }
+    .lav-statement { font-size: 54px; line-height: 59.4px; }
+    .lav-caption { font-size: 14px; line-height: 21px; }
+  }
+  /* Long German compounds (Nachhaltigkeitswerbung) are wider than a phone at
+     heading sizes: hyphenate, but only words of 14+ letters, so ordinary
+     headlines never break mid-word. .lav-hyphenate applies the same rule to
+     smaller text in narrow columns (cards, steps, table cells). */
+  .lav-h1,
+  .lav-h2,
+  .lav-h3,
+  .lav-statement,
+  .lav-hyphenate {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 14 6 6;
+    overflow-wrap: break-word;
+  }
 }

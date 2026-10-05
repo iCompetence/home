@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { lavenderOverrides } from './lavender-overrides';
 
 export type Language = 'en' | 'de';
 
@@ -19,7 +20,7 @@ interface Translations {
   };
 }
 
-const translations: Translations = {
+export const translations: Translations = {
   // Header
   'header.contact': {
     en: 'Contact us',
@@ -679,6 +680,15 @@ const translations: Translations = {
     en: 'Something went wrong while sending your request. Please try again.',
     de: 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.'
   },
+  // Field errors of the redesigned forms (FormField State=error), approved
+  // 01.10.2026; also in Figma (Content-Guidelines → Formulare).
+  'form.error.required': { en: 'Please fill in this field.', de: 'Bitte fülle dieses Feld aus.' },
+  'form.error.email': {
+    en: 'Please enter a valid email address.',
+    de: 'Bitte gib eine gültige E-Mail-Adresse ein.'
+  },
+  'form.error.url': { en: 'Please enter a valid web address.', de: 'Bitte gib eine gültige Webadresse ein.' },
+  'form.error.consent': { en: 'Please give your consent.', de: 'Bitte bestätige deine Einwilligung.' },
   'empco.form.disclaimer': {
     en: 'Note: the EmpCo Audit is an initial technical assessment and does not replace qualified legal advice. We accept no liability for the accuracy, completeness or timeliness of the results. For the final legal evaluation of your claims, please discuss the audit results with your legal department or a qualified lawyer.',
     de: 'Hinweis: Der EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine qualifizierte Rechtsberatung. Für die Richtigkeit, Vollständigkeit und Aktualität der Ergebnisse übernehmen wir keine Haftung. Für die finale rechtliche Bewertung Ihrer Claims besprechen Sie die Audit-Ergebnisse bitte mit Ihrer Rechtsabteilung oder einem Rechtsanwalt bzw. einer Rechtsanwältin.'
@@ -1170,6 +1180,40 @@ const translations: Translations = {
     de: 'Nach oben'
   },
 
+  // Top navigation (new design system) — section anchors + primary CTA
+  'topNav.services': {
+    en: 'Services',
+    de: 'Leistungen'
+  },
+  'topNav.products': {
+    en: 'Products',
+    de: 'Produkte'
+  },
+  'topNav.process': {
+    en: 'Process',
+    de: 'Vorgehen'
+  },
+  'topNav.privacyLed': {
+    en: 'Privacy-led AI',
+    de: 'Privacy-led AI'
+  },
+  'topNav.letsTalk': {
+    en: "Let's talk",
+    de: 'Kontakt aufnehmen'
+  },
+  'topNav.menu': {
+    en: 'Menu',
+    de: 'Menü'
+  },
+  'topNav.switchToGerman': {
+    en: 'Switch to German',
+    de: 'Auf Deutsch umschalten'
+  },
+  'topNav.switchToEnglish': {
+    en: 'Switch to English',
+    de: 'Auf Englisch umschalten'
+  },
+
   // Burger Menu
   'burgerMenu.home': {
     en: 'Home',
@@ -1186,6 +1230,11 @@ const translations: Translations = {
   'burgerMenu.products': {
     en: 'Products & Tools',
     de: 'Produkte & Tools'
+  },
+  // Redesign: own group for the principles page (2026-10-02).
+  'burgerMenu.principles': {
+    en: 'Principles',
+    de: 'Prinzipien'
   },
   'burgerMenu.analyticsAgent': {
     en: 'Analytics Agent',
@@ -2622,15 +2671,370 @@ const translations: Translations = {
   'burgerMenu.whatsNew.desc': {
     en: 'Latest product updates',
     de: 'Neueste Produkt-Updates'
+  },
+
+  // ---------------------------------------------------------------- //
+  // Lavender page (new design). "Separate the signal from the noise."
+  // is the brand headline and stays English in both languages.
+  // ---------------------------------------------------------------- //
+  // \n is the desktop line break (rendered with whitespace-pre-line);
+  // compact viewports collapse it to a space.
+  'lavender.hero.headline': {
+    en: 'Separate the signal\nfrom the noise.',
+    de: 'Separate the signal\nfrom the noise.'
+  },
+  'lavender.hero.subline': {
+    en: 'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
+    de: 'Mit uns bekommen Teams den Überblick: So werden verstreute Daten zu klaren Entscheidungen, KI zu Produkten und Automatisierung liefert zuverlässige Ergebnisse.'
+  },
+  'lavender.hero.seeServices': {
+    en: 'See our services',
+    de: 'Unsere Leistungen ansehen'
+  },
+  'lavender.statement': {
+    en: 'We help ambitious teams turn data and AI into real business outcomes.',
+    de: 'Wir verwandeln Daten und KI in echte Geschäftsergebnisse – für sichtbare Erfolge.'
+  },
+  'lavender.services.title': {
+    en: 'Our Services',
+    de: 'Unsere Leistungen'
+  },
+
+  // Services — Data
+  'lavender.services.data.title': { en: 'Data', de: 'Daten' },
+  'lavender.services.data.strategy.label': { en: 'Data Strategy', de: 'Datenstrategie' },
+  'lavender.services.data.strategy.desc': {
+    en: 'Build a clear data foundation: assess sources, prioritize use cases, and align teams on outcomes.',
+    de: 'Ein klares Datenfundament schaffen: Quellen bewerten, Use Cases priorisieren und Teams auf gemeinsame Ziele ausrichten.'
+  },
+  'lavender.services.data.engineering.label': { en: 'Data Engineering', de: 'Data Engineering' },
+  'lavender.services.data.engineering.desc': {
+    en: 'Reliable pipelines, governed warehouses, and the plumbing that makes analytics and AI dependable.',
+    de: 'Zuverlässige Pipelines, governte Data Warehouses und die Infrastruktur, die Analytics und KI verlässlich macht.'
+  },
+  'lavender.services.data.analytics.label': { en: 'Analytics', de: 'Analytics' },
+  'lavender.services.data.analytics.desc': {
+    en: 'Turn raw events into decision-grade metrics: instrumentation, modelling, and trustworthy reporting.',
+    de: 'Aus Rohdaten entscheidungsreife Kennzahlen machen: Tracking, Modellierung und belastbares Reporting.'
+  },
+  'lavender.services.data.visualization.label': { en: 'Visualization', de: 'Visualisierung' },
+  'lavender.services.data.visualization.desc': {
+    en: 'Self-explanatory dashboards for executives, operators, and analysts alike.',
+    de: 'Selbsterklärende Dashboards – für Führungskräfte, Fachbereiche und Analysten gleichermaßen.'
+  },
+
+  // Services — AI
+  'lavender.services.ai.title': { en: 'AI', de: 'KI' },
+  'lavender.services.ai.strategy.label': { en: 'AI Strategy', de: 'KI-Strategie' },
+  'lavender.services.ai.strategy.desc': {
+    en: 'Identify where AI makes the difference and design the path from quick wins to durable capability.',
+    de: 'Erkennen, wo KI den Unterschied macht – und den Weg von schnellen Erfolgen zu dauerhafter Leistungsfähigkeit gestalten.'
+  },
+  'lavender.services.ai.genai.label': { en: 'Generative AI', de: 'Generative KI' },
+  'lavender.services.ai.genai.desc': {
+    en: 'Ship production-grade GenAI features with the safety, evaluation, and ops to back them.',
+    de: 'Produktionsreife GenAI-Funktionen ausliefern – mit der nötigen Sicherheit, Evaluierung und dem Betrieb dahinter.'
+  },
+  'lavender.services.ai.agentic.label': { en: 'Agentic Systems', de: 'Agentische Systeme' },
+  'lavender.services.ai.agentic.desc': {
+    en: 'Multi-step agents that take action with your tools, data, and workflows. Always by keeping humans in the lead.',
+    de: 'Mehrstufige Agenten, die mit deinen Tools, Daten und Workflows handeln – stets unter menschlicher Führung.'
+  },
+  'lavender.services.ai.llm.label': { en: 'LLM Integration', de: 'LLM-Integration' },
+  'lavender.services.ai.llm.desc': {
+    en: 'Integrate the right model into the right surface: assistants, copilots, and end-to-end automations, tailored to your needs.',
+    de: 'Das richtige Modell an der richtigen Stelle integrieren: Assistenten, Copilots und End-to-End-Automatisierungen, zugeschnitten auf deinen Bedarf.'
+  },
+
+  // Services — Workshops
+  'lavender.services.workshops.title': { en: 'Workshops', de: 'Workshops' },
+  'lavender.services.workshops.ai.label': { en: 'AI Workshops', de: 'KI-Workshops' },
+  'lavender.services.workshops.ai.desc': {
+    en: 'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
+    de: 'Ein fokussierter Tag praktisches Prototyping. Dein Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.'
+  },
+  'lavender.services.workshops.enablement.label': { en: 'Team Enablement', de: 'Team-Enablement' },
+  'lavender.services.workshops.enablement.desc': {
+    en: 'Practical skill-building so your team can build, evaluate, and operate AI products themselves.',
+    de: 'Praxisnaher Kompetenzaufbau, damit dein Team KI-Produkte selbst entwickeln, bewerten und betreiben kann.'
+  },
+  'lavender.services.workshops.briefings.label': { en: 'Executive Briefings', de: 'Executive Briefings' },
+  'lavender.services.workshops.briefings.desc': {
+    en: "A clear-eyed look at where AI changes your business for the better and where it won't.",
+    de: 'Ein nüchterner Blick darauf, wo KI dein Geschäft wirklich voranbringt – und wo nicht.'
+  },
+  'lavender.services.workshops.trainings.label': { en: 'Hands-on Trainings', de: 'Hands-on-Trainings' },
+  'lavender.services.workshops.trainings.desc': {
+    en: 'Practice over theory: modular training on data, GenAI, and agentic systems.',
+    de: 'Praxis vor Theorie: modulare Trainings zu Daten, GenAI und agentischen Systemen.'
+  },
+
+  // Products / highlight
+  'lavender.products.featuredEyebrow': {
+    en: 'Featured Product',
+    de: 'Empfohlenes Produkt'
+  },
+  'lavender.products.eyebrow': { en: 'Product', de: 'Produkt' },
+  // Shared by the redesigned product pages
+  'lavender.products.moreTitle': { en: 'Products & tools', de: 'Produkte & Tools' },
+  'lavender.common.breadcrumb': { en: 'Breadcrumb', de: 'Brotkrumen-Navigation' },
+  'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
+  'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
+  'lavender.common.close': { en: 'Close', de: 'Schließen' },
+  'lavender.common.moreInfo': { en: 'More information', de: 'Mehr Informationen' },
+  // ConsultModal ("Book your initial consultation"), 2026-10-02.
+  'lavender.consult.topic': { en: 'Topic', de: 'Thema' },
+  'lavender.icu.anchor.statusQuo': { en: 'Status quo', de: 'Status quo' },
+  'lavender.icu.anchor.benefits': { en: 'Benefits', de: 'Vorteile' },
+  'lavender.icu.anchor.more': { en: 'More about ICU', de: 'Mehr über ICU' },
+  'lavender.icu.anchor.faq': { en: 'FAQ', de: 'FAQ' },
+  'lavender.icu.anchor.contact': { en: 'Contact', de: 'Kontakt' },
+  // Alt texts: EN as hard-coded on the live page, DE per docs/i18n-luecken.md §3.
+  'lavender.icu.layersAlt': { en: 'From overview to every detail', de: 'Vom Überblick bis ins Detail' },
+  'lavender.icu.agentAlt': { en: 'iCU Agent chat interface', de: 'Chat-Oberfläche des ICU-Agenten' },
+  // Thank-you and 404 pages — hard-coded on the live site; DE in "du" and the
+  // 404 DE draft from docs/i18n-luecken.md §9, as in Figma.
+  'thankYou.title': { en: 'Thank you!', de: 'Vielen Dank!' },
+  'thankYou.message': {
+    en: 'Your message has been sent successfully. We will get back to you as soon as possible.',
+    de: 'Deine Nachricht wurde erfolgreich gesendet. Wir werden uns schnellstmöglich bei dir melden.'
+  },
+  'thankYou.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  'notFound.title': { en: '404\nPage not found', de: '404\nSeite nicht gefunden' },
+  'notFound.message': {
+    en: "The page you are looking for doesn't exist or has been moved.",
+    de: 'Die Seite, die du suchst, existiert nicht oder wurde verschoben.'
+  },
+  'notFound.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  // Shell: skip link and the LinkedIn icon link (live hard-coded in English).
+  'lavender.common.skipToContent': { en: 'Skip to content', de: 'Zum Inhalt springen' },
+  'lavender.common.linkedin': { en: 'iCompetence on LinkedIn', de: 'iCompetence auf LinkedIn' },
+  // Privacy policy page — new in the redesign (live, the privacy text sits on
+  // the imprint page); title as in Figma. The soft hyphen breaks the word where
+  // Figma does once it is wider than a phone at display size.
+  'privacyPolicy.title': { en: 'Privacy policy', de: 'Datenschutz\u00ADerklärung' },
+  // Privacy-led AI — the live page is hard-coded English; DE = drafts from
+  // docs/i18n-luecken.md §1 (as in Figma), EN with US spelling and sentence case.
+  'privacy.hero.title': { en: 'Privacy-led AI', de: 'Privacy-led AI' },
+  'privacy.hero.subline': { en: 'Intelligence without exposure', de: 'Intelligenz ohne Datenpreisgabe' },
+  'privacy.intro.line1': { en: 'AI is ready. Your data is not.', de: 'KI ist bereit. Deine Daten sind es nicht.' },
+  'privacy.intro.text': {
+    en: 'AI is becoming a fundamental driver of efficiency and competitiveness. But every organization working with sensitive data faces the same barrier: AI cannot go where the data lives \u2014 and the data cannot go where the AI runs.',
+    de: 'KI wird zum grundlegenden Treiber für Effizienz und Wettbewerbsfähigkeit. Doch jede Organisation, die mit sensiblen Daten arbeitet, stößt auf dieselbe Hürde: Die KI kann nicht dorthin, wo die Daten liegen \u2013 und die Daten können nicht dorthin, wo die KI läuft.'
+  },
+  'privacy.intro.solution': { en: 'The solution: Bring AI to your data.', de: 'Die Lösung: Bring die KI zu deinen Daten.' },
+  'privacy.guidance.title': {
+    en: "If you're unsure where to start, we're here to guide you.",
+    de: 'Wenn du unsicher bist, wo du anfangen sollst, begleiten wir dich.'
+  },
+  'privacy.guidance.subline': {
+    en: "AI in sensitive environments raises questions. We help you understand what's possible, what's safe, and what creates real value in your organization.",
+    de: 'KI in sensiblen Umgebungen wirft Fragen auf. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was in deiner Organisation echten Mehrwert schafft.'
+  },
+  'privacy.guidance.step1.label': { en: 'Clarity', de: 'Klarheit' },
+  'privacy.guidance.step1.desc': {
+    en: "AI raises big questions \u2014 and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty.",
+    de: 'KI wirft große Fragen auf \u2013 und Klarheit ist der Anfang von allem. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was wirklich Wert schafft, damit du ohne Unsicherheit vorankommst.'
+  },
+  'privacy.guidance.step2.label': { en: 'Responsibility', de: 'Verantwortung' },
+  'privacy.guidance.step2.desc': {
+    en: 'AI should serve your organization, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees.',
+    de: 'KI soll deiner Organisation dienen, nicht ihre Prinzipien untergraben. Wir gestalten interne KI-Systeme, die deine Governance, deine Datengrenzen und deine Verantwortung gegenüber Kundinnen, Kunden und Mitarbeitenden respektieren.'
+  },
+  'privacy.guidance.step3.label': { en: 'Transparency', de: 'Transparenz' },
+  'privacy.guidance.step3.desc': {
+    en: 'Understanding how AI works is essential \u2014 especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why.',
+    de: 'Zu verstehen, wie KI funktioniert, ist entscheidend \u2013 gerade in sensiblen Umgebungen. Wir machen Architekturen, Datenflüsse und Entscheidungswege sichtbar, damit du jederzeit weißt, was wo und warum geschieht.'
+  },
+  'privacy.guidance.step4.label': { en: 'Security', de: 'Sicherheit' },
+  'privacy.guidance.step4.desc': {
+    en: 'Your data never leaves your environment. We implement AI inside your infrastructure \u2014 secure, compliant, auditable \u2014 giving you the confidence and control you need to innovate safely.',
+    de: 'Deine Daten verlassen niemals deine Umgebung. Wir implementieren KI in deiner Infrastruktur \u2013 sicher, konform, prüfbar \u2013 und geben dir das Vertrauen und die Kontrolle, die du für sichere Innovation brauchst.'
+  },
+  // AI Workshop — the live page is hard-coded German; these keys carry the
+  // DE copy (in "du") and the EN drafts from docs/i18n-luecken.md §2 as in Figma.
+  'workshop.hero.title': { en: 'The AI Workshop', de: 'Der KI-Workshop' },
+  'workshop.hero.subline': { en: 'An AI boost for brands', de: 'KI-Boost für Marken' },
+  'workshop.anchor.about': { en: 'About the workshop', de: 'Über den Workshop' },
+  'workshop.anchor.experts': { en: 'Experts', de: 'Experten' },
+  'workshop.anchor.apply': { en: 'Apply now', de: 'Jetzt bewerben' },
+  'workshop.anchor.contact': { en: 'Contact', de: 'Kontakt' },
+  'workshop.intro.run1': {
+    en: 'From the makers of \u201ciKnow\u201d, the first self-learning, privacy-compliant German data platform, and \u201cIntelligentic Search\u201d.',
+    de: 'Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform \u201eiKnow" und der \u201eIntelligentic Search".'
+  },
+  'workshop.intro.run2': {
+    en: 'In the race for the top spots in the market, AI plays a central role. But how do you use it safely? What are the prerequisites \u2013 including data volume and quality? What visibility, benefits and ROI can you expect? We answer the key questions for brands and marketers.',
+    de: 'Im Rennen um die vorderen Plätze auf dem Markt spielt KI eine zentrale Rolle. Aber wie sie sicher nutzen? Was sind die Voraussetzungen - auch hinsichtlich der Datenmenge und -qualität? Welche Sichtbarkeit, welchen Nutzen und ROI kann ich erwarten? Wir klären die zentralen Fragen für Marken und Marketers.'
+  },
+  'workshop.intro.run3': {
+    en: 'The workshop that gives you the big picture, from experts at the forefront of AI development in Germany. Insights and room for your questions.',
+    de: 'Der Workshop, der dir einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI Entwicklung mitwirken. Einblicke und Platz für deine Fragen.'
+  },
+  'workshop.intro.run4': { en: 'Free. Limited seats!', de: 'Gratis. Nur wenige Plätze!' },
+  'workshop.experts.title': { en: 'Our experts', de: 'Unsere Experten' },
+  'workshop.experts.photoCredit': { en: 'Source: Frank Krems', de: 'Foto: Frank Krems' },
+  'workshop.form.title': { en: 'Apply now', de: 'Jetzt bewerben' },
+  'workshop.form.intro': {
+    en: 'Secure your seat at the AI Workshop.',
+    de: 'Sichere dir deinen Platz beim KI-Workshop.'
+  },
+  'workshop.form.name': { en: 'Name', de: 'Name' },
+  'workshop.form.email': { en: 'Email', de: 'E-Mail' },
+  'workshop.form.phone': { en: 'Phone (optional)', de: 'Telefon (optional)' },
+  'workshop.form.position': { en: 'Position', de: 'Position' },
+  'workshop.form.company': { en: 'Company', de: 'Firma' },
+  'workshop.form.dates': { en: 'Preferred date(s)', de: 'Bevorzugte(r) Termin(e)' },
+  'workshop.form.dateCustom': { en: 'Book an individual date', de: 'Individuellen Termin buchen' },
+  'workshop.form.submit': { en: 'Submit application', de: 'Bewerbung absenden' },
+  'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
+  'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
+  'lavender.products.empco.desc': {
+    en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',
+    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
+  },
+  'lavender.products.empco.cta': {
+    en: 'Explore EmpCo Audit',
+    de: 'EmpCo Audit entdecken'
+  },
+  'lavender.products.empco.imageAlt': {
+    en: 'EmpCo Audit — automated audit of the sustainability claims on your website',
+    de: 'EmpCo Audit — automatisierter Audit der Nachhaltigkeitsaussagen auf deiner Website'
+  },
+  'lavender.products.iknow.desc': {
+    en: 'The central knowledge platform for enterprises. AI-based, secure, local – turn scattered information into a structured knowledge base.',
+    de: 'Die zentrale Wissensplattform für Unternehmen. KI-basiert, sicher, lokal – verwandle verteilte Informationen in eine strukturierte Wissensgrundlage.'
+  },
+  'lavender.products.iknow.imageAlt': {
+    en: 'iKnow — AI knowledge platform interface',
+    de: 'iKnow — Oberfläche der KI-Wissensplattform'
+  },
+  'lavender.products.analyticsAgent.desc': {
+    en: 'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualizations and insights at the touch of a button.',
+    de: 'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.'
+  },
+  'lavender.products.analyticsAgent.imageAlt': {
+    en: 'Analytics Agent — conversational data analytics interface',
+    de: 'Analytics Agent — Oberfläche für dialogbasierte Datenanalyse'
+  },
+
+  // Testimonials
+  'lavender.testimonials.title': {
+    en: 'What our clients say',
+    de: 'Was unsere Kunden sagen'
+  },
+  'lavender.testimonials.prev': { en: 'Previous testimonial', de: 'Vorheriges Zitat' },
+  'lavender.testimonials.next': { en: 'Next testimonial', de: 'Nächstes Zitat' },
+  'lavender.testimonials.kosyrev.quote': {
+    en: '“iCompetence supported us professionally & efficiently in setting up our analytics infrastructure. Needs-based, competent consulting was followed by a fast & reliable implementation, with the corresponding reporting. In iCompetence we have a partner at eye level, with whom we get to work both operationally and strategically.”',
+    de: '“iCompetence hat uns professionell & effizient beim Setup unserer Analytics Infrastruktur unterstützt. Auf eine bedarfsgerechte & kompetente Beratung folgte eine schnelle & zuverlässige Umsetzung der Maßnahmen mit entsprechendem Reporting. Mit iCompetence haben wir einen Partner auf Augenhöhe, mit dem wir sowohl operativ als auch strategisch zusammenarbeiten dürfen.”'
+  },
+  'lavender.testimonials.kosyrev.role': {
+    en: 'Head of E-Commerce & Online Marketing, Lucky Bike.de GmbH',
+    de: 'Leitung E-Commerce & Online-Marketing, Lucky Bike.de GmbH'
+  },
+  'lavender.testimonials.schneider.quote': {
+    en: '“iCompetence played a decisive role in our migration to Google Analytics 360: from conception through implementation to training. It was of great value to us that the team was familiar with the widest range of web analytics and tag management tool providers. We have always known iCompetence as an independent expert and can only recommend the company as a competent sparring partner. At the same time, we look forward to continuing to work together!”',
+    de: '“iCompetence hat uns bei der Migration zu Google Analytics 360 entscheidend unterstützt: von der Konzeption über die Implementierung bis hin zu Trainings. Für uns war es von großem Nutzen, dass sich das Team mit den unterschiedlichsten Webanalyse- und Tag Management-Toolanbietern auskannte. Wir haben iCompetence stets als unabhängigen Experten kennengelernt und können das Unternehmen als kompetenten Sparringpartner nur weiterempfehlen. Gleichzeitig freuen wir uns auf die weitere Zusammenarbeit!”'
+  },
+  'lavender.testimonials.schneider.role': {
+    en: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA',
+    de: 'Head of Web Analytics, Tracking & Targeting, CTS EVENTIM AG & Co. KGaA'
+  },
+  'lavender.testimonials.leparoux.quote': {
+    en: '“iCompetence engaged intensively with our requirements as a financial institution and supported us as a professional and technical advisor in implementing a tailored solution. This laid the foundation for using our analytics data in a way that supports and streamlines decision-making across many levels of the company. Thank you for what is by now a long-standing partnership at eye level.”',
+    de: '“iCompetence hat sich intensiv mit unseren Anforderungen als Finanzinstitut auseinandergesetzt und uns bei der Umsetzung einer individuellen Lösung als fachlicher und technischer Berater unterstützt. Dabei wurde die Basis für eine Nutzung unserer Analytics-Daten geschaffen, die auf vielen Ebenen des Unternehmens den Entscheidungsprozess unterstützt und effizienter macht. Vielen Dank für eine inzwischen langjährige Partnerschaft auf Augenhöhe.”'
+  },
+  'lavender.testimonials.leparoux.role': {
+    en: 'Head of User Experience Management, comdirect bank AG',
+    de: 'Head of User Experience Management, comdirect bank AG'
+  },
+  'lavender.testimonials.devries.quote': {
+    en: '“For years, I have relied on iCompetence for operational and, above all, strategic analytics projects. Their profound expertise and highly focused, professional project management impress me time and again!”',
+    de: '“Seit Jahren setze ich bei Fragen operativer und vor allem auch strategischer Analytics Projekte auf iCompetence. Die profunde Kompetenz und das sehr zielstrebige und professionelle Projektmanagement überzeugen mich immer wieder!”'
+  },
+  'lavender.testimonials.devries.role': {
+    en: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH',
+    de: 'Managing Director & Partner, pepXpress Touristik & Marketing GmbH'
+  },
+  'lavender.testimonials.loewe.quote': {
+    en: '“I greatly value the iCompetence team for their expertise & know-how as well as their strategic foresight. iCompetence not only supports us with competent advice on all digital questions, but is also a reliable partner in achieving our strategic goals.”',
+    de: '“Ich schätze das Team von iCompetence hinsichtlich Ihrer Expertise & Fachwissen, sowie strategischen Weitblicks sehr. iCompetence unterstützt uns nicht nur mit Ihrer kompetenten Beratung bei allen digitalen Fragestellungen, sondern begegnet uns auch als verlässlicher Partner in der Erreichung unserer strategischen Ziele.”'
+  },
+  'lavender.testimonials.loewe.role': {
+    en: 'Team Lead Online Marketing, Küche&Co GmbH – a member of the otto group',
+    de: 'Teamleiter Online Marketing, Küche&Co GmbH – a member of the otto group'
+  },
+  'lavender.testimonials.kroesser.quote': {
+    en: '“Many thanks for the excellent, collaborative partnership. Over the past two years you have definitely helped us take the next step each time and freed us from many “pain points” in day-to-day operations as well. We look forward to more joint projects.”',
+    de: '“Vielen Dank für die sehr gute partnerschaftliche Zusammenarbeit, ihr habt uns in den letzten zwei Jahren definitiv geholfen, den jeweils nächsten Schritt zu machen und uns auch im operativen Geschäft von vielen „pain points“ befreit. Wir freuen uns auf weitere gemeinsame Projekte.”'
+  },
+  'lavender.testimonials.kroesser.role': {
+    en: 'Director Media & Analytics, Career Partner GmbH',
+    de: 'Director Media & Analytics, Career Partner GmbH'
+  },
+  'lavender.testimonials.buettner.quote': {
+    en: '“iCompetence has been an important partner for us for years, both on strategic questions and for the operational implementation around Digital Intelligence – from data collection and preparation to the interpretation and visualization of data. The personable relationship and an always open ear greatly enrich the professional collaboration and make it fun.”',
+    de: '“iCompetence ist seit Jahren ein wichtiger Partner für uns, sowohl in strategischen Fragen als auch für die operative Umsetzung rund um Digital Intelligence – von der Erhebung über die Aufbereitung bis zur Interpretation und Visualisierung von Daten. Der familiäre Umgang und ein immer offenes Ohr bereichern die professionelle Zusammenarbeit sehr und machen Spaß.”'
+  },
+  'lavender.testimonials.buettner.role': {
+    en: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group',
+    de: 'Senior Data Analyst Digital Customer Interaction, Deutsche Post DHL Group'
+  },
+
+  // Process
+  'lavender.process.title': {
+    en: 'This is how we work',
+    de: 'So arbeiten wir'
+  },
+  'lavender.process.ideation.title': { en: 'Ideation Workshop', de: 'Ideation Workshop' },
+  'lavender.process.ideation.desc': {
+    en: 'With you, we identify the problem to be solved. In a focused workshop, we map your goals, constraints, and data. Then walk away with a sharp use case and a clear next step.',
+    de: 'Gemeinsam mit dir identifizieren wir das zu lösende Problem. In einem fokussierten Workshop erfassen wir deine Ziele, Rahmenbedingungen und Daten – und gehen mit einem klaren Use Case und einem konkreten nächsten Schritt heraus.'
+  },
+  'lavender.process.poc.title': { en: 'Proof of Concept', de: 'Proof of Concept' },
+  'lavender.process.poc.desc': {
+    en: 'We build a tangible prototype together – focused, fast, and grounded in your real data. Within weeks, you see whether the idea holds up in practice, what to refine, and what to scale.',
+    de: 'Gemeinsam bauen wir einen greifbaren Prototyp – fokussiert, schnell und auf Basis deiner echten Daten. Innerhalb weniger Wochen siehst du, ob die Idee in der Praxis trägt, was zu verfeinern und was zu skalieren ist.'
+  },
+  'lavender.process.rollout.title': { en: 'Rollout', de: 'Rollout' },
+  'lavender.process.rollout.desc': {
+    en: 'We harden the proof into a production-ready system, integrated, monitored, and owned by your team. Enablement, documentation, and handover are part of the package.',
+    de: 'Wir überführen den Proof of Concept in ein produktionsreifes System – integriert, überwacht und in der Hand deines Teams. Enablement, Dokumentation und Übergabe gehören selbstverständlich dazu.'
+  },
+
+  // Privacy-led + closing CTA
+  'lavender.privacyLed.title': {
+    en: 'Privacy-Led Setups',
+    de: 'Privacy-Led-Setups'
+  },
+  'lavender.privacyLed.desc': {
+    en: 'Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you.',
+    de: 'Warum solltest du deine Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält deine Daten – und deinen Wettbewerbsvorteil – genau dort, wo sie hingehören: bei dir.'
+  },
+  'lavender.privacyLed.cta': {
+    en: 'Explore privacy-led',
+    de: 'Privacy-Led entdecken'
+  },
+  'lavender.cta.heading': {
+    en: 'Ready to turn ambition into outcomes?',
+    de: 'Bereit, Anspruch in Ergebnisse zu verwandeln?'
   }
 };
 
 export const LanguageProvider = ({
   children,
   initialLanguage,
+  variant,
 }: {
   children: ReactNode;
   initialLanguage?: Language;
+  /**
+   * 'lavender' = the redesigned pages: copy overrides from
+   * lavender-overrides.ts win over the shared strings, so the live pages keep
+   * their wording while both designs exist side by side.
+   */
+  variant?: 'lavender';
 }) => {
   // When the route provides a language (URL is /de/… or /en/…) it is the single
   // source of truth — this keeps the server-rendered (statically exported) HTML
@@ -2650,6 +3054,15 @@ export const LanguageProvider = ({
     }
   }, [initialLanguage]);
 
+  // Dev-only: re-render when the text jig changes an override.
+  const [, setDevTextVersion] = useState(0);
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+    const bump = () => setDevTextVersion((v) => v + 1);
+    window.addEventListener('icdev:text', bump);
+    return () => window.removeEventListener('icdev:text', bump);
+  }, []);
+
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
     if (typeof window !== 'undefined') {
@@ -2658,6 +3071,19 @@ export const LanguageProvider = ({
   };
 
   const t = (key: string): string => {
+    if (process.env.NODE_ENV !== 'production') {
+      // Dev-only text jig: the design/text panel writes overrides here so copy
+      // can be edited live on the page. Statically removed in production.
+      const dev = (globalThis as Record<string, unknown>).__ICDEV_TEXT__ as
+        | Record<string, Record<string, string>>
+        | undefined;
+      const override = dev?.[language]?.[key];
+      if (override !== undefined) return override;
+    }
+    if (variant === 'lavender') {
+      const override = lavenderOverrides[key]?.[language];
+      if (override !== undefined) return override;
+    }
     return translations[key]?.[language] || key;
   };
 

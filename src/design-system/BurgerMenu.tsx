@@ -1,0 +1,220 @@
+'use client';
+
+import { Fragment, useEffect, useId, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { cn } from '@/components/ui/utils';
+import { LanguageToggle } from './LanguageToggle';
+import { LinkedInGlyph } from './icons';
+import { LINKEDIN_URL, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS } from './nav-links';
+import { siteHref } from './routes';
+import { NAV_TONE, useNavSurface } from './nav-surface';
+import { DURATION, EASE, useMotionPrefs } from './motion';
+
+/**
+ * Burger menu: Home · What's new, the "Products & Tools" grid, "Principles".
+ * `trigger="hover"` = desktop mega-menu, `trigger="tap"` = touch sheet.
+ * Width/offsets are measured from the nav pill, so they stay inline styles.
+ *
+ * A disclosure (button + panel), not an ARIA menu: Enter/Space toggle it in
+ * both modes, Escape closes it and returns focus to the button, tabbing out
+ * or clicking elsewhere closes it too.
+ */
+export function BurgerMenu({
+  iconSize,
+  wide = false,
+  pillWidth = 0,
+  pillPaddingX = 0,
+  pillPaddingY = 0,
+  trigger = 'hover',
+  columns = 1,
+}: {
+  iconSize: number;
+  wide?: boolean;
+  pillWidth?: number;
+  pillPaddingX?: number;
+  pillPaddingY?: number;
+  trigger?: 'hover' | 'tap';
+  columns?: number;
+}) {
+  const { t, language } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const prefs = useMotionPrefs();
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelId = useId();
+  const tap = trigger === 'tap';
+  const tone = NAV_TONE[useNavSurface()];
+  const dropdownTopOffset = pillPaddingY + 24;
+  const panelWidth = pillWidth || (wide ? 1100 : 264);
+  const closeOnNav = tap ? () => setOpen(false) : undefined;
+
+  // Alphabetical by the label in the active language (DE and EN order differ).
+  const sortedLinks = [...PRODUCT_LINKS].sort((a, b) =>
+    t(a.labelKey).localeCompare(t(b.labelKey), language),
+  );
+
+  // Outside click / Escape close it in both modes (hover mode also closes on
+  // mouse-leave) — a keyboard user opens the desktop menu without hovering.
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setOpen(false);
+      buttonRef.current?.focus();
+    };
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  return (
+    <div
+      ref={rootRef}
+      onMouseEnter={tap ? undefined : () => setOpen(true)}
+      onMouseLeave={tap ? undefined : () => setOpen(false)}
+      onBlur={(e) => {
+        if (!rootRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
+      className="relative inline-flex items-center"
+    >
+      <button
+        ref={buttonRef}
+        type="button"
+        aria-label={t('topNav.menu')}
+        aria-expanded={open}
+        aria-controls={panelId}
+        // Hover mode: a mouse click only opens (hover already did); Enter/Space
+        // (detail 0) toggle, so the desktop menu works without a mouse.
+        onClick={(e) => setOpen((p) => (tap || e.detail === 0 ? !p : true))}
+        className={cn(
+          'relative inline-flex cursor-pointer items-center border-0 bg-transparent p-0',
+          tone.text,
+          // Touch: 44×44 hit area around the 22/24 icon without moving it (Figma).
+          tap &&
+            "before:absolute before:left-1/2 before:top-1/2 before:h-11 before:w-11 before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
+        )}
+      >
+        <Menu size={iconSize} strokeWidth={2} />
+      </button>
+
+      {/* Hover bridge so the menu doesn't close in the gap below the pill. */}
+      {!tap && open && (
+        <div
+          aria-hidden
+          className="absolute top-full bg-transparent"
+          style={{ right: -pillPaddingX, width: panelWidth, height: dropdownTopOffset }}
+        />
+      )}
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id={panelId}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: prefs.d(DURATION.fast), ease: EASE.out }}
+            className={cn(
+              'absolute flex flex-col shadow-[0_10px_30px_rgba(11,34,49,0.18)]',
+              tone.pill,
+              wide ? 'gap-6 rounded-card px-12 py-10' : 'gap-3 rounded-card-sm px-6 py-5',
+              tap && 'max-h-[calc(100vh-140px)] max-w-[100vw] overflow-y-auto',
+            )}
+            style={{
+              top: `calc(100% + ${dropdownTopOffset}px)`,
+              right: -pillPaddingX,
+              width: panelWidth,
+            }}
+          >
+            {/* Home left, What's new right — the same level (Dennis, 2026-10-02). */}
+            <div className={cn('flex items-center justify-between gap-6', !wide && 'py-1')}>
+              {[{ labelKey: 'burgerMenu.home', href: '/' }, NEWS_LINK].map(({ labelKey, href }) => (
+                <a
+                  key={href}
+                  href={siteHref(language, href)}
+                  onClick={closeOnNav}
+                  className={cn(
+                    'font-brand font-medium no-underline',
+                    tone.text,
+                    wide ? 'text-body' : 'text-[15px]',
+                  )}
+                >
+                  {t(labelKey)}
+                </a>
+              ))}
+            </div>
+
+            {[
+              { labelKey: 'burgerMenu.products', links: sortedLinks },
+              { labelKey: 'burgerMenu.principles', links: PRINCIPLE_LINKS },
+            ].map((group) => (
+              <Fragment key={group.labelKey}>
+                <div className={cn('h-px', tone.divider, !wide && 'my-1')} />
+
+                <span
+                  className={cn(
+                    'font-brand font-medium uppercase tracking-[1px]',
+                    tone.muted,
+                    wide ? 'text-[12px]' : 'text-[11px]',
+                  )}
+                >
+                  {t(group.labelKey)}
+                </span>
+
+                <div
+                  className={cn('grid', wide ? 'gap-x-8 gap-y-4' : 'gap-x-6')}
+                  style={{
+                    gridTemplateColumns: `repeat(${wide ? 4 : columns}, 1fr)`,
+                    rowGap: wide ? undefined : columns > 1 ? 14 : 10,
+                  }}
+                >
+                  {group.links.map(({ labelKey, href }) => (
+                    <a
+                      key={href}
+                      href={siteHref(language, href)}
+                      onClick={closeOnNav}
+                      className={cn(
+                        'font-brand font-medium no-underline',
+                        tone.text,
+                        wide ? 'text-[18px]' : 'text-[15px]',
+                      )}
+                    >
+                      {t(labelKey)}
+                    </a>
+                  ))}
+                </div>
+              </Fragment>
+            ))}
+
+            <div className={cn('h-px', tone.divider, !wide && 'my-1')} />
+
+            <div className={cn('flex items-center justify-between', wide ? 'gap-6' : 'gap-3')}>
+              <LanguageToggle />
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('lavender.common.linkedin')}
+                className={cn(
+                  'inline-flex items-center justify-center rounded-pill no-underline',
+                  tone.chip,
+                  wide ? 'h-9 w-9' : 'h-8 w-8',
+                )}
+              >
+                <LinkedInGlyph size={wide ? 18 : 16} />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

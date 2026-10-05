@@ -1,0 +1,137 @@
+'use client';
+
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Minus, Plus } from 'lucide-react';
+import { cn } from '@/components/ui/utils';
+import { Section } from './Section';
+import { DURATION, EASE, useMotionPrefs } from './motion';
+
+export type ProcessStep = {
+  /** Step number, e.g. "01". */
+  number: string;
+  title: string;
+  description: string;
+  /** Optional visual shown next to the description when expanded. */
+  image?: string;
+};
+
+export type ProcessAccordionProps = {
+  steps: readonly ProcessStep[];
+  title: string;
+  /** Optional intro below the title. */
+  subline?: string;
+  id?: string;
+  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when AnchorTabs point here. */
+  className?: string;
+  /** Index of the step expanded on first render (default: the second one). */
+  defaultExpanded?: number | null;
+};
+
+/** Numbered process steps as an accordion. */
+export function ProcessAccordion({
+  steps,
+  title,
+  subline,
+  id = 'process',
+  className,
+  defaultExpanded = 1,
+}: ProcessAccordionProps) {
+  const [expanded, setExpanded] = useState<number | null>(defaultExpanded);
+
+  return (
+    <Section dsName="ProcessAccordion" id={id} className={className} innerClassName="flex flex-col gap-8 md:gap-10 lg:gap-12">
+      <div className="flex w-full flex-col gap-6 md:gap-8">
+        <h2 className="lav-h1 w-full text-lav-navy">
+          {title}
+        </h2>
+        {subline && (
+          <p className="lav-lead max-w-[820px] font-normal text-lav-navy/80">
+            {subline}
+          </p>
+        )}
+      </div>
+
+      <div className="flex w-full flex-col">
+        {steps.map((step, idx) => (
+          <ProcessRow
+            key={step.number}
+            step={step}
+            isLast={idx === steps.length - 1}
+            expanded={expanded === idx}
+            onToggle={() => setExpanded((e) => (e === idx ? null : idx))}
+          />
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function ProcessRow({
+  step,
+  isLast,
+  expanded,
+  onToggle,
+}: {
+  step: ProcessStep;
+  isLast: boolean;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const Icon = expanded ? Minus : Plus;
+  const prefs = useMotionPrefs();
+  return (
+    <div
+      className={cn('flex flex-col border-t border-lav-navy/20', isLast && 'border-b')}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={expanded}
+        className="flex min-h-[71px] w-full cursor-pointer items-center justify-between gap-4 border-0 bg-transparent py-5 text-left md:min-h-[84px] md:py-6 lg:min-h-[104px] lg:py-8"
+      >
+        <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
+          <span className="lav-h2 min-w-10 shrink-0 text-lav-navy/80 md:min-w-11 lg:min-w-14">
+            {step.number}
+          </span>
+          <span className="lav-h2 text-lav-navy">
+            {step.title}
+          </span>
+        </div>
+        <Icon size={24} strokeWidth={2} className="shrink-0 text-lav-navy lg:size-7" />
+      </button>
+
+      {/* Collapsed rows keep their copy in the static HTML for crawlers/LLM bots. */}
+      {!expanded && <p className="sr-only">{step.description}</p>}
+
+      {/* Height + opacity so the step does not teleport in and shove the rest
+          of the list down. Under reduced motion only the fade remains. */}
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: prefs.d(DURATION.base), ease: EASE.out }}
+            className="w-full overflow-hidden"
+          >
+        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-4 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:py-8">
+          <div className="flex flex-1 flex-col gap-4 md:gap-6 md:py-2 md:pl-12 lg:py-4 lg:pl-16">
+            <p className="lav-paragraph font-normal text-lav-navy/80">
+              {step.description}
+            </p>
+          </div>
+          {step.image && (
+            <div
+              className="h-[200px] w-full shrink-0 rounded-card-sm bg-lav-navy bg-contain bg-center bg-no-repeat md:h-[220px] md:w-[320px] lg:h-[280px] lg:w-[420px]"
+              style={{ backgroundImage: `url(${step.image})` }}
+            />
+          )}
+        </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

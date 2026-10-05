@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-interface ServiceData {
+export interface ServiceData {
   name: { en: string; de: string };
   description: { en: string; de: string };
   company: string;
@@ -24,7 +24,7 @@ interface ServiceData {
   maxCookieStorage?: { en: string; de: string };
 }
 
-const servicesData: ServiceData[] = [
+export const servicesData: ServiceData[] = [
   {
     name: { en: 'Google Fonts', de: 'Google Fonts' },
     description: {
@@ -243,7 +243,7 @@ const servicesData: ServiceData[] = [
   }
 ];
 
-const labels = {
+export const labels = {
   services: { en: 'Services', de: 'Services' },
   description: { en: 'Service Description', de: 'Beschreibung des Services' },
   processingCompany: { en: 'Processing Company', de: 'Verarbeitendes Unternehmen' },

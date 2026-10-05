@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+// Live pages: the frozen Tailwind snapshot, exactly as on main. The redesign
+// adds the compiled design system in app/[lang]/lavender/layout.tsx.
 import '../../src/index.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
+import { DevDials } from '@/design-system';
 
 type Lang = 'en' | 'de';
 
@@ -135,8 +138,19 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if (window.location.pathname.endsWith('/imprint') || window.location.pathname.endsWith('/imprint/')) {
+              /* No consent banner over the legal pages: imprint and (redesign) privacy policy. */
+              if (['/imprint', '/imprint/', '/privacy-policy', '/privacy-policy/'].some((p) => window.location.pathname.endsWith(p))) {
                 window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
+              }
+              ${
+                process.env.NODE_ENV === 'production'
+                  ? ''
+                  : `/* Local development only: the consent overlay blocks the page
+                       until it is answered, which makes every dev reload a chore.
+                       This clause is not emitted in production builds. */
+                     if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+                       window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
+                     }`
               }
             `,
           }}
@@ -166,6 +180,8 @@ export default async function RootLayout({
           ></iframe>
         </noscript>
         {children}
+        {/* Dev-only design/copy/migration panel — compiled out of production. */}
+        <DevDials />
       </body>
     </html>
   );

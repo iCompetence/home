@@ -81,7 +81,8 @@ export default async function LavenderPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LavenderHome initialLang={lang} />
+      {/* LanguageProvider comes from ./layout.tsx (shared by all preview pages). */}
+      <LavenderHome />
     </>
   )
 }
