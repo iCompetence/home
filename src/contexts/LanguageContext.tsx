@@ -438,13 +438,22 @@ export const translations: Translations = {
   },
 
   // EmpCo Audit Page
+  'empco.hero.kicker': {
+    en: 'In force since 27 Sep 2026 · Directive (EU) 2024/825',
+    de: 'Gilt seit 27.09.2026 · EU-Richtlinie 2024/825'
+  },
+  // Second line of the H1 (the search phrase the page targets)
   'empco.hero.headline': {
-    en: 'Sustainability that holds up under scrutiny.',
-    de: 'Nachhaltigkeit, die der Prüfung standhält.'
+    en: 'Check your website for greenwashing.',
+    de: 'Website auf Greenwashing prüfen.'
   },
   'empco.hero.subtitle': {
-    en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',
-    de: 'Der automatisierte Audit, der Sie vor EmpCo-Verstößen auf Ihrer Website schützt. Innerhalb weniger Stunden wissen Sie, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
+    en: 'Sustainability that holds up under scrutiny: our AI-powered EmpCo check shows which environmental claims on your website are defensible and which put you at risk. With a verbatim quote, location and legal reference for every finding.',
+    de: 'Nachhaltigkeit, die der Prüfung standhält: Der KI-gestützte EmpCo Check zeigt, welche Umweltaussagen auf Ihrer Website belegbar sind und welche zum Abmahnrisiko werden. Mit Zitat, Fundstelle und Regelverweis für jeden Befund.'
+  },
+  'empco.header.contact': {
+    en: 'Contact us',
+    de: 'Kontakt aufnehmen'
   },
   'empco.hero.ctaPrimary': {
     en: 'Request a free sample page',
@@ -493,12 +502,12 @@ export const translations: Translations = {
 
   // Section 2: Why now
   'empco.why.title': {
-    en: 'Sustainability marketing is becoming a legal obligation.',
-    de: 'Aus Nachhaltigkeitswerbung wird Rechtspflicht.'
+    en: 'Since 27 Sep 2026: environmental claims need evidence.',
+    de: 'Seit 27.09.2026: Umweltaussagen brauchen Belege.'
   },
   'empco.why.p1': {
-    en: 'The EU Green Claims Directive and the Empowering Consumers Directive (EmpCo) are changing what companies are allowed to communicate about sustainability. From September 2026, terms such as "climate-neutral", "sustainable" or "environmentally friendly" must be substantiated. Without proof, companies face cease-and-desist letters under unfair-competition law, fines, and reputational damage.',
-    de: 'Die EU Green Claims Directive und die Empowering Consumers Directive (EmpCo) verändern, was Unternehmen über Nachhaltigkeit kommunizieren dürfen. Begriffe wie „klimaneutral", „nachhaltig" oder „umweltfreundlich" müssen ab September 2026 belegbar sein. Ohne Nachweis drohen Abmahnungen nach UWG, Bußgelder und Reputationsschäden.'
+    en: 'Since 27 September 2026, the Empowering Consumers Directive (EmpCo, Directive (EU) 2024/825) has applied; in Germany it is transposed into the Act against Unfair Competition (UWG). Terms such as “climate-neutral”, “sustainable” or “environmentally friendly” are now only allowed with proof. Without proof, companies face cease-and-desist letters, fines and reputational damage. Greenwashing has become expensive.',
+    de: 'Seit dem 27. September 2026 gilt die Empowering Consumers Directive (EmpCo, Richtlinie (EU) 2024/825), in Deutschland umgesetzt im Gesetz gegen den unlauteren Wettbewerb (UWG). Begriffe wie „klimaneutral“, „nachhaltig“ oder „umweltfreundlich“ sind seitdem nur noch mit Nachweis erlaubt. Ohne Nachweis drohen Abmahnungen nach UWG, Bußgelder und Reputationsschäden. Greenwashing ist teuer geworden.'
   },
   'empco.why.p2': {
     en: 'At the same time, the CSRD is tightening the requirements for non-financial reporting. Statements on your website have to match your ESG reporting. Anyone with gaps stands out — internally, externally, in court.',
@@ -527,14 +536,64 @@ export const translations: Translations = {
     de: 'Der EmpCo Audit ersetzt nicht Ihre Juristen. Er ersetzt die Arbeit davor. Statt sich durch die gesamte Website zu lesen, bekommt Ihr Team eine fertig priorisierte Liste auf den Tisch. Mit jeder kritischen Aussage, jeder Fundstelle, jedem Regelverweis. Die juristische Letztprüfung läuft anschließend gezielt auf den Stellen, die wirklich juristische Bewertung benötigen.'
   },
 
+  // Section 3c: Example finding (fictitious demo data from the tool screenshot)
+  'empco.toolImage.alt': {
+    en: 'EmpCo Audit interface: list of findings with risk levels, verbatim quotes, locations and second review',
+    de: 'Oberfläche des EmpCo Audit: Befundliste mit Risikostufen, Zitaten, Fundstellen und Zweitbewertung'
+  },
+  'empco.example.title': {
+    en: 'What a finding looks like',
+    de: 'So sieht ein Befund aus'
+  },
+  'empco.example.lead': {
+    en: 'An example from our demo website “Grünwald Naturkost”, a fictitious company. Every finding in the report follows this structure.',
+    de: 'Ein Beispiel aus unserer Demo-Website „Grünwald Naturkost“, einem fiktiven Unternehmen. Jeder Befund im Bericht folgt diesem Aufbau.'
+  },
+  'empco.example.quote.label': { en: 'Verbatim quote', de: 'Wörtliches Zitat' },
+  'empco.example.quote.value': {
+    en: '“Our products are 100% climate-neutral. We fully offset every emission from cultivation, production and transport through certified climate protection projects.”',
+    de: '„Unsere Produkte sind zu 100 % klimaneutral. Jede Emission, die bei Anbau, Herstellung und Transport entsteht, gleichen wir vollständig durch zertifizierte Klimaschutzprojekte aus.“'
+  },
+  'empco.example.location.label': { en: 'Location', de: 'Fundstelle' },
+  'empco.example.location.value': {
+    en: '/de/nachhaltigkeit/, section “Unser Versprechen an die Umwelt” (our promise to the environment)',
+    de: '/de/nachhaltigkeit/, Abschnitt „Unser Versprechen an die Umwelt“'
+  },
+  'empco.example.risk.label': { en: 'Risk level', de: 'Risikostufe' },
+  'empco.example.risk.value': { en: 'Level 5 of 5: prohibited per se (Annex I clearly met)', de: 'Stufe 5 von 5: per se verboten (Anhang I eindeutig erfüllt)' },
+  'empco.example.rule.label': { en: 'Legal reference', de: 'Regelverweis' },
+  'empco.example.rule.value': {
+    en: 'Section 5 UWG (German Federal Court of Justice, judgment of 27 June 2024, I ZR 98/23, Katjes); Annex I No. 4c Unfair Commercial Practices Directive (inserted by Directive (EU) 2024/825)',
+    de: '§ 5 UWG (BGH, Urteil vom 27.06.2024, I ZR 98/23, Katjes); Anhang I Nr. 4c UGP-Richtlinie (eingefügt durch Richtlinie (EU) 2024/825)'
+  },
+  'empco.example.reason.label': { en: 'Reasoning', de: 'Begründung' },
+  'empco.example.reason.value': {
+    en: '“Climate-neutral” is applied explicitly to the products and rests entirely on offsetting through climate protection projects. This is already misleading under Section 5 UWG (Federal Court of Justice, Katjes) and has been prohibited per se since 27 Sep 2026 (Annex I No. 4c). Project name, standard and independent verification are missing.',
+    de: '„Klimaneutral“ wird ausdrücklich auf die Produkte bezogen und beruht vollständig auf Kompensation durch Klimaschutzprojekte. Das ist bereits nach § 5 UWG irreführend (BGH Katjes) und seit dem 27.09.2026 per se verboten (Anhang I Nr. 4c). Projektname, Standard und unabhängige Verifizierung fehlen.'
+  },
+  'empco.example.review.label': { en: 'Second review', de: 'Zweitprüfung' },
+  'empco.example.review.value': {
+    en: 'Confirmed by the sceptical counter-check (level 5 → 5).',
+    de: 'Von der skeptischen Gegenprüfung bestätigt (Stufe 5 → 5).'
+  },
+  'empco.example.action.label': { en: 'Action', de: 'Maßnahme' },
+  'empco.example.action.value': {
+    en: 'Revise the content and have it reviewed by legal.',
+    de: 'Inhaltlich überarbeiten und juristisch prüfen lassen.'
+  },
+  'empco.example.note': {
+    en: 'Example with fictitious data. The assessment does not replace legal advice.',
+    de: 'Beispiel mit fiktiven Daten. Die Einordnung ersetzt keine Rechtsberatung.'
+  },
+
   // Section 4: Features
   'empco.features.title': {
     en: 'Not a screenshot in ChatGPT. An audit tool with built-in quality assurance.',
     de: 'Kein Screenshot in ChatGPT. Ein Audit-Werkzeug mit eingebauter Qualitätssicherung.'
   },
   'empco.features.lead': {
-    en: 'Most AI checks on the market work on one principle: one prompt, one run, one result that gets taken at face value. That isn\'t reliable. The same page can produce a different finding on every run. What gets flagged once is missed the next time.\n\nWe do the opposite. For us, an AI result is never the finished finding. It is a hypothesis that has to be proven. Every statement runs through several stages: analysis, a critical counter-check, and a comparison across multiple runs. Text and the page\'s visual rendering are evaluated together. The result is an audit that is reproducible and complete. Something a single AI call cannot deliver by design.',
-    de: 'Die meisten KI-Prüfungen am Markt funktionieren nach einem Prinzip: ein Prompt, ein Durchlauf, ein Ergebnis, das ungeprüft übernommen wird. Das ist nicht verlässlich. Dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Was einmal auffällt, geht beim nächsten Mal unter.\n\nWir machen das Gegenteil. Bei uns ist ein KI-Ergebnis nie der fertige Befund, sondern erst eine Vermutung, die belegt werden muss. Jede Aussage durchläuft mehrere Stufen: Analyse, kritische Gegenprüfung und einen Abgleich über mehrere Durchläufe. Text und visuelle Darstellung der Seite werden dabei gemeinsam ausgewertet. So entsteht ein Audit, der reproduzierbar und vollständig ist. Etwas, das ein einzelner KI-Aufruf prinzipbedingt nicht leisten kann.'
+    en: 'Most AI checks on the market work on one principle: one prompt, one run, one result that gets taken at face value. That isn\'t reliable. The same page can produce a different finding on every run. What gets flagged once is missed the next time.\n\nWe do the opposite. For us, an AI result is never the finished finding but a hypothesis that has to be proven. Every page is analysed in several independent runs and the results are merged. Critical statements go through a sceptical counter-check, and text and visual rendering are evaluated together. The result is an audit that is considerably more stable and complete than a single AI call.',
+    de: 'Die meisten KI-Prüfungen am Markt funktionieren nach einem Prinzip: ein Prompt, ein Durchlauf, ein Ergebnis, das ungeprüft übernommen wird. Das ist nicht verlässlich. Dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Was einmal auffällt, geht beim nächsten Mal unter.\n\nWir machen das Gegenteil. Bei uns ist ein KI-Ergebnis nie der fertige Befund, sondern eine Vermutung, die belegt werden muss. Jede Seite wird in mehreren unabhängigen Durchläufen analysiert und die Ergebnisse werden zusammengeführt. Kritische Aussagen durchlaufen eine skeptische Gegenprüfung, Text und visuelle Darstellung werden gemeinsam ausgewertet. So entsteht ein Audit, der deutlich stabiler und vollständiger ist als ein einzelner KI-Aufruf.'
   },
   'empco.feature1.title': {
     en: 'Complete coverage',
@@ -549,40 +608,40 @@ export const translations: Translations = {
     de: 'Doppelter Blick auf kritische Aussagen'
   },
   'empco.feature2.desc': {
-    en: 'Every critical finding is reviewed a second time by a deliberately sceptical counter-instance. If the two reviews disagree, the passage is automatically escalated for manual review. Single opinions get caught.',
-    de: 'Jedes kritische Finding wird ein zweites Mal geprüft, von einer bewusst skeptischen Gegeninstanz. Sind sich beide Prüfungen nicht einig, wandert die Stelle automatisch in die manuelle Nachsicht. Einzelmeinungen werden so abgefangen.'
+    en: 'Every high-risk statement is reviewed a second time by a deliberately sceptical counter-check. If the two assessments differ significantly, the passage is flagged for manual review. Single opinions get caught.',
+    de: 'Jede Aussage mit hohem Risiko wird ein zweites Mal geprüft, von einer bewusst skeptischen Gegenprüfung. Weichen beide Bewertungen deutlich ab, wird die Stelle für die manuelle Nachsicht markiert. Einzelmeinungen werden so abgefangen.'
   },
   'empco.feature3.title': {
     en: 'Evidence required for every finding',
     de: 'Belegpflicht für jeden Befund'
   },
   'empco.feature3.desc': {
-    en: 'Every flagged statement is documented with the verbatim quote from the source. If the model invents something that is not actually on the page, it is automatically detected and flagged. You will not get phantom findings.',
-    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und markiert. Sie bekommen keine Phantom-Befunde.'
+    en: 'Every flagged statement is documented with the verbatim quote from the source. If the model invents something that is not actually on the page, it is automatically detected and filtered out. You will not get phantom findings.',
+    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und aussortiert. Sie bekommen keine Phantom-Befunde.'
   },
   'empco.feature4.title': {
     en: 'Aligned with actual law',
     de: 'An echten Gesetzen ausgerichtet'
   },
   'empco.feature4.desc': {
-    en: 'Every assessment cites a concrete paragraph from EmpCo, the German Act Against Unfair Competition, relevant Federal Court of Justice rulings, or ISO 14021. No free model interpretation. You can always see why something is marked as problematic.',
-    de: 'Jede Bewertung verweist auf einen konkreten Paragraphen aus EmpCo, UWG, einschlägige BGH-Urteile oder ISO 14021. Keine freie Modell-Interpretation. Sie sehen immer, warum etwas als problematisch markiert ist.'
+    en: 'Every assessment cites a specific provision of the EmpCo Directive and the German Act against Unfair Competition (UWG), or relevant case law. No free model interpretation. You can always see why something is marked as problematic.',
+    de: 'Jede Bewertung verweist auf eine konkrete Vorschrift aus EmpCo-Richtlinie und UWG oder auf einschlägige Rechtsprechung. Keine freie Modell-Interpretation. Sie sehen immer, warum etwas als problematisch markiert ist.'
   },
   'empco.feature5.title': {
     en: 'Context awareness',
     de: 'Kontextverständnis'
   },
   'empco.feature5.desc': {
-    en: 'Statements are evaluated in their full context — including surrounding paragraphs, related pages, and matching evidence from your reporting. No isolated keyword search, but reading that understands what the page actually says.',
-    de: 'Aussagen werden im vollen Kontext bewertet — einschließlich umliegender Absätze, verwandter Seiten und passender Belege aus Ihrer Berichterstattung. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.'
+    en: 'Statements are evaluated in their full context, with the surrounding paragraphs and the visual rendering of the page. No isolated keyword search, but reading that understands what the page actually says.',
+    de: 'Aussagen werden im vollen Kontext bewertet, mit umliegenden Absätzen und der visuellen Darstellung der Seite. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.'
   },
   'empco.feature6.title': {
     en: 'Traceable down to the last line',
     de: 'Nachvollziehbar bis zur letzten Zeile'
   },
   'empco.feature6.desc': {
-    en: 'Every assessment, every status change, every decision is documented with a timestamp. Compatible with your compliance processes. Compatible with supervisory authorities.',
-    de: 'Jede Bewertung, jede Statusänderung, jede Entscheidung ist mit Zeitstempel dokumentiert. Anschlussfähig an Ihre Compliance-Prozesse. Anschlussfähig gegenüber Aufsichtsbehörden.'
+    en: 'Every status change and every comment is documented with a timestamp and the person responsible, and can be exported as an audit trail. Compatible with your compliance processes.',
+    de: 'Jede Statusänderung und jeder Kommentar ist mit Zeitstempel und Bearbeiter dokumentiert und als Audit-Trail exportierbar. Anschlussfähig an Ihre Compliance-Prozesse.'
   },
 
   // Section 5a: Test first
@@ -611,8 +670,8 @@ export const translations: Translations = {
     de: 'Befund innerhalb von 24 Stunden'
   },
   'empco.test.step2.desc': {
-    en: 'The complete finding lands in your inbox — with quotes, regulatory references, and prioritization.',
-    de: 'Der vollständige Befund landet in Ihrem Postfach — mit Zitaten, Regelverweisen und Priorisierung.'
+    en: 'You receive your finding as a protected online report, with quotes, legal references and prioritisation.',
+    de: 'Sie erhalten Ihren Befund als geschützten Online-Bericht, mit Zitaten, Regelverweisen und Priorisierung.'
   },
   'empco.test.step3.title': {
     en: 'You decide whether to commission the full audit',
@@ -699,7 +758,7 @@ export const translations: Translations = {
   },
   'empco.form.privacyNotice': {
     en: 'We process your details (name, email, company, URL) solely to create the audit. Processors: Anthropic/USA, Cloudflare/USA (SCCs). Deletion any time via email to info@icompetence.de.',
-    de: 'Wir verarbeiten deine Angaben (Name, Mail, Firma, URL) ausschließlich zur Audit-Erstellung. Auftragsverarbeiter: Anthropic/USA, Cloudflare/USA (SCCs). Löschung jederzeit per Mail an info@icompetence.de.'
+    de: 'Wir verarbeiten Ihre Angaben (Name, Mail, Firma, URL) ausschließlich zur Audit-Erstellung. Auftragsverarbeiter: Anthropic/USA, Cloudflare/USA (SCCs). Löschung jederzeit per Mail an info@icompetence.de.'
   },
   'empco.form.privacyLink': {
     en: 'Full privacy policy',
@@ -707,13 +766,17 @@ export const translations: Translations = {
   },
 
   // EmpCo Audit – SEO / knowledge section (explainer, facts, banned, steps, comparison, FAQ)
+  'empco.seo.section.title': {
+    en: 'The EmpCo Directive explained: what applies since 27 Sep 2026',
+    de: 'EmpCo-Richtlinie erklärt: Was seit dem 27.09.2026 gilt'
+  },
   'empco.seo.explainer.title': {
     en: 'The EmpCo Directive explained',
     de: 'EmpCo-Richtlinie einfach erklärt'
   },
   'empco.seo.explainer.lead': {
-    en: 'The EmpCo Directive (Directive (EU) 2024/825, “Empowering Consumers for the Green Transition”) is the EU’s new law against greenwashing. It bans misleading environmental claims and unverified sustainability labels in advertising to consumers – and applies bindingly from 27 September 2026.',
-    de: 'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist das neue EU-Gesetz gegen Greenwashing. Sie verbietet irreführende Umweltaussagen und unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern – und gilt verbindlich ab dem 27. September 2026.'
+    en: 'The EmpCo Directive (Directive (EU) 2024/825, “Empowering Consumers for the Green Transition”) is the EU’s new law against greenwashing. It bans misleading environmental claims and unverified sustainability labels in advertising to consumers – and has applied bindingly since 27 September 2026.',
+    de: 'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist das neue EU-Gesetz gegen Greenwashing. Sie verbietet irreführende Umweltaussagen und unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern – und gilt seit dem 27. September 2026 verbindlich.'
   },
 
   // Key facts (concise values for the statistics cards)
@@ -723,10 +786,10 @@ export const translations: Translations = {
   'empco.seo.fact2.value': { en: 'March 2024', de: 'März 2024' },
   'empco.seo.fact3.label': { en: 'Transposition by', de: 'Umsetzung bis' },
   'empco.seo.fact3.value': { en: '27 Mar 2026', de: '27.03.2026' },
-  'empco.seo.fact4.label': { en: 'Applies from', de: 'Gilt ab' },
+  'empco.seo.fact4.label': { en: 'Applies since', de: 'Gilt seit' },
   'empco.seo.fact4.value': { en: '27 Sep 2026', de: '27.09.2026' },
-  'empco.seo.fact5.label': { en: 'Fines up to', de: 'Bußgeld bis' },
-  'empco.seo.fact5.value': { en: '4% turnover', de: '4 % Umsatz' },
+  'empco.seo.fact5.label': { en: 'Fines', de: 'Bußgeld' },
+  'empco.seo.fact5.value': { en: 'up to 4% of turnover (EU-wide infringements)', de: 'bis 4 % des Umsatzes (EU-weite Verstöße)' },
   'empco.seo.fact6.label': { en: 'Who is affected', de: 'Betroffen' },
   'empco.seo.fact6.value': { en: 'All EU B2C sellers', de: 'Alle B2C-Anbieter' },
 
@@ -736,20 +799,30 @@ export const translations: Translations = {
     de: 'Das verbietet die EmpCo'
   },
   'empco.seo.banned.item1': {
-    en: 'Generic environmental claims without proof: “eco-friendly”, “climate-neutral”, “sustainable”, “green”, “ecological”, “biodegradable”, “climate-positive”.',
-    de: 'Pauschale Umweltaussagen ohne Nachweis: „umweltfreundlich“, „klimaneutral“, „nachhaltig“, „grün“, „ökologisch“, „biologisch abbaubar“, „klimapositiv“.'
+    en: 'Generic environmental claims such as “eco-friendly”, “sustainable”, “green” or “ecological” that are neither specifically explained nor backed by recognised excellent environmental performance.',
+    de: 'Pauschale Umweltaussagen wie „umweltfreundlich“, „nachhaltig“, „grün“ oder „ökologisch“, die weder konkret erläutert noch durch eine anerkannte hervorragende Umweltleistung belegt sind.'
   },
   'empco.seo.banned.item2': {
-    en: 'Climate-neutrality advertising based on carbon offsetting.',
-    de: 'Klimaneutralitäts-Werbung, die auf CO₂-Kompensation (Offsetting) beruht.'
+    en: 'Climate claims such as “climate-neutral”, “CO₂-reduced” or “climate-positive” that are based on carbon offsetting.',
+    de: 'Klimaaussagen wie „klimaneutral“, „CO₂-reduziert“ oder „klimapositiv“, die auf CO₂-Kompensation (Offsetting) beruhen.'
   },
   'empco.seo.banned.item3': {
     en: 'Sustainability labels without independent certification or a public-authority basis.',
     de: 'Nachhaltigkeitssiegel ohne unabhängige Zertifizierung oder behördliche Grundlage.'
   },
   'empco.seo.banned.item4': {
-    en: 'Promises about future environmental performance without verifiable, public interim targets.',
-    de: 'Versprechen über künftige Umweltleistung ohne überprüfbare, öffentliche Zwischenziele.'
+    en: 'Promises about future environmental performance without a realistic implementation plan with verifiable interim targets that is independently reviewed and publicly available.',
+    de: 'Versprechen über künftige Umweltleistung ohne realistischen Umsetzungsplan mit überprüfbaren Zwischenzielen, der unabhängig geprüft und öffentlich einsehbar ist.'
+  },
+
+  // Allowed vs. banned examples
+  'empco.seo.examples.title': {
+    en: 'Allowed or banned? Typical claims at a glance',
+    de: 'Erlaubt oder verboten? Typische Aussagen im Überblick'
+  },
+  'empco.seo.examples.content': {
+    en: 'Since 27 Sep 2026, the following applies to advertising aimed at consumers:\n- Banned: “climate-neutral”, “CO₂-reduced” or “climate-positive” if the claim is based on carbon offsetting.\n- Banned: “eco-friendly”, “sustainable” or “green” without a specific explanation and without recognised excellent environmental performance.\n- Banned: self-designed labels without a certification scheme or public-authority basis.\n- Banned: an environmental claim about the whole product or company that only concerns one aspect.\n- Not permitted: “climate-neutral by 2040” without a realistic implementation plan with verifiable interim targets that is independently reviewed and publicly available.\n- Allowed with proof: specific statements such as “packaging made from 80% recycled plastic”.\n- Allowed with proof: “CO₂ emissions in production cut by 30% since 2020”, if measurement and base year are documented.\n- Allowed: labels from public or independently certified schemes, such as the EU Ecolabel.',
+    de: 'Seit dem 27.09.2026 gilt für Werbung gegenüber Verbraucherinnen und Verbrauchern:\n- Verboten: „klimaneutral“, „CO₂-reduziert“ oder „klimapositiv“, wenn die Aussage auf CO₂-Ausgleich beruht.\n- Verboten: „umweltfreundlich“, „nachhaltig“ oder „grün“ ohne konkrete Erläuterung und ohne anerkannte hervorragende Umweltleistung.\n- Verboten: selbst entworfene Siegel ohne Zertifizierungssystem oder behördliche Grundlage.\n- Verboten: eine Umweltaussage über das ganze Produkt oder Unternehmen, die nur einen Teilaspekt betrifft.\n- Unzulässig: „klimaneutral bis 2040“ ohne realistischen Umsetzungsplan mit überprüfbaren Zwischenzielen, der unabhängig geprüft und öffentlich einsehbar ist.\n- Erlaubt mit Nachweis: konkrete Angaben wie „Verpackung zu 80 % aus recyceltem Kunststoff“.\n- Erlaubt mit Nachweis: „CO₂-Emissionen in der Produktion seit 2020 um 30 % gesenkt“, wenn Messung und Bezugsjahr belegt sind.\n- Erlaubt: Siegel aus staatlichen oder unabhängig zertifizierten Systemen, etwa das EU Ecolabel.'
   },
 
   // 5 steps
@@ -792,7 +865,7 @@ export const translations: Translations = {
   'empco.seo.compare.colEmpco': { en: 'EmpCo Directive', de: 'EmpCo-Richtlinie' },
   'empco.seo.compare.colGcd': { en: 'Green Claims Directive (GCD)', de: 'Green Claims Directive (GCD)' },
   'empco.seo.compare.r1.aspect': { en: 'Status', de: 'Status' },
-  'empco.seo.compare.r1.empco': { en: 'In force, applies from 27 Sep 2026', de: 'In Kraft, gilt ab 27.09.2026' },
+  'empco.seo.compare.r1.empco': { en: 'In force, applies since 27 Sep 2026', de: 'In Kraft, gilt seit 27.09.2026' },
   'empco.seo.compare.r1.gcd': { en: 'Stalled / announced for withdrawal in 2025', de: '2025 gestoppt / zur Rücknahme angekündigt' },
   'empco.seo.compare.r2.aspect': { en: 'Approach', de: 'Ansatz' },
   'empco.seo.compare.r2.empco': { en: 'Minimum standard: bans misleading claims in general', de: 'Mindeststandard: verbietet irreführende Aussagen generell' },
@@ -813,8 +886,8 @@ export const translations: Translations = {
   },
   'empco.seo.faq.q2': { en: 'When does the EmpCo Directive apply?', de: 'Ab wann gilt die EmpCo-Richtlinie?' },
   'empco.seo.faq.a2': {
-    en: 'The EmpCo Directive applies bindingly from 27 September 2026. EU member states must transpose it into national law by 27 March 2026. There is no transition period for products already on the market – from the cut-off date, all commercial claims must comply with the new rules.',
-    de: 'Die EmpCo-Richtlinie gilt verbindlich ab dem 27. September 2026. Die EU-Mitgliedstaaten müssen sie bis zum 27. März 2026 in nationales Recht umsetzen. Eine Übergangsfrist für bereits im Markt befindliche Produkte gibt es nicht – ab dem Stichtag müssen alle kommerziellen Aussagen den neuen Regeln entsprechen.'
+    en: 'The EmpCo Directive has applied bindingly since 27 September 2026. EU member states had to transpose it into national law by 27 March 2026; Germany did so via the Act against Unfair Competition (UWG). There is no transition period for products already on the market – since the cut-off date, all commercial claims must comply with the new rules.',
+    de: 'Die EmpCo-Richtlinie gilt seit dem 27. September 2026 verbindlich. Die EU-Mitgliedstaaten mussten sie bis zum 27. März 2026 in nationales Recht umsetzen, Deutschland hat das über das UWG getan. Eine Übergangsfrist für bereits im Markt befindliche Produkte gibt es nicht – seit dem Stichtag müssen alle kommerziellen Aussagen den neuen Regeln entsprechen.'
   },
   'empco.seo.faq.q3': { en: 'Which companies are affected by EmpCo?', de: 'Welche Unternehmen betrifft die EmpCo?' },
   'empco.seo.faq.a3': {
@@ -828,63 +901,63 @@ export const translations: Translations = {
   },
   'empco.seo.faq.q5': { en: 'Which environmental claims does EmpCo ban?', de: 'Welche Umweltaussagen verbietet die EmpCo?' },
   'empco.seo.faq.a5': {
-    en: 'Banned are generic environmental claims without proof – such as “eco-friendly”, “climate-neutral”, “sustainable”, “green”, “ecological”, “biodegradable” or “climate-positive”. Also prohibited are climate-neutrality claims based on carbon offsetting, sustainability labels without independent certification, and promises about future environmental performance without verifiable, public interim targets.',
-    de: 'Verboten sind pauschale Umweltaussagen ohne Nachweis – etwa „umweltfreundlich“, „klimaneutral“, „nachhaltig“, „grün“, „ökologisch“, „biologisch abbaubar“ oder „klimapositiv“. Ebenfalls unzulässig sind Klimaneutralitäts-Aussagen, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne überprüfbare, öffentliche Zwischenziele.'
+    en: 'Banned are generic environmental claims such as “eco-friendly”, “sustainable”, “green” or “ecological” that are neither specifically explained nor backed by recognised excellent environmental performance. Also prohibited are climate claims such as “climate-neutral”, “CO₂-reduced” or “climate-positive” that are based on carbon offsetting, sustainability labels without independent certification, and promises about future environmental performance without a realistic, independently reviewed implementation plan.',
+    de: 'Verboten sind pauschale Umweltaussagen wie „umweltfreundlich“, „nachhaltig“, „grün“ oder „ökologisch“, die weder konkret erläutert noch durch eine anerkannte hervorragende Umweltleistung belegt sind. Ebenfalls unzulässig sind Klimaaussagen wie „klimaneutral“, „CO₂-reduziert“ oder „klimapositiv“, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne realistischen, unabhängig geprüften Umsetzungsplan.'
   },
-  'empco.seo.faq.q6': { en: 'Is “climate-neutral” still allowed from 2026?', de: 'Ist „klimaneutral“ ab 2026 noch erlaubt?' },
+  'empco.seo.faq.q6': { en: 'Is “climate-neutral” still allowed?', de: 'Ist „klimaneutral“ noch erlaubt?' },
   'empco.seo.faq.a6': {
-    en: 'Only with genuine reduction evidence. “Climate-neutral” remains permitted if the claim is based on actual reductions of life-cycle emissions and is robustly substantiated. Advertising climate neutrality that relies solely or mainly on carbon offsetting is prohibited. Claims such as “climate-neutral through offsetting” are no longer allowed from 27 September 2026.',
-    de: 'Nur mit echtem Reduktionsnachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf der tatsächlichen Reduktion der Emissionen im Lebenszyklus beruht und belastbar belegt ist. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind ab dem 27. September 2026 nicht mehr erlaubt.'
+    en: 'Only with genuine reduction evidence. “Climate-neutral” remains permitted if the claim is based on actual emission reductions, is robustly substantiated and is explained directly in the advertising. Advertising climate neutrality that relies solely or mainly on carbon offsetting is prohibited. Claims such as “climate-neutral through offsetting” have no longer been allowed since 27 September 2026.',
+    de: 'Nur mit echtem Reduktionsnachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 nicht mehr erlaubt.'
   },
   'empco.seo.faq.q7': { en: 'What happens to sustainability labels?', de: 'Was passiert mit Nachhaltigkeitssiegeln?' },
   'empco.seo.faq.a7': {
-    en: 'From 2026, sustainability labels may only be used with a certified, independently verified basis – or if they were established by a public authority. Self-created logos and labels without transparent, audited criteria must be removed from advertising, packaging and websites.',
-    de: 'Nachhaltigkeitssiegel dürfen ab 2026 nur noch mit zertifizierter, unabhängig geprüfter Grundlage verwendet werden – oder wenn sie von einer Behörde eingeführt wurden. Selbst erstellte Logos und Siegel ohne transparente, geprüfte Kriterien müssen aus Werbung, Verpackung und Website entfernt werden.'
+    en: 'Since 27 September 2026, sustainability labels may only be used with a certified, independently verified basis – or if they were established by a public authority. Self-created logos and labels without transparent, audited criteria must be removed from advertising, packaging and websites.',
+    de: 'Nachhaltigkeitssiegel dürfen seit dem 27. September 2026 nur noch mit zertifizierter, unabhängig geprüfter Grundlage verwendet werden – oder wenn sie von einer Behörde eingeführt wurden. Selbst erstellte Logos und Siegel ohne transparente, geprüfte Kriterien müssen aus Werbung, Verpackung und Website entfernt werden.'
   },
   'empco.seo.faq.q8': { en: 'What is the difference between EmpCo and the Green Claims Directive?', de: 'Was ist der Unterschied zwischen EmpCo und der Green Claims Directive?' },
   'empco.seo.faq.a8': {
-    en: 'EmpCo sets a minimum standard and bans misleading environmental claims in general; it applies from September 2026. The Green Claims Directive (GCD) was planned as a more detailed framework that would have required mandatory external prior verification (“ex ante”) of every green claim. The GCD was stalled in 2025 – EmpCo applies independently of it.',
-    de: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt ab September 2026. Die Green Claims Directive (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.'
+    en: 'EmpCo sets a minimum standard and bans misleading environmental claims in general; it has applied since 27 September 2026. The Green Claims Directive (GCD) was planned as a more detailed framework that would have required mandatory external prior verification (“ex ante”) of every green claim. The GCD was stalled in 2025 – EmpCo applies independently of it.',
+    de: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt seit dem 27. September 2026. Die Green Claims Directive (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.'
   },
   'empco.seo.faq.q9': { en: 'Was the Green Claims Directive withdrawn – what applies now?', de: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?' },
   'empco.seo.faq.a9': {
-    en: 'Yes – in June 2025 the European Commission announced its intention to withdraw the GCD, mainly because of the high verification burden for companies. In practice this changes little: the EmpCo Directive still applies and requires every environmental claim to be substantiated from 27 September 2026.',
-    de: 'Ja – die EU-Kommission hat die GCD im Juni 2025 zur Rücknahme angekündigt, vor allem wegen des hohen Prüfaufwands für Unternehmen. Für die Praxis ändert das wenig: Die EmpCo-Richtlinie gilt weiterhin und verpflichtet ab dem 27. September 2026 dazu, jede Umweltaussage belegen zu können.'
+    en: 'Yes – in June 2025 the European Commission announced its intention to withdraw the GCD, mainly because of the high verification burden for companies. In practice this changes little: the EmpCo Directive still applies and has required every environmental claim to be substantiated since 27 September 2026.',
+    de: 'Ja – die EU-Kommission hat die GCD im Juni 2025 zur Rücknahme angekündigt, vor allem wegen des hohen Prüfaufwands für Unternehmen. Für die Praxis ändert das wenig: Die EmpCo-Richtlinie gilt weiterhin und verpflichtet seit dem 27. September 2026 dazu, jede Umweltaussage belegen zu können.'
   },
   'empco.seo.faq.q10': { en: 'What penalties apply for breaching EmpCo?', de: 'Welche Strafen drohen bei Verstößen gegen die EmpCo?' },
   'empco.seo.faq.a10': {
-    en: 'Besides cease-and-desist warnings and injunctions, widespread infringements with an EU dimension can trigger fines of up to 4% of annual turnover in the member states concerned. Real cases show the scale: Shein was fined €1 million for misleading environmental claims, Armani €3.5 million for misleading ethics claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance. Reputational damage and the obligation to correct or withdraw the contested advertising add to this.',
-    de: 'Neben Abmahnungen und Unterlassungsklagen drohen bei weitverbreiteten Verstößen mit EU-Dimension Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, Armani 3,5 Mio. € für irreführende Ethik-Aussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.'
+    en: 'The main risk is cease-and-desist warnings and injunctions from competitors and associations. For widespread infringements with an EU dimension, fines of up to 4% of annual turnover are also possible. Real cases show the scale: the Italian competition authority AGCM fined Shein €1 million for misleading environmental claims, and a German court banned Apple’s “carbon neutral” advertising for the Apple Watch at first instance. Reputational damage and the obligation to correct or withdraw the contested advertising add to this.',
+    de: 'Das Hauptrisiko sind Abmahnungen und Unterlassungsklagen durch Wettbewerber und Verbände. Bei weitverbreiteten Verstößen mit EU-Dimension sind zudem Bußgelder von bis zu 4 % des Jahresumsatzes möglich. Reale Beispiele zeigen die Größenordnung: Die italienische Wettbewerbsbehörde AGCM verhängte gegen Shein 1 Mio. € Bußgeld wegen irreführender Umweltaussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.'
   },
   'empco.seo.faq.q11': { en: 'How is EmpCo implemented in Germany?', de: 'Wie wird die EmpCo in Deutschland umgesetzt?' },
   'empco.seo.faq.a11': {
-    en: 'Via the Third Act Amending the Act against Unfair Competition (UWG), published in the Federal Law Gazette on 19 February 2026. It essentially enters into force on 27 September 2026, in step with the EU-wide start of application. The banned practices are added to the “blacklist” of commercial practices that are always unfair. A general transition period for existing claims is not provided – all sustainability communication must be compliant by then.',
-    de: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es tritt im Wesentlichen am 27. September 2026 in Kraft – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken werden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss bis dahin angepasst sein.'
+    en: 'Via the Third Act Amending the Act against Unfair Competition (UWG), published in the Federal Law Gazette on 19 February 2026. It essentially entered into force on 27 September 2026, in step with the EU-wide start of application. The banned practices were added to the “blacklist” of commercial practices that are always unfair. A general transition period for existing claims is not provided – all sustainability communication must comply since then.',
+    de: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es ist im Wesentlichen am 27. September 2026 in Kraft getreten – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken wurden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss seitdem den neuen Regeln entsprechen.'
   },
   'empco.seo.faq.q12': { en: 'Is there a transition period for existing products?', de: 'Gibt es eine Übergangsfrist für Bestandsprodukte?' },
   'empco.seo.faq.a12': {
-    en: 'No, there is no transition period. From 27 September 2026, all environmental claims – on packaging, websites, in advertising and in online shops – must meet the new requirements. Companies should review stock and communication materials in good time.',
-    de: 'Nein, eine Übergangsfrist gibt es nicht. Ab dem 27. September 2026 müssen sämtliche Umweltaussagen – auf Verpackungen, Websites, in Werbung und im Online-Shop – den neuen Anforderungen entsprechen. Unternehmen sollten Bestände und Kommunikationsmittel rechtzeitig prüfen.'
+    en: 'No, there is no transition period. Since 27 September 2026, all environmental claims – on packaging, websites, in advertising and in online shops – must meet the new requirements. Companies that have not yet reviewed stock and communication materials should do so now.',
+    de: 'Nein, eine Übergangsfrist gibt es nicht. Seit dem 27. September 2026 müssen sämtliche Umweltaussagen – auf Verpackungen, Websites, in Werbung und im Online-Shop – den neuen Anforderungen entsprechen. Wer Bestände und Kommunikationsmittel noch nicht geprüft hat, sollte das jetzt nachholen.'
   },
   'empco.seo.faq.q13': { en: 'What should companies do now?', de: 'Was müssen Unternehmen jetzt konkret tun?' },
   'empco.seo.faq.a13': {
-    en: 'Inventory all environmental claims and review them before the cut-off date. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended – the 5 steps above summarise the approach.',
-    de: 'Alle Umweltaussagen inventarisieren und vor dem Stichtag prüfen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.'
+    en: 'Inventory all environmental claims and review them without delay – the 27 Sep 2026 cut-off date has already passed. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended – the 5 steps above summarise the approach.',
+    de: 'Alle Umweltaussagen inventarisieren und umgehend prüfen – der Stichtag 27.09.2026 ist bereits verstrichen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.'
   },
   'empco.seo.faq.q14': { en: 'Are carbon offsets a scam?', de: 'Sind CO₂-Kompensationen (Carbon Offsets) Betrug?' },
   'empco.seo.faq.a14': {
-    en: 'Not per se, but they are under heavy criticism because their actual climate impact is often hard to measure and sometimes overstated. That is exactly why the EmpCo Directive bans advertising a product as “climate-neutral” from 2026 based solely on offsetting. For companies this means: offsetting can be part of a strategy, but it is no longer sufficient as the sole basis for an environmental claim.',
-    de: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie ab 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.'
+    en: 'Not per se, but they are under heavy criticism because their actual climate impact is often hard to measure and sometimes overstated. That is exactly why, since 27 September 2026, the EmpCo Directive has banned advertising a product as “climate-neutral” based solely on offsetting. For companies this means: offsetting can be part of a strategy, but it is no longer sufficient as the sole basis for an environmental claim.',
+    de: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie seit dem 27. September 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.'
   },
   'empco.seo.faq.q15': { en: 'Can I be sued or receive a cease-and-desist warning for an “eco-friendly” claim?', de: 'Kann ich für eine „umweltfreundlich“-Aussage abgemahnt oder verklagt werden?' },
   'empco.seo.faq.a15': {
-    en: 'Yes. Unsubstantiated or generic environmental claims are already actionable as misleading under Section 5 UWG (German Act against Unfair Competition) – through competitors and associations. From 27 September 2026, the EmpCo transposition in the UWG tightens this further. Evidence must be in place before the claim goes online.',
-    de: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Ab dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.'
+    en: 'Yes. Unsubstantiated or generic environmental claims are already actionable as misleading under Section 5 UWG (German Act against Unfair Competition) – through competitors and associations. Since 27 September 2026, the EmpCo transposition in the UWG has tightened this further. Evidence must be in place before the claim goes online.',
+    de: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Seit dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.'
   },
   'empco.seo.faq.q16': { en: 'Do I also have to review old website pages and legacy content?', de: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?' },
   'empco.seo.faq.a16': {
-    en: 'Yes. The rules apply to all claims that are public from the cut-off date – including legacy pages, product copy and landing pages that have grown over years. This is exactly the core problem: most companies do not know what is written on hundreds of their own pages. An automated audit provides a complete overview within hours.',
-    de: 'Ja. Die Regeln gelten für alle Aussagen, die ab dem Stichtag öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.'
+    en: 'Yes. The rules apply to all claims that are public since the cut-off date (27 Sep 2026) – including legacy pages, product copy and landing pages that have grown over years. This is exactly the core problem: most companies do not know what is written on hundreds of their own pages. An automated audit provides a complete overview within hours.',
+    de: 'Ja. Die Regeln gelten für alle Aussagen, die seit dem Stichtag (27.09.2026) öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.'
   },
   'empco.seo.faq.q17': { en: 'How do I check my website for green-claims risks?', de: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?' },
   'empco.seo.faq.a17': {
@@ -893,8 +966,8 @@ export const translations: Translations = {
   },
   'empco.seo.faq.q18': { en: 'Isn’t it enough to show ChatGPT a screenshot?', de: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?' },
   'empco.seo.faq.a18': {
-    en: 'No. A single AI pass is not reproducible – the same page can produce a different result on every run. A robust audit checks every claim in multiple stages (analysis, critical cross-examination, reconciliation across several runs) and evaluates text and visual presentation together. Only that makes the findings complete and traceable.',
-    de: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Aussage mehrstufig (Analyse, kritische Gegenprüfung, Abgleich über mehrere Durchläufe) und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.'
+    en: 'No. A single AI pass is not reproducible – the same page can produce a different result on every run. A robust audit checks every page in several runs, subjects critical claims to a sceptical counter-check and evaluates text and visual presentation together. Only that makes the findings complete and traceable.',
+    de: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Seite in mehreren Durchläufen, unterzieht kritische Aussagen einer skeptischen Gegenprüfung und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.'
   },
   'empco.seo.faq.q19': { en: 'Who is liable for greenwashing – marketing, legal or sustainability?', de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Recht oder Nachhaltigkeit?' },
   'empco.seo.faq.a19': {
@@ -914,6 +987,38 @@ export const translations: Translations = {
   'empco.cluster.kicker': {
     en: 'EmpCo Knowledge',
     de: 'EmpCo Wissen'
+  },
+
+  // Sources & last update (visible freshness / trust signal)
+  'empco.sources.title': {
+    en: 'Sources & last update',
+    de: 'Quellen & Stand'
+  },
+  'empco.sources.updated': {
+    en: 'Last updated: 26 October 2026',
+    de: 'Zuletzt aktualisiert: 26.10.2026'
+  },
+  'empco.sources.eurlex': {
+    en: 'Directive (EU) 2024/825 in the Official Journal of the EU (EUR-Lex)',
+    de: 'Richtlinie (EU) 2024/825 im Amtsblatt der EU (EUR-Lex)'
+  },
+  'empco.sources.agcm': {
+    en: 'Italian competition authority AGCM: fine against Shein (press release, 2025)',
+    de: 'Italienische Wettbewerbsbehörde AGCM: Bußgeld gegen Shein (Pressemitteilung, 2025)'
+  },
+  'empco.sources.disclaimer': {
+    en: 'The content on this page is for information purposes and does not replace legal advice.',
+    de: 'Die Inhalte dieser Seite dienen der Information und ersetzen keine Rechtsberatung.'
+  },
+
+  // EmpCo page CTA (formal address, on-topic instead of the generic site CTA)
+  'empco.cta.headline': {
+    en: 'Ready for the EmpCo audit of your website?',
+    de: 'Bereit für den EmpCo Audit Ihrer Website?'
+  },
+  'empco.cta.button': {
+    en: 'Book an initial consultation',
+    de: 'Erstgespräch vereinbaren'
   },
 
   // Analytics Agent Page

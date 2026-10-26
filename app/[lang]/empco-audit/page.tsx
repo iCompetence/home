@@ -2,14 +2,18 @@ import type { Metadata } from 'next'
 import EmpCoAuditPage from '@/components/EmpCoAuditPage'
 import { alternates, toLang } from '@/lib/i18n-meta'
 
+const SITE_URL = 'https://icompetence.de'
+
+// Title/description target the product searches ("EmpCo Audit", "EmpCo Check",
+// "Website auf Greenwashing prüfen") and state that the directive already applies.
 const meta = {
   de: {
-    title: 'EmpCo-Richtlinie 2026: Was Unternehmen wissen müssen | EmpCo Audit',
-    description: 'EmpCo-Richtlinie (EU 2024/825) einfach erklärt: gilt ab 27.09.2026, verbotene Green Claims, Bußgelder, FAQ. Plus automatischer EmpCo-Audit für Ihre Website.',
+    title: 'EmpCo Audit & Check: Website auf Greenwashing prüfen | iCompetence',
+    description: 'EmpCo (EU 2024/825) gilt seit 27.09.2026: Prüfen Sie Ihre Website auf Greenwashing. KI-Audit mit Zitat, Regelverweis und Zweitprüfung – Probeseite kostenlos.',
   },
   en: {
-    title: 'EmpCo Directive 2026: What companies need to know | EmpCo Audit',
-    description: 'The EmpCo Directive (EU 2024/825) explained: applies from 27 Sep 2026, banned green claims, fines, FAQ. Plus an automated EmpCo audit for your website.',
+    title: 'EmpCo Audit & Check: Scan your website for greenwashing | iCompetence',
+    description: 'EmpCo (EU 2024/825) applies since 27 Sep 2026: check your website for greenwashing. AI audit with verbatim quotes, legal references and a second review – free sample page.',
   },
 }
 
@@ -19,37 +23,63 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
+  const url = `${SITE_URL}/${lang}/empco-audit/`
   return {
     title: meta[lang].title,
     description: meta[lang].description,
     alternates: alternates('empco-audit', lang),
     robots: { index: true, follow: true },
+    // Own Open Graph / Twitter tags — otherwise the homepage values from the
+    // layout are inherited and link previews show the homepage.
+    openGraph: {
+      title: meta[lang].title,
+      description: meta[lang].description,
+      url,
+      siteName: 'iCompetence',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'iCompetence - Data & AI Consulting',
+        },
+      ],
+      locale: lang === 'de' ? 'de_DE' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta[lang].title,
+      description: meta[lang].description,
+      images: ['/og-image.jpg'],
+    },
   }
 }
 
 // EmpCo SEO FAQ — German (the primary SEO target for this URL). Rendered server-side
-// so the FAQPage / HowTo structured data is in the crawlable static HTML. The text is
-// kept identical to the German answers shown in the FAQ accordion (Google policy:
-// JSON-LD must match the visible content).
+// so the FAQPage / HowTo structured data is in the crawlable static HTML. The text must
+// stay identical to the German answers in LanguageContext (empco.seo.faq.q*/a*), which
+// the FAQ accordion renders into the HTML (Google policy: JSON-LD must match the
+// visible content).
 const empcoFaqDe: { q: string; a: string }[] = [
   { q: 'Was ist die EmpCo-Richtlinie?', a: 'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist ein EU-Gesetz gegen Greenwashing. Sie ändert die UGP-Richtlinie (2005/29/EG) und die Verbraucherrechte-Richtlinie (2011/83/EU) und verbietet irreführende Umweltaussagen sowie unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern. Die Richtlinie ist seit März 2024 in Kraft.' },
-  { q: 'Ab wann gilt die EmpCo-Richtlinie?', a: 'Die EmpCo-Richtlinie gilt verbindlich ab dem 27. September 2026. Die EU-Mitgliedstaaten müssen sie bis zum 27. März 2026 in nationales Recht umsetzen. Eine Übergangsfrist für bereits im Markt befindliche Produkte gibt es nicht – ab dem Stichtag müssen alle kommerziellen Aussagen den neuen Regeln entsprechen.' },
+  { q: 'Ab wann gilt die EmpCo-Richtlinie?', a: 'Die EmpCo-Richtlinie gilt seit dem 27. September 2026 verbindlich. Die EU-Mitgliedstaaten mussten sie bis zum 27. März 2026 in nationales Recht umsetzen, Deutschland hat das über das UWG getan. Eine Übergangsfrist für bereits im Markt befindliche Produkte gibt es nicht – seit dem Stichtag müssen alle kommerziellen Aussagen den neuen Regeln entsprechen.' },
   { q: 'Welche Unternehmen betrifft die EmpCo?', a: 'Die EmpCo betrifft alle Unternehmen, die Produkte oder Dienstleistungen an Verbraucher in der EU vermarkten – unabhängig von Branche, Unternehmensgröße oder Firmensitz. Auch kleine und mittlere Unternehmen sowie Anbieter aus Drittländern fallen darunter, sobald sie EU-Konsumenten ansprechen. Reine B2B-Kommunikation ist nicht direkt erfasst, faktisch aber oft mitbetroffen.' },
   { q: 'Was sind Green Claims?', a: 'Green Claims sind umweltbezogene Werbeaussagen – also Angaben, die einem Produkt, einer Dienstleistung oder einem Unternehmen einen ökologischen Vorteil zuschreiben, etwa „klimaneutral“, „aus recyceltem Material“ oder „plastikfrei“. Die EmpCo-Richtlinie regelt, unter welchen Bedingungen solche Green Claims gegenüber Verbrauchern zulässig sind und welche pauschalen Aussagen verboten werden.' },
-  { q: 'Welche Umweltaussagen verbietet die EmpCo?', a: 'Verboten sind pauschale Umweltaussagen ohne Nachweis – etwa „umweltfreundlich“, „klimaneutral“, „nachhaltig“, „grün“, „ökologisch“, „biologisch abbaubar“ oder „klimapositiv“. Ebenfalls unzulässig sind Klimaneutralitäts-Aussagen, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne überprüfbare, öffentliche Zwischenziele.' },
-  { q: 'Ist „klimaneutral“ ab 2026 noch erlaubt?', a: 'Nur mit echtem Reduktionsnachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf der tatsächlichen Reduktion der Emissionen im Lebenszyklus beruht und belastbar belegt ist. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind ab dem 27. September 2026 nicht mehr erlaubt.' },
-  { q: 'Was passiert mit Nachhaltigkeitssiegeln?', a: 'Nachhaltigkeitssiegel dürfen ab 2026 nur noch mit zertifizierter, unabhängig geprüfter Grundlage verwendet werden – oder wenn sie von einer Behörde eingeführt wurden. Selbst erstellte Logos und Siegel ohne transparente, geprüfte Kriterien müssen aus Werbung, Verpackung und Website entfernt werden.' },
-  { q: 'Was ist der Unterschied zwischen EmpCo und der Green Claims Directive?', a: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt ab September 2026. Die Green Claims Directive (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.' },
-  { q: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?', a: 'Ja – die EU-Kommission hat die GCD im Juni 2025 zur Rücknahme angekündigt, vor allem wegen des hohen Prüfaufwands für Unternehmen. Für die Praxis ändert das wenig: Die EmpCo-Richtlinie gilt weiterhin und verpflichtet ab dem 27. September 2026 dazu, jede Umweltaussage belegen zu können.' },
-  { q: 'Welche Strafen drohen bei Verstößen gegen die EmpCo?', a: 'Neben Abmahnungen und Unterlassungsklagen drohen bei weitverbreiteten Verstößen mit EU-Dimension Bußgelder von bis zu 4 % des Jahresumsatzes in den betroffenen Mitgliedstaaten. Reale Beispiele zeigen die Größenordnung: Shein zahlte 1 Mio. € Bußgeld für irreführende Umweltaussagen, Armani 3,5 Mio. € für irreführende Ethik-Aussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.' },
-  { q: 'Wie wird die EmpCo in Deutschland umgesetzt?', a: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es tritt im Wesentlichen am 27. September 2026 in Kraft – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken werden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss bis dahin angepasst sein.' },
-  { q: 'Gibt es eine Übergangsfrist für Bestandsprodukte?', a: 'Nein, eine Übergangsfrist gibt es nicht. Ab dem 27. September 2026 müssen sämtliche Umweltaussagen – auf Verpackungen, Websites, in Werbung und im Online-Shop – den neuen Anforderungen entsprechen. Unternehmen sollten Bestände und Kommunikationsmittel rechtzeitig prüfen.' },
-  { q: 'Was müssen Unternehmen jetzt konkret tun?', a: 'Alle Umweltaussagen inventarisieren und vor dem Stichtag prüfen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.' },
-  { q: 'Sind CO₂-Kompensationen (Carbon Offsets) Betrug?', a: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie ab 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.' },
-  { q: 'Kann ich für eine „umweltfreundlich“-Aussage abgemahnt oder verklagt werden?', a: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Ab dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.' },
-  { q: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?', a: 'Ja. Die Regeln gelten für alle Aussagen, die ab dem Stichtag öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.' },
+  { q: 'Welche Umweltaussagen verbietet die EmpCo?', a: 'Verboten sind pauschale Umweltaussagen wie „umweltfreundlich“, „nachhaltig“, „grün“ oder „ökologisch“, die weder konkret erläutert noch durch eine anerkannte hervorragende Umweltleistung belegt sind. Ebenfalls unzulässig sind Klimaaussagen wie „klimaneutral“, „CO₂-reduziert“ oder „klimapositiv“, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne realistischen, unabhängig geprüften Umsetzungsplan.' },
+  { q: 'Ist „klimaneutral“ noch erlaubt?', a: 'Nur mit echtem Reduktionsnachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 nicht mehr erlaubt.' },
+  { q: 'Was passiert mit Nachhaltigkeitssiegeln?', a: 'Nachhaltigkeitssiegel dürfen seit dem 27. September 2026 nur noch mit zertifizierter, unabhängig geprüfter Grundlage verwendet werden – oder wenn sie von einer Behörde eingeführt wurden. Selbst erstellte Logos und Siegel ohne transparente, geprüfte Kriterien müssen aus Werbung, Verpackung und Website entfernt werden.' },
+  { q: 'Was ist der Unterschied zwischen EmpCo und der Green Claims Directive?', a: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt seit dem 27. September 2026. Die Green Claims Directive (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.' },
+  { q: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?', a: 'Ja – die EU-Kommission hat die GCD im Juni 2025 zur Rücknahme angekündigt, vor allem wegen des hohen Prüfaufwands für Unternehmen. Für die Praxis ändert das wenig: Die EmpCo-Richtlinie gilt weiterhin und verpflichtet seit dem 27. September 2026 dazu, jede Umweltaussage belegen zu können.' },
+  { q: 'Welche Strafen drohen bei Verstößen gegen die EmpCo?', a: 'Das Hauptrisiko sind Abmahnungen und Unterlassungsklagen durch Wettbewerber und Verbände. Bei weitverbreiteten Verstößen mit EU-Dimension sind zudem Bußgelder von bis zu 4 % des Jahresumsatzes möglich. Reale Beispiele zeigen die Größenordnung: Die italienische Wettbewerbsbehörde AGCM verhängte gegen Shein 1 Mio. € Bußgeld wegen irreführender Umweltaussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.' },
+  { q: 'Wie wird die EmpCo in Deutschland umgesetzt?', a: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es ist im Wesentlichen am 27. September 2026 in Kraft getreten – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken wurden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss seitdem den neuen Regeln entsprechen.' },
+  { q: 'Gibt es eine Übergangsfrist für Bestandsprodukte?', a: 'Nein, eine Übergangsfrist gibt es nicht. Seit dem 27. September 2026 müssen sämtliche Umweltaussagen – auf Verpackungen, Websites, in Werbung und im Online-Shop – den neuen Anforderungen entsprechen. Wer Bestände und Kommunikationsmittel noch nicht geprüft hat, sollte das jetzt nachholen.' },
+  { q: 'Was müssen Unternehmen jetzt konkret tun?', a: 'Alle Umweltaussagen inventarisieren und umgehend prüfen – der Stichtag 27.09.2026 ist bereits verstrichen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.' },
+  { q: 'Sind CO₂-Kompensationen (Carbon Offsets) Betrug?', a: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie seit dem 27. September 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.' },
+  { q: 'Kann ich für eine „umweltfreundlich“-Aussage abgemahnt oder verklagt werden?', a: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Seit dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.' },
+  { q: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?', a: 'Ja. Die Regeln gelten für alle Aussagen, die seit dem Stichtag (27.09.2026) öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.' },
   { q: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?', a: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.' },
-  { q: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?', a: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Aussage mehrstufig (Analyse, kritische Gegenprüfung, Abgleich über mehrere Durchläufe) und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.' },
+  { q: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?', a: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Seite in mehreren Durchläufen, unterzieht kritische Aussagen einer skeptischen Gegenprüfung und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.' },
   { q: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Recht oder Nachhaltigkeit?', a: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Marketing formuliert, Nachhaltigkeit liefert Daten, Recht prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.' },
 ]
 
@@ -78,7 +108,7 @@ const howToJsonLd = {
   inLanguage: 'de',
   name: 'In 5 Schritten EmpCo-konform werden',
   description:
-    'Vorgehen, um die Nachhaltigkeitskommunikation bis zum Geltungsbeginn der EmpCo-Richtlinie am 27. September 2026 rechtskonform zu machen.',
+    'Vorgehen, um die Nachhaltigkeitskommunikation an die seit dem 27. September 2026 geltende EmpCo-Richtlinie anzupassen.',
   step: empcoStepsDe.map((s, i) => ({
     '@type': 'HowToStep',
     position: i + 1,

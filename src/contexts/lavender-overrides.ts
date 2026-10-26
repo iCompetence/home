@@ -28,16 +28,16 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'The audit reads every page, every PDF, every annual report. Long documents are analyzed in full — not just the first few paragraphs. What is online is seen.',
   },
   'empco.feature3.desc': {
-    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und markiert. Du bekommst keine Phantom-Befunde.',
+    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und aussortiert. Du bekommst keine Phantom-Befunde.',
   },
   'empco.feature4.desc': {
-    de: 'Jede Bewertung verweist auf einen konkreten Paragraphen aus EmpCo, UWG, einschlägige BGH-Urteile oder ISO 14021. Keine freie Modell-Interpretation. Du siehst immer, warum etwas als problematisch markiert ist.',
+    de: 'Jede Bewertung verweist auf eine konkrete Vorschrift aus EmpCo-Richtlinie und UWG oder auf einschlägige Rechtsprechung. Keine freie Modell-Interpretation. Du siehst immer, warum etwas als problematisch markiert ist.',
   },
   'empco.feature5.desc': {
-    de: 'Aussagen werden im vollen Kontext bewertet — einschließlich umliegender Absätze, verwandter Seiten und passender Belege aus deiner Berichterstattung. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.',
+    de: 'Aussagen werden im vollen Kontext bewertet, mit umliegenden Absätzen und der visuellen Darstellung der Seite. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.',
   },
   'empco.feature6.desc': {
-    de: 'Jede Bewertung, jede Statusänderung, jede Entscheidung ist mit Zeitstempel dokumentiert. Anschlussfähig an deine Compliance-Prozesse. Anschlussfähig gegenüber Aufsichtsbehörden.',
+    de: 'Jede Statusänderung und jeder Kommentar ist mit Zeitstempel und Bearbeiter dokumentiert und als Audit-Trail exportierbar. Anschlussfähig an deine Compliance-Prozesse.',
   },
   'empco.test.title': { de: 'Sehen, was der Audit findet. Bevor du zahlst.' },
   'empco.test.step1.title': { de: 'Du nennst uns eine URL' },
@@ -45,7 +45,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Eine Seite aus deiner Domain. Sustainability-Landingpage, Produktseite, Pressemeldung. Du entscheidest.',
   },
   'empco.test.step2.desc': {
-    de: 'Der vollständige Befund landet in deinem Postfach — mit Zitaten, Regelverweisen und Priorisierung.',
+    de: 'Du erhältst deinen Befund als geschützten Online-Bericht, mit Zitaten, Regelverweisen und Priorisierung.',
   },
   'empco.test.step3.title': { de: 'Du entscheidest über den vollen Audit' },
   'empco.test.step3.desc': {
@@ -61,7 +61,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Hinweis: Der EmpCo Audit ist eine erste technische Bestandsaufnahme und ersetzt keine qualifizierte Rechtsberatung. Für die Richtigkeit, Vollständigkeit und Aktualität der Ergebnisse übernehmen wir keine Haftung. Für die finale rechtliche Bewertung deiner Claims besprich die Audit-Ergebnisse bitte mit deiner Rechtsabteilung oder einem Rechtsanwalt bzw. einer Rechtsanwältin.',
   },
   'empco.seo.faq.a13': {
-    en: 'Inventory all environmental claims and review them before the cut-off date. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended – the 5 steps above summarize the approach.',
+    en: 'Inventory all environmental claims and review them without delay – the Sep 27, 2026 cut-off date has already passed. Remove generic claims or back them with evidence, drop non-certified labels, and revise offsetting-based climate claims. A fixed approval process between marketing, legal and sustainability, plus an audit of external communication, is recommended – the 5 steps above summarize the approach.',
   },
   'empco.seo.faq.a17': {
     en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritized list on which the final legal review can build.',

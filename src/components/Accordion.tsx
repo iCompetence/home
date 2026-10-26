@@ -111,6 +111,8 @@ export const Accordion = ({
               >
                 <button
                   onClick={() => toggleItem(index)}
+                  aria-expanded={isItemSelected(index)}
+                  aria-controls={`${id}-panel-${index}`}
                   className="w-full py-6 sm:py-8 px-0 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors duration-200 cursor-pointer"
                   style={{
                     color: 'var(--gray-light)',
@@ -151,7 +153,11 @@ export const Accordion = ({
                   </div>
                 </button>
                 
+                {/* Content is always rendered (collapsed via max-height/opacity only),
+                    so it is part of the static HTML and indexable by search engines. */}
                 <div
+                  id={`${id}-panel-${index}`}
+                  aria-hidden={!isItemSelected(index)}
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${
                     isItemSelected(index)
                       ? `${contentMaxHeightClass} opacity-100 pb-8`
@@ -159,45 +165,43 @@ export const Accordion = ({
                   }`}
                 >
                   <div className="pl-12 sm:pl-20">
-                    {isItemSelected(index) && (
-                      <div 
-                        className="mobile-accordion-content"
-                        style={{ 
-                          color: 'var(--gray-light)',
-                          fontSize: '18px',
-                          lineHeight: '160%',
-                          maxWidth: '600px'
-                        }}
-                      >
-                        {item.content.split('\n\n').map((paragraph, idx) => {
-                          // Check if this paragraph contains list items
-                          if (paragraph.includes('\n-')) {
-                            const parts = paragraph.split('\n-');
-                            const textBefore = parts[0];
-                            const listItems = parts.slice(1);
-                            
-                            return (
-                              <div key={idx} style={{ marginBottom: idx < item.content.split('\n\n').length - 1 ? '1rem' : '0' }}>
-                                {textBefore && <p style={{ marginBottom: '0.5rem' }}>{textBefore}</p>}
-                                <ul style={{ listStyle: 'none', paddingLeft: '0', margin: '0' }}>
-                                  {listItems.map((item, itemIdx) => (
-                                    <li key={itemIdx} style={{ marginBottom: '0.25rem' }}>
-                                      • {item.trim()}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            );
-                          }
+                    <div
+                      className="mobile-accordion-content"
+                      style={{ 
+                        color: 'var(--gray-light)',
+                        fontSize: '18px',
+                        lineHeight: '160%',
+                        maxWidth: '600px'
+                      }}
+                    >
+                      {item.content.split('\n\n').map((paragraph, idx) => {
+                        // Check if this paragraph contains list items
+                        if (paragraph.includes('\n-')) {
+                          const parts = paragraph.split('\n-');
+                          const textBefore = parts[0];
+                          const listItems = parts.slice(1);
                           
                           return (
-                            <p key={idx} style={{ marginBottom: idx < item.content.split('\n\n').length - 1 ? '1rem' : '0' }}>
-                              {paragraph}
-                            </p>
+                            <div key={idx} style={{ marginBottom: idx < item.content.split('\n\n').length - 1 ? '1rem' : '0' }}>
+                              {textBefore && <p style={{ marginBottom: '0.5rem' }}>{textBefore}</p>}
+                              <ul style={{ listStyle: 'none', paddingLeft: '0', margin: '0' }}>
+                                {listItems.map((item, itemIdx) => (
+                                  <li key={itemIdx} style={{ marginBottom: '0.25rem' }}>
+                                    • {item.trim()}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           );
-                        })}
-                      </div>
-                    )}
+                        }
+                        
+                        return (
+                          <p key={idx} style={{ marginBottom: idx < item.content.split('\n\n').length - 1 ? '1rem' : '0' }}>
+                            {paragraph}
+                          </p>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>

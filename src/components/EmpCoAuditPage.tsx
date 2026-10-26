@@ -208,6 +208,10 @@ function EmpCoAuditPageContent() {
       content: empcoBanned.map((item) => `\n- ${item}`).join(''),
     },
     {
+      title: t('empco.seo.examples.title'),
+      content: t('empco.seo.examples.content'),
+    },
+    {
       title: t('empco.seo.steps.title'),
       content: empcoSteps.map((s) => `\n- ${s.label}: ${s.description}`).join(''),
     },
@@ -225,9 +229,20 @@ function EmpCoAuditPageContent() {
     title: t(`empco.seo.faq.q${i + 1}`),
     content: t(`empco.seo.faq.a${i + 1}`),
   }));
-  // NOTE: FAQPage + HowTo JSON-LD is rendered server-side in app/empco-audit/page.tsx
-  // (German, the SEO-target language) so it lands in the crawlable static HTML — the
-  // rich content here only renders client-side after mount.
+  // NOTE: FAQPage + HowTo JSON-LD is rendered server-side in app/[lang]/empco-audit/page.tsx
+  // (German, the SEO-target language). The Accordion renders all answers into the static
+  // HTML, so the German answers there must stay identical to empco.seo.faq.a* (de).
+
+  // Example finding (fictitious demo data) — one row per report field.
+  const exampleRows: { label: string; value: string; quote?: boolean; highlight?: boolean }[] = [
+    { label: t('empco.example.quote.label'), value: t('empco.example.quote.value'), quote: true },
+    { label: t('empco.example.location.label'), value: t('empco.example.location.value') },
+    { label: t('empco.example.risk.label'), value: t('empco.example.risk.value'), highlight: true },
+    { label: t('empco.example.rule.label'), value: t('empco.example.rule.value') },
+    { label: t('empco.example.reason.label'), value: t('empco.example.reason.value') },
+    { label: t('empco.example.review.label'), value: t('empco.example.review.value') },
+    { label: t('empco.example.action.label'), value: t('empco.example.action.value') },
+  ];
 
   return (
     <>
@@ -273,29 +288,33 @@ function EmpCoAuditPageContent() {
             }}
           >
             <div className="text-center max-w-4xl mx-auto">
-              <h1
-                className="hero-headline"
-                style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(48px, 8vw, 96px)',
-                  fontWeight: '700',
-                  lineHeight: '110%',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                EmpCo Audit
-              </h1>
               <p
                 style={{
-                  color: 'var(--gray-white)',
-                  fontSize: 'clamp(24px, 4vw, 48px)',
+                  color: 'var(--gray-light)',
+                  fontSize: '14px',
                   fontWeight: '500',
-                  lineHeight: '130%',
+                  letterSpacing: '0.04em',
                   marginBottom: '1.5rem',
                 }}
               >
-                {t('empco.hero.headline')}
+                {t('empco.hero.kicker')}
               </p>
+              {/* H1 carries the product name plus the search phrase the page targets.
+                  The first line inherits the .hero-headline size; the second keeps the
+                  size of the former hero headline paragraph. */}
+              <h1 className="hero-headline" style={{ color: 'var(--gray-white)', marginBottom: '1.5rem' }}>
+                <span style={{ display: 'block', marginBottom: '1.5rem' }}>EmpCo Audit</span>{' '}
+                <span
+                  style={{
+                    display: 'block',
+                    fontSize: 'clamp(24px, 4vw, 48px)',
+                    fontWeight: '500',
+                    lineHeight: '130%',
+                  }}
+                >
+                  {t('empco.hero.headline')}
+                </span>
+              </h1>
               <p
                 style={{
                   color: 'var(--gray-white)',
@@ -359,22 +378,21 @@ function EmpCoAuditPageContent() {
           />
         )}
 
-        {/* Logo */}
-        <div
+        {/* Logo — a real link so crawlers can follow it */}
+        <a
+          href={`/${language}/`}
           className="fixed z-50 cursor-pointer"
           style={{
+            display: 'block',
             top: '40px',
             left: '36px',
             opacity: scrollY < 100 || isFooterVisible ? 1 : 0,
             transform: scrollY < 100 || isFooterVisible ? 'translateY(0)' : 'translateY(-20px)',
             transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
           }}
-          onClick={() => {
-            window.location.href = `/${language}/`;
-          }}
         >
-          <ImageWithFallback src={logoImage} alt="Logo" className="h-6" style={{ width: 'auto' }} />
-        </div>
+          <ImageWithFallback src={logoImage} alt="iCompetence" className="h-6" style={{ width: 'auto' }} />
+        </a>
 
         {/* Anchor Dropdown */}
         {showAnchorDropdown && (
@@ -474,21 +492,23 @@ function EmpCoAuditPageContent() {
               animation: 'fadeIn 0.8s ease-out 0.6s forwards',
             }}
           >
-            <button
+            <a
               data-cta='empco_header_contact'
-              onClick={() => {
-                trackCtaClick('empco_header_contact', t('header.contact'));
-                window.open(`/${language}/contact/`, '_blank');
-              }}
+              href={`/${language}/contact/`}
+              target="_blank"
+              rel="noopener"
+              onClick={() => trackCtaClick('empco_header_contact', t('empco.header.contact'))}
               className="px-6 py-2.5 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer"
               style={{
+                display: 'inline-block',
                 color: 'var(--gray-white)',
                 fontSize: '14px',
                 fontWeight: '500',
+                textDecoration: 'none',
               }}
             >
-              {t('header.contact')}
-            </button>
+              {t('empco.header.contact')}
+            </a>
 
             {scrollY < 50 && <LanguageSwitcher />}
 
@@ -532,12 +552,13 @@ function EmpCoAuditPageContent() {
 
         {/* CTA Button - Floating - Mobile only */}
         {isMobile && (
-          <button
+          <a
             data-cta='empco_header_contact'
-            onClick={() => {
-              trackCtaClick('empco_header_contact', t('header.contact'));
-              window.open(`/${language}/contact/`, '_blank');
-            }}
+            href={`/${language}/contact/`}
+            target="_blank"
+            rel="noopener"
+            aria-label={t('empco.header.contact')}
+            onClick={() => trackCtaClick('empco_header_contact', t('empco.header.contact'))}
             className="fixed right-4 z-50 p-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer flex items-center justify-center"
             style={{
               bottom: '84px',
@@ -546,7 +567,7 @@ function EmpCoAuditPageContent() {
             }}
           >
             <Mail size={20} style={{ color: 'var(--gray-white)' }} />
-          </button>
+          </a>
         )}
 
         {/* Burger Menu */}
@@ -748,12 +769,89 @@ function EmpCoAuditPageContent() {
               }}
             >
               <img
-                src="/assets/empco/EmpCo-Tool-UI.png"
-                alt="EmpCo Audit Tool"
+                src="/assets/empco/EmpCo-Tool-UI.webp"
+                alt={t('empco.toolImage.alt')}
+                width={2000}
+                height={1137}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto"
                 style={{ display: 'block' }}
               />
             </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Section 3c: Example finding — shows the report structure on the page
+          itself (fictitious demo data, same case as in the tool screenshot). */}
+      <AnimatedSection
+        id="example-section"
+        className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
+        animationType="fadeInUp"
+        duration={0}
+      >
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <h2
+              className="mobile-h2-title"
+              style={{
+                background: 'linear-gradient(90deg, #E19B74 0%, #D476CD 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                marginBottom: '1.5rem',
+                fontSize: '32px',
+                fontWeight: '700',
+                lineHeight: '110%',
+              }}
+            >
+              {t('empco.example.title')}
+            </h2>
+            <p
+              className="mobile-subline max-w-4xl"
+              style={{ color: 'var(--gray-white)', fontSize: '18px', lineHeight: '170%', marginBottom: '2rem' }}
+            >
+              {t('empco.example.lead')}
+            </p>
+
+            <dl
+              style={{
+                borderRadius: '16px',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                margin: 0,
+              }}
+            >
+              {exampleRows.map((row, index) => (
+                <div
+                  key={row.label}
+                  className="empco-example-row"
+                  style={{
+                    borderTop: index === 0 ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
+                  }}
+                >
+                  <dt style={{ color: 'var(--gray-light)', fontSize: '14px', fontWeight: '500' }}>
+                    {row.label}
+                  </dt>
+                  <dd
+                    style={{
+                      margin: 0,
+                      color: row.highlight ? '#E19B74' : 'var(--gray-white)',
+                      fontSize: '18px',
+                      lineHeight: '160%',
+                      fontWeight: row.highlight ? '600' : '400',
+                      fontStyle: row.quote ? 'italic' : 'normal',
+                    }}
+                  >
+                    {row.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <p style={{ color: 'var(--gray-light)', fontSize: '14px', lineHeight: '160%', marginTop: '1rem' }}>
+              {t('empco.example.note')}
+            </p>
           </div>
         </div>
       </AnimatedSection>
@@ -1051,7 +1149,7 @@ function EmpCoAuditPageContent() {
           design); each heading becomes one collapsible item. */}
       <Accordion
         id="empco-info-section"
-        title={t('empco.anchor.directive')}
+        title={t('empco.seo.section.title')}
         items={empcoDirectiveItems}
         allowMultiple
         contentMaxHeightClass="max-h-[900px]"
@@ -1064,6 +1162,45 @@ function EmpCoAuditPageContent() {
         items={empcoFaq}
         contentMaxHeightClass="max-h-[600px]"
       />
+
+      {/* Section 7b: Sources & last update — visible freshness and trust signal */}
+      <section className="relative z-10 px-4 sm:px-6 lg:px-8" style={{ paddingBottom: '4rem' }}>
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto border-t border-white/10" style={{ paddingTop: '2rem' }}>
+            <h2 style={{ color: 'var(--gray-white)', fontSize: '20px', fontWeight: '600', marginBottom: '1rem' }}>
+              {t('empco.sources.title')}
+            </h2>
+            <p style={{ color: 'var(--gray-light)', fontSize: '16px', lineHeight: '170%', marginBottom: '0.5rem' }}>
+              {t('empco.sources.updated')}
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 0.5rem 0' }}>
+              <li style={{ fontSize: '16px', lineHeight: '170%' }}>
+                <a
+                  href={`https://eur-lex.europa.eu/legal-content/${language === 'de' ? 'DE' : 'EN'}/TXT/?uri=CELEX:32024L0825`}
+                  target="_blank"
+                  rel="noopener"
+                  style={{ color: '#0B99CC', textDecoration: 'underline' }}
+                >
+                  {t('empco.sources.eurlex')}
+                </a>
+              </li>
+              <li style={{ fontSize: '16px', lineHeight: '170%' }}>
+                <a
+                  href="https://en.agcm.it/en/media/press-releases/2025/8/PS12709"
+                  target="_blank"
+                  rel="noopener"
+                  style={{ color: '#0B99CC', textDecoration: 'underline' }}
+                >
+                  {t('empco.sources.agcm')}
+                </a>
+              </li>
+            </ul>
+            <p style={{ color: 'var(--gray-light)', fontSize: '14px', lineHeight: '160%' }}>
+              {t('empco.sources.disclaimer')}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* CTA & Footer Section */}
       <div ref={footerRef}>
@@ -1099,21 +1236,23 @@ function EmpCoAuditPageContent() {
                   letterSpacing: '-0.01em',
                 }}
               >
-                {t('cta.headline')}
+                {t('empco.cta.headline')}
               </p>
 
-              <button
-                onClick={() => {
-                  window.open(`/${language}/contact/`, '_blank');
-                }}
+              <a
+                href={`/${language}/contact/`}
+                target="_blank"
+                rel="noopener"
                 className="px-6 sm:px-8 py-3 rounded-full bg-[#0b99cc] border border-[#0b99cc] hover:bg-[#0a88b8] hover:border-[#0a88b8] transition-all duration-300 cursor-pointer text-sm sm:text-base"
                 style={{
+                  display: 'inline-block',
                   color: 'var(--gray-white)',
                   fontWeight: '500',
+                  textDecoration: 'none',
                 }}
               >
-                {t('cta.button')}
-              </button>
+                {t('empco.cta.button')}
+              </a>
             </div>
           </div>
 
@@ -1140,13 +1279,11 @@ function EmpCoAuditPageContent() {
                   {/* Right Side - Contact & Social */}
                   <div className="lg:text-right">
                     <div className="flex gap-4 lg:justify-end mb-8">
-                      <button
-                        onClick={() =>
-                          window.open(
-                            'https://www.linkedin.com/company/icompetence/posts/?feedView=all',
-                            '_blank'
-                          )
-                        }
+                      <a
+                        href="https://www.linkedin.com/company/icompetence/posts/?feedView=all"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="LinkedIn"
                         className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer"
                         style={{ background: 'rgba(255, 255, 255, 0.1)', border: 'none' }}
                         onMouseEnter={(e) => {
@@ -1167,7 +1304,7 @@ function EmpCoAuditPageContent() {
                         >
                           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                         </svg>
-                      </button>
+                      </a>
                     </div>
 
                     <div className="space-y-4">
@@ -1182,29 +1319,27 @@ function EmpCoAuditPageContent() {
                         >
                           {t('footer.inquiries')}
                         </p>
-                        <button
+                        <a
                           data-cta='mail'
-                          onClick={() => { trackCtaClick('footer_mail', 'info@icompetence.de'); window.open('mailto:info@icompetence.de', '_blank'); }}
+                          href="mailto:info@icompetence.de"
+                          onClick={() => trackCtaClick('footer_mail', 'info@icompetence.de')}
                           style={{
                             color: 'var(--gray-white)',
                             fontSize: '18px',
                             fontWeight: '500',
-                            background: 'none',
-                            border: 'none',
+                            textDecoration: 'none',
                             cursor: 'pointer',
-                            textAlign: 'right',
-                            padding: '0',
                             transition: 'color 0.3s ease',
                           }}
                           onMouseEnter={(e) =>
-                            ((e.currentTarget as HTMLButtonElement).style.color = '#0B99CC')
+                            ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')
                           }
                           onMouseLeave={(e) =>
-                            ((e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-white)')
+                            ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-white)')
                           }
                         >
                           info@icompetence.de
-                        </button>
+                        </a>
                       </div>
                       <div>
                         <p
@@ -1217,29 +1352,27 @@ function EmpCoAuditPageContent() {
                         >
                           {t('footer.phone')}
                         </p>
-                        <button
+                        <a
                           data-cta='fon'
-                          onClick={() => { trackCtaClick('footer_phone', '+49 40 22636380'); window.open('tel:+494022636380', '_blank'); }}
+                          href="tel:+494022636380"
+                          onClick={() => trackCtaClick('footer_phone', '+49 40 22636380')}
                           style={{
                             color: 'var(--gray-white)',
                             fontSize: '18px',
                             fontWeight: '500',
-                            background: 'none',
-                            border: 'none',
+                            textDecoration: 'none',
                             cursor: 'pointer',
-                            textAlign: 'right',
-                            padding: '0',
                             transition: 'color 0.3s ease',
                           }}
                           onMouseEnter={(e) =>
-                            ((e.currentTarget as HTMLButtonElement).style.color = '#0B99CC')
+                            ((e.currentTarget as HTMLAnchorElement).style.color = '#0B99CC')
                           }
                           onMouseLeave={(e) =>
-                            ((e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-white)')
+                            ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-white)')
                           }
                         >
                           +49 40 22636380
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1247,42 +1380,44 @@ function EmpCoAuditPageContent() {
 
                 <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/10">
                   <div className="flex gap-8 mb-4 sm:mb-0">
-                    <button
-                      onClick={() => window.open(`/${language}/imprint/`, '_blank')}
+                    <a
+                      href={`/${language}/imprint/`}
+                      target="_blank"
+                      rel="noopener"
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
                         fontWeight: '500',
-                        background: 'none',
-                        border: 'none',
+                        textDecoration: 'none',
                         cursor: 'pointer',
                         transition: 'color 0.3s ease',
                       }}
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = '#FCFCFC')}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#FCFCFC')}
                       onMouseLeave={(e) =>
-                        ((e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-light)')
+                        ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-light)')
                       }
                     >
                       {t('footer.imprint')}
-                    </button>
-                    <button
-                      onClick={() => window.open(`/${language}/imprint/`, '_blank')}
+                    </a>
+                    <a
+                      href={`/${language}/imprint/`}
+                      target="_blank"
+                      rel="noopener"
                       style={{
                         color: 'var(--gray-light)',
                         fontSize: '16px',
                         fontWeight: '500',
-                        background: 'none',
-                        border: 'none',
+                        textDecoration: 'none',
                         cursor: 'pointer',
                         transition: 'color 0.3s ease',
                       }}
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = '#FCFCFC')}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#FCFCFC')}
                       onMouseLeave={(e) =>
-                        ((e.currentTarget as HTMLButtonElement).style.color = 'var(--gray-light)')
+                        ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--gray-light)')
                       }
                     >
                       {t('footer.privacy')}
-                    </button>
+                    </a>
                   </div>
 
                   <button
@@ -1342,6 +1477,13 @@ function EmpCoAuditPageContent() {
         .anchor-nav-border-container {
           padding-left: 36px;
           padding-right: 24px;
+        }
+
+        .empco-example-row {
+          display: grid;
+          grid-template-columns: 180px 1fr;
+          gap: 24px;
+          padding: 20px 24px;
         }
 
         .anchor-nav-scroll-container {
@@ -1411,6 +1553,12 @@ function EmpCoAuditPageContent() {
 
           .mobile-footer-tagline {
             font-size: 40px !important;
+          }
+
+          .empco-example-row {
+            grid-template-columns: 1fr;
+            gap: 4px;
+            padding: 16px;
           }
         }
 

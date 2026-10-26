@@ -42,13 +42,6 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
     onMenuStateChange?.(false);
   };
 
-  const handleNavigate = (href: string) => {
-    // Prefix every internal target with the active language directory so menu
-    // navigation stays within /de/… or /en/… (href values start with '/').
-    window.location.href = `/${language}${href}`;
-    closeMenu();
-  };
-
   useEffect(() => {
     if (onCloseMenuRef) {
       onCloseMenuRef(closeMenu);
@@ -150,14 +143,18 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
         >
           <div className="w-full px-8 sm:px-16 md:px-20">
             <nav className="flex flex-col gap-3 sm:gap-4">
-              <button
-                onClick={() => handleNavigate('/')}
+              {/* Real links (not buttons) so crawlers can follow the site navigation.
+                  Every target is prefixed with the active language directory so menu
+                  navigation stays within /de/… or /en/… (href values start with '/'). */}
+              <a
+                href={`/${language}/`}
+                onClick={closeMenu}
                 onMouseEnter={() => setActiveItem('home')}
                 className="mobile-burger-menu-item"
-                style={mainMenuItemStyle('home')}
+                style={{ ...mainMenuItemStyle('home'), textDecoration: 'none' }}
               >
                 {t('burgerMenu.home')}
-              </button>
+              </a>
 
               {/* Products row — main item + sub-items share one hover zone */}
               <div
@@ -184,13 +181,13 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
                 >
                   <div className="flex flex-col gap-3 sm:gap-4">
                     {landingPages.map((page) => (
-                      <button
+                      <a
                         key={page.href}
-                        onClick={() => handleNavigate(page.href)}
+                        href={`/${language}${page.href}`}
+                        onClick={closeMenu}
                         className="text-left"
                         style={{
-                          background: 'none',
-                          border: 'none',
+                          textDecoration: 'none',
                           cursor: 'pointer',
                           color: 'rgba(255, 255, 255, 0.55)',
                           fontSize: '20px',
@@ -204,7 +201,7 @@ const BurgerMenu = ({ showHeroText, scrollY, onMenuStateChange, onCloseMenuRef }
                         onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.55)'}
                       >
                         {t(page.titleKey)}
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </div>
