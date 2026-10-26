@@ -616,16 +616,16 @@ export const translations: Translations = {
     de: 'Belegpflicht für jeden Befund'
   },
   'empco.feature3.desc': {
-    en: 'Every flagged statement is documented with the verbatim quote from the source. If the model invents something that is not actually on the page, it is automatically detected and filtered out. You will not get phantom findings.',
-    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und aussortiert. Sie bekommen keine Phantom-Befunde.'
+    en: 'Every flagged passage is documented with the verbatim quote from the source. If a quote cannot be found in the text of the page or document, the finding is automatically filtered out and does not appear in your list. This is how invented findings are caught.',
+    de: 'Jede beanstandete Textstelle ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Findet sich ein Zitat nicht im Text der Seite oder des Dokuments, wird der Befund automatisch aussortiert und erscheint nicht in Ihrer Liste. So werden erfundene Befunde abgefangen.'
   },
   'empco.feature4.title': {
     en: 'Aligned with actual law',
     de: 'An echten Gesetzen ausgerichtet'
   },
   'empco.feature4.desc': {
-    en: 'Every assessment cites a specific provision of the EmpCo Directive and the German Act against Unfair Competition (UWG), or relevant case law. No free model interpretation. You can always see why something is marked as problematic.',
-    de: 'Jede Bewertung verweist auf eine konkrete Vorschrift aus EmpCo-Richtlinie und UWG oder auf einschlägige Rechtsprechung. Keine freie Modell-Interpretation. Sie sehen immer, warum etwas als problematisch markiert ist.'
+    en: 'The rulebook is based on the EmpCo Directive (EU) 2024/825, its transposition into the German Act against Unfair Competition (UWG, in force since 27 September 2026) and relevant case law. Every assessment cites a specific provision or ruling. No free model interpretation. For labels, the audit checks whether they are based on a recognised certification scheme, such as the EU Ecolabel or Type I environmental labels under ISO 14024. You can always see why something is marked as problematic.',
+    de: 'Das Regelwerk basiert auf der EmpCo-Richtlinie (EU) 2024/825, ihrer Umsetzung im UWG (gilt seit 27.09.2026) und der einschlägigen Rechtsprechung. Jede Bewertung verweist auf eine konkrete Vorschrift oder ein Urteil. Keine freie Modell-Interpretation. Bei Siegeln prüft der Audit, ob sie auf einem anerkannten Zertifizierungssystem beruhen, etwa dem EU Ecolabel oder Typ-I-Umweltzeichen nach ISO 14024. Sie sehen immer, warum etwas als problematisch markiert ist.'
   },
   'empco.feature5.title': {
     en: 'Context awareness',

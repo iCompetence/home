@@ -28,10 +28,10 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'The audit reads every page, every PDF, every annual report. Long documents are analyzed in full — not just the first few paragraphs. What is online is seen.',
   },
   'empco.feature3.desc': {
-    de: 'Jede markierte Aussage ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Erfindet das Modell etwas, das gar nicht auf der Seite steht, wird das automatisch erkannt und aussortiert. Du bekommst keine Phantom-Befunde.',
+    de: 'Jede beanstandete Textstelle ist mit dem wörtlichen Zitat aus der Quelle dokumentiert. Findet sich ein Zitat nicht im Text der Seite oder des Dokuments, wird der Befund automatisch aussortiert und erscheint nicht in deiner Liste. So werden erfundene Befunde abgefangen.',
   },
   'empco.feature4.desc': {
-    de: 'Jede Bewertung verweist auf eine konkrete Vorschrift aus EmpCo-Richtlinie und UWG oder auf einschlägige Rechtsprechung. Keine freie Modell-Interpretation. Du siehst immer, warum etwas als problematisch markiert ist.',
+    de: 'Das Regelwerk basiert auf der EmpCo-Richtlinie (EU) 2024/825, ihrer Umsetzung im UWG (gilt seit 27.09.2026) und der einschlägigen Rechtsprechung. Jede Bewertung verweist auf eine konkrete Vorschrift oder ein Urteil. Keine freie Modell-Interpretation. Bei Siegeln prüft der Audit, ob sie auf einem anerkannten Zertifizierungssystem beruhen, etwa dem EU Ecolabel oder Typ-I-Umweltzeichen nach ISO 14024. Du siehst immer, warum etwas als problematisch markiert ist.',
   },
   'empco.feature5.desc': {
     de: 'Aussagen werden im vollen Kontext bewertet, mit umliegenden Absätzen und der visuellen Darstellung der Seite. Keine isolierte Stichwortsuche, sondern Lesen, das versteht, was die Seite tatsächlich sagt.',
