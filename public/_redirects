@@ -33,8 +33,9 @@
 /campaign-parameter-tool/      /en/campaign-parameter-tool/    301
 /analytics-agent               /en/analytics-agent/            301
 /analytics-agent/              /en/analytics-agent/            301
-/ai-workshop                   /en/ai-workshop/                301
-/ai-workshop/                  /en/ai-workshop/                301
+# ai-workshop: German page — the German print ad (11/2026) prints /ai-workshop
+/ai-workshop                   /de/ai-workshop/                301
+/ai-workshop/                  /de/ai-workshop/                301
 /privacy-led-ai                /en/privacy-led-ai/             301
 /privacy-led-ai/               /en/privacy-led-ai/             301
 /iknow                         /en/iknow/                      301
