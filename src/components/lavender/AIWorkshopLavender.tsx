@@ -31,10 +31,10 @@ const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 
 /** Names, roles (job titles stay English) and photos as on the live page. */
 const EXPERTS = [
-  { name: 'Dennis Breuer', role: 'Head of Experience Orchestration', photo: '/images/experts/Dennis_4x.png' },
+  { name: 'Dennis Breuer', role: 'Head of Innovation', photo: '/images/experts/Dennis_4x.png' },
   { name: 'Matthias Postel', role: 'CEO iCompetence GmbH', photo: '/images/experts/Matthias_4x.png', credit: true },
-  { name: 'Marc-André Lampe', role: 'Senior Data Architect', photo: '/images/experts/Marc_4x.png' },
-  { name: 'Lionel Schulz', role: 'Lead Experience Lab', photo: '/images/experts/Lionel_4x.png' },
+  { name: 'Marc-André Lampe', role: 'Applied Intelligence Lead', photo: '/images/experts/Marc_4x.png' },
+  { name: 'Lionel Schulz', role: 'Product Innovation Lead', photo: '/images/experts/Lionel_4x.png' },
 ] as const;
 
 /**

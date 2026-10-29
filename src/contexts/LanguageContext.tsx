@@ -2592,20 +2592,20 @@ export const translations: Translations = {
     de: 'Meet the Experts'
   },
   'aiworkshop.expert.dennis.role': {
-    en: 'Head of Experience Orchestration',
-    de: 'Head of Experience Orchestration'
+    en: 'Head of Innovation',
+    de: 'Head of Innovation'
   },
   'aiworkshop.expert.marc.role': {
-    en: 'Senior Data Architect',
-    de: 'Senior Data Architect'
+    en: 'Applied Intelligence Lead',
+    de: 'Applied Intelligence Lead'
   },
   'aiworkshop.expert.matthias.role': {
     en: 'CEO iCompetence',
     de: 'CEO iCompetence'
   },
   'aiworkshop.expert.lionel.role': {
-    en: 'Lead Experience Lab',
-    de: 'Lead Experience Lab'
+    en: 'Product Innovation Lead',
+    de: 'Product Innovation Lead'
   },
   'aiworkshop.form.title': {
     en: 'Apply Now',

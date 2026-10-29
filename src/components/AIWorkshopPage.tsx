@@ -16,10 +16,10 @@ import Script from 'next/script';
 const logoImage = '/iCompetence_logo.svg';
 
 const experts = [
-  { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Experience Orchestration', photo: '/images/experts/Dennis_4x.png' },
+  { name: 'Dennis Breuer', initials: 'DB', role: 'Head of Innovation', photo: '/images/experts/Dennis_4x.png' },
   { name: 'Matthias Postel', initials: 'MP', role: 'CEO iCompetence GmbH', photo: '/images/experts/Matthias_4x.png', photoCredit: 'Source: Frank Krems' },
-  { name: 'Marc-André Lampe', initials: 'ML', role: 'Senior Data Architect', photo: '/images/experts/Marc_4x.png' },
-  { name: 'Lionel Schulz', initials: 'LS', role: 'Lead Experience Lab', photo: '/images/experts/Lionel_4x.png' },
+  { name: 'Marc-André Lampe', initials: 'ML', role: 'Applied Intelligence Lead', photo: '/images/experts/Marc_4x.png' },
+  { name: 'Lionel Schulz', initials: 'LS', role: 'Product Innovation Lead', photo: '/images/experts/Lionel_4x.png' },
 ];
 
 const dateOptions = [
