@@ -3,8 +3,8 @@ import AIWorkshopPage from '@/components/AIWorkshopPage'
 import { alternates, toLang } from '@/lib/i18n-meta'
 
 const meta = {
-  de: { title: "Der KI-Workshop | iCompetence", description: "KI-Workshop von iCompetence: Orientierungshilfe bei Einführung und Absicherung von KI. Von den Machern von iKnow und Intelligentic Search." },
-  en: { title: "The AI Workshop | iCompetence", description: "AI workshop by iCompetence: guidance for introducing and safeguarding AI. From the makers of iKnow and Intelligentic Search." },
+  de: { title: "Der KI-Workshop | iCompetence", description: "Der KI-Workshop von iCompetence zeigt, wie Sie KI sicher und gewinnbringend einsetzen und wie viel KI Ihre Marke braucht. Mit den Köpfen hinter EmpCo Audit und iKnow." },
+  en: { title: "The AI Workshop | iCompetence", description: "AI workshop by iCompetence: guidance for introducing and safeguarding AI. From the people behind the EmpCo Audit and iKnow." },
 }
 
 export async function generateMetadata({

@@ -503,18 +503,19 @@ function AIWorkshopPageContent() {
             textAlign: 'left'
           }}
         >
-          <span style={{ color: '#0b99cc', fontStyle: 'italic' }}>
-            Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform „iKnow" und der „Intelligentic Search".
-          </span>
-          <br /><br />
-          Im Rennen um die vorderen Plätze auf dem Markt spielt KI eine zentrale Rolle. Aber wie sie sicher nutzen? Was sind die Voraussetzungen - auch hinsichtlich der Datenmenge und -qualität? Welche Sichtbarkeit, welchen Nutzen und ROI kann ich erwarten? Wir klären die zentralen Fragen für Marken und Marketers.
-          <br /><br />
+          {/* Same copy and order as the print ad (11/2026). */}
           <span style={{ color: 'var(--gray-white)', fontWeight: '700' }}>
-            Der Workshop, der Ihnen einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI Entwicklung mitwirken. Einblicke und Platz für Ihre Fragen.
+            Hier erfahren Sie, wie Sie KI gewinnbringend einsetzen können, wie Sie KI sicher nutzen können und wie viel KI Ihre Marke wirklich braucht. Mit echten Use Cases und Platz für Ihre Fragen.
           </span>
           {' '}
           <span style={{ color: '#0b99cc', fontWeight: '700', fontStyle: 'italic' }}>
             Gratis. Nur wenige Plätze!
+          </span>
+          <br /><br />
+          Im Rennen um die vorderen Plätze im Markt spielt KI eine entscheidende Rolle. Doch es ist längst keine Frage mehr, ob Marken KI einsetzen. Wie sicher ist KI? Wofür kann ich sie einsetzen und wie viel KI nützt meiner Marke?
+          <br /><br />
+          <span style={{ color: '#0b99cc', fontStyle: 'italic' }}>
+            Der KI-Workshop mit den Köpfen hinter dem EmpCo Audit und der Unternehmenswissensbasis iKnow. Lernen von den Experten.
           </span>
         </StaticText>
 
