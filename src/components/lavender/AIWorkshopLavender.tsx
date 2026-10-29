@@ -109,10 +109,12 @@ export default function AIWorkshopLavender() {
 
       <Section id="intro" className={ANCHOR_SCROLL_MARGIN}>
         <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
-          <p className="lav-lead font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
-          <p className="lav-lead font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
+          {/* Order of the print ad (11/2026): promise, free seats, body, then
+              the people behind it right before the experts. */}
           <p className="lav-lead font-medium text-lav-navy">{t('workshop.intro.run3')}</p>
           <p className="lav-lead font-medium text-lav-navy">{t('workshop.intro.run4')}</p>
+          <p className="lav-lead font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
+          <p className="lav-lead font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
         </div>
       </Section>
 

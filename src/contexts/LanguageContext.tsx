@@ -2964,17 +2964,18 @@ export const translations: Translations = {
   'workshop.anchor.experts': { en: 'Experts', de: 'Experten' },
   'workshop.anchor.apply': { en: 'Apply now', de: 'Jetzt bewerben' },
   'workshop.anchor.contact': { en: 'Contact', de: 'Kontakt' },
+  // Copy of the print ad (11/2026), du form like the rest of the redesign.
   'workshop.intro.run1': {
-    en: 'From the makers of \u201ciKnow\u201d, the first self-learning, privacy-compliant German data platform, and \u201cIntelligentic Search\u201d.',
-    de: 'Von den Machern der ersten selbständig lernenden datenschutzkonformen deutschen Datenplattform \u201eiKnow" und der \u201eIntelligentic Search".'
+    en: 'The AI workshop with the minds behind the EmpCo Audit and the iKnow enterprise knowledge base. Learn from the experts.',
+    de: 'Der KI-Workshop mit den Köpfen hinter dem EmpCo Audit und der Unternehmenswissensbasis iKnow. Lernen von den Experten.'
   },
   'workshop.intro.run2': {
-    en: 'In the race for the top spots in the market, AI plays a central role. But how do you use it safely? What are the prerequisites \u2013 including data volume and quality? What visibility, benefits and ROI can you expect? We answer the key questions for brands and marketers.',
-    de: 'Im Rennen um die vorderen Plätze auf dem Markt spielt KI eine zentrale Rolle. Aber wie sie sicher nutzen? Was sind die Voraussetzungen - auch hinsichtlich der Datenmenge und -qualität? Welche Sichtbarkeit, welchen Nutzen und ROI kann ich erwarten? Wir klären die zentralen Fragen für Marken und Marketers.'
+    en: 'In the race for the top spots in the market, AI plays a decisive role. The question is no longer whether brands use AI. How safe is AI? What can I use it for, and how much AI does my brand really benefit from?',
+    de: 'Im Rennen um die vorderen Plätze im Markt spielt KI eine entscheidende Rolle. Doch es ist längst keine Frage mehr, ob Marken KI einsetzen. Wie sicher ist KI? Wofür kann ich sie einsetzen und wie viel KI nützt meiner Marke?'
   },
   'workshop.intro.run3': {
-    en: 'The workshop that gives you the big picture, from experts at the forefront of AI development in Germany. Insights and room for your questions.',
-    de: 'Der Workshop, der dir einen Überblick gibt, von den Experten, die an der Spitze der deutschen KI Entwicklung mitwirken. Einblicke und Platz für deine Fragen.'
+    en: 'Find out how to put AI to profitable use, how to use it safely and how much AI your brand really needs. With real use cases and room for your questions.',
+    de: 'Hier erfährst du, wie du KI gewinnbringend einsetzen kannst, wie du KI sicher nutzen kannst und wie viel KI deine Marke wirklich braucht. Mit echten Use Cases und Platz für deine Fragen.'
   },
   'workshop.intro.run4': { en: 'Free. Limited seats!', de: 'Gratis. Nur wenige Plätze!' },
   'workshop.experts.title': { en: 'Our experts', de: 'Unsere Experten' },
