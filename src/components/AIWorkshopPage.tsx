@@ -23,9 +23,9 @@ const experts = [
 ];
 
 const dateOptions = [
-  // 'Dienstag, 14.04.2026 (10:00 bis 11:30 Uhr)',
-  // 'Donnerstag, 16.04.2026 (10:00 bis 11:30 Uhr)',
-  // 'Donnerstag, 23.04.2026 (14:00 bis 15:30 Uhr)',
+  'Mittwoch, 18.11.2026 (14:00 bis 16:00 Uhr)',
+  'Dienstag, 24.11.2026 (14:00 bis 16:00 Uhr)',
+  'Donnerstag, 26.11.2026 (10:00 bis 12:00 Uhr)',
   'Individuellen Termin buchen',
 ];
 
@@ -596,20 +596,19 @@ function AIWorkshopPageContent() {
           </div>
         </AnimatedSection>
 
-        {/* Workshop Dates Section — temporarily hidden
+        {/* Workshop Dates Section */}
         <ProcessList
           id="dates-section"
           title="Verfügbare Termine"
           subline="Für Erstnutzende bieten wir den Workshop an folgenden 3 Tagen kostenfrei an, eigene Termine können gegen Gebühr gebucht werden."
           steps={[
-            { label: 'Dienstag, 14.04.2026', description: 'Zeitraum: 10:00 bis 11:30 Uhr, Ort: Remote' },
-            { label: 'Donnerstag, 16.04.2026', description: 'Zeitraum: 10:00 bis 11:30 Uhr, Ort: Remote' },
-            { label: 'Donnerstag, 23.04.2026', description: 'Zeitraum: 14:00 bis 15:30 Uhr, Ort: Remote' },
+            { label: 'Mittwoch, 18.11.2026', description: 'Zeitraum: 14:00 bis 16:00 Uhr, Ort: Remote' },
+            { label: 'Dienstag, 24.11.2026', description: 'Zeitraum: 14:00 bis 16:00 Uhr, Ort: Remote' },
+            { label: 'Donnerstag, 26.11.2026', description: 'Zeitraum: 10:00 bis 12:00 Uhr, Ort: Remote' },
           ]}
           layout="vertical"
           className="py-8 sm:py-16"
         />
-        */}
 
         {/* Application Form Section */}
         <section
