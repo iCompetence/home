@@ -417,6 +417,26 @@ function ImpressumPageContent() {
                     color: 'var(--gray-white)'
                   }}
                 >
+                  {t('imprint.mediaMonitoring.title')}
+                </h3>
+                <p>
+                  {t('imprint.mediaMonitoring.text')}{' '}
+                  <a href={`/${language}/privacy-media-monitoring/`} style={{ color: '#0b99cc', textDecoration: 'none' }}>{t('imprint.mediaMonitoring.privacy')}</a>
+                  {' · '}
+                  <a href={`/${language}/data-deletion-media-monitoring/`} style={{ color: '#0b99cc', textDecoration: 'none' }}>{t('imprint.mediaMonitoring.deletion')}</a>
+                  {' · '}
+                  <a href={`/${language}/terms-media-monitoring/`} style={{ color: '#0b99cc', textDecoration: 'none' }}>{t('imprint.mediaMonitoring.terms')}</a>
+                </p>
+
+                <h3
+                  style={{
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    marginTop: '1.5rem',
+                    marginBottom: '0.75rem',
+                    color: 'var(--gray-white)'
+                  }}
+                >
                   {t('imprint.empco.title')}
                 </h3>
                 <p>{t('imprint.empco.intro')}</p>

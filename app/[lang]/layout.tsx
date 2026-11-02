@@ -138,8 +138,12 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              /* No consent banner over the legal pages: imprint and (redesign) privacy policy. */
-              if (['/imprint', '/imprint/', '/privacy-policy', '/privacy-policy/'].some((p) => window.location.pathname.endsWith(p))) {
+              /* No consent banner over the legal pages: imprint, (redesign) privacy policy and the
+                 Media Monitoring app pages (Meta/LinkedIn reviewers must read them without consent). */
+              if (['/imprint', '/imprint/', '/privacy-policy', '/privacy-policy/',
+                   '/privacy-media-monitoring', '/privacy-media-monitoring/',
+                   '/data-deletion-media-monitoring', '/data-deletion-media-monitoring/',
+                   '/terms-media-monitoring', '/terms-media-monitoring/'].some((p) => window.location.pathname.endsWith(p))) {
                 window.UC_UI_SUPPRESS_CMP_DISPLAY = true;
               }
               ${

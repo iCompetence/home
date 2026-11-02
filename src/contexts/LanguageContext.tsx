@@ -1627,6 +1627,26 @@ export const translations: Translations = {
     en: 'The audit is created with AI support. All results are editorially reviewed before being sent. No profiling or automated decision-making with legal effect concerning you takes place.',
     de: 'Das Audit wird KI-gestützt erstellt. Alle Ergebnisse werden vor Versand redaktionell geprüft. Es findet kein Profiling und keine automatisierte Entscheidung mit rechtlicher Wirkung Ihnen gegenüber statt.'
   },
+  'imprint.mediaMonitoring.title': {
+    en: 'App "iCompetence Media Monitoring"',
+    de: 'App „iCompetence Media Monitoring“'
+  },
+  'imprint.mediaMonitoring.text': {
+    en: 'Separate information applies to our media monitoring app:',
+    de: 'Für unsere App zur Medienbeobachtung gelten eigene Hinweise:'
+  },
+  'imprint.mediaMonitoring.privacy': {
+    en: 'Privacy policy',
+    de: 'Datenschutzhinweise'
+  },
+  'imprint.mediaMonitoring.deletion': {
+    en: 'Data deletion',
+    de: 'Datenlöschung'
+  },
+  'imprint.mediaMonitoring.terms': {
+    en: 'Terms of use',
+    de: 'Nutzungsbedingungen'
+  },
   'imprint.source': {
     en: 'Source: eRecht24 (Attorney-at-Law Sören Siebert)',
     de: 'Quelle: eRecht24 (Rechtsanwalt Sören Siebert)'

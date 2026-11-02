@@ -22,6 +22,14 @@
 /danke                         /de/thank-you/                  301
 /danke/                        /de/thank-you/                  301
 
+# --- Media Monitoring app legal pages: German slugs (briefing) -> actual routes ---
+/de/datenschutz-media-monitoring          /de/privacy-media-monitoring/        301
+/de/datenschutz-media-monitoring/         /de/privacy-media-monitoring/        301
+/de/datenloeschung-media-monitoring       /de/data-deletion-media-monitoring/  301
+/de/datenloeschung-media-monitoring/      /de/data-deletion-media-monitoring/  301
+/de/nutzungsbedingungen-media-monitoring  /de/terms-media-monitoring/          301
+/de/nutzungsbedingungen-media-monitoring/ /de/terms-media-monitoring/          301
+
 # --- everything else: English was the indexed/primary language ---
 /whats-new                     /en/whats-new/                  301
 /whats-new/                    /en/whats-new/                  301
