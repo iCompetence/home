@@ -1011,6 +1011,28 @@ export const translations: Translations = {
     de: 'Die Inhalte dieser Seite dienen der Information und ersetzen keine Rechtsberatung.'
   },
 
+  // Content article template (ContentArticlePage): source list & last update
+  'article.sources.title': {
+    en: 'Sources & last update',
+    de: 'Quellen & Stand'
+  },
+  'article.updated': {
+    en: 'Last updated:',
+    de: 'Zuletzt aktualisiert:'
+  },
+  'article.sources.retrieved': {
+    en: 'retrieved on',
+    de: 'abgerufen am'
+  },
+  'article.sources.ref': {
+    en: 'Source',
+    de: 'Quelle'
+  },
+  'article.sources.disclaimer': {
+    en: 'The content on this page is for information purposes and does not replace legal advice.',
+    de: 'Die Inhalte dieser Seite dienen der Information und ersetzen keine Rechtsberatung.'
+  },
+
   // EmpCo page CTA (formal address, on-topic instead of the generic site CTA)
   'empco.cta.headline': {
     en: 'Ready for the EmpCo audit of your website?',

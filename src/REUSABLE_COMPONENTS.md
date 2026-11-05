@@ -206,6 +206,53 @@ const contactInfo = [
 
 ---
 
+## 📰 ContentArticlePage Component
+
+**Location:** `/components/ContentArticlePage.tsx` · Model and helpers: `/lib/content-article.ts`
+
+Template for content article pages (guides that answer one search question and link back to a tool
+landing page). Generalised from `EmpCoClusterPage` with the same look; adds a numbered source list with
+"last updated" (`#quellen`) and superscript source references. Used for indexable guide pages in the
+live design.
+
+### Usage (route `app/[lang]/<tool>/<slug>/page.tsx`)
+```tsx
+import ContentArticlePage from '@/components/ContentArticlePage';
+import { buildArticleJsonLd, toPlainText, type ContentArticleContent } from '@/lib/content-article';
+
+const content: ContentArticleContent = {
+  title: 'Greenwashing-Strafen: …',
+  kicker: 'Ratgeber',
+  pillar: { label: 'EmpCo Audit', href: '/de/empco-audit/' },
+  intro: ['**Antwort zuerst.** [^1]'],
+  sections: [{ id: 'abschnitt', heading: 'H2', paragraphs: ['Text mit Beleg. [^1,2]'] }],
+  faqTitle: 'Häufige Fragen', faq: [{ q: 'Frage?', a: 'Antwort. [^2]' }],
+  relatedTitle: 'Weiterlesen', related: [{ label: 'EmpCo Audit', href: '/de/empco-audit/' }],
+  cta: { headline: '…', button: 'Zum EmpCo Audit', href: '/de/empco-audit/' },
+  ctaIdPrefix: 'empco_strafe',
+  sources: [{ title: 'UWG, § 19', url: 'https://www.gesetze-im-internet.de/uwg_2004/__19.html', retrieved: '2026-11-04' }],
+  published: '2026-11-04',
+  updated: '2026-11-04',
+};
+
+// JSON-LD (Article, BreadcrumbList, FAQPage) from the same object, so it matches the visible text
+buildArticleJsonLd(content, '/de/empco-audit/greenwashing-strafe/', 'de').map((block, i) => (
+  <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(block) }} />
+));
+<ContentArticlePage content={content} initialLanguage="de" />
+```
+
+### Inline markup in all text fields
+- `**bold**` – emphasis
+- `[label](/path/)` – internal link (with trailing slash)
+- `[^1]` / `[^1,3]` – reference to entry 1 (and 3) of `sources`, rendered as superscript link to the source list
+
+### Props
+- `content` (ContentArticleContent): see `/lib/content-article.ts` for all fields
+- `initialLanguage` ('de' | 'en', optional)
+
+---
+
 ## 🎨 Styling & Customization
 
 All components use your established design system:

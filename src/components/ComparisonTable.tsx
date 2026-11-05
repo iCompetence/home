@@ -1,14 +1,15 @@
 'use client'
 
+import type { ReactNode } from 'react';
 import { AnimatedSection } from './ScrollAnimations';
 
 interface ComparisonRow {
   /** Feature/criteria name */
-  feature: string;
+  feature: ReactNode;
   /** Value for the primary option (Intelligentic Search) */
-  primary: string;
+  primary: ReactNode;
   /** Value for the secondary option (Traditional Search) */
-  secondary: string;
+  secondary: ReactNode;
 }
 
 interface ComparisonTableProps {
@@ -16,6 +17,8 @@ interface ComparisonTableProps {
   id?: string;
   /** Optional title above the table */
   title?: string;
+  /** Optional header for the first column (empty by default) */
+  featureHeader?: ReactNode;
   /** Header for primary column */
   primaryHeader: string;
   /** Header for secondary column */
@@ -31,6 +34,7 @@ interface ComparisonTableProps {
 export const ComparisonTable = ({
   id = "comparison-section",
   title,
+  featureHeader,
   primaryHeader,
   secondaryHeader,
   rows,
@@ -70,8 +74,20 @@ export const ComparisonTable = ({
             {/* Header Row */}
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                {/* Empty first column */}
-                <th style={{ width: '40%', padding: '0 0 24px 0' }}></th>
+                {/* First column: empty unless featureHeader is set */}
+                <th style={{ width: '40%', padding: '0 0 24px 0', textAlign: 'left' }}>
+                  {featureHeader && (
+                    <span
+                      style={{
+                        color: 'var(--gray-white)',
+                        fontSize: '18px',
+                        fontWeight: '600'
+                      }}
+                    >
+                      {featureHeader}
+                    </span>
+                  )}
+                </th>
 
                 {/* Primary header (Intelligentic Search) */}
                 <th style={{ width: '30%', padding: '0 0 24px 0', textAlign: 'center' }}>
