@@ -196,7 +196,13 @@ export function startNightSky(
 
   /** 0 in the sky, 1 on the ground: the stretch of the page where the city stands. */
   function grounded() {
-    if (cityInHero) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
+    if (cityInHero) {
+      // The stage shows at the top of the page and again at its end, when the
+      // day layer has scrolled out: as much as the layer leaves free.
+      const box = layer?.getBoundingClientRect();
+      if (!box) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
+      return easeInOut(clamp01(Math.max(box.top, H - box.bottom) / (H * 0.85)));
+    }
     const end = document.documentElement.scrollHeight - H;
     return easeInOut(clamp01((window.scrollY - (end - H * 0.9)) / (H * 0.9)));
   }

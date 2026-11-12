@@ -149,6 +149,23 @@ const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:bg-lav-in
 type CityPlace = 'end' | 'hero';
 
 export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }) {
+  // Hamburg hero variant: which text stands on the stage. It changes while the
+  // day layer covers the whole screen (half a screen after it has closed over
+  // the hero), so nobody sees the swap.
+  const [closing, setClosing] = useState(false);
+  useEffect(() => {
+    const layer = document.querySelector('[data-ds="DayLayer"]');
+    if (!layer) return;
+    const onScroll = () => setClosing(layer.getBoundingClientRect().top < -window.innerHeight * 0.5);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [city]);
+
   const sections = (
     <>
       {/* No client logos yet: the logo files need versions for both grounds.
@@ -165,14 +182,17 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
 
   if (city === 'hero') {
     return (
-      <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity={false} />}>
+      <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing} />}>
         <NightSky city={city} />
-        {/* Pulled up under the nav (76 / 92 px tall), so the hero fills the
-            whole first screen. id="top" sits here: the hero itself is sticky
+        {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
+            whole first screen. id="top" sits here: the stage itself is sticky
             and would not be a scroll target. */}
         <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
-          <HeroHamburg />
+          <HeroHamburg hidden={closing} />
           <DayLayer>{sections}</DayLayer>
+          {/* The last screen: the day layer has scrolled out and the stage is
+              back. The footer (ClosingStage) lies over this space. */}
+          <div aria-hidden className={STAGE_HEIGHT} />
         </div>
       </PageShell>
     );
@@ -244,18 +264,24 @@ function Hero() {
   );
 }
 
-/**
- * Variant: the trip starts in Hamburg. The hero is exactly one screen and
- * stays put (sticky) while the day layer scrolls up over it. Headline and the
- * one action are centred in the sky above the skyline; the glass city runs
- * along the bottom edge. The city's upper third is empty sky, so the text
- * block may reach into it.
+/*
+ * Variant: the trip starts and ends in Hamburg. One stage (the sky and the
+ * glass city along the bottom edge) is exactly one screen and stays put for
+ * the whole page. The day layer scrolls up over it and, at the end of the
+ * page, out of it again. On the stage stands the hero text at first and the
+ * closing call to action at the end; the two are swapped while the layer
+ * covers the screen. The city's upper third is empty sky, so the text block
+ * may reach into it.
  */
-function HeroHamburg() {
+const STAGE_HEIGHT = 'h-[max(100svh,540px)]';
+const STAGE_TEXT =
+  'relative z-[1] mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28';
+
+function HeroHamburg({ hidden }: { hidden: boolean }) {
   const { t } = useLanguage();
   return (
-    <div data-ds="HeroHamburg" className="sticky top-0 flex h-[100svh] min-h-[540px] flex-col overflow-hidden">
-      <div className="relative z-[1] mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28">
+    <div data-ds="HeroHamburg" className={cn('sticky top-0 flex flex-col overflow-hidden', STAGE_HEIGHT)}>
+      <div data-stage="hero" className={cn(STAGE_TEXT, hidden && 'invisible')}>
         <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
         <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
@@ -271,6 +297,46 @@ function HeroHamburg() {
           screen and fades towards the text block (.lav-hamburg-haze). */}
       <HamburgGlass className="lav-hamburg-haze absolute bottom-0 left-[-36%] w-[160%] md:left-0 md:w-full" />
     </div>
+  );
+}
+
+/**
+ * The footer of the Hamburg hero variant: the closing text on the same stage.
+ * It is the last thing in the document, pulled up over the page's last screen
+ * and pinned to the screen (sticky bottom), so it stands still on the stage
+ * while the day layer scrolls out. Hidden until the layer covers the hero.
+ */
+function ClosingStage({ shown }: { shown: boolean }) {
+  const { t, language } = useLanguage();
+  const link = 'text-lav-ink no-underline';
+  return (
+    <footer
+      data-ds="FooterNight"
+      data-stage="closing"
+      className={cn('sticky bottom-0 -mt-[max(100svh,540px)] flex flex-col', STAGE_HEIGHT, !shown && 'invisible')}
+    >
+      {/* A wider measure than the hero: the closing line is longer and should stay on two lines. */}
+      <div className={cn(STAGE_TEXT, 'max-w-[1240px]')}>
+        <h2 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
+        <Button asChild variant="white" className={solidOnNight}>
+          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+            {t('topNav.letsTalk')}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </a>
+        </Button>
+        <div className="flex flex-col items-center gap-4">
+          <p className="lav-body flex flex-wrap justify-center gap-x-8 gap-y-2">
+            <a href={`mailto:${EMAIL}`} className={link}>{EMAIL}</a>
+            <span className="text-lav-ink">{PHONE}</span>
+          </p>
+          <p className="lav-small flex flex-wrap justify-center gap-x-8 gap-y-2">
+            <a href={siteHref(language, 'imprint')} className={`${link} text-lav-ink/80`}>{t('footer.imprint')}</a>
+            <a href={siteHref(language, 'privacy-policy')} className={`${link} text-lav-ink/80`}>{t('footer.privacy')}</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={`${link} text-lav-ink/80`}>LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 

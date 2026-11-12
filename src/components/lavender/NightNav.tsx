@@ -11,8 +11,8 @@ import { cn } from '@/components/ui/utils';
 /**
  * Header of the night home: no bar and no background, so nothing slides over
  * the sky while scrolling. Logo left, the contact button in the middle, the
- * menu on the right. Without a bar the logo would run across the text of the
- * sections, so it fades out once the page leaves the top; button and menu stay.
+ * menu on the right; all three stay while scrolling. On the day layer (the
+ * light sheet of the Hamburg hero variant) logo and menu icon turn dark.
  *
  * The menu is the shadcn Sheet (Radix Dialog: focus trap, Escape, scroll
  * lock) opening from the right as a light, rounded panel with large numbered
@@ -37,7 +37,6 @@ export function NightNav() {
   const { t, language } = useLanguage();
   const pages = [...PRODUCT_LINKS, ...PRINCIPLE_LINKS, NEWS_LINK];
   const [open, setOpen] = useState(false);
-  const [atTop, setAtTop] = useState(true);
   // True while the day layer (the light sheet of the Hamburg hero variant) is
   // behind the nav: menu icon and button hover then switch to navy.
   const [onDay, setOnDay] = useState(false);
@@ -45,7 +44,6 @@ export function NightNav() {
   useEffect(() => {
     const layer = document.querySelector('[data-ds="DayLayer"]');
     const onScroll = () => {
-      setAtTop(window.scrollY < 80);
       const box = layer?.getBoundingClientRect();
       setOnDay(!!box && box.top <= 46 && box.bottom > 46);
     };
@@ -71,14 +69,11 @@ export function NightNav() {
         <a
           href="#top"
           onClick={smoothAnchor}
-          tabIndex={atTop ? undefined : -1}
-          aria-hidden={atTop ? undefined : true}
-          className={cn(
-            `inline-flex justify-self-start transition-opacity duration-[var(--duration-base)] ${focusRing} focus-visible:outline-lav-white`,
-            atTop ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
-          )}
+          className={`pointer-events-auto inline-flex justify-self-start ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
         >
-          <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-8 w-auto md:h-10" />
+          {/* White on the night sky, black on the day layer. */}
+          <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-8 w-auto group-data-[ground=day]/nav:hidden md:h-10" />
+          <img src="/iCompetence_black.svg" alt="" aria-hidden className="hidden h-8 w-auto group-data-[ground=day]/nav:block md:h-10" />
         </a>
 
         <a
