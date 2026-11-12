@@ -182,9 +182,11 @@ Stand:
       „So arbeiten wir“ die Komponenten der heutigen Lavender-Startseite (`ServicesCarousel`,
       `TestimonialSlider`, `ProcessAccordion`); aus der Studie bleiben Statement, Produktzeilen
       und Privacy-Led. Der Footer (`ClosingStage`) ist wie `Footer` aufgebaut (Zeile links,
-      Kontakt rechts, Leiste mit Impressum/Datenschutz/LinkedIn und „Nach oben“), darunter die
-      Skyline. Das Blatt hat unten runde Ecken und bleibt am Seitenende als Streifen in
-      Nav-Höhe stehen. Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      Kontakt rechts), darunter die
+      Skyline. Das Blatt hat unten runde Ecken und rollt am Ende ganz hinaus. Die Leiste mit
+      Impressum, Datenschutz, LinkedIn und „Nach oben“ ist ein normaler Block ganz am
+      Seitenende: Auf den letzten Pixeln schiebt sie die Skyline nach oben und erscheint
+      darunter; der Schlusstext bleibt dabei stehen. Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

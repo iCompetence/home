@@ -190,10 +190,9 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
             <DayProcess />
             <PrivacyLed />
           </DayLayer>
-          {/* The last screen: the day layer scrolls out and the stage is back.
-              The space is one nav height short of a screen, so the layer stops
-              as a strip under the nav. The footer (ClosingStage) lies over it. */}
-          <div aria-hidden className="h-[calc(max(100svh,540px)-76px)] lg:h-[calc(max(100svh,540px)-92px)]" />
+          {/* The last screen: the day layer scrolls out completely and the
+              stage is back. The footer text (ClosingStage) lies over this space. */}
+          <div aria-hidden className={STAGE_HEIGHT} />
         </div>
       </PageShell>
     );
@@ -311,16 +310,19 @@ function HeroHamburg({ hidden }: { hidden: boolean }) {
 }
 
 /**
- * The footer of the Hamburg hero variant, on the same stage. Built like the
- * design system's Footer (headline left, contact right, a strip with the legal
- * links and "back to top"), with the closing call to action as its headline
- * and the skyline as its end.
+ * The footer of the Hamburg hero variant, in two parts:
  *
- * It is the last thing in the document, pulled up over the page's last screen
- * and pinned to the screen (sticky bottom), so it stands still on the stage
- * while the day layer scrolls out. The layer stops as a strip under the nav
- * (see the spacer in HomeNightLavender), hence the top padding. Hidden until
- * the layer covers the hero.
+ * - the legal strip (imprint, privacy, LinkedIn, back to top) is an ordinary
+ *   block at the very end of the page. Scrolling the last few pixels brings it
+ *   in below the skyline, which moves up by the strip's height (the stage is
+ *   sticky inside <main>, and <main> ends above the strip);
+ * - the closing text is pinned to the screen (sticky bottom, pulled up over
+ *   the last screen), so it stands still on the stage while the day layer
+ *   scrolls out and while the skyline moves. It lets the pointer through to
+ *   the strip beneath it. Hidden until the layer covers the hero.
+ *
+ * The <footer> itself has no box (`contents`), so both parts are laid out in
+ * the page shell.
  */
 function ClosingStage({ shown }: { shown: boolean }) {
   const { t, language } = useLanguage();
@@ -332,13 +334,40 @@ function ClosingStage({ shown }: { shown: boolean }) {
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   return (
-    <footer
-      data-ds="FooterNight"
-      data-stage="closing"
-      className={cn('sticky bottom-0 -mt-[max(100svh,540px)] flex flex-col', STAGE_HEIGHT, !shown && 'invisible')}
-    >
-      <div className="relative z-[1] mx-auto flex w-full max-w-frame flex-col gap-8 px-[var(--section-pad-h)] pt-[108px] lg:gap-10 lg:pt-[140px]">
-        <div className="flex w-full flex-col justify-between gap-8 md:flex-row md:gap-10">
+    <footer data-ds="FooterNight" className="contents">
+      <div className="relative mx-auto flex w-full max-w-frame items-center justify-between gap-6 px-[var(--section-pad-h)] py-6">
+        <div className="flex items-center gap-6 md:gap-8">
+          <a href={siteHref(language, 'imprint')} className={legal}>{t('footer.imprint')}</a>
+          <a href={siteHref(language, 'privacy-policy')} className={legal}>{t('footer.privacy')}</a>
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('lavender.common.linkedin')}
+            className="inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline"
+          >
+            <LinkedInGlyph size={18} />
+          </a>
+        </div>
+        <button
+          type="button"
+          onClick={toTop}
+          className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70"
+        >
+          <span className="lav-body font-medium">{t('footer.backToTop')}</span>
+          <ChevronUp size={16} strokeWidth={2} />
+        </button>
+      </div>
+
+      <div
+        data-stage="closing"
+        className={cn(
+          'pointer-events-none sticky bottom-0 -mt-[max(100svh,540px)] flex flex-col',
+          STAGE_HEIGHT,
+          !shown && 'invisible',
+        )}
+      >
+        <div className="pointer-events-auto relative z-[1] mx-auto flex w-full max-w-frame flex-col justify-between gap-8 px-[var(--section-pad-h)] pt-[108px] md:flex-row md:gap-10 lg:pt-[140px]">
           <div className="flex max-w-[720px] flex-col items-start gap-8">
             <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
             <Button asChild variant="white" className={solidOnNight}>
@@ -358,30 +387,6 @@ function ClosingStage({ shown }: { shown: boolean }) {
               <span className={value}>{PHONE}</span>
             </div>
           </div>
-        </div>
-
-        <div className="flex w-full items-center justify-between gap-6 border-t border-lav-ink/30 pt-6">
-          <div className="flex items-center gap-6 md:gap-8">
-            <a href={siteHref(language, 'imprint')} className={legal}>{t('footer.imprint')}</a>
-            <a href={siteHref(language, 'privacy-policy')} className={legal}>{t('footer.privacy')}</a>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t('lavender.common.linkedin')}
-              className="inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline"
-            >
-              <LinkedInGlyph size={18} />
-            </a>
-          </div>
-          <button
-            type="button"
-            onClick={toTop}
-            className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70"
-          >
-            <span className="lav-body font-medium">{t('footer.backToTop')}</span>
-            <ChevronUp size={16} strokeWidth={2} />
-          </button>
         </div>
       </div>
     </footer>
