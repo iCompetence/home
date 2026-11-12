@@ -154,6 +154,12 @@ Stand:
       Variante `/de|en/lavender/nacht-hamburg/` (`HomeNightLavender city="hero"`): die Glasstadt
       steht im Hero statt am Seitenende, Text zentriert darüber; der Leitstern startet über der
       Stadt und steigt beim Scrollen nach oben, am Ende gibt es keine Landung. Zum Vergleichen.
+      Kopfzeile `NightNav` statt `TopNav` (Wunsch Dennis, 12.11.2026): kein Hintergrund, Logo
+      links (blendet nach dem Seitenanfang aus), „Kontakt aufnehmen“ mittig, Menü rechts. Menü =
+      shadcn `Sheet` von rechts als helle, abgerundete Fläche mit großen nummerierten Abschnitts-
+      links, darunter alle Produktseiten, Kontakt, Rechtliches, Sprachwahl. Keine AnchorTabs mehr
+      auf diesen Seiten (deren Navy-Leiste fuhr beim Scrollen ein). Hintergrundsterne bleiben
+      Punkte (max. 1,7 px), der Leitstern ist größer.
       Bewegter Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React):
       kleine Sterne in Perspektive (Scrollen fliegt hinein, Funkeln, Aufblitzen), Leitstern
       (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein

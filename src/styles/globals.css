@@ -542,6 +542,24 @@ html {
     to { transform: scaleX(1); }
   }
 
+  /* The night home's menu (NightNav): the sheet slides in from the right. The
+     shadcn sheet's own animate-in classes have no effect here (no animation
+     plugin is installed), so the motion is defined for this panel alone. */
+  .lav-menu[data-state='open'] {
+    animation: lav-menu-in var(--duration-slow) var(--ease-emphasized) both;
+  }
+  .lav-menu[data-state='closed'] {
+    animation: lav-menu-out var(--duration-base) var(--ease-emphasized) both;
+  }
+  @keyframes lav-menu-in {
+    from { transform: translateX(calc(100% + 24px)); }
+    to { transform: translateX(0); }
+  }
+  @keyframes lav-menu-out {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(100% + 24px)); }
+  }
+
   /* Hamburg as a milk-glass sculpture (HamburgGlass.tsx). Two congruent
      renderings on black, blended with screen; the lit one shows through an
      ellipse that follows the pointer. --x/--y/--rx/--ry/--a come from script. */

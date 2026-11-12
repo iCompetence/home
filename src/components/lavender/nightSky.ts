@@ -136,18 +136,18 @@ export function startNightSky(
     const big = compact
       ? { x: W * 0.72, y: H * 0.3, size: W * 1.15 }
       : { x: W * 0.76, y: H * 0.46, size: Math.min(W * 0.66, H * 1.1) };
-    const small = { x: W * 0.5, y: H * 0.17, size: Math.max(84, Math.min(W, H) * 0.11) };
+    const small = { x: W * 0.5, y: H * 0.19, size: Math.max(120, Math.min(W, H) * 0.19) };
     // At the end of the page it rests in the gap of sky between the Rathaus tower
     // and the Elbphilharmonie, above the roofs, so it does not sit on a lit building.
     const box = city?.getBoundingClientRect();
     const skyline = box ? box.height : W * SKYLINE_RATIO;
     // In the hero the text block sits above the middle of the city, so the
     // star rests further right there, above the Speicherstadt.
-    const at = cityInHero ? { x: 0.9, y: 0.4 } : { x: 0.69, y: 0.26 };
+    const at = cityInHero ? { x: 0.9, y: 0.3 } : { x: 0.69, y: 0.2 };
     const land = {
       x: (box ? box.left : 0) + (box ? box.width : W) * at.x,
       y: (box ? box.top : H - skyline) + skyline * at.y,
-      size: Math.min(cityInHero ? 190 : 250, Math.max(64, skyline * 0.44)),
+      size: Math.min(cityInHero ? 300 : 360, Math.max(96, skyline * 0.62)),
     };
     const tripX = lerp(big.x, small.x, away) + ease.x * W * 0.04 * (1 - away);
     const tripY = lerp(big.y, small.y, away) + ease.y * H * 0.04 * (1 - away);
@@ -213,10 +213,11 @@ export function startNightSky(
       ctx.globalAlpha = alpha;
       ctx.fillStyle = s.tint;
       ctx.beginPath();
-      ctx.arc(x, y, (0.5 + persp * 0.55) * s.mag, 0, Math.PI * 2);
+      // Real stars stay points: they get brighter, not bigger. Capped well below 2 px.
+      ctx.arc(x, y, Math.min(1.7, (0.45 + persp * 0.3) * s.mag), 0, Math.PI * 2);
       ctx.fill();
-      if (s.mag > 1.28) glint(x, y, 3 + persp * 3.2, alpha * 0.8, s.tint);
-      if (flash > 0.02) glint(x, y, 7 + 16 * flash, flash * edge, s.tint);
+      // Only the few brightest carry a fine cross, and a flare just adds a little to it.
+      if (s.mag > 1.28) glint(x, y, Math.min(5, 2.5 + persp) + 2.5 * flash, alpha * 0.7, s.tint);
     }
     ctx.globalAlpha = 1;
   }

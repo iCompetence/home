@@ -6,16 +6,15 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
 import { HamburgGlass } from './HamburgGlass';
+import { NightNav } from './NightNav';
 import { startNightSky } from './nightSky';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Button,
   Eyebrow,
   LINKEDIN_URL,
   PageShell,
   Section,
-  TopNav,
   siteHref,
 } from '@/design-system';
 
@@ -116,13 +115,14 @@ type CityPlace = 'end' | 'hero';
 
 export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }) {
   return (
-    <PageShell surface="inverse" nav={<TopNav />} footer={<Closing withCity={city === 'end'} />}>
+    <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity={city === 'end'} />}>
       <NightSky city={city} />
       <div className="relative">
         {city === 'hero' ? <HeroHamburg /> : <Hero />}
         {/* No client logos yet: the logo files are made for a light ground
-            (several have an opaque background) and need night versions first. */}
-        <HomeTabs />
+            (several have an opaque background) and need night versions first.
+            No AnchorTabs either: their navy bar slid in under the nav while
+            scrolling; the sections are in the menu instead. */}
         <Services />
         <Statement />
         <Products />
@@ -132,17 +132,6 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
       </div>
     </PageShell>
   );
-}
-
-function HomeTabs() {
-  const { t } = useLanguage();
-  const tabs = [
-    { id: 'services', label: t('topNav.services') },
-    { id: 'products', label: t('topNav.products') },
-    { id: 'process', label: t('topNav.process') },
-    { id: 'privacy-led', label: t('topNav.privacyLed') },
-  ];
-  return <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />;
 }
 
 /* ---------------- Hero ---------------- */
