@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
+import { startNightSky } from './nightSky';
 import {
   ANCHOR_SCROLL_MARGIN,
   AnchorTabs,
@@ -32,25 +33,19 @@ import {
  * every visual class is ours.
  */
 
-const STAR = {
-  double: '/images/icompetence_visual_01.png',
-  blue: '/images/icompetence_visual_blau_01.png',
-  violet: '/images/icompetence_visual_violet_01.png',
-  mint: '/images/icompetence_visual_mint.png',
-} as const;
+/**
+ * Tells the sky (nightSky.ts) that this section has a brand star. The sky
+ * finds the marker, measures the section around it and draws the star.
+ */
+function NightStar({ kind, side = 'right', soft = false }: { kind: 'blue' | 'violet' | 'mint'; side?: 'left' | 'right'; soft?: boolean }) {
+  return <span hidden data-night-star={kind} data-night-side={side} data-night-soft={soft ? '' : undefined} />;
+}
 
-/** Decorative brand star. Must sit in the same <section> as the glass it lights. */
-function Star({ src, className }: { src: string; className?: string }) {
-  return (
-    <div
-      aria-hidden
-      className={cn(
-        'pointer-events-none absolute aspect-square bg-contain bg-center bg-no-repeat',
-        className,
-      )}
-      style={{ backgroundImage: `url(${src})` }}
-    />
-  );
+/** The moving sky: one fixed canvas behind the whole page. */
+function NightSky() {
+  const canvas = useRef<HTMLCanvasElement>(null);
+  useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
+  return <canvas ref={canvas} aria-hidden className="pointer-events-none fixed inset-0 z-0 h-full w-full" />;
 }
 
 /**
@@ -77,8 +72,8 @@ const outlineOnNight = 'border-lav-white text-lav-white';
 export default function HomeNightLavender() {
   return (
     <PageShell surface="inverse" nav={<TopNav />} footer={<Closing />}>
-      {/* The stars reach past the frame on purpose; clip them instead of widening the page. */}
-      <div className="lav-sky overflow-x-clip">
+      <NightSky />
+      <div className="relative">
         <Hero />
         {/* No client logos yet: the logo files are made for a light ground
             (several have an opaque background) and need night versions first. */}
@@ -109,21 +104,6 @@ function HomeTabs() {
 
 function Hero() {
   const { t, language } = useLanguage();
-  const star = useRef<HTMLDivElement>(null);
-
-  // The guide star leans a little towards the pointer. Not with reduced motion.
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const follow = (e: globalThis.PointerEvent) => {
-      if (!star.current) return;
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
-      star.current.style.transform = `translate3d(${(x * -36).toFixed(1)}px, ${(y * -36).toFixed(1)}px, 0)`;
-    };
-    window.addEventListener('pointermove', follow, { passive: true });
-    return () => window.removeEventListener('pointermove', follow);
-  }, []);
-
   // No glass here: the first view is the sky itself, with the double star as
   // the one sharp thing in it. Glass starts with the content below.
   return (
@@ -132,12 +112,6 @@ function Hero() {
       className="relative"
       innerClassName="relative flex min-h-[calc(100svh-200px)] flex-col justify-end lg:min-h-[calc(100svh-240px)]"
     >
-      <div
-        ref={star}
-        aria-hidden
-        className="pointer-events-none absolute -right-[38%] -top-[6%] aspect-square w-[130%] bg-contain bg-center bg-no-repeat transition-transform duration-[900ms] ease-[var(--ease-settle)] md:-right-[22%] md:w-[88%] lg:-right-[10%] lg:-top-[18%] lg:w-[64%]"
-        style={{ backgroundImage: `url(${STAR.double})` }}
-      />
       <div className="relative flex flex-col gap-10 lg:gap-14">
         <h1 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.hero.headline')}</h1>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -165,9 +139,9 @@ function Hero() {
 /* ---------------- Services: three tabs, everything open ---------------- */
 
 const SERVICE_FIELDS = [
-  { id: 'data', star: STAR.blue, items: ['strategy', 'engineering', 'analytics', 'visualization'] },
-  { id: 'ai', star: STAR.violet, items: ['strategy', 'genai', 'agentic', 'llm'] },
-  { id: 'workshops', star: STAR.mint, items: ['ai', 'enablement', 'briefings', 'trainings'] },
+  { id: 'data', star: 'blue', items: ['strategy', 'engineering', 'analytics', 'visualization'] },
+  { id: 'ai', star: 'violet', items: ['strategy', 'genai', 'agentic', 'llm'] },
+  { id: 'workshops', star: 'mint', items: ['ai', 'enablement', 'briefings', 'trainings'] },
 ] as const;
 
 type ServiceFieldId = (typeof SERVICE_FIELDS)[number]['id'];
@@ -180,17 +154,8 @@ function Services() {
     <Section id="services" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
       <h2 className="lav-h1 text-lav-white">{t('lavender.services.title')}</h2>
 
-      {/* One star per field; the active one fades in behind the glass. */}
-      {SERVICE_FIELDS.map((f) => (
-        <Star
-          key={f.id}
-          src={f.star}
-          className={cn(
-            '-right-[20%] -top-[8%] w-[70%] transition-opacity duration-[var(--duration-slow)] md:-right-[6%] md:-top-[16%] md:w-[44%] lg:-top-[22%] lg:right-[4%] lg:w-[30%]',
-            field === f.id ? 'opacity-100' : 'opacity-0',
-          )}
-        />
-      ))}
+      {/* The section's star takes the colour of the open field. */}
+      <NightStar kind={SERVICE_FIELDS.find((f) => f.id === field)?.star ?? 'blue'} />
 
       <Tabs
         value={field}
@@ -247,6 +212,7 @@ function Statement() {
   const { t, language } = useLanguage();
   return (
     <Section>
+      <NightStar kind="violet" side="right" soft />
       <div className="flex flex-col items-start gap-10 lg:gap-14">
         <p className="lav-statement max-w-[1100px] text-lav-white">{t('lavender.statement')}</p>
         <Button asChild variant="white">
@@ -319,7 +285,7 @@ function Products() {
   return (
     <Section id="products" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
       <h2 className="lav-h1 text-lav-white">{t('topNav.products')}</h2>
-      <Star src={STAR.double} className="left-[4%] top-[10%] w-[110%] md:left-[18%] md:w-[72%] lg:left-[24%] lg:top-[2%] lg:w-[56%]" />
+      <NightStar kind="blue" side="left" soft />
       <div className="relative -mx-4 mt-10 grid gap-4 md:-mx-8 lg:-mx-10 lg:mt-14 lg:grid-cols-2">
         <ProductTile
           featured
@@ -367,7 +333,7 @@ function Testimonials() {
   const { t } = useLanguage();
   return (
     <Section className="relative" innerClassName="relative">
-      <Star src={STAR.violet} className="-bottom-[10%] -right-[30%] w-[80%] md:-right-[10%] md:w-[48%] lg:-bottom-[28%] lg:-right-[4%] lg:w-[30%]" />
+      <NightStar kind="violet" side="right" />
       <Tabs defaultValue={TESTIMONIALS[0].key} orientation="vertical" className="block gap-0">
         <Glass className="grid gap-10 lg:grid-cols-12 lg:py-14">
           <div className="flex flex-col gap-8 lg:col-span-7 lg:gap-10">
@@ -440,7 +406,7 @@ function PrivacyLed() {
   const { t, language } = useLanguage();
   return (
     <Section id="privacy-led" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
-      <Star src={STAR.mint} className="-left-[30%] -top-[30%] w-[110%] md:w-[70%] lg:-left-[16%] lg:-top-[60%] lg:w-[52%]" />
+      <NightStar kind="mint" side="left" />
       <Glass className="grid gap-10 lg:grid-cols-12 lg:items-end lg:py-14">
         <h2 className="lav-h1 text-lav-white lg:col-span-6">{t('lavender.privacyLed.title')}</h2>
         <div className="flex flex-col items-start gap-8 lg:col-span-5 lg:col-start-8">
@@ -474,11 +440,9 @@ function Closing() {
     <Section
       as="footer"
       dsName="FooterNight"
-      className="lav-sky relative overflow-hidden pb-0"
+      className="relative overflow-hidden pb-0"
       innerClassName="relative"
     >
-      <Star src={STAR.double} className="bottom-[2%] left-[10%] w-[100%] md:left-[36%] md:w-[56%] lg:bottom-[6%] lg:left-[48%] lg:w-[36%]" />
-
       <div className="relative flex flex-col items-start gap-10 lg:gap-14">
         <h2 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.cta.heading')}</h2>
         <Button asChild variant="white">

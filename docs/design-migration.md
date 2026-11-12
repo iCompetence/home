@@ -144,8 +144,14 @@ Stand:
       `FooterNight` statt `ClosingBlock`: eine Schlusszeile, Kontaktzeile, Hamburg-Skyline als
       Abschluss. Reiter-Inhalte per `forceMount` im HTML (alle 12 Leistungen, alle 7 Zitate).
       Produktbilder ohne farbige Bühne: `public/images/nacht-*.webp`.
+      Bewegter Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React):
+      kleine Sterne in Perspektive (Scrollen fliegt hinein, Funkeln, Aufblitzen), Leitstern
+      (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein
+      Stern, der aus der Tiefe kommt und vorbeizieht (Marker `data-night-star`). Bei reduzierter
+      Bewegung nur Neuzeichnen beim Scrollen. `.lav-glass` dafür dunkler (Lesbarkeit).
       Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
-      EN nicht geprüft; kleine Sterne stehen still.
+      EN nicht geprüft; Intro (Stern entsteht) aus dem Prototyp nicht übernommen; Leistung der
+      Canvas auf schwachen Geräten nicht gemessen.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
