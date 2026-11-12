@@ -140,8 +140,12 @@ Stand:
       Reiter kommen aus `src/components/ui/tabs` (shadcn/Radix), nur das Verhalten.
       Neu, nur für diese Seite: `.lav-sky`, `.lav-glass`, Typostufe `.lav-mega` (44/72/112),
       `rounded-frame` (40 px), `public/images/hamburg-skyline.webp`.
+      Hero ohne Glas (Doppelstern frei, folgt dem Zeiger leicht), dunkle Nav. Eigene Fußzeile
+      `FooterNight` statt `ClosingBlock`: eine Schlusszeile, Kontaktzeile, Hamburg-Skyline als
+      Abschluss. Reiter-Inhalte per `forceMount` im HTML (alle 12 Leistungen, alle 7 Zitate).
+      Produktbilder ohne farbige Bühne: `public/images/nacht-*.webp`.
       Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
-      Fußzeile ist der bestehende `Footer`; EN nicht geprüft; Sterne stehen still.
+      EN nicht geprüft; kleine Sterne stehen still.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die

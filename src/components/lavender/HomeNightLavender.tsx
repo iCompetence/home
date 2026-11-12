@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -10,7 +10,7 @@ import {
   AnchorTabs,
   Button,
   Eyebrow,
-  Footer,
+  LINKEDIN_URL,
   PageShell,
   Section,
   TopNav,
@@ -76,7 +76,7 @@ const outlineOnNight = 'border-lav-white text-lav-white';
 
 export default function HomeNightLavender() {
   return (
-    <PageShell surface="inverse" nav={<TopNav surface="light" />} footer={<Closing />}>
+    <PageShell surface="inverse" nav={<TopNav />} footer={<Closing />}>
       {/* The stars reach past the frame on purpose; clip them instead of widening the page. */}
       <div className="lav-sky overflow-x-clip">
         <Hero />
@@ -109,13 +109,36 @@ function HomeTabs() {
 
 function Hero() {
   const { t, language } = useLanguage();
+  const star = useRef<HTMLDivElement>(null);
+
+  // The guide star leans a little towards the pointer. Not with reduced motion.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const follow = (e: globalThis.PointerEvent) => {
+      if (!star.current) return;
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      star.current.style.transform = `translate3d(${(x * -36).toFixed(1)}px, ${(y * -36).toFixed(1)}px, 0)`;
+    };
+    window.addEventListener('pointermove', follow, { passive: true });
+    return () => window.removeEventListener('pointermove', follow);
+  }, []);
+
+  // No glass here: the first view is the sky itself, with the double star as
+  // the one sharp thing in it. Glass starts with the content below.
   return (
-    <Section id="top" className="relative" innerClassName="relative">
-      <Star
-        src={STAR.double}
-        className="-bottom-[45%] -right-[18%] w-[130%] md:-bottom-[70%] md:w-[90%] lg:-bottom-[95%] lg:-right-[12%] lg:w-[78%]"
+    <Section
+      id="top"
+      className="relative"
+      innerClassName="relative flex min-h-[calc(100svh-200px)] flex-col justify-end lg:min-h-[calc(100svh-240px)]"
+    >
+      <div
+        ref={star}
+        aria-hidden
+        className="pointer-events-none absolute -right-[38%] -top-[6%] aspect-square w-[130%] bg-contain bg-center bg-no-repeat transition-transform duration-[900ms] ease-[var(--ease-settle)] md:-right-[22%] md:w-[88%] lg:-right-[10%] lg:-top-[18%] lg:w-[64%]"
+        style={{ backgroundImage: `url(${STAR.double})` }}
       />
-      <Glass className="flex flex-col gap-12 md:gap-16 lg:gap-24 lg:py-16">
+      <div className="relative flex flex-col gap-10 lg:gap-14">
         <h1 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.hero.headline')}</h1>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <p className="lav-lead max-w-[560px] text-lav-white/80">{t('lavender.hero.subline')}</p>
@@ -134,7 +157,7 @@ function Hero() {
             </Button>
           </div>
         </div>
-      </Glass>
+      </div>
     </Section>
   );
 }
@@ -163,7 +186,7 @@ function Services() {
           key={f.id}
           src={f.star}
           className={cn(
-            'left-[-12%] top-[6%] w-[110%] transition-opacity duration-[var(--duration-slow)] md:left-[-6%] md:w-[70%] lg:top-[-4%] lg:w-[56%]',
+            '-right-[20%] -top-[8%] w-[70%] transition-opacity duration-[var(--duration-slow)] md:-right-[6%] md:-top-[16%] md:w-[44%] lg:-top-[22%] lg:right-[4%] lg:w-[30%]',
             field === f.id ? 'opacity-100' : 'opacity-0',
           )}
         />
@@ -181,7 +204,7 @@ function Services() {
               <TabsTrigger
                 key={f.id}
                 value={f.id}
-                className="h-auto flex-none justify-start whitespace-normal rounded-none border-0 p-0 text-left font-brand text-[40px] font-medium leading-[1] tracking-[-1.5px] text-lav-white opacity-40 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 md:text-[56px] lg:text-[80px] lg:tracking-[-3px]"
+                className="h-auto flex-none justify-start whitespace-normal rounded-none border-0 p-0 text-left font-brand text-[40px] font-medium leading-[1] tracking-[-1.5px] text-lav-white opacity-45 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 md:text-[56px] lg:text-[80px] lg:tracking-[-3px]"
               >
                 {t(`lavender.services.${f.id}.title`)}
               </TabsTrigger>
@@ -189,7 +212,7 @@ function Services() {
           </TabsList>
 
           {SERVICE_FIELDS.map((f) => (
-            <TabsContent key={f.id} value={f.id} className="lg:col-span-7">
+            <TabsContent key={f.id} value={f.id} forceMount className="data-[state=inactive]:hidden lg:col-span-7">
               <ul className="m-0 list-none p-0">
                 {f.items.map((item, i) => (
                   <li
@@ -296,14 +319,14 @@ function Products() {
   return (
     <Section id="products" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
       <h2 className="lav-h1 text-lav-white">{t('topNav.products')}</h2>
-      <Star src={STAR.double} className="left-[8%] top-[4%] w-[120%] md:w-[84%] lg:left-[14%] lg:w-[72%]" />
+      <Star src={STAR.double} className="left-[4%] top-[10%] w-[110%] md:left-[18%] md:w-[72%] lg:left-[24%] lg:top-[2%] lg:w-[56%]" />
       <div className="relative -mx-4 mt-10 grid gap-4 md:-mx-8 lg:-mx-10 lg:mt-14 lg:grid-cols-2">
         <ProductTile
           featured
           eyebrow={t('lavender.products.featuredEyebrow')}
           title={t('lavender.products.empco.title')}
           description={t('lavender.products.empco.desc')}
-          image="/images/lavender-empco.png"
+          image="/images/nacht-empco.webp"
           imageAlt={t('lavender.products.empco.imageAlt')}
           href={siteHref(language, 'empco-audit')}
         />
@@ -311,7 +334,7 @@ function Products() {
           eyebrow={t('lavender.products.eyebrow')}
           title="iKnow"
           description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
+          image="/images/nacht-iknow.webp"
           imageAlt={t('lavender.products.iknow.imageAlt')}
           href={siteHref(language, 'iknow')}
         />
@@ -319,7 +342,7 @@ function Products() {
           eyebrow={t('lavender.products.eyebrow')}
           title="Analytics Agent"
           description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
+          image="/images/nacht-analytics-agent.webp"
           imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
           href={siteHref(language, 'analytics-agent')}
         />
@@ -344,13 +367,13 @@ function Testimonials() {
   const { t } = useLanguage();
   return (
     <Section className="relative" innerClassName="relative">
-      <Star src={STAR.violet} className="-right-[30%] -top-[20%] w-[110%] md:w-[70%] lg:-right-[14%] lg:-top-[38%] lg:w-[56%]" />
+      <Star src={STAR.violet} className="-bottom-[10%] -right-[30%] w-[80%] md:-right-[10%] md:w-[48%] lg:-bottom-[28%] lg:-right-[4%] lg:w-[30%]" />
       <Tabs defaultValue={TESTIMONIALS[0].key} orientation="vertical" className="block gap-0">
         <Glass className="grid gap-10 lg:grid-cols-12 lg:py-14">
           <div className="flex flex-col gap-8 lg:col-span-7 lg:gap-10">
             <Eyebrow tone="white">{t('lavender.testimonials.title')}</Eyebrow>
             {TESTIMONIALS.map((item) => (
-              <TabsContent key={item.key} value={item.key} className="flex-none">
+              <TabsContent key={item.key} value={item.key} forceMount className="flex-none data-[state=inactive]:hidden">
                 <blockquote className="m-0">
                   <p className="lav-h2 text-lav-white">{t(`lavender.testimonials.${item.key}.quote`)}</p>
                 </blockquote>
@@ -363,7 +386,7 @@ function Testimonials() {
                 key={item.key}
                 value={item.key}
                 className={cn(
-                  'h-auto flex-none flex-col items-start justify-start gap-1 whitespace-normal rounded-none border-0 px-0 py-4 text-left font-brand text-lav-white opacity-50 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100',
+                  'h-auto flex-none flex-col items-start justify-start gap-1 whitespace-normal rounded-none border-0 px-0 py-4 text-left font-brand text-lav-white opacity-60 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100',
                   i > 0 && 'border-t border-lav-white/20',
                 )}
               >
@@ -434,33 +457,62 @@ function PrivacyLed() {
   );
 }
 
-/* ---------------- Closing: the landing in Hamburg, then the footer ---------------- */
+/* ---------------- Closing: the landing in Hamburg ---------------- */
 
+const EMAIL = 'info@icompetence.de';
+const PHONE = '+49 40 22636380';
+
+/**
+ * Own footer instead of ClosingBlock + Footer: those end on a second big
+ * headline ("Separate the signal …") right under the CTA line. Here the page
+ * has one closing line, a compact row of contact and legal links, and the
+ * Hamburg skyline as the very last thing.
+ */
 function Closing() {
   const { t, language } = useLanguage();
   return (
-    <>
-      <Section as="div" className="lav-sky relative overflow-hidden pb-0" innerClassName="relative">
-        <Star src={STAR.double} className="-bottom-[30%] left-[10%] w-[110%] md:left-[24%] md:w-[70%] lg:-bottom-[42%] lg:left-[34%] lg:w-[52%]" />
-        <div className="relative flex flex-col items-start gap-10 lg:gap-14">
-          <h2 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.cta.heading')}</h2>
-          <Button asChild variant="white">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('topNav.letsTalk')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+    <Section
+      as="footer"
+      dsName="FooterNight"
+      className="lav-sky relative overflow-hidden pb-0"
+      innerClassName="relative"
+    >
+      <Star src={STAR.double} className="bottom-[2%] left-[10%] w-[100%] md:left-[36%] md:w-[56%] lg:bottom-[6%] lg:left-[48%] lg:w-[36%]" />
+
+      <div className="relative flex flex-col items-start gap-10 lg:gap-14">
+        <h2 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.cta.heading')}</h2>
+        <Button asChild variant="white">
+          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+            {t('topNav.letsTalk')}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </a>
+        </Button>
+      </div>
+
+      <div className="relative mt-[var(--section-pad-v)] grid gap-8 border-t border-lav-white/20 pt-8 md:grid-cols-12 md:gap-10">
+        <div className="flex flex-col gap-3 md:col-span-4">
+          <Eyebrow tone="white">{t('footer.inquiries')}</Eyebrow>
+          <a href={`mailto:${EMAIL}`} className="lav-body text-lav-white">{EMAIL}</a>
         </div>
-        {/* Decorative: the skyline says "Hamburg", which the footer's address states in text. */}
-        <img
-          src="/images/hamburg-skyline.webp"
-          alt=""
-          aria-hidden
-          loading="lazy"
-          className="relative mt-10 block w-[calc(100%+2*var(--section-pad-h))] max-w-none -translate-x-[var(--section-pad-h)] lg:mt-0"
-        />
-      </Section>
-      <Footer />
-    </>
+        <div className="flex flex-col gap-3 md:col-span-4">
+          <Eyebrow tone="white">{t('footer.phone')}</Eyebrow>
+          <span className="lav-body text-lav-white">{PHONE}</span>
+        </div>
+        <div className="flex flex-wrap items-start gap-x-8 gap-y-3 md:col-span-4 md:justify-end">
+          <a href={siteHref(language, 'imprint')} className="lav-body text-lav-white/80">{t('footer.imprint')}</a>
+          <a href={siteHref(language, 'privacy-policy')} className="lav-body text-lav-white/80">{t('footer.privacy')}</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="lav-body text-lav-white/80">LinkedIn</a>
+        </div>
+      </div>
+
+      {/* Decorative: the skyline says "Hamburg"; the address is on the imprint page. */}
+      <img
+        src="/images/hamburg-skyline.webp"
+        alt=""
+        aria-hidden
+        loading="lazy"
+        className="relative mt-6 block w-[calc(100%+2*var(--section-pad-h))] max-w-none -translate-x-[var(--section-pad-h)] lg:-mt-10"
+      />
+    </Section>
   );
 }
