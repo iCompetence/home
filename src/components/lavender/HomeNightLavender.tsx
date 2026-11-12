@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
@@ -13,8 +13,12 @@ import {
   Button,
   Eyebrow,
   LINKEDIN_URL,
+  LinkedInGlyph,
   PageShell,
+  ProcessAccordion,
   Section,
+  ServicesCarousel,
+  TestimonialSlider,
   siteHref,
 } from '@/design-system';
 
@@ -166,20 +170,6 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
     };
   }, [city]);
 
-  const sections = (
-    <>
-      {/* No client logos yet: the logo files need versions for both grounds.
-          No AnchorTabs either: their navy bar slid in under the nav while
-          scrolling; the sections are in the menu instead. */}
-      <Services />
-      <Statement />
-      <Products />
-      <Testimonials />
-      <Process />
-      <PrivacyLed />
-    </>
-  );
-
   if (city === 'hero') {
     return (
       <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing} />}>
@@ -189,21 +179,41 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
             and would not be a scroll target. */}
         <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
           <HeroHamburg hidden={closing} />
-          <DayLayer>{sections}</DayLayer>
-          {/* The last screen: the day layer has scrolled out and the stage is
-              back. The footer (ClosingStage) lies over this space. */}
-          <div aria-hidden className={STAGE_HEIGHT} />
+          {/* On the day layer: services, testimonials and process are the
+              components of today's Lavender home (design system); statement,
+              products and Privacy-Led are the rows of this study. */}
+          <DayLayer>
+            <DayServices />
+            <Statement />
+            <Products />
+            <DayTestimonials />
+            <DayProcess />
+            <PrivacyLed />
+          </DayLayer>
+          {/* The last screen: the day layer scrolls out and the stage is back.
+              The space is one nav height short of a screen, so the layer stops
+              as a strip under the nav. The footer (ClosingStage) lies over it. */}
+          <div aria-hidden className="h-[calc(max(100svh,540px)-76px)] lg:h-[calc(max(100svh,540px)-92px)]" />
         </div>
       </PageShell>
     );
   }
 
+  // All-night variant (Hamburg at the end of the page): the earlier state of
+  // this study, kept for comparison.
   return (
     <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity />}>
       <NightSky city={city} />
       <div className="relative">
         <Hero />
-        {sections}
+        {/* No client logos: the logo files are made for a light ground. No
+            AnchorTabs: their navy bar slid in under the nav while scrolling. */}
+        <Services />
+        <Statement />
+        <Products />
+        <Testimonials />
+        <Process />
+        <PrivacyLed />
       </div>
     </PageShell>
   );
@@ -225,7 +235,7 @@ function DayLayer({ children }: { children: ReactNode }) {
     <div
       data-ds="DayLayer"
       data-surface="light"
-      className="relative z-10 rounded-t-card bg-lav-page text-lav-navy lg:rounded-t-frame"
+      className="relative z-10 rounded-card bg-lav-page text-lav-navy lg:rounded-frame"
     >
       <canvas aria-hidden data-sky="day" className="pointer-events-none fixed inset-0 h-full w-full" />
       {children}
@@ -301,42 +311,136 @@ function HeroHamburg({ hidden }: { hidden: boolean }) {
 }
 
 /**
- * The footer of the Hamburg hero variant: the closing text on the same stage.
+ * The footer of the Hamburg hero variant, on the same stage. Built like the
+ * design system's Footer (headline left, contact right, a strip with the legal
+ * links and "back to top"), with the closing call to action as its headline
+ * and the skyline as its end.
+ *
  * It is the last thing in the document, pulled up over the page's last screen
  * and pinned to the screen (sticky bottom), so it stands still on the stage
- * while the day layer scrolls out. Hidden until the layer covers the hero.
+ * while the day layer scrolls out. The layer stops as a strip under the nav
+ * (see the spacer in HomeNightLavender), hence the top padding. Hidden until
+ * the layer covers the hero.
  */
 function ClosingStage({ shown }: { shown: boolean }) {
   const { t, language } = useLanguage();
-  const link = 'text-lav-ink no-underline';
+  const value = 'lav-body font-medium text-lav-ink no-underline';
+  const legal = 'lav-body font-medium text-lav-ink/70 no-underline';
+  const toTop = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
   return (
     <footer
       data-ds="FooterNight"
       data-stage="closing"
       className={cn('sticky bottom-0 -mt-[max(100svh,540px)] flex flex-col', STAGE_HEIGHT, !shown && 'invisible')}
     >
-      {/* A wider measure than the hero: the closing line is longer and should stay on two lines. */}
-      <div className={cn(STAGE_TEXT, 'max-w-[1240px]')}>
-        <h2 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
-        <Button asChild variant="white" className={solidOnNight}>
-          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-            {t('topNav.letsTalk')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-        <div className="flex flex-col items-center gap-4">
-          <p className="lav-body flex flex-wrap justify-center gap-x-8 gap-y-2">
-            <a href={`mailto:${EMAIL}`} className={link}>{EMAIL}</a>
-            <span className="text-lav-ink">{PHONE}</span>
-          </p>
-          <p className="lav-small flex flex-wrap justify-center gap-x-8 gap-y-2">
-            <a href={siteHref(language, 'imprint')} className={`${link} text-lav-ink/80`}>{t('footer.imprint')}</a>
-            <a href={siteHref(language, 'privacy-policy')} className={`${link} text-lav-ink/80`}>{t('footer.privacy')}</a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={`${link} text-lav-ink/80`}>LinkedIn</a>
-          </p>
+      <div className="relative z-[1] mx-auto flex w-full max-w-frame flex-col gap-8 px-[var(--section-pad-h)] pt-[108px] lg:gap-10 lg:pt-[140px]">
+        <div className="flex w-full flex-col justify-between gap-8 md:flex-row md:gap-10">
+          <div className="flex max-w-[720px] flex-col items-start gap-8">
+            <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
+            <Button asChild variant="white" className={solidOnNight}>
+              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+                {t('topNav.letsTalk')}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </a>
+            </Button>
+          </div>
+          <div className="flex flex-row flex-wrap items-start gap-x-10 gap-y-6 md:flex-col md:items-end md:gap-8">
+            <div className="flex flex-col items-start gap-3 md:items-end">
+              <Eyebrow className="text-lav-ink/70">{t('footer.inquiries')}</Eyebrow>
+              <a href={`mailto:${EMAIL}`} className={value}>{EMAIL}</a>
+            </div>
+            <div className="flex flex-col items-start gap-3 md:items-end">
+              <Eyebrow className="text-lav-ink/70">{t('footer.phone')}</Eyebrow>
+              <span className={value}>{PHONE}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex w-full items-center justify-between gap-6 border-t border-lav-ink/30 pt-6">
+          <div className="flex items-center gap-6 md:gap-8">
+            <a href={siteHref(language, 'imprint')} className={legal}>{t('footer.imprint')}</a>
+            <a href={siteHref(language, 'privacy-policy')} className={legal}>{t('footer.privacy')}</a>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('lavender.common.linkedin')}
+              className="inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline"
+            >
+              <LinkedInGlyph size={18} />
+            </a>
+          </div>
+          <button
+            type="button"
+            onClick={toTop}
+            className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70"
+          >
+            <span className="lav-body font-medium">{t('footer.backToTop')}</span>
+            <ChevronUp size={16} strokeWidth={2} />
+          </button>
         </div>
       </div>
     </footer>
+  );
+}
+
+/* ---------------- Day layer: the Lavender home's components ---------------- */
+
+function DayServices() {
+  const { t } = useLanguage();
+  const card = (id: string, image: string, items: readonly string[]) => ({
+    title: t(`lavender.services.${id}.title`),
+    image,
+    pills: items.map((item) => ({
+      label: t(`lavender.services.${id}.${item}.label`),
+      description: t(`lavender.services.${id}.${item}.desc`),
+    })),
+  });
+  return (
+    <ServicesCarousel
+      cards={[
+        card('data', '/images/iC_Stern_Blau.png', SERVICE_FIELDS[0].items),
+        card('ai', '/images/iC_Stern_Gelb.png', SERVICE_FIELDS[1].items),
+        card('workshops', '/images/iC_Stern_Gruen.png', SERVICE_FIELDS[2].items),
+      ]}
+      title={t('lavender.services.title')}
+      className={ANCHOR_SCROLL_MARGIN}
+    />
+  );
+}
+
+function DayTestimonials() {
+  const { t } = useLanguage();
+  return (
+    <TestimonialSlider
+      items={TESTIMONIALS.map((item) => ({
+        quote: t(`lavender.testimonials.${item.key}.quote`),
+        name: item.name,
+        role: t(`lavender.testimonials.${item.key}.role`),
+      }))}
+      title={t('lavender.testimonials.title')}
+      prevLabel={t('lavender.testimonials.prev')}
+      nextLabel={t('lavender.testimonials.next')}
+    />
+  );
+}
+
+function DayProcess() {
+  const { t } = useLanguage();
+  return (
+    <ProcessAccordion
+      steps={PROCESS_STEPS.map((step) => ({
+        number: step.number,
+        title: t(`lavender.process.${step.key}.title`),
+        description: t(`lavender.process.${step.key}.desc`),
+      }))}
+      title={t('lavender.process.title')}
+      className={ANCHOR_SCROLL_MARGIN}
+    />
   );
 }
 

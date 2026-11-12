@@ -177,7 +177,15 @@ Stand:
       Schlusstext statt dem Hero-Text: `ClosingStage` ist der `<footer>`, liegt per negativem
       Rand über dem letzten Bildschirm und klebt am unteren Rand (sticky). Getauscht wird, während
       das Blatt den Bildschirm ganz bedeckt (`closing` in HomeNightLavender). Das Logo bleibt beim
-      Scrollen stehen und wird auf dem Blatt dunkel. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
+      Scrollen stehen und wird auf dem Blatt dunkel.
+      Stand 2026-11-12 (Rückmeldung Dennis): Auf dem Blatt sind Leistungen, Kundenstimmen und
+      „So arbeiten wir“ die Komponenten der heutigen Lavender-Startseite (`ServicesCarousel`,
+      `TestimonialSlider`, `ProcessAccordion`); aus der Studie bleiben Statement, Produktzeilen
+      und Privacy-Led. Der Footer (`ClosingStage`) ist wie `Footer` aufgebaut (Zeile links,
+      Kontakt rechts, Leiste mit Impressum/Datenschutz/LinkedIn und „Nach oben“), darunter die
+      Skyline. Das Blatt hat unten runde Ecken und bleibt am Seitenende als Streifen in
+      Nav-Höhe stehen. Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene
       groß (halbe Bildschirmbreite) und liegt dort auf einer eigenen Leinwand über dem Weiß und

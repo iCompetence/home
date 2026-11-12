@@ -258,7 +258,7 @@ export function startNightSky(
     return !!box && y >= box.top && y <= box.bottom;
   }
 
-  /** The guide star on the day layer's canvas, clipped to the layer (rounded top corners included). */
+  /** The guide star on the day layer's canvas, clipped to the layer (rounded corners included). */
   function drawDay(star: { x: number; y: number; alpha: number }, size: number, box: DOMRect) {
     if (!dayCanvas || !dayCtx) return;
     const top = Math.max(0, box.top);
@@ -275,7 +275,7 @@ export function startNightSky(
     const radius = parseFloat(getComputedStyle(layer as Element).borderTopLeftRadius) || 0;
     dayCtx.save();
     dayCtx.beginPath();
-    if (radius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, [radius, radius, 0, 0]);
+    if (radius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, radius);
     else dayCtx.rect(box.left, box.top, box.width, box.height);
     dayCtx.clip();
     dayCtx.globalAlpha = star.alpha;

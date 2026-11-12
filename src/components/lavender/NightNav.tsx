@@ -44,8 +44,14 @@ export function NightNav() {
   useEffect(() => {
     const layer = document.querySelector('[data-ds="DayLayer"]');
     const onScroll = () => {
-      const box = layer?.getBoundingClientRect();
-      setOnDay(!!box && box.top <= 46 && box.bottom > 46);
+      // Behind the nav means: at 46 px from the top (the middle of the nav).
+      const behind = (el: Element | null | undefined) => {
+        const box = el?.getBoundingClientRect();
+        return !!box && box.top <= 46 && box.bottom > 46;
+      };
+      // A navy band on the layer (the testimonials) counts as night again.
+      const band = layer ? Array.from(layer.querySelectorAll(':scope > .bg-lav-navy')).some(behind) : false;
+      setOnDay(behind(layer) && !band);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
