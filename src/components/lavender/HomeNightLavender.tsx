@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react';
 import { ArrowDown, ArrowUpRight, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,7 +20,6 @@ import {
   ServicesCarousel,
   TestimonialSlider,
   siteHref,
-  smoothAnchor,
 } from '@/design-system';
 
 /**
@@ -167,6 +166,44 @@ const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
 const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent`;
 
 /**
+ * The hero's button: glides the page to its anchor over about a second, so
+ * the day layer visibly rises over the hero. The browser's own smooth
+ * scrolling covers the distance in a fraction of that and reads as a jump.
+ * Any scrolling by the visitor ends the glide; with reduced motion it jumps.
+ */
+function glideTo(e: MouseEvent<HTMLAnchorElement>) {
+  const id = e.currentTarget.getAttribute('href')?.slice(1);
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return;
+  e.preventDefault();
+  const from = window.scrollY;
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const to = Math.max(0, target.getBoundingClientRect().top + from - margin);
+  const jump = (top: number) => window.scrollTo({ top, behavior: 'instant' });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    jump(to);
+    return;
+  }
+  const duration = 1100;
+  const start = performance.now();
+  let stopped = false;
+  const stop = () => {
+    stopped = true;
+  };
+  const inputs = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+  inputs.forEach((type) => window.addEventListener(type, stop, { once: true, passive: true }));
+  const step = (now: number) => {
+    if (stopped) return;
+    const t = Math.min(1, (now - start) / duration);
+    const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    jump(from + (to - from) * eased);
+    if (t < 1) requestAnimationFrame(step);
+    else inputs.forEach((type) => window.removeEventListener(type, stop));
+  };
+  requestAnimationFrame(step);
+}
+
+/**
  * Where the glass city of Hamburg stands: at the end of the page (the trip
  * lands there) or in the hero (the trip starts there). Two variants to compare.
  */
@@ -291,7 +328,7 @@ function Hero() {
           <div className="flex flex-wrap gap-4">
             {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
             <Button asChild variant="white" className={solidOnNight}>
-              <a href="#services" onClick={smoothAnchor}>
+              <a href="#services" onClick={glideTo}>
                 {t('lavender.hero.seeServices')}
                 <ArrowDown size={20} strokeWidth={2} />
               </a>
@@ -328,7 +365,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
         <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
         <Button asChild variant="white" className={solidOnNight}>
-          <a href="#services" onClick={smoothAnchor}>
+          <a href="#services" onClick={glideTo}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
           </a>
