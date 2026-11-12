@@ -7,7 +7,9 @@
  * - small stars in perspective: scrolling flies into them, they twinkle at
  *   their own pace and now and then one flares into a four-pointed star;
  * - the guide star (the blue/violet double star): large beside the hero, then
- *   small and fixed overhead for the whole trip, finally down over Hamburg;
+ *   small and fixed overhead for the whole trip, finally down over Hamburg.
+ *   Down there it follows the pointer; over the glass city (HamburgGlass) it
+ *   shrinks away and the city's own light takes over at the same spot;
  * - one brand star per section: it comes out of the depth as a point, rests
  *   beside the section while that is centred, then passes the camera.
  *
@@ -32,8 +34,8 @@ const DEFAULT_SOURCES: Record<Kind, string> = {
 const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4'];
 /** How fast a section's star grows while its section scrolls through. */
 const ZOOM = 3.3;
-/** Width / height of public/images/hamburg-skyline.webp. */
-const SKYLINE_RATIO = 661 / 2000;
+/** Height / width of the Hamburg rendering at the end of the page (HamburgGlass). */
+const SKYLINE_RATIO = 959 / 2600;
 
 type FieldStar = { x: number; y: number; z: number; tint: string; rate: number; phase: number; mag: number };
 type Waypoint = { marker: HTMLElement; section: Element; kind: string; since: number };
@@ -57,6 +59,12 @@ export function startNightSky(
   let last = performance.now();
   let time = 0;
   const mouse = { x: 0, y: 0 };
+  // Pointer in px, the guide star's eased chase of it, and how far the star has melted into the city (0..1).
+  const pointer = { x: 0, y: 0, seen: false };
+  const chase = { x: 0, y: 0 };
+  let melt = 0;
+  const follows = !reduce && window.matchMedia('(hover: hover)').matches;
+  const city = document.querySelector('[data-ds="HamburgGlass"]');
   const ease = { x: 0, y: 0 };
   let field: FieldStar[] = [];
   const flare = { index: -1, start: 0 };
@@ -122,17 +130,25 @@ export function startNightSky(
       : { x: W * 0.76, y: H * 0.46, size: Math.min(W * 0.66, H * 1.1) };
     const small = { x: W * 0.5, y: H * 0.17, size: Math.max(84, Math.min(W, H) * 0.11) };
     const skyline = W * SKYLINE_RATIO;
+    // It comes to rest in the gap of sky between the Rathaus tower and the
+    // Elbphilharmonie, above the roofs, so it does not sit on a lit building.
     const land = {
-      x: W * (compact ? 0.72 : 0.66),
-      y: H - skyline * (compact ? 1.0 : 0.8),
-      size: Math.min(420, Math.max(150, skyline * 0.8)),
+      x: W * 0.69,
+      y: H - skyline * 0.74,
+      size: Math.min(250, Math.max(64, skyline * 0.44)),
     };
+    const tripX = lerp(big.x, small.x, away) + ease.x * W * 0.04 * (1 - away);
+    const tripY = lerp(big.y, small.y, away) + ease.y * H * 0.04 * (1 - away);
+    // On the ground the star goes where the pointer is, if there is one.
+    const led = follows && pointer.seen;
     return {
-      x: lerp(lerp(big.x, small.x, away), land.x, down) + ease.x * W * 0.04 * (1 - away),
-      y: lerp(lerp(big.y, small.y, away), land.y, down) + ease.y * H * 0.04 * (1 - away),
-      size: lerp(lerp(big.size, small.size, away), land.size, down),
+      x: lerp(tripX, led ? chase.x : land.x, down),
+      y: lerp(tripY, led ? chase.y : land.y, down),
+      size: lerp(lerp(big.size, small.size, away), land.size, down) * (1 - melt),
       // Overhead it passes behind running text, so it steps back; full strength at both ends.
-      alpha: lerp(lerp(1, 0.55, away), 1, down),
+      alpha: lerp(lerp(1, 0.55, away), 1, down) * (1 - melt),
+      // The sky turns around where the star would rest, not around the pointer.
+      pivot: { x: lerp(tripX, land.x, down), y: lerp(tripY, land.y, down) },
     };
   }
 
@@ -231,10 +247,10 @@ export function startNightSky(
     ctx.clearRect(0, 0, W, H);
     const down = descent();
     const pole = guideStar(down);
-    drawField(pole, down);
+    drawField(pole.pivot, down);
     for (let i = waypoints.length - 1; i >= 0; i--) drawWaypoint(waypoints[i], down);
     const sprite = sprites.double;
-    if (sprite) {
+    if (sprite && pole.size > 1) {
       const size = pole.size * (reduce ? 1 : 1 + 0.025 * Math.sin(time / 640));
       ctx.globalAlpha = pole.alpha;
       ctx.drawImage(sprite, pole.x - size / 2, pole.y - size / 2, size, size);
@@ -248,6 +264,13 @@ export function startNightSky(
     time += dt;
     ease.x += (mouse.x - ease.x) * 0.05;
     ease.y += (mouse.y - ease.y) * 0.05;
+    if (follows && pointer.seen) {
+      chase.x += (pointer.x - chase.x) * 0.12;
+      chase.y += (pointer.y - chase.y) * 0.12;
+      const box = city?.getBoundingClientRect();
+      const over = !!box && pointer.x >= box.left && pointer.x <= box.right && pointer.y >= box.top && pointer.y <= box.bottom;
+      melt += ((over ? 1 : 0) - melt) * 0.14;
+    }
     if (time > nextFlare) {
       flare.index = Math.floor(Math.random() * field.length);
       flare.start = time;
@@ -260,6 +283,13 @@ export function startNightSky(
   const onPointer = (e: PointerEvent) => {
     mouse.x = (e.clientX / W) * 2 - 1;
     mouse.y = (e.clientY / H) * 2 - 1;
+    if (!pointer.seen) {
+      chase.x = e.clientX;
+      chase.y = e.clientY;
+    }
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+    pointer.seen = true;
   };
   const onScroll = () => draw();
 

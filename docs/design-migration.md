@@ -149,6 +149,11 @@ Stand:
       (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein
       Stern, der aus der Tiefe kommt und vorbeizieht (Marker `data-night-star`). Bei reduzierter
       Bewegung nur Neuzeichnen beim Scrollen. `.lav-glass` dafür dunkler (Lesbarkeit).
+      Abschluss: `HamburgGlass` statt Strichzeichnung: Hamburg als Milchglas-Skulptur, zwei
+      deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.jpg`), in Ruhe dunkel, das Licht folgt
+      dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern
+      folgt unten dem Zeiger und schrumpft über der Stadt weg, dort übernimmt das Licht im Glas.
+      Bewusste Ausnahme von „Licht und Linie“ (Entscheidung Dennis, 12.11.2026); Footer immer dunkel.
       Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
       EN nicht geprüft; Intro (Stern entsteht) aus dem Prototyp nicht übernommen; Leistung der
       Canvas auf schwachen Geräten nicht gemessen.

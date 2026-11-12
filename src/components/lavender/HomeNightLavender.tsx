@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
+import { HamburgGlass } from './HamburgGlass';
 import { startNightSky } from './nightSky';
 import {
   ANCHOR_SCROLL_MARGIN,
@@ -469,14 +470,9 @@ function Closing() {
         </div>
       </div>
 
-      {/* Decorative: the skyline says "Hamburg"; the address is on the imprint page. */}
-      <img
-        src="/images/hamburg-skyline.webp"
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="relative mt-6 block w-[calc(100%+2*var(--section-pad-h))] max-w-none -translate-x-[var(--section-pad-h)] lg:-mt-10"
-      />
+      {/* Full bleed by negative margins, not by a transform: a transform would
+          isolate the glass from the sky and its black would stop blending away. */}
+      <HamburgGlass className="-mx-[var(--section-pad-h)] mt-10 lg:mt-6" />
     </Section>
   );
 }

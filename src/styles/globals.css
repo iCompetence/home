@@ -503,4 +503,44 @@ html {
       inset 0 0 0 1px rgb(253 250 254 / 0.16),
       0 40px 80px -40px rgb(0 0 0 / 0.55);
   }
+
+  /* Hamburg as a milk-glass sculpture (HamburgGlass.tsx). Two congruent
+     renderings on black, blended with screen; the lit one shows through an
+     ellipse that follows the pointer. --x/--y/--rx/--ry/--a come from script. */
+  .lav-hamburg {
+    position: relative;
+    aspect-ratio: 2600 / 959;
+    touch-action: pan-y;
+    --x: 50%;
+    --y: 70%;
+    --rx: 200px;
+    --ry: 300px;
+    --a: 0;
+  }
+  .lav-hamburg > div {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .lav-hamburg-halo {
+    background: radial-gradient(ellipse var(--rx) var(--ry) at var(--x) var(--y), #24a1da 0%, rgb(147 84 246 / 0.85) 45%, transparent 75%);
+    filter: blur(46px);
+    opacity: calc(var(--a) * 0.3);
+  }
+  .lav-hamburg-off,
+  .lav-hamburg-on {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    mix-blend-mode: screen;
+  }
+  .lav-hamburg-off {
+    background-image: url('/images/hamburg-glas-dunkel.jpg');
+    opacity: 0.9;
+  }
+  .lav-hamburg-on {
+    background-image: url('/images/hamburg-glas-licht.jpg');
+    opacity: var(--a);
+    -webkit-mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);
+    mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);
+  }
 }
