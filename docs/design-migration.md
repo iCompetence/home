@@ -131,6 +131,18 @@ Stand:
       Footer-Link „Datenschutz" zeigt auf die neue Seite. Leere Aktionsrahmen der Figma-Heroes
       (Kontakt, Impressum, Datenschutz, Neuigkeiten) sind im Code weggelassen.
 
+- [ ] **Startseite Nacht (Designstudie, 12.11.2026)** — `/de|en/lavender/nacht/`, neben der
+      bisherigen Vorschau-Startseite zum Vergleichen. Gleiche Texte und Schlüssel wie
+      `LavenderHome`, dunkle Seite (`PageShell surface="inverse"`) mit Sternenhimmel und Milchglas.
+      Andere Bausteine, wo der Inhalt es verlangt: Leistungen als drei Reiter mit allen vier
+      Leistungen offen (statt Karussell mit Aufklapp-Zeilen), Kundenstimmen als ein Zitat plus
+      Auswahl aller sieben Namen (statt Slider), Vorgehen als drei offene Zeilen (statt Akkordeon).
+      Reiter kommen aus `src/components/ui/tabs` (shadcn/Radix), nur das Verhalten.
+      Neu, nur für diese Seite: `.lav-sky`, `.lav-glass`, Typostufe `.lav-mega` (44/72/112),
+      `rounded-frame` (40 px), `public/images/hamburg-skyline.webp`.
+      Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
+      Fußzeile ist der bestehende `Footer`; EN nicht geprüft; Sterne stehen still.
+
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
 Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.
