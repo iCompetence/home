@@ -45,10 +45,12 @@ function NightStar({ kind, side = 'right', soft = false }: { kind: 'blue' | 'vio
 }
 
 /** The moving sky: one fixed canvas behind the whole page. */
-function NightSky() {
+function NightSky({ city }: { city: CityPlace }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
-  return <canvas ref={canvas} aria-hidden className="pointer-events-none fixed inset-0 z-0 h-full w-full" />;
+  return (
+    <canvas ref={canvas} aria-hidden data-city={city} className="pointer-events-none fixed inset-0 z-0 h-full w-full" />
+  );
 }
 
 /** Small sharp four-pointed star: the brand mark as a line-art glyph. */
@@ -106,12 +108,18 @@ function FeatureRow({
 
 const outlineOnNight = 'border-lav-white text-lav-white';
 
-export default function HomeNightLavender() {
+/**
+ * Where the glass city of Hamburg stands: at the end of the page (the trip
+ * lands there) or in the hero (the trip starts there). Two variants to compare.
+ */
+type CityPlace = 'end' | 'hero';
+
+export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }) {
   return (
-    <PageShell surface="inverse" nav={<TopNav />} footer={<Closing />}>
-      <NightSky />
+    <PageShell surface="inverse" nav={<TopNav />} footer={<Closing withCity={city === 'end'} />}>
+      <NightSky city={city} />
       <div className="relative">
-        <Hero />
+        {city === 'hero' ? <HeroHamburg /> : <Hero />}
         {/* No client logos yet: the logo files are made for a light ground
             (several have an opaque background) and need night versions first. */}
         <HomeTabs />
@@ -169,6 +177,40 @@ function Hero() {
           </div>
         </div>
       </div>
+    </Section>
+  );
+}
+
+/**
+ * Variant: the trip starts in Hamburg. Headline and actions centred above,
+ * the glass city along the bottom edge of the first view. The city's upper
+ * part is empty sky, so it may reach up behind the text block.
+ */
+function HeroHamburg() {
+  const { t, language } = useLanguage();
+  return (
+    // A div, not a <section>: sections get a transform in the base layer, which
+    // would isolate the glass city and stop its black from blending into the sky.
+    <Section as="div" id="top" className="relative overflow-hidden pb-0 pt-8 lg:pt-10" innerClassName="relative">
+      <div className="relative z-[1] mx-auto flex max-w-[980px] flex-col items-center gap-8 text-center lg:gap-10">
+        <h1 className="lav-display text-lav-white [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
+        <p className="lav-lead max-w-[620px] text-lav-white/80">{t('lavender.hero.subline')}</p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button asChild variant="white">
+            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+              {t('topNav.letsTalk')}
+              <ArrowUpRight size={20} strokeWidth={2} />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className={outlineOnNight}>
+            <a href="#services">
+              {t('lavender.hero.seeServices')}
+              <ArrowDown size={20} strokeWidth={2} />
+            </a>
+          </Button>
+        </div>
+      </div>
+      <HamburgGlass className="-mx-[var(--section-pad-h)] mt-6 lg:-mt-[11.5vw]" />
     </Section>
   );
 }
@@ -530,13 +572,13 @@ const PHONE = '+49 40 22636380';
  * has one closing line, a compact row of contact and legal links, and the
  * Hamburg skyline as the very last thing.
  */
-function Closing() {
+function Closing({ withCity }: { withCity: boolean }) {
   const { t, language } = useLanguage();
   return (
     <Section
       as="footer"
       dsName="FooterNight"
-      className="relative overflow-hidden pb-0"
+      className={cn('relative overflow-hidden', withCity && 'pb-0')}
       innerClassName="relative"
     >
       <div className="relative flex flex-col items-start gap-10 lg:gap-14">
@@ -567,7 +609,7 @@ function Closing() {
 
       {/* Full bleed by negative margins, not by a transform: a transform would
           isolate the glass from the sky and its black would stop blending away. */}
-      <HamburgGlass className="-mx-[var(--section-pad-h)] mt-10 lg:mt-6" />
+      {withCity && <HamburgGlass className="-mx-[var(--section-pad-h)] mt-10 lg:mt-6" />}
     </Section>
   );
 }

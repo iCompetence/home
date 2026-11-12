@@ -17,6 +17,11 @@
  *   <span hidden data-night-star="blue|violet|mint" data-night-side="left|right" data-night-soft />
  * The colour is read every frame, so it may change (the services tabs do that).
  *
+ * Where the glass city stands decides the trip (canvas `data-city`):
+ * - "end" (default): the page ends in Hamburg, the guide star comes down there;
+ * - "hero": the page starts in Hamburg. The guide star begins above the city
+ *   and rises overhead as the page lifts off; there is no landing at the end.
+ *
  * With prefers-reduced-motion nothing animates by itself: the sky is redrawn
  * on scroll only, without twinkle, drift or pointer movement.
  */
@@ -65,6 +70,7 @@ export function startNightSky(
   let melt = 0;
   const follows = !reduce && window.matchMedia('(hover: hover)').matches;
   const city = document.querySelector('[data-ds="HamburgGlass"]');
+  const cityInHero = canvas.dataset.city === 'hero';
   const ease = { x: 0, y: 0 };
   let field: FieldStar[] = [];
   const flare = { index: -1, start: 0 };
@@ -116,26 +122,32 @@ export function startNightSky(
     if (reduce) draw();
   }
 
-  /** 0 in the sky, 1 on the ground: the last stretch of the page. */
+  /** 0 in the sky, 1 on the ground: the last stretch of the page, or the first one when the city is in the hero. */
   function descent() {
+    if (cityInHero) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
     const end = document.documentElement.scrollHeight - H;
     return easeInOut(clamp01((window.scrollY - (end - H * 0.9)) / (H * 0.9)));
   }
 
   function guideStar(down: number) {
     const compact = W < 768;
-    const away = easeInOut(clamp01(window.scrollY / (H * 0.85)));
+    // With the city in the hero the star never is the large hero star: it is small all the way.
+    const away = cityInHero ? 1 : easeInOut(clamp01(window.scrollY / (H * 0.85)));
     const big = compact
       ? { x: W * 0.72, y: H * 0.3, size: W * 1.15 }
       : { x: W * 0.76, y: H * 0.46, size: Math.min(W * 0.66, H * 1.1) };
     const small = { x: W * 0.5, y: H * 0.17, size: Math.max(84, Math.min(W, H) * 0.11) };
-    const skyline = W * SKYLINE_RATIO;
-    // It comes to rest in the gap of sky between the Rathaus tower and the
-    // Elbphilharmonie, above the roofs, so it does not sit on a lit building.
+    // At the end of the page it rests in the gap of sky between the Rathaus tower
+    // and the Elbphilharmonie, above the roofs, so it does not sit on a lit building.
+    const box = city?.getBoundingClientRect();
+    const skyline = box ? box.height : W * SKYLINE_RATIO;
+    // In the hero the text block sits above the middle of the city, so the
+    // star rests further right there, above the Speicherstadt.
+    const at = cityInHero ? { x: 0.9, y: 0.4 } : { x: 0.69, y: 0.26 };
     const land = {
-      x: W * 0.69,
-      y: H - skyline * 0.74,
-      size: Math.min(250, Math.max(64, skyline * 0.44)),
+      x: (box ? box.left : 0) + (box ? box.width : W) * at.x,
+      y: (box ? box.top : H - skyline) + skyline * at.y,
+      size: Math.min(cityInHero ? 190 : 250, Math.max(64, skyline * 0.44)),
     };
     const tripX = lerp(big.x, small.x, away) + ease.x * W * 0.04 * (1 - away);
     const tripY = lerp(big.y, small.y, away) + ease.y * H * 0.04 * (1 - away);

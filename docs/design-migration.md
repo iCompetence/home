@@ -151,6 +151,9 @@ Stand:
       mit Screenshot. Kundenstimmen = Firmenleiste, die von selbst weiterläuft (hält bei Zeiger/
       Fokus, stoppt nach Auswahl, nicht bei reduzierter Bewegung), ein Zitat darunter. Vorgehen =
       drei hohe Glasfelder. Neu: `.lav-glass-clear`, `.lav-progress-run`.
+      Variante `/de|en/lavender/nacht-hamburg/` (`HomeNightLavender city="hero"`): die Glasstadt
+      steht im Hero statt am Seitenende, Text zentriert darüber; der Leitstern startet über der
+      Stadt und steigt beim Scrollen nach oben, am Ende gibt es keine Landung. Zum Vergleichen.
       Bewegter Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React):
       kleine Sterne in Perspektive (Scrollen fliegt hinein, Funkeln, Aufblitzen), Leitstern
       (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein
