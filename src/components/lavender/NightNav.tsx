@@ -38,9 +38,17 @@ export function NightNav() {
   const pages = [...PRODUCT_LINKS, ...PRINCIPLE_LINKS, NEWS_LINK];
   const [open, setOpen] = useState(false);
   const [atTop, setAtTop] = useState(true);
+  // True while the day layer (the light sheet of the Hamburg hero variant) is
+  // behind the nav: menu icon and button hover then switch to navy.
+  const [onDay, setOnDay] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 80);
+    const layer = document.querySelector('[data-ds="DayLayer"]');
+    const onScroll = () => {
+      setAtTop(window.scrollY < 80);
+      const box = layer?.getBoundingClientRect();
+      setOnDay(!!box && box.top <= 46 && box.bottom > 46);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -55,7 +63,7 @@ export function NightNav() {
 
   return (
     // Must stay a direct child of PageShell's root to remain sticky.
-    <header className="pointer-events-none sticky top-0 z-50 w-full">
+    <header data-ground={onDay ? 'day' : 'night'} className="group/nav pointer-events-none sticky top-0 z-50 w-full">
       <nav
         data-ds="NightNav"
         className="mx-auto grid w-full max-w-frame grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 md:px-12 lg:px-[var(--section-pad-h)] lg:py-6"
@@ -77,7 +85,7 @@ export function NightNav() {
           href={siteHref(language, 'contact')}
           target="_blank"
           rel="noopener noreferrer"
-          className={`pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white hover:opacity-100! active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
+          className={`pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline transition-[background-color,color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white hover:opacity-100! active:scale-[0.96] group-data-[ground=day]/nav:hover:bg-lav-navy group-data-[ground=day]/nav:hover:text-lav-white md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
         >
           {t('topNav.letsTalk')}
           <ArrowUpRight size={18} strokeWidth={2} />
@@ -86,7 +94,7 @@ export function NightNav() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             aria-label={t('topNav.menu')}
-            className={`pointer-events-auto inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-pill border-0 bg-transparent text-lav-white transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] ${focusRing} focus-visible:outline-lav-white`}
+            className={`pointer-events-auto inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-pill border-0 bg-transparent text-lav-white transition-[background-color,color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] group-data-[ground=day]/nav:text-lav-navy group-data-[ground=day]/nav:hover:bg-lav-navy/10 ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
           >
             <Menu size={26} strokeWidth={2} />
           </SheetTrigger>

@@ -63,7 +63,7 @@ function StarField({ star, className, children }: { star: StarKind; className?: 
   );
 }
 
-/** The sky: one fixed canvas behind the whole page (small stars and the guide star). */
+/** The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */
 function NightSky({ city }: { city: CityPlace }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
@@ -127,17 +127,18 @@ function FeatureRow({
 }
 
 /*
- * Button states on the night pages. The design system's buttons (and
- * PageShell's page-wide rule) only dim to 75 % on hover, which reads as
- * "disabled" on a dark ground. Here hover swaps the colour and a press gives
- * a short squeeze. `hover:opacity-100!` switches the page-wide dimming off.
+ * Button states. The design system's buttons (and PageShell's page-wide rule)
+ * only dim to 75 % on hover, which reads as "disabled". Here hover swaps the
+ * colour and a press gives a short squeeze. `hover:opacity-100!` switches the
+ * page-wide dimming off. Colours come from ink and ground, so the same button
+ * is white on the night sky and navy on the day layer.
  */
 const pressable =
   'transition-[background-color,border-color,color,scale] duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96]';
-/** White button: turns brand blue on hover. Pair with variant="white". */
-const solidOnNight = `${pressable} hover:bg-lav-blue`;
-/** Outlined button: fills white on hover. Pair with variant="outline". */
-const outlineOnNight = `${pressable} border-lav-white text-lav-white hover:bg-lav-white hover:text-lav-navy`;
+/** Filled button in the ink colour: turns brand blue on hover. Pair with variant="white". */
+const solidOnNight = `${pressable} bg-lav-ink text-lav-ground hover:bg-lav-blue hover:text-lav-navy`;
+/** Outlined button: fills with the ink colour on hover. Pair with variant="outline". */
+const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:bg-lav-ink hover:text-lav-ground`;
 
 /**
  * Where the glass city of Hamburg stands: at the end of the page (the trip
@@ -146,30 +147,70 @@ const outlineOnNight = `${pressable} border-lav-white text-lav-white hover:bg-la
 type CityPlace = 'end' | 'hero';
 
 export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }) {
+  const sections = (
+    <>
+      {/* No client logos yet: the logo files need versions for both grounds.
+          No AnchorTabs either: their navy bar slid in under the nav while
+          scrolling; the sections are in the menu instead. */}
+      <Services />
+      <Statement />
+      <Products />
+      <Testimonials />
+      <Process />
+      <PrivacyLed />
+    </>
+  );
+
+  if (city === 'hero') {
+    return (
+      <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity={false} />}>
+        <NightSky city={city} />
+        {/* Pulled up under the nav (76 / 92 px tall), so the hero fills the
+            whole first screen. id="top" sits here: the hero itself is sticky
+            and would not be a scroll target. */}
+        <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
+          <HeroHamburg />
+          <DayLayer>{sections}</DayLayer>
+        </div>
+      </PageShell>
+    );
+  }
+
   return (
-    <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity={city === 'end'} />}>
+    <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity />}>
       <NightSky city={city} />
       <div className="relative">
-        {city === 'hero' ? <HeroHamburg /> : <Hero />}
-        {/* No client logos yet: the logo files are made for a light ground
-            (several have an opaque background) and need night versions first.
-            No AnchorTabs either: their navy bar slid in under the nav while
-            scrolling; the sections are in the menu instead. */}
-        <Services />
-        <Statement />
-        <Products />
-        <Testimonials />
-        <Process />
-        <PrivacyLed />
+        <Hero />
+        {sections}
       </div>
     </PageShell>
+  );
+}
+
+/**
+ * The day layer: a light sheet that scrolls up over the hero, which stays
+ * where it is. Everything on it reads `ink` and `ground` (see globals.css), so
+ * the sections are the same components as on the night sky. Its own canvas
+ * (sticky, one screen tall, no layout height) is where the sky draws the guide
+ * star on the sheet: above the white, behind the content.
+ */
+function DayLayer({ children }: { children: ReactNode }) {
+  return (
+    <div
+      data-ds="DayLayer"
+      data-surface="light"
+      className="relative z-10 overflow-clip rounded-t-card bg-lav-page text-lav-navy lg:rounded-t-frame"
+    >
+      <canvas aria-hidden data-sky="day" className="pointer-events-none sticky top-0 -mb-[100vh] block h-screen w-full" />
+      {children}
+    </div>
   );
 }
 
 /* ---------------- Hero ---------------- */
 
 function Hero() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   // No glass here: the first view is the sky itself, with the double star as
   // the one sharp thing in it. Glass starts with the content below.
   return (
@@ -179,9 +220,9 @@ function Hero() {
       innerClassName="relative flex min-h-[calc(100svh-200px)] flex-col justify-end lg:min-h-[calc(100svh-240px)]"
     >
       <div className="relative flex flex-col gap-10 lg:gap-14">
-        <h1 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.hero.headline')}</h1>
+        <h1 className="lav-mega max-w-[1100px] text-lav-ink">{t('lavender.hero.headline')}</h1>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p className="lav-lead max-w-[680px] text-lav-white/80">{t('lavender.hero.subline')}</p>
+          <p className="lav-lead max-w-[680px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
           <div className="flex flex-wrap gap-4">
             {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
             <Button asChild variant="white" className={solidOnNight}>
@@ -198,31 +239,32 @@ function Hero() {
 }
 
 /**
- * Variant: the trip starts in Hamburg. Headline and actions centred above,
- * the glass city along the bottom edge of the first view. The city's upper
- * part is empty sky, so it may reach up behind the text block.
+ * Variant: the trip starts in Hamburg. The hero is exactly one screen and
+ * stays put (sticky) while the day layer scrolls up over it. Headline and the
+ * one action are centred in the sky above the skyline; the glass city runs
+ * along the bottom edge. The city's upper third is empty sky, so the text
+ * block may reach into it.
  */
 function HeroHamburg() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   return (
-    // A div, not a <section>: sections get a transform in the base layer, which
-    // would isolate the glass city and stop its black from blending into the sky.
-    <Section as="div" id="top" className="relative overflow-hidden pb-0 pt-8 lg:pt-10" innerClassName="relative">
-      <div className="relative z-[1] mx-auto flex max-w-[980px] flex-col items-center gap-8 text-center lg:gap-10">
-        <h1 className="lav-display text-lav-white [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
-        <p className="lav-lead max-w-[760px] text-lav-white/80">{t('lavender.hero.subline')}</p>
-        <div className="flex flex-wrap justify-center gap-4">
-          {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
-          <Button asChild variant="white" className={solidOnNight}>
-            <a href="#services">
-              {t('lavender.hero.seeServices')}
-              <ArrowDown size={20} strokeWidth={2} />
-            </a>
-          </Button>
-        </div>
+    <div data-ds="HeroHamburg" className="sticky top-0 flex h-[100svh] min-h-[540px] flex-col overflow-hidden">
+      <div className="relative z-[1] mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28">
+        <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
+        <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
+        {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
+        <Button asChild variant="white" className={solidOnNight}>
+          <a href="#services">
+            {t('lavender.hero.seeServices')}
+            <ArrowDown size={20} strokeWidth={2} />
+          </a>
+        </Button>
       </div>
-      <HamburgGlass className="-mx-[var(--section-pad-h)] mt-6 lg:-mt-[11.5vw]" />
-    </Section>
+      {/* On phones the full skyline would be a thin strip: show the middle of it
+          larger (TV tower to Elbphilharmonie). From tablets up it spans the
+          screen and fades towards the text block (.lav-hamburg-haze). */}
+      <HamburgGlass className="lav-hamburg-haze absolute bottom-0 left-[-36%] w-[160%] md:left-0 md:w-full" />
+    </div>
   );
 }
 
@@ -250,14 +292,14 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
     >
       <Tabs defaultValue={field.items[0]} orientation="vertical" className={cn(ROW, 'gap-10')}>
         <div className={textCol(field.media)}>
-          {first && <Eyebrow tone="white">{t('lavender.services.title')}</Eyebrow>}
-          <h2 className="lav-display text-lav-white">{t(`lavender.services.${field.id}.title`)}</h2>
-          <TabsList className="flex h-auto w-full flex-col items-stretch justify-start gap-0 rounded-none border-b border-lav-white/20 bg-transparent p-0 text-lav-white">
+          {first && <Eyebrow className="text-lav-ink/70">{t('lavender.services.title')}</Eyebrow>}
+          <h2 className="lav-display text-lav-ink">{t(`lavender.services.${field.id}.title`)}</h2>
+          <TabsList className="flex h-auto w-full flex-col items-stretch justify-start gap-0 rounded-none border-b border-lav-ink/20 bg-transparent p-0 text-lav-ink">
             {field.items.map((item) => (
               <TabsTrigger
                 key={item}
                 value={item}
-                className="h-auto flex-none justify-between gap-4 whitespace-normal rounded-none border-0 border-t border-lav-white/20 px-0 py-5 text-left font-brand text-[20px] font-medium leading-[1.2] text-lav-white opacity-60 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:text-[24px] [&>svg]:opacity-0 data-[state=active]:[&>svg]:opacity-100"
+                className="h-auto flex-none justify-between gap-4 whitespace-normal rounded-none border-0 border-t border-lav-ink/20 px-0 py-5 text-left font-brand text-[20px] font-medium leading-[1.2] text-lav-ink opacity-60 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:text-[24px] [&>svg]:opacity-0 data-[state=active]:[&>svg]:opacity-100"
               >
                 {t(`lavender.services.${field.id}.${item}.label`)}
                 <Spark className="size-4 transition-opacity duration-[var(--duration-fast)]" />
@@ -272,7 +314,8 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
               value={item}
               forceMount
               // 12 px from the field's edge with radius 28: concentric with the 40 px field.
-              className="absolute inset-x-3 bottom-3 flex flex-none flex-col gap-5 rounded-card-sm bg-lav-navy/80 p-6 data-[state=inactive]:hidden lg:right-auto lg:w-[64%] lg:rounded-[28px] lg:p-8"
+              // Always a navy card with white text, on the night sky and on the day layer.
+              className="absolute inset-x-3 bottom-3 flex flex-none flex-col gap-5 rounded-card-sm bg-lav-navy/80 p-6 in-data-[surface=light]:bg-lav-navy data-[state=inactive]:hidden lg:right-auto lg:w-[64%] lg:rounded-[28px] lg:p-8"
             >
               <h3 className="lav-h3 text-lav-white">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
               <p className="lav-paragraph text-lav-white/80">{t(`lavender.services.${field.id}.${item}.desc`)}</p>
@@ -301,7 +344,7 @@ function Statement() {
   return (
     <Section>
       <div className="flex flex-col items-start gap-10 lg:gap-14">
-        <p className="lav-statement max-w-[1100px] text-lav-white">{t('lavender.statement')}</p>
+        <p className="lav-statement max-w-[1100px] text-lav-ink">{t('lavender.statement')}</p>
         <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
@@ -355,9 +398,9 @@ function ProductRow({
         />
       }
     >
-      <Eyebrow tone="white">{eyebrow}</Eyebrow>
-      <h2 className="lav-h1 text-lav-white">{title}</h2>
-      <p className="lav-body text-lav-white/80">{description}</p>
+      <Eyebrow className="text-lav-ink/70">{eyebrow}</Eyebrow>
+      <h2 className="lav-h1 text-lav-ink">{title}</h2>
+      <p className="lav-body text-lav-ink/80">{description}</p>
       <Button asChild variant="outline" className={outlineOnNight}>
         <a href={href}>
           {cta}
@@ -464,13 +507,13 @@ function Testimonials() {
         onFocusCapture={() => setWaiting(true)}
         onBlurCapture={() => setWaiting(false)}
       >
-        <Eyebrow tone="white">{t('lavender.testimonials.title')}</Eyebrow>
-        <TabsList className="mt-8 flex h-auto w-full items-stretch justify-start gap-2 overflow-x-auto rounded-none bg-transparent p-0 text-lav-white lg:mt-10">
+        <Eyebrow className="text-lav-ink/70">{t('lavender.testimonials.title')}</Eyebrow>
+        <TabsList className="mt-8 flex h-auto w-full items-stretch justify-start gap-2 overflow-x-auto rounded-none bg-transparent p-0 text-lav-ink lg:mt-10">
           {TESTIMONIALS.map((item) => (
             <TabsTrigger
               key={item.key}
               value={item.key}
-              className="relative h-auto min-w-[9.5rem] flex-none justify-start rounded-none border-0 border-t border-lav-white/25 px-0 pb-2 pt-5 text-left font-brand text-body font-medium text-lav-white opacity-55 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:min-w-0 lg:flex-1"
+              className="relative h-auto min-w-[9.5rem] flex-none justify-start rounded-none border-0 border-t border-lav-ink/25 px-0 pb-2 pt-5 text-left font-brand text-body font-medium text-lav-ink opacity-55 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:min-w-0 lg:flex-1"
             >
               {item.company}
               {active === item.key && (
@@ -478,7 +521,7 @@ function Testimonials() {
                   key={`${auto}-${waiting}`}
                   aria-hidden
                   className={cn(
-                    'absolute -top-px left-0 h-0.5 w-full origin-left bg-lav-white',
+                    'absolute -top-px left-0 h-0.5 w-full origin-left bg-lav-ink',
                     auto && !waiting && 'lav-progress-run',
                   )}
                 />
@@ -496,13 +539,13 @@ function Testimonials() {
             >
               <blockquote className="m-0">
                 {/* Between lav-h3 and lav-h2: the quotes run from 150 to 600 characters. */}
-                <p className="m-0 font-brand text-[20px] font-medium leading-[1.3] text-lav-white md:text-[24px] lg:text-[30px] lg:leading-[1.25] lg:tracking-[-0.3px]">
+                <p className="m-0 font-brand text-[20px] font-medium leading-[1.3] text-lav-ink md:text-[24px] lg:text-[30px] lg:leading-[1.25] lg:tracking-[-0.3px]">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
               <p className="m-0 flex flex-col gap-2">
-                <span className="text-body font-medium leading-[1.4] text-lav-white">{item.name}</span>
-                <span className="text-[14px] font-normal leading-[1.4] text-lav-white/70">
+                <span className="text-body font-medium leading-[1.4] text-lav-ink">{item.name}</span>
+                <span className="text-[14px] font-normal leading-[1.4] text-lav-ink/70">
                   {t(`lavender.testimonials.${item.key}.role`)}
                 </span>
               </p>
@@ -526,7 +569,7 @@ function Process() {
   const { t } = useLanguage();
   return (
     <Section id="process" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
-      <Eyebrow tone="white">{t('lavender.process.title')}</Eyebrow>
+      <Eyebrow className="text-lav-ink/70">{t('lavender.process.title')}</Eyebrow>
       <ol className="-mx-4 mt-8 grid list-none gap-4 p-0 md:-mx-8 lg:-mx-10 lg:mt-10 lg:grid-cols-3">
         {PROCESS_STEPS.map((step) => (
           <li
@@ -534,10 +577,10 @@ function Process() {
             className="lav-glass flex flex-col justify-between gap-16 rounded-card p-6 md:p-8 lg:min-h-[460px] lg:rounded-frame lg:p-10"
           >
             <div className="flex flex-col gap-6">
-              <span className="lav-display text-lav-white/35">{step.number}</span>
-              <h3 className="lav-h1 text-lav-white">{t(`lavender.process.${step.key}.title`)}</h3>
+              <span className="lav-display text-lav-ink/35">{step.number}</span>
+              <h3 className="lav-h1 text-lav-ink">{t(`lavender.process.${step.key}.title`)}</h3>
             </div>
-            <p className="lav-paragraph text-lav-white/80">{t(`lavender.process.${step.key}.desc`)}</p>
+            <p className="lav-paragraph text-lav-ink/80">{t(`lavender.process.${step.key}.desc`)}</p>
           </li>
         ))}
       </ol>
@@ -555,11 +598,11 @@ function PrivacyLed() {
       media="left"
       star="blue"
       className={ANCHOR_SCROLL_MARGIN}
-      field={<Spark className="absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 text-lav-white/90 lg:size-28" />}
+      field={<Spark className="absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 text-lav-ink/90 lg:size-28" />}
     >
-      <Eyebrow tone="white">{t('topNav.privacyLed')}</Eyebrow>
-      <h2 className="lav-h1 text-lav-white">{t('lavender.privacyLed.title')}</h2>
-      <p className="lav-body text-lav-white/80">{t('lavender.privacyLed.desc')}</p>
+      <Eyebrow className="text-lav-ink/70">{t('topNav.privacyLed')}</Eyebrow>
+      <h2 className="lav-h1 text-lav-ink">{t('lavender.privacyLed.title')}</h2>
+      <p className="lav-body text-lav-ink/80">{t('lavender.privacyLed.desc')}</p>
       <Button asChild variant="outline" className={outlineOnNight}>
         <a href={siteHref(language, 'privacy-led-ai')} target="_blank" rel="noopener noreferrer">
           {t('lavender.privacyLed.cta')}
@@ -591,7 +634,7 @@ function Closing({ withCity }: { withCity: boolean }) {
       innerClassName="relative"
     >
       <div className="relative flex flex-col items-start gap-10 lg:gap-14">
-        <h2 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.cta.heading')}</h2>
+        <h2 className="lav-mega max-w-[1100px] text-lav-ink">{t('lavender.cta.heading')}</h2>
         <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
@@ -600,19 +643,19 @@ function Closing({ withCity }: { withCity: boolean }) {
         </Button>
       </div>
 
-      <div className="relative mt-[var(--section-pad-v)] grid gap-8 border-t border-lav-white/20 pt-8 md:grid-cols-12 md:gap-10">
+      <div className="relative mt-[var(--section-pad-v)] grid gap-8 border-t border-lav-ink/20 pt-8 md:grid-cols-12 md:gap-10">
         <div className="flex flex-col gap-3 md:col-span-4">
-          <Eyebrow tone="white">{t('footer.inquiries')}</Eyebrow>
-          <a href={`mailto:${EMAIL}`} className="lav-body text-lav-white">{EMAIL}</a>
+          <Eyebrow className="text-lav-ink/70">{t('footer.inquiries')}</Eyebrow>
+          <a href={`mailto:${EMAIL}`} className="lav-body text-lav-ink">{EMAIL}</a>
         </div>
         <div className="flex flex-col gap-3 md:col-span-4">
-          <Eyebrow tone="white">{t('footer.phone')}</Eyebrow>
-          <span className="lav-body text-lav-white">{PHONE}</span>
+          <Eyebrow className="text-lav-ink/70">{t('footer.phone')}</Eyebrow>
+          <span className="lav-body text-lav-ink">{PHONE}</span>
         </div>
         <div className="flex flex-wrap items-start gap-x-8 gap-y-3 md:col-span-4 md:justify-end">
-          <a href={siteHref(language, 'imprint')} className="lav-body text-lav-white/80">{t('footer.imprint')}</a>
-          <a href={siteHref(language, 'privacy-policy')} className="lav-body text-lav-white/80">{t('footer.privacy')}</a>
-          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="lav-body text-lav-white/80">LinkedIn</a>
+          <a href={siteHref(language, 'imprint')} className="lav-body text-lav-ink/80">{t('footer.imprint')}</a>
+          <a href={siteHref(language, 'privacy-policy')} className="lav-body text-lav-ink/80">{t('footer.privacy')}</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="lav-body text-lav-ink/80">LinkedIn</a>
         </div>
       </div>
 

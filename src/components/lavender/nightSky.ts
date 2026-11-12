@@ -52,6 +52,12 @@ export function startNightSky(
   const follows = !reduce && window.matchMedia('(hover: hover)').matches;
   const city = document.querySelector('[data-ds="HamburgGlass"]');
   const cityInHero = canvas.dataset.city === 'hero';
+  // The day layer: a light sheet that scrolls over the hero (Hamburg hero
+  // variant). It covers this canvas, so the guide star is drawn a second time
+  // on the layer's own canvas, which lies above the white and behind the content.
+  const layer = document.querySelector('[data-ds="DayLayer"]');
+  const dayCanvas = layer?.querySelector<HTMLCanvasElement>('canvas[data-sky="day"]') ?? null;
+  const dayCtx = dayCanvas?.getContext('2d') ?? null;
 
   let W = 0;
   let H = 0;
@@ -67,6 +73,8 @@ export function startNightSky(
   const pointer = { x: 0, y: 0, seen: false };
   const chase = { x: 0, y: 0 };
   let melt = 0;
+  // How far the guide star is on the day layer (0..1): there it grows large.
+  let day = 0;
 
   // The artwork is 3000 px wide; draw from a 1024 px copy instead.
   let sprite: HTMLCanvasElement | null = null;
@@ -111,6 +119,10 @@ export function startNightSky(
     H = window.innerHeight;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
+    if (dayCanvas) {
+      dayCanvas.width = Math.round(dayCanvas.clientWidth * dpr);
+      dayCanvas.height = Math.round(dayCanvas.clientHeight * dpr);
+    }
     if (reseed) seed();
     if (reduce) draw();
   }
@@ -198,7 +210,8 @@ export function startNightSky(
     const skyline = box ? box.height : W * SKYLINE_RATIO;
     const at = cityInHero ? { x: 0.9, y: 0.3 } : { x: 0.69, y: 0.2 };
     const land = {
-      x: (box ? box.left : 0) + (box ? box.width : W) * at.x,
+      // Never off screen (on phones the city is wider than the screen).
+      x: Math.min(W * 0.86, (box ? box.left : 0) + (box ? box.width : W) * at.x),
       y: (box ? box.top : H - skyline) + skyline * at.y,
       size: Math.min(cityInHero ? 300 : 360, Math.max(96, skyline * 0.62)),
     };
@@ -209,13 +222,27 @@ export function startNightSky(
     // How much of the way to the pointer it goes: the large hero star only
     // leans (a quarter of the way), the small star follows all the way.
     const led = follows && pointer.seen ? lerp(0.25, 1, Math.max(away, down)) : 0;
+    const x = lerp(rest.x, chase.x, led);
+    const y = lerp(rest.y, chase.y, led);
+    // On the day layer there is room: the star grows to a large glow behind
+    // the content. In the hero it stays small, the city and the headline need
+    // the space.
+    const roam = compact ? W * 1.05 : Math.min(W * 0.5, H * 0.82);
+    const night = lerp(lerp(big.size, small.size, away), land.size, down);
     return {
-      x: lerp(rest.x, chase.x, led),
-      y: lerp(rest.y, chase.y, led),
-      size: lerp(lerp(big.size, small.size, away), land.size, down) * (1 - melt),
+      x,
+      y,
+      size: lerp(night, roam, day) * (1 - melt),
       // At rest overhead it passes behind running text, so it steps back there.
-      alpha: lerp(lerp(lerp(1, compact ? 0.3 : 0.55, away), 1, down), 0.9, led) * (1 - melt),
+      // On the day layer it lies behind dark text on white: a little lighter.
+      alpha: lerp(lerp(lerp(1, compact ? 0.3 : 0.55, away), 1, down), lerp(0.9, 0.78, day), led) * (1 - melt),
     };
+  }
+
+  /** Whether a point of the screen lies on the day layer. */
+  function onLayer(y: number) {
+    const box = layer?.getBoundingClientRect();
+    return !!box && y >= box.top && y <= box.bottom;
   }
 
   function draw() {
@@ -223,12 +250,32 @@ export function startNightSky(
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     drawField();
-    const star = guideStar();
+    let star = guideStar();
+    if (layer) {
+      // Without animation frames (reduced motion) the size follows at once.
+      const target = onLayer(star.y) ? 1 : 0;
+      if (reduce && day !== target) {
+        day = target;
+        star = guideStar();
+      }
+    }
+    const size = star.size * (reduce ? 1 : 1 + 0.02 * Math.sin(time / 900));
     if (sprite && star.size > 1) {
-      const size = star.size * (reduce ? 1 : 1 + 0.02 * Math.sin(time / 900));
       ctx.globalAlpha = star.alpha;
       ctx.drawImage(sprite, star.x - size / 2, star.y - size / 2, size, size);
       ctx.globalAlpha = 1;
+    }
+    if (dayCanvas && dayCtx) {
+      // Same star, in the layer canvas' own coordinates (it is sticky: it moves
+      // with the layer until it reaches the top of the screen).
+      const box = dayCanvas.getBoundingClientRect();
+      dayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dayCtx.clearRect(0, 0, box.width, box.height);
+      if (sprite && star.size > 1 && box.top < H && box.bottom > 0) {
+        dayCtx.globalAlpha = star.alpha;
+        dayCtx.drawImage(sprite, star.x - box.left - size / 2, star.y - box.top - size / 2, size, size);
+        dayCtx.globalAlpha = 1;
+      }
     }
   }
 
@@ -240,9 +287,18 @@ export function startNightSky(
       chase.x += (pointer.x - chase.x) * 0.08;
       chase.y += (pointer.y - chase.y) * 0.08;
       const box = city?.getBoundingClientRect();
+      // Over the city, and not on the layer that may lie over it.
       const over =
-        !!box && pointer.x >= box.left && pointer.x <= box.right && pointer.y >= box.top && pointer.y <= box.bottom;
+        !!box &&
+        pointer.x >= box.left &&
+        pointer.x <= box.right &&
+        pointer.y >= box.top &&
+        pointer.y <= box.bottom &&
+        !onLayer(pointer.y);
       melt += ((over ? 1 : 0) - melt) * 0.14;
+    }
+    if (layer) {
+      day += ((onLayer(guideStar().y) ? 1 : 0) - day) * 0.07;
     }
     draw();
     raf = requestAnimationFrame(frame);

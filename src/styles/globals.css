@@ -159,6 +159,11 @@
   --color-lav-page: #fdfafe;
   --color-lav-blue: #24a1da;
   --color-lav-white: #ffffff;
+  /* Text and ground of the surface an element stands on: navy on light by
+     default, swapped inside [data-surface='inverse'] (see the rule below the
+     theme). Lets one component serve the night sky and the day layer. */
+  --color-lav-ink: #0b2231;
+  --color-lav-ground: #fdfafe;
   /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
   --color-lav-error: #b3433d;
 
@@ -213,6 +218,17 @@
   @keyframes scroll {
     to { transform: translate(calc(-50% - 0.5rem)); }
   }
+}
+
+/* Ink and ground follow the surface: dark pages swap them, a light layer on a
+   dark page (the day layer of the night home) swaps them back. */
+[data-surface='inverse'] {
+  --color-lav-ink: #ffffff;
+  --color-lav-ground: #0b2231;
+}
+[data-surface='light'] {
+  --color-lav-ink: #0b2231;
+  --color-lav-ground: #fdfafe;
 }
 
 /* Live section padding, consumed by the shared <Section> component. Kept as
@@ -533,6 +549,22 @@ html {
       0 40px 80px -40px rgb(0 0 0 / 0.55);
   }
 
+  /* The same two glasses on the day layer: milky white with a fine dark edge. */
+  [data-surface='light'] .lav-glass {
+    background-color: rgb(246 240 251 / 0.6);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 0 0 1px rgb(11 34 49 / 0.07),
+      0 40px 80px -48px rgb(11 34 49 / 0.3);
+  }
+  [data-surface='light'] .lav-glass-clear {
+    background-color: rgb(255 255 255 / 0.38);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 0 0 1px rgb(11 34 49 / 0.07),
+      0 40px 80px -48px rgb(11 34 49 / 0.3);
+  }
+
   /* Progress of the testimonial bar; duration = ROTATE_MS in HomeNightLavender. */
   .lav-progress-run {
     animation: lav-progress 8000ms linear both;
@@ -561,7 +593,7 @@ html {
   }
 
   /* Hamburg as a milk-glass sculpture (HamburgGlass.tsx). Two congruent
-     renderings on black, blended with screen; the lit one shows through an
+     renderings with a transparent ground; the lit one shows through an
      ellipse that follows the pointer. --x/--y/--rx/--ry/--a come from script. */
   .lav-hamburg {
     position: relative;
@@ -572,6 +604,15 @@ html {
     --rx: 200px;
     --ry: 300px;
     --a: 0;
+  }
+  /* In the hero the headline stands in the sky above the skyline: from tablets
+     up the city thins out towards the top centre, so no tower runs through
+     the text. */
+  @media (min-width: 768px) {
+    .lav-hamburg-haze {
+      -webkit-mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
+      mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
+    }
   }
   .lav-hamburg > div {
     position: absolute;
@@ -587,14 +628,13 @@ html {
   .lav-hamburg-on {
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    mix-blend-mode: screen;
   }
   .lav-hamburg-off {
-    background-image: url('/images/hamburg-glas-dunkel.jpg');
+    background-image: url('/images/hamburg-glas-dunkel.webp');
     opacity: 0.9;
   }
   .lav-hamburg-on {
-    background-image: url('/images/hamburg-glas-licht.jpg');
+    background-image: url('/images/hamburg-glas-licht.webp');
     opacity: var(--a);
     -webkit-mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);
     mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);

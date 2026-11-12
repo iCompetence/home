@@ -6,10 +6,10 @@ import { cn } from '@/components/ui/utils';
 /**
  * Hamburg as a milk-glass sculpture at the end of the night home.
  *
- * Two congruent renderings on pure black (public/images/hamburg-glas-*.jpg,
- * 2600 × 959): one unlit, one lit from inside in the double star's colours.
- * Both are blended with `screen`, so the black disappears on the navy ground.
- * At rest the city is dark; the lit rendering shows through an elliptical
+ * Two congruent renderings with a transparent ground
+ * (public/images/hamburg-glas-*.webp, 2600 × 959): one unlit, one lit from
+ * inside in the double star's colours. No blend mode, so the city may stand
+ * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
  *
  * A deliberate exception to "Licht und Linie" (a rendering, not a line),
@@ -93,8 +93,29 @@ export function HamburgGlass({ className }: { className?: string }) {
       if (touch && !still && visible && !inside) timer = window.setTimeout(walk, delay);
     };
 
+    const leave = () => {
+      inside = false;
+      target.a = 0;
+      go();
+      startWalk(900);
+    };
+
+    // Listens on the window, not on the city: in the hero the text block lies
+    // over the towers and would swallow the pointer. The day layer that scrolls
+    // over the hero counts as "not on the city".
     const move = (e: PointerEvent) => {
       const box = el.getBoundingClientRect();
+      const cover = document.querySelector('[data-ds="DayLayer"]')?.getBoundingClientRect();
+      const on =
+        e.clientX >= box.left &&
+        e.clientX <= box.right &&
+        e.clientY >= box.top &&
+        e.clientY <= box.bottom &&
+        !(cover && e.clientY >= cover.top && e.clientY <= cover.bottom);
+      if (!on) {
+        if (inside) leave();
+        return;
+      }
       inside = true;
       stopWalk();
       Object.assign(target, {
@@ -106,13 +127,6 @@ export function HamburgGlass({ className }: { className?: string }) {
       });
       go();
     };
-    const leave = () => {
-      inside = false;
-      target.a = 0;
-      go();
-      startWalk(900);
-    };
-
     const seen = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
@@ -129,10 +143,17 @@ export function HamburgGlass({ className }: { className?: string }) {
     );
     seen.observe(el);
 
-    el.addEventListener('pointermove', move);
-    el.addEventListener('pointerdown', move);
-    el.addEventListener('pointerleave', leave);
-    el.addEventListener('pointercancel', leave);
+    const lift = (e: PointerEvent) => {
+      if (e.pointerType === 'touch' && inside) leave();
+    };
+    const out = () => {
+      if (inside) leave();
+    };
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerdown', move, { passive: true });
+    window.addEventListener('pointerup', lift);
+    window.addEventListener('pointercancel', lift);
+    document.documentElement.addEventListener('pointerleave', out);
     window.addEventListener('resize', paint);
     paint();
 
@@ -140,10 +161,11 @@ export function HamburgGlass({ className }: { className?: string }) {
       cancelAnimationFrame(raf);
       stopWalk();
       seen.disconnect();
-      el.removeEventListener('pointermove', move);
-      el.removeEventListener('pointerdown', move);
-      el.removeEventListener('pointerleave', leave);
-      el.removeEventListener('pointercancel', leave);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerdown', move);
+      window.removeEventListener('pointerup', lift);
+      window.removeEventListener('pointercancel', lift);
+      document.documentElement.removeEventListener('pointerleave', out);
       window.removeEventListener('resize', paint);
     };
   }, []);

@@ -170,8 +170,19 @@ Stand:
       Kreuz, 3 bis 9 px), nie mehr als zwei gleichzeitig. Knöpfe der Nachtseiten: Hover wechselt
       die Farbe (Blau ↔ Weiß, Kontur füllt sich), Druck staucht auf 96 %; im Hero nur noch ein
       Knopf („Unsere Leistungen ansehen“, weiß).
+      Variante „Hamburg oben“ (`/lavender/nacht-hamburg/`): der Hero ist genau einen Bildschirm
+      groß und bleibt stehen (sticky); darüber schiebt sich beim Scrollen die **Tag-Ebene**
+      (`DayLayer`, `data-surface="light"`), ein helles Blatt mit allen Inhalten. Am Ende kehrt
+      die Nacht mit dem Footer zurück. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
+      Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
+      `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene
+      groß (halbe Bildschirmbreite) und liegt dort auf einer eigenen Leinwand über dem Weiß und
+      hinter dem Inhalt; im Hero bleibt er klein. Die Stadt ist dafür jetzt ein Bildpaar mit
+      transparentem Grund (`hamburg-glas-*.webp`), ohne `mix-blend-mode`: sie darf damit in
+      sticky/transformierten Eltern stehen. NightNav schaltet auf der Ebene Menü-Icon und
+      Hover auf Navy (`data-ground` am Header).
       Abschluss: `HamburgGlass` statt Strichzeichnung: Hamburg als Milchglas-Skulptur, zwei
-      deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.jpg`), in Ruhe dunkel, das Licht folgt
+      deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.webp`), in Ruhe dunkel, das Licht folgt
       dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern
       folgt unten dem Zeiger und schrumpft über der Stadt weg, dort übernimmt das Licht im Glas.
       Bewusste Ausnahme von „Licht und Linie“ (Entscheidung Dennis, 12.11.2026); Footer immer dunkel.
