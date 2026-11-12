@@ -249,8 +249,11 @@ export function startNightSky(
     const size = rest.size * f * (reduce ? 1 : 1 + 0.02 * Math.sin(time / 1700 + rest.x));
     // On narrow screens the star crosses the text column on its way to the field, so it stays faint there.
     const strength = compact ? 0.38 : 'nightSoft' in w.marker.dataset ? 0.45 : 0.78;
+    // While the page still stands in Hamburg, the first section's star would show
+    // up as a point in the middle of the headline: it waits until the page lifts off.
+    const lifted = cityInHero ? 1 - down : 1;
     ctx.globalAlpha =
-      strength * passing * clamp01(f / 0.03) * (reduce ? 1 : clamp01((time - w.since) / 400));
+      strength * lifted * passing * clamp01(f / 0.03) * (reduce ? 1 : clamp01((time - w.since) / 400));
     ctx.drawImage(sprite, x - size / 2, y - size / 2, size, size);
     ctx.globalAlpha = 1;
   }
