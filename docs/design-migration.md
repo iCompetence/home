@@ -144,6 +144,13 @@ Stand:
       `FooterNight` statt `ClosingBlock`: eine Schlusszeile, Kontaktzeile, Hamburg-Skyline als
       Abschluss. Reiter-Inhalte per `forceMount` im HTML (alle 12 Leistungen, alle 7 Zitate).
       Produktbilder ohne farbige Bühne: `public/images/nacht-*.webp`.
+      Komponenten nach orchid.ai umgebaut (12.11.2026, Wunsch Dennis): ein Grundbaustein
+      `FeatureRow` (Textspalte neben großem Glasfeld, Seiten abwechselnd; der Stern des
+      Abschnitts liegt hinter dem Feld). Leistungen = je Feld eine Zeile, die vier Leistungen als
+      Liste, die gewählte zeigt ihre Beschreibung als Karte im Feld. Produkte = dieselbe Zeile
+      mit Screenshot. Kundenstimmen = Firmenleiste, die von selbst weiterläuft (hält bei Zeiger/
+      Fokus, stoppt nach Auswahl, nicht bei reduzierter Bewegung), ein Zitat darunter. Vorgehen =
+      drei hohe Glasfelder. Neu: `.lav-glass-clear`, `.lav-progress-run`.
       Bewegter Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React):
       kleine Sterne in Perspektive (Scrollen fliegt hinein, Funkeln, Aufblitzen), Leitstern
       (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein

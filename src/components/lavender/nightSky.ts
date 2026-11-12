@@ -146,7 +146,7 @@ export function startNightSky(
       y: lerp(tripY, led ? chase.y : land.y, down),
       size: lerp(lerp(big.size, small.size, away), land.size, down) * (1 - melt),
       // Overhead it passes behind running text, so it steps back; full strength at both ends.
-      alpha: lerp(lerp(1, 0.55, away), 1, down) * (1 - melt),
+      alpha: lerp(lerp(1, compact ? 0.3 : 0.55, away), 1, down) * (1 - melt),
       // The sky turns around where the star would rest, not around the pointer.
       pivot: { x: lerp(tripX, land.x, down), y: lerp(tripY, land.y, down) },
     };
@@ -227,14 +227,16 @@ export function startNightSky(
 
     const compact = W < 768;
     const right = w.marker.dataset.nightSide !== 'left';
+    // Behind the section's glass field: beside the text on wide screens, below it on narrow ones.
     const rest = compact
-      ? { x: W * (right ? 0.72 : 0.28), y: H * 0.3, size: W * 1.1 }
-      : { x: W * (right ? 0.82 : 0.18), y: H * 0.42, size: Math.min(W * 0.5, H * 0.9) };
+      ? { x: W * 0.5, y: H * 0.66, size: W * 0.95 }
+      : { x: W * (right ? 0.74 : 0.26), y: H * 0.5, size: Math.min(W * 0.44, H * 0.8) };
     const near = clamp01(1 - Math.abs(u) * 2);
     const x = W / 2 + ease.x * W * 0.012 + (rest.x - W / 2) * f + ease.x * W * 0.04 * near;
     const y = H / 2 + ease.y * H * 0.012 + (rest.y - H / 2) * f + ease.y * H * 0.04 * near - down * H * 0.2;
     const size = rest.size * f * (reduce ? 1 : 1 + 0.02 * Math.sin(time / 1700 + rest.x));
-    const strength = 'nightSoft' in w.marker.dataset ? 0.45 : 0.78;
+    // On narrow screens the star crosses the text column on its way to the field, so it stays faint there.
+    const strength = compact ? 0.38 : 'nightSoft' in w.marker.dataset ? 0.45 : 0.78;
     ctx.globalAlpha =
       strength * passing * clamp01(f / 0.03) * (reduce ? 1 : clamp01((time - w.since) / 400));
     ctx.drawImage(sprite, x - size / 2, y - size / 2, size, size);
