@@ -12,7 +12,8 @@ import { cn } from '@/components/ui/utils';
  * Header of the night home: no bar and no background, so nothing slides over
  * the sky while scrolling. Logo left, the contact button in the middle, the
  * menu on the right; all three stay while scrolling. On the day layer (the
- * light sheet of the Hamburg hero variant) logo and menu icon turn dark.
+ * light sheet of the Hamburg hero variant) content scrolls under the nav, so
+ * there it does get a light bar, and logo and menu icon turn dark.
  *
  * The menu is the shadcn Sheet (Radix Dialog: focus trap, Escape, scroll
  * lock) opening from the right as a light, rounded panel with large numbered
@@ -38,7 +39,9 @@ export function NightNav() {
   const pages = [...PRODUCT_LINKS, ...PRINCIPLE_LINKS, NEWS_LINK];
   const [open, setOpen] = useState(false);
   // True while the day layer (the light sheet of the Hamburg hero variant) is
-  // behind the nav: menu icon and button hover then switch to navy.
+  // behind the nav: the nav then gets a light bar from logo to menu, and logo,
+  // menu icon and button hover switch to navy. The bar stays over the layer's
+  // dark band (testimonials) too, so it does not flicker.
   const [onDay, setOnDay] = useState(false);
 
   useEffect(() => {
@@ -49,9 +52,7 @@ export function NightNav() {
         const box = el?.getBoundingClientRect();
         return !!box && box.top <= 46 && box.bottom > 46;
       };
-      // A navy band on the layer (the testimonials) counts as night again.
-      const band = layer ? Array.from(layer.querySelectorAll(':scope > .bg-lav-navy')).some(behind) : false;
-      setOnDay(behind(layer) && !band);
+      setOnDay(behind(layer));
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -70,8 +71,13 @@ export function NightNav() {
     <header data-ground={onDay ? 'day' : 'night'} className="group/nav pointer-events-none sticky top-0 z-50 w-full">
       <nav
         data-ds="NightNav"
-        className="mx-auto grid w-full max-w-frame grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 md:px-12 lg:px-[var(--section-pad-h)] lg:py-6"
+        className="relative mx-auto grid w-full max-w-frame grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 md:px-12 lg:px-[var(--section-pad-h)] lg:py-6"
       >
+        {/* The bar: only on the day layer. No backdrop blur (costly on a long page). */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-page opacity-0 shadow-[0_10px_30px_-14px_rgb(11_34_49/0.35),inset_0_0_0_1px_rgb(11_34_49/0.08)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
+        />
         <a
           href="#top"
           onClick={smoothAnchor}

@@ -26,7 +26,7 @@
  * following. The sky is redrawn on scroll only, for the guide star's rest place.
  */
 
-const DEFAULT_SOURCES = { double: '/images/icompetence_visual_01.png' };
+const DEFAULT_SOURCES = { double: '/images/nacht-stern-doppel.webp' };
 
 /** Mostly white, a few in the brand's light tints. */
 const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4'];

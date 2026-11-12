@@ -39,10 +39,18 @@ import {
  * every visual class is ours.
  */
 
+// The brand stars at the size they are shown here (1200 px; the original PNGs
+// are about 3000 px and take some 36 MB each once decoded), and a small
+// pre-blurred copy of each for the glass fields on the day layer.
 const STAR = {
-  blue: '/images/icompetence_visual_blau_01.png',
-  violet: '/images/icompetence_visual_violet_01.png',
-  mint: '/images/icompetence_visual_mint.png',
+  blue: '/images/nacht-stern-blau.webp',
+  violet: '/images/nacht-stern-violett.webp',
+  mint: '/images/nacht-stern-mint.webp',
+} as const;
+const STAR_SOFT = {
+  blue: '/images/nacht-stern-blau-weich.webp',
+  violet: '/images/nacht-stern-violett-weich.webp',
+  mint: '/images/nacht-stern-mint-weich.webp',
 } as const;
 type StarKind = keyof typeof STAR;
 
@@ -54,9 +62,12 @@ type StarKind = keyof typeof STAR;
  */
 function StarField({ star, className, children }: { star: StarKind; className?: string; children: ReactNode }) {
   return (
-    // --lav-field-star: the day layer blurs the star itself instead of the
-    // backdrop (.lav-glass-clear::before in globals.css).
-    <div className={cn('relative', className)} style={{ '--lav-field-star': `url(${STAR[star]})` } as CSSProperties}>
+    // --lav-field-star-soft: on the day layer the field shows a pre-blurred
+    // copy of the star instead of blurring its backdrop (.lav-glass-clear::before).
+    <div
+      className={cn('relative', className)}
+      style={{ '--lav-field-star-soft': `url(${STAR_SOFT[star]})` } as CSSProperties}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute -inset-[9%] bg-contain bg-center bg-no-repeat"
@@ -70,11 +81,16 @@ function StarField({ star, className, children }: { star: StarKind; className?: 
 }
 
 /** The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */
-function NightSky({ city }: { city: CityPlace }) {
+function NightSky({ city, hidden = false }: { city: CityPlace; hidden?: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
   return (
-    <canvas ref={canvas} aria-hidden data-city={city} className="pointer-events-none fixed inset-0 z-0 h-full w-full" />
+    <canvas
+      ref={canvas}
+      aria-hidden
+      data-city={city}
+      className={cn('pointer-events-none fixed inset-0 z-0 h-full w-full', hidden && 'invisible')}
+    />
   );
 }
 
@@ -157,10 +173,18 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
   // day layer covers the whole screen (half a screen after it has closed over
   // the hero), so nobody sees the swap.
   const [closing, setClosing] = useState(false);
+  // While the layer covers the screen with room to spare, the stage behind it
+  // is taken out of drawing: the browser then has only the layer to paint.
+  const [covered, setCovered] = useState(false);
   useEffect(() => {
     const layer = document.querySelector('[data-ds="DayLayer"]');
     if (!layer) return;
-    const onScroll = () => setClosing(layer.getBoundingClientRect().top < -window.innerHeight * 0.5);
+    const onScroll = () => {
+      const box = layer.getBoundingClientRect();
+      const h = window.innerHeight;
+      setClosing(box.top < -h * 0.5);
+      setCovered(box.top < -h * 0.25 && box.bottom > h * 1.25);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
@@ -172,13 +196,13 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
 
   if (city === 'hero') {
     return (
-      <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing} />}>
-        <NightSky city={city} />
+      <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing && !covered} />}>
+        <NightSky city={city} hidden={covered} />
         {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
             whole first screen. id="top" sits here: the stage itself is sticky
             and would not be a scroll target. */}
         <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
-          <HeroHamburg hidden={closing} />
+          <HeroHamburg hidden={closing} covered={covered} />
           {/* On the day layer: services, testimonials and process are the
               components of today's Lavender home (design system); statement,
               products and Privacy-Led are the rows of this study. */}
@@ -286,10 +310,13 @@ const STAGE_HEIGHT = 'h-[max(100svh,540px)]';
 const STAGE_TEXT =
   'relative z-[1] mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28';
 
-function HeroHamburg({ hidden }: { hidden: boolean }) {
+function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean }) {
   const { t } = useLanguage();
   return (
-    <div data-ds="HeroHamburg" className={cn('sticky top-0 flex flex-col overflow-hidden', STAGE_HEIGHT)}>
+    <div
+      data-ds="HeroHamburg"
+      className={cn('sticky top-0 flex flex-col overflow-hidden', STAGE_HEIGHT, covered && 'invisible')}
+    >
       <div data-stage="hero" className={cn(STAGE_TEXT, hidden && 'invisible')}>
         <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
         <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
@@ -326,7 +353,6 @@ function HeroHamburg({ hidden }: { hidden: boolean }) {
  */
 function ClosingStage({ shown }: { shown: boolean }) {
   const { t, language } = useLanguage();
-  const value = 'lav-body font-medium text-lav-ink no-underline';
   const legal = 'lav-body font-medium text-lav-ink/70 no-underline';
   const toTop = () =>
     window.scrollTo({
@@ -367,8 +393,9 @@ function ClosingStage({ shown }: { shown: boolean }) {
           !shown && 'invisible',
         )}
       >
-        <div className="pointer-events-auto relative z-[1] mx-auto flex w-full max-w-frame flex-col justify-between gap-8 px-[var(--section-pad-h)] pt-[108px] md:flex-row md:gap-10 lg:pt-[140px]">
-          <div className="flex max-w-[720px] flex-col items-start gap-8">
+        <div className="relative z-[1] mx-auto w-full max-w-frame px-[var(--section-pad-h)] pt-[108px] lg:pt-[140px]">
+          {/* Contact details are on the contact page; here only the call to action. */}
+          <div className="pointer-events-auto flex max-w-[720px] flex-col items-start gap-8">
             <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
             <Button asChild variant="white" className={solidOnNight}>
               <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
@@ -376,16 +403,6 @@ function ClosingStage({ shown }: { shown: boolean }) {
                 <ArrowUpRight size={20} strokeWidth={2} />
               </a>
             </Button>
-          </div>
-          <div className="flex flex-row flex-wrap items-start gap-x-10 gap-y-6 md:flex-col md:items-end md:gap-8">
-            <div className="flex flex-col items-start gap-3 md:items-end">
-              <Eyebrow className="text-lav-ink/70">{t('footer.inquiries')}</Eyebrow>
-              <a href={`mailto:${EMAIL}`} className={value}>{EMAIL}</a>
-            </div>
-            <div className="flex flex-col items-start gap-3 md:items-end">
-              <Eyebrow className="text-lav-ink/70">{t('footer.phone')}</Eyebrow>
-              <span className={value}>{PHONE}</span>
-            </div>
           </div>
         </div>
       </div>
@@ -408,9 +425,10 @@ function DayServices() {
   return (
     <ServicesCarousel
       cards={[
-        card('data', '/images/iC_Stern_Blau.png', SERVICE_FIELDS[0].items),
-        card('ai', '/images/iC_Stern_Gelb.png', SERVICE_FIELDS[1].items),
-        card('workshops', '/images/iC_Stern_Gruen.png', SERVICE_FIELDS[2].items),
+        // The Lavender home's card visuals, at the size they are shown.
+        card('data', '/images/nacht-leistung-blau.webp', SERVICE_FIELDS[0].items),
+        card('ai', '/images/nacht-leistung-gelb.webp', SERVICE_FIELDS[1].items),
+        card('workshops', '/images/nacht-leistung-gruen.webp', SERVICE_FIELDS[2].items),
       ]}
       title={t('lavender.services.title')}
       className={ANCHOR_SCROLL_MARGIN}
@@ -574,7 +592,6 @@ function ProductRow({
         <img
           src={image}
           alt={imageAlt}
-          loading="lazy"
           className="absolute left-6 top-6 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] max-w-none rounded-tl-card-sm object-cover object-left-top outline outline-1 -outline-offset-1 outline-white/10 lg:left-12 lg:top-12 lg:h-[calc(100%-3rem)] lg:w-[calc(100%-3rem)] lg:rounded-tl-[28px]"
         />
       }
