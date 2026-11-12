@@ -177,7 +177,10 @@ Stand:
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene
       groß (halbe Bildschirmbreite) und liegt dort auf einer eigenen Leinwand über dem Weiß und
-      hinter dem Inhalt; im Hero bleibt er klein. Die Stadt ist dafür jetzt ein Bildpaar mit
+      hinter dem Inhalt; im Hero bleibt er klein. Die Ebene hat bewusst kein `overflow` und
+      keine `backdrop-filter`: beides zusammen ließ die Seite auf echten Grafikkarten ruckeln
+      und teils abreißen. Die Glasfelder zeichnen dort ihren eigenen Stern einmalig weich
+      (`::before`), der Himmel beschneidet den Leitstern selbst und zeichnet nur bei Änderung. Die Stadt ist dafür jetzt ein Bildpaar mit
       transparentem Grund (`hamburg-glas-*.webp`), ohne `mix-blend-mode`: sie darf damit in
       sticky/transformierten Eltern stehen. NightNav schaltet auf der Ebene Menü-Icon und
       Hover auf Navy (`data-ground` am Header).

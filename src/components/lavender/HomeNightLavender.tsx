@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -50,7 +50,9 @@ type StarKind = keyof typeof STAR;
  */
 function StarField({ star, className, children }: { star: StarKind; className?: string; children: ReactNode }) {
   return (
-    <div className={cn('relative', className)}>
+    // --lav-field-star: the day layer blurs the star itself instead of the
+    // backdrop (.lav-glass-clear::before in globals.css).
+    <div className={cn('relative', className)} style={{ '--lav-field-star': `url(${STAR[star]})` } as CSSProperties}>
       <div
         aria-hidden
         className="pointer-events-none absolute -inset-[9%] bg-contain bg-center bg-no-repeat"
@@ -191,17 +193,21 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
  * The day layer: a light sheet that scrolls up over the hero, which stays
  * where it is. Everything on it reads `ink` and `ground` (see globals.css), so
  * the sections are the same components as on the night sky. Its own canvas
- * (sticky, one screen tall, no layout height) is where the sky draws the guide
+ * (fixed, inside the sheet's stacking context) is where the sky draws the guide
  * star on the sheet: above the white, behind the content.
+ *
+ * No `overflow` on the sheet: clipping a sheet this tall to its rounded
+ * corners makes the browser mask every glass field inside against it, which
+ * is slow and breaks on some graphics cards. The sky clips the star itself.
  */
 function DayLayer({ children }: { children: ReactNode }) {
   return (
     <div
       data-ds="DayLayer"
       data-surface="light"
-      className="relative z-10 overflow-clip rounded-t-card bg-lav-page text-lav-navy lg:rounded-t-frame"
+      className="relative z-10 rounded-t-card bg-lav-page text-lav-navy lg:rounded-t-frame"
     >
-      <canvas aria-hidden data-sky="day" className="pointer-events-none sticky top-0 -mb-[100vh] block h-screen w-full" />
+      <canvas aria-hidden data-sky="day" className="pointer-events-none fixed inset-0 h-full w-full" />
       {children}
     </div>
   );

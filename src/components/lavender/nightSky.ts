@@ -75,6 +75,11 @@ export function startNightSky(
   let melt = 0;
   // How far the guide star is on the day layer (0..1): there it grows large.
   let day = 0;
+  // What the day canvas shows right now; it is only redrawn when that changes.
+  let dayDrawn = '';
+  // The same for the sky: the guide star's state at the last drawing, and when that was.
+  let skyDrawn = '';
+  let skyDrawnAt = -1e9;
 
   // The artwork is 3000 px wide; draw from a 1024 px copy instead.
   let sprite: HTMLCanvasElement | null = null;
@@ -84,7 +89,7 @@ export function startNightSky(
     copy.width = copy.height = 1024;
     copy.getContext('2d')?.drawImage(img, 0, 0, 1024, 1024);
     sprite = copy;
-    if (reduce) draw();
+    if (reduce) draw(true);
   };
   img.src = sources.double;
 
@@ -120,11 +125,13 @@ export function startNightSky(
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     if (dayCanvas) {
-      dayCanvas.width = Math.round(dayCanvas.clientWidth * dpr);
-      dayCanvas.height = Math.round(dayCanvas.clientHeight * dpr);
+      dayCanvas.width = canvas.width;
+      dayCanvas.height = canvas.height;
+      dayDrawn = '';
     }
     if (reseed) seed();
-    if (reduce) draw();
+    skyDrawn = '';
+    if (reduce) draw(true);
   }
 
   /** Now and then a random star that is on screen starts to glint. */
@@ -245,13 +252,36 @@ export function startNightSky(
     return !!box && y >= box.top && y <= box.bottom;
   }
 
-  function draw() {
+  /** The guide star on the day layer's canvas, clipped to the layer (rounded top corners included). */
+  function drawDay(star: { x: number; y: number; alpha: number }, size: number, box: DOMRect) {
+    if (!dayCanvas || !dayCtx) return;
+    const top = Math.max(0, box.top);
+    const bottom = Math.min(H, box.bottom);
+    const shown = !!sprite && size > 1 && bottom > top && star.y + size / 2 > top && star.y - size / 2 < bottom;
+    const key = shown
+      ? [star.x, star.y, size, star.alpha, box.top, bottom].map((v) => v.toFixed(1)).join()
+      : 'empty';
+    if (key === dayDrawn) return;
+    dayDrawn = key;
+    dayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dayCtx.clearRect(0, 0, W, H);
+    if (!shown || !sprite) return;
+    const radius = parseFloat(getComputedStyle(layer as Element).borderTopLeftRadius) || 0;
+    dayCtx.save();
+    dayCtx.beginPath();
+    if (radius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, [radius, radius, 0, 0]);
+    else dayCtx.rect(box.left, box.top, box.width, box.height);
+    dayCtx.clip();
+    dayCtx.globalAlpha = star.alpha;
+    dayCtx.drawImage(sprite, star.x - size / 2, star.y - size / 2, size, size);
+    dayCtx.restore();
+  }
+
+  function draw(force = false) {
     if (!ctx) return;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    drawField();
     let star = guideStar();
-    if (layer) {
+    const box = layer?.getBoundingClientRect();
+    if (box) {
       // Without animation frames (reduced motion) the size follows at once.
       const target = onLayer(star.y) ? 1 : 0;
       if (reduce && day !== target) {
@@ -259,23 +289,26 @@ export function startNightSky(
         star = guideStar();
       }
     }
-    const size = star.size * (reduce ? 1 : 1 + 0.02 * Math.sin(time / 900));
+    // The star breathes in the night sky; on the day layer it holds still, so
+    // nothing has to be redrawn (and no glass re-blurred) while the pointer rests.
+    const size = star.size * (reduce ? 1 : 1 + 0.02 * (1 - day) * Math.sin(time / 900));
+    if (box) drawDay(star, size, box);
+    // While the layer covers the whole screen, the sky behind it is not drawn.
+    if (box && box.top <= 0 && box.bottom >= H) return;
+    // A full-screen canvas is costly to hand to the screen 60 times a second.
+    // The small stars only shimmer slowly, so the sky is redrawn 20 times a
+    // second, and at once whenever the guide star moves.
+    const key = [star.x, star.y, star.size, star.alpha].map((v) => v.toFixed(1)).join();
+    if (!force && key === skyDrawn && time - skyDrawnAt < 50) return;
+    skyDrawn = key;
+    skyDrawnAt = time;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    drawField();
     if (sprite && star.size > 1) {
       ctx.globalAlpha = star.alpha;
       ctx.drawImage(sprite, star.x - size / 2, star.y - size / 2, size, size);
       ctx.globalAlpha = 1;
-    }
-    if (dayCanvas && dayCtx) {
-      // Same star, in the layer canvas' own coordinates (it is sticky: it moves
-      // with the layer until it reaches the top of the screen).
-      const box = dayCanvas.getBoundingClientRect();
-      dayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      dayCtx.clearRect(0, 0, box.width, box.height);
-      if (sprite && star.size > 1 && box.top < H && box.bottom > 0) {
-        dayCtx.globalAlpha = star.alpha;
-        dayCtx.drawImage(sprite, star.x - box.left - size / 2, star.y - box.top - size / 2, size, size);
-        dayCtx.globalAlpha = 1;
-      }
     }
   }
 
@@ -298,7 +331,8 @@ export function startNightSky(
       melt += ((over ? 1 : 0) - melt) * 0.14;
     }
     if (layer) {
-      day += ((onLayer(guideStar().y) ? 1 : 0) - day) * 0.07;
+      const target = onLayer(guideStar().y) ? 1 : 0;
+      day = Math.abs(target - day) < 0.003 ? target : day + (target - day) * 0.07;
     }
     draw();
     raf = requestAnimationFrame(frame);
@@ -314,13 +348,13 @@ export function startNightSky(
     pointer.y = e.clientY;
     pointer.seen = true;
   };
-  const onScroll = () => draw();
+  const onScroll = () => draw(true);
 
   window.addEventListener('resize', resize);
   resize();
   if (reduce) {
     window.addEventListener('scroll', onScroll, { passive: true });
-    draw();
+    draw(true);
   } else {
     if (follows) window.addEventListener('pointermove', onPointer, { passive: true });
     raf = requestAnimationFrame(frame);
