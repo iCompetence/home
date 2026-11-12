@@ -35,15 +35,35 @@ import {
  * every visual class is ours.
  */
 
+const STAR = {
+  blue: '/images/icompetence_visual_blau_01.png',
+  violet: '/images/icompetence_visual_violet_01.png',
+  mint: '/images/icompetence_visual_mint.png',
+} as const;
+type StarKind = keyof typeof STAR;
+
 /**
- * Tells the sky (nightSky.ts) that this section has a brand star. The sky
- * finds the marker, measures the section around it and draws the star.
+ * A glass field with its star: the star is part of the page and stands still
+ * behind the glass. It is a little larger than the field, so its tips show
+ * sharp past the edges while the glass turns the rest into a glow. The outer
+ * element takes the grid placement, `children` float inside the glass.
  */
-function NightStar({ kind, side = 'right', soft = false }: { kind: 'blue' | 'violet' | 'mint'; side?: 'left' | 'right'; soft?: boolean }) {
-  return <span hidden data-night-star={kind} data-night-side={side} data-night-soft={soft ? '' : undefined} />;
+function StarField({ star, className, children }: { star: StarKind; className?: string; children: ReactNode }) {
+  return (
+    <div className={cn('relative', className)}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-[9%] bg-contain bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${STAR[star]})` }}
+      />
+      <div className="lav-glass-clear relative h-full min-h-[320px] overflow-hidden rounded-card md:min-h-[400px] lg:min-h-[500px] lg:rounded-frame">
+        {children}
+      </div>
+    </div>
+  );
 }
 
-/** The moving sky: one fixed canvas behind the whole page. */
+/** The sky: one fixed canvas behind the whole page (small stars and the guide star). */
 function NightSky({ city }: { city: CityPlace }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
@@ -63,9 +83,9 @@ function Spark({ className }: { className?: string }) {
 
 /*
  * The page's one building block (after orchid.ai's feature rows): a short
- * text column next to a large glass field, sides alternating. The section's
- * star rests behind the field, so the glass turns it into a soft glow, and a
- * piece of real content floats in front (a description card, a screenshot).
+ * text column next to a large glass field (StarField), sides alternating. The
+ * section's star stands behind the field, and a piece of real content floats
+ * in front (a description card, a screenshot).
  * The field reaches the frame edge; the text stays on the text column.
  */
 type Side = 'left' | 'right';
@@ -74,7 +94,7 @@ const textCol = (media: Side) =>
   cn('flex flex-col items-start gap-8 lg:col-span-5 lg:row-start-1', media === 'right' ? 'lg:col-start-1' : 'lg:col-start-8');
 const mediaCol = (media: Side) =>
   cn(
-    'lav-glass-clear relative -mx-4 min-h-[320px] overflow-hidden rounded-card md:-mx-8 md:min-h-[400px] lg:col-span-7 lg:row-start-1 lg:mx-0 lg:min-h-[500px] lg:rounded-frame',
+    '-mx-4 md:-mx-8 lg:col-span-7 lg:row-start-1 lg:mx-0',
     media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
   );
 
@@ -89,7 +109,7 @@ function FeatureRow({
   id?: string;
   /** Side of the glass field; the text takes the other one. */
   media: Side;
-  star: 'blue' | 'violet' | 'mint';
+  star: StarKind;
   className?: string;
   /** The text column. */
   children: ReactNode;
@@ -98,9 +118,10 @@ function FeatureRow({
 }) {
   return (
     <Section id={id} className={cn('relative', className)} innerClassName={ROW}>
-      <NightStar kind={star} side={media} />
       <div className={textCol(media)}>{children}</div>
-      <div className={mediaCol(media)}>{field}</div>
+      <StarField star={star} className={mediaCol(media)}>
+        {field}
+      </StarField>
     </Section>
   );
 }
@@ -226,7 +247,6 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
       className={cn('relative', first && ANCHOR_SCROLL_MARGIN)}
       innerClassName="relative"
     >
-      <NightStar kind={field.star} side={field.media} />
       <Tabs defaultValue={field.items[0]} orientation="vertical" className={cn(ROW, 'gap-10')}>
         <div className={textCol(field.media)}>
           {first && <Eyebrow tone="white">{t('lavender.services.title')}</Eyebrow>}
@@ -244,7 +264,7 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
             ))}
           </TabsList>
         </div>
-        <div className={mediaCol(field.media)}>
+        <StarField star={field.star} className={mediaCol(field.media)}>
           {field.items.map((item) => (
             <TabsContent
               key={item}
@@ -257,7 +277,7 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
               <p className="lav-paragraph text-lav-white/80">{t(`lavender.services.${field.id}.${item}.desc`)}</p>
             </TabsContent>
           ))}
-        </div>
+        </StarField>
       </Tabs>
     </Section>
   );
@@ -308,7 +328,7 @@ function ProductRow({
 }: {
   id?: string;
   media: Side;
-  star: 'blue' | 'violet' | 'mint';
+  star: StarKind;
   eyebrow: string;
   title: string;
   description: string;
@@ -505,7 +525,6 @@ function Process() {
   const { t } = useLanguage();
   return (
     <Section id="process" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
-      <NightStar kind="violet" side="right" soft />
       <Eyebrow tone="white">{t('lavender.process.title')}</Eyebrow>
       <ol className="-mx-4 mt-8 grid list-none gap-4 p-0 md:-mx-8 lg:-mx-10 lg:mt-10 lg:grid-cols-3">
         {PROCESS_STEPS.map((step) => (

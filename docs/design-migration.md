@@ -160,11 +160,12 @@ Stand:
       links, darunter alle Produktseiten, Kontakt, Rechtliches, Sprachwahl. Keine AnchorTabs mehr
       auf diesen Seiten (deren Navy-Leiste fuhr beim Scrollen ein). Hintergrundsterne bleiben
       Punkte (max. 1,7 px), der Leitstern ist größer.
-      Bewegter Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React):
-      kleine Sterne in Perspektive (Scrollen fliegt hinein, Funkeln, Aufblitzen), Leitstern
-      (Doppelstern) groß im Hero, dann klein über Kopf, am Ende über Hamburg; je Abschnitt ein
-      Stern, der aus der Tiefe kommt und vorbeizieht (Marker `data-night-star`). Bei reduzierter
-      Bewegung nur Neuzeichnen beim Scrollen. `.lav-glass` dafür dunkler (Lesbarkeit).
+      Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React): kleine Sterne
+      als feste Punkte, die nur in der Helligkeit flackern (kein Zoom, keine Bewegung beim
+      Scrollen; Entscheidung Dennis 12.11.2026, das Hineinfliegen war zu viel). Einzig der
+      Leitstern (Doppelstern) bewegt sich: Er folgt dem Zeiger mit Verzögerung hinter dem Inhalt;
+      im Hero der Fassung „unten“ ist er groß und neigt sich nur. Die Sterne der Abschnitte
+      stehen fest hinter ihren Glasfeldern (`StarField`). Bei reduzierter Bewegung steht alles.
       Abschluss: `HamburgGlass` statt Strichzeichnung: Hamburg als Milchglas-Skulptur, zwei
       deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.jpg`), in Ruhe dunkel, das Licht folgt
       dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern
