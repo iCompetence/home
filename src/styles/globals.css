@@ -583,27 +583,98 @@ html {
     pointer-events: none;
   }
 
-  /* Hover of the night home's buttons: the double star's colours, a little
-     darker so white text stays readable. Laid over the button's own colour as
-     a layer that fades in (a gradient itself cannot be transitioned). */
-  .lav-star-hover {
+  /*
+   * Hover on the night home: the light of the double star moves into whatever
+   * the pointer is on (the guide star itself goes out meanwhile, see nightSky).
+   * One gradient, two uses:
+   * - .lav-star-hover: things with a surface (buttons, round icon buttons, the
+   *   logo) are filled with it, text and icons turn white;
+   * - .lav-star-text: plain text (links, labels) takes it as its colour. It is
+   *   a span inside the link or button; the same look marks the current item
+   *   ([aria-current]).
+   * --lav-star-fill is a little darker than the brand colours so white text
+   * stays readable; --lav-star-ink is the text version per ground.
+   */
+  :root {
+    --lav-star-fill: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink-end: #8a45f2;
+  }
+  [data-surface='inverse'] {
+    --lav-star-ink: linear-gradient(105deg, #53bdf0 0%, #8f93fb 55%, #b88bfb 100%);
+    --lav-star-ink-end: #b88bfb;
+  }
+  [data-surface='light'] {
+    --lav-star-ink: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink-end: #8a45f2;
+  }
+
+  /* Filled: the gradient is a layer over the element's own colour that fades
+     in (a gradient itself cannot be transitioned). The second selector gives
+     the same hover to the buttons inside the Lavender components on the day
+     layer (carousel and quote arrows, service pills) without touching the
+     components, which the live Lavender pages share. */
+  .lav-star-hover,
+  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']) {
     position: relative;
     isolation: isolate;
     overflow: hidden;
   }
-  .lav-star-hover::before {
+  .lav-star-hover::before,
+  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true'])::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    background: var(--lav-star-fill);
     opacity: 0;
     transition: opacity var(--duration-fast) ease-out;
   }
-  .lav-star-hover:hover::before,
-  .lav-star-hover:focus-visible::before {
+  .lav-star-hover:is(:hover, :focus-visible)::before,
+  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']):is(:hover, :focus-visible)::before {
     opacity: 1;
+  }
+  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']):is(:hover, :focus-visible) {
+    color: #fff !important;
+    border-color: transparent !important;
+  }
+  /* PageShell dims every hovered link and button to 75 %; not here. */
+  [data-star-hover] :is(a, button):not(:disabled):hover {
+    opacity: 1 !important;
+  }
+
+  /* Text: the gradient lies behind the glyphs all the time; making the text
+     colour transparent reveals it, which can be transitioned. */
+  .lav-star-text,
+  [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
+    background-image: var(--lav-star-ink);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: color var(--duration-fast) ease-out;
+    /* Room for descenders: the type steps trim their box to cap height and
+       baseline, and the gradient only shows inside the box. No effect on layout. */
+    padding-block: 0.3em;
+    margin-block: -0.3em;
+  }
+  :is(a, button):is(:hover, :focus-visible) > .lav-star-text,
+  [aria-current] > .lav-star-text,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:is(:hover, :focus-visible) > div > span:last-child {
+    color: transparent !important;
+  }
+  /* An icon beside such a text takes the gradient's end colour. */
+  :is(a, button):is(:hover, :focus-visible) > .lav-star-text ~ svg,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:is(:hover, :focus-visible) > svg {
+    color: var(--lav-star-ink-end) !important;
+  }
+
+  /* The logo as a shape that can be filled: white at rest, the gradient on hover. */
+  .lav-logo-mask {
+    -webkit-mask: url('/iCompetence_white.svg') center / contain no-repeat;
+    mask: url('/iCompetence_white.svg') center / contain no-repeat;
+  }
+  .lav-logo-mask::before {
+    background: var(--lav-star-ink);
   }
 
   /* The section label in the nav bar fades in when the section changes. */

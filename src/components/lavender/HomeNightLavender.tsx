@@ -20,6 +20,7 @@ import {
   ServicesCarousel,
   TestimonialSlider,
   siteHref,
+  smoothAnchor,
 } from '@/design-system';
 
 /**
@@ -261,6 +262,8 @@ function DayLayer({ children }: { children: ReactNode }) {
     <div
       data-ds="DayLayer"
       data-surface="light"
+      // The Lavender components' own buttons get the study's hover (globals.css).
+      data-star-hover
       className="relative z-10 rounded-card bg-lav-page text-lav-navy lg:rounded-frame"
     >
       <canvas aria-hidden data-sky="day" className="pointer-events-none fixed inset-0 h-full w-full" />
@@ -288,7 +291,7 @@ function Hero() {
           <div className="flex flex-wrap gap-4">
             {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
             <Button asChild variant="white" className={solidOnNight}>
-              <a href="#services">
+              <a href="#services" onClick={smoothAnchor}>
                 {t('lavender.hero.seeServices')}
                 <ArrowDown size={20} strokeWidth={2} />
               </a>
@@ -325,7 +328,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
         <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
         <Button asChild variant="white" className={solidOnNight}>
-          <a href="#services">
+          <a href="#services" onClick={smoothAnchor}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
           </a>
@@ -356,7 +359,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
  */
 function ClosingStage({ shown }: { shown: boolean }) {
   const { t, language } = useLanguage();
-  const legal = 'lav-body font-medium text-lav-ink/70 no-underline';
+  const legal = 'lav-body font-medium text-lav-ink/70 no-underline hover:opacity-100!';
   const toTop = () =>
     window.scrollTo({
       top: 0,
@@ -366,14 +369,18 @@ function ClosingStage({ shown }: { shown: boolean }) {
     <footer data-ds="FooterNight" className="contents">
       <div className="relative mx-auto flex w-full max-w-frame items-center justify-between gap-6 px-[var(--section-pad-h)] py-6">
         <div className="flex items-center gap-6 md:gap-8">
-          <a href={siteHref(language, 'imprint')} className={legal}>{t('footer.imprint')}</a>
-          <a href={siteHref(language, 'privacy-policy')} className={legal}>{t('footer.privacy')}</a>
+          <a href={siteHref(language, 'imprint')} className={legal}>
+            <span className="lav-star-text">{t('footer.imprint')}</span>
+          </a>
+          <a href={siteHref(language, 'privacy-policy')} className={legal}>
+            <span className="lav-star-text">{t('footer.privacy')}</span>
+          </a>
           <a
             href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t('lavender.common.linkedin')}
-            className="inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline"
+            className="lav-star-hover inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline hover:opacity-100!"
           >
             <LinkedInGlyph size={18} />
           </a>
@@ -381,9 +388,9 @@ function ClosingStage({ shown }: { shown: boolean }) {
         <button
           type="button"
           onClick={toTop}
-          className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70"
+          className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70 hover:opacity-100!"
         >
-          <span className="lav-body font-medium">{t('footer.backToTop')}</span>
+          <span className="lav-star-text lav-body font-medium">{t('footer.backToTop')}</span>
           <ChevronUp size={16} strokeWidth={2} />
         </button>
       </div>

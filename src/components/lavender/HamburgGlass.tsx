@@ -111,7 +111,9 @@ export function HamburgGlass({ className }: { className?: string }) {
         e.clientX <= box.right &&
         e.clientY >= box.top &&
         e.clientY <= box.bottom &&
-        !(cover && e.clientY >= cover.top && e.clientY <= cover.bottom);
+        !(cover && e.clientY >= cover.top && e.clientY <= cover.bottom) &&
+        // On a link or a button the light is in that control (its hover), not in the city.
+        !(e.target as Element | null)?.closest?.('a, button, [role="button"]');
       if (!on) {
         if (inside) leave();
         return;

@@ -33,7 +33,8 @@ const EMAIL = 'info@icompetence.de';
 const PHONE = '+49 40 22636380';
 
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
-const smallLink = `font-brand text-[15px] font-medium leading-[1.4] text-lav-navy no-underline transition-opacity duration-[var(--duration-fast)] hover:opacity-60 ${focusRing} focus-visible:outline-lav-navy`;
+// Hover is the star gradient on the text (a .lav-star-text span inside, see globals.css).
+const smallLink = `font-brand text-[15px] font-medium leading-[1.4] text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
 
 export function NightNav() {
   const { t, language } = useLanguage();
@@ -97,15 +98,15 @@ export function NightNav() {
         {/* The bar: only on the day layer. No backdrop blur (costly on a long page). */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55),inset_0_0_0_1px_rgb(255_255_255/0.1)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
+          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
         />
+        {/* The logo is a masked shape, so hover can fill it with the star gradient. */}
         <a
           href="#top"
           onClick={smoothAnchor}
-          className={`pointer-events-auto inline-flex justify-self-start ${focusRing} focus-visible:outline-lav-white`}
-        >
-          <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-8 w-auto md:h-10" />
-        </a>
+          aria-label="iCompetence"
+          className={`lav-star-hover lav-logo-mask pointer-events-auto block h-8 w-[94px] justify-self-start bg-lav-white hover:opacity-100! md:h-10 md:w-[117px] ${focusRing} focus-visible:outline-lav-white`}
+        />
 
         <a
           href={siteHref(language, 'contact')}
@@ -122,7 +123,7 @@ export function NightNav() {
               (from tablets up); the whole thing opens the menu. */}
           <SheetTrigger
             aria-label={t('topNav.menu')}
-            className={`pointer-events-auto inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-3 justify-self-end rounded-pill border-0 bg-transparent px-2 font-brand text-[14px] font-medium text-lav-white transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] md:text-body ${focusRing} focus-visible:outline-lav-white`}
+            className={`pointer-events-auto inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-3 justify-self-end lav-star-hover rounded-pill border-0 bg-transparent px-2 font-brand text-[14px] font-medium text-lav-white transition-[scale] duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96] md:text-body ${focusRing} focus-visible:outline-lav-white`}
           >
             {onDay && section && (
               <span key={section} aria-hidden className="lav-nav-section hidden pl-2 md:inline">
@@ -136,42 +137,45 @@ export function NightNav() {
             side="right"
             aria-describedby={undefined}
             // [&>button]:hidden removes the sheet's own small close icon; ours is below.
-            className="lav-menu inset-y-3 right-3 h-auto w-[calc(100%-1.5rem)] gap-0 overflow-y-auto rounded-[28px] border-0 bg-lav-page p-6 text-lav-navy shadow-none sm:max-w-[640px] md:p-10 lg:p-12 [&>button]:hidden"
+            className="lav-menu inset-y-3 right-3 h-auto w-[calc(100%-1.5rem)] gap-0 overflow-y-auto rounded-[28px] border-0 bg-lav-page p-6 text-lav-navy shadow-none sm:max-w-[640px] md:p-10 [&>button]:hidden"
           >
             <SheetTitle className="sr-only">{t('topNav.menu')}</SheetTitle>
 
-            <div className="flex min-h-full flex-col gap-12">
-              <div className="flex justify-end">
-                <SheetClose
-                  aria-label={t('lavender.common.close')}
-                  className={`inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white ${focusRing} focus-visible:outline-lav-navy`}
-                >
-                  <X size={20} strokeWidth={2.5} />
-                </SheetClose>
-              </div>
+            {/* Everything fits one screen without scrolling: the close button
+                sits beside the first link instead of on a row of its own, and
+                the big links and the gaps shrink with the height of the screen. */}
+            <div className="relative flex min-h-full flex-col gap-[clamp(18px,3.6vh,36px)]">
+              <SheetClose
+                aria-label={t('lavender.common.close')}
+                className={`lav-star-hover absolute right-0 top-0 inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] ${focusRing} focus-visible:outline-lav-navy`}
+              >
+                <X size={20} strokeWidth={2.5} />
+              </SheetClose>
 
-              <ul className="m-0 flex list-none flex-col gap-1 p-0 md:gap-2">
+              <ul className="m-0 flex list-none flex-col gap-1 p-0 pr-14">
                 {SECTIONS.map((item, i) => (
                   <li key={item.href}>
                     <a
-                        href={item.href}
-                        onClick={goTo}
-                        className={`group inline-flex items-start gap-3 font-brand font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`}
-                      >
-                        <span className="pt-2 text-[13px] leading-none text-lav-navy/60 md:pt-3">0{i + 1}</span>
-                        <span className="text-[44px] leading-[1.08] tracking-[-1.5px] transition-opacity duration-[var(--duration-fast)] group-hover:opacity-50 md:text-[64px] md:tracking-[-2.5px]">
-                          {t(item.labelKey)}
-                        </span>
-                      </a>
+                      href={item.href}
+                      onClick={goTo}
+                      // The section the page is in keeps the star gradient.
+                      aria-current={section === item.labelKey ? 'location' : undefined}
+                      className={`inline-flex items-start gap-3 font-brand font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`}
+                    >
+                      <span className="pt-[0.5em] text-[13px] leading-none text-lav-navy/60">0{i + 1}</span>
+                      <span className="lav-star-text text-[clamp(28px,5vh,44px)] leading-[1.08] tracking-[-0.035em] md:text-[clamp(36px,6.6vh,64px)]">
+                        {t(item.labelKey)}
+                      </span>
+                    </a>
                   </li>
                 ))}
               </ul>
 
-              <ul className="m-0 grid list-none grid-cols-1 gap-x-8 gap-y-2 border-t border-lav-navy/15 p-0 pt-6 sm:grid-cols-2">
+              <ul className="m-0 grid list-none grid-cols-1 gap-x-8 gap-y-1.5 border-t border-lav-navy/15 p-0 pt-5 sm:grid-cols-2">
                 {pages.map((page) => (
                   <li key={page.href}>
                     <a href={siteHref(language, page.href)} className={smallLink}>
-                      {t(page.labelKey)}
+                      <span className="lav-star-text">{t(page.labelKey)}</span>
                     </a>
                   </li>
                 ))}
@@ -179,13 +183,21 @@ export function NightNav() {
 
               <div className="mt-auto flex flex-wrap items-end justify-between gap-6">
                 <div className="flex flex-col gap-1">
-                  <a href={`mailto:${EMAIL}`} className={smallLink}>{EMAIL}</a>
+                  <a href={`mailto:${EMAIL}`} className={smallLink}>
+                    <span className="lav-star-text">{EMAIL}</span>
+                  </a>
                   <span className="font-brand text-[15px] font-medium leading-[1.4] text-lav-navy">{PHONE}</span>
                 </div>
                 <div className="flex flex-col items-start gap-1 sm:items-end">
-                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={smallLink}>LinkedIn</a>
-                  <a href={siteHref(language, 'imprint')} className={smallLink}>{t('footer.imprint')}</a>
-                  <a href={siteHref(language, 'privacy-policy')} className={smallLink}>{t('footer.privacy')}</a>
+                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={smallLink}>
+                    <span className="lav-star-text">LinkedIn</span>
+                  </a>
+                  <a href={siteHref(language, 'imprint')} className={smallLink}>
+                    <span className="lav-star-text">{t('footer.imprint')}</span>
+                  </a>
+                  <a href={siteHref(language, 'privacy-policy')} className={smallLink}>
+                    <span className="lav-star-text">{t('footer.privacy')}</span>
+                  </a>
                   <NavSurfaceContext.Provider value="light">
                     <LanguageToggle />
                   </NavSurfaceContext.Provider>

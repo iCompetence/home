@@ -194,8 +194,12 @@ Stand:
       `loading="lazy"`-Bilder; Bühne und Himmel werden nicht gezeichnet, solange das Blatt
       sie verdeckt. Auf dem Blatt bekommt die Navigation eine dunkle Leiste von Logo bis
       Menü; neben dem Menü-Icon steht der aktuelle Abschnitt (Leistungen, Produkte, Vorgehen,
-      Privacy-led AI). Knöpfe der Studie bekommen im Hover den Verlauf des Doppelsterns
-      (`.lav-star-hover`), und der Leitstern erlischt über allem Klickbaren. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      Privacy-led AI). Hover ist ein System (globals.css): Das Licht des Doppelsterns wandert in das
+      Element unter dem Zeiger. Flächen (Knöpfe, runde Icon-Knöpfe, Logo, Pfeile und Pillen
+      der Lavender-Bausteine) füllen sich mit dem Verlauf (`.lav-star-hover`), Text (Links,
+      Labels, Akkordeon-Titel) nimmt ihn als Schriftfarbe an (`.lav-star-text`); derselbe
+      Verlauf markiert im Menü den aktuellen Abschnitt. Leitstern und Stadtlicht erlöschen
+      über allem Klickbaren. Das Menü passt ohne Scrollen auf einen Bildschirm. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene
