@@ -200,8 +200,13 @@ Stand:
       Labels, Akkordeon-Titel) nimmt ihn als Schriftfarbe an (`.lav-star-text`); derselbe
       Verlauf markiert im Menü den aktuellen Abschnitt. Leitstern und Stadtlicht erlöschen
       über allem Klickbaren. Das Menü passt ohne Scrollen auf einen Bildschirm.
-      Arbeitsseite `/lavender/leistungen-varianten/`: zehn Darstellungen für „Unsere
-      Leistungen“ zur Auswahl (Karussell überzeugt nicht). Nach der Entscheidung entfernen. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      „Unsere Leistungen“: Aus zehn Varianten hat Dennis am 2026-11-12 „Tabs mit Sternfeld“
+      gewählt (statt des Karussells): je Feld ein Tab, links die vier Leistungen mit
+      Beschreibung, rechts groß der Stern des Felds. Die Arbeitsseite mit den zehn Varianten
+      ist wieder entfernt (Commit 095d6a6 enthält sie).
+      Kundenstimmen: eigene Fassung statt `TestimonialSlider`, weil dessen Zitate in
+      Überschriftengröße über zwei Bildschirme liefen: ein Zitat zur Zeit in Lesegröße
+      (24 px) auf einer hellen Lila-Fläche, mit Zähler und Pfeilen; passt auf einen Bildschirm. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

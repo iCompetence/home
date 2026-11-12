@@ -53,7 +53,7 @@ export function NightNav() {
     // In page order; the testimonials end the products' stretch without a label of their own.
     const marks: { el: Element | null; labelKey: string }[] = [
       ...SECTIONS.map((item) => ({ el: document.querySelector(item.href), labelKey: item.labelKey as string })),
-      { el: document.querySelector('[data-ds="TestimonialSlider"]'), labelKey: '' },
+      { el: document.querySelector('[data-ds="Testimonials"]'), labelKey: '' },
     ];
     const onScroll = () => {
       // Behind the nav means: at 46 px from the top (the middle of the nav).
