@@ -4,9 +4,11 @@
  * started on any canvas: `const stop = startNightSky(canvas)`.
  *
  * What it draws:
- * - small stars: fixed points that only change in brightness, like real ones.
- *   They do not move with scrolling or the pointer; the whole sky turns very
- *   slowly around a fixed pole. The few brightest carry a fine cross.
+ * - small stars: fixed points with a barely visible shimmer. They do not move
+ *   with scrolling or the pointer; the whole sky turns very slowly around a
+ *   fixed pole. Every few seconds one star somewhere on the screen, a different
+ *   one each time, glints: it brightens and shows a fine cross of a random,
+ *   small size, then fades. Never many at once, never large.
  * - the guide star (the blue/violet double star, "Polaris"): the one thing
  *   that moves. It follows the pointer with a lag, behind the page's content,
  *   so glass panels turn it into a glow. Over the glass city (HamburgGlass) it
@@ -32,6 +34,8 @@ const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4']
 const SKYLINE_RATIO = 959 / 2600;
 
 type FieldStar = { angle: number; radius: number; size: number; tint: string; rate: number; phase: number };
+/** One star glinting: which one, since when, for how long, and how long its cross gets (px). */
+type Glint = { index: number; start: number; duration: number; reach: number };
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -56,6 +60,8 @@ export function startNightSky(
   let last = performance.now();
   let time = 0;
   let field: FieldStar[] = [];
+  let glints: Glint[] = [];
+  let nextGlint = 1500;
   // The pointer in px, the guide star's eased chase of it, and how far the
   // star has melted into the city (0..1).
   const pointer = { x: 0, y: 0, seen: false };
@@ -91,7 +97,7 @@ export function startNightSky(
         radius: reach * Math.sqrt(Math.random()),
         size: 0.45 + mag * 1.15,
         tint: TINTS[Math.floor(Math.random() * TINTS.length)],
-        rate: 0.0012 + Math.random() * 0.003,
+        rate: 0.0004 + Math.random() * 0.0012,
         phase: Math.random() * Math.PI * 2,
       };
     });
@@ -109,32 +115,62 @@ export function startNightSky(
     if (reduce) draw();
   }
 
+  /** Now and then a random star that is on screen starts to glint. */
+  function scheduleGlints(turn: number) {
+    glints = glints.filter((g) => time - g.start < g.duration);
+    if (time < nextGlint || glints.length >= 2) return;
+    // 2.5 to 7 seconds until the next one.
+    nextGlint = time + 2500 + Math.random() * 4500;
+    const p = pole();
+    for (let tries = 0; tries < 12; tries++) {
+      const index = Math.floor(Math.random() * field.length);
+      const s = field[index];
+      const x = p.x + Math.cos(s.angle + turn) * s.radius;
+      const y = p.y + Math.sin(s.angle + turn) * s.radius;
+      if (x < 8 || x > W - 8 || y < 8 || y > H - 8) continue;
+      // Most glints are small (cross 3 px long), a few reach 9 px.
+      glints.push({ index, start: time, duration: 1400 + Math.random() * 1600, reach: 3 + Math.pow(Math.random(), 2) * 6 });
+      return;
+    }
+  }
+
   function drawField() {
     if (!ctx) return;
     const p = pole();
     // One turn takes about three hours: enough to feel alive, never to notice.
     const turn = reduce ? 0 : time * 0.0000006;
+    if (!reduce) scheduleGlints(turn);
     for (let i = 0; i < field.length; i++) {
       const s = field[i];
       const x = p.x + Math.cos(s.angle + turn) * s.radius;
       const y = p.y + Math.sin(s.angle + turn) * s.radius;
       if (x < -4 || x > W + 4 || y < -4 || y > H + 4) continue;
-      // Two beats per star, so the flicker is irregular like scintillation.
-      const flicker = reduce
-        ? 0.8
-        : 0.72 + 0.28 * Math.sin(time * s.rate + s.phase) * Math.sin(time * s.rate * 0.37 + s.phase * 2);
+      // A slight shimmer only: the star stays the same size and nearly the same brightness.
+      const shimmer = reduce ? 1 : 0.92 + 0.08 * Math.sin(time * s.rate + s.phase);
       const bright = (s.size - 0.45) / 1.15;
-      ctx.globalAlpha = (0.3 + 0.7 * bright) * flicker;
+      ctx.globalAlpha = (0.3 + 0.6 * bright) * shimmer;
       ctx.fillStyle = s.tint;
       ctx.beginPath();
       ctx.arc(x, y, s.size, 0, Math.PI * 2);
       ctx.fill();
-      if (bright > 0.82) {
-        // A fine cross, as bright stars show to the eye.
-        const len = s.size * (2.6 + flicker);
-        ctx.fillRect(x - len, y - 0.3, len * 2, 0.6);
-        ctx.fillRect(x - 0.3, y - len, 0.6, len * 2);
-      }
+    }
+    for (const g of glints) {
+      const s = field[g.index];
+      if (!s) continue;
+      const x = p.x + Math.cos(s.angle + turn) * s.radius;
+      const y = p.y + Math.sin(s.angle + turn) * s.radius;
+      // Rises quickly, fades slowly.
+      const t = (time - g.start) / g.duration;
+      const glow = t < 0.3 ? t / 0.3 : 1 - (t - 0.3) / 0.7;
+      const len = g.reach * glow;
+      ctx.fillStyle = s.tint;
+      ctx.globalAlpha = glow;
+      ctx.beginPath();
+      ctx.arc(x, y, Math.min(1.8, s.size + 0.5 * glow), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = glow * 0.85;
+      ctx.fillRect(x - len, y - 0.35, len * 2, 0.7);
+      ctx.fillRect(x - 0.35, y - len, 0.7, len * 2);
     }
     ctx.globalAlpha = 1;
   }

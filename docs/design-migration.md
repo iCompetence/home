@@ -166,6 +166,10 @@ Stand:
       Leitstern (Doppelstern) bewegt sich: Er folgt dem Zeiger mit Verzögerung hinter dem Inhalt;
       im Hero der Fassung „unten“ ist er groß und neigt sich nur. Die Sterne der Abschnitte
       stehen fest hinter ihren Glasfeldern (`StarField`). Bei reduzierter Bewegung steht alles.
+      Funkeln: alle paar Sekunden glitzert ein zufälliger Stern irgendwo im Bild kurz auf (feines
+      Kreuz, 3 bis 9 px), nie mehr als zwei gleichzeitig. Knöpfe der Nachtseiten: Hover wechselt
+      die Farbe (Blau ↔ Weiß, Kontur füllt sich), Druck staucht auf 96 %; im Hero nur noch ein
+      Knopf („Unsere Leistungen ansehen“, weiß).
       Abschluss: `HamburgGlass` statt Strichzeichnung: Hamburg als Milchglas-Skulptur, zwei
       deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.jpg`), in Ruhe dunkel, das Licht folgt
       dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern

@@ -126,7 +126,18 @@ function FeatureRow({
   );
 }
 
-const outlineOnNight = 'border-lav-white text-lav-white';
+/*
+ * Button states on the night pages. The design system's buttons (and
+ * PageShell's page-wide rule) only dim to 75 % on hover, which reads as
+ * "disabled" on a dark ground. Here hover swaps the colour and a press gives
+ * a short squeeze. `hover:opacity-100!` switches the page-wide dimming off.
+ */
+const pressable =
+  'transition-[background-color,border-color,color,scale] duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96]';
+/** White button: turns brand blue on hover. Pair with variant="white". */
+const solidOnNight = `${pressable} hover:bg-lav-blue`;
+/** Outlined button: fills white on hover. Pair with variant="outline". */
+const outlineOnNight = `${pressable} border-lav-white text-lav-white hover:bg-lav-white hover:text-lav-navy`;
 
 /**
  * Where the glass city of Hamburg stands: at the end of the page (the trip
@@ -170,15 +181,10 @@ function Hero() {
       <div className="relative flex flex-col gap-10 lg:gap-14">
         <h1 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.hero.headline')}</h1>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p className="lav-lead max-w-[560px] text-lav-white/80">{t('lavender.hero.subline')}</p>
+          <p className="lav-lead max-w-[680px] text-lav-white/80">{t('lavender.hero.subline')}</p>
           <div className="flex flex-wrap gap-4">
-            <Button asChild variant="white">
-              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-                {t('topNav.letsTalk')}
-                <ArrowUpRight size={20} strokeWidth={2} />
-              </a>
-            </Button>
-            <Button asChild variant="outline" className={outlineOnNight}>
+            {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
+            <Button asChild variant="white" className={solidOnNight}>
               <a href="#services">
                 {t('lavender.hero.seeServices')}
                 <ArrowDown size={20} strokeWidth={2} />
@@ -204,15 +210,10 @@ function HeroHamburg() {
     <Section as="div" id="top" className="relative overflow-hidden pb-0 pt-8 lg:pt-10" innerClassName="relative">
       <div className="relative z-[1] mx-auto flex max-w-[980px] flex-col items-center gap-8 text-center lg:gap-10">
         <h1 className="lav-display text-lav-white [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
-        <p className="lav-lead max-w-[620px] text-lav-white/80">{t('lavender.hero.subline')}</p>
+        <p className="lav-lead max-w-[760px] text-lav-white/80">{t('lavender.hero.subline')}</p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button asChild variant="white">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('topNav.letsTalk')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
-          <Button asChild variant="outline" className={outlineOnNight}>
+          {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
+          <Button asChild variant="white" className={solidOnNight}>
             <a href="#services">
               {t('lavender.hero.seeServices')}
               <ArrowDown size={20} strokeWidth={2} />
@@ -301,7 +302,7 @@ function Statement() {
     <Section>
       <div className="flex flex-col items-start gap-10 lg:gap-14">
         <p className="lav-statement max-w-[1100px] text-lav-white">{t('lavender.statement')}</p>
-        <Button asChild variant="white">
+        <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
@@ -591,7 +592,7 @@ function Closing({ withCity }: { withCity: boolean }) {
     >
       <div className="relative flex flex-col items-start gap-10 lg:gap-14">
         <h2 className="lav-mega max-w-[1100px] text-lav-white">{t('lavender.cta.heading')}</h2>
-        <Button asChild variant="white">
+        <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />

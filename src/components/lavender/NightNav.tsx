@@ -77,7 +77,7 @@ export function NightNav() {
           href={siteHref(language, 'contact')}
           target="_blank"
           rel="noopener noreferrer"
-          className={`pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
+          className={`pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white hover:opacity-100! active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
         >
           {t('topNav.letsTalk')}
           <ArrowUpRight size={18} strokeWidth={2} />
@@ -86,7 +86,7 @@ export function NightNav() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             aria-label={t('topNav.menu')}
-            className={`pointer-events-auto inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-pill border-0 bg-transparent text-lav-white ${focusRing} focus-visible:outline-lav-white`}
+            className={`pointer-events-auto inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-pill border-0 bg-transparent text-lav-white transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] ${focusRing} focus-visible:outline-lav-white`}
           >
             <Menu size={26} strokeWidth={2} />
           </SheetTrigger>
