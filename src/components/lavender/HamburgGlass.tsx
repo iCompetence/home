@@ -174,9 +174,13 @@ export function HamburgGlass({ className }: { className?: string }) {
 
   return (
     <div ref={stage} aria-hidden data-ds="HamburgGlass" className={cn('lav-hamburg', className)}>
+      {/* The glow may reach above the picture; the two renderings sit in their
+          own box, so a mask on them (the hero's haze) does not cut the glow. */}
       <div className="lav-hamburg-halo" />
-      <div className="lav-hamburg-off" />
-      <div className="lav-hamburg-on" />
+      <div className="lav-hamburg-glass">
+        <div className="lav-hamburg-off" />
+        <div className="lav-hamburg-on" />
+      </div>
     </div>
   );
 }

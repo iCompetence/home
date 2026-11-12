@@ -644,14 +644,20 @@ html {
     opacity: 1 !important;
   }
 
-  /* Text: the gradient lies behind the glyphs all the time; making the text
-     colour transparent reveals it, which can be transitioned. */
+  /* Text: the gradient lies behind the glyphs and the text colour fades to
+     transparent, which can be transitioned. At rest the gradient has no size,
+     so it cannot shine through a text colour that is partly transparent; on
+     the way back it stays until the colour has returned (delayed size). */
   .lav-star-text,
   [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
     background-image: var(--lav-star-ink);
+    background-repeat: no-repeat;
+    background-size: 0 0;
     -webkit-background-clip: text;
     background-clip: text;
-    transition: color var(--duration-fast) ease-out;
+    transition:
+      color var(--duration-fast) ease-out,
+      background-size 0s linear var(--duration-fast);
     /* Room for descenders: the type steps trim their box to cap height and
        baseline, and the gradient only shows inside the box. No effect on layout. */
     padding-block: 0.3em;
@@ -659,8 +665,14 @@ html {
   }
   :is(a, button):is(:hover, :focus-visible) > .lav-star-text,
   [aria-current] > .lav-star-text,
+  [data-state='open'] > .lav-star-text,
+  :is(a, button):is(:hover, :focus-visible) > span > .lav-star-text,
   [data-star-hover] [data-ds='ProcessAccordion'] button:is(:hover, :focus-visible) > div > span:last-child {
     color: transparent !important;
+    background-size: 100% 100%;
+    transition:
+      color var(--duration-fast) ease-out,
+      background-size 0s;
   }
   /* An icon beside such a text takes the gradient's end colour. */
   :is(a, button):is(:hover, :focus-visible) > .lav-star-text ~ svg,
@@ -733,18 +745,22 @@ html {
      up the city thins out towards the top centre, so no tower runs through
      the text. */
   @media (min-width: 768px) {
-    .lav-hamburg-haze {
+    .lav-hamburg-haze .lav-hamburg-glass {
       -webkit-mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
       mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
     }
   }
-  .lav-hamburg > div {
+  .lav-hamburg > div,
+  .lav-hamburg-glass > div {
     position: absolute;
     inset: 0;
     pointer-events: none;
   }
-  .lav-hamburg-halo {
-    background: radial-gradient(ellipse var(--rx) var(--ry) at var(--x) var(--y), #24a1da 0%, rgb(147 84 246 / 0.85) 45%, transparent 75%);
+  /* 300 px taller than the picture at the top, so the glow fades out in the
+     sky instead of ending at the picture's upper edge. */
+  .lav-hamburg > .lav-hamburg-halo {
+    top: -300px;
+    background: radial-gradient(ellipse var(--rx) var(--ry) at var(--x) calc(var(--y) + 300px), #24a1da 0%, rgb(147 84 246 / 0.85) 45%, transparent 75%);
     filter: blur(46px);
     opacity: calc(var(--a) * 0.3);
   }
