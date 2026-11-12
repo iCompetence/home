@@ -150,17 +150,20 @@ function FeatureRow({
 
 /*
  * Button states. The design system's buttons (and PageShell's page-wide rule)
- * only dim to 75 % on hover, which reads as "disabled". Here hover swaps the
- * colour and a press gives a short squeeze. `hover:opacity-100!` switches the
- * page-wide dimming off. Colours come from ink and ground, so the same button
- * is white on the night sky and navy on the day layer.
+ * only dim to 75 % on hover, which reads as "disabled". Here the hovered
+ * button takes the double star's colours (a blue-to-violet gradient,
+ * .lav-star-hover in globals.css) while the guide star itself goes out (see
+ * nightSky): the light moves into the button. A press gives a short squeeze.
+ * `hover:opacity-100!` switches the page-wide dimming off. Resting colours
+ * come from ink and ground, so the same button is white on the night sky and
+ * navy on the day layer.
  */
 const pressable =
-  'transition-[background-color,border-color,color,scale] duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96]';
-/** Filled button in the ink colour: turns brand blue on hover. Pair with variant="white". */
-const solidOnNight = `${pressable} bg-lav-ink text-lav-ground hover:bg-lav-blue hover:text-lav-navy`;
-/** Outlined button: fills with the ink colour on hover. Pair with variant="outline". */
-const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:bg-lav-ink hover:text-lav-ground`;
+  'lav-star-hover transition-[color,border-color,scale] duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! active:scale-[0.96]';
+/** Filled button in the ink colour. Pair with variant="white". */
+const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
+/** Outlined button. Pair with variant="outline". */
+const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent`;
 
 /**
  * Where the glass city of Hamburg stands: at the end of the page (the trip

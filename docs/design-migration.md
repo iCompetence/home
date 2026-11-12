@@ -192,8 +192,10 @@ Stand:
       3000 px großen PNGs mit etwa 36 MB je Bild im Speicher), auf dem Blatt vorab
       weichgezeichnete Kopien (`-weich.webp`) statt CSS-Filter, kurze Schatten, keine
       `loading="lazy"`-Bilder; Bühne und Himmel werden nicht gezeichnet, solange das Blatt
-      sie verdeckt. Auf dem Blatt bekommt die Navigation eine helle Leiste von Logo bis
-      Menü. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      sie verdeckt. Auf dem Blatt bekommt die Navigation eine dunkle Leiste von Logo bis
+      Menü; neben dem Menü-Icon steht der aktuelle Abschnitt (Leistungen, Produkte, Vorgehen,
+      Privacy-led AI). Knöpfe der Studie bekommen im Hover den Verlauf des Doppelsterns
+      (`.lav-star-hover`), und der Leitstern erlischt über allem Klickbaren. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

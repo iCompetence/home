@@ -13,7 +13,8 @@ import { cn } from '@/components/ui/utils';
  * the sky while scrolling. Logo left, the contact button in the middle, the
  * menu on the right; all three stay while scrolling. On the day layer (the
  * light sheet of the Hamburg hero variant) content scrolls under the nav, so
- * there it does get a light bar, and logo and menu icon turn dark.
+ * there it does get a dark bar, which also names the current section next to
+ * the menu icon.
  *
  * The menu is the shadcn Sheet (Radix Dialog: focus trap, Escape, scroll
  * lock) opening from the right as a light, rounded panel with large numbered
@@ -39,24 +40,44 @@ export function NightNav() {
   const pages = [...PRODUCT_LINKS, ...PRINCIPLE_LINKS, NEWS_LINK];
   const [open, setOpen] = useState(false);
   // True while the day layer (the light sheet of the Hamburg hero variant) is
-  // behind the nav: the nav then gets a light bar from logo to menu, and logo,
-  // menu icon and button hover switch to navy. The bar stays over the layer's
-  // dark band (testimonials) too, so it does not flicker.
+  // behind the nav: content then scrolls under the nav, so it gets a dark bar
+  // from logo to menu. The bar stays over the layer's dark band too.
   const [onDay, setOnDay] = useState(false);
+  // Label of the section the page is in, shown in the bar next to the menu.
+  // Empty where a section has no anchor (the testimonials).
+  const [section, setSection] = useState('');
 
   useEffect(() => {
     const layer = document.querySelector('[data-ds="DayLayer"]');
+    // In page order; the testimonials end the products' stretch without a label of their own.
+    const marks: { el: Element | null; labelKey: string }[] = [
+      ...SECTIONS.map((item) => ({ el: document.querySelector(item.href), labelKey: item.labelKey as string })),
+      { el: document.querySelector('[data-ds="TestimonialSlider"]'), labelKey: '' },
+    ];
     const onScroll = () => {
       // Behind the nav means: at 46 px from the top (the middle of the nav).
-      const behind = (el: Element | null | undefined) => {
-        const box = el?.getBoundingClientRect();
-        return !!box && box.top <= 46 && box.bottom > 46;
-      };
-      setOnDay(behind(layer));
+      const box = layer?.getBoundingClientRect();
+      setOnDay(!!box && box.top <= 46 && box.bottom > 46);
+      // The current section: the last one whose top has passed the upper third.
+      const line = window.innerHeight * 0.35;
+      let top = -Infinity;
+      let key = '';
+      for (const mark of marks) {
+        const y = mark.el?.getBoundingClientRect().top;
+        if (y !== undefined && y <= line && y > top) {
+          top = y;
+          key = mark.labelKey;
+        }
+      }
+      setSection(key);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // smoothAnchor prevents the default, which also stops Radix' SheetClose from
@@ -76,33 +97,38 @@ export function NightNav() {
         {/* The bar: only on the day layer. No backdrop blur (costly on a long page). */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-page opacity-0 shadow-[0_10px_30px_-14px_rgb(11_34_49/0.35),inset_0_0_0_1px_rgb(11_34_49/0.08)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
+          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55),inset_0_0_0_1px_rgb(255_255_255/0.1)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
         />
         <a
           href="#top"
           onClick={smoothAnchor}
-          className={`pointer-events-auto inline-flex justify-self-start ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
+          className={`pointer-events-auto inline-flex justify-self-start ${focusRing} focus-visible:outline-lav-white`}
         >
-          {/* White on the night sky, black on the day layer. */}
-          <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-8 w-auto group-data-[ground=day]/nav:hidden md:h-10" />
-          <img src="/iCompetence_black.svg" alt="" aria-hidden className="hidden h-8 w-auto group-data-[ground=day]/nav:block md:h-10" />
+          <img src="/iCompetence_white.svg" alt="iCompetence" className="block h-8 w-auto md:h-10" />
         </a>
 
         <a
           href={siteHref(language, 'contact')}
           target="_blank"
           rel="noopener noreferrer"
-          className={`pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline transition-[background-color,color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white hover:opacity-100! active:scale-[0.96] group-data-[ground=day]/nav:hover:bg-lav-navy group-data-[ground=day]/nav:hover:text-lav-white md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
+          className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-[14px] font-medium text-lav-navy no-underline transition-[color,scale] duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
         >
           {t('topNav.letsTalk')}
           <ArrowUpRight size={18} strokeWidth={2} />
         </a>
 
         <Sheet open={open} onOpenChange={setOpen}>
+          {/* In the bar the trigger also names the section the page is in
+              (from tablets up); the whole thing opens the menu. */}
           <SheetTrigger
             aria-label={t('topNav.menu')}
-            className={`pointer-events-auto inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-pill border-0 bg-transparent text-lav-white transition-[background-color,color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] group-data-[ground=day]/nav:text-lav-navy group-data-[ground=day]/nav:hover:bg-lav-navy/10 ${focusRing} focus-visible:outline-lav-white group-data-[ground=day]/nav:focus-visible:outline-lav-navy`}
+            className={`pointer-events-auto inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-3 justify-self-end rounded-pill border-0 bg-transparent px-2 font-brand text-[14px] font-medium text-lav-white transition-[background-color,scale] duration-[var(--duration-fast)] ease-out hover:bg-lav-white/15 hover:opacity-100! active:scale-[0.96] md:text-body ${focusRing} focus-visible:outline-lav-white`}
           >
+            {onDay && section && (
+              <span key={section} aria-hidden className="lav-nav-section hidden pl-2 md:inline">
+                {t(section)}
+              </span>
+            )}
             <Menu size={26} strokeWidth={2} />
           </SheetTrigger>
 

@@ -583,6 +583,41 @@ html {
     pointer-events: none;
   }
 
+  /* Hover of the night home's buttons: the double star's colours, a little
+     darker so white text stays readable. Laid over the button's own colour as
+     a layer that fades in (a gradient itself cannot be transitioned). */
+  .lav-star-hover {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .lav-star-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    opacity: 0;
+    transition: opacity var(--duration-fast) ease-out;
+  }
+  .lav-star-hover:hover::before,
+  .lav-star-hover:focus-visible::before {
+    opacity: 1;
+  }
+
+  /* The section label in the nav bar fades in when the section changes. */
+  .lav-nav-section {
+    animation: lav-nav-section var(--duration-base) ease-out both;
+  }
+  @keyframes lav-nav-section {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lav-nav-section { animation: none; }
+  }
+
   /* Progress of the testimonial bar; duration = ROTATE_MS in HomeNightLavender. */
   .lav-progress-run {
     animation: lav-progress 8000ms linear both;

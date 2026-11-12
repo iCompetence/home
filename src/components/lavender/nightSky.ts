@@ -37,6 +37,9 @@ type FieldStar = { angle: number; radius: number; size: number; tint: string; ra
 /** One star glinting: which one, since when, for how long, and how long its cross gets (px). */
 type Glint = { index: number; start: number; duration: number; reach: number };
 
+/** What can be clicked: over these the guide star goes out. */
+const CONTROLS = 'a, button, [role="button"], [role="tab"], input, textarea, select, summary';
+
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -70,7 +73,7 @@ export function startNightSky(
   let nextGlint = 1500;
   // The pointer in px, the guide star's eased chase of it, and how far the
   // star has melted into the city (0..1).
-  const pointer = { x: 0, y: 0, seen: false };
+  const pointer = { x: 0, y: 0, seen: false, onControl: false };
   const chase = { x: 0, y: 0 };
   let melt = 0;
   // How far the guide star is on the day layer (0..1): there it grows large.
@@ -334,7 +337,7 @@ export function startNightSky(
         pointer.y >= box.top &&
         pointer.y <= box.bottom &&
         !onLayer(pointer.y);
-      melt += ((over ? 1 : 0) - melt) * 0.14;
+      melt += ((over || pointer.onControl ? 1 : 0) - melt) * 0.14;
     }
     if (layer) {
       const target = onLayer(guideStar().y) ? 1 : 0;
@@ -353,6 +356,8 @@ export function startNightSky(
     pointer.x = e.clientX;
     pointer.y = e.clientY;
     pointer.seen = true;
+    // Over a link or a button the star goes out: its light is in the control then.
+    pointer.onControl = !!(e.target as Element | null)?.closest?.(CONTROLS);
   };
   const onScroll = () => draw(true);
 
