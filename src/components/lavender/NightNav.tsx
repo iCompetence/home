@@ -49,6 +49,12 @@ export type NightNavProps = {
    * start, for pages whose content scrolls under the nav right away.
    */
   bar?: 'auto' | 'always';
+  /**
+   * Where the contact button leads when the page is the contact page itself:
+   * an anchor on it (e.g. '#form'), reached in the same tab. Everywhere else
+   * the button opens the contact page in a new tab.
+   */
+  contactAnchor?: `#${string}`;
 };
 
 const EMAIL = 'info@icompetence.de';
@@ -59,7 +65,7 @@ const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:o
 // The type steps trim their box to cap height; the padding gives the link a touch target, the negative margin keeps the layout.
 const smallLink = `lav-paragraph inline-block py-3 font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
 
-export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNavProps = {}) {
+export function NightNav({ logoHref = '#top', sections, bar = 'auto', contactAnchor }: NightNavProps = {}) {
   const { t, language } = useLanguage();
   const onHome = logoHref === '#top';
   // The big links of the menu: the page's own sections, else the home page's
@@ -169,9 +175,9 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
         </a>
 
         <a
-          href={siteHref(language, 'contact')}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(contactAnchor
+            ? { href: contactAnchor, onClick: glideOnClick }
+            : { href: siteHref(language, 'contact'), target: '_blank', rel: 'noopener noreferrer' })}
           className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-primary px-4 font-brand text-small font-medium whitespace-nowrap text-lav-on-primary no-underline transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
         >
           {t('topNav.letsTalk')}

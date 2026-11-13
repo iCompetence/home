@@ -9,6 +9,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { submitNetlifyForm, trackCtaClick } from '@/lib/tracking';
 import {
+  ANCHOR_SCROLL_MARGIN,
   Button,
   Eyebrow,
   FormError,
@@ -35,7 +36,8 @@ export default function ContactLavender() {
 
   return (
     <NightPage
-      nav={<NightNav logoHref={home} bar="always" />}
+      // The nav's contact button would open this very page again: here it leads to the form.
+      nav={<NightNav logoHref={home} bar="always" contactAnchor="#form" />}
       footer={<NightFooter />}
     >
       <Script
@@ -96,7 +98,7 @@ function ContactForm() {
   );
 
   return (
-    <Section id="form" innerClassName="flex flex-col gap-8 md:gap-10 lg:flex-row lg:gap-16">
+    <Section id="form" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8 md:gap-10 lg:flex-row lg:gap-16">
       <address className="flex flex-col gap-8 not-italic md:gap-10 lg:w-[44.2%]">
         {detail(t('footer.inquiries'), EMAIL, `mailto:${EMAIL}`, 'contact_mail')}
         {detail(t('footer.phone'), PHONE, 'tel:+494022636380', 'contact_phone')}
