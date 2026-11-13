@@ -206,7 +206,15 @@ Stand:
       ist wieder entfernt (Commit 095d6a6 enthält sie).
       Kundenstimmen: eigene Fassung statt `TestimonialSlider`, weil dessen Zitate in
       Überschriftengröße über zwei Bildschirme liefen: ein Zitat zur Zeit in Lesegröße
-      (24 px) auf einer hellen Lila-Fläche, mit Zähler und Pfeilen; passt auf einen Bildschirm. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      (24 px) auf einer hellen Lila-Fläche, mit Zähler und Pfeilen; passt auf einen Bildschirm.
+      Navigation der übrigen Vorschauseiten (2026-11-13): Alle Lavender-Unterseiten nutzen
+      jetzt `NightNav` statt `TopNav` (`bar="always"`: die dunkle Leiste von Anfang an). Seiten
+      mit Abschnitten geben sie als `sections` mit: Die Leiste nennt den aktuellen Abschnitt,
+      das Menü listet sie als große Links. Die `AnchorTabs`-Zeile entfällt dort; `TopNav` und
+      `AnchorTabs` nutzt nur noch die bisherige Startseite `LavenderHome`.
+      Kundenlogos: `LogoCarousel` steht als Erstes auf dem hellen Blatt (die Logodateien
+      brauchen hellen Grund). Neue Tokens: `--text-small`, `--radius-frame-inner`,
+      `--container-measure(-lead|-wide)` für Zeilenlängen. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

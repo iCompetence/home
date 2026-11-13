@@ -177,6 +177,7 @@
   --text-h3: 36px;
   --text-sub: 24px;
   --text-body: 16px;
+  --text-small: 14px;
 
   /* Radii */
   --radius-pill: 100px;
@@ -184,6 +185,12 @@
   --radius-card-sm: 16px;
   /* Large glass frames of the night home (preview /lavender/nacht/). */
   --radius-frame: 40px;
+  /* Inside a frame, 12 px in from its edge: concentric with the 40 px corner. */
+  --radius-frame-inner: 28px;
+  /* Line lengths of the night home: body text, lead text and quotes, headlines. */
+  --container-measure: 520px;
+  --container-measure-lead: 760px;
+  --container-measure-wide: 1100px;
 
   /* Section rhythm — see the responsive :root block below for the live values. */
   --spacing-section-v: 64px;

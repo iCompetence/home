@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import {
@@ -18,7 +19,6 @@ import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm, trackCtaClick } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Button,
   ButtonStack,
   CheckItem,
@@ -38,7 +38,6 @@ import {
   SectionHeader,
   SpecItem,
   Statement,
-  TopNav,
   ValidatedForm,
   siteHref,
   smoothAnchor,
@@ -101,7 +100,7 @@ export default function EmpCoAuditLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <ClosingBlock
           heading={t('cta.headline')}
@@ -163,8 +162,6 @@ export default function EmpCoAuditLavender() {
           ))}
         </ul>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <Why />
       <FactsBand

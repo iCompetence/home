@@ -1,11 +1,11 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Button,
   ButtonStack,
   CheckItem,
@@ -18,7 +18,6 @@ import {
   QuoteIntro,
   Section,
   SectionHeader,
-  TopNav,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
@@ -61,7 +60,7 @@ export default function IKnowLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <ClosingBlock
           id="contact"
@@ -99,8 +98,6 @@ export default function IKnowLavender() {
           ))}
         </ul>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <QuoteIntro
         id="status-quo"

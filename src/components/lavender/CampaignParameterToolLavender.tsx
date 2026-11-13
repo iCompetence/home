@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
@@ -7,7 +8,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Badge,
   Button,
   ButtonStack,
@@ -26,7 +26,6 @@ import {
   SectionHeader,
   SegmentedControl,
   SpecItem,
-  TopNav,
   siteHref,
 } from '@/design-system';
 import { TrialModal, type TrialMode } from './TrialModal';
@@ -81,7 +80,7 @@ export default function CampaignParameterToolLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <ClosingBlock
           id="contact"
@@ -152,8 +151,6 @@ export default function CampaignParameterToolLavender() {
           ))}
         </ul>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <Section id="values" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.values.title')} />

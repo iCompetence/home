@@ -14,6 +14,7 @@ import {
   Eyebrow,
   LINKEDIN_URL,
   LinkedInGlyph,
+  LogoCarousel,
   PageShell,
   ProcessAccordion,
   Section,
@@ -246,6 +247,9 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
               Lavender home (design system); services (tabs), statement, products,
               testimonials and Privacy-Led are this study's. */}
           <DayLayer>
+            {/* Client logos open the day layer: the logo files are made for a
+                light ground, which the night sky could not offer. */}
+            <LogoCarousel />
             <DayServices />
             <Statement />
             <Products />
@@ -320,9 +324,9 @@ function Hero() {
       innerClassName="relative flex min-h-[calc(100svh-200px)] flex-col justify-end lg:min-h-[calc(100svh-240px)]"
     >
       <div className="relative flex flex-col gap-10 lg:gap-14">
-        <h1 className="lav-mega max-w-[1100px] text-lav-ink">{t('lavender.hero.headline')}</h1>
+        <h1 className="lav-mega max-w-measure-wide text-lav-ink">{t('lavender.hero.headline')}</h1>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p className="lav-lead max-w-[680px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
+          <p className="lav-lead max-w-measure-lead text-lav-ink/80">{t('lavender.hero.subline')}</p>
           <div className="flex flex-wrap gap-4">
             {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
             <Button asChild variant="white" className={solidOnNight}>
@@ -349,7 +353,7 @@ function Hero() {
  */
 const STAGE_HEIGHT = 'h-[max(100svh,540px)]';
 const STAGE_TEXT =
-  'relative z-[1] mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28';
+  'relative z-[1] mx-auto flex w-full max-w-measure-wide flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28';
 
 function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean }) {
   const { t } = useLanguage();
@@ -360,7 +364,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
     >
       <div data-stage="hero" className={cn(STAGE_TEXT, hidden && 'invisible')}>
         <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
-        <p className="lav-lead max-w-[760px] text-lav-ink/80">{t('lavender.hero.subline')}</p>
+        <p className="lav-lead max-w-measure-lead text-lav-ink/80">{t('lavender.hero.subline')}</p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
         <Button asChild variant="white" className={solidOnNight}>
           <a href="#services" onClick={glideTo}>
@@ -440,7 +444,7 @@ function ClosingStage({ shown }: { shown: boolean }) {
       >
         <div className="relative z-[1] mx-auto w-full max-w-frame px-[var(--section-pad-h)] pt-[108px] lg:pt-[140px]">
           {/* Contact details are on the contact page; here only the call to action. */}
-          <div className="pointer-events-auto flex max-w-[720px] flex-col items-start gap-8">
+          <div className="pointer-events-auto flex max-w-measure-lead flex-col items-start gap-8">
             <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
             <Button asChild variant="white" className={solidOnNight}>
               <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
@@ -493,7 +497,7 @@ function DayServices() {
               {field.items.map((item) => (
                 <li key={item} className="flex flex-col gap-3 border-t border-lav-ink/15 py-6 last:border-b">
                   <h3 className="lav-h2 text-lav-ink">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
-                  <p className="lav-paragraph max-w-[520px] text-lav-ink/75">
+                  <p className="lav-paragraph max-w-measure text-lav-ink/75">
                     {t(`lavender.services.${field.id}.${item}.desc`)}
                   </p>
                 </li>
@@ -567,8 +571,8 @@ function DayTestimonials() {
                 i === index ? 'opacity-100' : 'invisible opacity-0',
               )}
             >
-              <blockquote className="m-0 max-w-[980px]">
-                <p className="m-0 font-brand text-[18px] font-medium leading-[1.45] text-lav-navy md:text-[20px] lg:text-[24px] lg:leading-[1.4]">
+              <blockquote className="m-0 max-w-measure-lead">
+                <p className="lav-lead font-medium text-lav-navy">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
@@ -646,7 +650,7 @@ function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; 
               forceMount
               // 12 px from the field's edge with radius 28: concentric with the 40 px field.
               // Always a navy card with white text, on the night sky and on the day layer.
-              className="absolute inset-x-3 bottom-3 flex flex-none flex-col gap-5 rounded-card-sm bg-lav-navy/80 p-6 in-data-[surface=light]:bg-lav-navy data-[state=inactive]:hidden lg:right-auto lg:w-[64%] lg:rounded-[28px] lg:p-8"
+              className="absolute inset-x-3 bottom-3 flex flex-none flex-col gap-5 rounded-card-sm bg-lav-navy/80 p-6 in-data-[surface=light]:bg-lav-navy data-[state=inactive]:hidden lg:right-auto lg:w-[64%] lg:rounded-frame-inner lg:p-8"
             >
               <h3 className="lav-h3 text-lav-white">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
               <p className="lav-paragraph text-lav-white/80">{t(`lavender.services.${field.id}.${item}.desc`)}</p>
@@ -675,7 +679,7 @@ function Statement() {
   return (
     <Section>
       <div className="flex flex-col items-start gap-10 lg:gap-14">
-        <p className="lav-statement max-w-[1100px] text-lav-ink">{t('lavender.statement')}</p>
+        <p className="lav-statement max-w-measure-wide text-lav-ink">{t('lavender.statement')}</p>
         <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
@@ -865,7 +869,7 @@ function Testimonials() {
               key={item.key}
               value={item.key}
               forceMount
-              className="col-start-1 row-start-1 flex max-w-[1000px] flex-none flex-col gap-10 transition-opacity duration-[var(--duration-base)] data-[state=inactive]:invisible data-[state=inactive]:opacity-0"
+              className="col-start-1 row-start-1 flex max-w-measure-wide flex-none flex-col gap-10 transition-opacity duration-[var(--duration-base)] data-[state=inactive]:invisible data-[state=inactive]:opacity-0"
             >
               <blockquote className="m-0">
                 {/* Between lav-h3 and lav-h2: the quotes run from 150 to 600 characters. */}
@@ -964,7 +968,7 @@ function Closing({ withCity }: { withCity: boolean }) {
       innerClassName="relative"
     >
       <div className="relative flex flex-col items-start gap-10 lg:gap-14">
-        <h2 className="lav-mega max-w-[1100px] text-lav-ink">{t('lavender.cta.heading')}</h2>
+        <h2 className="lav-mega max-w-measure-wide text-lav-ink">{t('lavender.cta.heading')}</h2>
         <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}

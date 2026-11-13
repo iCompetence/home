@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -11,7 +12,6 @@ import {
   PageShell,
   PrincipleCard,
   Section,
-  TopNav,
   siteHref,
 } from '@/design-system';
 
@@ -28,7 +28,7 @@ export default function PrivacyLedLavender() {
   return (
     <PageShell
       surface="inverse"
-      nav={<TopNav logoHref={home} surface="light" />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={
         <ClosingBlock
           id="contact"

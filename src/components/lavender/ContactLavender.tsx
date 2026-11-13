@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight } from 'lucide-react';
@@ -14,7 +15,6 @@ import {
   PageShell,
   Section,
   TextAreaField,
-  TopNav,
   ValidatedForm,
   Footer,
   siteHref,
@@ -35,7 +35,7 @@ export default function ContactLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={<Footer />}
     >
       <Script

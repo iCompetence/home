@@ -1,10 +1,11 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { consumePendingFormSuccess, trackThankYouView } from '@/lib/tracking';
-import { Button, Footer, Hero, PageShell, PREVIEW_BASE, TopNav, siteHref } from '@/design-system';
+import { Button, Footer, Hero, PageShell, PREVIEW_BASE, siteHref } from '@/design-system';
 
 /** True while the redesign lives under /lavender (widened from the literal type). */
 const IN_PREVIEW = (PREVIEW_BASE as string) !== '';
@@ -15,7 +16,7 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
   const home = siteHref(language, '/');
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={<Footer />}
     >
       <Hero

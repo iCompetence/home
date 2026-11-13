@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -8,7 +9,6 @@ import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Badge,
   Button,
   ButtonStack,
@@ -21,7 +21,6 @@ import {
   ProductTeaser,
   Section,
   SectionHeader,
-  TopNav,
   ValidatedForm,
   siteHref,
   smoothAnchor,
@@ -61,7 +60,7 @@ export default function AIWorkshopLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <ClosingBlock
           id="contact"
@@ -104,8 +103,6 @@ export default function AIWorkshopLavender() {
           </Button>
         </ButtonStack>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <Section id="intro" className={ANCHOR_SCROLL_MARGIN}>
         <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">

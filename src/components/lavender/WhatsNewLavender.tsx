@@ -1,5 +1,6 @@
 'use client';
 
+import { NightNav } from './NightNav';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
@@ -9,7 +10,6 @@ import {
   PageShell,
   Section,
   SplitBlock,
-  TopNav,
   siteHref,
 } from '@/design-system';
 
@@ -63,7 +63,7 @@ export default function WhatsNewLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={
         <ClosingBlock
           id="contact"
