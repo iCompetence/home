@@ -160,7 +160,7 @@ export function TrialModal({
                   />
                   <div data-trial-recaptcha="true" data-netlify-recaptcha="true" />
                   <FormError />
-                  <Button type="submit" className="w-full" disabled={state === 'submitting'}>
+                  <Button type="submit" variant="primary" className="w-full" disabled={state === 'submitting'}>
                     {state === 'submitting' ? t('ct.trial.modal.submitting') : submit}
                   </Button>
                 </ValidatedForm>

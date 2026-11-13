@@ -1,6 +1,6 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -69,7 +69,7 @@ export default function WhatsNewLavender() {
           id="contact"
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} />
+            <ConsultButton variant="solid" />
           }
         />
       }

@@ -19,10 +19,6 @@ import { useTextHaze } from './textHaze';
  * - LegalStrip: the strip alone; the home page puts it under its own stage.
  */
 
-/** Look of a button on the night ground: white, the star gradient on hover and focus. Pair with variant="white". */
-export const NIGHT_BUTTON =
-  'lav-star-hover transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
-
 /**
  * "Based in Hamburg." on the left; imprint, privacy, LinkedIn and "back to top" on the right.
  * --lav-strip-h tall (84 px, phones 140 px); every target is at least 44 px. It keeps out of the
@@ -78,7 +74,7 @@ export function LegalStrip({ className }: { className?: string }) {
 export type NightClosingProps = {
   /** Closing headline, e.g. "Bereit, Anspruch in Ergebnisse zu verwandeln?" Left out on pages without one. */
   heading?: string;
-  /** The call to action, composed by the page (variant="white", className={NIGHT_BUTTON}). */
+  /** The call to action, composed by the page: a Button with variant="solid" (white on the night). */
   action?: ReactNode;
   /** Anchor target, e.g. for a "Contact" entry in the page's sections. */
   id?: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
@@ -108,7 +108,7 @@ export default function EmpCoAuditLavender() {
         <NightClosing
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.empcoAudit')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.empcoAudit')} />
           }
         />
       }
@@ -140,7 +140,7 @@ export default function EmpCoAuditLavender() {
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
+          <Button asChild variant="primary" className="w-full">
             <a
               href="#form"
               onClick={(e) => {
@@ -386,7 +386,7 @@ function SampleForm() {
         {mounted && <div data-netlify-recaptcha="true" />}
 
         <FormError />
-        <Button type="submit" className="w-full">
+        <Button type="submit" variant="primary" className="w-full">
           {t('empco.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>

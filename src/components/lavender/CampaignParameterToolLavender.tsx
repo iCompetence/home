@@ -1,6 +1,6 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useState } from 'react';
 import Script from 'next/script';
@@ -86,7 +86,7 @@ export default function CampaignParameterToolLavender() {
           id="contact"
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={'Campaign Parameter Tool'} />
+            <ConsultButton variant="solid" topic={'Campaign Parameter Tool'} />
           }
         />
       }
@@ -136,7 +136,7 @@ export default function CampaignParameterToolLavender() {
           {current.trialBadge && <Badge>{t('ct.pricing.trialBadge')}</Badge>}
         </div>
         <ButtonStack>
-          <Button className="w-full" onClick={() => openModal('trial')}>
+          <Button variant="primary" className="w-full" onClick={() => openModal('trial')}>
             {t('ct.hero.cta1')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>

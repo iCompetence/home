@@ -6,26 +6,40 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/components/ui/utils';
 
 /**
- * Pill CTA button in the new design. Mirrors LavenderHome's button styles.
- * Use `asChild` to render as a link: <Button asChild><a href="…">…</a></Button>.
+ * Pill button of "Licht und Linie". Use `asChild` to render as a link:
+ * <Button asChild><a href="…">…</a></Button>.
+ *
+ * States, as on the night home: hover and keyboard focus fill the button with
+ * the double star's gradient (.lav-star-hover in globals.css: white label,
+ * the outline goes, hover only under a fine pointer), a press squeezes it to
+ * 96 %. .lav-star-hover also stops double-tap zoom and text selection on touch.
+ *
+ * Colours: blue (`primary`) only for the one main action of a page (request
+ * the sample page, start the trial, send the form). Everything else is
+ * `solid` or `outline`. Both take ink and ground from the surface they stand
+ * on, so the same button is navy on the light page and white on the night.
  */
 const buttonVariants = cva(
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-opacity duration-[var(--duration-fast)] hover:opacity-75 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'lav-star-hover inline-flex min-h-12 items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-[color,border-color,scale] duration-[var(--duration-fast)] ease-out not-disabled:active:scale-[0.96] disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         // Navy on blue: white fails AA here (2.92:1), navy reaches 5.58:1.
         primary: 'bg-lav-blue text-lav-navy',
-        dark: 'bg-lav-navy text-lav-white',
-        white: 'bg-lav-white text-lav-navy',
-        outline: 'border border-lav-navy py-[11px] text-lav-navy bg-transparent',
+        // Filled in the ink colour: navy on the light page, white on the night.
+        solid: 'bg-lav-ink text-lav-ground',
+        // The line is an inset shadow, not a border: the gradient on hover
+        // then covers the whole button (a border would stay as a 1 px ring).
+        outline: 'bg-transparent text-lav-ink shadow-[inset_0_0_0_1px_var(--color-lav-ink)]',
       },
     },
     defaultVariants: {
-      variant: 'primary',
+      variant: 'solid',
     },
   },
 );
+
+type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>['variant']>;
 
 function Button({
   className,
@@ -61,4 +75,4 @@ function ButtonStack({ children }: { children: React.ReactNode }) {
   );
 }
 
-export { Button, ButtonStack, buttonVariants };
+export { Button, ButtonStack, buttonVariants, type ButtonVariant };

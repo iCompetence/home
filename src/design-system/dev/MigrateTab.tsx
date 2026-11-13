@@ -269,7 +269,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
     const image = data.images[0]?.src ?? PLACEHOLDER_IMAGE;
     const imageAlt = data.images[0]?.alt ?? head;
 
-    const ctaButton = (variant: 'primary' | 'dark', className?: string) => (
+    const ctaButton = (variant: 'primary' | 'solid', className?: string) => (
       <Button asChild variant={variant} className={className}>
         <a href={cta?.href ?? '#'}>
           {cta?.text ?? '⟨CTA⟩'}
@@ -309,7 +309,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
             description={copy[0] ?? '⟨Fließtext⟩'}
             image={image}
             imageAlt={imageAlt}
-            action={ctaButton('dark', 'self-start')}
+            action={ctaButton('solid', 'self-start')}
           />
         </Section>
       );
@@ -323,7 +323,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
             description: copy[0] ?? '⟨Fließtext⟩',
             image,
             imageAlt,
-            action: ctaButton('dark', 'self-start'),
+            action: ctaButton('solid', 'self-start'),
           }}
           /* Falls die alte Sektion keine Unterpunkte hat, zwei Platzhalter-
              Karten — sonst fehlt die halbe Komponente im A/B. */
@@ -402,9 +402,9 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       );
 
     if (target === 'closing')
-      return <ClosingBlock heading={head} action={ctaButton('dark')} />;
+      return <ClosingBlock heading={head} action={ctaButton('solid')} />;
 
-    if (target === 'cta') return <CTABand heading={head} action={ctaButton('dark')} />;
+    if (target === 'cta') return <CTABand heading={head} action={ctaButton('solid')} />;
 
     return (
       <Section innerClassName="flex flex-col gap-4 md:gap-6">
@@ -462,11 +462,11 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       statement: () =>
         `<Statement\n  text={${head}}\n  action={${ctaJsx('primary')}}\n/>`,
       feature: () =>
-        `<Section>\n  <FeatureBlock\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('dark', ' className="self-start"')}}\n  />\n</Section>`,
+        `<Section>\n  <FeatureBlock\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('solid', ' className="self-start"')}}\n  />\n</Section>`,
       featureStacked: () =>
-        `<Section>\n  <FeatureBlock\n    layout="stacked"\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('dark', ' className="self-start"')}}\n  />\n</Section>`,
+        `<Section>\n  <FeatureBlock\n    layout="stacked"\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('solid', ' className="self-start"')}}\n  />\n</Section>`,
       products: () =>
-        `<ProductShowcase\n  featured={{\n    eyebrow: t('…'),\n    title: ${head},\n    description: ${copy[0] ?? "'…'"},\n    image: '${img}',\n    imageAlt: t('…'),\n    action: ${ctaJsx('dark', ' className="self-start"')},\n  }}\n  teasers={[\n${items
+        `<ProductShowcase\n  featured={{\n    eyebrow: t('…'),\n    title: ${head},\n    description: ${copy[0] ?? "'…'"},\n    image: '${img}',\n    imageAlt: t('…'),\n    action: ${ctaJsx('solid', ' className="self-start"')},\n  }}\n  teasers={[\n${items
           .slice(0, 2)
           .map((i) => `    { eyebrow: t('…'), title: ${i.label}, description: ${i.desc}, image: '…', imageAlt: t('…'), href: '…', ctaLabel: t('…') },`)
           .join('\n')}\n  ]}\n/>`,
@@ -479,8 +479,8 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       testimonials: () =>
         `<TestimonialSlider\n  title={${head}}\n  items={[\n${items.map((i) => `    { quote: ${i.desc}, name: '…', role: '…' },`).join('\n')}\n  ]}\n/>  {/* Name und Rolle sind in der alten Sektion nicht enthalten */}`,
       closing: () =>
-        `<ClosingBlock\n  heading={${head}}\n  action={${ctaJsx('dark')}}\n/>  {/* enthält bereits den Footer */}`,
-      cta: () => `<CTABand\n  heading={${head}}\n  action={${ctaJsx('dark')}}\n/>`,
+        `<ClosingBlock\n  heading={${head}}\n  action={${ctaJsx('solid')}}\n/>  {/* enthält bereits den Footer */}`,
+      cta: () => `<CTABand\n  heading={${head}}\n  action={${ctaJsx('solid')}}\n/>`,
       section: () =>
         `<Section innerClassName="flex flex-col gap-4 md:gap-6">\n  <h2 className="font-brand text-[28px] md:text-[32px] lg:text-h3 leading-[1.1] …">{${head}}</h2>\n${copy.map((c) => `  <p className="font-brand text-body md:text-sub leading-[1.5] …">{${c}}</p>`).join('\n')}\n</Section>`,
     };

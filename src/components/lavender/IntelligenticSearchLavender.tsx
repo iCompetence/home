@@ -1,6 +1,6 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -64,7 +64,7 @@ export default function IntelligenticSearchLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.intelligenticSearch')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.intelligenticSearch')} />
           }
         />
       }

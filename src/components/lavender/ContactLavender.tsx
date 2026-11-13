@@ -143,7 +143,7 @@ function ContactForm() {
         {mounted && <div data-netlify-recaptcha="true" />}
 
         <FormError />
-        <Button type="submit" className="w-full">
+        <Button type="submit" variant="primary" className="w-full">
           {t('contact.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>

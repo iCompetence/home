@@ -6,7 +6,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowUpRight, Check, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackFormSuccess } from '@/lib/tracking';
-import { Button, FormError, FormField, TextAreaField, ValidatedForm } from '@/design-system';
+import { Button, FormError, FormField, TextAreaField, ValidatedForm, type ButtonVariant } from '@/design-system';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 const RECAPTCHA_SRC = 'https://www.google.com/recaptcha/api.js?render=explicit';
@@ -164,7 +164,7 @@ export function ConsultModal({
                   />
                   <div data-consult-recaptcha="true" data-netlify-recaptcha="true" />
                   <FormError />
-                  <Button type="submit" className="w-full" disabled={state === 'submitting'}>
+                  <Button type="submit" variant="primary" className="w-full" disabled={state === 'submitting'}>
                     {state === 'submitting' ? t('contact.form.submitting') : t('contact.form.submit')}
                   </Button>
                 </ValidatedForm>
@@ -183,12 +183,13 @@ export function ConsultModal({
  */
 export function ConsultButton({
   topic,
-  variant,
+  // Mostly the page's main action (the buy box); "solid" in the closing block.
+  variant = 'primary',
   className,
   children,
 }: {
   topic?: string;
-  variant?: 'primary' | 'dark' | 'outline' | 'white';
+  variant?: ButtonVariant;
   className?: string;
   /** Defaults to cta.button with the arrow. */
   children?: ReactNode;

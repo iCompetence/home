@@ -73,23 +73,6 @@ const mediaCol = (media: Side) =>
     media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
   );
 
-/*
- * Button states. The design system's buttons (and PageShell's page-wide rule)
- * only dim to 75 % on hover, which reads as "disabled". Here the hovered
- * button takes the double star's colours (a blue-to-violet gradient,
- * .lav-star-hover in globals.css) while the guide star itself goes out (see
- * nightSky): the light moves into the button. A press gives a short squeeze.
- * `hover:opacity-100!` switches the page-wide dimming off. Resting colours
- * come from ink and ground, so the same button is white on the night sky and
- * navy on the day layer.
- */
-const pressable =
-  'lav-star-hover transition-[color,border-color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
-/** Filled button in the ink colour. Pair with variant="white". */
-const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
-/** Outlined button. Pair with variant="outline". */
-const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent focus-visible:border-transparent`;
-
 /**
  * The night home: the glass city of Hamburg stands in the hero, the day layer
  * scrolls over it, and at the end the same stage is back with the closing line.
@@ -214,7 +197,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
           {t('lavender.hero.subline')}
         </p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
-        <Button asChild variant="white" className={solidOnNight}>
+        <Button asChild variant="solid">
           <a data-haze href="#services" onClick={(e) => glideOnClick(e, 1100)}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
@@ -261,7 +244,7 @@ function ClosingStage({ shown }: { shown: boolean }) {
       >
         {/* Contact details are on the contact page; here only the call to action. */}
         <ClosingText heading={t('lavender.cta.heading')}>
-          <Button asChild variant="white" className={solidOnNight}>
+          <Button asChild variant="solid">
             <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
               {t('topNav.letsTalk')}
               <ArrowUpRight size={20} strokeWidth={2} />
@@ -384,7 +367,7 @@ function DayRow({
         {/* One step smaller on small laptops, so two-word names stay on one line. */}
         <h2 className="lav-h1 text-lav-ink lg:max-xl:text-[40px] lg:max-xl:leading-[44px]">{title}</h2>
         <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        <Button asChild variant={primary ? 'white' : 'outline'} className={cn(primary ? solidOnNight : outlineOnNight, 'mt-2')}>
+        <Button asChild variant={primary ? 'solid' : 'outline'} className="mt-2">
           <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
             {cta}
             <ArrowUpRight size={20} strokeWidth={2} />
@@ -666,7 +649,7 @@ function Statement() {
     <Section>
       <div className="flex flex-col items-start gap-8 lg:gap-10">
         <p className="lav-statement max-w-measure-wide text-lav-ink [text-wrap:balance]">{t('lavender.statement')}</p>
-        <Button asChild variant="white" className={solidOnNight}>
+        <Button asChild variant="solid">
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
