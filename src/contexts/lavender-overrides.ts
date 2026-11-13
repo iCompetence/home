@@ -283,23 +283,51 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'Everything you need for clean tracking',
     de: 'Alles, was du für sauberes Tracking brauchst',
   },
-  'ct.features.item1.title': { en: 'Automated UTM generation' },
+  // Features 01–08: since the first commit (21.01.2026) the titles came from a
+  // different list than the descriptions (the descriptions match the icons of
+  // the live page). Titles now name what each description does, in the terms
+  // of the CPT product sheet; each line adds its benefit (content team
+  // 11/2026, docs/korrekturen-2026-11.md C-6). Live page unchanged.
+  'ct.features.item1.title': { en: 'Generation', de: 'Generierung' },
   'ct.features.item1.description': {
-    de: 'Definiere eigene Namenskonventionen und Parameter-Strukturen nach Unternehmensstandards.',
+    en: 'Create clean campaign URLs in a few clicks, with validation and a preview before you use them.',
+    de: 'In wenigen Klicks erzeugst du saubere Kampagnen-URLs, mit Validierung und Vorschau vor dem Einsatz.',
   },
-  'ct.features.item2.title': { en: 'Parameter templates & governance layer' },
+  'ct.features.item2.title': { en: 'Naming conventions', de: 'Namenskonventionen' },
   'ct.features.item2.description': {
-    en: 'Role-based access control and collaboration features for marketing, media and analytics teams.',
+    en: "Set naming conventions and parameter structures once, following your company's standards. Every new campaign follows them automatically.",
+    de: 'Du legst Namenskonventionen und Parameterstrukturen einmal nach den Standards deines Unternehmens fest. Jede neue Kampagne folgt ihnen automatisch.',
   },
-  'ct.features.item3.title': { en: 'Logging & documentation' },
-  'ct.features.item4.title': { en: 'Multi-user workflow' },
+  'ct.features.item3.title': { en: 'Governance', de: 'Governance' },
+  'ct.features.item3.description': {
+    en: 'Templates and role-based permissions for marketing, media and analytics. Campaigns stay consistent across teams, brands and countries.',
+    de: 'Vorlagen und rollenbasierte Rechte für Marketing, Media und Analytics. So bleiben Kampagnen auch über Teams, Marken und Länder hinweg einheitlich.',
+  },
+  'ct.features.item4.title': { en: 'Checks', de: 'Prüfung' },
   'ct.features.item4.description': {
+    en: 'The tool checks every URL for naming conventions, duplicates and format rules. Errors show up before they reach your reporting.',
+    de: 'Das Tool prüft jede URL auf Namenskonventionen, Dubletten und Formatvorgaben. Fehler fallen auf, bevor sie im Reporting landen.',
+  },
+  'ct.features.item5.title': { en: 'Bulk creation', de: 'Massenerstellung' },
+  'ct.features.item5.description': {
+    en: 'Generate hundreds of campaign URLs in one central step via CSV import or API.',
     de: 'Generiere hunderte Kampagnen-URLs in einem einzigen, zentralen Arbeitsgang via CSV-Import oder API.',
   },
-  'ct.features.item5.title': { en: 'Channel & vendor standardization' },
-  'ct.features.item6.title': { en: 'Reusable campaign structures' },
-  'ct.features.item7.title': { en: 'Integration into existing MarTech stack workflows' },
-  'ct.features.item8.title': { en: 'Export to analytics & BI tools' },
+  'ct.features.item6.title': { en: 'Integrations', de: 'Anbindung' },
+  'ct.features.item6.description': {
+    en: 'Native integration with GA4, Adobe Analytics and other analytics platforms, plus export to BI tools.',
+    de: 'Native Anbindung an GA4, Adobe Analytics und weitere Analytics-Plattformen, Export auch in BI-Tools.',
+  },
+  'ct.features.item7.title': { en: 'Links', de: 'Links' },
+  'ct.features.item7.description': {
+    en: 'Built-in link shortener with custom domains and click tracking. Long campaign URLs become easy to share and stay measurable.',
+    de: 'Integrierter Link-Kürzer mit eigenen Domains und Klick-Tracking. Lange Kampagnen-URLs werden teilbar und bleiben messbar.',
+  },
+  'ct.features.item8.title': { en: 'History', de: 'Historie' },
+  'ct.features.item8.description': {
+    en: 'Every change is logged in full, so you can trace what changed in a campaign for compliance and quality assurance.',
+    de: 'Jede Änderung wird vollständig protokolliert, damit du für Compliance und Qualitätssicherung nachvollziehen kannst, was sich an einer Kampagne geändert hat.',
+  },
   'ct.why.title': { en: 'Why clean UTM parameters are critical' },
   'ct.why.problem.title': { en: 'Without standards' },
   'ct.pricing.trialBadge': { en: '14 day free trial', de: '14 Tage kostenlos testen' },
