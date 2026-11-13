@@ -9,8 +9,9 @@
  * i18n module; they must match the visible text word for word.
  *
  * Nodes are linked by @id, so a crawler sees one iCompetence, not one per
- * page. Go-live: app/[lang]/layout.tsx still emits its own, thinner
- * Organization without @id; replace it with organizationNode() there.
+ * page. app/[lang]/layout.tsx still emits its own, thinner Organization with
+ * the same @id (so the two merge into one entity); at go-live replace it with
+ * organizationNode().
  */
 import { pageUrl, SITE_NAME, SITE_URL, type Lang } from './i18n-meta';
 

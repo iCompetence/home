@@ -121,8 +121,9 @@ gibt. Reihenfolge beim Umzug:
    springen gemeinsam um).
 3. `robots: noindex` fällt mit dem Lavender-Layout weg; die explizite Angabe in
    `app/[lang]/lavender/page.tsx` und die Zeilen in `public/_headers` entfernen.
-4. In `app/[lang]/layout.tsx` die alte Organization (ohne `@id`, ohne Adresse) durch
-   `organizationNode()` ersetzen; heute stehen auf den Vorschauseiten zwei Organization-Knoten.
+4. In `app/[lang]/layout.tsx` die alte Organization (ohne Adresse) durch
+   `organizationNode()` ersetzen. Heute stehen auf den Vorschauseiten zwei Organization-Knoten
+   mit derselben `@id`, die Suchmaschinen als eine Entität lesen.
 5. `lavender-seo.ts` und `lavender-overrides.ts` in `translations` übernehmen.
 6. Sitemap: Einträge mit `lastmod` aus `PAGE_UPDATED`; `PAGE_UPDATED` einmal prüfen.
 7. Prüfen im Export: `grep -rlE 'icompetence\.de/(de|en)/lavender' out` muss leer bleiben
