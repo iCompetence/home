@@ -337,7 +337,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
         </Button>
       </div>
       {/* On phones the full skyline would be a thin strip: show the middle of it
-          larger (TV tower to Elbphilharmonie). From tablets up it spans the
+          larger (Landungsbrücken to Rathaus). From tablets up it spans the
           screen and fades towards the text block (.lav-hamburg-haze). */}
       <HamburgGlass className="lav-hamburg-haze absolute bottom-0 left-[-36%] w-[160%] md:left-0 md:w-full" />
     </div>
