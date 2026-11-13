@@ -146,7 +146,8 @@ function Features() {
   // The three sublines hold two paragraphs each, separated by a blank line.
   const intro = [1, 2, 3].flatMap((n) => t(`is.features.subline${n}`).split('\n\n'));
   return (
-    <Section id="features" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+    // Title to the first block as far apart as the blocks are, so the title heads all of them (U-5).
+    <Section id="features" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14 lg:gap-24">
       <div className="flex flex-col gap-8">
         <h2 className="lav-h1 text-lav-navy">{t('is.features.title')}</h2>
         <div className="flex max-w-measure-lead flex-col gap-6">

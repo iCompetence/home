@@ -156,7 +156,8 @@ function About() {
 function Benefits() {
   const { t } = useLanguage();
   return (
-    <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+    // Title to the first block as far apart as the blocks are, so the title heads all of them (U-5).
+    <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14 lg:gap-24">
       <SectionHeader title={t('iknow.guidance.title')} />
       <div className="flex flex-col gap-14 lg:gap-24">
         {CARD_VIDEOS.map((video, i) => (
