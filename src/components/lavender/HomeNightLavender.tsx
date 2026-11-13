@@ -377,12 +377,12 @@ function ClosingStage({ shown }: { shown: boolean }) {
   return (
     <footer data-ds="FooterNight" className="contents">
       {/* First in the document (reading and tab order: closing line, then the
-          legal links), yet it ends 84 px above the page's end, where the strip
-          follows: the margins pull it over the last screen and the strip under it. */}
+          legal links), yet it ends the strip's height (--lav-strip-h) above the page's end,
+          where the strip follows: the margins pull it over the last screen and the strip under it. */}
       <div
         data-stage="closing"
         className={cn(
-          'pointer-events-none sticky bottom-0 -mb-[84px] -mt-[calc(max(100svh,540px)-84px)] flex flex-col',
+          'pointer-events-none sticky bottom-0 -mb-[var(--lav-strip-h)] -mt-[calc(max(100svh,540px)_-_var(--lav-strip-h))] flex flex-col',
           STAGE_HEIGHT,
           !shown && 'invisible',
         )}

@@ -259,6 +259,35 @@
   }
 }
 
+/* The legal strip at the foot of the night pages (LegalStrip in NightFooter.tsx)
+   keeps out of the bottom-right corner, where Usercentrics' privacy button floats
+   over every page. Usercentrics sizes it once on load (set in its admin, not here):
+   44 px at 24 px from the edges below 768 px, 64 px at 40 px from 768 px up.
+   --lav-strip-h: the strip's height. On phones the row moves up out of the corner
+   and the button floats on the empty ground below it. The skyline and the home
+   page's closing stage end this far above the page's end.
+   --lav-uc-corner: room the strip leaves on the right from 640 px up (the button
+   plus a gap); 0 on phones, where the row has moved up instead. */
+:root {
+  --lav-strip-h: 84px;
+  --lav-uc-corner: 0px;
+}
+@media (max-width: 639.98px) {
+  :root {
+    --lav-strip-h: 140px;
+  }
+}
+@media (min-width: 640px) {
+  :root {
+    --lav-uc-corner: 80px;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --lav-uc-corner: 120px;
+  }
+}
+
 /* Honour prefers-reduced-motion. The rule is "gentler, not zero": opacity and
    colour keep transitioning so state changes stay legible, while movement
    (transform) and smooth scrolling — the parts that trigger vestibular

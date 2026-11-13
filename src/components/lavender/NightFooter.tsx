@@ -23,7 +23,11 @@ import { useTextHaze } from './textHaze';
 export const NIGHT_BUTTON =
   'lav-star-hover transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
 
-/** "Based in Hamburg." on the left; imprint, privacy, LinkedIn and "back to top" on the right. 84 px tall; every target is at least 44 px. */
+/**
+ * "Based in Hamburg." on the left; imprint, privacy, LinkedIn and "back to top" on the right.
+ * --lav-strip-h tall (84 px, phones 140 px); every target is at least 44 px. It keeps out of the
+ * corner of the Usercentrics privacy button (--lav-strip-h / --lav-uc-corner in globals.css).
+ */
 export function LegalStrip({ className }: { className?: string }) {
   const { t, language } = useLanguage();
   const legal =
@@ -34,7 +38,11 @@ export function LegalStrip({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'mx-auto flex h-[84px] w-full max-w-frame items-center justify-between gap-4 px-[var(--section-pad-h)]',
+        'mx-auto flex h-[var(--lav-strip-h)] w-full max-w-frame items-center justify-between gap-4 px-[var(--section-pad-h)]',
+        // Phones: the row at the top of the taller strip, above the privacy button.
+        'max-sm:items-start max-sm:pt-5',
+        // From 640 px: room on the right for the button, less where the frame's own margin already gives it.
+        'pr-[max(var(--section-pad-h),calc(var(--lav-uc-corner)_-_max(0px,(100vw_-_1440px)/2)))]',
         className,
       )}
     >
@@ -57,8 +65,8 @@ export function LegalStrip({ className }: { className?: string }) {
           aria-label={t('footer.backToTop')}
           className={`inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-white/70 hover:opacity-100! ${press}`}
         >
-          {/* On phones the arrow alone: the row has no room for the words. */}
-          <span className="lav-star-text lav-body font-medium max-sm:hidden">{t('footer.backToTop')}</span>
+          {/* Below 1024 px the arrow alone: with the room for the privacy button the row has none for the words. */}
+          <span className="lav-star-text lav-body font-medium max-lg:hidden">{t('footer.backToTop')}</span>
           {/* The same arrow family as in the buttons. */}
           <ArrowUp size={20} strokeWidth={2} />
         </button>
@@ -125,7 +133,7 @@ export function NightClosing({ heading, action, id, className }: NightClosingPro
       {heading && <ClosingText heading={heading}>{action}</ClosingText>}
       {/* On phones the middle of the skyline, larger; from tablets up the whole of it. */}
       <HamburgGlass
-        className={cn('left-[-36%] w-[160%] md:left-0 md:w-full', heading && 'absolute! bottom-[84px]')}
+        className={cn('left-[-36%] w-[160%] md:left-0 md:w-full', heading && 'absolute! bottom-[var(--lav-strip-h)]')}
       />
       <LegalStrip className="relative z-[1] mt-auto" />
     </footer>
