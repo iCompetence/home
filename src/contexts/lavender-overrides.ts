@@ -244,7 +244,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.hero.headline': { en: 'UTM automation for marketing, media & analytics teams' },
   'ct.hero.bullet3': { en: 'Clean data for analytics & attribution' },
   'ct.hero.bullet4': { en: 'Optimized for media and performance teams' },
-  'ct.hero.cta1': { en: 'Start trial' },
+  'ct.hero.cta1': { en: 'Start trial', de: 'Kostenlos testen' },
   'ct.values.title': { en: 'The value for your team', de: 'Der Mehrwert für dein Team' },
   // DE: content team 11/2026 (docs/korrekturen-2026-11.md C-2, C-2a) — German on the DE page.
   'ct.values.card1.title': {
@@ -288,14 +288,14 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.pricing.tier2.rooms': { en: '2 to 4 parameter spaces per space' },
   'ct.pricing.tier3.rooms': { en: '5+ parameter spaces per space' },
   'ct.pricing.cta': { en: 'Start trial' },
-  'ct.trial.modal.title': { en: 'Start your free trial', de: 'Starte deinen Trial' },
+  'ct.trial.modal.title': { en: 'Start your free trial', de: '14 Tage kostenlos testen' },
   'ct.trial.modal.subtitle': { de: 'Füll das Formular aus und wir melden uns in Kürze bei dir.' },
   'ct.trial.modal.email': { en: 'Email address' },
-  'ct.trial.modal.submit': { en: 'Submit trial request' },
+  'ct.trial.modal.submit': { en: 'Submit trial request', de: 'Testzugang anfordern' },
   'ct.trial.modal.success': { de: 'Vielen Dank! Wir melden uns in Kürze bei dir.' },
-  'ct.demo.modal.title': { en: 'Request your demo', de: 'Frag deine Demo an' },
+  'ct.demo.modal.title': { en: 'Request your demo', de: 'Demo anfragen' },
   'ct.demo.modal.subtitle': { de: 'Füll das Formular aus und wir vereinbaren eine persönliche Demo.' },
-  'ct.demo.modal.submit': { en: 'Submit demo request' },
+  'ct.demo.modal.submit': { en: 'Submit demo request', de: 'Demo-Anfrage absenden' },
   'ct.faq.title': { en: 'Frequently asked questions' },
   'ct.faq.item2.answer': {
     de: 'Ja – sämtliche Parameterstrukturen lassen sich flexibel an deine internen Standards anpassen. Du kannst eigene Templates, Naming Conventions und Validierungsregeln erstellen, die zu deiner Unternehmensstruktur passen.',
@@ -335,6 +335,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'whatsNew.january2026.item2.description': { de: 'Speichere und verwende deine häufigsten UTM-Parameter-Konfigurationen mit unserer neuen Vorlagenbibliothek. Teile Vorlagen im Team für konsistentes Kampagnen-Tracking.' },
 
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
+  // Buttons say what happens, in the infinitive ("Kontakt aufnehmen"), not as an imperative (Dennis, 13.11.2026).
+  'cta.button': { de: 'Erstgespräch buchen' },
   'burgerMenu.products': { en: 'Products & tools' },
   'burgerMenu.whatsNew': { en: "What's new" },
   // Content-Guidelines: „Privacy-led AI“, never „Privacy-Led AI“ (as in the nav).

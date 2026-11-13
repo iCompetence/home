@@ -3143,8 +3143,8 @@ export const translations: Translations = {
     de: 'Warum solltest du deine Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält deine Daten – und deinen Wettbewerbsvorteil – genau dort, wo sie hingehören: bei dir.'
   },
   'lavender.privacyLed.cta': {
-    en: 'Explore privacy-led',
-    de: 'Privacy-Led entdecken'
+    en: 'Explore Privacy-led AI',
+    de: 'Privacy-led AI entdecken'
   },
   'lavender.cta.heading': {
     en: 'Ready to turn ambition into outcomes?',
