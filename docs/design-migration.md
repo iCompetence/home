@@ -267,6 +267,14 @@ Stand:
       Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
       EN nicht geprüft; Intro (Stern entsteht) aus dem Prototyp nicht übernommen; Leistung der
       Canvas auf schwachen Geräten nicht gemessen.
+      Durchsicht vor dem PR (13.11.2026): `NightNav` mit `bar="always"` steht schon im
+      statischen HTML (vorher stand das weiße Logo bis zum Laden des Skripts auf hellem Grund).
+      Die Rechtsleiste weicht dem schwebenden Usercentrics-Knopf aus (44 px / 24 px Abstand unter
+      768 px, 64 px / 40 px darüber, im Usercentrics-Admin eingestellt): auf dem Handy rückt die
+      Zeile nach oben (`--lav-strip-h` 140 statt 84 px, gilt auch für Skyline und Schlussbühne),
+      ab 640 px bleibt rechts Platz (`--lav-uc-corner`), „Nach oben“ unter 1024 px nur als Pfeil.
+      Skyline-Skript und Original-Rendering liegen in `scripts/skyline/` (README: Aufruf und die
+      Stellen, die beim Austausch mitmüssen).
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
