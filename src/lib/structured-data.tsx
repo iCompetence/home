@@ -178,10 +178,11 @@ export function faqPage({
     url,
     inLanguage: lang,
     isPartOf: { '@id': `${url}#webpage` },
+    // Soft hyphens (break hints in long headings) are not part of the words.
     mainEntity: items.map((item) => ({
       '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      name: item.question.replace(/\u00AD/g, ''),
+      acceptedAnswer: { '@type': 'Answer', text: item.answer.replace(/\u00AD/g, '') },
     })),
   };
 }

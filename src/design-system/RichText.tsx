@@ -22,9 +22,9 @@ import { DataTable } from './DataTable';
 
 const INLINE = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
 
-/** The text without markup: for JSON-LD, which must match the visible words. */
+/** The text without markup and soft hyphens: for JSON-LD, which must match the visible words. */
 export function plainText(text: string): string {
-  return text.replace(INLINE, (_, bold, label) => bold ?? label);
+  return text.replace(INLINE, (_, bold, label) => bold ?? label).replace(/\u00AD/g, '');
 }
 
 /** Inline linkified/bold nodes of one line. */

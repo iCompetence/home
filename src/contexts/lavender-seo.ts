@@ -12,6 +12,9 @@ import type { Language } from './LanguageContext';
  * Format of the explanatory blocks (`.body`, FAQ answers): see
  * src/design-system/RichText.tsx — blank line between blocks, "- " lists,
  * "1. " numbered lists, "|" tables, **bold**, [label](/route/) links.
+ * Long compounds in headings and questions carry a soft hyphen (\u00AD) at
+ * the joint, so the browser does not break them mid-syllable on phones
+ * ("KI-Wissensma-nagement"); plainText()/faqPage() strip it for JSON-LD.
  * Orientation: Google top results for five search terms per page
  * (13.11.2026); the text is our own. When facts change, update the text and
  * the page's date in src/lib/page-dates.ts.
@@ -101,7 +104,7 @@ An AI agent is only as good as the data it can access. That is why many projects
     en: `A chatbot answers questions in a conversation. An AI agent gets tasks done: it plans several steps, uses tools and data sources along the way and delivers a result, such as a report or a prepared transaction. With our agents, a person signs off at the end.`,
   },
   'lavender.seo.home.faq.q3': {
-    de: `Brauche ich eine Datenstrategie, bevor ich KI einsetze?`,
+    de: `Brauche ich eine Daten\u00ADstrategie, bevor ich KI einsetze?`,
     en: `Do I need a data strategy before using AI?`,
   },
   'lavender.seo.home.faq.a3': {
@@ -129,7 +132,7 @@ An AI agent is only as good as the data it can access. That is why many projects
   // iKnow: KI-Wissensmanagement · Wissensdatenbank mit KI · KI lokal ohne
   // Cloud · Unternehmenswissen sichern · Wissensmanagement Software
   // ======================================================================
-  'lavender.seo.iknow.title': { de: `Was ist KI-Wissensmanagement?`, en: `What is AI knowledge management?` },
+  'lavender.seo.iknow.title': { de: `Was ist KI-Wissens\u00ADmanagement?`, en: `What is AI knowledge management?` },
   'lavender.seo.iknow.answer': {
     de: `Beim KI-Wissensmanagement führt eine KI das Wissen eines Unternehmens aus Dokumenten, E-Mails, Chats und Gesprächen zusammen, ordnet es und findet es auf eine Frage hin wieder.`,
     en: `In AI knowledge management, an AI brings together a company's knowledge from documents, emails, chats and conversations, organizes it and retrieves it when someone asks.`,
@@ -139,7 +142,7 @@ An AI agent is only as good as the data it can access. That is why many projects
     en: `Anyone looking for something asks in plain language and gets an answer from the company's own material instead of digging through folders and inboxes. iKnow does this locally: the software runs inside the company, and no data goes to public AI services.`,
   },
   'lavender.seo.iknow.b1.title': {
-    de: `So funktioniert eine Wissensdatenbank mit KI`,
+    de: `So funktioniert eine Wissens\u00ADdatenbank mit KI`,
     en: `How an AI knowledge base works`,
   },
   'lavender.seo.iknow.b1.body': {
@@ -173,7 +176,7 @@ Für Wissen, das das Unternehmen nicht verlassen soll, ist der lokale Betrieb di
 For knowledge that should not leave the company, running locally is the obvious choice. Why we generally bring AI to the data is explained under [Privacy-led AI](/privacy-led-ai/).`,
   },
   'lavender.seo.iknow.b3.title': {
-    de: `Warum Unternehmenswissen verloren geht`,
+    de: `Warum Unternehmens\u00ADwissen verloren geht`,
     en: `Why company knowledge gets lost`,
   },
   'lavender.seo.iknow.b3.body': {
@@ -185,11 +188,11 @@ Eine Wissensbasis, die im Arbeitsalltag mitläuft, sichert dieses Wissen, bevor 
 A knowledge base that runs alongside daily work secures this knowledge before anyone leaves. It is also the foundation for AI agents: without reliable company knowledge, agents guess; with it, they can take on tasks.`,
   },
   'lavender.seo.iknow.faqTitle': {
-    de: `Häufige Fragen zu KI-Wissensmanagement`,
+    de: `Häufige Fragen zu KI-Wissens\u00ADmanagement`,
     en: `Frequently asked questions about AI knowledge management`,
   },
   'lavender.seo.iknow.faq.q1': {
-    de: `Was ist der Unterschied zwischen einer klassischen Wissensdatenbank und KI-Wissensmanagement?`,
+    de: `Was ist der Unterschied zwischen einer klassischen Wissens\u00ADdatenbank und KI-Wissens\u00ADmanagement?`,
     en: `What is the difference between a classic knowledge base and AI knowledge management?`,
   },
   'lavender.seo.iknow.faq.a1': {
@@ -218,7 +221,7 @@ A knowledge base that runs alongside daily work secures this knowledge before an
     en: `iKnow connects via API to tools such as Microsoft 365, Google Workspace or Slack and captures emails, chats and documents. If you want, it also transcribes meetings and workshops.`,
   },
   'lavender.seo.iknow.faq.q5': {
-    de: `Wie verhindert man Wissensverlust, wenn Mitarbeitende gehen?`,
+    de: `Wie verhindert man Wissens\u00ADverlust, wenn Mitarbeitende gehen?`,
     en: `How do you prevent knowledge loss when employees leave?`,
   },
   'lavender.seo.iknow.faq.a5': {
@@ -432,7 +435,7 @@ In Germany, all journey data falls under Section 25 TDDDG (called TTDSG until Ma
     en: `Semantic search makes this possible: products and queries are stored as vectors, and the search compares meaning rather than strings of letters. Intelligentic Search vectorizes all product information for this, not just titles, and responds in milliseconds.`,
   },
   'lavender.seo.search.b1.title': {
-    de: `Stichwortsuche und semantische Suche im Vergleich`,
+    de: `Stichwort\u00ADsuche und semantische Suche im Vergleich`,
     en: `Keyword search and semantic search compared`,
   },
   'lavender.seo.search.b1.body': {
@@ -489,7 +492,7 @@ Image search works on the same principle: someone uploads a photo or a screensho
     en: `Frequently asked questions about AI product search`,
   },
   'lavender.seo.search.faq.q1': {
-    de: `Was ist der Unterschied zwischen semantischer Suche und Stichwortsuche?`,
+    de: `Was ist der Unterschied zwischen semantischer Suche und Stichwort\u00ADsuche?`,
     en: `What is the difference between semantic search and keyword search?`,
   },
   'lavender.seo.search.faq.a1': {
@@ -589,7 +592,7 @@ Always set utm_source, utm_medium and utm_campaign. Values are case-sensitive: u
 - Unassigned: no rule matches, for example because utm_medium is missing or says newsletter instead of email.`,
   },
   'lavender.seo.cpt.b3.title': {
-    de: `Eine UTM-Namenskonvention fürs Team`,
+    de: `Eine UTM-Namens\u00ADkonvention fürs Team`,
     en: `A UTM naming convention for your team`,
   },
   'lavender.seo.cpt.b3.body': {
@@ -609,7 +612,7 @@ Ein kostenloser UTM-Generator baut einzelne Links korrekt zusammen. Er kennt abe
 A free UTM generator builds individual links correctly. But it doesn't know your convention or which names your team has already used. As soon as several people, agencies or countries create campaigns, you need rules that the tool enforces. The Campaign Parameter Tool implements them as templates, validation and roles for marketing, media and analytics.`,
   },
   'lavender.seo.cpt.faq.q1': {
-    de: `Unterscheiden UTM-Parameter Groß- und Kleinschreibung?`,
+    de: `Unterscheiden UTM-Parameter Groß- und Klein\u00ADschreibung?`,
     en: `Are UTM parameters case-sensitive?`,
   },
   'lavender.seo.cpt.faq.a1': {
@@ -774,7 +777,7 @@ The text of the regulation is on [EUR-Lex](https://eur-lex.europa.eu/eli/reg/201
   },
   'lavender.seo.privacy.b2.title': {
     de: `KI-Dienst, EU-Cloud oder eigene Infrastruktur?`,
-    en: `AI service, EU cloud or your own infrastructure?`,
+    en: `AI service, EU cloud or your own infra\u00ADstructure?`,
   },
   'lavender.seo.privacy.b2.body': {
     de: `| | Öffentlicher KI-Dienst | In der EU gehostet | Eigene Infrastruktur |
@@ -825,7 +828,7 @@ Our products follow the same principle: [iKnow](/iknow/) runs locally inside the
     en: `No. Running locally removes the need for a data processor and for third-country transfers, but you still have to settle the legal basis, purpose limitation, access rights and deletion. Local operation just makes these obligations easier to meet.`,
   },
   'lavender.seo.privacy.faq.q2': {
-    de: `Wann ist eine Datenschutz-Folgenabschätzung bei KI Pflicht?`,
+    de: `Wann ist eine Datenschutz-Folgen\u00ADabschätzung bei KI Pflicht?`,
     en: `When is a data protection impact assessment mandatory for AI?`,
   },
   'lavender.seo.privacy.faq.a2': {
@@ -849,7 +852,7 @@ Our products follow the same principle: [iKnow](/iknow/) runs locally inside the
     en: `Data protection is built into the architecture from the start, as Art. 25 GDPR requires. For AI this mainly means that the data stays in your own environment and the AI only gets what it needs for its task.`,
   },
   'lavender.seo.privacy.faq.q5': {
-    de: `Wie hilft iCompetence bei datenschutzkonformer KI?`,
+    de: `Wie hilft iCompetence bei datenschutz\u00ADkonformer KI?`,
     en: `How does iCompetence help with privacy-compliant AI?`,
   },
   'lavender.seo.privacy.faq.a5': {
