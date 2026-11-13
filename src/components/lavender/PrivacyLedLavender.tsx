@@ -70,10 +70,12 @@ export default function PrivacyLedLavender() {
         </div>
       </Section>
 
-      <Section id="principles" className="pt-0" innerClassName="flex flex-col gap-12">
-        <div className="flex flex-col gap-6">
-          <h2 className="lav-h2 text-lav-white">{t('privacy.guidance.title')}</h2>
-          <p className="lav-body font-normal text-lav-white/70">{t('privacy.guidance.subline')}</p>
+      {/* A section of its own with a section title: the h1 step and the full
+          distance to the intro above (was the h2 step, 80 px below it). */}
+      <Section id="principles" innerClassName="flex flex-col gap-12">
+        <div className="flex flex-col gap-8">
+          <h2 className="lav-h1 max-w-measure-wide text-lav-ink">{t('privacy.guidance.title')}</h2>
+          <p className="lav-body max-w-measure-lead font-normal text-lav-ink/70">{t('privacy.guidance.subline')}</p>
         </div>
         {/* Two in a row only from 1200px (75rem): below, „Verantwortung“ at
             H1 size is wider than half a row. Checkerboard in two columns,
