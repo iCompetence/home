@@ -45,6 +45,7 @@ export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
 export { ProductTeaser, type ProductTeaserProps } from './ProductTeaser';
 export { ProductRow, MoreProducts, type ProductRowProps, type ProductKey } from './ProductRow';
+export { ProductGlimpse, type GlimpseProduct } from './ProductGlimpse';
 export { DesignFrameOverlay } from './DesignFrameOverlay';
 export {
   ServicesCarousel,
