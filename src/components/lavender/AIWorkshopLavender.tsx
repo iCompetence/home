@@ -105,7 +105,9 @@ export default function AIWorkshopLavender() {
         </ButtonStack>
       </ProductHead>
 
-      <Section id="intro" className={ANCHOR_SCROLL_MARGIN}>
+      {/* Every section starts with its title (was: four paragraphs without one). */}
+      <Section id="intro" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
+        <SectionHeader title={t('workshop.anchor.about')} />
         <div className="flex max-w-measure-lead flex-col gap-6">
           {/* Order of the print ad (11/2026): promise, free seats, body, then
               the people behind it right before the experts. Running text in
