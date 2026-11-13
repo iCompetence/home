@@ -52,7 +52,9 @@ export function Explainer({
       </div>
       <div className="flex flex-col">
         {blocks.map((block) => (
-          <SplitBlock key={block.title} title={block.title} headingLevel={3}>
+          // Block headings in the h3 step: reference material below the section's
+          // title, and every word fits the narrow column (at 36 px some broke mid-word).
+          <SplitBlock key={block.title} title={block.title} headingLevel={3} headingStep="h3">
             <RichBody text={block.body} className="max-w-[var(--container-measure-lead)]" />
           </SplitBlock>
         ))}
