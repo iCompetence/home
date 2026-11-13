@@ -2,14 +2,16 @@
 
 import { useState } from 'react';
 import { cn } from '@/components/ui/utils';
+import { ZoomImage } from './ZoomImage';
 
 export type GalleryImage = { src: string; alt: string };
 
 /**
  * Product gallery: a stage on lavender (4:3 unless the images ask for another
  * ratio) and a row of thumbnails. The stage is a real <img> (crawlable, has
- * alt text); thumbnails are buttons that swap it. The thumbnail row scrolls
- * sideways when it is wider than the stage.
+ * alt text) that opens full size on click (ZoomImage); thumbnails are
+ * buttons that swap it. The thumbnail row scrolls sideways when it is wider
+ * than the stage.
  */
 export function MediaGallery({
   images,
@@ -27,7 +29,7 @@ export function MediaGallery({
 
   return (
     <div data-ds="MediaGallery" className="flex w-full flex-col gap-3 md:gap-4">
-      <img
+      <ZoomImage
         src={current.src}
         alt={current.alt}
         className={cn(

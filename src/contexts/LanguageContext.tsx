@@ -2906,6 +2906,8 @@ export const translations: Translations = {
   'lavender.common.breadcrumb': { en: 'Breadcrumb', de: 'Brotkrumen-Navigation' },
   'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
+  // Lightbox trigger (ZoomImage), content team 11/2026 G-2.
+  'lavender.common.zoomImage': { en: 'Enlarge image', de: 'Bild vergrößern' },
   'lavender.common.close': { en: 'Close', de: 'Schließen' },
   // Label before the mail address in the imprint (was hard-coded "Email:").
   'lavender.common.email': { en: 'Email', de: 'E-Mail' },

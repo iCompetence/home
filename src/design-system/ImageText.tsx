@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { cn } from '@/components/ui/utils';
 import { useMotionPrefs } from './motion';
+import { ZoomImage } from './ZoomImage';
 
 export type ImageTextProps = {
   title: string;
@@ -48,7 +49,7 @@ export function ImageText({
         {video ? (
           <LoopVideo src={video} className={media} />
         ) : (
-          image && <img src={image} alt={imageAlt} loading="lazy" className={media} />
+          image && <ZoomImage src={image} alt={imageAlt} loading="lazy" className={media} />
         )}
       </div>
       <div className="flex w-full flex-col gap-6 md:gap-8 lg:flex-1 lg:gap-10">

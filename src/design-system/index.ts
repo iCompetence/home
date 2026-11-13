@@ -17,6 +17,7 @@ export { PriceTag } from './PriceTag';
 export { PricingCard } from './PricingCard';
 export { Breadcrumb, type Crumb } from './Breadcrumb';
 export { MediaGallery, type GalleryImage } from './MediaGallery';
+export { ZoomImage } from './ZoomImage';
 export { CheckItem } from './CheckItem';
 export { InfoTip } from './InfoTip';
 export { ProductHead, type ProductHeadProps } from './ProductHead';

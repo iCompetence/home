@@ -29,6 +29,7 @@ import {
   SectionHeader,
   SegmentedControl,
   SpecItem,
+  ZoomImage,
   siteHref,
 } from '@/design-system';
 import { TrialModal, type TrialMode } from './TrialModal';
@@ -178,7 +179,7 @@ export default function CampaignParameterToolLavender() {
 
       <Section id="how" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.demo.title')} intro={[t('ct.demo.description')]} />
-        <img
+        <ZoomImage
           src="/assets/how-it-works.png"
           alt="How it works"
           loading="lazy"
