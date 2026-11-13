@@ -105,7 +105,7 @@ export function TrialModal({
               </div>
               <Dialog.Close
                 aria-label={t('lavender.common.close')}
-                className="absolute right-4 top-4 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-pill border-0 bg-transparent p-2 text-lav-navy"
+                className="lav-star-hover absolute right-4 top-4 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-pill border-0 bg-transparent p-2 text-lav-navy transition-[color,scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96]"
               >
                 <X aria-hidden size={20} strokeWidth={2} />
               </Dialog.Close>
@@ -160,7 +160,7 @@ export function TrialModal({
                   />
                   <div data-trial-recaptcha="true" data-netlify-recaptcha="true" />
                   <FormError />
-                  <Button type="submit" className="w-full" disabled={state === 'submitting'}>
+                  <Button type="submit" variant="primary" className="w-full" disabled={state === 'submitting'}>
                     {state === 'submitting' ? t('ct.trial.modal.submitting') : submit}
                   </Button>
                 </ValidatedForm>

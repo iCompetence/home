@@ -15,7 +15,6 @@ export { Badge } from './Badge';
 export { SegmentedControl, type SegmentOption } from './SegmentedControl';
 export { PriceTag } from './PriceTag';
 export { PricingCard } from './PricingCard';
-export { ReviewCard } from './ReviewCard';
 export { Breadcrumb, type Crumb } from './Breadcrumb';
 export { MediaGallery, type GalleryImage } from './MediaGallery';
 export { CheckItem } from './CheckItem';
@@ -27,6 +26,7 @@ export { IconCard } from './IconCard';
 export { PrincipleCard } from './PrincipleCard';
 export { ImageText, LoopVideo, type ImageTextProps } from './ImageText';
 export { QuoteIntro } from './QuoteIntro';
+export { QuotePanel, type Quote } from './QuotePanel';
 export { SpecItem } from './SpecItem';
 export { FaqList, type FaqEntry } from './FaqList';
 export { FaqSection } from './FaqSection';
@@ -36,10 +36,11 @@ export { FormField, TextAreaField, ConsentCheckbox, ValidatedForm, FormError } f
 export { ComparisonTable, type ComparisonRow } from './ComparisonTable';
 export { FactsBand, type Fact } from './FactsBand';
 export { ClosingBlock, type ClosingBlockProps } from './ClosingBlock';
-export { Button, ButtonStack, buttonVariants } from './Button';
+export { Button, ButtonStack, buttonVariants, type ButtonVariant } from './Button';
 export { Eyebrow } from './Eyebrow';
 export { Footer } from './Footer';
 export { ProductTeaser, type ProductTeaserProps } from './ProductTeaser';
+export { ProductRow, MoreProducts, type ProductRowProps, type ProductKey } from './ProductRow';
 export { DesignFrameOverlay } from './DesignFrameOverlay';
 export {
   ServicesCarousel,

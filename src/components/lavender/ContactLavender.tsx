@@ -2,6 +2,7 @@
 
 import { NightFooter } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight } from 'lucide-react';
@@ -13,7 +14,6 @@ import {
   FormError,
   FormField,
   Hero,
-  PageShell,
   Section,
   TextAreaField,
   ValidatedForm,
@@ -34,7 +34,7 @@ export default function ContactLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={<NightFooter />}
     >
@@ -44,7 +44,7 @@ export default function ContactLavender() {
       />
       <Hero title={t('contact.hero.title')} />
       <ContactForm />
-    </PageShell>
+    </NightPage>
   );
 }
 
@@ -88,7 +88,9 @@ function ContactForm() {
         // the column is too narrow (1024–1090px) it breaks after the "@".
         className="lav-h2 text-lav-navy no-underline hyphens-none [overflow-wrap:anywhere]"
       >
-        {value.split('@').flatMap((part, i) => (i === 0 ? [part] : ['@', <wbr key={i} />, part]))}
+        <span className="lav-star-text">
+          {value.split('@').flatMap((part, i) => (i === 0 ? [part] : ['@', <wbr key={i} />, part]))}
+        </span>
       </a>
     </div>
   );
@@ -141,7 +143,7 @@ function ContactForm() {
         {mounted && <div data-netlify-recaptcha="true" />}
 
         <FormError />
-        <Button type="submit" className="w-full">
+        <Button type="submit" variant="primary" className="w-full">
           {t('contact.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>

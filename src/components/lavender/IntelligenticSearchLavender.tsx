@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -13,9 +14,8 @@ import {
   ComparisonTable,
   ImageText,
   LoopVideo,
-  PageShell,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   QuoteIntro,
   Section,
   SectionHeader,
@@ -56,7 +56,7 @@ export default function IntelligenticSearchLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -64,7 +64,7 @@ export default function IntelligenticSearchLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.intelligenticSearch')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.intelligenticSearch')} />
           }
         />
       }
@@ -108,7 +108,7 @@ export default function IntelligenticSearchLavender() {
         author={
           <>
             (
-            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer">
+            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
               Amazon
             </a>
             , 2025)
@@ -124,13 +124,13 @@ export default function IntelligenticSearchLavender() {
         <SectionHeader title={t('is.howItWorks.title')} intro={[t('is.howItWorks.description')]} />
         <LoopVideo
           src="/videos/Architecture.mp4"
-          className="aspect-video w-full rounded-card bg-lav-lavender object-contain object-center"
+          className="aspect-video w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />
       </Section>
 
       <Benefits />
-      <MoreProducts />
-    </PageShell>
+      <MoreProducts products={['iknow', 'analyticsAgent']} />
+    </NightPage>
   );
 }
 
@@ -209,33 +209,3 @@ function Benefits() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={siteHref(language, 'analytics-agent')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

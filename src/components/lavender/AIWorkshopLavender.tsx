@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -16,9 +17,8 @@ import {
   ConsentCheckbox,
   FormError,
   FormField,
-  PageShell,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   Section,
   SectionHeader,
   ValidatedForm,
@@ -59,7 +59,7 @@ export default function AIWorkshopLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -67,7 +67,7 @@ export default function AIWorkshopLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.aiWorkshop')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.aiWorkshop')} />
           }
         />
       }
@@ -89,7 +89,7 @@ export default function AIWorkshopLavender() {
       >
         <Badge>{t('workshop.intro.run4')}</Badge>
         <ButtonStack>
-          <Button asChild className="w-full">
+          <Button asChild variant="primary" className="w-full">
             <a href="#form" onClick={smoothAnchor}>
               {t('workshop.anchor.apply')}
               <ArrowUpRight size={20} strokeWidth={2} />
@@ -116,8 +116,8 @@ export default function AIWorkshopLavender() {
       </Section>
 
       <ApplicationForm />
-      <MoreProducts />
-    </PageShell>
+      <MoreProducts products={['iknow', 'intelligenticSearch']} />
+    </NightPage>
   );
 }
 
@@ -128,7 +128,8 @@ function Experts() {
   return (
     <div
       id="experts"
-      className={`flex flex-col gap-10 rounded-card bg-lav-lavender p-6 md:p-8 lg:p-12 ${ANCHOR_SCROLL_MARGIN}`}
+      // In the gallery's place, with the gallery's big corner from desktop up.
+      className={`flex flex-col gap-10 rounded-card bg-lav-lavender p-6 md:p-8 lg:rounded-frame lg:p-12 ${ANCHOR_SCROLL_MARGIN}`}
     >
       <h2 className="lav-h2 text-lav-navy">{t('workshop.experts.title')}</h2>
       <ul className="m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-2 md:gap-y-10">
@@ -236,7 +237,7 @@ function ApplicationForm() {
         {mounted && <div data-netlify-recaptcha="true" />}
 
         <FormError />
-        <Button type="submit" className="w-full">
+        <Button type="submit" variant="primary" className="w-full">
           {t('workshop.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>
@@ -245,33 +246,3 @@ function ApplicationForm() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Intelligentic Search"
-          description={t('is.hero.subline')}
-          image="/images/ICS_Travel_Club.png"
-          imageAlt="Intelligentic Search Demo"
-          href={siteHref(language, 'intelligentic-search')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

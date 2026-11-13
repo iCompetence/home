@@ -1,13 +1,13 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   Hero,
   NewsEntry,
-  PageShell,
   Section,
   SplitBlock,
   siteHref,
@@ -62,14 +62,14 @@ export default function WhatsNewLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={
         <NightClosing
           id="contact"
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} />
+            <ConsultButton variant="solid" />
           }
         />
       }
@@ -98,6 +98,6 @@ export default function WhatsNewLavender() {
           </SplitBlock>
         ))}
       </Section>
-    </PageShell>
+    </NightPage>
   );
 }

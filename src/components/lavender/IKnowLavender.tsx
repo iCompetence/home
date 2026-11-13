@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -12,9 +13,8 @@ import {
   CheckItem,
   ImageText,
   MediaGallery,
-  PageShell,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   QuoteIntro,
   Section,
   SectionHeader,
@@ -59,7 +59,7 @@ export default function IKnowLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -67,7 +67,7 @@ export default function IKnowLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.iknow')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.iknow')} />
           }
         />
       }
@@ -123,8 +123,8 @@ export default function IKnowLavender() {
         />
       </Section>
 
-      <MoreProducts />
-    </PageShell>
+      <MoreProducts products={['analyticsAgent', 'empco']} />
+    </NightPage>
   );
 }
 
@@ -168,33 +168,3 @@ function Benefits() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={siteHref(language, 'analytics-agent')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="EmpCo Audit"
-          description={t('lavender.products.empco.desc')}
-          image="/images/lavender-empco.png"
-          imageAlt={t('lavender.products.empco.imageAlt')}
-          href={siteHref(language, 'empco-audit')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

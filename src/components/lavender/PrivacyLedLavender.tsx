@@ -1,15 +1,14 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
-  BrandStar,
   Button,
   Eyebrow,
-  PageShell,
   PrincipleCard,
   Section,
   siteHref,
@@ -26,24 +25,21 @@ export default function PrivacyLedLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       surface="inverse"
       nav={<NightNav logoHref={home} bar="always" />}
       footer={
         <NightClosing
           id="contact"
           heading={t('lavender.cta.heading')}
-          action={<ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.privacyLedAi')} />}
+          action={<ConsultButton variant="solid" topic={t('burgerMenu.privacyLedAi')} />}
         />
       }
     >
-      {/* Hero. The padding sits on the positioned box (as in the FactsBand),
-          so the star's offsets count from the hero's top edge. The star may
-          reach up behind the nav, hence only horizontal clipping. */}
-      <section id="top" data-ds="Section" className="relative w-full overflow-x-clip">
-        <div className="relative mx-auto w-full max-w-frame px-[var(--section-pad-h)] py-[var(--section-pad-v)]">
-          <BrandStar variant="principles" />
-          <div className="relative flex flex-col gap-8">
+      {/* Hero. No star of its own: the sky's guide star is the one star here. */}
+      <section id="top" data-ds="Section" className="w-full">
+        <div className="mx-auto w-full max-w-frame px-[var(--section-pad-h)] py-[var(--section-pad-v)]">
+          <div className="flex flex-col gap-8">
             <Eyebrow tone="white">{t('burgerMenu.principles')}</Eyebrow>
             <h1 className="lav-display text-lav-white">{t('privacy.hero.title')}</h1>
             <p className="lav-lead font-normal text-lav-white/70">{t('privacy.hero.subline')}</p>
@@ -99,6 +95,6 @@ export default function PrivacyLedLavender() {
           ))}
         </div>
       </Section>
-    </PageShell>
+    </NightPage>
   );
 }

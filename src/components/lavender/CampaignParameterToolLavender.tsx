@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
@@ -17,11 +18,10 @@ import {
   FaqSection,
   IconCard,
   InfoTip,
-  PageShell,
   PriceTag,
   ProductHead,
-  ProductTeaser,
-  ReviewCard,
+  MoreProducts,
+  QuotePanel,
   Section,
   SectionHeader,
   SegmentedControl,
@@ -79,14 +79,14 @@ export default function CampaignParameterToolLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
           id="contact"
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={'Campaign Parameter Tool'} />
+            <ConsultButton variant="solid" topic={'Campaign Parameter Tool'} />
           }
         />
       }
@@ -136,7 +136,7 @@ export default function CampaignParameterToolLavender() {
           {current.trialBadge && <Badge>{t('ct.pricing.trialBadge')}</Badge>}
         </div>
         <ButtonStack>
-          <Button className="w-full" onClick={() => openModal('trial')}>
+          <Button variant="primary" className="w-full" onClick={() => openModal('trial')}>
             {t('ct.hero.cta1')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>
@@ -174,7 +174,7 @@ export default function CampaignParameterToolLavender() {
           src="/assets/how-it-works.png"
           alt="How it works"
           loading="lazy"
-          className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center"
+          className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />
       </Section>
 
@@ -208,21 +208,16 @@ export default function CampaignParameterToolLavender() {
         />
       </Section>
 
-      <Section id="reviews" innerClassName="flex flex-col gap-12">
-        <SectionHeader title={t('ct.testimonials.title')} />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {CLIENTS.map((client, i) => (
-            <ReviewCard
-              key={client.name}
-              logo={client.logo}
-              logoAlt={client.name}
-              quote={t(`ct.testimonials.item${i + 1}.quote`)}
-              role={t(`ct.testimonials.item${i + 1}.role`)}
-              company={t(`ct.testimonials.item${i + 1}.company`)}
-            />
-          ))}
-        </div>
-      </Section>
+      {/* The home page's quote panel (was: three cards). No names are known, so role and company sign. */}
+      <QuotePanel
+        id="reviews"
+        title={t('ct.testimonials.title')}
+        quotes={[1, 2, 3].map((n) => ({
+          quote: t(`ct.testimonials.item${n}.quote`),
+          role: t(`ct.testimonials.item${n}.role`),
+          company: t(`ct.testimonials.item${n}.company`),
+        }))}
+      />
 
       <FaqSection
         className={ANCHOR_SCROLL_MARGIN}
@@ -232,44 +227,14 @@ export default function CampaignParameterToolLavender() {
           answer: t(`ct.faq.item${n}.answer`),
         }))}
       />
-      <MoreProducts />
+      <MoreProducts products={['iknow', 'analyticsAgent']} />
 
       <TrialModal
         open={modal.open}
         mode={modal.mode}
         onOpenChange={(open) => setModal((m) => ({ ...m, open }))}
       />
-    </PageShell>
+    </NightPage>
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={siteHref(language, 'analytics-agent')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

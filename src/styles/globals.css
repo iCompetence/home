@@ -576,9 +576,13 @@ html {
   .lav-star-hover:focus-visible::before {
     opacity: 1;
   }
-  /* PageShell dims every hovered link and button to 75 %; not here. */
-  [data-star-hover] :is(a, button):not(:disabled):hover {
-    opacity: 1 !important;
+  /* On the gradient, text and icons are white and an outline goes. Set here,
+     next to the fill, so the two can never come apart (a white label on a
+     white button). !important: the resting colours are utilities, which
+     outrank this layer. White on the gradient: 4.8:1 to 5.0:1. */
+  .lav-star-hover:not([data-state='active'], :disabled):focus-visible {
+    color: var(--color-lav-white) !important;
+    border-color: transparent !important;
   }
 
   /* Text: the gradient lies behind the glyphs and the text colour fades to
@@ -618,15 +622,29 @@ html {
   [aria-current] > .lav-star-text,
   [data-state='open'] > .lav-star-text,
   :is(a, button):focus-visible > span > .lav-star-text,
+  a.lav-star-text:focus-visible,
   [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > div > span:last-child {
     color: transparent !important;
     background-size: 100% 100%;
     --lav-star-hold: 0s;
+    /* An underlined link in running text keeps its line, in the gradient's end colour. */
+    text-decoration-color: var(--lav-star-ink-end);
   }
-  /* An icon beside such a text takes the gradient's end colour. */
+  /* An icon beside such a text takes the gradient's end colour, as does an
+     icon-only control without a surface (.lav-star-icon: the info button). */
   :is(a, button):focus-visible > .lav-star-text ~ svg,
+  a.lav-star-text:focus-visible svg,
+  .lav-star-icon:focus-visible,
   [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > svg {
     color: var(--lav-star-ink-end) !important;
+  }
+  /* A picture that is a button (the gallery's thumbnails): its frame takes the
+     gradient; a fill would hide the picture. Needs a 2 px transparent border. */
+  .lav-star-ring:focus-visible {
+    border-color: transparent;
+    background:
+      linear-gradient(var(--color-lav-lavender), var(--color-lav-lavender)) padding-box,
+      var(--lav-star-fill) border-box;
   }
 
   /* The logo as a shape that can be filled: white at rest, the gradient on hover. */
@@ -641,22 +659,36 @@ html {
     opacity: 1;
   }
 
-  /* The same three, under a pointer. */
+  /* The same, under a pointer. */
   @media (hover: hover) and (pointer: fine) {
-    .lav-star-hover:hover::before,
+    .lav-star-hover:not(:disabled):hover::before,
     a:hover > .lav-logo-mask::before {
       opacity: 1;
     }
+    .lav-star-hover:not([data-state='active'], :disabled):hover {
+      color: var(--color-lav-white) !important;
+      border-color: transparent !important;
+    }
     :is(a, button):hover > .lav-star-text,
     :is(a, button):hover > span > .lav-star-text,
+    a.lav-star-text:hover,
     [data-star-hover] [data-ds='ProcessAccordion'] button:hover > div > span:last-child {
       color: transparent !important;
       background-size: 100% 100%;
       --lav-star-hold: 0s;
+      text-decoration-color: var(--lav-star-ink-end);
     }
     :is(a, button):hover > .lav-star-text ~ svg,
+    a.lav-star-text:hover svg,
+    .lav-star-icon:hover,
     [data-star-hover] [data-ds='ProcessAccordion'] button:hover > svg {
       color: var(--lav-star-ink-end) !important;
+    }
+    .lav-star-ring:hover {
+      border-color: transparent;
+      background:
+        linear-gradient(var(--color-lav-lavender), var(--color-lav-lavender)) padding-box,
+        var(--lav-star-fill) border-box;
     }
   }
 
@@ -676,56 +708,9 @@ html {
     .lav-enter > * { animation: none; }
   }
 
-  /* A still star field for the night footer of the subpages (the home page
-     has the live canvas instead). The glass city fades the lower stars. */
-  .lav-night-stars {
-    background-image:
-      linear-gradient(to bottom, transparent 45%, #0b2231 78%),
-      radial-gradient(0.6px 0.6px at 33.1% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 80.8% 8.6%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 89.3% 15.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 42.1% 17.2%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 7.7% 36.4%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(1px 1px at 93.0% 37.0%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 95.7% 5.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 42.2% 34.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 55.8% 43.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 56.8% 14.1%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 70.4% 36.3%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 49.7% 34.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 58.2% 29.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 78.3% 44.2%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 57.1% 34.0%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 29.6% 60.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 42.1% 47.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 42.5% 59.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 57.0% 54.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 68.7% 38.1%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 8.6% 8.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 68.9% 6.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 97.3% 51.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(1px 1px at 87.2% 23.5%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 18.1% 9.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 75.8% 10.6%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 39.5% 54.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 45.1% 35.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
-      radial-gradient(1px 1px at 84.9% 19.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 67.5% 25.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.6px 0.6px at 10.0% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 48.6% 37.8%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
-      radial-gradient(0.8px 0.8px at 2.4% 27.7%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 56.4% 59.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%);
-  }
-
   /* The selected tab keeps its own colour under the pointer. */
   .lav-star-hover[data-state='active']::before {
     opacity: 0 !important;
-  }
-  /* Touch screens have no hover: PageShell's 75 % dim would stick after a tap. */
-  @media not ((hover: hover) and (pointer: fine)) {
-    .lavender-page :is(a, button):hover {
-      opacity: 1;
-    }
   }
   /* Controls: no double-tap zoom delay, no text selection on a long press. */
   :is(.lav-star-hover, [data-ds='NightNav'] button, [data-ds='FooterNight'] button, [data-star-hover] button) {

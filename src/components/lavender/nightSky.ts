@@ -1,7 +1,8 @@
 /**
- * The night sky of the night home (the preview home, /lavender/),
- * drawn on one fixed canvas behind the page. No React in here, so it can be
- * started on any canvas: `const stop = startNightSky(canvas)`.
+ * The night sky of "Licht und Linie", drawn on one fixed canvas: behind the
+ * whole night home (the preview home, /lavender/), and in the footer of every
+ * subpage (NightSky in NightPage.tsx). No React in here, so it can be started
+ * on any canvas: `const stop = startNightSky(canvas)`.
  *
  * What it draws:
  * - small stars: fixed points that twinkle (their brightness wavers, each at
@@ -52,10 +53,14 @@ export function startNightSky(
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const follows = !reduce && window.matchMedia('(hover: hover)').matches;
   const city = document.querySelector('[data-ds="HamburgGlass"]');
-  // The day layer: a light sheet that scrolls over the hero (Hamburg hero
-  // variant). It covers this canvas, so the guide star is drawn a second time
-  // on the layer's own canvas, which lies above the white and behind the content.
+  // The day layer: a light sheet that scrolls over the hero (the home page) or
+  // carries a subpage's content (DaySheet). It covers this canvas, so the guide
+  // star is drawn a second time on the layer's own canvas, which lies above the
+  // white and behind the content.
   const layer = document.querySelector('[data-ds="DayLayer"]');
+  // Without a layer (a night page such as Privacy-led AI) the footer is where
+  // the stage begins.
+  const footer = document.querySelector('[data-ds="FooterNight"]');
   const dayCanvas = layer?.querySelector<HTMLCanvasElement>('canvas[data-sky="day"]') ?? null;
   const dayCtx = dayCanvas?.getContext('2d') ?? null;
 
@@ -77,8 +82,12 @@ export function startNightSky(
   let day = 0;
   // What the day canvas shows right now; it is only redrawn when that changes.
   let dayDrawn = '';
-  // The day layer's corner radius, read once per resize.
+  // The day layer's corner radii (top left, top right, bottom right, bottom
+  // left), read once per resize: the subpages' sheet is only rounded below.
+  let layerRadii = [0, 0, 0, 0];
   let layerRadius = 0;
+  // Whether the canvas is taken out of drawing (a day layer covers the screen).
+  let parked = false;
   // The same for the sky: the guide star's state at the last drawing, and when that was.
   let skyDrawn = '';
   let skyDrawnAt = -1e9;
@@ -126,7 +135,16 @@ export function startNightSky(
     H = window.innerHeight;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    layerRadius = layer ? parseFloat(getComputedStyle(layer).borderTopLeftRadius) || 0 : 0;
+    if (layer) {
+      const style = getComputedStyle(layer);
+      layerRadii = [
+        style.borderTopLeftRadius,
+        style.borderTopRightRadius,
+        style.borderBottomRightRadius,
+        style.borderBottomLeftRadius,
+      ].map((v) => parseFloat(v) || 0);
+      layerRadius = Math.max(...layerRadii);
+    }
     if (dayCanvas) {
       dayCanvas.width = canvas.width;
       dayCanvas.height = canvas.height;
@@ -224,8 +242,10 @@ export function startNightSky(
     // The stage shows at the top of the page and again at its end, when the
     // day layer has scrolled out: as much as the layer leaves free.
     const box = layer?.getBoundingClientRect();
-    if (!box) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
-    return easeInOut(clamp01(Math.max(box.top, H - box.bottom) / (H * 0.85)));
+    if (box) return easeInOut(clamp01(Math.max(box.top, H - box.bottom) / (H * 0.85)));
+    // A night page without a layer: as much of the footer as is on screen.
+    const foot = footer?.getBoundingClientRect();
+    return foot ? easeInOut(clamp01((H - foot.top) / (H * 0.85))) : 0;
   }
 
   function guideStar() {
@@ -286,10 +306,9 @@ export function startNightSky(
     dayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     dayCtx.clearRect(0, 0, W, H);
     if (!shown || !sprite) return;
-    const radius = layerRadius;
     dayCtx.save();
     dayCtx.beginPath();
-    if (radius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, radius);
+    if (layerRadius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, layerRadii);
     else dayCtx.rect(box.left, box.top, box.width, box.height);
     dayCtx.clip();
     dayCtx.globalAlpha = star.alpha;
@@ -313,7 +332,14 @@ export function startNightSky(
     // nothing has to be redrawn (and no glass re-blurred) while the pointer rests.
     const size = star.size * (reduce ? 1 : 1 + 0.02 * (1 - day) * Math.sin(time / 900));
     if (box) drawDay(star, size, box);
-    // While the layer covers the whole screen, the sky behind it is not drawn.
+    // While the layer covers the whole screen, the sky behind it is not drawn,
+    // and with room to spare (a quarter screen) it is taken out of the page's
+    // painting altogether. A class the page sets (`invisible`) still wins.
+    const park = !!box && box.top < -H * 0.25 && box.bottom > H * 1.25;
+    if (park !== parked) {
+      parked = park;
+      canvas.style.visibility = park ? 'hidden' : '';
+    }
     if (box && box.top <= 0 && box.bottom >= H) return;
     // A full-screen canvas is costly to hand to the screen 60 times a second.
     // The small stars only shimmer slowly, so the sky is redrawn 20 times a

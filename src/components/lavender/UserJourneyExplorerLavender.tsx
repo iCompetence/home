@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -12,9 +13,8 @@ import {
   CheckItem,
   FaqSection,
   ImageText,
-  PageShell,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   Section,
   SectionHeader,
   SpecItem,
@@ -52,7 +52,7 @@ export default function UserJourneyExplorerLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -60,7 +60,7 @@ export default function UserJourneyExplorerLavender() {
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.userJourney')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.userJourney')} />
           }
         />
       }
@@ -109,8 +109,8 @@ export default function UserJourneyExplorerLavender() {
           answer: t(`icu.faq.q${i + 1}.content`),
         }))}
       />
-      <MoreProducts />
-    </PageShell>
+      <MoreProducts products={['iknow', 'analyticsAgent']} />
+    </NightPage>
   );
 }
 
@@ -159,33 +159,3 @@ function Guidance() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={siteHref(language, 'analytics-agent')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

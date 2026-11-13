@@ -60,7 +60,8 @@ export function InfoTip({
         aria-expanded={open}
         aria-controls={cardId}
         onClick={() => setOpen((o) => !o)}
-        className="relative inline-flex shrink-0 cursor-pointer rounded-pill text-lav-navy/70 before:absolute before:-inset-[13px] before:content-['']"
+        // No surface to fill: the icon takes the star gradient's end colour (.lav-star-icon).
+        className="lav-star-icon relative inline-flex shrink-0 cursor-pointer rounded-pill text-lav-navy/70 transition-colors duration-[var(--duration-fast)] ease-out before:absolute before:-inset-[13px] before:content-['']"
       >
         <Info aria-hidden size={18} strokeWidth={2} />
       </button>

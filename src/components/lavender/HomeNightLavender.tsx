@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
@@ -10,15 +10,18 @@ import { HamburgGlass } from './HamburgGlass';
 import { ClosingText, LegalStrip } from './NightFooter';
 import { useTextHaze } from './textHaze';
 import { NightNav } from './NightNav';
-import { startNightSky } from './nightSky';
+import { NightSky } from './NightPage';
 import {
   ANCHOR_SCROLL_MARGIN,
   Button,
-  Eyebrow,
   PageShell,
   ProcessAccordion,
+  ProductRow,
+  QuotePanel,
   Section,
+  Statement,
   siteHref,
+  type ProductRowProps,
 } from '@/design-system';
 
 /**
@@ -42,53 +45,6 @@ const STAR = {
   violet: '/images/nacht-stern-violett.webp',
   mint: '/images/nacht-stern-mint.webp',
 } as const;
-
-/** The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */
-function NightSky({ hidden = false }: { hidden?: boolean }) {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
-  return (
-    <canvas
-      ref={canvas}
-      aria-hidden
-      className={cn('pointer-events-none fixed inset-0 z-0 h-full w-full', hidden && 'invisible')}
-    />
-  );
-}
-
-/*
- * The page's one building block (after orchid.ai's feature rows): a short
- * text column next to a large glass field (StarField), sides alternating. The
- * section's star stands behind the field, and a piece of real content floats
- * in front (a description card, a screenshot).
- * The field reaches the frame edge; the text stays on the text column.
- */
-type Side = 'left' | 'right';
-const ROW = 'relative grid items-center gap-10 lg:grid-cols-12 lg:gap-10';
-const textCol = (media: Side) =>
-  cn('flex flex-col items-start gap-8 lg:col-span-5 lg:row-start-1', media === 'right' ? 'lg:col-start-1' : 'lg:col-start-8');
-const mediaCol = (media: Side) =>
-  cn(
-    '-mx-4 md:-mx-8 lg:col-span-7 lg:row-start-1 lg:mx-0',
-    media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
-  );
-
-/*
- * Button states. The design system's buttons (and PageShell's page-wide rule)
- * only dim to 75 % on hover, which reads as "disabled". Here the hovered
- * button takes the double star's colours (a blue-to-violet gradient,
- * .lav-star-hover in globals.css) while the guide star itself goes out (see
- * nightSky): the light moves into the button. A press gives a short squeeze.
- * `hover:opacity-100!` switches the page-wide dimming off. Resting colours
- * come from ink and ground, so the same button is white on the night sky and
- * navy on the day layer.
- */
-const pressable =
-  'lav-star-hover transition-[color,border-color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
-/** Filled button in the ink colour. Pair with variant="white". */
-const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
-/** Outlined button. Pair with variant="outline". */
-const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent focus-visible:border-transparent`;
 
 /**
  * The night home: the glass city of Hamburg stands in the hero, the day layer
@@ -122,7 +78,8 @@ export default function HomeNightLavender() {
 
   return (
     <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing && !covered} />}>
-      <NightSky hidden={covered} />
+      {/* The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */}
+      <NightSky hidden={covered} className="z-0" />
       {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
           whole first screen. id="top" sits here: the stage itself is sticky
           and would not be a scroll target. */}
@@ -133,7 +90,7 @@ export default function HomeNightLavender() {
             testimonials and Privacy-Led are this study's. */}
         <DayLayer>
           <DayServices />
-          <Statement />
+          <DayStatement />
           {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
               the proof right after the claim. */}
           <LogoStream />
@@ -214,7 +171,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
           {t('lavender.hero.subline')}
         </p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
-        <Button asChild variant="white" className={solidOnNight}>
+        <Button asChild variant="solid">
           <a data-haze href="#services" onClick={(e) => glideOnClick(e, 1100)}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
@@ -261,7 +218,7 @@ function ClosingStage({ shown }: { shown: boolean }) {
       >
         {/* Contact details are on the contact page; here only the call to action. */}
         <ClosingText heading={t('lavender.cta.heading')}>
-          <Button asChild variant="white" className={solidOnNight}>
+          <Button asChild variant="solid">
             <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
               {t('topNav.letsTalk')}
               <ArrowUpRight size={20} strokeWidth={2} />
@@ -340,65 +297,13 @@ function DayServices() {
 }
 
 /**
- * A product or topic on the day layer: text beside the picture the Lavender
- * pages use for it (a finished composition with its own coloured ground, so no
- * glass field and no star behind it). Sides alternate like the other rows.
+ * A product or topic on the day layer: a section of its own holding one
+ * ProductRow (design system), the picture beside the text. Sides alternate.
  */
-function DayRow({
-  id,
-  media,
-  image,
-  imageAlt,
-  imageClass,
-  eyebrow,
-  title,
-  description,
-  href,
-  cta,
-  external,
-  primary,
-  className,
-}: {
-  id?: string;
-  media: Side;
-  image: string;
-  imageAlt: string;
-  /** Aspect ratio and crop of the picture. */
-  imageClass: string;
-  /** Label above the title; left out where it would only repeat the title. */
-  eyebrow?: string;
-  title: string;
-  description: string;
-  href: string;
-  cta: string;
-  external?: boolean;
-  className?: string;
-  /** Filled button instead of the outlined one. */
-  primary?: boolean;
-}) {
+function DayRow({ id, className, ...row }: ProductRowProps & { id?: string }) {
   return (
-    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN, className)} innerClassName={ROW}>
-      {/* Tight inside the group, wider towards the action: label 16, heading 24, text 32 to the button. */}
-      <div className={cn(textCol(media), 'gap-6')}>
-        {eyebrow && <Eyebrow className="-mb-2 text-lav-ink/70">{eyebrow}</Eyebrow>}
-        {/* One step smaller on small laptops, so two-word names stay on one line. */}
-        <h2 className="lav-h1 text-lav-ink lg:max-xl:text-[40px] lg:max-xl:leading-[44px]">{title}</h2>
-        <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        <Button asChild variant={primary ? 'white' : 'outline'} className={cn(primary ? solidOnNight : outlineOnNight, 'mt-2')}>
-          <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-            {cta}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-      </div>
-      <div className={mediaCol(media)}>
-        <img
-          src={image}
-          alt={imageAlt}
-          decoding="async"
-          className={cn('block w-full rounded-card object-cover lg:rounded-frame', imageClass)}
-        />
-      </div>
+    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN, className)}>
+      <ProductRow {...row} />
     </Section>
   );
 }
@@ -422,7 +327,7 @@ function DayProducts() {
           media={i % 2 === 0 ? 'left' : 'right'}
           image={product.image}
           imageAlt={t(`lavender.products.${product.key}.imageAlt`)}
-          imageClass={cn('aspect-[2416/1120]', product.crop)}
+          imageClassName={cn('aspect-[2416/1120]', product.crop)}
           // The three products read as one group: closer to each other than sections are.
           className={i > 0 ? 'lg:pt-4' : undefined}
           eyebrow={t('lavender.products.eyebrow')}
@@ -444,7 +349,7 @@ function DayPrivacyLed() {
       media="left"
       image="/images/privacy-led.jpg"
       imageAlt={t('lavender.privacyLed.title')}
-      imageClass="aspect-[2416/1120] object-center"
+      imageClassName="aspect-[2416/1120] object-center"
       title={t('lavender.privacyLed.title')}
       description={t('lavender.privacyLed.desc')}
       href={siteHref(language, 'privacy-led-ai')}
@@ -562,74 +467,22 @@ function LogoStream() {
 }
 
 /**
- * Testimonials on the day layer: one quote at a time on a lilac panel, set in
- * a reading size so even the longest quote (about 600 characters) fits one
- * screen together with its author and the arrows. (The Lavender slider sets
- * quotes in headline size on a navy band; long ones ran over two screens.)
- * All quotes share one grid cell, so the height does not jump, and all of
- * them are in the HTML.
+ * Testimonials on the day layer: the design system's QuotePanel (one quote
+ * at a time on a lilac panel, in reading size). The roles already name the
+ * company. data-ds "Testimonials": the nav ends the products' stretch here.
  */
 function DayTestimonials() {
   const { t } = useLanguage();
-  const [index, setIndex] = useState(0);
-  const count = TESTIMONIALS.length;
-  const arrow =
-    'lav-star-hover inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96] lg:size-12';
   return (
-    <Section dsName="Testimonials">
-      {/* Side padding = the negative margin, so the text inside stands on the page's text edge. */}
-      <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender px-4 py-6 md:-mx-8 md:px-8 md:py-10 lg:-mx-10 lg:gap-12 lg:rounded-frame lg:px-10 lg:py-14">
-        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-          {/* May wrap on narrow panels; then into two even lines, not one word alone. */}
-          <h2 className="lav-h1 text-lav-navy [text-wrap:balance]">{t('lavender.testimonials.title')}</h2>
-          <div className="flex shrink-0 items-center gap-3">
-            <span aria-hidden className="lav-small mr-1 text-lav-navy/70 [font-variant-numeric:tabular-nums]">
-              {index + 1} / {count}
-            </span>
-            <button
-              type="button"
-              aria-label={t('lavender.testimonials.prev')}
-              onClick={() => setIndex((i) => (i - 1 + count) % count)}
-              className={arrow}
-            >
-              <ArrowLeft size={20} strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              aria-label={t('lavender.testimonials.next')}
-              onClick={() => setIndex((i) => (i + 1) % count)}
-              className={arrow}
-            >
-              <ArrowRight size={20} strokeWidth={2} />
-            </button>
-          </div>
-        </div>
-        <div className="grid">
-          {TESTIMONIALS.map((item, i) => (
-            <figure
-              key={item.key}
-              aria-hidden={i !== index}
-              className={cn(
-                // The author below the quote on every width, as in the other quote
-                // components (TestimonialSlider, QuoteIntro, ReviewCard).
-                'col-start-1 row-start-1 m-0 flex flex-col items-start gap-8 transition-opacity duration-[var(--duration-base)] ease-out',
-                i === index ? 'opacity-100' : 'invisible opacity-0',
-              )}
-            >
-              <blockquote className="m-0 max-w-measure-lead">
-                <p className="lav-lead font-medium text-lav-navy">
-                  {t(`lavender.testimonials.${item.key}.quote`)}
-                </p>
-              </blockquote>
-              <figcaption className="flex flex-col gap-2">
-                <span className="lav-body font-medium text-lav-navy">{item.name}</span>
-                <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </Section>
+    <QuotePanel
+      dsName="Testimonials"
+      title={t('lavender.testimonials.title')}
+      quotes={TESTIMONIALS.map((item) => ({
+        quote: t(`lavender.testimonials.${item.key}.quote`),
+        name: item.name,
+        role: t(`lavender.testimonials.${item.key}.role`),
+      }))}
+    />
   );
 }
 
@@ -660,20 +513,20 @@ const SERVICE_FIELDS = [
 
 /* ---------------- Statement ---------------- */
 
-function Statement() {
+function DayStatement() {
   const { t, language } = useLanguage();
   return (
-    <Section>
-      <div className="flex flex-col items-start gap-8 lg:gap-10">
-        <p className="lav-statement max-w-measure-wide text-lav-ink [text-wrap:balance]">{t('lavender.statement')}</p>
-        <Button asChild variant="white" className={solidOnNight}>
+    <Statement
+      text={t('lavender.statement')}
+      action={
+        <Button asChild variant="solid">
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
         </Button>
-      </div>
-    </Section>
+      }
+    />
   );
 }
 

@@ -76,7 +76,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | C-5 | 04 Multi-User Workflow: statt „auf einmal“ „in einem einzigen, zentralen Arbeitsgang“ | 1 | `ct.features.item4.description` | ✅ |
 | C-6 | 01–08: bei jedem Punkt in wenigen Worten den Vorteil nennen, z. B. bei 04 „… in Sekundenschnelle die Struktur, für die dein Team sonst Monate (?) braucht!“ | 2 | `ct.features.item1–8.description` | ❓ |
 | C-7 | „Warum saubere UTM-Parameter entscheidend sind“: Schlusssatz „Mit dem iCompetence Parameter Tool vermeidest du diese Probleme und erhältst einfach, kostengünstig und effizient valide UTM-Parameter für dein Marketing.“ | 2 | `ct.why.description` | ❓ |
-| C-8 | „Experten vertrauen uns“: Zitate mit Anführungszeichen, kursiv und etwas größer | 3 | `ReviewCard` / Testimonials | ❓ |
+| C-8 | „Experten vertrauen uns“: Zitate mit Anführungszeichen, kursiv und etwas größer | 3 | `ReviewCard` / Testimonials | ✅ (13.11., Branch `claude/unterseiten-licht-und-linie-d96d42`) |
 | C-9 | FAQ „Kann ich eigene Parameterstrukturen definieren?“: „Ja – sämtliche Parameterstrukturen lassen sich flexibel an eure internen Standards anpassen“ | 1 | `ct.faq.item2.answer` | ✅ |
 | C-10 | „Produkte und Tools“: Bilder per Klick vergrößern (→ G-2), ganze Karte als Link statt nur „Mehr erfahren“ | 3 | `ProductTeaser` | ❓ |
 | C-11 | CTA „Bereit, dein Unternehmen für die Agentic Era zu befähigen?“ zu lang, CTA zu spät. Stattdessen „Bist du agentic? Jetzt Erstgespräch buchen!“ und dann der Button | 3 | `cta.headline` (alle Produktseiten) | ❓ |
@@ -108,6 +108,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 **C-7 Vorschlag:** Den Abschlusssatz aufnehmen, aber ohne die Dreierreihe: „Mit dem Campaign Parameter Tool vermeidest du diese Probleme und bekommst valide UTM-Parameter für dein Marketing, ohne Mehraufwand.“ Produktname wie im Rest der Seite („Campaign Parameter Tool“ bzw. „iCPT“).
 
 **C-8 Vorschlag:** Typografische Anführungszeichen „…“ im Bauteil setzen (nicht in den Texten), Schrift eine Stufe größer. Kursiv würde ich weglassen, längere kursive Absätze lesen sich schlechter. Gilt dann auch für die Zitate auf der Startseite.
+**C-8 umgesetzt:** CPT nutzt das Zitatmodul der Startseite (`QuotePanel`): ein Zitat zur Zeit auf der Lila-Fläche in Lesegröße (Lead, medium), Anführungszeichen setzt das Bauteil (DE „…“, EN “…”; Zitate, die schon welche haben, bleiben, wie die der Startseite), nicht kursiv. `ReviewCard` ist entfernt.
 
 **C-10 Vorschlag:** Ganze Karte klickbar machen, „Mehr erfahren“ bleibt als sichtbarer Linktext (der Link spannt per Overlay über die Karte, Screenreader lesen weiterhin nur einen Link). Gilt für alle Produktteaser.
 

@@ -291,6 +291,37 @@ Stand:
       bleibt bis zum Umzug unverändert. Nur von `LavenderHome` genutzte Bausteine (u. a. `TopNav`,
       `AnchorTabs`, `ServicesCarousel`, `TestimonialSlider`, `LogoCarousel`, `ClosingBlock`) sind noch
       im Design-System und können beim Aufräumen weg.
+- [x] **Unterseiten in „Licht und Linie“** (Entscheidung Dennis, 13.11.2026) — vorher hatten die
+      Unterseiten Navigation und Footer der Startseite, im Inhalt aber noch die Regeln der ersten
+      Lavender-Fassung. Jetzt ein System:
+      Hover: `PageShell` dunkelt nichts mehr auf 75 % ab. Flächen füllen sich mit dem Stern-Verlauf
+      (`.lav-star-hover`, setzt auch die weiße Schrift und nimmt die Kontur weg; weiß auf dem Verlauf
+      4,8–5,0 : 1), Text nimmt ihn als Farbe an (`.lav-star-text`, auch direkt auf einem Link; Links im
+      Fließtext behalten ihre Unterstreichung in der Endfarbe), Icon-Knöpfe ohne Fläche
+      (`.lav-star-icon`), Bild-Knöpfe als Rahmen (`.lav-star-ring`). Hover nur unter
+      `(hover: hover) and (pointer: fine)`, Fokus überall. Der Link-Reset von `PageShell` steht jetzt
+      in `@layer base`, damit `underline` greift (Rechtstexte waren nie unterstrichen).
+      `Button`: Stern-Hover, 96 % beim Drücken, Touch-Schutz. Varianten `primary` (Blau, nur die eine
+      Hauptaktion einer Seite, auch dort, wo sie wiederkehrt), `solid` (Tinte: Navy am Tag, weiß in der
+      Nacht; Standard) und `outline` (Linie als Innenschatten, damit der Verlauf den ganzen Knopf
+      füllt). `dark`, `white`, `NIGHT_BUTTON`, `solidOnNight`/`outlineOnNight` sind weg.
+      Ein Stern: `NightPage` (neu, `NightPage.tsx`) legt den Inhalt auf ein helles Tag-Blatt wie auf
+      der Startseite: der Leitstern folgt dem Zeiger als großer, weicher Schein auf der eigenen
+      Leinwand des Blatts, hinter dem Inhalt (negativer z-Index im Blatt). Das Blatt beginnt unter der
+      Navigation und endet mit runden Ecken über der Nacht. `NightClosing`/`NightFooter` tragen den
+      lebenden Himmel (`NightSky`, mit der Startseite geteilt) statt `.lav-night-stars`; der Leitstern
+      ruht über der Glasstadt und geht in ihr Licht über. Auf Privacy-led steht der Inhalt direkt auf
+      dem Himmel. `nightSky.ts`: Bodenhöhe aus dem Footer, wo es kein Blatt gibt; Ecken je einzeln
+      beschnitten; die Himmels-Leinwand wird ausgeblendet, solange ein Blatt den Bildschirm deckt.
+      Frei schwebende `BrandStar`s sind weg (Produktkopf, Hero, Statement, Faktenband, Privacy-led).
+      Farbige Sterne nur noch in Feldern.
+      Angleichung: `Statement` wie auf der Startseite (links, ohne Stern, `text-wrap: balance`, Aktion
+      direkt darunter; `layout` entfällt). `FactsBand` als Navy-Feld („Nacht im Tag“) mit dem
+      Mint-Stern im Feld (Desktop links neben dem Inhalt, kompakt aus der Ecke). `ProductRow` (aus
+      `DayRow`) und `MoreProducts` (Katalog der Produkte, Zeilen statt `ProductTeaser`-Karten, Titel
+      als h3). Große Bilder ab `lg` mit `rounded-frame`. `QuotePanel` (aus `DayTestimonials`) auch für
+      die CPT-Bewertungen statt drei `ReviewCard`s (entfernt); Anführungszeichen setzt das Bauteil
+      (Korrektur C-8).
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die

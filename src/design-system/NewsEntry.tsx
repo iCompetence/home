@@ -24,13 +24,13 @@ export function NewsEntry({
           src={image}
           alt={imageAlt}
           loading="lazy"
-          className="aspect-[12/7] w-full rounded-card bg-lav-lavender object-contain object-center"
+          className="aspect-[12/7] w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />
       )}
       <h3 className="lav-lead font-medium text-lav-navy">{title}</h3>
       <p className="lav-body font-normal text-lav-navy/80">{teaser}</p>
       <a href={href} className="lav-body self-start font-medium text-lav-navy no-underline">
-        {linkLabel} →
+        <span className="lav-star-text">{linkLabel} →</span>
       </a>
     </article>
   );

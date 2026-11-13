@@ -7,21 +7,20 @@ import { cn } from '@/components/ui/utils';
 import { LINKEDIN_URL, siteHref } from '@/design-system';
 import { fromKeyboard, glideTo } from './glide';
 import { HamburgGlass } from './HamburgGlass';
+import { NightSky } from './NightPage';
 import { useTextHaze } from './textHaze';
 
 /**
  * How the pages of the night design end: the closing line with its action on
  * the night ground, the glass skyline of Hamburg, and below it the legal strip.
+ * The night is the live sky of the home page (NightSky): its small stars and
+ * the guide star, which rests above the glass city and follows the pointer.
  *
  * - NightClosing: for pages with a closing call to action (same props as the
  *   design system's ClosingBlock, which it replaces on the preview pages).
  * - NightFooter: the same without a closing line (contact, legal pages).
  * - LegalStrip: the strip alone; the home page puts it under its own stage.
  */
-
-/** Look of a button on the night ground: white, the star gradient on hover and focus. Pair with variant="white". */
-export const NIGHT_BUTTON =
-  'lav-star-hover transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
 
 /**
  * "Based in Hamburg." on the left; imprint, privacy, LinkedIn and "back to top" on the right.
@@ -78,7 +77,7 @@ export function LegalStrip({ className }: { className?: string }) {
 export type NightClosingProps = {
   /** Closing headline, e.g. "Bereit, Anspruch in Ergebnisse zu verwandeln?" Left out on pages without one. */
   heading?: string;
-  /** The call to action, composed by the page (variant="white", className={NIGHT_BUTTON}). */
+  /** The call to action, composed by the page: a Button with variant="solid" (white on the night). */
   action?: ReactNode;
   /** Anchor target, e.g. for a "Contact" entry in the page's sections. */
   id?: string;
@@ -123,13 +122,15 @@ export function NightClosing({ heading, action, id, className }: NightClosingPro
       data-ds="FooterNight"
       data-surface="inverse"
       className={cn(
-        'lav-night-stars relative flex flex-col overflow-hidden bg-lav-navy text-lav-white',
+        // isolate: the sky (fixed, full screen) paints above this navy and below the footer's content.
+        'relative isolate flex flex-col overflow-hidden bg-lav-navy text-lav-white',
         // With a closing line the footer is one screen, laid out like the home page's last
         // screen: the line at the top, the city along the lower edge, the strip below it.
         heading ? 'h-[max(100svh,540px)]' : 'pt-[var(--section-pad-v)]',
         className,
       )}
     >
+      <NightSky className="-z-10" />
       {heading && <ClosingText heading={heading}>{action}</ClosingText>}
       {/* On phones the middle of the skyline, larger; from tablets up the whole of it. */}
       <HamburgGlass

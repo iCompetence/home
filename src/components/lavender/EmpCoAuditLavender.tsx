@@ -1,7 +1,8 @@
 'use client';
 
-import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import {
@@ -30,10 +31,9 @@ import {
   FormError,
   FormField,
   IconCard,
-  PageShell,
   ProcessAccordion,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   Section,
   SectionHeader,
   SpecItem,
@@ -42,7 +42,6 @@ import {
   siteHref,
   smoothAnchor,
 } from '@/design-system';
-import { cn } from '@/components/ui/utils';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
@@ -102,13 +101,13 @@ export default function EmpCoAuditLavender() {
       : [];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
           heading={t('lavender.cta.heading')}
           action={
-            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.empcoAudit')} />
+            <ConsultButton variant="solid" topic={t('burgerMenu.empcoAudit')} />
           }
         />
       }
@@ -140,7 +139,7 @@ export default function EmpCoAuditLavender() {
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild className="w-full">
+          <Button asChild variant="primary" className="w-full">
             <a
               href="#form"
               onClick={(e) => {
@@ -191,10 +190,10 @@ export default function EmpCoAuditLavender() {
       </div>
 
       <Statement
-        layout="feature"
         text={t('empco.test.closing')}
         action={
-          <Button asChild>
+          // The page's main action again (as in the head): blue wherever it appears on the day sheet.
+          <Button asChild variant="primary">
             <a
               href="#form"
               onClick={(e) => {
@@ -212,8 +211,8 @@ export default function EmpCoAuditLavender() {
       <SampleForm />
       <Directive />
       <Faq />
-      <MoreProducts />
-    </PageShell>
+      <MoreProducts products={['iknow', 'analyticsAgent']} />
+    </NightPage>
   );
 }
 
@@ -261,7 +260,7 @@ function About() {
         src="/assets/empco/EmpCo-Tool-UI.png"
         alt={t('lavender.products.empco.imageAlt')}
         loading="lazy"
-        className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%]"
+        className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%] lg:rounded-frame"
       />
     </Section>
   );
@@ -386,14 +385,14 @@ function SampleForm() {
         {mounted && <div data-netlify-recaptcha="true" />}
 
         <FormError />
-        <Button type="submit" className="w-full">
+        <Button type="submit" variant="primary" className="w-full">
           {t('empco.form.submit')}
           <ArrowUpRight size={20} strokeWidth={2} />
         </Button>
 
         <p className="lav-small font-normal text-lav-navy/70">{t('empco.form.privacyNotice')}</p>
         <a href={siteHref(language, 'privacy-policy')} className="lav-small font-medium text-lav-navy">
-          → {t('empco.form.privacyLink')}
+          <span className="lav-star-text">→ {t('empco.form.privacyLink')}</span>
         </a>
       </ValidatedForm>
     </Section>
@@ -474,33 +473,3 @@ function Faq() {
   );
 }
 
-/* ---------------- More products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName={cn('flex flex-col gap-12')}>
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Analytics Agent"
-          description={t('lavender.products.analyticsAgent.desc')}
-          image="/images/lavender-analytics-agent.png"
-          imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-          href={siteHref(language, 'analytics-agent')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}
