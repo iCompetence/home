@@ -1,13 +1,18 @@
-import { BrandStar } from './BrandStar';
+import { Section } from './Section';
 
 export type Fact = { label: string; value: string };
 
 /**
- * Dark band with a short explainer and key figures set large.
+ * Key figures set large, with a short explainer: night inside the day, as the
+ * field of the home page's service tabs. A navy field on the light page that
+ * reaches the same outer edge as the large pictures; its side padding equals
+ * that overhang, so the text inside stays on the page's text edge.
  *
- * The mint star never sits behind text: on desktop it fills the left third
- * and the content takes the right eight columns; on tablet and mobile it sits
- * in the top-left corner and the band reserves that space above the content.
+ * The mint star stands inside the field (coloured stars only live in fields
+ * now) and never behind text: on desktop it fills the left third next to the
+ * content, on tablet and mobile it peeks from the field's top-left corner and
+ * the field keeps that space free above the content. A pre-sized webp (1200 px)
+ * instead of the 3000 px PNG, as on the home page.
  */
 export function FactsBand({
   title,
@@ -21,14 +26,18 @@ export function FactsBand({
   id?: string;
 }) {
   return (
-    <section
-      id={id}
-      data-ds="FactsBand"
-      data-surface="inverse"
-      className="relative w-full overflow-hidden bg-lav-navy text-lav-white"
-    >
-      <div className="relative mx-auto w-full max-w-frame px-6 pb-[var(--section-pad-v)] pt-[144px] md:px-12 md:pt-[186px] lg:px-24 lg:pt-[var(--section-pad-v)]">
-        <BrandStar variant="facts" />
+    <Section id={id} dsName="FactsBand">
+      <div
+        data-surface="inverse"
+        className="relative -mx-4 overflow-hidden rounded-card bg-lav-navy px-4 pb-10 pt-[144px] text-lav-white md:-mx-8 md:px-8 md:pb-14 md:pt-[186px] lg:-mx-10 lg:rounded-frame lg:px-10 lg:py-20"
+      >
+        <img
+          src="/images/nacht-stern-mint.webp"
+          alt=""
+          aria-hidden
+          decoding="async"
+          className="pointer-events-none absolute left-[-120px] top-[-120px] w-[320px] max-w-none select-none md:left-[-150px] md:top-[-160px] md:w-[420px] lg:left-[17%] lg:top-1/2 lg:w-[44%] lg:-translate-x-1/2 lg:-translate-y-1/2"
+        />
         <div className="relative flex flex-col gap-12 lg:ml-auto lg:w-[65.4%]">
           <div className="flex flex-col gap-6">
             <h2 className="lav-h2 text-lav-white">{title}</h2>
@@ -44,6 +53,6 @@ export function FactsBand({
           </dl>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

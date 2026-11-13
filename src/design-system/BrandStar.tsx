@@ -19,8 +19,7 @@
  */
 export type BrandStarVariant =
   | 'testimonials'
-  | 'closing'
-  | 'facts';
+  | 'closing';
 
 const PLACEMENT: Record<BrandStarVariant, string> = {
   testimonials:
@@ -28,14 +27,6 @@ const PLACEMENT: Record<BrandStarVariant, string> = {
     'top-1/2 -translate-y-1/2 right-[-120px] h-[360px] w-[360px] ' +
     'md:right-[-150px] md:h-[700px] md:w-[700px] ' +
     'lg:right-[-300px] lg:h-[900px] lg:w-[900px]',
-  // Mint star for dark fact bands. Never behind text: on desktop it fills the
-  // left third next to the content, on compact it sits in the top-left corner
-  // above it (the band reserves that space).
-  facts:
-    "bg-[url('/images/icompetence_visual_mint.png')] " +
-    'top-[-117px] left-[-99px] h-[260px] w-[260px] ' +
-    'md:top-[-153px] md:left-[-129px] md:h-[340px] md:w-[340px] ' +
-    'lg:top-1/2 lg:left-[-300px] lg:h-[900px] lg:w-[900px] lg:-translate-y-1/2',
   closing:
     "bg-[url('/images/icompetence_visual_01.png')] " +
     // 70 % so the white footer claim keeps 3:1 over the star's bright core.
