@@ -82,8 +82,8 @@ export default function PrivacyLedLavender() {
           <p className="lav-body max-w-measure-lead font-normal text-lav-ink/70">{t('privacy.guidance.subline')}</p>
         </div>
         {/* Two in a row only from 1200px (75rem): below, „Verantwortung“ at
-            H1 size is wider than half a row. Checkerboard in two columns,
-            alternating in one. */}
+            H1 size is wider than half a row. All four on lavender (was a
+            checkerboard with blue: blue is the main action's colour only). */}
         <div className="grid grid-cols-1 gap-6 min-[75rem]:grid-cols-2">
           {[1, 2, 3, 4].map((n) => (
             <PrincipleCard
@@ -91,14 +91,7 @@ export default function PrivacyLedLavender() {
               number={`0${n}`}
               title={t(`privacy.guidance.step${n}.label`)}
               description={t(`privacy.guidance.step${n}.desc`)}
-              className={
-                [
-                  'bg-lav-lavender',
-                  'bg-lav-blue',
-                  'bg-lav-lavender min-[75rem]:bg-lav-blue',
-                  'bg-lav-blue min-[75rem]:bg-lav-lavender',
-                ][n - 1]
-              }
+              className="bg-lav-lavender"
             />
           ))}
         </div>
