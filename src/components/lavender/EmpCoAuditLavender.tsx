@@ -132,7 +132,7 @@ export default function EmpCoAuditLavender() {
           { label: 'EmpCo Audit' },
         ]}
         images={[
-          { src: '/assets/empco/EmpCo-Tool-UI.png', alt: t('lavender.products.empco.imageAlt') },
+          { src: '/assets/empco/EmpCo-Tool-UI.webp', alt: t('lavender.products.empco.imageAlt') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="EmpCo Audit"
@@ -178,6 +178,7 @@ export default function EmpCoAuditLavender() {
         }))}
       />
       <About />
+      <Example />
       <Features />
 
       <div id="test" className={ANCHOR_SCROLL_MARGIN}>
@@ -260,12 +261,63 @@ function About() {
           <p className={paragraph}>{t('empco.what.p2')}</p>
         </div>
       </div>
+      {/* WebP (121 KB instead of 597 KB) and the alt text describing the
+          screenshot, as on the live page. */}
       <img
-        src="/assets/empco/EmpCo-Tool-UI.png"
-        alt={t('lavender.products.empco.imageAlt')}
+        src="/assets/empco/EmpCo-Tool-UI.webp"
+        alt={t('empco.toolImage.alt')}
+        width={2000}
+        height={1137}
         loading="lazy"
+        decoding="async"
         className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%] lg:rounded-frame"
       />
+    </Section>
+  );
+}
+
+/* ---------------- Example finding ---------------- */
+
+/**
+ * One finding as the report shows it (fictitious demo data, as on the live
+ * page since 26.10.2026): what the audit delivers, in words a crawler and an
+ * AI answer can quote. A description list, one row per report field.
+ */
+function Example() {
+  const { t } = useLanguage();
+  const rows = [
+    { key: 'quote', className: 'italic' },
+    { key: 'location' },
+    { key: 'risk', className: 'font-medium' },
+    { key: 'rule' },
+    { key: 'reason' },
+    { key: 'review' },
+    { key: 'action' },
+  ];
+  return (
+    <Section id="example" dsName="ExampleFinding" innerClassName="flex flex-col gap-12">
+      <SectionHeader title={t('empco.example.title')} intro={[t('empco.example.lead')]} />
+      <div className="flex flex-col gap-4">
+        <dl className="m-0 flex flex-col rounded-card bg-lav-lavender px-6 py-2 md:px-10 md:py-4">
+          {rows.map((row, i) => (
+            <div
+              key={row.key}
+              className={cn(
+                'flex flex-col gap-2 py-5 md:flex-row md:gap-8',
+                i > 0 && 'border-t border-lav-navy/15',
+              )}
+            >
+              <dt className="lav-small font-medium text-lav-navy/70 md:w-[200px] md:shrink-0 md:pt-0.5">
+                {t(`empco.example.${row.key}.label`)}
+              </dt>
+              <dd className={cn('lav-body m-0 font-normal text-lav-navy', row.className)}>
+                {t(`empco.example.${row.key}.value`)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="lav-small font-normal text-lav-navy/70">{t('empco.example.note')}</p>
+      </div>
     </Section>
   );
 }
@@ -423,7 +475,8 @@ function Directive() {
   const block = 'flex flex-col gap-8';
   return (
     <Section id="directive" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 md:gap-14 lg:gap-16">
-      <h2 className="lav-h1 text-lav-navy">{t('empco.anchor.directive')}</h2>
+      {/* The descriptive heading of the live page (since 26.10.2026). */}
+      <h2 className="lav-h1 text-lav-navy">{t('empco.seo.section.title')}</h2>
 
       <div className={block}>
         <h3 className="lav-h2 text-lav-navy">{t('empco.seo.banned.title')}</h3>
@@ -441,6 +494,8 @@ function Directive() {
           ))}
         </ul>
       </div>
+
+      <ClaimExamples />
 
       <div className={block}>
         <h3 className="lav-h2 text-lav-navy">{t('empco.seo.steps.title')}</h3>
@@ -474,6 +529,42 @@ function Directive() {
         />
       </div>
     </Section>
+  );
+}
+
+/**
+ * "Erlaubt oder verboten?": typical claims with their verdict (live page since
+ * 26.10.2026). The string is a lead line plus "- Verdict: claim" lines; the
+ * verdict sits in its own column so a reader (and an AI answer) can scan it.
+ */
+function ClaimExamples() {
+  const { t } = useLanguage();
+  const [lead, ...lines] = t('empco.seo.examples.content').split('\n');
+  const items = lines
+    .filter((line) => line.startsWith('- '))
+    .map((line) => {
+      const text = line.slice(2);
+      const cut = text.indexOf(': ');
+      return { verdict: text.slice(0, cut), claim: text.slice(cut + 2) };
+    });
+  return (
+    <div className="flex flex-col gap-8">
+      <h3 className="lav-h2 text-lav-navy">{t('empco.seo.examples.title')}</h3>
+      <p className="lav-paragraph font-normal text-lav-navy/80">{lead}</p>
+      <ul className="m-0 flex list-none flex-col border-b border-lav-navy/20 p-0">
+        {items.map((item) => (
+          <li
+            key={item.claim}
+            className="flex flex-col gap-2 border-t border-lav-navy/20 py-5 md:flex-row md:gap-8"
+          >
+            <strong className="lav-body font-medium text-lav-navy md:w-[200px] md:shrink-0">
+              {item.verdict}:
+            </strong>{' '}
+            <span className="lav-body font-normal text-lav-navy/80">{item.claim}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
