@@ -82,10 +82,10 @@ Veröffentlichung). Was die Seiten dafür mitbringen:
 - **Metadaten:** `pageMetadata()` in `src/lib/i18n-meta.ts` setzt je Seite Titel,
   Beschreibung, Canonical, hreflang und eigene Open-Graph-/Twitter-Angaben (vorher erbten
   alle og:title/og:url der Live-Startseite aus `app/[lang]/layout.tsx`).
-- **Pfade:** `previewRoute(route, previewSlug?)` liefert den Pfad unter `/<lang>/` und liest
+- **Pfade:** `previewRoute(route)` liefert den Pfad unter `/<lang>/` und liest
   `PREVIEW_BASE`: heute `lavender/<route>`, nach dem Umzug `<route>`. Canonical, hreflang,
-  og:url und die URLs im JSON-LD hängen alle daran. Die Nacht-Startseite ist
-  `previewRoute('', 'nacht-hamburg')` und wird damit zu `/<lang>/`.
+  og:url und die URLs im JSON-LD hängen alle daran. Die Startseite (`previewRoute('')`)
+  ist heute `/<lang>/lavender/` und wird damit zu `/<lang>/`.
 - **Strukturierte Daten:** `src/lib/structured-data.tsx`. Jede `page.tsx` gibt einen Graphen
   aus (Organization mit Adresse, WebSite, WebPage mit `dateModified`, sichtbarer Breadcrumb,
   Thema der Seite als SoftwareApplication/Service/Course). FAQs gibt die Seitenkomponente
@@ -104,9 +104,10 @@ dort liegen. Wer beim Umzug nur die Ordner verschiebt und `PREVIEW_BASE` stehen 
 veröffentlicht Seiten, deren Canonical auf eine Vorschau-URL zeigt, die es dann nicht mehr
 gibt. Reihenfolge beim Umzug:
 
-1. Ordner aus `app/[lang]/lavender/` eine Ebene nach oben; `nacht-hamburg` wird
-   `app/[lang]/page.tsx`. Die alte Vorschau-Startseite (`/lavender/`, `LavenderHome`) und
-   `nacht/` löschen, sonst beanspruchen zwei Seiten `/<lang>/`.
+1. Ordner aus `app/[lang]/lavender/` eine Ebene nach oben; `app/[lang]/lavender/page.tsx`
+   (die Nacht-Startseite) ersetzt `app/[lang]/page.tsx`. Die 301 `/lavender/nacht-hamburg/`
+   in `public/_redirects` dann direkt auf `/<lang>/` zeigen lassen (keine Kette über
+   `/lavender/`).
 2. `PREVIEW_BASE = ''` in `src/design-system/routes.ts` (Links, Canonicals und JSON-LD
    springen gemeinsam um).
 3. `robots: noindex` fällt mit dem Lavender-Layout weg; die explizite Angabe in

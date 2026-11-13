@@ -45,13 +45,11 @@ const OG_IMAGE = {
  * PREVIEW_BASE is '' (go-live, src/design-system/routes.ts) it is the final
  * route ('empco-audit'). Canonical, hreflang, og:url and the JSON-LD URLs
  * all come from here, so they flip together with the internal links.
- *
- * `previewSlug` is for a page whose preview slug differs from its final
- * route: the night home is previewed at 'nacht-hamburg' and becomes ''.
+ * The home ('') is 'lavender' today and '' at go-live.
  */
-export function previewRoute(route: string, previewSlug: string = route): string {
+export function previewRoute(route: string): string {
   const base = PREVIEW_BASE.replace(/^\/+|\/+$/g, '');
-  return base ? [base, previewSlug].filter(Boolean).join('/') : route;
+  return base ? [base, route].filter(Boolean).join('/') : route;
 }
 
 /** Absolute URL of a page path below /<lang>/ ('' = the language home). */
