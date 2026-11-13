@@ -660,11 +660,13 @@ function LogoStream() {
   );
 
   return (
-    // No top padding: the row belongs to the statement above it. It runs the
-    // full width of the day layer and fades out towards both edges.
+    // A band of its own between the statement and the products, with the same
+    // air above and below: half a section padding on each side, on top of the
+    // neighbours' own (120 px each on desktop, 84 on tablets, 72 on phones).
+    // It runs the full width of the day layer and fades out towards both edges.
     <section
       data-ds="LogoStream"
-      className="w-full overflow-hidden pb-[var(--section-pad-v)] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] motion-reduce:[mask-image:none]"
+      className="w-full overflow-hidden py-[calc(var(--section-pad-v)/2)] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] motion-reduce:[mask-image:none]"
     >
       <ul
         ref={track}
