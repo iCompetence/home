@@ -71,7 +71,7 @@ export function FormField({
     <div data-ds="FormField" className={cn('flex flex-col gap-3', className)}>
       <label htmlFor={id} className="lav-small font-medium text-lav-navy">
         {label}
-        {required && requiredMark && <span aria-hidden> *</span>}
+        {required && requiredMark && <span aria-hidden>*</span>}
       </label>
       <input id={id} required={required} className={inputCls} {...input} {...aria} />
       <FieldMessage id={id} hint={hint} error={error} />
@@ -98,7 +98,7 @@ export function TextAreaField({
     <div data-ds="FormField" className={cn('flex flex-col gap-3', className)}>
       <label htmlFor={id} className="lav-small font-medium text-lav-navy">
         {label}
-        {required && requiredMark && <span aria-hidden> *</span>}
+        {required && requiredMark && <span aria-hidden>*</span>}
       </label>
       <textarea
         id={id}
@@ -142,7 +142,7 @@ export function ConsentCheckbox({
         />
         <label htmlFor={id} className="lav-small cursor-pointer py-[5px] font-normal text-lav-navy/80">
           {children}
-          {required && <span aria-hidden> *</span>}
+          {required && <span aria-hidden>*</span>}
         </label>
       </div>
       {/* Indented to the label: 20 px box + 12 px gap. */}
