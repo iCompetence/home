@@ -57,6 +57,13 @@
 /lavender                      /de/lavender/                   301
 /lavender/                     /de/lavender/                   301
 
+# --- Preview: the night home was /<lang>/lavender/nacht-hamburg/ until it became
+# the preview home (13.11.2026); shared links land on /<lang>/lavender/. ---
+/de/lavender/nacht-hamburg     /de/lavender/                   301
+/de/lavender/nacht-hamburg/    /de/lavender/                   301
+/en/lavender/nacht-hamburg     /en/lavender/                   301
+/en/lavender/nacht-hamburg/    /en/lavender/                   301
+
 # --- EmpCo cluster pages (wave 1) taken offline 2026-07-15: redirect to pillar.
 # Non-forced rules: they stop applying automatically if the pages return. ---
 /de/empco-audit/abmahnung-greenwashing/          /de/empco-audit/    301

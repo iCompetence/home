@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
-import LavenderHome from '@/components/LavenderHome'
+import type { Metadata, Viewport } from 'next'
+import { preload } from 'react-dom'
+import HomeNightLavender from '@/components/lavender/HomeNightLavender'
 import { alternates, toLang } from '@/lib/i18n-meta'
 
 const SITE_URL = 'https://icompetence.de'
@@ -36,6 +37,9 @@ export async function generateMetadata({
   }
 }
 
+// The page starts on the night sky: the phone browser's bar takes its colour.
+export const viewport: Viewport = { themeColor: '#0b2231' }
+
 export default async function LavenderPage({
   params,
 }: {
@@ -43,6 +47,10 @@ export default async function LavenderPage({
 }) {
   const lang = toLang((await params).lang)
   const url = `${SITE_URL}/${lang}/lavender/`
+
+  // The glass city is half the first view and a CSS background, which the
+  // browser finds late: fetch it with the page, so it does not pop in after the text.
+  preload('/images/hamburg-glas-dunkel.webp', { as: 'image', fetchPriority: 'high' })
 
   // Server-rendered JSON-LD (present in the static HTML). Organization is
   // already emitted site-wide in [lang]/layout.tsx; here we add page-level
@@ -81,8 +89,9 @@ export default async function LavenderPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* LanguageProvider comes from ./layout.tsx (shared by all preview pages). */}
-      <LavenderHome />
+      {/* The night home ("Licht und Linie"). LanguageProvider comes from
+          ./layout.tsx (shared by all preview pages). */}
+      <HomeNightLavender />
     </>
   )
 }

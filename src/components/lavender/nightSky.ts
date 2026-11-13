@@ -1,5 +1,5 @@
 /**
- * The night sky of the night home (/lavender/nacht-hamburg/),
+ * The night sky of the night home (the preview home, /lavender/),
  * drawn on one fixed canvas behind the page. No React in here, so it can be
  * started on any canvas: `const stop = startNightSky(canvas)`.
  *

@@ -22,25 +22,21 @@ import {
 } from '@/design-system';
 
 /**
- * Design study: the home page as a night sky ("Licht und Linie").
+ * The home page of the new design ("Licht und Linie"), the preview home at
+ * /<lang>/lavender/. A night stage (sky, guide star, the glass city of
+ * Hamburg) holds the hero; the day layer with the content scrolls over it; at
+ * the end the stage is back with the closing line (ClosingStage).
  *
- * Same content and i18n keys as LavenderHome. The sections are built from one
- * block, a text column beside a large glass field (FeatureRow), instead of a
- * different component per section:
- * - services: one row per field; the four services are a list, the picked one
- *   shows its description in the field (was: carousel with collapsed rows);
- * - products: the same row with the screenshot in the field (was: tiles);
- * - testimonials: the companies as a bar that moves on by itself, one quote
- *   below (was: slider);
- * - process: three tall glass fields side by side (was: accordion).
+ * On the day layer: services as tabs with each field's star, statement, client
+ * logos (LogoStream), product rows, testimonials (one quote at a time),
+ * process (the Lavender ProcessAccordion) and Privacy-led AI.
  *
  * Tabs come from src/components/ui/tabs (shadcn/Radix) for the behaviour;
  * every visual class is ours.
  */
 
 // The brand stars at the size they are shown here (1200 px; the original PNGs
-// are about 3000 px and take some 36 MB each once decoded), and a small
-// pre-blurred copy of each for the glass fields on the day layer.
+// are about 3000 px and take some 36 MB each once decoded).
 const STAR = {
   blue: '/images/nacht-stern-blau.webp',
   violet: '/images/nacht-stern-violett.webp',
