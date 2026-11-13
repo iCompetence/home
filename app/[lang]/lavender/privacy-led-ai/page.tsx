@@ -4,14 +4,15 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles and descriptions as the live page (app/[lang]/privacy-led-ai/page.tsx).
+// Same descriptions as the live page (app/[lang]/privacy-led-ai/page.tsx); the
+// title in the house spelling "Privacy-led" as everywhere in the redesign.
 const meta = {
   de: {
-    title: 'Privacy-Led AI | iCompetence',
+    title: 'Privacy-led AI | iCompetence',
     description: 'KI-Implementierung mit Datenschutz und DSGVO-Konformität im Kern.',
   },
   en: {
-    title: 'Privacy-Led AI | iCompetence',
+    title: 'Privacy-led AI | iCompetence',
     description: 'AI implementation with privacy and GDPR compliance at its core.',
   },
 }
