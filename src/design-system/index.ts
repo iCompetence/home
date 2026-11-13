@@ -31,6 +31,7 @@ export { SpecItem } from './SpecItem';
 export { FaqList, type FaqEntry } from './FaqList';
 export { FaqSection } from './FaqSection';
 export { SplitBlock } from './SplitBlock';
+export { UpdatedNote } from './UpdatedNote';
 export { NewsEntry } from './NewsEntry';
 export { FormField, TextAreaField, ConsentCheckbox, ValidatedForm, FormError } from './FormField';
 export { ComparisonTable, type ComparisonRow } from './ComparisonTable';

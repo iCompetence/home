@@ -37,11 +37,16 @@ import {
   Section,
   SectionHeader,
   SpecItem,
+  SplitBlock,
   Statement,
+  UpdatedNote,
   ValidatedForm,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
+import { cn } from '@/components/ui/utils';
+import { previewRoute } from '@/lib/i18n-meta';
+import { faqPage, JsonLd } from '@/lib/structured-data';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
@@ -49,6 +54,11 @@ const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
 // offsets a scam?") is left out: the content team found the answer played the
 // problem down (docs/korrekturen-2026-11.md E-19). The live page still has it.
 const FAQ_NUMBERS = Array.from({ length: 19 }, (_, i) => i + 1).filter((n) => n !== 14);
+// The directive has applied since 27.09.2026 (as on the live page).
+const HOWTO_DESCRIPTION = {
+  de: 'Vorgehen, um die Nachhaltigkeitskommunikation an die seit dem 27. September 2026 geltende EmpCo-Richtlinie anzupassen.',
+  en: 'How to bring sustainability communication in line with the EmpCo Directive, which has applied since 27 September 2026.',
+} as const;
 
 /**
  * EmpCo Audit product page in the new design (preview under /lavender/).
@@ -67,38 +77,33 @@ export default function EmpCoAuditLavender() {
   ];
 
   // Structured data from the very strings the page shows (Google: JSON-LD
-  // must match the visible content). German only, as on the live page —
-  // German is the SEO target of this URL. Client components are rendered into
-  // the static export, so this is part of the crawlable HTML.
-  const jsonLd =
-    language === 'de'
-      ? [
-          {
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            inLanguage: 'de',
-            mainEntity: FAQ_NUMBERS.map((n) => ({
-              '@type': 'Question',
-              name: t(`empco.seo.faq.q${n}`),
-              acceptedAnswer: { '@type': 'Answer', text: t(`empco.seo.faq.a${n}`) },
-            })),
-          },
-          {
-            '@context': 'https://schema.org',
-            '@type': 'HowTo',
-            inLanguage: 'de',
-            name: t('empco.seo.steps.title'),
-            description:
-              'Vorgehen, um die Nachhaltigkeitskommunikation bis zum Geltungsbeginn der EmpCo-Richtlinie am 27. September 2026 rechtskonform zu machen.',
-            step: [1, 2, 3, 4, 5].map((n) => ({
-              '@type': 'HowToStep',
-              position: n,
-              name: t(`empco.seo.step${n}.label`),
-              text: t(`empco.seo.step${n}.desc`),
-            })),
-          },
-        ]
-      : [];
+  // must match the visible content), in the page's language. Client
+  // components are rendered into the static export, so this is part of the
+  // crawlable HTML. WebPage, breadcrumb and the service come from page.tsx.
+  const path = previewRoute('empco-audit');
+  const jsonLd = [
+    faqPage({
+      lang: language,
+      path,
+      items: FAQ_NUMBERS.map((n) => ({
+        question: t(`empco.seo.faq.q${n}`),
+        answer: t(`empco.seo.faq.a${n}`),
+      })),
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      inLanguage: language,
+      name: t('empco.seo.steps.title'),
+      description: HOWTO_DESCRIPTION[language],
+      step: [1, 2, 3, 4, 5].map((n) => ({
+        '@type': 'HowToStep',
+        position: n,
+        name: t(`empco.seo.step${n}.label`),
+        text: t(`empco.seo.step${n}.desc`),
+      })),
+    },
+  ];
 
   return (
     <NightPage
@@ -113,11 +118,7 @@ export default function EmpCoAuditLavender() {
       }
     >
       {jsonLd.map((entry) => (
-        <script
-          key={entry['@type']}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(entry) }}
-        />
+        <JsonLd key={String(entry['@type'])} data={entry} />
       ))}
       <Script
         src="https://www.google.com/recaptcha/api.js?render=explicit"
@@ -136,6 +137,8 @@ export default function EmpCoAuditLavender() {
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="EmpCo Audit"
         subline={t('empco.hero.headline')}
+        // The h1 carries the search phrase the title targets (as live).
+        sublineInHeading
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
@@ -211,6 +214,7 @@ export default function EmpCoAuditLavender() {
       <SampleForm />
       <Directive />
       <Faq />
+      <Sources />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
     </NightPage>
   );
@@ -486,3 +490,46 @@ function Faq() {
   );
 }
 
+/* ---------------- Sources & last update ---------------- */
+
+/**
+ * Where the facts on this page come from and when they were last checked
+ * (as on the live page since 26.10.2026): the visible date and the JSON-LD
+ * dateModified both come from PAGE_UPDATED.
+ */
+function Sources() {
+  const { t, language } = useLanguage();
+  // underline! — PageShell's unlayered `.lavender-page a { text-decoration: none }`
+  // beats the plain utility; links in a list of sources must look like links.
+  const link = 'lav-body font-normal text-lav-navy underline! underline-offset-2';
+  return (
+    <Section id="sources" dsName="Sources">
+      <SplitBlock title={t('empco.sources.title')}>
+        <UpdatedNote route="empco-audit" />
+        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+          <li>
+            <a
+              href={`https://eur-lex.europa.eu/legal-content/${language === 'de' ? 'DE' : 'EN'}/TXT/?uri=CELEX:32024L0825`}
+              target="_blank"
+              rel="noopener"
+              className={link}
+            >
+              {t('empco.sources.eurlex')}
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://en.agcm.it/en/media/press-releases/2025/8/PS12709"
+              target="_blank"
+              rel="noopener"
+              className={link}
+            >
+              {t('empco.sources.agcm')}
+            </a>
+          </li>
+        </ul>
+        <p className="lav-small font-normal text-lav-navy/70">{t('empco.sources.disclaimer')}</p>
+      </SplitBlock>
+    </Section>
+  );
+}

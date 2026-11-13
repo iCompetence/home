@@ -1,20 +1,29 @@
 import type { Metadata } from 'next'
 import EmpCoAuditLavender from '@/components/lavender/EmpCoAuditLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles as the live page (app/[lang]/empco-audit/page.tsx); the German
-// description says "deine" in line with the redesign's wording.
+// Same title as the live page (app/[lang]/empco-audit/page.tsx, 26.10.2026):
+// it targets the product searches ("EmpCo Audit", "EmpCo Check", "Website auf
+// Greenwashing prüfen") like the h1, and the description says the directive
+// already applies. German in "du" in line with the redesign's wording.
 const meta = {
   de: {
-    title: 'EmpCo-Richtlinie 2026: Was Unternehmen wissen müssen | EmpCo Audit',
+    title: 'EmpCo Audit & Check: Website auf Greenwashing prüfen | iCompetence',
     description:
-      'EmpCo-Richtlinie (EU 2024/825) einfach erklärt: gilt ab 27.09.2026, verbotene Green Claims, Bußgelder, FAQ. Plus automatischer EmpCo-Audit für deine Website.',
+      'EmpCo (EU 2024/825) gilt seit 27.09.2026: Prüf deine Website auf Greenwashing. KI-Audit mit Zitat, Regelverweis und Zweitprüfung – Probeseite kostenlos.',
   },
   en: {
-    title: 'EmpCo Directive 2026: What companies need to know | EmpCo Audit',
+    title: 'EmpCo Audit & Check: Scan your website for greenwashing | iCompetence',
     description:
-      'The EmpCo Directive (EU 2024/825) explained: applies from 27 Sep 2026, banned green claims, fines, FAQ. Plus an automated EmpCo audit for your website.',
+      'EmpCo (EU 2024/825) applies since 27 Sep 2026: check your website for greenwashing. AI audit with verbatim quotes, legal references and a second review – free sample page.',
   },
+}
+
+const SERVICE_TYPE = {
+  de: 'Prüfung von Website-Umweltaussagen nach der EmpCo-Richtlinie',
+  en: 'Website audit of environmental claims under the EmpCo Directive',
 }
 
 export async function generateMetadata({
@@ -29,10 +38,30 @@ export async function generateMetadata({
   }
 }
 
-export default function EmpCoAuditPreview() {
+export default async function EmpCoAuditPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('empco-audit')
   // LanguageProvider comes from ../layout.tsx. The FAQPage/HowTo structured
   // data is emitted by the page component itself (it needs the same strings
   // the page shows, which live in the client-side i18n module) and is still
-  // part of the statically exported HTML.
-  return <EmpCoAuditLavender />
+  // part of the statically exported HTML; it links to this graph by @id.
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['empco-audit'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'EmpCo Audit'),
+          subject: { kind: 'service', name: 'EmpCo Audit', description: meta[lang].description, serviceType: SERVICE_TYPE[lang] },
+        })}
+      />
+      <EmpCoAuditLavender />
+    </>
+  )
 }
