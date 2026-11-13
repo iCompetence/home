@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
+import { glideOnClick } from './glide';
 import { HamburgGlass } from './HamburgGlass';
+import { LegalStrip } from './NightFooter';
 import { NightNav } from './NightNav';
 import { startNightSky } from './nightSky';
 import {
@@ -158,49 +160,11 @@ function FeatureRow({
  * navy on the day layer.
  */
 const pressable =
-  'lav-star-hover transition-[color,border-color,scale] duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! active:scale-[0.96]';
+  'lav-star-hover transition-[color,border-color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96]';
 /** Filled button in the ink colour. Pair with variant="white". */
 const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
 /** Outlined button. Pair with variant="outline". */
-const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent`;
-
-/**
- * The hero's button: glides the page to its anchor over about a second, so
- * the day layer visibly rises over the hero. The browser's own smooth
- * scrolling covers the distance in a fraction of that and reads as a jump.
- * Any scrolling by the visitor ends the glide; with reduced motion it jumps.
- */
-function glideTo(e: MouseEvent<HTMLAnchorElement>) {
-  const id = e.currentTarget.getAttribute('href')?.slice(1);
-  const target = id ? document.getElementById(id) : null;
-  if (!target) return;
-  e.preventDefault();
-  const from = window.scrollY;
-  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-  const to = Math.max(0, target.getBoundingClientRect().top + from - margin);
-  const jump = (top: number) => window.scrollTo({ top, behavior: 'instant' });
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    jump(to);
-    return;
-  }
-  const duration = 1100;
-  const start = performance.now();
-  let stopped = false;
-  const stop = () => {
-    stopped = true;
-  };
-  const inputs = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
-  inputs.forEach((type) => window.addEventListener(type, stop, { once: true, passive: true }));
-  const step = (now: number) => {
-    if (stopped) return;
-    const t = Math.min(1, (now - start) / duration);
-    const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    jump(from + (to - from) * eased);
-    if (t < 1) requestAnimationFrame(step);
-    else inputs.forEach((type) => window.removeEventListener(type, stop));
-  };
-  requestAnimationFrame(step);
-}
+const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent focus-visible:border-transparent`;
 
 /**
  * Where the glass city of Hamburg stands: at the end of the page (the trip
@@ -251,7 +215,7 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
             <Statement />
             {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
                 the proof right after the claim. They need the light ground. */}
-            <LogoCarousel />
+            <LogoCarousel plain />
             <DayProducts />
             <DayTestimonials />
             <DayProcess />
@@ -330,7 +294,7 @@ function Hero() {
           <div className="flex flex-wrap gap-4">
             {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
             <Button asChild variant="white" className={solidOnNight}>
-              <a href="#services" onClick={glideTo}>
+              <a href="#services" onClick={(e) => glideOnClick(e, 1100)}>
                 {t('lavender.hero.seeServices')}
                 <ArrowDown size={20} strokeWidth={2} />
               </a>
@@ -362,12 +326,12 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
       data-ds="HeroHamburg"
       className={cn('sticky top-0 flex flex-col overflow-hidden', STAGE_HEIGHT, covered && 'invisible')}
     >
-      <div data-stage="hero" className={cn(STAGE_TEXT, hidden && 'invisible')}>
+      <div data-stage="hero" className={cn(STAGE_TEXT, 'lav-enter', hidden && 'invisible')}>
         <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
         <p className="lav-lead max-w-measure-lead text-lav-ink/80">{t('lavender.hero.subline')}</p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
         <Button asChild variant="white" className={solidOnNight}>
-          <a href="#services" onClick={glideTo}>
+          <a href="#services" onClick={(e) => glideOnClick(e, 1100)}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
           </a>
@@ -384,8 +348,8 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
 /**
  * The footer of the Hamburg hero variant, in two parts:
  *
- * - the legal strip (imprint, privacy, LinkedIn, back to top) is an ordinary
- *   block at the very end of the page. Scrolling the last few pixels brings it
+ * - the legal strip (LegalStrip in NightFooter.tsx) is an ordinary block at
+ *   the very end of the page. Scrolling the last few pixels brings it
  *   in below the skyline, which moves up by the strip's height (the stage is
  *   sticky inside <main>, and <main> ends above the strip);
  * - the closing text is pinned to the screen (sticky bottom, pulled up over
@@ -398,53 +362,22 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
  */
 function ClosingStage({ shown }: { shown: boolean }) {
   const { t, language } = useLanguage();
-  const legal = 'lav-body font-medium text-lav-ink/70 no-underline hover:opacity-100!';
-  const toTop = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    });
   return (
     <footer data-ds="FooterNight" className="contents">
-      <div className="relative mx-auto flex w-full max-w-frame items-center justify-between gap-6 px-[var(--section-pad-h)] py-6">
-        <div className="flex items-center gap-6 md:gap-8">
-          <a href={siteHref(language, 'imprint')} className={legal}>
-            <span className="lav-star-text">{t('footer.imprint')}</span>
-          </a>
-          <a href={siteHref(language, 'privacy-policy')} className={legal}>
-            <span className="lav-star-text">{t('footer.privacy')}</span>
-          </a>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t('lavender.common.linkedin')}
-            className="lav-star-hover inline-flex size-9 items-center justify-center rounded-pill bg-lav-ink/10 text-lav-ink no-underline hover:opacity-100!"
-          >
-            <LinkedInGlyph size={18} />
-          </a>
-        </div>
-        <button
-          type="button"
-          onClick={toTop}
-          className="inline-flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-ink/70 hover:opacity-100!"
-        >
-          <span className="lav-star-text lav-body font-medium">{t('footer.backToTop')}</span>
-          <ChevronUp size={16} strokeWidth={2} />
-        </button>
-      </div>
-
+      {/* First in the document (reading and tab order: closing line, then the
+          legal links), yet it ends 84 px above the page's end, where the strip
+          follows: the margins pull it over the last screen and the strip under it. */}
       <div
         data-stage="closing"
         className={cn(
-          'pointer-events-none sticky bottom-0 -mt-[max(100svh,540px)] flex flex-col',
+          'pointer-events-none sticky bottom-0 -mb-[84px] -mt-[calc(max(100svh,540px)-84px)] flex flex-col',
           STAGE_HEIGHT,
           !shown && 'invisible',
         )}
       >
         <div className="relative z-[1] mx-auto w-full max-w-frame px-[var(--section-pad-h)] pt-[108px] lg:pt-[140px]">
           {/* Contact details are on the contact page; here only the call to action. */}
-          <div className="pointer-events-auto flex max-w-measure-lead flex-col items-start gap-8">
+          <div className="pointer-events-auto flex max-w-measure-lead flex-col items-start gap-8 lg:gap-10">
             <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
             <Button asChild variant="white" className={solidOnNight}>
               <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
@@ -455,6 +388,7 @@ function ClosingStage({ shown }: { shown: boolean }) {
           </div>
         </div>
       </div>
+      <LegalStrip className="relative z-[1]" />
     </footer>
   );
 }
@@ -479,42 +413,46 @@ function DayServices() {
               <TabsTrigger
                 key={field.id}
                 value={field.id}
-                className="lav-star-hover h-auto flex-none rounded-pill border-0 px-5 py-2.5 font-brand text-body font-medium text-lav-ink transition-[color] duration-[var(--duration-fast)] hover:text-lav-white data-[state=active]:bg-lav-ink data-[state=active]:text-lav-ground data-[state=active]:shadow-none"
+                className="lav-star-hover h-auto flex-none rounded-pill border-0 px-5 py-2.5 active:scale-[0.97] font-brand text-body font-medium text-lav-ink transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white data-[state=active]:bg-lav-ink data-[state=active]:text-lav-ground data-[state=active]:shadow-none"
               >
                 {t(`lavender.services.${field.id}.title`)}
               </TabsTrigger>
             ))}
           </TabsList>
         </div>
-        {SERVICE_FIELDS.map((field) => (
-          <TabsContent
-            key={field.id}
-            value={field.id}
-            forceMount
-            className="grid flex-none items-stretch gap-10 data-[state=inactive]:hidden lg:grid-cols-12"
-          >
-            <ul className="m-0 flex list-none flex-col p-0 lg:col-span-6">
-              {field.items.map((item) => (
-                <li key={item} className="flex flex-col gap-3 border-t border-lav-ink/15 py-6 last:border-b">
-                  <h3 className="lav-h2 text-lav-ink">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
-                  <p className="lav-paragraph max-w-measure text-lav-ink/75">
-                    {t(`lavender.services.${field.id}.${item}.desc`)}
-                  </p>
-                </li>
-              ))}
-            </ul>
-            {/* Always a navy field with a white name, like the glass city: night inside the day. */}
-            <div className="relative min-h-[320px] overflow-hidden rounded-card bg-lav-navy lg:col-span-6 lg:rounded-frame">
-              <img
-                src={STAR[field.star]}
-                alt=""
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 select-none"
-              />
-              <p className="lav-display absolute left-8 top-8 text-lav-white">{t(`lavender.services.${field.id}.title`)}</p>
-            </div>
-          </TabsContent>
-        ))}
+        <div className="grid">
+          {SERVICE_FIELDS.map((field) => (
+            <TabsContent
+              key={field.id}
+              value={field.id}
+              forceMount
+              // All three panels share one grid cell, so the section keeps its height when the tab changes.
+              className="col-start-1 row-start-1 grid flex-none items-stretch gap-10 transition-opacity duration-[var(--duration-fast)] data-[state=inactive]:invisible data-[state=inactive]:opacity-0 lg:grid-cols-12 rounded-card ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lav-navy focus-visible:outline-solid"
+            >
+              <ul className="m-0 flex list-none flex-col p-0 lg:col-span-6">
+                {field.items.map((item) => (
+                  <li key={item} className="flex flex-col gap-4 border-t border-lav-ink/15 py-6 last:border-b">
+                    <h3 className="lav-h2 text-lav-ink">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
+                    <p className="lav-body max-w-measure font-normal text-lav-ink/80">
+                      {t(`lavender.services.${field.id}.${item}.desc`)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              {/* Always a navy field with a white name, like the glass city: night inside the day. */}
+              {/* Reaches the same outer edge as the pictures and the testimonial panel. */}
+              <div className="relative -mx-4 min-h-[320px] overflow-hidden rounded-card bg-lav-navy md:-mx-8 lg:col-span-6 lg:mx-0 lg:-mr-10 lg:rounded-frame">
+                <img
+                  src={STAR[field.star]}
+                  alt=""
+                  aria-hidden
+                  className="pointer-events-none absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 select-none"
+                />
+                <p className="lav-h1 absolute left-8 top-8 text-lav-white">{t(`lavender.services.${field.id}.title`)}</p>
+              </div>
+            </TabsContent>
+          ))}
+        </div>
       </Tabs>
     </Section>
   );
@@ -538,6 +476,7 @@ function DayRow({
   cta,
   external,
   primary,
+  className,
 }: {
   id?: string;
   media: Side;
@@ -545,22 +484,26 @@ function DayRow({
   imageAlt: string;
   /** Aspect ratio and crop of the picture. */
   imageClass: string;
-  eyebrow: string;
+  /** Label above the title; left out where it would only repeat the title. */
+  eyebrow?: string;
   title: string;
   description: string;
   href: string;
   cta: string;
   external?: boolean;
+  className?: string;
   /** Filled button instead of the outlined one. */
   primary?: boolean;
 }) {
   return (
-    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN)} innerClassName={ROW}>
-      <div className={textCol(media)}>
-        <Eyebrow className="text-lav-ink/70">{eyebrow}</Eyebrow>
-        <h2 className="lav-h1 text-lav-ink">{title}</h2>
-        <p className="lav-body text-lav-ink/80">{description}</p>
-        <Button asChild variant={primary ? 'white' : 'outline'} className={primary ? solidOnNight : outlineOnNight}>
+    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN, className)} innerClassName={ROW}>
+      {/* Tight inside the group, wider towards the action: label 16, heading 24, text 32 to the button. */}
+      <div className={cn(textCol(media), 'gap-6')}>
+        {eyebrow && <Eyebrow className="-mb-2 text-lav-ink/70">{eyebrow}</Eyebrow>}
+        {/* One step smaller on small laptops, so two-word names stay on one line. */}
+        <h2 className="lav-h1 text-lav-ink lg:max-xl:text-[40px] lg:max-xl:leading-[44px]">{title}</h2>
+        <p className="lav-body font-normal text-lav-ink/80">{description}</p>
+        <Button asChild variant={primary ? 'white' : 'outline'} className={cn(primary ? solidOnNight : outlineOnNight, 'mt-2')}>
           <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
             {cta}
             <ArrowUpRight size={20} strokeWidth={2} />
@@ -584,9 +527,10 @@ function DayProducts() {
   // The pictures of the Lavender home (ProductShowcase). Three products of
   // equal standing: the same size and the same label, none "featured".
   const products = [
-    { key: 'empco', title: t('lavender.products.empco.title'), image: '/images/lavender-empco.png', crop: 'object-center', route: 'empco-audit', cta: t('lavender.products.empco.cta') },
-    { key: 'iknow', title: 'iKnow', image: '/images/lavender-iknow.png', crop: 'object-left-top', route: 'iknow', cta: t('lavender.products.learnMore') },
-    { key: 'analyticsAgent', title: 'Analytics Agent', image: '/images/lavender-analytics-agent.png', crop: 'object-left-top', route: 'analytics-agent', cta: t('lavender.products.learnMore') },
+    // The wide pictures show in full; the tall EmpCo picture is cropped to the same shape around its screenshot.
+    { key: 'empco', title: t('lavender.products.empco.title'), image: '/images/lavender-empco.png', crop: 'object-[50%_34%]', route: 'empco-audit', cta: t('lavender.products.empco.cta') },
+    { key: 'iknow', title: 'iKnow', image: '/images/lavender-iknow.png', crop: 'object-center', route: 'iknow', cta: t('lavender.products.iknow.cta') },
+    { key: 'analyticsAgent', title: 'Analytics Agent', image: '/images/lavender-analytics-agent.png', crop: 'object-center', route: 'analytics-agent', cta: t('lavender.products.analyticsAgent.cta') },
   ] as const;
   return (
     <>
@@ -597,7 +541,9 @@ function DayProducts() {
           media={i % 2 === 0 ? 'left' : 'right'}
           image={product.image}
           imageAlt={t(`lavender.products.${product.key}.imageAlt`)}
-          imageClass={cn('aspect-[16/10]', product.crop)}
+          imageClass={cn('aspect-[2416/1120]', product.crop)}
+          // The three products read as one group: closer to each other than sections are.
+          className={i > 0 ? 'lg:pt-4' : undefined}
           eyebrow={t('lavender.products.eyebrow')}
           title={product.title}
           description={t(`lavender.products.${product.key}.desc`)}
@@ -617,8 +563,7 @@ function DayPrivacyLed() {
       media="left"
       image="/images/privacy-led.jpg"
       imageAlt={t('lavender.privacyLed.title')}
-      imageClass="aspect-[16/9]"
-      eyebrow={t('topNav.privacyLed')}
+      imageClass="aspect-[2416/1120] object-center"
       title={t('lavender.privacyLed.title')}
       description={t('lavender.privacyLed.desc')}
       href={siteHref(language, 'privacy-led-ai')}
@@ -641,14 +586,15 @@ function DayTestimonials() {
   const [index, setIndex] = useState(0);
   const count = TESTIMONIALS.length;
   const arrow =
-    'lav-star-hover inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] lg:size-12';
+    'lav-star-hover inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96] lg:size-12';
   return (
     <Section dsName="Testimonials">
-      <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender p-6 md:-mx-8 md:p-10 lg:-mx-10 lg:gap-10 lg:rounded-frame lg:p-14">
+      {/* Side padding = the negative margin, so the text inside stands on the page's text edge. */}
+      <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender px-4 py-6 md:-mx-8 md:px-8 md:py-10 lg:-mx-10 lg:gap-12 lg:rounded-frame lg:px-10 lg:py-14">
         <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-          <h2 className="lav-h2 text-lav-navy">{t('lavender.testimonials.title')}</h2>
+          <h2 className="lav-h1 text-lav-navy">{t('lavender.testimonials.title')}</h2>
           <div className="flex shrink-0 items-center gap-3">
-            <span aria-hidden className="lav-small mr-1 text-lav-navy/60 [font-variant-numeric:tabular-nums]">
+            <span aria-hidden className="lav-small mr-1 text-lav-navy/70 [font-variant-numeric:tabular-nums]">
               {index + 1} / {count}
             </span>
             <button
@@ -675,18 +621,19 @@ function DayTestimonials() {
               key={item.key}
               aria-hidden={i !== index}
               className={cn(
-                'col-start-1 row-start-1 m-0 flex flex-col justify-between gap-8 transition-opacity duration-[var(--duration-base)]',
+                // Quote and author side by side from laptops up: the author keeps one place for every quote.
+                'col-start-1 row-start-1 m-0 flex flex-col gap-8 transition-opacity duration-[var(--duration-base)] ease-out lg:grid lg:grid-cols-[minmax(0,var(--container-measure-lead))_1fr] lg:items-start lg:gap-14',
                 i === index ? 'opacity-100' : 'invisible opacity-0',
               )}
             >
-              <blockquote className="m-0 max-w-measure-lead">
+              <blockquote className="m-0 max-w-measure-lead lg:max-w-none">
                 <p className="lav-lead font-medium text-lav-navy">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
-              <figcaption className="flex flex-col gap-2">
+              <figcaption className="flex flex-col gap-2 lg:pt-1.5">
                 <span className="lav-body font-medium text-lav-navy">{item.name}</span>
-                <span className="lav-small text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
+                <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
               </figcaption>
             </figure>
           ))}
@@ -706,6 +653,8 @@ function DayProcess() {
         description: t(`lavender.process.${step.key}.desc`),
       }))}
       title={t('lavender.process.title')}
+      // The first step is open at the start.
+      defaultExpanded={0}
       className={ANCHOR_SCROLL_MARGIN}
     />
   );
@@ -786,8 +735,8 @@ function Statement() {
   const { t, language } = useLanguage();
   return (
     <Section>
-      <div className="flex flex-col items-start gap-10 lg:gap-14">
-        <p className="lav-statement max-w-measure-wide text-lav-ink">{t('lavender.statement')}</p>
+      <div className="flex flex-col items-start gap-8 lg:gap-10">
+        <p className="lav-statement max-w-measure-wide text-lav-ink [text-wrap:balance]">{t('lavender.statement')}</p>
         <Button asChild variant="white" className={solidOnNight}>
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}

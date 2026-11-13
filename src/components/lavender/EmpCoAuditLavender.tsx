@@ -1,5 +1,6 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
@@ -22,7 +23,6 @@ import {
   Button,
   ButtonStack,
   CheckItem,
-  ClosingBlock,
   ComparisonTable,
   ConsentCheckbox,
   FactsBand,
@@ -102,10 +102,10 @@ export default function EmpCoAuditLavender() {
     <PageShell
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={t('burgerMenu.empcoAudit')} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.empcoAudit')} />
           }
         />
       }

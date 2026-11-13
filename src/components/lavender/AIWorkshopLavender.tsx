@@ -1,5 +1,6 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
@@ -12,7 +13,6 @@ import {
   Badge,
   Button,
   ButtonStack,
-  ClosingBlock,
   ConsentCheckbox,
   FormError,
   FormField,
@@ -62,12 +62,12 @@ export default function AIWorkshopLavender() {
     <PageShell
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={t('burgerMenu.aiWorkshop')} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.aiWorkshop')} />
           }
         />
       }

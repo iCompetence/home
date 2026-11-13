@@ -1,5 +1,6 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,7 +10,6 @@ import {
   Button,
   ButtonStack,
   CheckItem,
-  ClosingBlock,
   ImageText,
   MediaGallery,
   PageShell,
@@ -62,12 +62,12 @@ export default function IKnowLavender() {
     <PageShell
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={t('burgerMenu.iknow')} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.iknow')} />
           }
         />
       }

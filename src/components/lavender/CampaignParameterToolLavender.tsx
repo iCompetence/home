@@ -1,5 +1,6 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { useState } from 'react';
 import Script from 'next/script';
@@ -12,7 +13,6 @@ import {
   Button,
   ButtonStack,
   CheckItem,
-  ClosingBlock,
   ComparisonTable,
   FaqSection,
   IconCard,
@@ -82,11 +82,11 @@ export default function CampaignParameterToolLavender() {
     <PageShell
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={'Campaign Parameter Tool'} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={'Campaign Parameter Tool'} />
           }
         />
       }

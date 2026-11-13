@@ -215,7 +215,18 @@ Stand:
       Kundenlogos: `LogoCarousel` steht auf dem hellen Blatt direkt unter dem Statement (die
       Logodateien brauchen hellen Grund). Produkte und Privacy-Led zeigen die Bilder der
       Lavender-Startseite (`lavender-*.png`, `privacy-led.jpg`) statt eigener Screenshots. Neue Tokens: `--text-small`, `--radius-frame-inner`,
-      `--container-measure(-lead|-wide)` für Zeilenlängen. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      `--container-measure(-lead|-wide)` für Zeilenlängen.
+      Stand 2026-11-13 abends: Alle Vorschauseiten enden mit `NightClosing` / `NightFooter`
+      (NightFooter.tsx: Schlusszeile, Glas-Skyline, Leiste mit „Based in Hamburg.“, Impressum,
+      Datenschutz, LinkedIn, Nach oben) statt `ClosingBlock` / `Footer`. Sprünge zu Abschnitten
+      laufen über `glide.ts` (folgt dem Ziel, auch wenn sich die Seite verschiebt). Die Skyline
+      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1098; beleuchtet = dieselbe Fassung in
+      Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
+      Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
+      Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem
+      Zitat, Hero-Auftakt beim Laden, animierte Druck- und Farbwechsel, Verhalten auf Touch.
+      Offen aus der Durchsicht: das Stadtlicht auf Transform umstellen (heute zeichnet jede
+      Zeigerbewegung breite Ebenen neu). Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

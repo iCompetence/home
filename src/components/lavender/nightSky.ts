@@ -33,7 +33,7 @@ const DEFAULT_SOURCES = { double: '/images/nacht-stern-doppel.webp' };
 /** Mostly white, a few in the brand's light tints. */
 const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4'];
 /** Height / width of the Hamburg rendering (HamburgGlass). */
-const SKYLINE_RATIO = 959 / 2600;
+const SKYLINE_RATIO = 1098 / 2600;
 
 type FieldStar = { angle: number; radius: number; size: number; tint: string; rate: number; phase: number };
 /** One star glinting: which one, since when, for how long, and how long its cross gets (px). */
@@ -82,6 +82,8 @@ export function startNightSky(
   let day = 0;
   // What the day canvas shows right now; it is only redrawn when that changes.
   let dayDrawn = '';
+  // The day layer's corner radius, read once per resize.
+  let layerRadius = 0;
   // The same for the sky: the guide star's state at the last drawing, and when that was.
   let skyDrawn = '';
   let skyDrawnAt = -1e9;
@@ -129,6 +131,7 @@ export function startNightSky(
     H = window.innerHeight;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
+    layerRadius = layer ? parseFloat(getComputedStyle(layer).borderTopLeftRadius) || 0 : 0;
     if (dayCanvas) {
       dayCanvas.width = canvas.width;
       dayCanvas.height = canvas.height;
@@ -292,14 +295,17 @@ export function startNightSky(
     const bottom = Math.min(H, box.bottom);
     const shown = !!sprite && size > 1 && bottom > top && star.y + size / 2 > top && star.y - size / 2 < bottom;
     const key = shown
-      ? [star.x, star.y, size, star.alpha, box.top, bottom].map((v) => v.toFixed(1)).join()
+      ? // The layer's edges only matter while they are near the screen: scrolling inside the layer changes nothing here.
+        [star.x, star.y, size, star.alpha, Math.max(-layerRadius, box.top), Math.min(H + layerRadius, box.bottom)]
+          .map((v) => v.toFixed(1))
+          .join()
       : 'empty';
     if (key === dayDrawn) return;
     dayDrawn = key;
     dayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     dayCtx.clearRect(0, 0, W, H);
     if (!shown || !sprite) return;
-    const radius = parseFloat(getComputedStyle(layer as Element).borderTopLeftRadius) || 0;
+    const radius = layerRadius;
     dayCtx.save();
     dayCtx.beginPath();
     if (radius && dayCtx.roundRect) dayCtx.roundRect(box.left, box.top, box.width, box.height, radius);
@@ -350,8 +356,10 @@ export function startNightSky(
     last = now;
     time += dt;
     if (pointer.seen) {
-      chase.x += (pointer.x - chase.x) * 0.08;
-      chase.y += (pointer.y - chase.y) * 0.08;
+      // Per frame at 60 Hz; on faster screens the same pace in time, not per frame.
+      const pace = (k: number) => 1 - Math.pow(1 - k, dt / 16.667);
+      chase.x += (pointer.x - chase.x) * pace(0.08);
+      chase.y += (pointer.y - chase.y) * pace(0.08);
       const box = city?.getBoundingClientRect();
       // Over the city, and not on the layer that may lie over it.
       const over =
@@ -361,7 +369,7 @@ export function startNightSky(
         pointer.y >= box.top &&
         pointer.y <= box.bottom &&
         !onLayer(pointer.y);
-      melt += ((over || pointer.onControl ? 1 : 0) - melt) * 0.14;
+      melt += ((over || pointer.onControl ? 1 : 0) - melt) * pace(0.14);
     }
     if (layer) {
       const target = onLayer(guideStar().y) ? 1 : 0;

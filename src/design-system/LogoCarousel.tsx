@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/components/ui/utils';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useBreakpoint } from './useBreakpoint';
@@ -65,7 +66,14 @@ function LogoMark({ logo }: { logo: LogoEntry }) {
  * Row of client logos that randomly swaps one slot at a time (crossfade).
  * Slot count is responsive: 3 (mobile) / 4 (tablet) / 5 (desktop).
  */
-export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEntry[] }) {
+export function LogoCarousel({
+  logos = CLIENT_LOGOS,
+  plain = false,
+}: {
+  logos?: readonly LogoEntry[];
+  /** No hairlines above and below, logos on the page's text edges (night home's day layer). */
+  plain?: boolean;
+}) {
   const bp = useBreakpoint();
   const prefs = useMotionPrefs();
   const rowRef = useRef<HTMLElement | null>(null);
@@ -140,8 +148,17 @@ export function LogoCarousel({ logos = CLIENT_LOGOS }: { logos?: readonly LogoEn
   }, [logos, prefs.reduced]);
 
   return (
-    <section ref={rowRef} data-ds="LogoCarousel" className="w-full overflow-hidden border-y border-lav-navy/20 py-[var(--section-pad-v)]">
-      <div className="mx-auto flex w-full max-w-frame items-center justify-between gap-4 px-6 md:gap-6 md:px-12 lg:gap-24 lg:px-10">
+    <section
+      ref={rowRef}
+      data-ds="LogoCarousel"
+      className={cn('w-full overflow-hidden py-[var(--section-pad-v)]', !plain && 'border-y border-lav-navy/20')}
+    >
+      <div
+        className={cn(
+          'mx-auto flex w-full max-w-frame items-center justify-between gap-4 md:gap-6',
+          plain ? 'px-[var(--section-pad-h)] lg:gap-12' : 'px-6 md:px-12 lg:gap-24 lg:px-10',
+        )}
+      >
         {visible.map((logo, i) => (
           <div
             key={i}

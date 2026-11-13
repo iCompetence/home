@@ -6,8 +6,12 @@ import { cn } from '@/components/ui/utils';
 /**
  * Hamburg as a milk-glass sculpture at the end of the night home.
  *
+ * Two congruent pictures with a transparent ground, made from one rendering
+ * (FLORA, FLUX 3, chosen by Dennis on 2026-11-13; the lit one is the same glass
+ * coloured blue to violet).
+ *
  * Two congruent renderings with a transparent ground
- * (public/images/hamburg-glas-*.webp, 2600 × 959): one unlit, one lit from
+ * (public/images/hamburg-glas-*.webp, 2600 × 1098): one unlit, one lit from
  * inside in the double star's colours. No blend mode, so the city may stand
  * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
@@ -24,14 +28,14 @@ import { cn } from '@/components/ui/utils';
 
 /** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
 const LANDMARKS = [
-  { x: 0.119, half: 0.072, y: 0.7, ry: 0.5 }, // Hafenkräne
-  { x: 0.253, half: 0.03, y: 0.5, ry: 0.8 }, // Fernsehturm
-  { x: 0.325, half: 0.075, y: 0.8, ry: 0.36 }, // Landungsbrücken
-  { x: 0.419, half: 0.047, y: 0.64, ry: 0.62 }, // Michel
-  { x: 0.517, half: 0.07, y: 0.82, ry: 0.34 }, // Rickmer Rickmers
-  { x: 0.61, half: 0.1, y: 0.68, ry: 0.6 }, // Rathaus
-  { x: 0.778, half: 0.062, y: 0.68, ry: 0.58 }, // Elbphilharmonie
-  { x: 0.906, half: 0.068, y: 0.86, ry: 0.3 }, // Speicherstadt
+  { x: 0.126, half: 0.075, y: 0.68, ry: 0.5 }, // Hafenkräne
+  { x: 0.274, half: 0.03, y: 0.45, ry: 0.9 }, // Fernsehturm
+  { x: 0.36, half: 0.09, y: 0.76, ry: 0.4 }, // Landungsbrücken
+  { x: 0.432, half: 0.045, y: 0.6, ry: 0.66 }, // Michel
+  { x: 0.545, half: 0.075, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
+  { x: 0.66, half: 0.09, y: 0.64, ry: 0.62 }, // Rathaus
+  { x: 0.81, half: 0.065, y: 0.64, ry: 0.56 }, // Elbphilharmonie
+  { x: 0.927, half: 0.055, y: 0.8, ry: 0.3 }, // Speicherstadt
 ] as const;
 
 type Light = { x: number; y: number; rx: number; ry: number; a: number };

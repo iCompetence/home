@@ -696,6 +696,104 @@ html {
     background: var(--lav-star-ink);
   }
 
+  /* The hero's entrance, once on load: headline, lead and button rise in one
+     after the other. Runs on the element's own animation, so hiding and
+     showing the block later (the swap with the closing text) does not replay it. */
+  .lav-enter > * {
+    animation: lav-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .lav-enter > :nth-child(2) { animation-delay: 80ms; }
+  .lav-enter > :nth-child(3) { animation-delay: 160ms; }
+  @keyframes lav-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lav-enter > * { animation: none; }
+  }
+
+  /* A still star field for the night footer of the subpages (the home page
+     has the live canvas instead). The glass city fades the lower stars. */
+  .lav-night-stars {
+    background-image:
+      linear-gradient(to bottom, transparent 45%, #0b2231 78%),
+      radial-gradient(0.6px 0.6px at 33.1% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 80.8% 8.6%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 89.3% 15.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 42.1% 17.2%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 7.7% 36.4%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1px 1px at 93.0% 37.0%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 95.7% 5.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 42.2% 34.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 55.8% 43.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 56.8% 14.1%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 70.4% 36.3%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 49.7% 34.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 58.2% 29.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 78.3% 44.2%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 57.1% 34.0%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 29.6% 60.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 42.1% 47.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 42.5% 59.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 57.0% 54.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 68.7% 38.1%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 8.6% 8.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 68.9% 6.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 97.3% 51.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1px 1px at 87.2% 23.5%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 18.1% 9.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 75.8% 10.6%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 39.5% 54.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 45.1% 35.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1px 1px at 84.9% 19.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 67.5% 25.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 10.0% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 48.6% 37.8%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 2.4% 27.7%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 56.4% 59.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%);
+  }
+
+  /* The selected tab keeps its own colour under the pointer. */
+  .lav-star-hover[data-state='active']::before {
+    opacity: 0 !important;
+  }
+  /* Touch screens have no hover: after a tap the fill and the text colour must
+     not stick. (Keyboard focus keeps them, on every device.) */
+  @media not ((hover: hover) and (pointer: fine)) {
+    .lav-star-hover:hover:not(:focus-visible)::before,
+    [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:hover:not(:focus-visible)::before {
+      opacity: 0;
+    }
+    :is(a, button):hover:not(:focus-visible) > .lav-star-text {
+      color: inherit !important;
+      background-size: 0 0;
+    }
+    /* PageShell's 75 % dim would stick after a tap as well. */
+    .lavender-page :is(a, button):hover {
+      opacity: 1;
+    }
+  }
+  /* Controls: no double-tap zoom delay, no text selection on a long press. */
+  :is(.lav-star-hover, [data-ds='NightNav'] button, [data-ds='FooterNight'] button, [data-star-hover] button) {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .lav-menu {
+    overscroll-behavior: contain;
+  }
+  /* The dark veil behind the menu fades with the panel (the sheet's own
+     animate-in classes do nothing here, no animation plugin is installed). */
+  [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='open'] {
+    animation: lav-fade-in var(--duration-slow) ease-out both;
+  }
+  [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='closed'] {
+    animation: lav-fade-out var(--duration-base) ease-out both;
+  }
+  @keyframes lav-fade-in { from { opacity: 0; } }
+  @keyframes lav-fade-out { to { opacity: 0; } }
+
   /* The section label in the nav bar fades in when the section changes. */
   .lav-nav-section {
     animation: lav-nav-section var(--duration-base) ease-out both;
@@ -740,7 +838,7 @@ html {
      ellipse that follows the pointer. --x/--y/--rx/--ry/--a come from script. */
   .lav-hamburg {
     position: relative;
-    aspect-ratio: 2600 / 959;
+    aspect-ratio: 2600 / 1098;
     touch-action: pan-y;
     --x: 50%;
     --y: 70%;
@@ -778,7 +876,8 @@ html {
   }
   .lav-hamburg-off {
     background-image: url('/images/hamburg-glas-dunkel.webp');
-    opacity: 0.9;
+    /* The rendering is bright; at rest the city stands back in the night. */
+    opacity: 0.5;
   }
   .lav-hamburg-on {
     background-image: url('/images/hamburg-glas-licht.webp');

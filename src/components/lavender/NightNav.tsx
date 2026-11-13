@@ -4,9 +4,10 @@ import { useEffect, useState, type MouseEvent } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { LINKEDIN_URL, LanguageToggle, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS, siteHref, smoothAnchor } from '@/design-system';
+import { LINKEDIN_URL, LanguageToggle, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS, siteHref } from '@/design-system';
 import { NavSurfaceContext } from '@/design-system/nav-surface';
 import { cn } from '@/components/ui/utils';
+import { glideOnClick } from './glide';
 
 /**
  * Header of the night home: no bar and no background, so nothing slides over
@@ -55,7 +56,8 @@ const PHONE = '+49 40 22636380';
 
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
 // Hover is the star gradient on the text (a .lav-star-text span inside, see globals.css).
-const smallLink = `lav-paragraph font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
+// The type steps trim their box to cap height; the padding gives the link a touch target, the negative margin keeps the layout.
+const smallLink = `lav-paragraph -my-1.5 inline-block py-1.5 font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
 
 export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNavProps = {}) {
   const { t, language } = useLanguage();
@@ -115,10 +117,10 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
     };
   }, [bar, watched]);
 
-  // smoothAnchor prevents the default, which also stops Radix' SheetClose from
-  // closing, so the sheet is closed here.
+  // In-page links glide to their section (glide.ts); the sheet is closed here,
+  // because preventing the default also stops Radix' SheetClose.
   const goTo = (e: MouseEvent<HTMLAnchorElement>) => {
-    smoothAnchor(e); // only acts on '#…' links; others navigate normally
+    glideOnClick(e); // only acts on '#…' links; others navigate normally
     setOpen(false);
   };
 
@@ -137,12 +139,12 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
         {/* The bar: only on the day layer. No backdrop blur (costly on a long page). */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-1 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-8 lg:inset-x-[calc(var(--section-pad-h)-24px)] lg:inset-y-3"
+          className="pointer-events-none absolute inset-x-2 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-4 lg:inset-x-[calc(var(--section-pad-h)-40px)] lg:inset-y-3"
         />
         {/* The logo is a masked shape, so hover can fill it with the star gradient. */}
         <a
           href={logoHref}
-          onClick={smoothAnchor}
+          onClick={glideOnClick}
           aria-label="iCompetence"
           className={`lav-star-hover lav-logo-mask pointer-events-auto block h-8 w-[94px] justify-self-start bg-lav-white hover:opacity-100! md:h-10 md:w-[117px] ${focusRing} focus-visible:outline-lav-white`}
         />
@@ -151,10 +153,10 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
           href={siteHref(language, 'contact')}
           target="_blank"
           rel="noopener noreferrer"
-          className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-small font-medium text-lav-navy no-underline transition-[color,scale] duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
+          className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-small font-medium whitespace-nowrap text-lav-navy no-underline transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
         >
           {t('topNav.letsTalk')}
-          <ArrowUpRight size={18} strokeWidth={2} />
+          <ArrowUpRight size={18} strokeWidth={2} className="max-[389px]:hidden" />
         </a>
 
         <Sheet open={open} onOpenChange={setOpen}>
@@ -162,7 +164,7 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
               (from tablets up); the whole thing opens the menu. */}
           <SheetTrigger
             aria-label={t('topNav.menu')}
-            className={`pointer-events-auto inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-3 justify-self-end lav-star-hover rounded-pill border-0 bg-transparent px-2 font-brand text-small font-medium text-lav-white transition-[scale] duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96] md:text-body ${focusRing} focus-visible:outline-lav-white`}
+            className={`pointer-events-auto inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-3 justify-self-end lav-star-hover rounded-pill border-0 bg-transparent px-2 font-brand text-small font-medium text-lav-white transition-[scale]! duration-[var(--duration-fast)] ease-out hover:opacity-100! active:scale-[0.96] md:text-body ${focusRing} focus-visible:outline-lav-white`}
           >
             {onDay && section && (
               <span key={section} aria-hidden className="lav-nav-section hidden max-w-[16rem] truncate pl-2 md:inline">
@@ -186,14 +188,15 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
             <div className="relative flex min-h-full flex-col gap-[clamp(18px,3.6vh,36px)]">
               <SheetClose
                 aria-label={t('lavender.common.close')}
-                className={`lav-star-hover absolute right-0 top-0 inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] ${focusRing} focus-visible:outline-lav-navy`}
+                className={`lav-star-hover absolute right-0 top-0 inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96] ${focusRing} focus-visible:outline-lav-navy`}
               >
                 <X size={20} strokeWidth={2.5} />
               </SheetClose>
 
-              <ul className="m-0 flex list-none flex-col gap-1 p-0 pr-14">
+              <ul className="m-0 flex list-none flex-col gap-1 p-0">
                 {links.map((item, i) => (
-                  <li key={item.href}>
+                  // Only the first link shares its line with the close button.
+                  <li key={item.href} className="first:pr-14">
                     <a
                       href={item.href}
                       onClick={goTo}
@@ -201,14 +204,16 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
                       aria-current={section === item.id ? 'location' : undefined}
                       className={`inline-flex items-start gap-3 font-brand font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`}
                     >
-                      <span className="lav-caption pt-[0.5em] text-lav-navy/60">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="lav-caption pt-[0.5em] text-lav-navy/70">{String(i + 1).padStart(2, '0')}</span>
                       <span
                         className={cn(
-                          'lav-star-text leading-[1.08] tracking-[-0.035em]',
+                          'lav-star-text tracking-[-0.035em]',
                           // Up to four links get the largest size; longer lists step down so the menu still fits one screen.
                           links.length <= 4
                             ? 'text-[clamp(28px,5vh,44px)] md:text-[clamp(36px,6.6vh,64px)]'
                             : 'text-[clamp(22px,3.6vh,32px)] md:text-[clamp(26px,4.4vh,44px)]',
+                          // After the size: tailwind-merge drops a line height that stands before a font size.
+                          'leading-[1.08]',
                         )}
                       >
                         {item.label}
@@ -229,13 +234,13 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
               </ul>
 
               <div className="mt-auto flex flex-wrap items-end justify-between gap-6">
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-3">
                   <a href={`mailto:${EMAIL}`} className={smallLink}>
                     <span className="lav-star-text">{EMAIL}</span>
                   </a>
                   <span className="lav-paragraph font-medium text-lav-navy">{PHONE}</span>
                 </div>
-                <div className="flex flex-col items-start gap-1 sm:items-end">
+                <div className="flex flex-col items-start gap-3 sm:items-end">
                   <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={smallLink}>
                     <span className="lav-star-text">LinkedIn</span>
                   </a>
