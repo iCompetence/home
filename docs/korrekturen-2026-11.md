@@ -14,6 +14,8 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 - ✅ umgesetzt (in den Commits nach dieser Liste auf Branch `claude/de-korrekturen-lavender-92af91`, je Seite ein Commit)
 - ☑️ schon erledigt: Der Code ist seit dem Lesen des Prüfers weiter (SEO-Überarbeitung der EmpCo-Seite vom 26.10.2026, Commit 760c26d). Die Anmerkung ist damit inhaltlich abgedeckt.
 - ❓ offen, Entscheidung nötig
+- ⏳ freigegeben, noch nicht umgesetzt (in Abstimmung mit einer anderen Session oder wartet auf Material)
+- ➖ entschieden: bleibt so, entfällt oder wird woanders erledigt
 
 **Wo die Änderungen liegen.** Schlüssel, die auch die alten Live-Seiten nutzen (`ct.*`, `is.*`, `icu.*`, `analyticsAgent.*`, `iknow.*`, `empco.*`, `cta.*`), sind als Override in `src/contexts/lavender-overrides.ts` geändert. `lavender.*` nutzt nur die Vorschau und ist direkt in `src/contexts/LanguageContext.tsx` geändert. Die Live-Seiten bleiben unverändert.
 
@@ -25,9 +27,9 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 
 | # | Anmerkung | Art | Status |
 |---|---|---|---|
-| G-1 | Schrift vor dem kräftigen Blau lieber weiß oder sehr hellgrau, mehr Kontrast. Auf Privacy-led AI noch einmal: „Schwarz auf Blau unglücklich“. | 3 | ❓ |
-| G-2 | Bilder per Klick (Doppelklick) als Overlay vergrößern, damit man die Screenshots lesen kann. Wiederholt bei CPT „Produkte und Tools“, Intelligentic Search, ICU, EmpCo. | 3 | ❓ |
-| G-3 | Gibt es Bildbeschreibungen (Barrierefreiheit)? | 2 | ❓ |
+| G-1 | Schrift vor dem kräftigen Blau lieber weiß oder sehr hellgrau, mehr Kontrast. Auf Privacy-led AI noch einmal: „Schwarz auf Blau unglücklich“. | 3 | ➖ bleibt |
+| G-2 | Bilder per Klick (Doppelklick) als Overlay vergrößern, damit man die Screenshots lesen kann. Wiederholt bei CPT „Produkte und Tools“, Intelligentic Search, ICU, EmpCo. | 3 | ⏳ |
+| G-3 | Gibt es Bildbeschreibungen (Barrierefreiheit)? | 2 | ⏳ |
 
 **G-1 Vorschlag:** So lassen. Gemeint sind die blauen Buttons (`lav-blue` #24a1da) mit dunkler Schrift (#0b2231). Gemessen: dunkel auf Blau hat 5,58 : 1 und besteht WCAG AA. Weiß auf Blau hätte nur 2,92 : 1 und fällt durch (AA verlangt 4,5 : 1). Genau deshalb wurde im A11y-Audit vom 30.09.2026 auf dunkle Schrift umgestellt, ein dunkleres Blau wurde damals verworfen. Wenn die Buttons trotzdem schwer lesbar wirken, ginge die Beschriftung in Halbfett (600 statt 500), ohne an Farbe oder Kontrastwert etwas zu ändern.
 
@@ -41,11 +43,11 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| H-1 | Kontrast der lilafarbenen Ausklappfenster in den Leistungen zu gering? Fettere Schrift oder hellerer Hintergrund? | 3 | `ServicesCarousel.tsx` (Pill aufgeklappt) | ❓ |
+| H-1 | Kontrast der lilafarbenen Ausklappfenster in den Leistungen zu gering? Fettere Schrift oder hellerer Hintergrund? | 3 | `ServicesCarousel.tsx` (Pill aufgeklappt) | ➖ entfällt |
 | H-2 | KI-Workshops: „Praxis statt PowerPoint …“ | 1 | `lavender.services.workshops.ai.desc` | ✅ |
 | H-3 | Executive Briefings: „… messbar voranbringt und echten ROI stiftet.“ | 1 | `lavender.services.workshops.briefings.desc` | ✅ |
-| H-4 | Generative KI: „ausliefern – sicher, überprüfbar, (was heißt mit dem Betrieb dahinter?)“ | 2 | `lavender.services.ai.genai.desc` | ❓ |
-| H-5 | EmpCo Audit: „… welche zum Risiko werden. wo Handlungsbedarf besteht.“ | 2 | `lavender.products.empco.desc` | ❓ |
+| H-4 | Generative KI: „ausliefern – sicher, überprüfbar, (was heißt mit dem Betrieb dahinter?)“ | 2 | `lavender.services.ai.genai.desc` | ✅ |
+| H-5 | EmpCo Audit: „… welche zum Risiko werden. wo Handlungsbedarf besteht.“ | 2 | `lavender.products.empco.desc` | ✅ |
 
 **H-2**
 - vorher: „Ein fokussierter Tag praktisches Prototyping. Dein Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.“
@@ -71,15 +73,15 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | C-1 | „14 Tage Free Trial“ → „14 Tage kostenlos testen“ | 1 | `ct.pricing.trialBadge` | ✅ |
 | C-2 | „Konsistente UTM-Parameter – über alle Kanäle“, konsequent deutsch auf der DE-Seite | 1 | `ct.values.card1.title` | ✅ |
 | C-2a | Folgeänderung: dieselbe Wendung „über alle Channels“ in der Vergleichstabelle | 1 | `ct.why.solution.item1` | ✅ |
-| C-3 | „Definiert einmal, genutzt überall. Standardisierte Parameterlogs …“ kommentarlos zitiert | 2 | `ct.values.card1.description` | ❓ |
+| C-3 | „Definiert einmal, genutzt überall. Standardisierte Parameterlogs …“ kommentarlos zitiert | 2 | `ct.values.card1.description` | ✅ |
 | C-4 | „in Echtzeit“ ergänzen | 1 | `ct.values.card3.description` | ✅ |
 | C-5 | 04 Multi-User Workflow: statt „auf einmal“ „in einem einzigen, zentralen Arbeitsgang“ | 1 | `ct.features.item4.description` | ✅ |
-| C-6 | 01–08: bei jedem Punkt in wenigen Worten den Vorteil nennen, z. B. bei 04 „… in Sekundenschnelle die Struktur, für die dein Team sonst Monate (?) braucht!“ | 2 | `ct.features.item1–8.description` | ❓ |
-| C-7 | „Warum saubere UTM-Parameter entscheidend sind“: Schlusssatz „Mit dem iCompetence Parameter Tool vermeidest du diese Probleme und erhältst einfach, kostengünstig und effizient valide UTM-Parameter für dein Marketing.“ | 2 | `ct.why.description` | ❓ |
+| C-6 | 01–08: bei jedem Punkt in wenigen Worten den Vorteil nennen, z. B. bei 04 „… in Sekundenschnelle die Struktur, für die dein Team sonst Monate (?) braucht!“ | 2 | `ct.features.item1–8.description` | ✅ |
+| C-7 | „Warum saubere UTM-Parameter entscheidend sind“: Schlusssatz „Mit dem iCompetence Parameter Tool vermeidest du diese Probleme und erhältst einfach, kostengünstig und effizient valide UTM-Parameter für dein Marketing.“ | 2 | `ct.why.description` | ✅ |
 | C-8 | „Experten vertrauen uns“: Zitate mit Anführungszeichen, kursiv und etwas größer | 3 | `ReviewCard` / Testimonials | ✅ (13.11., Branch `claude/unterseiten-licht-und-linie-d96d42`) |
 | C-9 | FAQ „Kann ich eigene Parameterstrukturen definieren?“: „Ja – sämtliche Parameterstrukturen lassen sich flexibel an eure internen Standards anpassen“ | 1 | `ct.faq.item2.answer` | ✅ |
-| C-10 | „Produkte und Tools“: Bilder per Klick vergrößern (→ G-2), ganze Karte als Link statt nur „Mehr erfahren“ | 3 | `ProductTeaser` | ❓ |
-| C-11 | CTA „Bereit, dein Unternehmen für die Agentic Era zu befähigen?“ zu lang, CTA zu spät. Stattdessen „Bist du agentic? Jetzt Erstgespräch buchen!“ und dann der Button | 3 | `cta.headline` (alle Produktseiten) | ❓ |
+| C-10 | „Produkte und Tools“: Bilder per Klick vergrößern (→ G-2), ganze Karte als Link statt nur „Mehr erfahren“ | 3 | `ProductTeaser` | ⏳ |
+| C-11 | CTA „Bereit, dein Unternehmen für die Agentic Era zu befähigen?“ zu lang, CTA zu spät. Stattdessen „Bist du agentic? Jetzt Erstgespräch buchen!“ und dann der Button | 3 | `cta.headline` (alle Produktseiten) | ➖ woanders |
 
 **C-1**
 - vorher: „14 Tage Free Trial“
@@ -123,12 +125,12 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | I-1 | „Intelligentic Search ist“ streichen: „Präziser als herkömmliche KI-Suchen“ | 1 | `is.features.step1.label` | ✅ |
 | I-2 | „Die echte KI“ (gleiche Kürzung) | 1 | `is.features.step3.label` | ✅ |
 | I-3 | „Antworten in Millisekunden“ | 1 | `is.features.step4.label` | ✅ |
-| I-4 | Bild auf Klick groß (→ G-2) | 3 | `ProductHead` | ❓ |
-| I-5 | „So funktioniert's“: Pfeil nach unten kann weg? | 3 | Button im Produktkopf | ❓ |
-| I-6 | Fließtext so groß wie die H2, die Alleinstellungsmerkmale kleiner. Fließtext so klein wie die Merkmale? | 3 | `lav-lead` in den Abschnitten | ❓ |
+| I-4 | Bild auf Klick groß (→ G-2) | 3 | `ProductHead` | ⏳ |
+| I-5 | „So funktioniert's“: Pfeil nach unten kann weg? | 3 | Button im Produktkopf | ➖ bleibt |
+| I-6 | Fließtext so groß wie die H2, die Alleinstellungsmerkmale kleiner. Fließtext so klein wie die Merkmale? | 3 | `lav-lead` in den Abschnitten | ⏳ |
 | I-7 | „… bis Amazon und Google: KI-Suche …“: Doppelpunkt durch Strich ersetzen | 1 | `is.quote.text` | ✅ |
 | I-8 | „Teil davon sein:“ → „!“, „Wir bieten die Next-Level-Suche“, „Tech-Konzernen.“ → „!“ | 1 | `is.quote.text` | ✅ |
-| I-9 | Groß über die ganze Seitenbreite: „Wir wissen, dass du es kannst. Intelligentic Search.“ | 3 | `QuoteIntro` (conclusion) | ❓ |
+| I-9 | Groß über die ganze Seitenbreite: „Wir wissen, dass du es kannst. Intelligentic Search.“ | 3 | `QuoteIntro` (conclusion) | ✅ |
 | I-10 | „… die nur KI bieten kann“: „!“ ergänzen | 1 | `is.features.subline1` | ✅ |
 | I-11 | „Modular und dynamisch“ ohne Punkt, es ist eine Überschrift | 1 | `is.modular.title` | ✅ |
 
@@ -161,11 +163,11 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| U-1 | Bilder vergrößern / Schriftgröße wie bei Intelligentic Search | 3 | → G-2, I-6 | ❓ |
+| U-1 | Bilder vergrößern / Schriftgröße wie bei Intelligentic Search | 3 | → G-2, I-6 | ⏳ |
 | U-2 | „Für Nicht-Analysten gemacht – und natürlich auch für Analysten“ | 1 | `icu.carousel.item2.title` | ✅ |
-| U-3 | Viel Text für die Schriftgröße. Einleitenden Satz behalten, Kernfeatures als Checkliste (drei Punkte vorgeschlagen). Dazu fett „Zielgruppen-FAQ“ über dem jetzigen Absatz | 2/3 | `icu.intro.text` (Statement) | ❓ |
-| U-4 | Umbruch auf 2/3 der Seite unverständlich: „Erkunde echte User Journeys …“ | 3 | `icu.guidance.subline` | ❓ |
-| U-5 | Danach mehr Abstand vor dem nächsten Abschnitt | 3 | Abschnitt „guidance“ | ❓ |
+| U-3 | Viel Text für die Schriftgröße. Einleitenden Satz behalten, Kernfeatures als Checkliste (drei Punkte vorgeschlagen). Dazu fett „Zielgruppen-FAQ“ über dem jetzigen Absatz | 2/3 | `icu.intro.text` (Statement) | ✅ |
+| U-4 | Umbruch auf 2/3 der Seite unverständlich: „Erkunde echte User Journeys …“ | 3 | `icu.guidance.subline` | ➖ bleibt |
+| U-5 | Danach mehr Abstand vor dem nächsten Abschnitt | 3 | Abschnitt „guidance“ | ⏳ |
 | U-6 | FAQ „Brauche ich technisches Wissen …?“: „Nein. ICU ist intuitiv für Nicht-Analysten konzipiert – liefert aber gleichzeitig die Granularität, die Data- und Analytics-Teams erwarten.“ | 1 | `icu.faq.q2.content` | ✅ |
 
 **U-2**
@@ -197,10 +199,10 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 | A-1 | „Sofort einsatzbereit mit Google Analytics 4“ statt „Google Analytics 4 – sofort einsatzbereit“ | 1 | `analyticsAgent.card5.title` | ✅ |
 | A-2 | „riesig“ durch „umfangreich“, „erheblich“ oder „groß“ ersetzen | 1 | `analyticsAgent.intro.p1` | ✅ |
 | A-3 | Statt „Aber GA4 ist nur der Anfang.“: „Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem.“ | 1 | `analyticsAgent.what.p3` | ✅ |
-| A-4 | „semantisches Verständnis deiner Daten im Kontext“: Ist „semantisch“ verständlich? Besser „setzt … in den Kontext“? | 2 | `analyticsAgent.card4.description` | ❓ |
+| A-4 | „semantisches Verständnis deiner Daten im Kontext“: Ist „semantisch“ verständlich? Besser „setzt … in den Kontext“? | 2 | `analyticsAgent.card4.description` | ✅ |
 | A-5 | „… beliebtesten Anwendungsfälle für den iCompetence Analytics Agent“ ergänzen | 1 | `analyticsAgent.card5.description` | ✅ |
 | A-6 | Unterüberschrift „Die Frage ist nicht, ob du Daten hast. Sondern ob du sie nutzen kannst.“ irritiert unter „Sieh den Analytics Agent in Aktion“ und kann dort weg | 1 | `AnalyticsAgentLavender.tsx` (`leadIn`) | ✅ |
-| A-7 | Die Zeile lieber als Claim für die ganze Seite: H1, Subline/Claim, Kurztext, Button „Jetzt Demo anfragen“ | 2 | Produktkopf | ❓ |
+| A-7 | Die Zeile lieber als Claim für die ganze Seite: H1, Subline/Claim, Kurztext, Button „Jetzt Demo anfragen“ | 2 | Produktkopf | ➖ nicht übernommen |
 
 **A-1**
 - vorher: „Google Analytics 4 – sofort einsatzbereit“
@@ -234,7 +236,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
 | K-1 | Stichpunkte im Produktkopf verständlicher machen (sechs Zeilen mit Ergänzungen) | 1 | `iknow.card1/5/6.title` | ✅ |
-| K-2 | „Wie das geht? Mit iKnow:“ entweder als eigene Überschrift ohne Doppelpunkt, oder mit Punkt und fett/kursiv in Absatzgröße | 3 | `iknow.intro.p3` (Schlusssatz `QuoteIntro`) | ❓ |
+| K-2 | „Wie das geht? Mit iKnow:“ entweder als eigene Überschrift ohne Doppelpunkt, oder mit Punkt und fett/kursiv in Absatzgröße | 3 | `iknow.intro.p3` (Schlusssatz `QuoteIntro`) | ✅ |
 
 **K-1** (Stichpunkte im Produktkopf und Titel der Nutzenkarten, beide nutzen denselben Schlüssel)
 - „Alle Wissensquellen vereint“ → „Alle Wissensquellen deines Unternehmens vereint an einem Ort“
@@ -253,18 +255,18 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| E-1 | „Greenwashing“ in den Einstieg, z. B. Untertitel „… welche zum Risiko werden, sich dem Vorwurf des Greenwashings auszusetzen“. Weiter unten stattdessen: H1 „Das iCompetence EmpCo Audit: Schütze deine Website vor Greenwashing-Vorwürfen und Abmahnungen.“, Subline „Innerhalb weniger Stunden identifiziert der automatisierte Audit unzulässige Umweltaussagen auf deiner Website und zeigt konkreten Handlungsbedarf.“ | 2 | Produktkopf | ❓ |
-| E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ❓ |
+| E-1 | „Greenwashing“ in den Einstieg, z. B. Untertitel „… welche zum Risiko werden, sich dem Vorwurf des Greenwashings auszusetzen“. Weiter unten stattdessen: H1 „Das iCompetence EmpCo Audit: Schütze deine Website vor Greenwashing-Vorwürfen und Abmahnungen.“, Subline „Innerhalb weniger Stunden identifiziert der automatisierte Audit unzulässige Umweltaussagen auf deiner Website und zeigt konkreten Handlungsbedarf.“ | 2 | Produktkopf | ⏳ |
+| E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ⏳ |
 | E-3 | Einleitungsabsatz ergänzen: „… kommunizieren dürfen, ohne in den Verdacht des Greenwashings zu geraten.“ | 1 | `empco.why.p1` | ☑️ |
-| E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ❓ |
-| E-5 | Bilder größer klicken (→ G-2); nach „Sehen, was der Audit findet“ ein Screenshot einer Audit-Analyse in voller Breite | 3 | Abschnitt „test“ | ❓ |
+| E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ⏳ |
+| E-5 | Bilder größer klicken (→ G-2); nach „Sehen, was der Audit findet“ ein Screenshot einer Audit-Analyse in voller Breite | 3 | Abschnitt „test“ | ⏳ |
 | E-6 | CTA „Kostenlose Probeseite anfordern“ doppelt sich. Überschrift: „Unser Angebot: Deine kostenlose Probeseite“ | 1 | `empco.form.title` | ✅ |
-| E-6a | Button „hier kostenlose Probeseite anfordern“ | 2 | `empco.hero.ctaPrimary`, `empco.test.cta` | ❓ |
-| E-7 | Hinweis sieht aus wie ein Mail-Zitat: Seitenbalken weg, nicht kursiv, Pfeil vor „Hinweis“ | 3 | Formular-Hinweis (`EmpCoAuditLavender.tsx`) | ❓ |
-| E-8 | Im rosa Kasten zwei Absätze mit *, davor ein Leerzeichen, das müsste weg | 3 | `FormField.tsx` (Pflichtfeld-Stern) | ❓ |
+| E-6a | Button „hier kostenlose Probeseite anfordern“ | 2 | `empco.hero.ctaPrimary`, `empco.test.cta` | ➖ bleibt |
+| E-7 | Hinweis sieht aus wie ein Mail-Zitat: Seitenbalken weg, nicht kursiv, Pfeil vor „Hinweis“ | 3 | Formular-Hinweis (`EmpCoAuditLavender.tsx`) | ✅ |
+| E-8 | Im rosa Kasten zwei Absätze mit *, davor ein Leerzeichen, das müsste weg | 3 | `FormField.tsx` (Pflichtfeld-Stern) | ✅ |
 | E-9 | „Das verbietet die EmpCo-Richtlinie“ | 1 | `empco.seo.banned.title` | ✅ |
 | E-10 | Tabelle: „In Kraft – wird seit dem 27. September 2026 verbindlich angewendet.“ | 1 | `empco.seo.compare.r1.empco` | ✅ |
-| E-11 | „Green Claims Directive (GCD)“ → „Green-Claims-Richtlinie“? Sonst ist die Tabelle denglisch | 2 | `empco.seo.compare.colGcd` u. a. | ❓ |
+| E-11 | „Green Claims Directive (GCD)“ → „Green-Claims-Richtlinie“? Sonst ist die Tabelle denglisch | 2 | `empco.seo.compare.colGcd` u. a. | ⏳ |
 | E-12 | FAQ „Ab wann gilt die EmpCo-Richtlinie?“: neue Antwort im Perfekt/Präteritum | 1 | `empco.seo.faq.a2` | ✅ |
 | E-13 | FAQ „Ist ‚klimaneutral‘ noch erlaubt?“: letzter Satz „… sind seit dem 27. September 2026 unzulässig und abmahngefährdet.“ | 1 | `empco.seo.faq.a6` | ✅ |
 | E-14 | „Nur mit echtem Reduktionsnachweis“ → „Nur mit belegbarem Nachweis“ | 1 | `empco.seo.faq.a6` | ✅ |
@@ -336,7 +338,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| W-1 | „JETZT BEWERBEN“ mit Ausrufezeichen? | 2 | `workshop.anchor.apply`, `workshop.form.title` | ❓ |
+| W-1 | „JETZT BEWERBEN“ mit Ausrufezeichen? | 2 | `workshop.anchor.apply`, `workshop.form.title` | ➖ bleibt |
 
 **W-1 Vorschlag:** Ohne Ausrufezeichen lassen. Keiner der anderen Buttons und Überschriften hat eines („Kontakt aufnehmen“, „Demo anfragen“, „Buche dein Erstgespräch“).
 
@@ -346,8 +348,8 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| P-1 | Die vier Prinzipien klingen nach KI (Dreiklänge, „nicht so, sondern so“) | 2 | `privacy.guidance.step1–4.desc` | ❓ |
-| P-2 | Schwarz auf Blau schlecht lesbar, sanftes Weiß oder leuchtende Farbe | 3 | → G-1 | ❓ |
+| P-1 | Die vier Prinzipien klingen nach KI (Dreiklänge, „nicht so, sondern so“) | 2 | `privacy.guidance.step1–4.desc` | ✅ |
+| P-2 | Schwarz auf Blau schlecht lesbar, sanftes Weiß oder leuchtende Farbe | 3 | → G-1 | ➖ bleibt |
 
 **P-1 Vorschlag** (ohne Dreierreihen und ohne „nicht X, sondern Y“):
 - Klarheit: „Bevor wir etwas bauen, klären wir mit dir, welche Daten betroffen sind und welche Anwendungsfälle sich mit ihnen sicher umsetzen lassen. So entscheidest du auf Grundlage von Fakten, wo sich KI für dich lohnt.“
@@ -362,8 +364,8 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 
 | # | Anmerkung | Art | Status |
 |---|---|---|---|
-| N-1 | EmpCo Audit und Dennis' neues Whitepaper fehlen | 2 | ❓ |
-| N-2 | Liste lang, Monatsdaten machen die Seite alt (letzte Meldung März 2026). Daten entfernen, Seite in „Aktuelle Produkt-Updates“ umbenennen, Top 3 nach oben: EmpCo Audit Tool, Whitepaper (aktuelle Ausgabe), Intelligentic Search Release | 2/3 | ❓ |
+| N-1 | EmpCo Audit und Dennis' neues Whitepaper fehlen | 2 | ➖ zurückgestellt |
+| N-2 | Liste lang, Monatsdaten machen die Seite alt (letzte Meldung März 2026). Daten entfernen, Seite in „Aktuelle Produkt-Updates“ umbenennen, Top 3 nach oben: EmpCo Audit Tool, Whitepaper (aktuelle Ausgabe), Intelligentic Search Release | 2/3 | ➖ zurückgestellt |
 
 **N-1 Vorschlag:** Neue Einträge anlegen. Dafür brauche ich je Eintrag Titel, ein bis zwei Sätze, Datum und Link (Whitepaper: Titel und wo es liegt).
 
@@ -396,7 +398,7 @@ Laut Prüfer ok, keine Änderung.
 | # | Anmerkung | Art | Status |
 |---|---|---|---|
 | D-1 | Stammen auch die EmpCo-Datenschutzangaben von Siebert/eRecht24 oder nur die allgemeinen? | 2 | ❓ |
-| D-2 | Die Links in „Klicke hier, um …“ sehen aus wie normaler Text. Gewollt? | 3 | ❓ |
+| D-2 | Die Links in „Klicke hier, um …“ sehen aus wie normaler Text. Gewollt? | 3 | ✅ |
 | D-3 | Sind die Rechtstexte von Siebert bzw. den Tool-Anbietern vorgegeben? | 2 | ❓ |
 
 **D-1 / D-3:** Frage an Dennis, aus dem Code nicht zu beantworten. Der EmpCo-Abschnitt kommt aus den Schlüsseln `imprint.empco.*`, die Dienste-Texte aus `ServiceAccordion.tsx` (Usercentrics).
@@ -409,12 +411,34 @@ Laut Prüfer ok, keine Änderung.
 
 | # | Anmerkung | Art | Status |
 |---|---|---|---|
-| F-1 | Seite nutzen, um Besucher weiterzuleiten. Headline „Hier ging es leider nicht weiter.“, Subline mit Lösungen und Kontakt, zwei Buttons „Zu den KI-Tools“ und „Kontakt aufnehmen“. „Dennis: Was meinst du?“ | 2 | ❓ |
+| F-1 | Seite nutzen, um Besucher weiterzuleiten. Headline „Hier ging es leider nicht weiter.“, Subline mit Lösungen und Kontakt, zwei Buttons „Zu den KI-Tools“ und „Kontakt aufnehmen“. „Dennis: Was meinst du?“ | 2 | ✅ |
 
 **F-1 Vorschlag:** Gute Idee, in du-Form (der Vorschlag ist in Sie-Form):
 - Headline: „Hier geht es leider nicht weiter.“ („404“ bleibt klein darüber)
 - Subline: „Die Seite, die du suchst, gibt es nicht mehr oder sie wurde verschoben. Schau dir unsere Produkte an oder schreib uns.“
 - Buttons: „Zu den Produkten“ (Startseite `#products`) und „Kontakt aufnehmen“. „KI-Tools“ würde ich nicht einführen, die Seite nennt sie überall „Produkte & Tools“.
+
+---
+
+## Zweite Runde: Entscheidungen von Dennis (13.11.2026)
+
+Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänzungen:
+
+- **G-1 / P-2 Schrift auf Blau:** bleibt dunkel (5,58 : 1).
+- **H-1 Ausklappfenster Startseite:** entfällt, die Leistungen sind inzwischen ein anderes Bauteil.
+- **H-4:** iCompetence betreibt die KI auf Wunsch auch. Text: „Produktionsreife GenAI-Funktionen, die sicher laufen und deren Ergebnisse geprüft sind. Auf Wunsch übernehmen wir auch den Betrieb.“
+- **C-6 CPT-Funktionen:** Die Zuordnung war seit dem ersten Commit (21.01.2026) falsch. Die acht Beschreibungen passen zu den Icons der Live-Seite, die Titel kamen aus einer anderen Liste. Neu nach den Begriffen des CPT-Produktblatts, je Punkt mit Nutzen: Generierung, Namenskonventionen, Governance, Prüfung, Massenerstellung, Anbindung, Links, Historie (DE und EN, nur Vorschau).
+- **C-11 Abschluss-Satz:** in der Session „iC | Website“ entschieden (Abschlusszeile der Startseite jetzt auf allen Unterseiten).
+- **F-1 404:** Button „Produkte ansehen“ statt „Zu den Produkten“, weil Buttons seit 13.11. im Infinitiv stehen.
+- **N-1 / N-2 Was ist neu:** zurückgestellt, die Seite wird erst insgesamt aktualisiert.
+- **D-2 / Link-Fehler:** behoben. Die Reset-Regel in `PageShell.tsx` liegt jetzt in `@layer base`. Geprüft auf allen DE-Vorschauseiten: unterstrichen sind nur die Links im Datenschutz und Impressum, dazu neu die Quellenangabe „Amazon“ auf Intelligentic Search. Sonst hat sich nichts verändert.
+- **E-7, E-8, I-9, K-2, U-3, A-4, C-3, C-7, H-5, P-1, E-14 (Schritt 4), Impressum „E-Mail:“:** wie vorgeschlagen umgesetzt.
+
+**Noch offen (⏳):**
+- Lightbox (G-2, I-4, U-1, E-5), Bildbeschriftungen der Galerie (G-3), ganze Produktkarte als Link (C-10), Zitate mit Anführungszeichen (C-8), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben. Abstimmung mit der Session „Unterseiten an die neue Startseite angleichen“, weil sie dieselben Bauteile anfasst.
+- E-5 braucht zusätzlich einen anonymisierten Screenshot einer Audit-Analyse (Kategorie, Textstelle, Vorschlag, Kommentar sichtbar).
+- E-1 (Greenwashing in die H1) und E-11 („Green-Claims-Richtlinie“): Rückfrage an die SEO/GEO-Session gestellt.
+- D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
 
 ---
 
