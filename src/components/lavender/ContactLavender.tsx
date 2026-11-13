@@ -88,7 +88,9 @@ function ContactForm() {
         // the column is too narrow (1024–1090px) it breaks after the "@".
         className="lav-h2 text-lav-navy no-underline hyphens-none [overflow-wrap:anywhere]"
       >
-        {value.split('@').flatMap((part, i) => (i === 0 ? [part] : ['@', <wbr key={i} />, part]))}
+        <span className="lav-star-text">
+          {value.split('@').flatMap((part, i) => (i === 0 ? [part] : ['@', <wbr key={i} />, part]))}
+        </span>
       </a>
     </div>
   );

@@ -393,7 +393,7 @@ function SampleForm() {
 
         <p className="lav-small font-normal text-lav-navy/70">{t('empco.form.privacyNotice')}</p>
         <a href={siteHref(language, 'privacy-policy')} className="lav-small font-medium text-lav-navy">
-          → {t('empco.form.privacyLink')}
+          <span className="lav-star-text">→ {t('empco.form.privacyLink')}</span>
         </a>
       </ValidatedForm>
     </Section>

@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 
 export type Crumb = { label: string; href?: string };
 
-/** Breadcrumb above a product head: muted parents, the current page in navy. */
+/** Breadcrumb above a product head: muted parents (the star gradient on hover), the current page in navy. */
 export function Breadcrumb({ items, label }: { items: readonly Crumb[]; label: string }) {
   return (
     <nav aria-label={label} data-ds="Breadcrumb">
@@ -13,7 +13,8 @@ export function Breadcrumb({ items, label }: { items: readonly Crumb[]; label: s
             <li key={item.label} className="flex items-center gap-2">
               {item.href && !last ? (
                 <a href={item.href} className="lav-small font-medium text-lav-navy/70">
-                  {item.label}
+                  {/* Hover and focus: the star gradient as the text colour (globals.css). */}
+                  <span className="lav-star-text">{item.label}</span>
                 </a>
               ) : (
                 <span

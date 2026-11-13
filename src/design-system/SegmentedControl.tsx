@@ -56,8 +56,9 @@ export function SegmentedControl<T extends string>({
             onClick={() => onChange(option.value)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              'inline-flex min-h-10 cursor-pointer items-center justify-center rounded-pill border-0 px-5 py-2',
-              selected ? 'bg-lav-navy text-lav-white' : 'bg-transparent text-lav-navy',
+              'inline-flex min-h-10 cursor-pointer items-center justify-center rounded-pill border-0 px-5 py-2 transition-[color,scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96]',
+              // The others fill with the star gradient on hover, as the tabs of the night home do.
+              selected ? 'bg-lav-navy text-lav-white' : 'lav-star-hover bg-transparent text-lav-navy',
             )}
           >
             <span className="lav-body block font-medium">{option.label}</span>

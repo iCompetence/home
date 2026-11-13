@@ -8,8 +8,8 @@ import { labels, servicesData, type ServiceData } from '@/components/ServiceAcco
 import { FaqList, Hero, PageShell, Section, SplitBlock, siteHref } from '@/design-system';
 
 const body = 'lav-body font-normal text-lav-navy/80';
-/** Inline links in running text (same colour as the text, hence underlined). */
-const inlineLink = 'text-inherit underline underline-offset-2';
+/** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
+const inlineLink = 'lav-star-text text-inherit underline underline-offset-2';
 
 /** Hero (title only) and footer around the legal text blocks. */
 function LegalPage({ title, children }: { title: string; children: ReactNode }) {

@@ -108,7 +108,7 @@ export default function IntelligenticSearchLavender() {
         author={
           <>
             (
-            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer">
+            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
               Amazon
             </a>
             , 2025)
