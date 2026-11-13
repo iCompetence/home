@@ -591,7 +591,7 @@ function DayTestimonials() {
     <Section dsName="Testimonials">
       {/* Side padding = the negative margin, so the text inside stands on the page's text edge. */}
       <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender px-4 py-6 md:-mx-8 md:px-8 md:py-10 lg:-mx-10 lg:gap-12 lg:rounded-frame lg:px-10 lg:py-14">
-        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex flex-col items-start gap-5 xl:flex-row xl:items-center xl:justify-between xl:gap-6">
           <h2 className="lav-h1 text-lav-navy">{t('lavender.testimonials.title')}</h2>
           <div className="flex shrink-0 items-center gap-3">
             <span aria-hidden className="lav-small mr-1 text-lav-navy/70 [font-variant-numeric:tabular-nums]">
@@ -621,17 +621,17 @@ function DayTestimonials() {
               key={item.key}
               aria-hidden={i !== index}
               className={cn(
-                // Quote and author side by side from laptops up: the author keeps one place for every quote.
-                'col-start-1 row-start-1 m-0 flex flex-col gap-8 transition-opacity duration-[var(--duration-base)] ease-out lg:grid lg:grid-cols-[minmax(0,var(--container-measure-lead))_1fr] lg:items-start lg:gap-14',
+                // Quote and author side by side on wide screens (1280 up; below, the author column would be a sliver).
+                'col-start-1 row-start-1 m-0 flex flex-col gap-8 transition-opacity duration-[var(--duration-base)] ease-out xl:grid xl:grid-cols-[minmax(0,var(--container-measure-lead))_1fr] xl:items-start xl:gap-14',
                 i === index ? 'opacity-100' : 'invisible opacity-0',
               )}
             >
-              <blockquote className="m-0 max-w-measure-lead lg:max-w-none">
+              <blockquote className="m-0 max-w-measure-lead xl:max-w-none">
                 <p className="lav-lead font-medium text-lav-navy">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
-              <figcaption className="flex flex-col gap-2 lg:pt-1.5">
+              <figcaption className="flex flex-col gap-2 xl:pt-1.5">
                 <span className="lav-body font-medium text-lav-navy">{item.name}</span>
                 <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
               </figcaption>

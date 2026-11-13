@@ -52,7 +52,7 @@ export function LegalStrip({ className }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t('lavender.common.linkedin')}
-          className="lav-star-hover inline-flex size-11 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline hover:opacity-100!"
+          className="lav-star-hover inline-flex size-11 shrink-0 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline hover:opacity-100!"
         >
           <LinkedInGlyph size={18} />
         </a>

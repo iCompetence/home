@@ -56,14 +56,34 @@ export function HamburgGlass({ className }: { className?: string }) {
     let inside = false;
     let visible = false;
 
+    const halo = el.querySelector<HTMLElement>('.lav-hamburg-halo');
+    const spot = el.querySelector<HTMLElement>('.lav-hamburg-spot');
+    const lit = el.querySelector<HTMLElement>('.lav-hamburg-on');
+
+    // The light is a small round window (spot) over the lit picture, and a
+    // glow (halo) behind the city. Both are only moved, scaled and faded,
+    // which the graphics card does without redrawing anything. The lit
+    // picture inside the window is moved and scaled the opposite way, so it
+    // stays exactly on the unlit one. (Before, the light was a mask and a
+    // blurred gradient across the whole skyline, repainted on every move.)
     const paint = () => {
+      if (!halo || !spot || !lit) return;
       const w = el.clientWidth;
       const h = el.clientHeight;
-      el.style.setProperty('--x', `${(cur.x * w).toFixed(1)}px`);
-      el.style.setProperty('--y', `${(cur.y * h).toFixed(1)}px`);
-      el.style.setProperty('--rx', `${(cur.rx * w).toFixed(1)}px`);
-      el.style.setProperty('--ry', `${(cur.ry * h).toFixed(1)}px`);
-      el.style.setProperty('--a', cur.a.toFixed(3));
+      const x = cur.x * w;
+      const y = cur.y * h;
+      const rx = cur.rx * w;
+      const ry = cur.ry * h;
+      // Both elements are 200 px circles centred on their own origin.
+      halo.style.transform = `translate3d(${x}px,${y}px,0) scale(${(rx * 0.75 + 46) / 100},${(ry * 0.75 + 46) / 100})`;
+      halo.style.opacity = String(cur.a * 0.3);
+      const sx = (rx * 1.2) / 100;
+      const sy = (ry * 1.15) / 100;
+      spot.style.transform = `translate3d(${x}px,${y}px,0) scale(${sx},${sy})`;
+      spot.style.opacity = String(cur.a);
+      lit.style.width = `${w}px`;
+      lit.style.height = `${h}px`;
+      lit.style.transform = `scale(${1 / sx},${1 / sy}) translate3d(${-x}px,${-y}px,0)`;
     };
     const tick = () => {
       // While nothing is lit, the light jumps to the new place and fades in there.
@@ -183,7 +203,9 @@ export function HamburgGlass({ className }: { className?: string }) {
       <div className="lav-hamburg-halo" />
       <div className="lav-hamburg-glass">
         <div className="lav-hamburg-off" />
-        <div className="lav-hamburg-on" />
+        <div className="lav-hamburg-spot">
+          <div className="lav-hamburg-on" />
+        </div>
       </div>
     </div>
   );

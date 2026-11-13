@@ -225,8 +225,11 @@ Stand:
       Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
       Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem
       Zitat, Hero-Auftakt beim Laden, animierte Druck- und Farbwechsel, Verhalten auf Touch.
-      Offen aus der Durchsicht: das Stadtlicht auf Transform umstellen (heute zeichnet jede
-      Zeigerbewegung breite Ebenen neu). Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      Das Stadtlicht ist seitdem ein kleines rundes Fenster auf das beleuchtete Bild, das nur
+      verschoben, skaliert und ein-/ausgeblendet wird (vorher: Maske und weichgezeichneter
+      Verlauf über die ganze Skyline, bei jeder Zeigerbewegung neu gezeichnet).
+      Prüfung auf sieben Bildschirmgrößen (360 bis 1920, de/en): Kundenstimmen unter 1280
+      gestapelt, Menü-Links zweispaltig mit größeren Tippflächen, Logo-Link 44 px hoch. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
       `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene

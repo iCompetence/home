@@ -57,7 +57,7 @@ const PHONE = '+49 40 22636380';
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
 // Hover is the star gradient on the text (a .lav-star-text span inside, see globals.css).
 // The type steps trim their box to cap height; the padding gives the link a touch target, the negative margin keeps the layout.
-const smallLink = `lav-paragraph -my-1.5 inline-block py-1.5 font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
+const smallLink = `lav-paragraph inline-block py-3 font-medium text-lav-navy no-underline ${focusRing} focus-visible:outline-lav-navy`;
 
 export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNavProps = {}) {
   const { t, language } = useLanguage();
@@ -141,13 +141,16 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
           aria-hidden
           className="pointer-events-none absolute inset-x-2 inset-y-2 -z-10 rounded-pill bg-lav-navy opacity-0 shadow-[0_12px_32px_-14px_rgb(11_34_49/0.55)] transition-opacity duration-[var(--duration-base)] group-data-[ground=day]/nav:opacity-100 md:inset-x-4 lg:inset-x-[calc(var(--section-pad-h)-40px)] lg:inset-y-3"
         />
-        {/* The logo is a masked shape, so hover can fill it with the star gradient. */}
+        {/* The logo is a masked shape, so hover can fill it with the star gradient.
+            The link around it is 44 px tall, a full touch target. */}
         <a
           href={logoHref}
           onClick={glideOnClick}
           aria-label="iCompetence"
-          className={`lav-star-hover lav-logo-mask pointer-events-auto block h-8 w-[94px] justify-self-start bg-lav-white hover:opacity-100! md:h-10 md:w-[117px] ${focusRing} focus-visible:outline-lav-white`}
-        />
+          className={`pointer-events-auto inline-flex h-11 items-center justify-self-start hover:opacity-100! ${focusRing} focus-visible:outline-lav-white`}
+        >
+          <span className="lav-star-hover lav-logo-mask block h-8 w-[94px] bg-lav-white md:h-10 md:w-[117px]" />
+        </a>
 
         <a
           href={siteHref(language, 'contact')}
@@ -223,7 +226,7 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
                 ))}
               </ul>
 
-              <ul className="m-0 grid list-none grid-cols-1 gap-x-8 gap-y-1.5 border-t border-lav-navy/15 p-0 pt-5 sm:grid-cols-2">
+              <ul className="m-0 grid list-none grid-cols-2 gap-x-6 gap-y-0 border-t border-lav-navy/15 p-0 pt-3 sm:gap-x-8">
                 {pages.map((page) => (
                   <li key={page.href}>
                     <a href={siteHref(language, page.href)} className={smallLink}>
@@ -234,13 +237,13 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
               </ul>
 
               <div className="mt-auto flex flex-wrap items-end justify-between gap-6">
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col">
                   <a href={`mailto:${EMAIL}`} className={smallLink}>
                     <span className="lav-star-text">{EMAIL}</span>
                   </a>
-                  <span className="lav-paragraph font-medium text-lav-navy">{PHONE}</span>
+                  <span className="lav-paragraph py-3 font-medium text-lav-navy">{PHONE}</span>
                 </div>
-                <div className="flex flex-col items-start gap-3 sm:items-end">
+                <div className="flex flex-col items-start sm:items-end">
                   <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={smallLink}>
                     <span className="lav-star-text">LinkedIn</span>
                   </a>

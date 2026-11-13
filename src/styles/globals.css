@@ -695,6 +695,9 @@ html {
   .lav-logo-mask::before {
     background: var(--lav-star-ink);
   }
+  a:is(:hover, :focus-visible) > .lav-logo-mask::before {
+    opacity: 1;
+  }
 
   /* The hero's entrance, once on load: headline, lead and button rise in one
      after the other. Runs on the element's own animation, so hiding and
@@ -834,25 +837,20 @@ html {
   }
 
   /* Hamburg as a milk-glass sculpture (HamburgGlass.tsx). Two congruent
-     renderings with a transparent ground; the lit one shows through an
-     ellipse that follows the pointer. --x/--y/--rx/--ry/--a come from script. */
+     renderings with a transparent ground; the lit one shows through a
+     round window that follows the pointer (HamburgGlass.tsx moves it). */
   .lav-hamburg {
     position: relative;
     aspect-ratio: 2600 / 1098;
     touch-action: pan-y;
-    --x: 50%;
-    --y: 70%;
-    --rx: 200px;
-    --ry: 300px;
-    --a: 0;
   }
   /* In the hero the headline stands in the sky above the skyline: from tablets
      up the city thins out towards the top centre, so no tower runs through
      the text. */
   @media (min-width: 768px) {
     .lav-hamburg-haze .lav-hamburg-glass {
-      -webkit-mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
-      mask-image: radial-gradient(ellipse 46% 64% at 50% 0%, transparent 52%, #000 100%);
+      -webkit-mask-image: radial-gradient(ellipse 50% 72% at 50% 0%, transparent 56%, #000 100%);
+      mask-image: radial-gradient(ellipse 50% 72% at 50% 0%, transparent 56%, #000 100%);
     }
   }
   .lav-hamburg > div,
@@ -861,13 +859,40 @@ html {
     inset: 0;
     pointer-events: none;
   }
-  /* 300 px taller than the picture at the top, so the glow fades out in the
-     sky instead of ending at the picture's upper edge. */
+  /* The glow behind the city: a 200 px circle that script moves, scales and
+     fades (transform and opacity only, nothing is repainted). */
   .lav-hamburg > .lav-hamburg-halo {
-    top: -300px;
-    background: radial-gradient(ellipse var(--rx) var(--ry) at var(--x) calc(var(--y) + 300px), #24a1da 0%, rgb(147 84 246 / 0.85) 45%, transparent 75%);
-    filter: blur(46px);
-    opacity: calc(var(--a) * 0.3);
+    inset: auto;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    background: radial-gradient(closest-side, rgb(36 161 218 / 0.95) 0%, rgb(147 84 246 / 0.6) 38%, rgb(147 84 246 / 0.16) 68%, transparent 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  /* The window onto the lit picture: the same kind of circle with a soft
+     edge; the lit picture inside is moved the opposite way by script. */
+  .lav-hamburg-glass > .lav-hamburg-spot {
+    inset: auto;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    -webkit-mask-image: radial-gradient(closest-side, #000 34%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 34%, transparent 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .lav-hamburg-spot > .lav-hamburg-on {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    transform-origin: 0 0;
+    pointer-events: none;
+    will-change: transform;
   }
   .lav-hamburg-off,
   .lav-hamburg-on {
@@ -881,8 +906,5 @@ html {
   }
   .lav-hamburg-on {
     background-image: url('/images/hamburg-glas-licht.webp');
-    opacity: var(--a);
-    -webkit-mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);
-    mask-image: radial-gradient(ellipse calc(var(--rx) * 1.2) calc(var(--ry) * 1.15) at var(--x) var(--y), #000 34%, transparent 100%);
   }
 }
