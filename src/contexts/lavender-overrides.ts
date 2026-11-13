@@ -15,7 +15,7 @@ import type { Language } from './LanguageContext';
 export const lavenderOverrides: Record<string, Partial<Record<Language, string>>> = {
   // --- EmpCo Audit ---
   'empco.hero.subtitle': {
-    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.',
+    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und wo Handlungsbedarf besteht.',
   },
   'empco.anchor.what': { en: 'About the audit' },
   'empco.why.p2': {

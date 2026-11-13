@@ -2858,7 +2858,7 @@ export const translations: Translations = {
   'lavender.services.ai.genai.label': { en: 'Generative AI', de: 'Generative KI' },
   'lavender.services.ai.genai.desc': {
     en: 'Ship production-grade GenAI features with the safety, evaluation, and ops to back them.',
-    de: 'Produktionsreife GenAI-Funktionen ausliefern – mit der nötigen Sicherheit, Evaluierung und dem Betrieb dahinter.'
+    de: 'Produktionsreife GenAI-Funktionen, die sicher laufen und deren Ergebnisse geprüft sind. Auf Wunsch übernehmen wir auch den Betrieb.'
   },
   'lavender.services.ai.agentic.label': { en: 'Agentic Systems', de: 'Agentische Systeme' },
   'lavender.services.ai.agentic.desc': {
@@ -3023,7 +3023,7 @@ export const translations: Translations = {
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {
     en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',
-    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.'
+    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und wo Handlungsbedarf besteht.'
   },
   'lavender.products.empco.cta': {
     en: 'Explore EmpCo Audit',
