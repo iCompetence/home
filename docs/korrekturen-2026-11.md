@@ -28,8 +28,8 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | # | Anmerkung | Art | Status |
 |---|---|---|---|
 | G-1 | Schrift vor dem kräftigen Blau lieber weiß oder sehr hellgrau, mehr Kontrast. Auf Privacy-led AI noch einmal: „Schwarz auf Blau unglücklich“. | 3 | ➖ bleibt |
-| G-2 | Bilder per Klick (Doppelklick) als Overlay vergrößern, damit man die Screenshots lesen kann. Wiederholt bei CPT „Produkte und Tools“, Intelligentic Search, ICU, EmpCo. | 3 | ⏳ |
-| G-3 | Gibt es Bildbeschreibungen (Barrierefreiheit)? | 2 | ⏳ |
+| G-2 | Bilder per Klick (Doppelklick) als Overlay vergrößern, damit man die Screenshots lesen kann. Wiederholt bei CPT „Produkte und Tools“, Intelligentic Search, ICU, EmpCo. | 3 | ✅ |
+| G-3 | Gibt es Bildbeschreibungen (Barrierefreiheit)? | 2 | ✅ |
 
 **G-1 Vorschlag:** So lassen. Gemeint sind die blauen Buttons (`lav-blue` #24a1da) mit dunkler Schrift (#0b2231). Gemessen: dunkel auf Blau hat 5,58 : 1 und besteht WCAG AA. Weiß auf Blau hätte nur 2,92 : 1 und fällt durch (AA verlangt 4,5 : 1). Genau deshalb wurde im A11y-Audit vom 30.09.2026 auf dunkle Schrift umgestellt, ein dunkleres Blau wurde damals verworfen. Wenn die Buttons trotzdem schwer lesbar wirken, ginge die Beschriftung in Halbfett (600 statt 500), ohne an Farbe oder Kontrastwert etwas zu ändern.
 
@@ -125,7 +125,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | I-1 | „Intelligentic Search ist“ streichen: „Präziser als herkömmliche KI-Suchen“ | 1 | `is.features.step1.label` | ✅ |
 | I-2 | „Die echte KI“ (gleiche Kürzung) | 1 | `is.features.step3.label` | ✅ |
 | I-3 | „Antworten in Millisekunden“ | 1 | `is.features.step4.label` | ✅ |
-| I-4 | Bild auf Klick groß (→ G-2) | 3 | `ProductHead` | ⏳ |
+| I-4 | Bild auf Klick groß (→ G-2) | 3 | `ProductHead` | ✅ |
 | I-5 | „So funktioniert's“: Pfeil nach unten kann weg? | 3 | Button im Produktkopf | ➖ bleibt |
 | I-6 | Fließtext so groß wie die H2, die Alleinstellungsmerkmale kleiner. Fließtext so klein wie die Merkmale? | 3 | `lav-lead` in den Abschnitten | ⏳ |
 | I-7 | „… bis Amazon und Google: KI-Suche …“: Doppelpunkt durch Strich ersetzen | 1 | `is.quote.text` | ✅ |
@@ -163,7 +163,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| U-1 | Bilder vergrößern / Schriftgröße wie bei Intelligentic Search | 3 | → G-2, I-6 | ⏳ |
+| U-1 | Bilder vergrößern / Schriftgröße wie bei Intelligentic Search | 3 | → G-2, I-6 | ✅ |
 | U-2 | „Für Nicht-Analysten gemacht – und natürlich auch für Analysten“ | 1 | `icu.carousel.item2.title` | ✅ |
 | U-3 | Viel Text für die Schriftgröße. Einleitenden Satz behalten, Kernfeatures als Checkliste (drei Punkte vorgeschlagen). Dazu fett „Zielgruppen-FAQ“ über dem jetzigen Absatz | 2/3 | `icu.intro.text` (Statement) | ✅ |
 | U-4 | Umbruch auf 2/3 der Seite unverständlich: „Erkunde echte User Journeys …“ | 3 | `icu.guidance.subline` | ➖ bleibt |
@@ -259,7 +259,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 | E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ⏳ |
 | E-3 | Einleitungsabsatz ergänzen: „… kommunizieren dürfen, ohne in den Verdacht des Greenwashings zu geraten.“ | 1 | `empco.why.p1` | ☑️ |
 | E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ⏳ |
-| E-5 | Bilder größer klicken (→ G-2); nach „Sehen, was der Audit findet“ ein Screenshot einer Audit-Analyse in voller Breite | 3 | Abschnitt „test“ | ⏳ |
+| E-5 | Bilder größer klicken (→ G-2); nach „Sehen, was der Audit findet“ ein Screenshot einer Audit-Analyse in voller Breite | 3 | Abschnitt „test“ | ✅ |
 | E-6 | CTA „Kostenlose Probeseite anfordern“ doppelt sich. Überschrift: „Unser Angebot: Deine kostenlose Probeseite“ | 1 | `empco.form.title` | ✅ |
 | E-6a | Button „hier kostenlose Probeseite anfordern“ | 2 | `empco.hero.ctaPrimary`, `empco.test.cta` | ➖ bleibt |
 | E-7 | Hinweis sieht aus wie ein Mail-Zitat: Seitenbalken weg, nicht kursiv, Pfeil vor „Hinweis“ | 3 | Formular-Hinweis (`EmpCoAuditLavender.tsx`) | ✅ |
@@ -437,9 +437,17 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **E-11 Green-Claims-Richtlinie:** mit der SEO/GEO-Session abgestimmt und umgesetzt. Tabellenkopf „Green-Claims-Richtlinie (GCD)“, Überschrift „EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich“, FAQ q8 und a8 deutsch, q9 „Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?“. Der englische Name bleibt damit an genau zwei Stellen sichtbar, weil danach gesucht wird.
 
 **Noch offen (⏳):**
-- Lightbox (G-2, I-4, U-1, E-5), Bildbeschriftungen der Galerie (G-3), ganze Produktkarte als Link (C-10, künftig in `ProductRow`), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, kommen nach dem Merge des Branches `claude/unterseiten-licht-und-linie-d96d42` in einem eigenen PR. C-8 (Zitate) hat jener Branch erledigt.
-- E-5 braucht zusätzlich einen anonymisierten Screenshot einer Audit-Analyse (Kategorie, Textstelle, Vorschlag, Kommentar sichtbar).
+- Ganze Produktkarte als Link (C-10, jetzt in `ProductRow`), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, noch offen. C-8 (Zitate) hat der Branch `claude/unterseiten-licht-und-linie-d96d42` erledigt.
 - D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
+
+---
+
+## Dritte Runde: Lightbox und Alt-Texte (13.11.2026)
+
+- **G-2, I-4, U-1 Lightbox:** neuer Baustein `ZoomImage` (`src/design-system/ZoomImage.tsx`). Das Bild bleibt im Seiten-HTML, liegt aber in einem Button; ein Klick oder Enter öffnet es bildschirmfüllend auf Navy, Escape, der Schließen-Button oder ein Klick daneben schließen, der Fokus kehrt zurück. Ein kleines Lupen-Abzeichen zeigt, dass man vergrößern kann. Eingesetzt in jeder Galerie (`MediaGallery`: Produktköpfe und „in Aktion“), in den Standbildern von `ImageText` (Videos bleiben) und beim CPT-Bild „So funktioniert das Tool“.
+- **E-5:** Kein neuer Screenshot nötig. Das vorhandene Tool-Bild zeigt schon eine Analyse (Befunde, Zitate, Notizen, Zweitbewertung). Es steht jetzt in voller Breite direkt nach „Sehen, was der Audit findet“ und ist vergrößerbar. Der Abschnitt „Was ist der Audit“ ist dafür reiner Text, sonst stünde dasselbe Bild dreimal auf der Seite.
+- **G-3:** Galerie-Vorschaubilder heißen „Bild anzeigen 2: <Alt-Text>“ statt nur mit Nummer. Die dünnen, fest eingebauten englischen Alt-Texte („How it works“, „iKnow Chat“, „Analytics Agent Dashboard“ …) sind durch übersetzte Beschreibungen ersetzt (`lavender.alt.*`), auf CPT, Intelligentic Search, Analytics Agent und iKnow.
+- **Achtung, offen:** Der iKnow-Screenshot „Connectoren“ (`public/assets/iknow/connectoren.png`) zeigt eine private Gmail-Adresse im Feld „Verbindung“. Mit der Lightbox wird sie gut lesbar. Vorschlag: im Bild unkenntlich machen oder durch eine Beispieladresse ersetzen.
 
 ---
 
