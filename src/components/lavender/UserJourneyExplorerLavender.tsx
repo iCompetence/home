@@ -5,6 +5,8 @@ import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { previewRoute } from '@/lib/i18n-meta';
+import { faqPage, JsonLd } from '@/lib/structured-data';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
@@ -42,6 +44,10 @@ const FAQ_COUNT = 6;
  */
 export default function UserJourneyExplorerLavender() {
   const { t, language } = useLanguage();
+  const faq = Array.from({ length: FAQ_COUNT }, (_, i) => ({
+    question: t(`icu.faq.q${i + 1}.title`),
+    answer: t(`icu.faq.q${i + 1}.content`),
+  }));
 
   const tabs = [
     { id: 'offer', label: t('lavender.icu.anchor.statusQuo') },
@@ -111,14 +117,9 @@ export default function UserJourneyExplorerLavender() {
       </div>
       <Benefits />
       <Guidance />
-      <FaqSection
-        className={ANCHOR_SCROLL_MARGIN}
-        title={t('icu.faq.title')}
-        items={Array.from({ length: FAQ_COUNT }, (_, i) => ({
-          question: t(`icu.faq.q${i + 1}.title`),
-          answer: t(`icu.faq.q${i + 1}.content`),
-        }))}
-      />
+      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('icu.faq.title')} items={faq} />
+      {/* FAQPage from the same strings as the visible answers. */}
+      <JsonLd data={faqPage({ lang: language, path: previewRoute('icu-user-journey-explorer'), items: faq })} />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
     </NightPage>
   );

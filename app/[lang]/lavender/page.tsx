@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { preload } from 'react-dom'
 import HomeNightLavender from '@/components/lavender/HomeNightLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
-
-const SITE_URL = 'https://icompetence.de'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // "Separate the signal from the noise." is the brand headline and stays in
 // English in both languages; only the description is localised.
@@ -45,48 +45,22 @@ export default async function LavenderPage({
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  const url = `${SITE_URL}/${lang}/lavender/`
-
   // The glass city is half the first view and a CSS background, which the
   // browser finds late: fetch it with the page, so it does not pop in after the text.
   preload('/images/hamburg-glas-dunkel.webp', { as: 'image', fetchPriority: 'high' })
 
-  // Server-rendered JSON-LD (present in the static HTML). Organization is
-  // already emitted site-wide in [lang]/layout.tsx; here we add page-level
-  // WebSite + BreadcrumbList context.
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'iCompetence',
-      url: SITE_URL,
-      inLanguage: lang,
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: lang === 'de' ? 'Start' : 'Home',
-          item: `${SITE_URL}/${lang}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Separate the signal from the noise.',
-          item: url,
-        },
-      ],
-    },
-  ]
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      {/* Server-rendered JSON-LD (in the static HTML): Organization, WebSite
+          and this page; see src/lib/structured-data.tsx. */}
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path: previewRoute(''),
+          ...meta[lang],
+          dateModified: PAGE_UPDATED[''],
+          aboutOrganization: true,
+        })}
       />
       {/* The night home ("Licht und Linie"). LanguageProvider comes from
           ./layout.tsx (shared by all preview pages). */}

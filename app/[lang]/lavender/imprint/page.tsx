@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { ImprintLavender } from '@/components/lavender/LegalLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles and descriptions as the live page (app/[lang]/imprint/page.tsx).
 const meta = {
@@ -20,7 +22,25 @@ export async function generateMetadata({
   }
 }
 
-export default function ImprintPreview() {
+export default async function ImprintPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('imprint')
   // LanguageProvider comes from ../layout.tsx.
-  return <ImprintLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED.imprint,
+        })}
+      />
+      <ImprintLavender />
+    </>
+  )
 }

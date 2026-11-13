@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import AnalyticsAgentLavender from '@/components/lavender/AnalyticsAgentLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles as the live page (app/[lang]/analytics-agent/page.tsx); the
 // descriptions use the redesign's wording ("deine", US "visualizations"), as
@@ -30,7 +32,27 @@ export async function generateMetadata({
   }
 }
 
-export default function AnalyticsAgentPreview() {
+export default async function AnalyticsAgentPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('analytics-agent')
   // LanguageProvider comes from ../layout.tsx.
-  return <AnalyticsAgentLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['analytics-agent'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'Analytics Agent'),
+          subject: { kind: 'software', name: 'Analytics Agent', description: meta[lang].description },
+        })}
+      />
+      <AnalyticsAgentLavender />
+    </>
+  )
 }

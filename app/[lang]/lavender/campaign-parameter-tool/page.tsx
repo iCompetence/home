@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import CampaignParameterToolLavender from '@/components/lavender/CampaignParameterToolLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles and descriptions as the live page
 // (app/[lang]/campaign-parameter-tool/page.tsx).
@@ -29,7 +31,27 @@ export async function generateMetadata({
   }
 }
 
-export default function CampaignParameterToolPreview() {
+export default async function CampaignParameterToolPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('campaign-parameter-tool')
   // LanguageProvider comes from ../layout.tsx.
-  return <CampaignParameterToolLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['campaign-parameter-tool'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'Campaign Parameter Tool'),
+          subject: { kind: 'software', name: 'Campaign Parameter Tool', description: meta[lang].description },
+        })}
+      />
+      <CampaignParameterToolLavender />
+    </>
+  )
 }

@@ -7,6 +7,8 @@ import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { previewRoute } from '@/lib/i18n-meta';
+import { faqPage, JsonLd } from '@/lib/structured-data';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
@@ -57,6 +59,10 @@ const CLIENTS = [
  */
 export default function CampaignParameterToolLavender() {
   const { t, language } = useLanguage();
+  const faq = [1, 2, 3, 4, 5].map((n) => ({
+    question: t(`ct.faq.item${n}.question`),
+    answer: t(`ct.faq.item${n}.answer`),
+  }));
   const [tier, setTier] = useState<TierId>('tier1');
   const [modal, setModal] = useState<{ open: boolean; mode: TrialMode }>({
     open: false,
@@ -220,14 +226,9 @@ export default function CampaignParameterToolLavender() {
         }))}
       />
 
-      <FaqSection
-        className={ANCHOR_SCROLL_MARGIN}
-        title={t('ct.faq.title')}
-        items={[1, 2, 3, 4, 5].map((n) => ({
-          question: t(`ct.faq.item${n}.question`),
-          answer: t(`ct.faq.item${n}.answer`),
-        }))}
-      />
+      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('ct.faq.title')} items={faq} />
+      {/* FAQPage from the same strings as the visible answers. */}
+      <JsonLd data={faqPage({ lang: language, path: previewRoute('campaign-parameter-tool'), items: faq })} />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
 
       <TrialModal

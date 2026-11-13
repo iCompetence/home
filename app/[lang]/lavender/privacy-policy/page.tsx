@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { PrivacyPolicyLavender } from '@/components/lavender/LegalLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // New page (live, the privacy text is part of the imprint). Titles as the
 // page heading in Figma; descriptions in the style of the imprint's.
@@ -29,7 +31,25 @@ export async function generateMetadata({
   }
 }
 
-export default function PrivacyPolicyPreview() {
+export default async function PrivacyPolicyPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('privacy-policy')
   // LanguageProvider comes from ../layout.tsx.
-  return <PrivacyPolicyLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['privacy-policy'],
+        })}
+      />
+      <PrivacyPolicyLavender />
+    </>
+  )
 }

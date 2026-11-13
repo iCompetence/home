@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import ContactLavender from '@/components/lavender/ContactLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles as the live page (app/[lang]/contact/page.tsx); the German
 // description says "du" in line with the redesign's wording.
@@ -27,7 +29,26 @@ export async function generateMetadata({
   }
 }
 
-export default function ContactPreview() {
+export default async function ContactPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('contact')
   // LanguageProvider comes from ../layout.tsx.
-  return <ContactLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED.contact,
+          type: 'ContactPage',
+        })}
+      />
+      <ContactLavender />
+    </>
+  )
 }

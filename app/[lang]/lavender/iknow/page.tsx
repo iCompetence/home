@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import IKnowLavender from '@/components/lavender/IKnowLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles as the live page (app/[lang]/iknow/page.tsx); the German
 // description says "verwandle" in line with the redesign's wording.
@@ -29,7 +31,27 @@ export async function generateMetadata({
   }
 }
 
-export default function IKnowPreview() {
+export default async function IKnowPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('iknow')
   // LanguageProvider comes from ../layout.tsx.
-  return <IKnowLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED.iknow,
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'iKnow'),
+          subject: { kind: 'software', name: 'iKnow', description: meta[lang].description },
+        })}
+      />
+      <IKnowLavender />
+    </>
+  )
 }

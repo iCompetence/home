@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import WhatsNewLavender from '@/components/lavender/WhatsNewLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles as the live page (app/[lang]/whats-new/page.tsx); the German
 // description says "du" in line with the redesign's wording.
@@ -27,7 +29,26 @@ export async function generateMetadata({
   }
 }
 
-export default function WhatsNewPreview() {
+export default async function WhatsNewPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('whats-new')
   // LanguageProvider comes from ../layout.tsx.
-  return <WhatsNewLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['whats-new'],
+          type: 'CollectionPage',
+        })}
+      />
+      <WhatsNewLavender />
+    </>
+  )
 }

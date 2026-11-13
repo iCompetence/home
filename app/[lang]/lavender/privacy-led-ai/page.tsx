@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import PrivacyLedLavender from '@/components/lavender/PrivacyLedLavender'
 import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // Same titles and descriptions as the live page (app/[lang]/privacy-led-ai/page.tsx).
 const meta = {
@@ -26,7 +28,25 @@ export async function generateMetadata({
   }
 }
 
-export default function PrivacyLedPreview() {
+export default async function PrivacyLedPreview({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const lang = toLang((await params).lang)
+  const path = previewRoute('privacy-led-ai')
   // LanguageProvider comes from ../layout.tsx.
-  return <PrivacyLedLavender />
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['privacy-led-ai'],
+        })}
+      />
+      <PrivacyLedLavender />
+    </>
+  )
 }
