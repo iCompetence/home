@@ -79,7 +79,9 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
   // True while the day layer (the light sheet of the Hamburg hero variant) is
   // behind the nav: content then scrolls under the nav, so it gets a dark bar
   // from logo to menu. The bar stays over the layer's dark band too.
-  const [onDay, setOnDay] = useState(false);
+  // With bar 'always' it is in the static HTML already: otherwise the white
+  // logo stood on the light page until the script had loaded.
+  const [onDay, setOnDay] = useState(bar === 'always');
   // Id of the section the page is in; its label is shown in the bar next to
   // the menu. Empty where a section has no anchor (the home's testimonials).
   const [section, setSection] = useState('');
