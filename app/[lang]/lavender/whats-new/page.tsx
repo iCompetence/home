@@ -4,15 +4,15 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles as the live page (app/[lang]/whats-new/page.tsx); the German
-// description says "du" in line with the redesign's wording.
+// Titles as on the live page (app/[lang]/whats-new/page.tsx), English in
+// sentence case like the h1; the German description says "du" as in the redesign.
 const meta = {
   de: {
     title: 'Neuigkeiten | iCompetence',
     description: 'Entdecke die neuesten Produkte, Features und Updates von iCompetence – deinem Partner für Data & AI Consulting.',
   },
   en: {
-    title: "What's New | iCompetence",
+    title: "What's new | iCompetence",
     description: 'Discover the latest products, features and updates from iCompetence — your Data & AI consulting partner.',
   },
 }
