@@ -8,7 +8,8 @@ export type GalleryImage = { src: string; alt: string };
 
 /**
  * Product gallery: a stage on lavender (4:3 unless the images ask for another
- * ratio) and a row of thumbnails. The stage is a real <img> (crawlable, has
+ * ratio) and, from two
+ * pictures up, a row of thumbnails. The stage is a real <img> (crawlable, has
  * alt text) that opens full size on click (ZoomImage); thumbnails are
  * buttons that swap it and are named after their picture. The thumbnail row
  * scrolls sideways when it is wider than the stage.
@@ -38,6 +39,8 @@ export function MediaGallery({
           aspectClassName,
         )}
       />
+      {/* Thumbnails only where there is something to switch to. */}
+      {images.length > 1 && (
       <div className="flex gap-2 overflow-x-auto md:gap-3 lg:gap-4">
         {images.map((image, i) => (
           <button
@@ -50,13 +53,14 @@ export function MediaGallery({
             className={cn(
               'h-[59px] w-[78px] shrink-0 cursor-pointer overflow-hidden rounded-card-sm border-2 bg-lav-lavender p-0 transition-[border-color,scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] md:h-[78px] md:w-[104px]',
               // The others: a frame in the star gradient on hover (.lav-star-ring).
-              i === active ? 'border-lav-navy' : 'lav-star-ring border-transparent',
+              i === active ? 'border-lav-ink' : 'lav-star-ring border-transparent',
             )}
           >
             <img src={image.src} alt="" className="h-full w-full object-contain object-center" />
           </button>
         ))}
       </div>
+      )}
     </div>
   );
 }
