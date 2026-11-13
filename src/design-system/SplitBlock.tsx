@@ -12,15 +12,19 @@ export function SplitBlock({
   children,
   className,
   contentClassName,
+  headingLevel = 2,
 }: {
   id?: string;
   title: string;
+  /** 3 inside a section that already has its h2 (Explainer). */
+  headingLevel?: 2 | 3;
   children: ReactNode;
   /** Extra classes on the block, e.g. a different stacked gap. */
   className?: string;
   /** Extra classes on the content column, e.g. its gap (default 24). */
   contentClassName?: string;
 }) {
+  const Heading = headingLevel === 3 ? 'h3' : 'h2';
   return (
     <div
       id={id}
@@ -30,7 +34,7 @@ export function SplitBlock({
         className,
       )}
     >
-      <h2 className="lav-h2 text-lav-navy lg:w-[31.4%] lg:shrink-0">{title}</h2>
+      <Heading className="lav-h2 text-lav-navy lg:w-[31.4%] lg:shrink-0">{title}</Heading>
       <div className={cn('flex min-w-0 flex-col gap-6 lg:flex-1', contentClassName)}>
         {children}
       </div>

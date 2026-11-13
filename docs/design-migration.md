@@ -74,6 +74,61 @@ Komponente löschen, Route aus `PREVIEW_ROUTES` nehmen, Overrides in `translatio
 übernehmen, `noindex` fällt mit dem Layout weg, Sitemap ergänzen. Für alle auf einmal:
 `PREVIEW_BASE = ''`.
 
+### SEO/GEO der Vorschauseiten (13.11.2026)
+
+Maßstab ist das Orientation Sheet „SEO-Seiten für AI Visibility“ (Checkliste vor
+Veröffentlichung). Was die Seiten dafür mitbringen:
+
+- **Metadaten:** `pageMetadata()` in `src/lib/i18n-meta.ts` setzt je Seite Titel,
+  Beschreibung, Canonical, hreflang und eigene Open-Graph-/Twitter-Angaben (vorher erbten
+  alle og:title/og:url der Live-Startseite aus `app/[lang]/layout.tsx`).
+- **Pfade:** `previewRoute(route)` liefert den Pfad unter `/<lang>/` und liest
+  `PREVIEW_BASE`: heute `lavender/<route>`, nach dem Umzug `<route>`. Canonical, hreflang,
+  og:url und die URLs im JSON-LD hängen alle daran. Die Startseite (`previewRoute('')`)
+  ist heute `/<lang>/lavender/` und wird damit zu `/<lang>/`.
+- **Strukturierte Daten:** `src/lib/structured-data.tsx`. Jede `page.tsx` gibt einen Graphen
+  aus (Organization mit Adresse, WebSite, WebPage mit `dateModified`, sichtbarer Breadcrumb,
+  Thema der Seite als SoftwareApplication/Service/Course). FAQs gibt die Seitenkomponente
+  neben den sichtbaren Fragen aus (`faqPage()`), aus denselben Strings.
+- **Stand-Datum:** `PAGE_UPDATED` in `src/lib/page-dates.ts` speist `dateModified` und die
+  sichtbare Zeile `UpdatedNote` („Zuletzt aktualisiert: …“). Bei jeder inhaltlichen Änderung
+  einer Seite das Datum mitziehen, nicht bei reinen Layoutänderungen.
+- **Neue Texte** für Suche und KI-Antworten: `src/contexts/lavender-seo.ts` (neue Schlüssel,
+  getrennt von den Overrides bestehender Texte in `lavender-overrides.ts`).
+- **Links im HTML:** Das Menü (`NightNav`, Radix-Sheet) entsteht erst beim Öffnen; die
+  Seitenlinks stehen deshalb zusätzlich als versteckte Liste in der `<nav>`.
+- **Erklär-Abschnitte (SEO- & LLM-Content):** `TopicSection` (`src/components/lavender/`)
+  setzt nach dem Produktteil einen `Explainer` (H2 als Frage, fette Kernantwort im ersten
+  Absatz, H3-Blöcke mit Listen/Tabellen, Stand-Datum) und auf Wunsch ein FAQ samt
+  FAQPage-Schema; CPT und ICU hängen ihre Fragen an das vorhandene FAQ an (ein FAQPage je
+  Seite). Texte in `lavender-seo.ts` im RichText-Format (`src/design-system/RichText.tsx`:
+  Leerzeile trennt Blöcke, `- ` Liste, `1. ` nummeriert, `|` Tabelle, `**fett**`,
+  `[Text](/route/)`). Grundlage: Top-Ergebnisse zu je fünf Suchbegriffen (freigegeben
+  13.11.2026), eigene Texte. Auf der dunklen Privacy-led-Seite liegt der Abschnitt auf einem
+  hellen Blatt wie die Tag-Ebene der Startseite.
+
+**Umzug: Falle bei Canonical und hreflang.** Heute zeigen Canonical, hreflang, og:url und
+JSON-LD aller Vorschauseiten auf `/<lang>/lavender/…`. Das ist richtig, solange die Seiten
+dort liegen. Wer beim Umzug nur die Ordner verschiebt und `PREVIEW_BASE` stehen lässt,
+veröffentlicht Seiten, deren Canonical auf eine Vorschau-URL zeigt, die es dann nicht mehr
+gibt. Reihenfolge beim Umzug:
+
+1. Ordner aus `app/[lang]/lavender/` eine Ebene nach oben; `app/[lang]/lavender/page.tsx`
+   (die Nacht-Startseite) ersetzt `app/[lang]/page.tsx`. Die 301 `/lavender/nacht-hamburg/`
+   in `public/_redirects` dann direkt auf `/<lang>/` zeigen lassen (keine Kette über
+   `/lavender/`).
+2. `PREVIEW_BASE = ''` in `src/design-system/routes.ts` (Links, Canonicals und JSON-LD
+   springen gemeinsam um).
+3. `robots: noindex` fällt mit dem Lavender-Layout weg; die explizite Angabe in
+   `app/[lang]/lavender/page.tsx` und die Zeilen in `public/_headers` entfernen.
+4. In `app/[lang]/layout.tsx` die alte Organization (ohne Adresse) durch
+   `organizationNode()` ersetzen. Heute stehen auf den Vorschauseiten zwei Organization-Knoten
+   mit derselben `@id`, die Suchmaschinen als eine Entität lesen.
+5. `lavender-seo.ts` und `lavender-overrides.ts` in `translations` übernehmen.
+6. Sitemap: Einträge mit `lastmod` aus `PAGE_UPDATED`; `PAGE_UPDATED` einmal prüfen.
+7. Prüfen im Export: `grep -rlE 'icompetence\.de/(de|en)/lavender' out` muss leer bleiben
+   (Canonical, hreflang, og:url und JSON-LD sind absolute URLs).
+
 Stand:
 - [x] Rahmen, Link-Helfer, Text-Overrides, `PageShell`
 - [x] **EmpCo Audit** (Pilot, Figma „Entwurf B") — `/de|en/lavender/empco-audit/`.

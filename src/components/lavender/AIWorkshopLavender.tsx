@@ -3,6 +3,7 @@
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
+import { TopicSection } from './TopicSection';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -116,6 +117,8 @@ export default function AIWorkshopLavender() {
       </Section>
 
       <ApplicationForm />
+      {/* The general topic after the workshop (orientation sheet: SEO & LLM content). */}
+      <TopicSection prefix="lavender.seo.workshop" route="ai-workshop" blockCount={3} faqCount={4} />
       <MoreProducts products={['iknow', 'intelligenticSearch']} />
     </NightPage>
   );

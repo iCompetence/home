@@ -3,6 +3,7 @@
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
+import { TopicSection } from './TopicSection';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -95,6 +96,15 @@ export default function PrivacyLedLavender() {
           ))}
         </div>
       </Section>
+      {/* The general topic (orientation sheet: SEO & LLM content) on a light
+          sheet, like the home's day layer: the explanatory blocks, tables and
+          FAQ are made for a light ground. */}
+      <div
+        data-surface="light"
+        className="mx-2 rounded-card bg-lav-page text-lav-navy md:mx-4 lg:mx-[calc(var(--section-pad-h)-40px)] lg:rounded-frame"
+      >
+        <TopicSection prefix="lavender.seo.privacy" route="privacy-led-ai" blockCount={3} faqCount={5} />
+      </div>
     </NightPage>
   );
 }

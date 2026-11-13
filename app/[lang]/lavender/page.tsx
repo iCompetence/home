@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from 'next'
 import { preload } from 'react-dom'
 import HomeNightLavender from '@/components/lavender/HomeNightLavender'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
-const SITE_URL = 'https://icompetence.de'
-
-// "Separate the signal from the noise." is the brand headline and stays in
-// English in both languages; only the description is localised.
+// The title says what iCompetence is and where (search phrase approved
+// 13.11.2026); the brand line "Separate the signal from the noise." stays the h1.
+// The description sums up the services (the hero lead is the page's first line).
 const meta = {
   de: {
-    title: 'iCompetence — Separate the signal from the noise.',
+    title: 'KI-Beratung & Data Consulting aus Hamburg | iCompetence',
     description:
-      'Mit uns bekommen Teams den Überblick: So werden verstreute Daten zu klaren Entscheidungen, KI zu Produkten und Automatisierung liefert zuverlässige Ergebnisse.',
+      'iCompetence ist eine Beratung für Daten und KI aus Hamburg: Datenstrategie, Web-Analytics, Dashboards, KI-Agenten und KI-Workshops, remote oder bei dir vor Ort.',
   },
   en: {
-    title: 'iCompetence — Separate the signal from the noise.',
+    title: 'AI and data consulting from Hamburg | iCompetence',
     description:
-      'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
+      'iCompetence is a data and AI consultancy from Hamburg: data strategy, web analytics, dashboards, AI agents and AI workshops, remotely or on site.',
   },
 } as const
 
@@ -27,10 +28,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    // Bilingual canonical + hreflang (de/en/x-default) — ready for go-live.
-    alternates: alternates('lavender', lang),
+    // Own canonical, hreflang and Open Graph. The path is /<lang>/lavender/
+    // today and becomes /<lang>/ once PREVIEW_BASE is '' (previewRoute).
+    ...pageMetadata({ path: previewRoute(''), lang, ...meta[lang] }),
     // Soft-launch preview — keep out of search indexes until go-live.
     // Flip both this and the sitemap entry (public/sitemap.xml) to publish.
     robots: { index: false, follow: false },
@@ -46,48 +46,22 @@ export default async function LavenderPage({
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  const url = `${SITE_URL}/${lang}/lavender/`
-
   // The glass city is half the first view and a CSS background, which the
   // browser finds late: fetch it with the page, so it does not pop in after the text.
   preload('/images/hamburg-glas-dunkel.webp', { as: 'image', fetchPriority: 'high' })
 
-  // Server-rendered JSON-LD (present in the static HTML). Organization is
-  // already emitted site-wide in [lang]/layout.tsx; here we add page-level
-  // WebSite + BreadcrumbList context.
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'iCompetence',
-      url: SITE_URL,
-      inLanguage: lang,
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: lang === 'de' ? 'Start' : 'Home',
-          item: `${SITE_URL}/${lang}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Separate the signal from the noise.',
-          item: url,
-        },
-      ],
-    },
-  ]
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      {/* Server-rendered JSON-LD (in the static HTML): Organization, WebSite
+          and this page; see src/lib/structured-data.tsx. */}
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path: previewRoute(''),
+          ...meta[lang],
+          dateModified: PAGE_UPDATED[''],
+          aboutOrganization: true,
+        })}
       />
       {/* The night home ("Licht und Linie"). LanguageProvider comes from
           ./layout.tsx (shared by all preview pages). */}

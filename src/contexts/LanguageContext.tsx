@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { lavenderOverrides } from './lavender-overrides';
+import { lavenderSeo } from './lavender-seo';
 
 export type Language = 'en' | 'de';
 
@@ -3219,7 +3220,7 @@ export const LanguageProvider = ({
       if (override !== undefined) return override;
     }
     if (variant === 'lavender') {
-      const override = lavenderOverrides[key]?.[language];
+      const override = lavenderOverrides[key]?.[language] ?? lavenderSeo[key]?.[language];
       if (override !== undefined) return override;
     }
     return translations[key]?.[language] || key;

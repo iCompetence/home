@@ -92,6 +92,9 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
     const marks: { el: Element | null; id: string }[] = [
       ...(watched ? watched.split(',') : []).map((id) => ({ el: document.getElementById(id), id })),
       { el: document.querySelector('[data-ds="Testimonials"]'), id: '' },
+      // The explanatory part after the product (TopicSection) is no section
+      // of the menu: the bar shows no label there instead of the one before.
+      { el: document.querySelector('[data-ds="Explainer"]'), id: '' },
     ];
     const onScroll = () => {
       // Behind the nav means: at 46 px from the top (the middle of the nav).
@@ -174,6 +177,18 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
           {t('topNav.letsTalk')}
           <ArrowUpRight size={18} strokeWidth={2} className="max-[389px]:hidden" />
         </a>
+
+        {/* The menu's page links in the static HTML as well. The sheet below
+            only mounts when it opens, and crawlers do not click: without this
+            list, most product pages were linked from almost nowhere. Hidden
+            for everyone (no layout, not read out); people use the menu. */}
+        <ul hidden>
+          {pages.map((page) => (
+            <li key={page.href}>
+              <a href={siteHref(language, page.href)}>{t(page.labelKey)}</a>
+            </li>
+          ))}
+        </ul>
 
         <Sheet open={open} onOpenChange={toggle}>
           {/* In the bar the trigger also names the section the page is in

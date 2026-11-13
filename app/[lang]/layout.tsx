@@ -111,6 +111,9 @@ export default async function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    // Same @id as organizationNode() (src/lib/structured-data.tsx) on the
+    // redesigned pages, so both blocks describe one entity.
+    '@id': `${SITE_URL}/#organization`,
     name: 'iCompetence',
     url: SITE_URL,
     logo: `${SITE_URL}/iCompetence_logo.svg`,

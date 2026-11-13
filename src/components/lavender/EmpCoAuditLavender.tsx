@@ -37,11 +37,16 @@ import {
   Section,
   SectionHeader,
   SpecItem,
+  SplitBlock,
   Statement,
+  UpdatedNote,
   ValidatedForm,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
+import { cn } from '@/components/ui/utils';
+import { previewRoute } from '@/lib/i18n-meta';
+import { faqPage, JsonLd } from '@/lib/structured-data';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
@@ -49,6 +54,11 @@ const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
 // offsets a scam?") is left out: the content team found the answer played the
 // problem down (docs/korrekturen-2026-11.md E-19). The live page still has it.
 const FAQ_NUMBERS = Array.from({ length: 19 }, (_, i) => i + 1).filter((n) => n !== 14);
+// The directive has applied since 27.09.2026 (as on the live page).
+const HOWTO_DESCRIPTION = {
+  de: 'Vorgehen, um die Nachhaltigkeitskommunikation an die seit dem 27. September 2026 geltende EmpCo-Richtlinie anzupassen.',
+  en: 'How to bring sustainability communication in line with the EmpCo Directive, which has applied since 27 September 2026.',
+} as const;
 
 /**
  * EmpCo Audit product page in the new design (preview under /lavender/).
@@ -67,38 +77,33 @@ export default function EmpCoAuditLavender() {
   ];
 
   // Structured data from the very strings the page shows (Google: JSON-LD
-  // must match the visible content). German only, as on the live page —
-  // German is the SEO target of this URL. Client components are rendered into
-  // the static export, so this is part of the crawlable HTML.
-  const jsonLd =
-    language === 'de'
-      ? [
-          {
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            inLanguage: 'de',
-            mainEntity: FAQ_NUMBERS.map((n) => ({
-              '@type': 'Question',
-              name: t(`empco.seo.faq.q${n}`),
-              acceptedAnswer: { '@type': 'Answer', text: t(`empco.seo.faq.a${n}`) },
-            })),
-          },
-          {
-            '@context': 'https://schema.org',
-            '@type': 'HowTo',
-            inLanguage: 'de',
-            name: t('empco.seo.steps.title'),
-            description:
-              'Vorgehen, um die Nachhaltigkeitskommunikation bis zum Geltungsbeginn der EmpCo-Richtlinie am 27. September 2026 rechtskonform zu machen.',
-            step: [1, 2, 3, 4, 5].map((n) => ({
-              '@type': 'HowToStep',
-              position: n,
-              name: t(`empco.seo.step${n}.label`),
-              text: t(`empco.seo.step${n}.desc`),
-            })),
-          },
-        ]
-      : [];
+  // must match the visible content), in the page's language. Client
+  // components are rendered into the static export, so this is part of the
+  // crawlable HTML. WebPage, breadcrumb and the service come from page.tsx.
+  const path = previewRoute('empco-audit');
+  const jsonLd = [
+    faqPage({
+      lang: language,
+      path,
+      items: FAQ_NUMBERS.map((n) => ({
+        question: t(`empco.seo.faq.q${n}`),
+        answer: t(`empco.seo.faq.a${n}`),
+      })),
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      inLanguage: language,
+      name: t('empco.seo.steps.title'),
+      description: HOWTO_DESCRIPTION[language],
+      step: [1, 2, 3, 4, 5].map((n) => ({
+        '@type': 'HowToStep',
+        position: n,
+        name: t(`empco.seo.step${n}.label`),
+        text: t(`empco.seo.step${n}.desc`),
+      })),
+    },
+  ];
 
   return (
     <NightPage
@@ -113,11 +118,7 @@ export default function EmpCoAuditLavender() {
       }
     >
       {jsonLd.map((entry) => (
-        <script
-          key={entry['@type']}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(entry) }}
-        />
+        <JsonLd key={String(entry['@type'])} data={entry} />
       ))}
       <Script
         src="https://www.google.com/recaptcha/api.js?render=explicit"
@@ -131,11 +132,13 @@ export default function EmpCoAuditLavender() {
           { label: 'EmpCo Audit' },
         ]}
         images={[
-          { src: '/assets/empco/EmpCo-Tool-UI.png', alt: t('lavender.products.empco.imageAlt') },
+          { src: '/assets/empco/EmpCo-Tool-UI.webp', alt: t('lavender.products.empco.imageAlt') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="EmpCo Audit"
         subline={t('empco.hero.headline')}
+        // The h1 carries the search phrase the title targets (as live).
+        sublineInHeading
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
@@ -175,6 +178,7 @@ export default function EmpCoAuditLavender() {
         }))}
       />
       <About />
+      <Example />
       <Features />
 
       <div id="test" className={ANCHOR_SCROLL_MARGIN}>
@@ -211,6 +215,7 @@ export default function EmpCoAuditLavender() {
       <SampleForm />
       <Directive />
       <Faq />
+      <Sources />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
     </NightPage>
   );
@@ -256,12 +261,63 @@ function About() {
           <p className={paragraph}>{t('empco.what.p2')}</p>
         </div>
       </div>
+      {/* WebP (121 KB instead of 597 KB) and the alt text describing the
+          screenshot, as on the live page. */}
       <img
-        src="/assets/empco/EmpCo-Tool-UI.png"
-        alt={t('lavender.products.empco.imageAlt')}
+        src="/assets/empco/EmpCo-Tool-UI.webp"
+        alt={t('empco.toolImage.alt')}
+        width={2000}
+        height={1137}
         loading="lazy"
+        decoding="async"
         className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%] lg:rounded-frame"
       />
+    </Section>
+  );
+}
+
+/* ---------------- Example finding ---------------- */
+
+/**
+ * One finding as the report shows it (fictitious demo data, as on the live
+ * page since 26.10.2026): what the audit delivers, in words a crawler and an
+ * AI answer can quote. A description list, one row per report field.
+ */
+function Example() {
+  const { t } = useLanguage();
+  const rows = [
+    { key: 'quote', className: 'italic' },
+    { key: 'location' },
+    { key: 'risk', className: 'font-medium' },
+    { key: 'rule' },
+    { key: 'reason' },
+    { key: 'review' },
+    { key: 'action' },
+  ];
+  return (
+    <Section id="example" dsName="ExampleFinding" innerClassName="flex flex-col gap-12">
+      <SectionHeader title={t('empco.example.title')} intro={[t('empco.example.lead')]} />
+      <div className="flex flex-col gap-4">
+        <dl className="m-0 flex flex-col rounded-card bg-lav-lavender px-6 py-2 md:px-10 md:py-4">
+          {rows.map((row, i) => (
+            <div
+              key={row.key}
+              className={cn(
+                'flex flex-col gap-2 py-5 md:flex-row md:gap-8',
+                i > 0 && 'border-t border-lav-navy/15',
+              )}
+            >
+              <dt className="lav-small font-medium text-lav-navy/70 md:w-[200px] md:shrink-0 md:pt-0.5">
+                {t(`empco.example.${row.key}.label`)}
+              </dt>
+              <dd className={cn('lav-body m-0 font-normal text-lav-navy', row.className)}>
+                {t(`empco.example.${row.key}.value`)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="lav-small font-normal text-lav-navy/70">{t('empco.example.note')}</p>
+      </div>
     </Section>
   );
 }
@@ -419,7 +475,8 @@ function Directive() {
   const block = 'flex flex-col gap-8';
   return (
     <Section id="directive" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 md:gap-14 lg:gap-16">
-      <h2 className="lav-h1 text-lav-navy">{t('empco.anchor.directive')}</h2>
+      {/* The descriptive heading of the live page (since 26.10.2026). */}
+      <h2 className="lav-h1 text-lav-navy">{t('empco.seo.section.title')}</h2>
 
       <div className={block}>
         <h3 className="lav-h2 text-lav-navy">{t('empco.seo.banned.title')}</h3>
@@ -437,6 +494,8 @@ function Directive() {
           ))}
         </ul>
       </div>
+
+      <ClaimExamples />
 
       <div className={block}>
         <h3 className="lav-h2 text-lav-navy">{t('empco.seo.steps.title')}</h3>
@@ -473,6 +532,42 @@ function Directive() {
   );
 }
 
+/**
+ * "Erlaubt oder verboten?": typical claims with their verdict (live page since
+ * 26.10.2026). The string is a lead line plus "- Verdict: claim" lines; the
+ * verdict sits in its own column so a reader (and an AI answer) can scan it.
+ */
+function ClaimExamples() {
+  const { t } = useLanguage();
+  const [lead, ...lines] = t('empco.seo.examples.content').split('\n');
+  const items = lines
+    .filter((line) => line.startsWith('- '))
+    .map((line) => {
+      const text = line.slice(2);
+      const cut = text.indexOf(': ');
+      return { verdict: text.slice(0, cut), claim: text.slice(cut + 2) };
+    });
+  return (
+    <div className="flex flex-col gap-8">
+      <h3 className="lav-h2 text-lav-navy">{t('empco.seo.examples.title')}</h3>
+      <p className="lav-paragraph font-normal text-lav-navy/80">{lead}</p>
+      <ul className="m-0 flex list-none flex-col border-b border-lav-navy/20 p-0">
+        {items.map((item) => (
+          <li
+            key={item.claim}
+            className="flex flex-col gap-2 border-t border-lav-navy/20 py-5 md:flex-row md:gap-8"
+          >
+            <strong className="lav-body font-medium text-lav-navy md:w-[200px] md:shrink-0">
+              {item.verdict}:
+            </strong>{' '}
+            <span className="lav-body font-normal text-lav-navy/80">{item.claim}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /* ---------------- FAQ ---------------- */
 
 function Faq() {
@@ -486,3 +581,46 @@ function Faq() {
   );
 }
 
+/* ---------------- Sources & last update ---------------- */
+
+/**
+ * Where the facts on this page come from and when they were last checked
+ * (as on the live page since 26.10.2026): the visible date and the JSON-LD
+ * dateModified both come from PAGE_UPDATED.
+ */
+function Sources() {
+  const { t, language } = useLanguage();
+  // underline! — PageShell's unlayered `.lavender-page a { text-decoration: none }`
+  // beats the plain utility; links in a list of sources must look like links.
+  const link = 'lav-body font-normal text-lav-navy underline! underline-offset-2';
+  return (
+    <Section id="sources" dsName="Sources">
+      <SplitBlock title={t('empco.sources.title')}>
+        <UpdatedNote route="empco-audit" />
+        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+          <li>
+            <a
+              href={`https://eur-lex.europa.eu/legal-content/${language === 'de' ? 'DE' : 'EN'}/TXT/?uri=CELEX:32024L0825`}
+              target="_blank"
+              rel="noopener"
+              className={link}
+            >
+              {t('empco.sources.eurlex')}
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://en.agcm.it/en/media/press-releases/2025/8/PS12709"
+              target="_blank"
+              rel="noopener"
+              className={link}
+            >
+              {t('empco.sources.agcm')}
+            </a>
+          </li>
+        </ul>
+        <p className="lav-small font-normal text-lav-navy/70">{t('empco.sources.disclaimer')}</p>
+      </SplitBlock>
+    </Section>
+  );
+}

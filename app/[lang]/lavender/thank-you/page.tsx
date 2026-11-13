@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ThankYouLavender } from '@/components/lavender/SimpleHeroLavender'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 
 // Same titles as the live page (app/[lang]/thank-you/page.tsx); the German
 // description says "deine" in line with the redesign's wording.
@@ -16,9 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('lavender/thank-you', lang),
+    ...pageMetadata({ path: previewRoute('thank-you'), lang, ...meta[lang] }),
     // robots: inherited from ../layout.tsx (noindex while this is a preview).
   }
 }

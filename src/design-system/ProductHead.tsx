@@ -14,6 +14,11 @@ export type ProductHeadProps = {
   title: string;
   /** One-line claim below the name. */
   subline?: string;
+  /**
+   * Make the claim the second line of the h1 (same look): for pages whose
+   * search phrase is the claim, e.g. EmpCo "Website auf Greenwashing prüfen."
+   */
+  sublineInHeading?: boolean;
   /** Longer supporting paragraph. */
   description?: string;
   /** Everything below the copy: price, buttons, benefit list … */
@@ -36,10 +41,12 @@ export function ProductHead({
   media,
   title,
   subline,
+  sublineInHeading = false,
   description,
   children,
   id = 'top',
 }: ProductHeadProps) {
+  const sublineClass = 'lav-lead font-normal text-lav-navy/80';
   return (
     <section id={id} data-ds="ProductHead" className="relative w-full">
       <div className="mx-auto flex w-full max-w-frame flex-col gap-6 px-[var(--section-pad-h)] pb-[var(--section-pad-v)] pt-6 md:pt-8">
@@ -50,8 +57,21 @@ export function ProductHead({
               (images && thumbLabel && <MediaGallery images={images} thumbLabel={thumbLabel} />)}
           </div>
           <div className="flex w-full flex-col gap-8 lg:flex-1">
-            <h1 className="lav-h1 text-lav-navy">{title}</h1>
-            {subline && <p className="lav-lead font-normal text-lav-navy/80">{subline}</p>}
+            {subline && sublineInHeading ? (
+              // Two blocks with the gap of the column, so it looks exactly
+              // like name + claim; the colon is for the heading's text only
+              // (absolutely positioned, it takes no space in the flex column).
+              <h1 className="m-0 flex flex-col gap-8 text-lav-navy">
+                <span className="lav-h1 text-lav-navy">{title}</span>
+                <span className="sr-only">: </span>
+                <span className={sublineClass}>{subline}</span>
+              </h1>
+            ) : (
+              <>
+                <h1 className="lav-h1 text-lav-navy">{title}</h1>
+                {subline && <p className={sublineClass}>{subline}</p>}
+              </>
+            )}
             {description && <p className="lav-body font-normal text-lav-navy/80">{description}</p>}
             {children}
           </div>
