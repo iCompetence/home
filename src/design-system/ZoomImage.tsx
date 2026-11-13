@@ -23,6 +23,8 @@ export function ZoomImage({
   className,
   buttonClassName,
   loading,
+  width,
+  height,
 }: {
   src: string;
   alt: string;
@@ -31,6 +33,9 @@ export function ZoomImage({
   /** Classes of the button around it, e.g. a width when the image has one. */
   buttonClassName?: string;
   loading?: 'lazy' | 'eager';
+  /** Intrinsic size, so the page keeps its space before the picture loads. */
+  width?: number;
+  height?: number;
 }) {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
@@ -50,7 +55,15 @@ export function ZoomImage({
             buttonClassName,
           )}
         >
-          <img src={src} alt={alt} loading={loading} className={className} />
+          <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            loading={loading}
+            decoding="async"
+            className={className}
+          />
           <span
             aria-hidden
             className="pointer-events-none absolute bottom-3 right-3 inline-flex h-10 w-10 items-center justify-center rounded-pill bg-lav-white/90 text-lav-navy shadow-[0_2px_8px_rgb(11_34_49/0.18)] transition-transform duration-[var(--duration-fast)] ease-out group-hover:scale-110 md:bottom-4 md:right-4"
