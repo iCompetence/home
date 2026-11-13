@@ -157,7 +157,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit deinen Web-Analytics-Daten im Dialog. Frag alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.',
   },
   'analyticsAgent.what.p3': {
-    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
+    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine Wissensbasis darunter sorgt dafür, dass der Agent deine Daten im Zusammenhang deines Geschäfts richtig einordnet.',
   },
   'analyticsAgent.what.p4': {
     de: '→ Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in deiner Sprache.',
@@ -170,7 +170,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Kein SQL, keine Query-Builder, kein technisches Wissen nötig. Stell deine Frage einfach so, wie du einen Kollegen fragen würdest: „Was waren unsere Top-Landingpages letzten Monat?" oder „Vergleiche die Conversion-Raten über alle Kanäle."',
   },
   'analyticsAgent.card4.description': {
-    de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis deiner Daten im Kontext. Sie weiß, was deine Metriken bedeuten, wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
+    de: 'Eine Wissensbasis unter dem Agenten sorgt dafür, dass er deine Daten richtig einordnet. Sie weiß, was deine Metriken bedeuten und wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
   },
   // Content team 11/2026 (A-1): bullet in the product head and card title.
   'analyticsAgent.card5.title': { de: 'Sofort einsatzbereit mit Google Analytics 4' },
