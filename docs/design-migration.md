@@ -389,6 +389,18 @@ Stand:
       `ProductRow`). `outline` bleibt als Alias stehen, bis PR #25 gemergt ist, und fällt dann weg.
       Auf einer Lavendel-Karte verschwände `soft`: dort `solid`. Figma: Textstile H1, H2, Statement
       und die Button-Variante nachziehen.
+- [x] Produktzeilen mit UI-Ausschnitten statt Screenshots (2026-11-13): `ProductGlimpse` zeigt je
+      Produkt wenige, große Bausteine aus dem echten Produkt (EmpCo: Stufen und zwei Fundstellen;
+      iKnow: Frage, Antwort, Quelle; Analytics Agent: Frage und Diagramm aus GA4; Intelligentic
+      Search: Reiseberater-Chat und zwei Angebote) auf dem Navy-Feld der Leistungen, mit dem
+      Markenstern des Produkts in der Ecke (EmpCo und Intelligentic Search Violett, iKnow Mint,
+      Analytics Agent Blau). Vorher hatte jedes Produkt einen ganzen Screen auf eigener
+      Verlaufsfarbe. HTML statt Bild: scharf, lesbar, für Crawler sichtbar; nach außen ein Bild
+      (`role="img"` mit dem bisherigen Alt-Text). Das Seitenverhältnis des alten Bilds ist ab `lg`
+      nur die Mindesthöhe, damit auf kleinen Laptops nichts abgeschnitten wird. `ProductRow` nimmt
+      dafür `visual` statt `image`; Startseite und `MoreProducts` nutzen es, Privacy-led behält sein
+      Bild. Texte unter `lavender.glimpse.*` (DE/EN). Die Bilder `lavender-empco.png`,
+      `lavender-iknow.png` und `lavender-analytics-agent.png` werden nicht mehr verwendet.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
