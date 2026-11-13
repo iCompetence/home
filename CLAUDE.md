@@ -11,7 +11,7 @@ This is a **Next.js 16 (React 19, TypeScript)** marketing website for icompetenc
 ```bash
 npm run dev      # Start development server
 npm run build    # Build and export static site to /out
-npm run lint     # Run Next.js built-in ESLint
+npm run lint     # Run ESLint with the Next.js rules (flat config in eslint.config.mjs)
 ```
 
 No testing framework is configured.
