@@ -86,8 +86,8 @@ export default function IKnowLavender() {
         subline={t('iknow.hero.subtitle')}
       >
         <ButtonStack>
-          <ConsultButton className="w-full" topic={t('burgerMenu.iknow')} />
-          <Button asChild variant="soft" className="w-full">
+          <ConsultButton topic={t('burgerMenu.iknow')} />
+          <Button asChild variant="soft">
             <a href="#tool" onClick={smoothAnchor}>
               {t('iknow.anchor.intoTool')}
               <ArrowDown size={20} strokeWidth={2} />

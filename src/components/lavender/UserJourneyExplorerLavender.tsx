@@ -89,8 +89,8 @@ export default function UserJourneyExplorerLavender() {
         subline={t('icu.hero.subline')}
       >
         <ButtonStack>
-          <ConsultButton className="w-full" topic={t('burgerMenu.userJourney')} />
-          <Button asChild variant="soft" className="w-full">
+          <ConsultButton topic={t('burgerMenu.userJourney')} />
+          <Button asChild variant="soft">
             <a href="#guidance" onClick={smoothAnchor}>
               {t('lavender.icu.anchor.more')}
               <ArrowDown size={20} strokeWidth={2} />

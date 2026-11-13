@@ -45,7 +45,8 @@ export function Hero({ title, eyebrow, subline, actions, id = 'top', className }
         )}
 
         {actions && (
-          <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
+          // As wide as their labels on every width, as on the night home (was: stretched on phones).
+          <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
             {actions}
           </div>
         )}

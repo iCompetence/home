@@ -143,7 +143,7 @@ export default function EmpCoAuditLavender() {
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild variant="primary" className="w-full">
+          <Button asChild variant="primary">
             <a
               href="#form"
               onClick={(e) => {
@@ -155,7 +155,7 @@ export default function EmpCoAuditLavender() {
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-          <Button asChild variant="soft" className="w-full">
+          <Button asChild variant="soft">
             <a href="#about" onClick={smoothAnchor}>
               {t('empco.hero.ctaSecondary')}
               <ArrowDown size={20} strokeWidth={2} />

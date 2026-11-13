@@ -90,13 +90,13 @@ export default function AIWorkshopLavender() {
       >
         <Badge>{t('workshop.intro.run4')}</Badge>
         <ButtonStack>
-          <Button asChild variant="primary" className="w-full">
+          <Button asChild variant="primary">
             <a href="#form" onClick={smoothAnchor}>
               {t('workshop.anchor.apply')}
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-          <Button asChild variant="soft" className="w-full">
+          <Button asChild variant="soft">
             <a href="#intro" onClick={smoothAnchor}>
               {t('workshop.anchor.about')}
               <ArrowDown size={20} strokeWidth={2} />
