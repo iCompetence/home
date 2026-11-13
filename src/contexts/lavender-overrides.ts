@@ -83,6 +83,9 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Aber bitte transparent: Du behältst die volle Kontrolle über Inhalte, Quellen und Verarbeitung. Alle Daten bleiben lokal im Unternehmen, ohne Anbindung nach außen, also ohne öffentliche KI-APIs.',
   },
   'iknow.guidance.title': { de: 'Das hast du nun davon!' },
+  // Content team 11/2026 (docs/korrekturen-2026-11.md K-1): the card titles
+  // double as the bullets in the product head and should read on their own.
+  'iknow.card1.title': { de: 'Alle Wissensquellen deines Unternehmens vereint an einem Ort' },
   'iknow.card3.title': { de: 'Optional: Nutze auch Gespräche' },
   'iknow.card3.description': {
     de: 'iKnow kann Meetings und Workshops transkribieren und so neues Wissen direkt in das System integrieren. So kannst du, wenn gewünscht, Wissen sichern, bevor es verloren geht.',
@@ -90,10 +93,11 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'iknow.card4.description': {
     de: 'Sichere Wissen heutiger Generationen für künftige: iKnow bewahrt deine wertvollste Ressource dauerhaft und sichert so das kollektive Gedächtnis deines Unternehmens.',
   },
+  'iknow.card5.title': { de: 'Sicherheit und Souveränität in einer volatilen Welt' },
   'iknow.card5.description': {
     de: 'iKnow arbeitet lokal: Als Desktop-Software verarbeitet es Daten sicher vor Ort. Behalte die Kontrolle über deine Daten und dein Wissen, jederzeit.',
   },
-  'iknow.card6.title': { de: 'Bereit für deine Unternehmens-KI' },
+  'iknow.card6.title': { de: 'Die Grundlage für deine Unternehmens-KI' },
   'iknow.card6.description': {
     de: 'iKnow baut für dich die Datengrundlage, die du für die Nutzung von KI-Agenten benötigst. So wird dein Unternehmen in kurzer Zeit bereit für die Zukunft mit KI – automatisiert, einfach, datensicher und auf der Höhe der Zeit.',
   },
