@@ -614,18 +614,18 @@ function DayTestimonials() {
               key={item.key}
               aria-hidden={i !== index}
               className={cn(
-                // Quote and author side by side wherever the panel has room for both
-                // (quote 760 + gap + at least 220 for the author); otherwise the author wraps below.
-                'col-start-1 row-start-1 m-0 flex flex-wrap items-start gap-x-14 gap-y-8 transition-opacity duration-[var(--duration-base)] ease-out',
+                // The author below the quote on every width, as in the other quote
+                // components (TestimonialSlider, QuoteIntro, ReviewCard).
+                'col-start-1 row-start-1 m-0 flex flex-col items-start gap-8 transition-opacity duration-[var(--duration-base)] ease-out',
                 i === index ? 'opacity-100' : 'invisible opacity-0',
               )}
             >
-              <blockquote className="m-0 min-w-0 flex-[0_1_760px]">
+              <blockquote className="m-0 max-w-measure-lead">
                 <p className="lav-lead font-medium text-lav-navy">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
-              <figcaption className="flex flex-[1_0_220px] flex-col gap-2 pt-1.5">
+              <figcaption className="flex flex-col gap-2">
                 <span className="lav-body font-medium text-lav-navy">{item.name}</span>
                 <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
               </figcaption>
