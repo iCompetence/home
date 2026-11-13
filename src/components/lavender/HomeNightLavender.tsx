@@ -247,15 +247,15 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
               Lavender home (design system); services (tabs), statement, products,
               testimonials and Privacy-Led are this study's. */}
           <DayLayer>
-            {/* Client logos open the day layer: the logo files are made for a
-                light ground, which the night sky could not offer. */}
-            <LogoCarousel />
             <DayServices />
             <Statement />
-            <Products />
+            {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
+                the proof right after the claim. They need the light ground. */}
+            <LogoCarousel />
+            <DayProducts />
             <DayTestimonials />
             <DayProcess />
-            <PrivacyLed />
+            <DayPrivacyLed />
           </DayLayer>
           {/* The last screen: the day layer scrolls out completely and the
               stage is back. The footer text (ClosingStage) lies over this space. */}
@@ -517,6 +517,127 @@ function DayServices() {
         ))}
       </Tabs>
     </Section>
+  );
+}
+
+/**
+ * A product or topic on the day layer: text beside the picture the Lavender
+ * pages use for it (a finished composition with its own coloured ground, so no
+ * glass field and no star behind it). Sides alternate like the other rows.
+ */
+function DayRow({
+  id,
+  media,
+  image,
+  imageAlt,
+  imageClass,
+  eyebrow,
+  title,
+  description,
+  href,
+  cta,
+  external,
+  primary,
+}: {
+  id?: string;
+  media: Side;
+  image: string;
+  imageAlt: string;
+  /** Aspect ratio and crop of the picture. */
+  imageClass: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  href: string;
+  cta: string;
+  external?: boolean;
+  /** Filled button instead of the outlined one. */
+  primary?: boolean;
+}) {
+  return (
+    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN)} innerClassName={ROW}>
+      <div className={textCol(media)}>
+        <Eyebrow className="text-lav-ink/70">{eyebrow}</Eyebrow>
+        <h2 className="lav-h1 text-lav-ink">{title}</h2>
+        <p className="lav-body text-lav-ink/80">{description}</p>
+        <Button asChild variant={primary ? 'white' : 'outline'} className={primary ? solidOnNight : outlineOnNight}>
+          <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+            {cta}
+            <ArrowUpRight size={20} strokeWidth={2} />
+          </a>
+        </Button>
+      </div>
+      <div className={mediaCol(media)}>
+        <img
+          src={image}
+          alt={imageAlt}
+          decoding="async"
+          className={cn('block w-full rounded-card object-cover lg:rounded-frame', imageClass)}
+        />
+      </div>
+    </Section>
+  );
+}
+
+function DayProducts() {
+  const { t, language } = useLanguage();
+  // The pictures of the Lavender home (ProductShowcase).
+  return (
+    <>
+      <DayRow
+        id="products"
+        media="left"
+        image="/images/lavender-empco.png"
+        imageAlt={t('lavender.products.empco.imageAlt')}
+        imageClass="aspect-[4/3]"
+        eyebrow={t('lavender.products.featuredEyebrow')}
+        title={t('lavender.products.empco.title')}
+        description={t('lavender.products.empco.desc')}
+        href={siteHref(language, 'empco-audit')}
+        cta={t('lavender.products.empco.cta')}
+      />
+      <DayRow
+        media="right"
+        image="/images/lavender-iknow.png"
+        imageAlt={t('lavender.products.iknow.imageAlt')}
+        imageClass="aspect-[2416/1120]"
+        eyebrow={t('lavender.products.eyebrow')}
+        title="iKnow"
+        description={t('lavender.products.iknow.desc')}
+        href={siteHref(language, 'iknow')}
+        cta={t('lavender.products.learnMore')}
+      />
+      <DayRow
+        media="left"
+        image="/images/lavender-analytics-agent.png"
+        imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
+        imageClass="aspect-[2416/1120]"
+        eyebrow={t('lavender.products.eyebrow')}
+        title="Analytics Agent"
+        description={t('lavender.products.analyticsAgent.desc')}
+        href={siteHref(language, 'analytics-agent')}
+        cta={t('lavender.products.learnMore')}
+      />
+    </>
+  );
+}
+
+function DayPrivacyLed() {
+  const { t, language } = useLanguage();
+  return (
+    <DayRow
+      id="privacy-led"
+      media="left"
+      image="/images/privacy-led.jpg"
+      imageAlt={t('lavender.privacyLed.title')}
+      imageClass="aspect-[16/9]"
+      eyebrow={t('topNav.privacyLed')}
+      title={t('lavender.privacyLed.title')}
+      description={t('lavender.privacyLed.desc')}
+      href={siteHref(language, 'privacy-led-ai')}
+      cta={t('lavender.privacyLed.cta')}
+      external
+    />
   );
 }
 

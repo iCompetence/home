@@ -212,8 +212,9 @@ Stand:
       mit Abschnitten geben sie als `sections` mit: Die Leiste nennt den aktuellen Abschnitt,
       das Menü listet sie als große Links. Die `AnchorTabs`-Zeile entfällt dort; `TopNav` und
       `AnchorTabs` nutzt nur noch die bisherige Startseite `LavenderHome`.
-      Kundenlogos: `LogoCarousel` steht als Erstes auf dem hellen Blatt (die Logodateien
-      brauchen hellen Grund). Neue Tokens: `--text-small`, `--radius-frame-inner`,
+      Kundenlogos: `LogoCarousel` steht auf dem hellen Blatt direkt unter dem Statement (die
+      Logodateien brauchen hellen Grund). Produkte und Privacy-Led zeigen die Bilder der
+      Lavender-Startseite (`lavender-*.png`, `privacy-led.jpg`) statt eigener Screenshots. Neue Tokens: `--text-small`, `--radius-frame-inner`,
       `--container-measure(-lead|-wide)` für Zeilenlängen. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
       frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
       Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
