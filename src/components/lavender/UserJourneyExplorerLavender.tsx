@@ -136,6 +136,7 @@ function Benefits() {
           <SpecItem
             key={n}
             number={`(0${n})`}
+            headingLevel={3}
             title={t(`icu.carousel.item${n}.title`)}
             description={t(`icu.carousel.item${n}.description`)}
           />

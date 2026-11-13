@@ -185,6 +185,7 @@ export default function CampaignParameterToolLavender() {
             <SpecItem
               key={n}
               number={`0${n}`}
+              headingLevel={3}
               title={t(`ct.features.item${n}.title`)}
               description={t(`ct.features.item${n}.description`)}
             />
