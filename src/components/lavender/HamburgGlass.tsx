@@ -11,7 +11,7 @@ import { cn } from '@/components/ui/utils';
  * coloured blue to violet).
  *
  * Two congruent renderings with a transparent ground
- * (public/images/hamburg-glas-*.webp, 2600 × 1102): one unlit, one lit from
+ * (public/images/hamburg-glas-*.webp, 2600 × 1108): one unlit, one lit from
  * inside in the double star's colours. No blend mode, so the city may stand
  * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
@@ -29,14 +29,14 @@ import { cn } from '@/components/ui/utils';
 /** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
 // From west to east, as the city lies along the Elbe.
 const LANDMARKS = [
-  { x: 0.124, half: 0.075, y: 0.68, ry: 0.5 }, // Hafenkräne
+  { x: 0.118, half: 0.09, y: 0.68, ry: 0.5 }, // Köhlbrandbrücke
   { x: 0.308, half: 0.1, y: 0.78, ry: 0.4 }, // Landungsbrücken
-  { x: 0.427, half: 0.03, y: 0.45, ry: 0.9 }, // Fernsehturm
-  { x: 0.482, half: 0.078, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
-  { x: 0.575, half: 0.045, y: 0.6, ry: 0.66 }, // Michel
-  { x: 0.696, half: 0.065, y: 0.64, ry: 0.56 }, // Elbphilharmonie
-  { x: 0.815, half: 0.06, y: 0.64, ry: 0.62 }, // Rathaus
-  { x: 0.926, half: 0.055, y: 0.8, ry: 0.3 }, // Speicherstadt
+  { x: 0.432, half: 0.03, y: 0.45, ry: 0.9 }, // Fernsehturm
+  { x: 0.487, half: 0.078, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
+  { x: 0.58, half: 0.045, y: 0.6, ry: 0.66 }, // Michel
+  { x: 0.7, half: 0.065, y: 0.64, ry: 0.56 }, // Elbphilharmonie
+  { x: 0.82, half: 0.06, y: 0.64, ry: 0.62 }, // Rathaus
+  { x: 0.928, half: 0.055, y: 0.8, ry: 0.3 }, // Speicherstadt
 ] as const;
 
 type Light = { x: number; y: number; rx: number; ry: number; a: number };

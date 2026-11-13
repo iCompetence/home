@@ -857,7 +857,7 @@ html {
      round window that follows the pointer (HamburgGlass.tsx moves it). */
   .lav-hamburg {
     position: relative;
-    aspect-ratio: 2600 / 1102;
+    aspect-ratio: 2600 / 1108;
     touch-action: pan-y;
   }
   /* In the hero the headline stands in the sky above the skyline: from tablets
