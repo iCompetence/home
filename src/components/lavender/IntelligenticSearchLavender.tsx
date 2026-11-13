@@ -192,29 +192,29 @@ function Benefits() {
   const { t } = useLanguage();
   return (
     <>
-    <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 lg:gap-14">
-      <SectionHeader title={t('is.comparison.title')} />
-      <ComparisonTable
-        icons
-        caption={t('is.comparison.title')}
-        primaryHead={t('is.comparison.primaryHeader')}
-        secondaryHead={t('is.comparison.secondaryHeader')}
-        rows={[1, 2, 3].map((n) => ({
-          aspect: t(`is.comparison.row${n}.feature`),
-          primary: t(`is.comparison.row${n}.primary`),
-          secondary: t(`is.comparison.row${n}.secondary`),
-        }))}
-      />
-    </Section>
-    {/* A section of its own: it has its own title, so it keeps the distance
-        every section has (was 56 px below the table instead of 160). */}
-    <Section id="benefits-summary" innerClassName="flex flex-col gap-8">
-      <SectionHeader title={t('is.benefits.title')} />
-      <div className="flex max-w-measure-lead flex-col gap-6">
-        <p className={body}>{t('is.benefits.text1')}</p>
-        <p className={body}>{t('is.benefits.text2')}</p>
-      </div>
-    </Section>
+      <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 lg:gap-14">
+        <SectionHeader title={t('is.comparison.title')} />
+        <ComparisonTable
+          icons
+          caption={t('is.comparison.title')}
+          primaryHead={t('is.comparison.primaryHeader')}
+          secondaryHead={t('is.comparison.secondaryHeader')}
+          rows={[1, 2, 3].map((n) => ({
+            aspect: t(`is.comparison.row${n}.feature`),
+            primary: t(`is.comparison.row${n}.primary`),
+            secondary: t(`is.comparison.row${n}.secondary`),
+          }))}
+        />
+      </Section>
+      {/* A section of its own: it has its own title, so it keeps the distance
+          every section has (was 56 px below the table instead of 160). */}
+      <Section id="benefits-summary" innerClassName="flex flex-col gap-8">
+        <SectionHeader title={t('is.benefits.title')} />
+        <div className="flex max-w-measure-lead flex-col gap-6">
+          <p className={body}>{t('is.benefits.text1')}</p>
+          <p className={body}>{t('is.benefits.text2')}</p>
+        </div>
+      </Section>
     </>
   );
 }
