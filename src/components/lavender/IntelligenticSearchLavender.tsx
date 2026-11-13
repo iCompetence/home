@@ -191,6 +191,7 @@ function Modular() {
 function Benefits() {
   const { t } = useLanguage();
   return (
+    <>
     <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 lg:gap-14">
       <SectionHeader title={t('is.comparison.title')} />
       <ComparisonTable
@@ -204,14 +205,17 @@ function Benefits() {
           secondary: t(`is.comparison.row${n}.secondary`),
         }))}
       />
-      <div className="flex flex-col gap-8">
-        <h2 className="lav-h1 text-lav-navy">{t('is.benefits.title')}</h2>
-        <div className="flex max-w-measure-lead flex-col gap-6">
-          <p className={body}>{t('is.benefits.text1')}</p>
-          <p className={body}>{t('is.benefits.text2')}</p>
-        </div>
+    </Section>
+    {/* A section of its own: it has its own title, so it keeps the distance
+        every section has (was 56 px below the table instead of 160). */}
+    <Section id="benefits-summary" innerClassName="flex flex-col gap-8">
+      <SectionHeader title={t('is.benefits.title')} />
+      <div className="flex max-w-measure-lead flex-col gap-6">
+        <p className={body}>{t('is.benefits.text1')}</p>
+        <p className={body}>{t('is.benefits.text2')}</p>
       </div>
     </Section>
+    </>
   );
 }
 
