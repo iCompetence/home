@@ -182,12 +182,18 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'is.anchor.statusQuo': { en: 'Status quo' },
   // Same wording as iKnow and CPT (Dennis, 02.10.2026); tab and buy-box button.
   'is.anchor.howItWorks': { en: 'How it works', de: "So funktioniert's" },
-  'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google: KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein: Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen.' },
+  'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google – KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein! Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten die Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen!' },
   'is.quote.conclusion': { de: 'Wir wissen, dass du es kannst. Intelligentic Search.' },
-  'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
+  'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann!\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
   'is.features.subline3': { de: "Starre Filter? Tausende von „Ergebnissen\" zum Durchklicken? So gestern!\n\nSei auf dem neuesten Stand mit Intelligentic Search. It's a match!" },
+  // DE labels shortened per content team 11/2026 (docs/korrekturen-2026-11.md I-1 to I-3);
+  // they are the bullets in the product head and the feature titles.
+  'is.features.step1.label': { de: 'Präziser als herkömmliche KI-Suchen' },
   'is.features.step2.label': { en: 'Integrated image search' },
-  'is.features.step3.label': { en: 'Intelligentic Search is the real AI' },
+  'is.features.step3.label': { en: 'Intelligentic Search is the real AI', de: 'Die echte KI' },
+  'is.features.step4.label': { de: 'Antworten in Millisekunden' },
+  // A heading — no full stop (content team 11/2026, I-11).
+  'is.modular.title': { de: 'Modular und dynamisch' },
   'is.modular.text1': { de: 'Unsere Mission ist es für jeden die perfekt zugeschnittene Lösung zu finden. Die Intelligentic Search ist ein Modulares System, das um eigene Wünsche und Funktionen erweitert und auf die Eigenschaften deines Unternehmens angepasst werden kann.' },
   'is.howItWorks.title': { en: 'Under the hood: How the Intelligentic Search engine works' },
   'is.comparison.title': { de: 'Die Vorteile für dich' },
