@@ -1,7 +1,8 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Explainer, FaqSection, plainText, useInline, type FaqEntry } from '@/design-system';
+import { ANCHOR_SCROLL_MARGIN, Explainer, FaqSection, plainText, useInline, type FaqEntry } from '@/design-system';
+import { cn } from '@/components/ui/utils';
 import { previewRoute } from '@/lib/i18n-meta';
 import type { DatedRoute } from '@/lib/page-dates';
 import { faqPage, JsonLd } from '@/lib/structured-data';
@@ -64,11 +65,16 @@ export function TopicSection({
         lead={t(`${prefix}.lead`)}
         blocks={blocks}
         updated={route}
-        className={className}
+        className={cn(ANCHOR_SCROLL_MARGIN, className)}
       />
       {faqCount > 0 && (
         <>
-          <FaqSection id={`${id}-faq`} title={t(`${prefix}.faqTitle`)} items={faq.items} />
+          <FaqSection
+            id={`${id}-faq`}
+            className={ANCHOR_SCROLL_MARGIN}
+            title={t(`${prefix}.faqTitle`)}
+            items={faq.items}
+          />
           <JsonLd data={faqPage({ lang: language, path: previewRoute(route), items: faq.schema })} />
         </>
       )}
