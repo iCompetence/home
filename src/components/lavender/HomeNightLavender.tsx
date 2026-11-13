@@ -18,6 +18,7 @@ import {
   PageShell,
   ProcessAccordion,
   Section,
+  Statement,
   siteHref,
 } from '@/design-system';
 
@@ -104,7 +105,7 @@ export default function HomeNightLavender() {
             testimonials and Privacy-Led are this study's. */}
         <DayLayer>
           <DayServices />
-          <Statement />
+          <DayStatement />
           {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
               the proof right after the claim. */}
           <LogoStream />
@@ -631,20 +632,20 @@ const SERVICE_FIELDS = [
 
 /* ---------------- Statement ---------------- */
 
-function Statement() {
+function DayStatement() {
   const { t, language } = useLanguage();
   return (
-    <Section>
-      <div className="flex flex-col items-start gap-8 lg:gap-10">
-        <p className="lav-statement max-w-measure-wide text-lav-ink [text-wrap:balance]">{t('lavender.statement')}</p>
+    <Statement
+      text={t('lavender.statement')}
+      action={
         <Button asChild variant="solid">
           <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
             {t('topNav.letsTalk')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
         </Button>
-      </div>
-    </Section>
+      }
+    />
   );
 }
 

@@ -295,8 +295,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       return (
         <Statement
           text={data.heading ?? copy[0] ?? '⟨Aussage⟩'}
-          action={ctaButton('primary')}
-          actionId="preview-cta"
+          action={ctaButton('solid')}
         />
       );
 
@@ -460,7 +459,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       hero: () =>
         `<Hero\n  title={${head}}\n  subline={${copy[0] ?? "'…'"}}\n  actions={${ctaJsx('primary')}}\n/>`,
       statement: () =>
-        `<Statement\n  text={${head}}\n  action={${ctaJsx('primary')}}\n/>`,
+        `<Statement\n  text={${head}}\n  action={${ctaJsx('solid')}}\n/>`,
       feature: () =>
         `<Section>\n  <FeatureBlock\n    title={${head}}\n    description={${copy[0] ?? "'…'"}}\n    image="${img}"\n    imageAlt={t('…')}\n    action={${ctaJsx('solid', ' className="self-start"')}}\n  />\n</Section>`,
       featureStacked: () =>

@@ -1,78 +1,28 @@
-'use client';
-
 import { type ReactNode } from 'react';
 import { Section } from './Section';
-import { BrandStar } from './BrandStar';
-import { DesignFrameOverlay } from './DesignFrameOverlay';
-import { isCompact, useBreakpoint } from './useBreakpoint';
 
 export type StatementProps = {
   /** The single oversized sentence this section exists for. */
   text: string;
-  /** Optional CTA below it, rendered in its own band (see note). */
+  /** Optional action directly below it (a Button, `solid` unless it is the page's main action). */
   action?: ReactNode;
   id?: string;
-  /** id of the action band — the home page anchors #cta here. */
-  actionId?: string;
-  /**
-   * 'band' (default): star on the left, the action in its own band below.
-   * 'feature': a tall block that carries the page's key statement mid-page —
-   * star on the right, the action directly under the sentence.
-   */
-  layout?: 'band' | 'feature';
+  className?: string;
 };
 
 /**
- * A centred, oversized statement over the blue brand star.
- *
- * The action deliberately sits in a *sibling* band rather than inside the
- * statement's own padding: the statement keeps the full section rhythm above
- * and below, while the button hangs off its bottom edge with padding on one
- * side only. Emitting both from one component is what keeps that pairing from
- * being re-guessed on every page.
+ * One oversized sentence, as on the night home: calm, left-aligned on the
+ * text edge, no star behind it (the sky's guide star is the one star on the
+ * page). `text-wrap: balance` keeps the lines even instead of leaving one
+ * word alone. Ink colour, so it reads on the day sheet and on the night.
  */
-export function Statement({ text, action, id, actionId = 'cta', layout = 'band' }: StatementProps) {
-  const bp = useBreakpoint();
-  const compact = isCompact(bp);
-  const star = <BrandStar variant={layout === 'feature' ? 'statementRight' : 'statement'} />;
-
-  if (layout === 'feature') {
-    return (
-      <section
-        id={id}
-        data-ds="Statement"
-        className="relative flex min-h-[440px] w-full items-center overflow-hidden py-12 md:min-h-[560px] md:py-14 lg:min-h-[760px] lg:py-24"
-      >
-        {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
-        <div className="relative z-[2] mx-auto flex w-full max-w-frame flex-col items-center gap-10 px-[var(--section-pad-h)] lg:gap-12">
-          <p className="lav-statement w-full text-center text-lav-navy">{text}</p>
-          {action}
-        </div>
-      </section>
-    );
-  }
-
+export function Statement({ text, action, id, className }: StatementProps) {
   return (
-    <>
-      <Section dsName="Statement" id={id} className="relative" innerClassName="relative z-[2]">
-        {/* The star shares the container with the sentence: as a positioned
-            box it would paint over the (static) text, so it gets its own
-            layer behind it — the star always stays in the background. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          {compact ? star : <DesignFrameOverlay>{star}</DesignFrameOverlay>}
-        </div>
-        <p className="lav-statement w-full text-center text-lav-navy">
-          {text}
-        </p>
-      </Section>
-
-      {action && (
-        <section id={actionId} data-ds="StatementCTA" className="w-full pb-[var(--section-pad-v)]">
-          <div className="mx-auto flex w-full max-w-frame justify-center px-6 md:px-12 lg:px-24">
-            {action}
-          </div>
-        </section>
-      )}
-    </>
+    <Section dsName="Statement" id={id} className={className}>
+      <div className="flex flex-col items-start gap-8 lg:gap-10">
+        <p className="lav-statement max-w-measure-wide text-lav-ink [text-wrap:balance]">{text}</p>
+        {action}
+      </div>
+    </Section>
   );
 }

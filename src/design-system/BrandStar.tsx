@@ -5,9 +5,8 @@
  * first design's components (ClosingBlock, TestimonialSlider) and the
  * sections still on their way out.
  *
- * Placement is per-slot, not per-page: the statement star sits behind the
- * sentence on the left, and the
- * closing star spans the CTA band and the footer. Keeping the presets
+ * Placement is per-slot, not per-page: the testimonials star sits
+ * behind the slider, and the closing star spans the CTA band and the footer. Keeping the presets
  * here is what stops each migrated page from re-deriving the offsets — the
  * scale is a design-system decision, not page copy.
  *
@@ -15,33 +14,19 @@
  * so a JS-positioned star would paint at desktop size on a phone before
  * hydration corrects it.
  *
- * Renders only the positioned layer; callers place it (Hero and Statement pin
+ * Renders only the positioned layer; callers place it (TestimonialSlider pins
  * it to the 1440 design frame on desktop via DesignFrameOverlay).
  */
 export type BrandStarVariant =
-  | 'statement'
-  | 'statementRight'
   | 'testimonials'
   | 'closing'
   | 'facts';
 
 const PLACEMENT: Record<BrandStarVariant, string> = {
-  statement:
-    "bg-[url('/images/icompetence_visual_blau_01.png')] " +
-    'top-1/2 -translate-y-1/2 left-[-130px] h-[340px] w-[340px] ' +
-    'md:left-[-220px] md:h-[600px] md:w-[600px] ' +
-    'lg:left-[-300px] lg:h-[900px] lg:w-[900px]',
   testimonials:
     "bg-[url('/images/icompetence_visual_rot_01.png')] " +
     'top-1/2 -translate-y-1/2 right-[-120px] h-[360px] w-[360px] ' +
     'md:right-[-150px] md:h-[700px] md:w-[700px] ' +
-    'lg:right-[-300px] lg:h-[900px] lg:w-[900px]',
-  // Statement with the star on the right — the star alternates sides down a
-  // page, so a statement that follows a left-hand star mirrors it.
-  statementRight:
-    "bg-[url('/images/icompetence_visual_blau_01.png')] " +
-    'top-1/2 -translate-y-1/2 right-[-130px] h-[340px] w-[340px] ' +
-    'md:right-[-220px] md:h-[600px] md:w-[600px] ' +
     'lg:right-[-300px] lg:h-[900px] lg:w-[900px]',
   // Mint star for dark fact bands. Never behind text: on desktop it fills the
   // left third next to the content, on compact it sits in the top-left corner

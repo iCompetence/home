@@ -191,10 +191,10 @@ export default function EmpCoAuditLavender() {
       </div>
 
       <Statement
-        layout="feature"
         text={t('empco.test.closing')}
         action={
-          <Button asChild>
+          // The page's main action again (as in the head): blue wherever it appears on the day sheet.
+          <Button asChild variant="primary">
             <a
               href="#form"
               onClick={(e) => {
