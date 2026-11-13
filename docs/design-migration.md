@@ -381,6 +381,14 @@ Stand:
       als h3). Große Bilder ab `lg` mit `rounded-frame`. `QuotePanel` (aus `DayTestimonials`) auch für
       die CPT-Bewertungen statt drei `ReviewCard`s (entfernt); Anführungszeichen setzt das Bauteil
       (Korrektur C-8).
+- [x] Feinschliff nach der serus.ai-Analyse (2026-11-13): Große Überschriften enger gesetzt,
+      in em, damit es mit jeder Stufe skaliert: `lav-h1` und `lav-statement` −0,02 em, `lav-h2`
+      −0,01 em (`lav-display` hatte mit −2 px bei 80 px schon etwa −0,025 em). Der zweite Button ist
+      jetzt eine Fläche ohne Linie: Variante `soft` in `--color-lav-soft` (Lavendel am Tag, Weiß 12 %
+      in der Nacht; folgt der Fläche wie Tinte und Grund). Sie ersetzt `outline` überall (Kaufboxen,
+      `ProductRow`). `outline` bleibt als Alias stehen, bis PR #25 gemergt ist, und fällt dann weg.
+      Auf einer Lavendel-Karte verschwände `soft`: dort `solid`. Figma: Textstile H1, H2, Statement
+      und die Button-Variante nachziehen.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
