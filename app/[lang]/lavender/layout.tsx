@@ -22,6 +22,27 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
+/**
+ * A reload starts at the top of the page (Dennis, 13.11.2026). Browsers put
+ * you back where you were, which on the home page drops you onto the day layer
+ * without the night stage; a #section in the address would jump there too.
+ * Only reloads: back and forward keep the remembered position. Inline, so it
+ * runs while the page is parsed, before the browser restores the position.
+ */
+const RELOAD_TO_TOP = `(function () {
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    if (!nav || nav.type !== 'reload') return;
+    history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+    window.scrollTo(0, 0);
+    window.addEventListener('load', function () { window.scrollTo(0, 0); }, { once: true });
+    // Back on when leaving, so this entry remembers its position for back and
+    // forward. (Earlier, at load, was too soon: the browser restores later.)
+    window.addEventListener('pagehide', function () { history.scrollRestoration = 'auto'; });
+  } catch (e) {}
+})();`
+
 export default async function LavenderLayout({
   children,
   params,
@@ -31,8 +52,11 @@ export default async function LavenderLayout({
 }) {
   const lang = toLang((await params).lang)
   return (
-    <LanguageProvider initialLanguage={lang} variant="lavender">
-      {children}
-    </LanguageProvider>
+    <>
+      <script dangerouslySetInnerHTML={{ __html: RELOAD_TO_TOP }} />
+      <LanguageProvider initialLanguage={lang} variant="lavender">
+        {children}
+      </LanguageProvider>
+    </>
   )
 }

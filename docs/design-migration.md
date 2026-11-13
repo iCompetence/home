@@ -288,7 +288,11 @@ Stand:
       `HomeNightLavender` (Metadaten und JSON-LD der Seite bleiben), `LavenderHome` ist entfernt.
       `/lavender/nacht-hamburg/` leitet per 301 auf `/lavender/` (`public/_redirects`). Damit führen
       Logo und Menü-Abschnittslinks der Unterseiten auf die neue Startseite. Die echte Startseite `/`
-      bleibt bis zum Umzug unverändert. Nur von `LavenderHome` genutzte Bausteine (u. a. `TopNav`,
+      bleibt bis zum Umzug unverändert.
+      Neu laden startet oben (Wunsch Dennis, 13.11.2026): Inline-Skript im Vorschau-Layout
+      schaltet bei `performance … type === 'reload'` die Scroll-Wiederherstellung ab, scrollt nach
+      oben und entfernt einen Anker aus der Adresse. Zurück/Vor behält die gemerkte Position
+      (`scrollRestoration` geht beim Verlassen der Seite wieder auf `auto`). Nur von `LavenderHome` genutzte Bausteine (u. a. `TopNav`,
       `AnchorTabs`, `ServicesCarousel`, `TestimonialSlider`, `LogoCarousel`, `ClosingBlock`) sind noch
       im Design-System und können beim Aufräumen weg.
 - [x] **Unterseiten in „Licht und Linie“** (Entscheidung Dennis, 13.11.2026) — vorher hatten die
