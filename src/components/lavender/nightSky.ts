@@ -4,11 +4,13 @@
  * started on any canvas: `const stop = startNightSky(canvas)`.
  *
  * What it draws:
- * - small stars: fixed points with a barely visible shimmer. They do not move
- *   with scrolling or the pointer; the whole sky turns very slowly around a
- *   fixed pole. Every few seconds one star somewhere on the screen, a different
- *   one each time, glints: it brightens and shows a fine cross of a random,
- *   small size, then fades. Never many at once, never large.
+ * - small stars: fixed points that twinkle (their brightness wavers, each at
+ *   its own pace; their size does not change). They do not move with scrolling
+ *   or the pointer; the whole sky turns very slowly around a fixed pole. Every
+ *   second or two one star somewhere on the screen, a different one each time,
+ *   glints: it brightens and shows a fine cross of a random, small size, then
+ *   fades. At most three at once, never large. Towards the glass city the
+ *   stars fade out, so none shows through the buildings.
  * - the guide star (the blue/violet double star, "Polaris"): the one thing
  *   that moves. It follows the pointer with a lag, behind the page's content,
  *   so glass panels turn it into a glow. Over the glass city (HamburgGlass) it
@@ -113,7 +115,7 @@ export function startNightSky(
         radius: reach * Math.sqrt(Math.random()),
         size: 0.45 + mag * 1.15,
         tint: TINTS[Math.floor(Math.random() * TINTS.length)],
-        rate: 0.0004 + Math.random() * 0.0012,
+        rate: 0.0012 + Math.random() * 0.0026,
         phase: Math.random() * Math.PI * 2,
       };
     });
@@ -140,9 +142,10 @@ export function startNightSky(
   /** Now and then a random star that is on screen starts to glint. */
   function scheduleGlints(turn: number) {
     glints = glints.filter((g) => time - g.start < g.duration);
-    if (time < nextGlint || glints.length >= 2) return;
-    // 2.5 to 7 seconds until the next one.
-    nextGlint = time + 2500 + Math.random() * 4500;
+    if (time < nextGlint || glints.length >= 3) return;
+    // 0.9 to 2.6 seconds until the next one: often enough to be noticed
+    // without looking for it, never a pattern.
+    nextGlint = time + 900 + Math.random() * 1700;
     const p = pole();
     for (let tries = 0; tries < 12; tries++) {
       const index = Math.floor(Math.random() * field.length);
@@ -151,9 +154,22 @@ export function startNightSky(
       const y = p.y + Math.sin(s.angle + turn) * s.radius;
       if (x < 8 || x > W - 8 || y < 8 || y > H - 8) continue;
       // Most glints are small (cross 3 px long), a few reach 9 px.
-      glints.push({ index, start: time, duration: 1400 + Math.random() * 1600, reach: 3 + Math.pow(Math.random(), 2) * 6 });
+      glints.push({ index, start: time, duration: 1200 + Math.random() * 1200, reach: 4 + Math.pow(Math.random(), 2) * 6 });
       return;
     }
+  }
+
+  /**
+   * How visible a star is at this height: stars fade out towards the glass
+   * city, so none shows through the buildings. 1 above the city, 0 from its
+   * middle down. Only while the city is on screen and not behind the day layer.
+   */
+  function cityFade(): (y: number) => number {
+    const box = city?.getBoundingClientRect();
+    if (!box || box.bottom < 0 || box.top > H) return () => 1;
+    const from = box.top + box.height * 0.04;
+    const to = box.top + box.height * 0.5;
+    return (y) => (y <= from ? 1 : y >= to ? 0 : 1 - (y - from) / (to - from));
   }
 
   function drawField() {
@@ -162,15 +178,22 @@ export function startNightSky(
     // One turn takes about three hours: enough to feel alive, never to notice.
     const turn = reduce ? 0 : time * 0.0000006;
     if (!reduce) scheduleGlints(turn);
+    const fade = cityFade();
     for (let i = 0; i < field.length; i++) {
       const s = field[i];
       const x = p.x + Math.cos(s.angle + turn) * s.radius;
       const y = p.y + Math.sin(s.angle + turn) * s.radius;
       if (x < -4 || x > W + 4 || y < -4 || y > H + 4) continue;
-      // A slight shimmer only: the star stays the same size and nearly the same brightness.
-      const shimmer = reduce ? 1 : 0.92 + 0.08 * Math.sin(time * s.rate + s.phase);
+      const near = fade(y);
+      if (near <= 0) continue;
       const bright = (s.size - 0.45) / 1.15;
-      ctx.globalAlpha = (0.3 + 0.6 * bright) * shimmer;
+      // Twinkling as with real stars: the brightness wavers, the size does not.
+      // Two waves of different length per star, so no rhythm shows; brighter
+      // stars waver more (down to about half), faint ones hardly.
+      const depth = 0.12 + 0.36 * bright;
+      const wave = Math.sin(time * s.rate + s.phase) * 0.6 + Math.sin(time * s.rate * 2.7 + s.phase * 1.9) * 0.4;
+      const twinkle = reduce ? 1 : 1 - depth * (0.5 + 0.5 * wave);
+      ctx.globalAlpha = (0.34 + 0.66 * bright) * twinkle * near;
       ctx.fillStyle = s.tint;
       ctx.beginPath();
       ctx.arc(x, y, s.size, 0, Math.PI * 2);
@@ -183,7 +206,8 @@ export function startNightSky(
       const y = p.y + Math.sin(s.angle + turn) * s.radius;
       // Rises quickly, fades slowly.
       const t = (time - g.start) / g.duration;
-      const glow = t < 0.3 ? t / 0.3 : 1 - (t - 0.3) / 0.7;
+      const glow = (t < 0.3 ? t / 0.3 : 1 - (t - 0.3) / 0.7) * fade(y);
+      if (glow <= 0) continue;
       const len = g.reach * glow;
       ctx.fillStyle = s.tint;
       ctx.globalAlpha = glow;
