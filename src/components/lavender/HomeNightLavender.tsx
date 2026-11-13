@@ -318,19 +318,90 @@ const STAGE_HEIGHT = 'h-[max(100svh,540px)]';
 const STAGE_TEXT =
   'relative z-[1] mx-auto flex w-full max-w-measure-wide flex-1 flex-col items-center justify-center gap-8 px-[var(--section-pad-h)] pb-[min(24vw,34svh)] pt-24 text-center lg:gap-10 lg:pt-28';
 
+/**
+ * The city stands back behind the text of the stage, and only there. Every
+ * element marked `data-haze` (the hero's lines and button, the closing line
+ * and its button) cuts a soft-edged hole into the skyline, exactly where it
+ * stands, so a tower beside or below the text stays whole. (Before, one large
+ * oval faded the whole upper middle of the city, and the TV tower with it.)
+ * The holes are drawn as a small SVG that masks the glass; it is redrawn when
+ * the text or the screen changes.
+ */
+function useTextHaze(deps: readonly unknown[]) {
+  useEffect(() => {
+    const glass = document.querySelector<HTMLElement>('[data-ds="HeroHamburg"] .lav-hamburg-glass');
+    if (!glass) return;
+    const GROW = 18; // px the hole reaches beyond the text
+    const SOFT = 13; // px blur of its edge
+    let raf = 0;
+    let last = '';
+    const paint = () => {
+      raf = 0;
+      const box = glass.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const holes: string[] = [];
+      const add = (r: DOMRect) => {
+        if (!r.width || !r.height || r.bottom < box.top - 60 || r.top > box.bottom + 60) return;
+        const x = Math.round(r.left - box.left - GROW);
+        const y = Math.round(r.top - box.top - GROW);
+        holes.push(`<rect x="${x}" y="${y}" width="${Math.round(r.width + 2 * GROW)}" height="${Math.round(r.height + 2 * GROW)}" rx="${GROW}"/>`);
+      };
+      document.querySelectorAll<HTMLElement>('[data-haze]').forEach((el) => {
+        if (getComputedStyle(el).visibility === 'hidden') return;
+        if (el.matches('a, button')) return add(el.getBoundingClientRect());
+        // Text: one hole per line, as wide as the line (the element itself may be much wider).
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        Array.from(range.getClientRects()).forEach(add);
+      });
+      const w = Math.round(box.width);
+      const h = Math.round(box.height);
+      const svg = holes.length
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><filter id="b" filterUnits="userSpaceOnUse" x="0" y="0" width="${w}" height="${h}"><feGaussianBlur stdDeviation="${SOFT}"/></filter><mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#fff"/><g filter="url(#b)" fill="#000">${holes.join('')}</g></mask></defs><rect width="${w}" height="${h}" fill="#fff" mask="url(#m)"/></svg>`
+        : '';
+      if (svg === last) return;
+      last = svg;
+      const image = svg ? `url("data:image/svg+xml,${encodeURIComponent(svg)}")` : '';
+      glass.style.setProperty('-webkit-mask-image', image);
+      glass.style.setProperty('mask-image', image);
+      glass.style.setProperty('-webkit-mask-size', '100% 100%');
+      glass.style.setProperty('mask-size', '100% 100%');
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(paint);
+    };
+    paint();
+    document.fonts?.ready.then(queue);
+    window.addEventListener('resize', queue);
+    // The closing line and the city move against each other on the page's last pixels.
+    window.addEventListener('scroll', queue, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', queue);
+      window.removeEventListener('scroll', queue);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
+
 function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  useTextHaze([hidden, covered, language]);
   return (
     <div
       data-ds="HeroHamburg"
       className={cn('sticky top-0 flex flex-col overflow-hidden', STAGE_HEIGHT, covered && 'invisible')}
     >
       <div data-stage="hero" className={cn(STAGE_TEXT, 'lav-enter', hidden && 'invisible')}>
-        <h1 className="lav-display text-lav-ink [text-wrap:balance]">{t('lavender.hero.headline')}</h1>
-        <p className="lav-lead max-w-measure-lead text-lav-ink/80">{t('lavender.hero.subline')}</p>
+        <h1 data-haze className="lav-display text-lav-ink [text-wrap:balance]">
+          {t('lavender.hero.headline')}
+        </h1>
+        <p data-haze className="lav-lead max-w-measure-lead text-lav-ink/80">
+          {t('lavender.hero.subline')}
+        </p>
         {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
         <Button asChild variant="white" className={solidOnNight}>
-          <a href="#services" onClick={(e) => glideOnClick(e, 1100)}>
+          <a data-haze href="#services" onClick={(e) => glideOnClick(e, 1100)}>
             {t('lavender.hero.seeServices')}
             <ArrowDown size={20} strokeWidth={2} />
           </a>
@@ -338,8 +409,8 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
       </div>
       {/* On phones the full skyline would be a thin strip: show the middle of it
           larger (Landungsbrücken to Rathaus). From tablets up it spans the
-          screen and fades towards the text block (.lav-hamburg-haze). */}
-      <HamburgGlass className="lav-hamburg-haze absolute bottom-0 left-[-36%] w-[160%] md:left-0 md:w-full" />
+          screen; behind the text it stands back (useTextHaze). */}
+      <HamburgGlass className="absolute bottom-0 left-[-36%] w-[160%] md:left-0 md:w-full" />
     </div>
   );
 }
@@ -377,9 +448,11 @@ function ClosingStage({ shown }: { shown: boolean }) {
         <div className="relative z-[1] mx-auto w-full max-w-frame px-[var(--section-pad-h)] pt-[108px] lg:pt-[140px]">
           {/* Contact details are on the contact page; here only the call to action. */}
           <div className="pointer-events-auto flex max-w-measure-lead flex-col items-start gap-8 lg:gap-10">
-            <h2 className="lav-h1 text-lav-ink [text-wrap:balance]">{t('lavender.cta.heading')}</h2>
+            <h2 data-haze className="lav-h1 text-lav-ink [text-wrap:balance]">
+              {t('lavender.cta.heading')}
+            </h2>
             <Button asChild variant="white" className={solidOnNight}>
-              <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
+              <a data-haze href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
                 {t('topNav.letsTalk')}
                 <ArrowUpRight size={20} strokeWidth={2} />
               </a>

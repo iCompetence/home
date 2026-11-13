@@ -32,7 +32,7 @@ const LANDMARKS = [
   { x: 0.118, half: 0.09, y: 0.68, ry: 0.5 }, // Köhlbrandbrücke
   { x: 0.24, half: 0.09, y: 0.78, ry: 0.4 }, // Landungsbrücken
   { x: 0.351, half: 0.03, y: 0.45, ry: 0.9 }, // Fernsehturm
-  { x: 0.408, half: 0.08, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
+  { x: 0.43, half: 0.082, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
   { x: 0.536, half: 0.05, y: 0.6, ry: 0.66 }, // Michel
   { x: 0.661, half: 0.063, y: 0.64, ry: 0.56 }, // Elbphilharmonie
   { x: 0.8, half: 0.065, y: 0.64, ry: 0.62 }, // Rathaus

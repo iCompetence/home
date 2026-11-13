@@ -860,15 +860,6 @@ html {
     aspect-ratio: 2600 / 1109;
     touch-action: pan-y;
   }
-  /* In the hero the headline stands in the sky above the skyline: from tablets
-     up the city thins out towards the top centre, so no tower runs through
-     the text. */
-  @media (min-width: 768px) {
-    .lav-hamburg-haze .lav-hamburg-glass {
-      -webkit-mask-image: radial-gradient(ellipse 50% 72% at 50% 0%, transparent 56%, #000 100%);
-      mask-image: radial-gradient(ellipse 50% 72% at 50% 0%, transparent 56%, #000 100%);
-    }
-  }
   .lav-hamburg > div,
   .lav-hamburg-glass > div {
     position: absolute;

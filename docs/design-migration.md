@@ -224,7 +224,9 @@ Stand:
       Gebäuden in der Reihenfolge von West nach Ost: Köhlbrandbrücke (statt der Hafenkräne; ihre
       Fahrbahn läuft hinter den Landungsbrücken aus), Landungsbrücken, Fernsehturm,
       Rickmer Rickmers, Michel, Elbphilharmonie, Rathaus, Speicherstadt, rechts mit Luft zwischen den
-      Gebäuden; Bodenplatte und Spiegelung nachträglich geglättet; beleuchtet = dieselbe Fassung in
+      Gebäuden; Bodenplatte mit runden Enden und Boden aus der ersten Fassung übernommen, die
+      Spiegelung folgt den Gebäuden; im Hero tritt die Stadt nur noch direkt hinter dem Text
+      zurück (`useTextHaze`: weiche Löcher um jede Textzeile und den Knopf statt eines großen Ovals); beleuchtet = dieselbe Fassung in
       Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
       Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
       Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem
