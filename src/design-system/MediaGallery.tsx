@@ -17,27 +17,38 @@ export function MediaGallery({
   images,
   thumbLabel,
   aspectClassName = 'aspect-[4/3]',
+  bleed = 'both',
 }: {
   images: readonly GalleryImage[];
   /** Accessible name for a thumbnail, e.g. (n) => `Bild ${n} anzeigen`. */
   thumbLabel: (index: number) => string;
   /** Aspect ratio of the stage as a Tailwind class. */
   aspectClassName?: string;
+  /**
+   * How far the stage stands out over the text edge, like the large pictures
+   * and fields of the night home (16 / 32 px below desktop, 40 px from
+   * desktop up). 'both' in a section of its own; 'start' in the product head,
+   * where from desktop up only the outer, left side has room.
+   */
+  bleed?: 'both' | 'start';
 }) {
   const [active, setActive] = useState(0);
   const current = images[active] ?? images[0];
 
   return (
     <div data-ds="MediaGallery" className="flex w-full flex-col gap-3 md:gap-4">
-      <ZoomImage
-        src={current.src}
-        alt={current.alt}
-        className={cn(
-          // The big corner from desktop up, as the large pictures of the night home.
-          'w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame',
-          aspectClassName,
-        )}
-      />
+      {/* The thumbnails stay on the text edge. */}
+      <div className={cn('-mx-4 md:-mx-8', bleed === 'start' ? 'lg:mx-0 lg:-ml-10' : 'lg:-mx-10')}>
+        <ZoomImage
+          src={current.src}
+          alt={current.alt}
+          className={cn(
+            // The big corner from desktop up, as the large pictures of the night home.
+            'w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame',
+            aspectClassName,
+          )}
+        />
+      </div>
       {/* Thumbnails only where there is something to switch to. */}
       {images.length > 1 && (
         <div className="flex gap-2 overflow-x-auto md:gap-3 lg:gap-4">

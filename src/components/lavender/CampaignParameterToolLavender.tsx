@@ -178,12 +178,15 @@ export default function CampaignParameterToolLavender() {
 
       <Section id="how" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.demo.title')} intro={[t('ct.demo.description')]} />
-        <ZoomImage
-          src="/assets/how-it-works.png"
-          alt={t('lavender.alt.cpt.howItWorks')}
-          loading="lazy"
-          className="aspect-[1948/1014] w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame"
-        />
+        {/* Out to the frame edge, like the large pictures of the home page. */}
+        <div className="-mx-4 md:-mx-8 lg:-mx-10">
+          <ZoomImage
+            src="/assets/how-it-works.png"
+            alt={t('lavender.alt.cpt.howItWorks')}
+            loading="lazy"
+            className="aspect-[1948/1014] w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame"
+          />
+        </div>
       </Section>
 
       <Section id="features" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">

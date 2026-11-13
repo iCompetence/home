@@ -123,10 +123,13 @@ export default function IntelligenticSearchLavender() {
 
       <Section id="how-it-works" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('is.howItWorks.title')} intro={[t('is.howItWorks.description')]} />
-        <LoopVideo
-          src="/videos/Architecture.mp4"
-          className="aspect-video w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame"
-        />
+        {/* Out to the frame edge, like the large pictures of the home page. */}
+        <div className="-mx-4 md:-mx-8 lg:-mx-10">
+          <LoopVideo
+            src="/videos/Architecture.mp4"
+            className="aspect-video w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame"
+          />
+        </div>
       </Section>
 
       <Benefits />

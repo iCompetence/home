@@ -195,14 +195,17 @@ export default function EmpCoAuditLavender() {
         {/* What the report looks like, right after "Sehen, was der Audit
             findet", full width and enlargeable (content team 11/2026, E-5). */}
         <Section id="test-report" className="pt-0">
-          <ZoomImage
-            src="/assets/empco/EmpCo-Tool-UI.webp"
-            alt={t('empco.toolImage.alt')}
-            width={2000}
-            height={1137}
-            loading="lazy"
-            className="h-auto w-full rounded-card bg-lav-stage lg:rounded-frame"
-          />
+          {/* Out to the frame edge, like the large pictures of the home page. */}
+          <div className="-mx-4 md:-mx-8 lg:-mx-10">
+            <ZoomImage
+              src="/assets/empco/EmpCo-Tool-UI.webp"
+              alt={t('empco.toolImage.alt')}
+              width={2000}
+              height={1137}
+              loading="lazy"
+              className="h-auto w-full rounded-card bg-lav-stage lg:rounded-frame"
+            />
+          </div>
         </Section>
       </div>
 
