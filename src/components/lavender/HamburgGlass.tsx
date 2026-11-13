@@ -19,27 +19,23 @@ import { cn } from '@/components/ui/utils';
  * A deliberate exception to "Licht und Linie" (a rendering, not a line),
  * approved for the footer only. The footer stays dark in every theme.
  *
- * Without a pointer (touch) the light walks from landmark to landmark while
- * the city is on screen; a finger on the city takes over. With reduced motion
- * the light jumps instead of gliding and does not walk by itself.
+ * Without a pointer (touch) the whole city lights up and goes dark again in
+ * a slow change while it is on screen (Dennis, 13.11.2026; before, a spot
+ * walked from landmark to landmark). A finger on the city takes over with the
+ * spot. With reduced motion the city stays dark and the spot jumps instead of
+ * gliding.
  *
  * Decorative: the address is stated in text on the imprint page.
  */
 
-/** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
-// From west to east, as the city lies along the Elbe.
-const LANDMARKS = [
-  { x: 0.123, half: 0.089, y: 0.68 }, // Köhlbrandbrücke
-  { x: 0.236, half: 0.089, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
-  { x: 0.365, half: 0.03, y: 0.45 }, // Fernsehturm
-  { x: 0.423, half: 0.081, y: 0.78 }, // Rickmer Rickmers
-  { x: 0.505, half: 0.049, y: 0.6 }, // Michel
-  { x: 0.635, half: 0.062, y: 0.64 }, // Elbphilharmonie
-  { x: 0.714, half: 0.03, y: 0.55 }, // St. Nikolai
-  { x: 0.788, half: 0.064, y: 0.64 }, // Rathaus
-  { x: 0.853, half: 0.03, y: 0.55 }, // St. Petri
-  { x: 0.914, half: 0.054, y: 0.8 }, // Speicherstadt
-] as const;
+/**
+ * The slow change without a pointer, in ms: the fade (the same in and out,
+ * .lav-hamburg-all in globals.css), how long the city stays lit and how long
+ * it stays dark.
+ */
+const FADE = 1600;
+const LIT = 4000;
+const DARK = 3400;
 
 /** Where the light is (fractions of the picture), its radius as a fraction of the width, its strength. */
 type Light = { x: number; y: number; rx: number; a: number };
@@ -56,13 +52,14 @@ export function HamburgGlass({ className }: { className?: string }) {
     const target: Light = { ...cur };
     let raf = 0;
     let timer = 0;
-    let walking = 4;
+    let glowing = false;
     let inside = false;
     let visible = false;
 
     const halo = el.querySelector<HTMLElement>('.lav-hamburg-halo');
     const spot = el.querySelector<HTMLElement>('.lav-hamburg-spot');
     const lit = el.querySelector<HTMLElement>('.lav-hamburg-on');
+    const all = el.querySelector<HTMLElement>('.lav-hamburg-all');
 
     // The light is a small round window (spot) over the lit picture, and a
     // glow (halo) behind the city. Both are only moved, scaled and faded,
@@ -113,42 +110,32 @@ export function HamburgGlass({ className }: { className?: string }) {
       if (!raf) raf = requestAnimationFrame(tick);
     };
 
-    const stopWalk = () => {
+    // Without a pointer: the whole lit picture fades in over the unlit one,
+    // stays, fades out, and the city rests dark for a while. Only opacity
+    // changes (a CSS transition), nothing is repainted.
+    const glow = (on: boolean) => {
+      glowing = on;
+      if (all) all.style.opacity = on ? '1' : '0';
+    };
+    const stopPulse = () => {
       window.clearTimeout(timer);
       timer = 0;
+      glow(false);
     };
-    // Only landmarks that are on screen: on phones the city is wider than the
-    // screen (the middle of it, enlarged), and the light would spend a third of
-    // its round on landmarks nobody sees.
-    const onScreen = (x: number) => {
-      const box = el.getBoundingClientRect();
-      const from = -box.left / box.width;
-      const to = (document.documentElement.clientWidth - box.left) / box.width;
-      return x >= from + 0.03 && x <= to - 0.03;
+    const pulse = () => {
+      glow(!glowing);
+      timer = window.setTimeout(pulse, FADE + (glowing ? LIT : DARK));
     };
-    const walk = () => {
-      for (let step = 1; step <= LANDMARKS.length; step++) {
-        const next = (walking + step) % LANDMARKS.length;
-        if (onScreen(LANDMARKS[next].x)) {
-          walking = next;
-          break;
-        }
-      }
-      const lm = LANDMARKS[walking];
-      Object.assign(target, { x: lm.x, y: lm.y, rx: Math.max(lm.half * 1.55, 0.1), a: 1 });
-      go();
-      timer = window.setTimeout(walk, 2600);
-    };
-    const startWalk = (delay: number) => {
-      stopWalk();
-      if (touch && !still && visible && !inside) timer = window.setTimeout(walk, delay);
+    const startPulse = (delay: number) => {
+      stopPulse();
+      if (touch && !still && visible && !inside) timer = window.setTimeout(pulse, delay);
     };
 
     const leave = () => {
       inside = false;
       target.a = 0;
       go();
-      startWalk(900);
+      startPulse(900);
     };
 
     // Listens on the window, not on the city: in the hero the text block lies
@@ -170,7 +157,7 @@ export function HamburgGlass({ className }: { className?: string }) {
         return;
       }
       inside = true;
-      stopWalk();
+      stopPulse();
       Object.assign(target, {
         x: (e.clientX - box.left) / box.width,
         y: (e.clientY - box.top) / box.height,
@@ -182,9 +169,9 @@ export function HamburgGlass({ className }: { className?: string }) {
     const seen = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        if (visible) startWalk(600);
+        if (visible) startPulse(600);
         else {
-          stopWalk();
+          stopPulse();
           if (!inside) {
             target.a = 0;
             go();
@@ -211,7 +198,7 @@ export function HamburgGlass({ className }: { className?: string }) {
 
     return () => {
       cancelAnimationFrame(raf);
-      stopWalk();
+      stopPulse();
       seen.disconnect();
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerdown', move);
@@ -232,6 +219,8 @@ export function HamburgGlass({ className }: { className?: string }) {
       </div>
       <div className="lav-hamburg-glass">
         <div className="lav-hamburg-off" />
+        {/* The whole city lit: only shown without a pointer (the slow change). */}
+        <div className="lav-hamburg-all" />
         <div className="lav-hamburg-spot">
           <div className="lav-hamburg-on" />
         </div>

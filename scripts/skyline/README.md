@@ -24,8 +24,6 @@ transparent wird (Standard `0.035`).
 
 Diese Stellen hängen am Bild und müssen mit:
 
-- `LANDMARKS` in `src/components/lavender/HamburgGlass.tsx` – Positionen der Wahrzeichen,
-  zwischen denen das Licht ohne Zeiger wandert
 - `aspect-ratio` von `.lav-hamburg` in `src/styles/globals.css` (heute `2600 / 1097`)
 - `SKYLINE_RATIO` in `src/components/lavender/nightSky.ts` (heute `1097 / 2600`)
 
@@ -34,5 +32,7 @@ Diese Stellen hängen am Bild und müssen mit:
 Beide Dateien sind mit dem Skript neu erzeugt (2600 × 1097). Seitdem setzt es die Skulptur
 waagerecht in die Mitte: Im Rendering hatte die Sockelplatte links 51 px und rechts 2 px Abstand
 zum Bildrand, das Skript ergänzt rechts Schwarz, bis beide Abstände gleich sind (je rund 42 px
-bei 2600 px Breite). Die Wahrzeichen liegen dadurch um den Faktor 0,9846 weiter links; `LANDMARKS`
-und der Ruheplatz des Leitsterns (`at` in `nightSky.ts`) sind angepasst.
+bei 2600 px Breite). Die Wahrzeichen liegen dadurch um den Faktor 0,9846 weiter links; der
+Ruheplatz des Leitsterns (`at` in `nightSky.ts`) ist angepasst. Die Liste der Wahrzeichen
+(`LANDMARKS`) gibt es nicht mehr: Ohne Zeiger leuchtet seit dem 13.11.2026 abends die ganze Stadt
+im Wechsel auf, statt dass ein Licht von Wahrzeichen zu Wahrzeichen wandert.

@@ -872,7 +872,8 @@ html {
     will-change: transform;
   }
   .lav-hamburg-off,
-  .lav-hamburg-on {
+  .lav-hamburg-on,
+  .lav-hamburg-all {
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
@@ -881,7 +882,15 @@ html {
     /* The rendering is bright; at rest the city stands back in the night. */
     opacity: 0.5;
   }
-  .lav-hamburg-on {
+  .lav-hamburg-on,
+  .lav-hamburg-all {
     background-image: url('/images/hamburg-glas-licht.webp');
+  }
+  /* The whole city lit, for devices without a pointer: HamburgGlass.tsx
+     switches the opacity, the fade is here (FADE in HamburgGlass.tsx). */
+  .lav-hamburg-glass > .lav-hamburg-all {
+    opacity: 0;
+    transition: opacity 1600ms ease-in-out;
+    will-change: opacity;
   }
 }
