@@ -255,7 +255,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
-| E-1 | „Greenwashing“ in den Einstieg, z. B. Untertitel „… welche zum Risiko werden, sich dem Vorwurf des Greenwashings auszusetzen“. Weiter unten stattdessen: H1 „Das iCompetence EmpCo Audit: Schütze deine Website vor Greenwashing-Vorwürfen und Abmahnungen.“, Subline „Innerhalb weniger Stunden identifiziert der automatisierte Audit unzulässige Umweltaussagen auf deiner Website und zeigt konkreten Handlungsbedarf.“ | 2 | Produktkopf | ⏳ |
+| E-1 | „Greenwashing“ in den Einstieg, z. B. Untertitel „… welche zum Risiko werden, sich dem Vorwurf des Greenwashings auszusetzen“. Weiter unten stattdessen: H1 „Das iCompetence EmpCo Audit: Schütze deine Website vor Greenwashing-Vorwürfen und Abmahnungen.“, Subline „Innerhalb weniger Stunden identifiziert der automatisierte Audit unzulässige Umweltaussagen auf deiner Website und zeigt konkreten Handlungsbedarf.“ | 2 | Produktkopf | ➖ erledigt (SEO-Session) |
 | E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ⏳ |
 | E-3 | Einleitungsabsatz ergänzen: „… kommunizieren dürfen, ohne in den Verdacht des Greenwashings zu geraten.“ | 1 | `empco.why.p1` | ☑️ |
 | E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ⏳ |
@@ -266,7 +266,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 | E-8 | Im rosa Kasten zwei Absätze mit *, davor ein Leerzeichen, das müsste weg | 3 | `FormField.tsx` (Pflichtfeld-Stern) | ✅ |
 | E-9 | „Das verbietet die EmpCo-Richtlinie“ | 1 | `empco.seo.banned.title` | ✅ |
 | E-10 | Tabelle: „In Kraft – wird seit dem 27. September 2026 verbindlich angewendet.“ | 1 | `empco.seo.compare.r1.empco` | ✅ |
-| E-11 | „Green Claims Directive (GCD)“ → „Green-Claims-Richtlinie“? Sonst ist die Tabelle denglisch | 2 | `empco.seo.compare.colGcd` u. a. | ⏳ |
+| E-11 | „Green Claims Directive (GCD)“ → „Green-Claims-Richtlinie“? Sonst ist die Tabelle denglisch | 2 | `empco.seo.compare.colGcd` u. a. | ✅ |
 | E-12 | FAQ „Ab wann gilt die EmpCo-Richtlinie?“: neue Antwort im Perfekt/Präteritum | 1 | `empco.seo.faq.a2` | ✅ |
 | E-13 | FAQ „Ist ‚klimaneutral‘ noch erlaubt?“: letzter Satz „… sind seit dem 27. September 2026 unzulässig und abmahngefährdet.“ | 1 | `empco.seo.faq.a6` | ✅ |
 | E-14 | „Nur mit echtem Reduktionsnachweis“ → „Nur mit belegbarem Nachweis“ | 1 | `empco.seo.faq.a6` | ✅ |
@@ -433,11 +433,12 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **N-1 / N-2 Was ist neu:** zurückgestellt, die Seite wird erst insgesamt aktualisiert.
 - **D-2 / Link-Fehler:** behoben. Die Reset-Regel in `PageShell.tsx` liegt jetzt in `@layer base`. Geprüft auf allen DE-Vorschauseiten: unterstrichen sind nur die Links im Datenschutz und Impressum, dazu neu die Quellenangabe „Amazon“ auf Intelligentic Search. Sonst hat sich nichts verändert.
 - **E-7, E-8, I-9, K-2, U-3, A-4, C-3, C-7, H-5, P-1, E-14 (Schritt 4), Impressum „E-Mail:“:** wie vorgeschlagen umgesetzt.
+- **E-1 Greenwashing in der H1:** erledigt von der SEO/GEO-Session (Branch `claude/seo-geo-lavender-342459`, neues Prop `sublineInHeading` in `ProductHead`). Die H1 lautet im HTML „EmpCo Audit: Website auf Greenwashing prüfen.“, die Optik bleibt. Die H1 des Prüfers würde das Suchziel verschieben und wird nicht übernommen.
+- **E-11 Green-Claims-Richtlinie:** mit der SEO/GEO-Session abgestimmt und umgesetzt. Tabellenkopf „Green-Claims-Richtlinie (GCD)“, Überschrift „EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich“, FAQ q8 und a8 deutsch, q9 „Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?“. Der englische Name bleibt damit an genau zwei Stellen sichtbar, weil danach gesucht wird.
 
 **Noch offen (⏳):**
 - Lightbox (G-2, I-4, U-1, E-5), Bildbeschriftungen der Galerie (G-3), ganze Produktkarte als Link (C-10), Zitate mit Anführungszeichen (C-8), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben. Abstimmung mit der Session „Unterseiten an die neue Startseite angleichen“, weil sie dieselben Bauteile anfasst.
 - E-5 braucht zusätzlich einen anonymisierten Screenshot einer Audit-Analyse (Kategorie, Textstelle, Vorschlag, Kommentar sichtbar).
-- E-1 (Greenwashing in die H1) und E-11 („Green-Claims-Richtlinie“): Rückfrage an die SEO/GEO-Session gestellt.
 - D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
 
 ---
