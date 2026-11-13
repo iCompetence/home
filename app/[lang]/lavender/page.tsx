@@ -7,16 +7,17 @@ import { PAGE_UPDATED } from '@/lib/page-dates'
 
 // The title says what iCompetence is and where (search phrase approved
 // 13.11.2026); the brand line "Separate the signal from the noise." stays the h1.
+// The description sums up the services (the hero lead is the page's first line).
 const meta = {
   de: {
     title: 'KI-Beratung & Data Consulting aus Hamburg | iCompetence',
     description:
-      'Mit uns bekommen Teams den Überblick: So werden verstreute Daten zu klaren Entscheidungen, KI zu Produkten und Automatisierung liefert zuverlässige Ergebnisse.',
+      'iCompetence ist eine Beratung für Daten und KI aus Hamburg: Datenstrategie, Web-Analytics, Dashboards, KI-Agenten und KI-Workshops, remote oder bei dir vor Ort.',
   },
   en: {
     title: 'AI and data consulting from Hamburg | iCompetence',
     description:
-      'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
+      'iCompetence is a data and AI consultancy from Hamburg: data strategy, web analytics, dashboards, AI agents and AI workshops, remotely or on site.',
   },
 } as const
 

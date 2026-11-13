@@ -4,16 +4,20 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Title: product name plus the search phrase (approved 13.11.2026); description as
-// on the live page (app/[lang]/icu-user-journey-explorer/page.tsx).
+// Title: product name plus the search phrase (approved 13.11.2026). The
+// description says what the page shows; the live one called ICU a
+// "zero-party-data" explorer, but journeys are observed behaviour, not data
+// people declare themselves.
 const meta = {
   de: {
     title: 'ICU User Journey Explorer: Customer Journeys analysieren | iCompetence',
-    description: 'Zero-Party-Data Customer Journey Explorer für tiefe Nutzer-Insights.',
+    description:
+      'ICU rekonstruiert echte User Journeys automatisch aus deinen Tracking-Daten: Abbrüche, Schleifen und Pfade zur Conversion, auch per Frage in natürlicher Sprache.',
   },
   en: {
     title: 'ICU User Journey Explorer: analyze customer journeys | iCompetence',
-    description: 'Zero-party-data customer journey explorer for deep user insights.',
+    description:
+      'ICU automatically reconstructs real user journeys from your tracking data: drop-offs, loops and paths to conversion, also answered in natural language.',
   },
 }
 
