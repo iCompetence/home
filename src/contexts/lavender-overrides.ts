@@ -15,7 +15,7 @@ import type { Language } from './LanguageContext';
 export const lavenderOverrides: Record<string, Partial<Record<Language, string>>> = {
   // --- EmpCo Audit ---
   'empco.hero.subtitle': {
-    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und welche zum Risiko werden.',
+    de: 'Der automatisierte Audit, der dich vor EmpCo-Verstößen auf deiner Website schützt. Innerhalb weniger Stunden weißt du, welche Nachhaltigkeitsaussagen belegbar sind und wo Handlungsbedarf besteht.',
   },
   'empco.anchor.what': { en: 'About the audit' },
   'empco.why.p2': {
@@ -84,10 +84,27 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Nur mit belegbarem Nachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 unzulässig und abmahngefährdet.',
   },
   'empco.seo.faq.q8': {
-    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green Claims Directive?',
+    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green-Claims-Richtlinie?',
+  },
+  // E-11: German name like "EmpCo-Richtlinie" (content team 11/2026). The English
+  // name stays visible twice (comparison heading, q9) because people search for
+  // and ask AI assistants about it (SEO/GEO session, 13.11.2026).
+  'empco.seo.compare.title': {
+    de: 'EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich',
+  },
+  'empco.seo.compare.colGcd': { de: 'Green-Claims-Richtlinie (GCD)' },
+  'empco.seo.faq.a8': {
+    de: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt seit dem 27. September 2026. Die Green-Claims-Richtlinie (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.',
+  },
+  'empco.seo.faq.q9': {
+    de: 'Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?',
   },
   'empco.seo.faq.q19': {
     de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Geschäftsführung oder Nachhaltigkeitsmanagement?',
+  },
+  // E-14: same wording as the climate-neutral FAQ (no "echte Reduktionsnachweise").
+  'empco.seo.step4.desc': {
+    de: 'Klimaneutral-Aussagen, die auf Kompensation beruhen, streichen oder auf belegte eigene Emissionsminderung umstellen.',
   },
   'empco.seo.faq.a19': {
     de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Das Marketing formuliert, das Nachhaltigkeitsmanagement liefert Daten, die Rechtsabteilung prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.',
@@ -102,6 +119,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'iknow.intro.p2': {
     de: 'Hebe diesen Schatz! KI ermöglicht dir, das personengebundene Wissen allen verfügbar zu machen. Ein Wissenspool statt einer Insel, Struktur statt Silo, zugänglich für alle.',
   },
+  // K-2: the conclusion line ends with a full stop, not a colon (content team 11/2026).
+  'iknow.intro.p3': { de: 'Wie das geht? Mit iKnow.' },
   'iknow.what.p2': {
     de: 'Sie wächst mit dem Wissen deines Unternehmens. Kontinuierlich lernen? Selbstverständlich, das tust du ja auch.',
   },
@@ -150,6 +169,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'analyticsAgent.intro.p2': {
     de: 'Was wäre, wenn jeder in deinem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.',
   },
+  'analyticsAgent.intro.p3': { de: 'Genau das macht der Analytics Agent.' },
   'analyticsAgent.what.p1': {
     de: 'Der Analytics Agent ist ein eigenständiger KI-Agent, der sich mit jeder beliebigen Datenquelle verbinden lässt. Er versteht deine Daten, deinen Business-Kontext und deine Fragen – alles in natürlicher Sprache.',
   },
@@ -157,7 +177,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit deinen Web-Analytics-Daten im Dialog. Frag alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.',
   },
   'analyticsAgent.what.p3': {
-    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
+    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine Wissensbasis darunter sorgt dafür, dass der Agent deine Daten im Zusammenhang deines Geschäfts richtig einordnet.',
   },
   'analyticsAgent.what.p4': {
     de: '→ Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in deiner Sprache.',
@@ -170,7 +190,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Kein SQL, keine Query-Builder, kein technisches Wissen nötig. Stell deine Frage einfach so, wie du einen Kollegen fragen würdest: „Was waren unsere Top-Landingpages letzten Monat?" oder „Vergleiche die Conversion-Raten über alle Kanäle."',
   },
   'analyticsAgent.card4.description': {
-    de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis deiner Daten im Kontext. Sie weiß, was deine Metriken bedeuten, wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
+    de: 'Eine Wissensbasis unter dem Agenten sorgt dafür, dass er deine Daten richtig einordnet. Sie weiß, was deine Metriken bedeuten und wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
   },
   // Content team 11/2026 (A-1): bullet in the product head and card title.
   'analyticsAgent.card5.title': { de: 'Sofort einsatzbereit mit Google Analytics 4' },
@@ -193,7 +213,12 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   },
 
   // --- User Journey Explorer (ICU) ---
-  'icu.intro.text': { de: 'Die meisten Analytics-Tools zeigen die Journeys, die du bei deinen Nutzern vermutest. ICU zeigt die, die tatsächlich stattgefunden haben. Das KI-gestützte Tool rekonstruiert jeden echten Pfad durch deine Website oder dein Produkt in Echtzeit — jeden Schritt, jede Rückkehr, jeden Abbruch — und verwandelt ihn in eine visuelle Karte, die jeder verstehen kann. Kein Setup, keine Dashboards zu konfigurieren, kein Analyst-Studium erforderlich.' },
+  // U-3: only the first two sentences stay oversized; the rest became the
+  // checklist below (lavender.icu.intro.point1–3).
+  'icu.intro.text': {
+    en: 'Most analytics tools show the journeys you presume your users take. ICU shows the ones they actually took.',
+    de: 'Die meisten Analytics-Tools zeigen die Journeys, die du bei deinen Nutzern vermutest. ICU zeigt die, die tatsächlich stattgefunden haben.',
+  },
   'icu.carousel.title': { en: "We bring clarity to your user's behavior. In an instant.", de: 'Wir bringen Klarheit in das Verhalten deiner Nutzer. Sofort.' },
   'icu.carousel.subline': { en: 'ICU is built for the people who make decisions and for everybody else. ICU automatically - effortlessly - reveals the real journeys your users take. No dashboards to configure, no filters to master, no IT course to take — just clear, visual behavior anyone on your team can understand intuitively.', de: 'ICU wurde für Entscheider entwickelt — und für alle anderen. ICU enthüllt automatisch und mühelos die echten Journeys deiner Nutzer. Keine Dashboards zu konfigurieren, keine Filter zu beherrschen, kein IT-Kurs nötig — nur klares, visuelles Verhalten, das jeder in deinem Team intuitiv versteht.' },
   'icu.carousel.item1.description': { de: 'ICU deckt jeden echten Pfad deiner Nutzer auf — einschließlich Schleifen, Rückkehrern und stillen Abbrüchen — automatisch aus deinem vollständigen Datensatz rekonstruiert. Kein Setup. Kein Zusammenstückeln. Kein Rätselraten.' },
@@ -252,6 +277,13 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Konsistente UTM-Parameter – über alle Kanäle',
   },
   'ct.why.solution.item1': { de: 'Standardisierte Parameter über alle Kanäle' },
+  // C-3 ("Parameterlogs" was a slip) and C-7 (the section now names the tool's benefit).
+  'ct.values.card1.description': {
+    de: 'Einmal definiert, überall genutzt. Eine einheitliche Parameterlogik verhindert Wildwuchs, Tippfehler und unklare Kampagnenbezeichnungen.',
+  },
+  'ct.why.description': {
+    de: 'Kampagnen werden immer komplexer. Touchpoints vervielfachen sich. Ohne konsistente Tracking-Parameter entstehen Datenlücken, Reporting-Brüche und ineffiziente Workflows – mit direktem Impact auf Media Spend und Performance. Mit dem Campaign Parameter Tool vermeidest du diese Probleme und bekommst valide UTM-Parameter für dein Marketing, ohne Mehraufwand.',
+  },
   'ct.values.card3.description': {
     de: 'Keine mühsame manuelle Parameterpflege mehr in Excel-Sheets oder Slack-Threads. Parameter werden automatisch in Echtzeit generiert und dokumentiert.',
   },
@@ -264,23 +296,51 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'Everything you need for clean tracking',
     de: 'Alles, was du für sauberes Tracking brauchst',
   },
-  'ct.features.item1.title': { en: 'Automated UTM generation' },
+  // Features 01–08: since the first commit (21.01.2026) the titles came from a
+  // different list than the descriptions (the descriptions match the icons of
+  // the live page). Titles now name what each description does, in the terms
+  // of the CPT product sheet; each line adds its benefit (content team
+  // 11/2026, docs/korrekturen-2026-11.md C-6). Live page unchanged.
+  'ct.features.item1.title': { en: 'Generation', de: 'Generierung' },
   'ct.features.item1.description': {
-    de: 'Definiere eigene Namenskonventionen und Parameter-Strukturen nach Unternehmensstandards.',
+    en: 'Create clean campaign URLs in a few clicks, with validation and a preview before you use them.',
+    de: 'In wenigen Klicks erzeugst du saubere Kampagnen-URLs, mit Validierung und Vorschau vor dem Einsatz.',
   },
-  'ct.features.item2.title': { en: 'Parameter templates & governance layer' },
+  'ct.features.item2.title': { en: 'Naming conventions', de: 'Namenskonventionen' },
   'ct.features.item2.description': {
-    en: 'Role-based access control and collaboration features for marketing, media and analytics teams.',
+    en: "Set naming conventions and parameter structures once, following your company's standards. Every new campaign follows them automatically.",
+    de: 'Du legst Namenskonventionen und Parameterstrukturen einmal nach den Standards deines Unternehmens fest. Jede neue Kampagne folgt ihnen automatisch.',
   },
-  'ct.features.item3.title': { en: 'Logging & documentation' },
-  'ct.features.item4.title': { en: 'Multi-user workflow' },
+  'ct.features.item3.title': { en: 'Governance', de: 'Governance' },
+  'ct.features.item3.description': {
+    en: 'Templates and role-based permissions for marketing, media and analytics. Campaigns stay consistent across teams, brands and countries.',
+    de: 'Vorlagen und rollenbasierte Rechte für Marketing, Media und Analytics. So bleiben Kampagnen auch über Teams, Marken und Länder hinweg einheitlich.',
+  },
+  'ct.features.item4.title': { en: 'Checks', de: 'Prüfung' },
   'ct.features.item4.description': {
+    en: 'The tool checks every URL for naming conventions, duplicates and format rules. Errors show up before they reach your reporting.',
+    de: 'Das Tool prüft jede URL auf Namenskonventionen, Dubletten und Formatvorgaben. Fehler fallen auf, bevor sie im Reporting landen.',
+  },
+  'ct.features.item5.title': { en: 'Bulk creation', de: 'Massenerstellung' },
+  'ct.features.item5.description': {
+    en: 'Generate hundreds of campaign URLs in one central step via CSV import or API.',
     de: 'Generiere hunderte Kampagnen-URLs in einem einzigen, zentralen Arbeitsgang via CSV-Import oder API.',
   },
-  'ct.features.item5.title': { en: 'Channel & vendor standardization' },
-  'ct.features.item6.title': { en: 'Reusable campaign structures' },
-  'ct.features.item7.title': { en: 'Integration into existing MarTech stack workflows' },
-  'ct.features.item8.title': { en: 'Export to analytics & BI tools' },
+  'ct.features.item6.title': { en: 'Integrations', de: 'Anbindung' },
+  'ct.features.item6.description': {
+    en: 'Native integration with GA4, Adobe Analytics and other analytics platforms, plus export to BI tools.',
+    de: 'Native Anbindung an GA4, Adobe Analytics und weitere Analytics-Plattformen, Export auch in BI-Tools.',
+  },
+  'ct.features.item7.title': { en: 'Links', de: 'Links' },
+  'ct.features.item7.description': {
+    en: 'Built-in link shortener with custom domains and click tracking. Long campaign URLs become easy to share and stay measurable.',
+    de: 'Integrierter Link-Kürzer mit eigenen Domains und Klick-Tracking. Lange Kampagnen-URLs werden teilbar und bleiben messbar.',
+  },
+  'ct.features.item8.title': { en: 'History', de: 'Historie' },
+  'ct.features.item8.description': {
+    en: 'Every change is logged in full, so you can trace what changed in a campaign for compliance and quality assurance.',
+    de: 'Jede Änderung wird vollständig protokolliert, damit du für Compliance und Qualitätssicherung nachvollziehen kannst, was sich an einer Kampagne geändert hat.',
+  },
   'ct.why.title': { en: 'Why clean UTM parameters are critical' },
   'ct.why.problem.title': { en: 'Without standards' },
   'ct.pricing.trialBadge': { en: '14 day free trial', de: '14 Tage kostenlos testen' },

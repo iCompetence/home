@@ -1,9 +1,12 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/components/ui/utils';
+import { Eyebrow } from './Eyebrow';
 
 export type HeroProps = {
   /** Headline. A `\n` is a line break on every breakpoint, as in Figma. */
   title: string;
+  /** Small line above the headline, e.g. "404". */
+  eyebrow?: string;
   subline?: string;
   /** CTAs — composed by the page so each one picks its own buttons. */
   actions?: ReactNode;
@@ -18,7 +21,7 @@ export type HeroProps = {
  * yellow brand star by default): on the night pages the sky's guide star is
  * the one star.
  */
-export function Hero({ title, subline, actions, id = 'top', className }: HeroProps) {
+export function Hero({ title, eyebrow, subline, actions, id = 'top', className }: HeroProps) {
   return (
     <section
       id={id}
@@ -26,7 +29,14 @@ export function Hero({ title, subline, actions, id = 'top', className }: HeroPro
       className={cn('w-full bg-lav-lavender/10', className)}
     >
       <div className="mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-[var(--section-pad-v)] md:gap-12 md:px-12 lg:gap-14 lg:px-24">
-        <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
+        {eyebrow ? (
+          <div className="flex flex-col gap-4">
+            <Eyebrow>{eyebrow}</Eyebrow>
+            <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
+          </div>
+        ) : (
+          <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
+        )}
 
         {subline && (
           <p className="lav-lead w-full max-w-full font-normal text-lav-navy/80 md:w-[600px] lg:w-[820px]">

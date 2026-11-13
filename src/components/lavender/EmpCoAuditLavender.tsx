@@ -337,8 +337,9 @@ function SampleForm() {
     >
       <div className="flex flex-col gap-10 lg:w-[44.2%]">
         <SectionHeader title={t('empco.form.title')} intro={[t('empco.form.intro')]} />
-        <p className="lav-small border-l border-lav-navy/20 pl-4 font-normal italic text-lav-navy/70">
-          {t('empco.form.disclaimer')}
+        {/* Plain note, not styled like a quoted mail (content team 11/2026, E-7). */}
+        <p className="lav-small font-normal text-lav-navy/70">
+          <DisclaimerText text={t('empco.form.disclaimer')} />
         </p>
       </div>
 
@@ -396,6 +397,18 @@ function SampleForm() {
         </a>
       </ValidatedForm>
     </Section>
+  );
+}
+
+/** "Hinweis: …" / "Note: …" with the lead-in word in semibold. */
+function DisclaimerText({ text }: { text: string }) {
+  const i = text.indexOf(':');
+  if (i < 0 || i > 20) return <>{text}</>;
+  return (
+    <>
+      <strong className="font-semibold text-lav-navy">{text.slice(0, i + 1)}</strong>
+      {text.slice(i + 1)}
+    </>
   );
 }
 

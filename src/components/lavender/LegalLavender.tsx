@@ -52,7 +52,7 @@ export function ImprintLavender() {
         </p>
         <p className={body}>{t('footer.phone')}: +49 40 22636380</p>
         <p className={body}>
-          Email:{' '}
+          {t('lavender.common.email')}:{' '}
           <a href="mailto:info@icompetence.de" className={inlineLink}>
             info@icompetence.de
           </a>
