@@ -227,7 +227,9 @@ Stand:
       Elbphilharmonie, dahinter St. Nikolai, Rathaus, dahinter St. Petri, Speicherstadt. Die
       Gebäude überlappen sich wieder in der Tiefe. Im Hero tritt die Stadt nur direkt hinter dem
       Text zurück (`textHaze.ts`: weiche Löcher um jede Textzeile und den Knopf statt eines großen
-      Ovals). Das Stadtlicht ist rund. Alle Seiten enden im selben Bild (`ClosingText`: Schlusszeile
+      Ovals). Das Stadtlicht ist rund; das beleuchtete Bild ist kräftig eingefärbt (Blau und Lila in
+      schrägen Bändern, sodass ein Lichtfleck beide enthält) und hat einen eingerechneten Schein
+      über die Kanten (kein `mix-blend-mode`, nur das Bild selbst). Alle Seiten enden im selben Bild (`ClosingText`: Schlusszeile
       mittig, Stadt am unteren Rand, Leiste mit Textlinks darunter); beleuchtet = dieselbe Fassung in
       Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
       Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den

@@ -52,7 +52,7 @@ export function HamburgGlass({ className }: { className?: string }) {
     if (!el) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const touch = window.matchMedia('(hover: none)').matches;
-    const cur: Light = { x: 0.5, y: 0.7, rx: 0.1, a: 0 };
+    const cur: Light = { x: 0.5, y: 0.7, rx: 0.12, a: 0 };
     const target: Light = { ...cur };
     let raf = 0;
     let timer = 0;
@@ -120,7 +120,7 @@ export function HamburgGlass({ className }: { className?: string }) {
     const walk = () => {
       walking = (walking + 1) % LANDMARKS.length;
       const lm = LANDMARKS[walking];
-      Object.assign(target, { x: lm.x, y: lm.y, rx: Math.max(lm.half * 1.55, 0.08), a: 1 });
+      Object.assign(target, { x: lm.x, y: lm.y, rx: Math.max(lm.half * 1.55, 0.1), a: 1 });
       go();
       timer = window.setTimeout(walk, 2600);
     };
@@ -159,7 +159,7 @@ export function HamburgGlass({ className }: { className?: string }) {
       Object.assign(target, {
         x: (e.clientX - box.left) / box.width,
         y: (e.clientY - box.top) / box.height,
-        rx: 0.1,
+        rx: 0.12,
         a: 1,
       });
       go();
