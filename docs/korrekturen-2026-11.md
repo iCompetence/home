@@ -220,6 +220,7 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 **A-6**
 - vorher: Abschnitt „Sieh den Analytics Agent in Aktion“ mit Unterzeile „Die Frage ist nicht, ob du Daten hast. Sondern ob du sie nutzen kannst.“
 - nachher: Unterzeile entfernt, der Absatz „Mit dem Analytics Agent wird jedes Teammitglied …“ bleibt. Der Text liegt weiter im Override, falls er in den Produktkopf wandert (A-7).
+- Gilt auch für die EN-Vorschau, weil es dasselbe Bauteil ist.
 
 **A-4 Vorschlag:** „semantisch“ raus, ohne neuen Fachbegriff: „Eine Wissensbasis unter dem Agenten sorgt dafür, dass er deine Daten richtig einordnet. Sie weiß, was deine Metriken bedeuten und wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.“ Den Vorschlag „setzt … in den Kontext“ würde ich nicht nehmen, er sagt etwas anderes. Dasselbe Wort steht auch in `analyticsAgent.what.p3` („semantische Verständnis“), dort genauso anpassen.
 
@@ -413,6 +414,22 @@ Laut Prüfer ok, keine Änderung.
 - Headline: „Hier geht es leider nicht weiter.“ („404“ bleibt klein darüber)
 - Subline: „Die Seite, die du suchst, gibt es nicht mehr oder sie wurde verschoben. Schau dir unsere Produkte an oder schreib uns.“
 - Buttons: „Zu den Produkten“ (Startseite `#products`) und „Kontakt aufnehmen“. „KI-Tools“ würde ich nicht einführen, die Seite nennt sie überall „Produkte & Tools“.
+
+---
+
+## Prüfung im Browser (13.11.2026, Dev-Server)
+
+Je Seite alle Akkordeons, Leistungs-Tabs und FAQ-Antworten geöffnet, dann `document.body.innerText` durchsucht: Jeder neue Text ist da, keiner der alten mehr.
+
+- `/de/lavender/` und `/de/lavender/nacht-hamburg/`: H-2, H-3
+- `/de/lavender/campaign-parameter-tool/`: C-1, C-2, C-2a, C-4, C-5, C-9
+- `/de/lavender/intelligentic-search/`: I-1 bis I-3, I-7, I-8, I-10, I-11
+- `/de/lavender/icu-user-journey-explorer/`: U-2, U-6
+- `/de/lavender/analytics-agent/`: A-1 bis A-3, A-5, A-6
+- `/de/lavender/iknow/`: K-1
+- `/de/lavender/empco-audit/`: E-6, E-9, E-10, E-12 bis E-15, E-19, E-20; strukturierte Daten mit 18 statt 19 Fragen und dem neuen Wortlaut. `/en/lavender/empco-audit/` ohne „Are carbon offsets a scam?“.
+- `/de/lavender/imprint/`: M-1 (Linktext und `mailto:`)
+- Gegenprobe: `/de/empco-audit/`, `/de/campaign-parameter-tool/`, `/de/intelligentic-search/` (Live-Seiten) zeigen weiterhin die alten Texte.
 
 ---
 
