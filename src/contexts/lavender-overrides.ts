@@ -102,6 +102,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'iknow.intro.p2': {
     de: 'Hebe diesen Schatz! KI ermöglicht dir, das personengebundene Wissen allen verfügbar zu machen. Ein Wissenspool statt einer Insel, Struktur statt Silo, zugänglich für alle.',
   },
+  // K-2: the conclusion line ends with a full stop, not a colon (content team 11/2026).
+  'iknow.intro.p3': { de: 'Wie das geht? Mit iKnow.' },
   'iknow.what.p2': {
     de: 'Sie wächst mit dem Wissen deines Unternehmens. Kontinuierlich lernen? Selbstverständlich, das tust du ja auch.',
   },
@@ -150,6 +152,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'analyticsAgent.intro.p2': {
     de: 'Was wäre, wenn jeder in deinem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.',
   },
+  'analyticsAgent.intro.p3': { de: 'Genau das macht der Analytics Agent.' },
   'analyticsAgent.what.p1': {
     de: 'Der Analytics Agent ist ein eigenständiger KI-Agent, der sich mit jeder beliebigen Datenquelle verbinden lässt. Er versteht deine Daten, deinen Business-Kontext und deine Fragen – alles in natürlicher Sprache.',
   },

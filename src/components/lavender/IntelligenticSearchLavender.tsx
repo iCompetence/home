@@ -116,6 +116,8 @@ export default function IntelligenticSearchLavender() {
         }
         paragraphs={t('is.quote.text').split('\n\n')}
         conclusion={t('is.quote.conclusion')}
+        // Full width and large, as the content team asked (11/2026, I-9).
+        conclusionWide
       />
       <Features />
       <Modular />

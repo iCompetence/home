@@ -12,6 +12,7 @@ export function QuoteIntro({
   author,
   paragraphs,
   conclusion,
+  conclusionWide = false,
   className,
 }: {
   id?: string;
@@ -19,27 +20,34 @@ export function QuoteIntro({
   /** Attribution, e.g. "– Jensen Huang, 2024" (may contain a source link). */
   author: ReactNode;
   paragraphs: readonly string[];
-  /** Last line, set in medium. */
+  /** Last line, set in semibold. */
   conclusion?: string;
+  /** Set the last line below both columns, full width, in the statement step. */
+  conclusionWide?: boolean;
   className?: string;
 }) {
   return (
     <Section id={id} className={className} dsName="QuoteIntro">
-      <div className="flex flex-col gap-8 md:flex-row lg:gap-16">
-        <figure className="m-0 flex flex-col gap-8 md:flex-1">
-          <blockquote className="m-0">
-            <p className="lav-statement text-lav-navy">{quote}</p>
-          </blockquote>
-          <figcaption className="lav-body font-normal text-lav-navy/70">{author}</figcaption>
-        </figure>
-        <div className="flex flex-col gap-8 md:flex-1 md:gap-10">
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph} className="lav-lead whitespace-pre-line font-normal text-lav-navy/80">
-              {paragraph}
-            </p>
-          ))}
-          {conclusion && <p className="lav-lead font-medium text-lav-navy">{conclusion}</p>}
+      <div className="flex flex-col gap-12 lg:gap-16">
+        <div className="flex flex-col gap-8 md:flex-row lg:gap-16">
+          <figure className="m-0 flex flex-col gap-8 md:flex-1">
+            <blockquote className="m-0">
+              <p className="lav-statement text-lav-navy">{quote}</p>
+            </blockquote>
+            <figcaption className="lav-body font-normal text-lav-navy/70">{author}</figcaption>
+          </figure>
+          <div className="flex flex-col gap-8 md:flex-1 md:gap-10">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className="lav-lead whitespace-pre-line font-normal text-lav-navy/80">
+                {paragraph}
+              </p>
+            ))}
+            {conclusion && !conclusionWide && (
+              <p className="lav-lead font-semibold text-lav-navy">{conclusion}</p>
+            )}
+          </div>
         </div>
+        {conclusion && conclusionWide && <p className="lav-statement text-lav-navy">{conclusion}</p>}
       </div>
     </Section>
   );
