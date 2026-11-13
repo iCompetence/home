@@ -210,7 +210,7 @@ export default function CampaignParameterToolLavender() {
           primaryHead={t('ct.why.solution.title')}
           secondaryHead={t('ct.why.problem.title')}
           rows={[1, 2, 3, 4].map((n) => ({
-            aspect: `(0${n})`,
+            aspect: `0${n}`,
             primary: t(`ct.why.solution.item${n}`),
             secondary: t(`ct.why.problem.item${n}`),
           }))}
