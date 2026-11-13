@@ -3135,12 +3135,12 @@ export const translations: Translations = {
 
   // Privacy-led + closing CTA
   'lavender.privacyLed.title': {
-    en: 'Privacy-Led Setups',
-    de: 'Privacy-Led-Setups'
+    en: 'Privacy-led setups',
+    de: 'Privacy-led-Setups'
   },
   'lavender.privacyLed.desc': {
     en: 'Why share your customer data or strategies with foreign infrastructure? A privacy-led setup keeps your data — and your competitive edge — exactly where it belongs: with you.',
-    de: 'Warum solltest du deine Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-Led-Setup hält deine Daten – und deinen Wettbewerbsvorteil – genau dort, wo sie hingehören: bei dir.'
+    de: 'Warum solltest du deine Kundendaten oder Strategien fremder Infrastruktur anvertrauen? Ein Privacy-led-Setup hält deine Daten – und deinen Wettbewerbsvorteil – genau dort, wo sie hingehören: bei dir.'
   },
   'lavender.privacyLed.cta': {
     en: 'Explore Privacy-led AI',
