@@ -581,43 +581,30 @@ function DayRow({
 
 function DayProducts() {
   const { t, language } = useLanguage();
-  // The pictures of the Lavender home (ProductShowcase).
+  // The pictures of the Lavender home (ProductShowcase). Three products of
+  // equal standing: the same size and the same label, none "featured".
+  const products = [
+    { key: 'empco', title: t('lavender.products.empco.title'), image: '/images/lavender-empco.png', crop: 'object-center', route: 'empco-audit', cta: t('lavender.products.empco.cta') },
+    { key: 'iknow', title: 'iKnow', image: '/images/lavender-iknow.png', crop: 'object-left-top', route: 'iknow', cta: t('lavender.products.learnMore') },
+    { key: 'analyticsAgent', title: 'Analytics Agent', image: '/images/lavender-analytics-agent.png', crop: 'object-left-top', route: 'analytics-agent', cta: t('lavender.products.learnMore') },
+  ] as const;
   return (
     <>
-      <DayRow
-        id="products"
-        media="left"
-        image="/images/lavender-empco.png"
-        imageAlt={t('lavender.products.empco.imageAlt')}
-        imageClass="aspect-[4/3]"
-        eyebrow={t('lavender.products.featuredEyebrow')}
-        title={t('lavender.products.empco.title')}
-        description={t('lavender.products.empco.desc')}
-        href={siteHref(language, 'empco-audit')}
-        cta={t('lavender.products.empco.cta')}
-      />
-      <DayRow
-        media="right"
-        image="/images/lavender-iknow.png"
-        imageAlt={t('lavender.products.iknow.imageAlt')}
-        imageClass="aspect-[2416/1120]"
-        eyebrow={t('lavender.products.eyebrow')}
-        title="iKnow"
-        description={t('lavender.products.iknow.desc')}
-        href={siteHref(language, 'iknow')}
-        cta={t('lavender.products.learnMore')}
-      />
-      <DayRow
-        media="left"
-        image="/images/lavender-analytics-agent.png"
-        imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-        imageClass="aspect-[2416/1120]"
-        eyebrow={t('lavender.products.eyebrow')}
-        title="Analytics Agent"
-        description={t('lavender.products.analyticsAgent.desc')}
-        href={siteHref(language, 'analytics-agent')}
-        cta={t('lavender.products.learnMore')}
-      />
+      {products.map((product, i) => (
+        <DayRow
+          key={product.key}
+          id={i === 0 ? 'products' : undefined}
+          media={i % 2 === 0 ? 'left' : 'right'}
+          image={product.image}
+          imageAlt={t(`lavender.products.${product.key}.imageAlt`)}
+          imageClass={cn('aspect-[16/10]', product.crop)}
+          eyebrow={t('lavender.products.eyebrow')}
+          title={product.title}
+          description={t(`lavender.products.${product.key}.desc`)}
+          href={siteHref(language, product.route)}
+          cta={product.cta}
+        />
+      ))}
     </>
   );
 }
