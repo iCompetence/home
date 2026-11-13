@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
 import { glideOnClick } from './glide';
 import { HamburgGlass } from './HamburgGlass';
+import { ConsultButton } from './ConsultModal';
 import { ClosingText, LegalStrip } from './NightFooter';
 import { useTextHaze } from './textHaze';
 import { NightNav } from './NightNav';
@@ -203,7 +204,7 @@ function HeroHamburg({ hidden, covered }: { hidden: boolean; covered: boolean })
  * the page shell.
  */
 function ClosingStage({ shown }: { shown: boolean }) {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   return (
     <footer data-ds="FooterNight" className="contents">
       {/* First in the document (reading and tab order: closing line, then the
@@ -217,14 +218,11 @@ function ClosingStage({ shown }: { shown: boolean }) {
           !shown && 'invisible',
         )}
       >
-        {/* Contact details are on the contact page; here only the call to action. */}
+        {/* The same closing action as on every subpage: "Erstgespräch buchen"
+            opens the form (Dennis, 13.11.2026). "Kontakt aufnehmen" stays in
+            the nav. */}
         <ClosingText heading={t('lavender.cta.heading')}>
-          <Button asChild variant="solid">
-            <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-              {t('topNav.letsTalk')}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </a>
-          </Button>
+          <ConsultButton variant="solid" />
         </ClosingText>
       </div>
       <LegalStrip className="relative z-[1]" />
