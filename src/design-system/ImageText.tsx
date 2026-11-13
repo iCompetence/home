@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { cn } from '@/components/ui/utils';
 import { useMotionPrefs } from './motion';
+import { ProductRow } from './ProductRow';
 import { ZoomImage } from './ZoomImage';
 
 export type ImageTextProps = {
@@ -14,15 +14,20 @@ export type ImageTextProps = {
   image?: string;
   /** Alt text for the still. A video is decorative next to its text. */
   imageAlt?: string;
-  /** Desktop only: which side the media sits on. Tablet and mobile always
-   *  show the media above the text. */
+  /** Desktop only: which side the media sits on. On tablets and phones the
+   *  media follows the text. */
   layout?: 'image-left' | 'image-right';
   className?: string;
 };
 
 /**
- * One benefit: a 16:9 clip or image next to a title and a paragraph. Pages
+ * One benefit: a 16:9 clip or image beside a title and a paragraph. Pages
  * stack several and alternate `layout` on desktop.
+ *
+ * Drawn by the home page's ProductRow (was a layout of its own: half and
+ * half, the picture on the text edge): text in five columns, the picture in
+ * seven and out to the frame edge, wider than the text on phones and tablets,
+ * where it follows the text. No link: these rows explain, they lead nowhere.
  */
 export function ImageText({
   title,
@@ -37,27 +42,23 @@ export function ImageText({
   const media = 'aspect-video w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame';
 
   return (
-    <div
-      data-ds="ImageText"
-      className={cn(
-        'flex flex-col gap-8 md:gap-10 lg:items-center lg:gap-16',
-        layout === 'image-right' ? 'lg:flex-row-reverse' : 'lg:flex-row',
-        className,
-      )}
-    >
-      <div className="w-full lg:flex-1">
-        {video ? (
-          <LoopVideo src={video} className={media} />
-        ) : (
-          image && <ZoomImage src={image} alt={imageAlt} loading="lazy" className={media} />
-        )}
-      </div>
-      {/* Heading to text 24px, as in ProductRow; the text is running text (body, content team 11/2026). */}
-      <div className="flex w-full flex-col gap-6 lg:flex-1">
-        <h3 className="lav-h2 text-lav-navy">{title}</h3>
-        <p className="lav-body whitespace-pre-line font-normal text-lav-navy/80">{description}</p>
-      </div>
-    </div>
+    <ProductRow
+      className={className}
+      media={layout === 'image-right' ? 'right' : 'left'}
+      headingLevel="h3"
+      title={title}
+      description={description}
+      visual={
+        // A visual brings its own overhang below desktop (as ProductGlimpse does).
+        <div className="-mx-4 md:-mx-8 lg:mx-0">
+          {video ? (
+            <LoopVideo src={video} className={media} />
+          ) : (
+            image && <ZoomImage src={image} alt={imageAlt} loading="lazy" className={media} />
+          )}
+        </div>
+      }
+    />
   );
 }
 
