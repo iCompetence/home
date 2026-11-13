@@ -220,10 +220,11 @@ Stand:
       (NightFooter.tsx: Schlusszeile, Glas-Skyline, Leiste mit „Based in Hamburg.“, Impressum,
       Datenschutz, LinkedIn, Nach oben) statt `ClosingBlock` / `Footer`. Sprünge zu Abschnitten
       laufen über `glide.ts` (folgt dem Ziel, auch wenn sich die Seite verschiebt). Die Skyline
-      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1108; seit 13.11. nachmittags mit den
+      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1109; seit 13.11. nachmittags mit den
       Gebäuden in der Reihenfolge von West nach Ost: Köhlbrandbrücke (statt der Hafenkräne; ihre
-      Fahrbahn läuft hinter den Landungsbrücken aus, das ist nachträglich angesetzt), Landungsbrücken, Fernsehturm,
-      Rickmer Rickmers, Michel, Elbphilharmonie, Rathaus, Speicherstadt; beleuchtet = dieselbe Fassung in
+      Fahrbahn läuft hinter den Landungsbrücken aus), Landungsbrücken, Fernsehturm,
+      Rickmer Rickmers, Michel, Elbphilharmonie, Rathaus, Speicherstadt, rechts mit Luft zwischen den
+      Gebäuden; Bodenplatte und Spiegelung nachträglich geglättet; beleuchtet = dieselbe Fassung in
       Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
       Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
       Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem
