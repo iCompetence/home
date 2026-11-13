@@ -6,7 +6,8 @@
  * (pictures above it load and take their height, the menu closes and releases
  * its scroll lock), so the scroll ended short of the section. Here the goal is
  * read again on every frame, and for a moment after arriving the page is kept
- * on it. Any scrolling by the visitor ends it. With reduced motion it jumps.
+ * on it. Any scrolling by the visitor ends it. With reduced motion, and when
+ * the link was activated from the keyboard, it jumps.
  */
 
 /** cubic-bezier(0.25, 0.1, 0.25, 1): moves from the first frame on, settles softly. */
@@ -27,9 +28,10 @@ function ease(t: number) {
 /**
  * Glide to an element (its top, minus its scroll-margin-top) or, with `null`,
  * to the top of the page. `duration` in ms; by default it grows with the
- * distance, between 0.7 and 1.4 s.
+ * distance, between 0.7 and 1.4 s. `instant` jumps there (still holding the
+ * goal afterwards).
  */
-export function glideTo(target: Element | null, duration?: number) {
+export function glideTo(target: Element | null, duration?: number, instant = false) {
   const margin = target ? parseFloat(getComputedStyle(target).scrollMarginTop) || 0 : 0;
   const goal = () => {
     if (!target) return 0;
@@ -57,7 +59,7 @@ export function glideTo(target: Element | null, duration?: number) {
     requestAnimationFrame(step);
   };
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (instant || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     jump(goal());
     hold(performance.now() + 1200);
     return;
@@ -76,13 +78,23 @@ export function glideTo(target: Element | null, duration?: number) {
   requestAnimationFrame(step);
 }
 
-/** For `<a href="#id">`: glide to that element instead of jumping. Other links are left alone. */
-export function glideOnClick(e: { currentTarget: HTMLAnchorElement; preventDefault(): void }, duration?: number) {
+/** A click that came from the keyboard (Enter) or from assistive technology: no pointer, `detail` is 0. */
+export const fromKeyboard = (e: { detail?: number }) => e.detail === 0;
+
+/**
+ * For `<a href="#id">`: glide to that element instead of jumping. Other links
+ * are left alone. From the keyboard it jumps: someone who steers with keys
+ * should not wait for a scroll.
+ */
+export function glideOnClick(
+  e: { currentTarget: HTMLAnchorElement; preventDefault(): void; detail?: number },
+  duration?: number,
+) {
   const href = e.currentTarget.getAttribute('href') || '';
   if (!href.startsWith('#')) return;
   const id = href.slice(1);
   const target = id && id !== 'top' ? document.getElementById(id) : null;
   if (id && id !== 'top' && !target) return;
   e.preventDefault();
-  glideTo(target, duration);
+  glideTo(target, duration, fromKeyboard(e));
 }

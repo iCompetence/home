@@ -214,7 +214,7 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
             <Statement />
             {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
                 the proof right after the claim. */}
-            <LogoWall />
+            <LogoStream />
             <DayProducts />
             <DayTestimonials />
             <DayProcess />
@@ -412,7 +412,7 @@ function DayServices() {
               <TabsTrigger
                 key={field.id}
                 value={field.id}
-                className="lav-star-hover h-auto flex-none rounded-pill border-0 px-5 py-2.5 active:scale-[0.97] font-brand text-body font-medium text-lav-ink transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white data-[state=active]:bg-lav-ink data-[state=active]:text-lav-ground data-[state=active]:shadow-none"
+                className="lav-star-hover h-auto flex-none rounded-pill border-0 px-5 py-2.5 active:scale-[0.96] font-brand text-body font-medium text-lav-ink transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white data-[state=active]:bg-lav-ink data-[state=active]:text-lav-ground data-[state=active]:shadow-none"
               >
                 {t(`lavender.services.${field.id}.title`)}
               </TabsTrigger>
@@ -573,8 +573,10 @@ function DayPrivacyLed() {
 }
 
 /**
- * Twelve clients as a still wall of two rows (was: five logos changing at
- * random). All in one colour, so the wall reads as part of the page: each
+ * Twelve clients in one row that moves with the page: scrolling down pushes
+ * the row to the left, scrolling up brings it back; while the page rests, the
+ * row rests (was: a still wall of two rows; before that five logos changing
+ * at random). All in one colour, so the row reads as part of the page: each
  * logo is used as a mask over a navy field. The vector logos mask as they
  * are; five logos that are a lettering on a coloured block (DHL, REWE, Miele,
  * Klett, Lucky Bike) have a one-colour version in public/logos/mono/.
@@ -594,26 +596,84 @@ const WALL = [
   ['Lucky Bike', '/logos/mono/luckybike.png'],
 ] as const;
 
-function LogoWall() {
+/** Sideways travel of the logo row per pixel of page scroll. */
+const STREAM_SPEED = 0.9;
+
+function LogoStream() {
+  const track = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const el = track.current;
+    const strip = el?.parentElement;
+    // With reduced motion the row does not move: the logos wrap into a still block instead (classes below).
+    if (!el || !strip || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = 0;
+    let seen = false;
+    // The list holds the logos twice; one pass is half its width, so the row
+    // can start over without a seam. Only the transform is written.
+    const place = () => {
+      raf = 0;
+      const half = el.scrollWidth / 2;
+      if (!half) return;
+      const passed = window.innerHeight - strip.getBoundingClientRect().top;
+      const x = (((passed * STREAM_SPEED) % half) + half) % half;
+      el.style.transform = `translate3d(${-x}px,0,0)`;
+    };
+    const onScroll = () => {
+      if (seen && !raf) raf = requestAnimationFrame(place);
+    };
+    const watch = new IntersectionObserver(
+      ([entry]) => {
+        seen = entry.isIntersecting;
+        onScroll();
+      },
+      { rootMargin: '200px 0px' },
+    );
+    watch.observe(strip);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    place();
+    return () => {
+      cancelAnimationFrame(raf);
+      watch.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  const logo = (name: string, src: string, copy: boolean) => (
+    <li
+      key={copy ? `${name}-copy` : name}
+      aria-hidden={copy || undefined}
+      className={cn('mx-7 flex h-9 w-[112px] flex-none items-center justify-center lg:mx-11 lg:h-11 lg:w-[140px]', copy && 'motion-reduce:hidden')}
+    >
+      <span
+        role="img"
+        aria-label={copy ? undefined : name}
+        className="block h-full w-full bg-lav-navy/85"
+        style={{
+          WebkitMask: `url(${src}) center / contain no-repeat`,
+          mask: `url(${src}) center / contain no-repeat`,
+        }}
+      />
+    </li>
+  );
+
   return (
-    // No top padding: the wall belongs to the statement above it.
-    <Section dsName="LogoWall" className="pt-0">
-      <ul className="m-0 grid list-none grid-cols-3 items-center gap-x-8 gap-y-10 p-0 sm:grid-cols-4 lg:grid-cols-6 lg:gap-x-14 lg:gap-y-14">
-        {WALL.map(([name, src]) => (
-          <li key={name} className="flex h-9 items-center justify-center lg:h-11">
-            <span
-              role="img"
-              aria-label={name}
-              className="block h-full w-full max-w-[140px] bg-lav-navy/85"
-              style={{
-                WebkitMask: `url(${src}) center / contain no-repeat`,
-                mask: `url(${src}) center / contain no-repeat`,
-              }}
-            />
-          </li>
-        ))}
+    // No top padding: the row belongs to the statement above it. It runs the
+    // full width of the day layer and fades out towards both edges.
+    <section
+      data-ds="LogoStream"
+      className="w-full overflow-hidden pb-[var(--section-pad-v)] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] motion-reduce:[mask-image:none]"
+    >
+      <ul
+        ref={track}
+        className="m-0 flex w-max list-none p-0 will-change-transform motion-reduce:mx-auto motion-reduce:w-full motion-reduce:max-w-frame motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-10 motion-reduce:px-[var(--section-pad-h)]"
+      >
+        {WALL.map(([name, src]) => logo(name, src, false))}
+        {WALL.map(([name, src]) => logo(name, src, true))}
       </ul>
-    </Section>
+    </section>
   );
 }
 

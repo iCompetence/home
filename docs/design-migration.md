@@ -246,6 +246,13 @@ Stand:
       dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern
       folgt unten dem Zeiger und schrumpft über der Stadt weg, dort übernimmt das Licht im Glas.
       Bewusste Ausnahme von „Licht und Linie“ (Entscheidung Dennis, 12.11.2026); Footer immer dunkel.
+      Bewegung (Durchsicht 13.11.2026): Kundenlogos als eine Reihe, die mit der Seite läuft
+      (`LogoStream`: nur `transform`, an die Scrollposition gebunden, steht bei reduzierter
+      Bewegung als ruhiger Block). Hover nur hinter `(hover: hover) and (pointer: fine)`,
+      Tastaturfokus überall. Menü und Schleier setzen beim schnellen Schließen/Öffnen dort
+      fort, wo sie stehen (`--lav-menu-from`, `--lav-veil-from`). Ankerlinks und „Nach oben“
+      gleiten über `glide.ts`, von der Tastatur aus springen sie. Das Stadtlicht läuft auf
+      60 und 120 Hz gleich schnell. Die Skyline wird mit der Seite vorgeladen (`preload`).
       Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
       EN nicht geprüft; Intro (Stern entsteht) aus dem Prototyp nicht übernommen; Leistung der
       Canvas auf schwachen Geräten nicht gemessen.

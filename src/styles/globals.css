@@ -617,18 +617,15 @@ html {
   }
 
   /* Filled: the gradient is a layer over the element's own colour that fades
-     in (a gradient itself cannot be transitioned). The second selector gives
-     the same hover to the buttons inside the Lavender components on the day
-     layer (carousel and quote arrows, service pills) without touching the
-     components, which the live Lavender pages share. */
-  .lav-star-hover,
-  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']) {
+     in (a gradient itself cannot be transitioned). Hover only where there is a
+     pointer that can hover; on touch screens a tap would leave it switched on.
+     Keyboard focus shows it on every device. */
+  .lav-star-hover {
     position: relative;
     isolation: isolate;
     overflow: hidden;
   }
-  .lav-star-hover::before,
-  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true'])::before {
+  .lav-star-hover::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -638,13 +635,8 @@ html {
     opacity: 0;
     transition: opacity var(--duration-fast) ease-out;
   }
-  .lav-star-hover:is(:hover, :focus-visible)::before,
-  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']):is(:hover, :focus-visible)::before {
+  .lav-star-hover:focus-visible::before {
     opacity: 1;
-  }
-  [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:not(:disabled):not([aria-expanded='true']):is(:hover, :focus-visible) {
-    color: #fff !important;
-    border-color: transparent !important;
   }
   /* PageShell dims every hovered link and button to 75 %; not here. */
   [data-star-hover] :is(a, button):not(:disabled):hover {
@@ -654,7 +646,10 @@ html {
   /* Text: the gradient lies behind the glyphs and the text colour fades to
      transparent, which can be transitioned. At rest the gradient has no size,
      so it cannot shine through a text colour that is partly transparent; on
-     the way back it stays until the colour has returned (delayed size). */
+     the way back it stays until the colour has returned (--lav-star-hold, the
+     delay of the size change: the fade's length at rest, none when lit). The
+     second selector gives the same hover to the titles of the Lavender
+     accordion on the day layer without touching the component. */
   .lav-star-text,
   [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
     background-image: var(--lav-star-ink);
@@ -664,26 +659,35 @@ html {
     background-clip: text;
     transition:
       color var(--duration-fast) ease-out,
-      background-size 0s linear var(--duration-fast);
+      background-size 0s linear var(--lav-star-hold, var(--duration-fast));
     /* Room for descenders: the type steps trim their box to cap height and
        baseline, and the gradient only shows inside the box. No effect on layout. */
     padding-block: 0.3em;
     margin-block: -0.3em;
   }
-  :is(a, button):is(:hover, :focus-visible) > .lav-star-text,
+  /* The global reduced-motion rule narrows every transition to colour and
+     opacity; the size change would then come at once and the text would be
+     gone for a moment on the way back. Keep the pair together. */
+  @media (prefers-reduced-motion: reduce) {
+    .lav-star-text,
+    [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
+      transition-property: color, background-size !important;
+      transition-duration: var(--duration-fast), 0s !important;
+      transition-delay: 0s, var(--lav-star-hold, var(--duration-fast)) !important;
+    }
+  }
+  :is(a, button):focus-visible > .lav-star-text,
   [aria-current] > .lav-star-text,
   [data-state='open'] > .lav-star-text,
-  :is(a, button):is(:hover, :focus-visible) > span > .lav-star-text,
-  [data-star-hover] [data-ds='ProcessAccordion'] button:is(:hover, :focus-visible) > div > span:last-child {
+  :is(a, button):focus-visible > span > .lav-star-text,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > div > span:last-child {
     color: transparent !important;
     background-size: 100% 100%;
-    transition:
-      color var(--duration-fast) ease-out,
-      background-size 0s;
+    --lav-star-hold: 0s;
   }
   /* An icon beside such a text takes the gradient's end colour. */
-  :is(a, button):is(:hover, :focus-visible) > .lav-star-text ~ svg,
-  [data-star-hover] [data-ds='ProcessAccordion'] button:is(:hover, :focus-visible) > svg {
+  :is(a, button):focus-visible > .lav-star-text ~ svg,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > svg {
     color: var(--lav-star-ink-end) !important;
   }
 
@@ -695,8 +699,27 @@ html {
   .lav-logo-mask::before {
     background: var(--lav-star-ink);
   }
-  a:is(:hover, :focus-visible) > .lav-logo-mask::before {
+  a:focus-visible > .lav-logo-mask::before {
     opacity: 1;
+  }
+
+  /* The same three, under a pointer. */
+  @media (hover: hover) and (pointer: fine) {
+    .lav-star-hover:hover::before,
+    a:hover > .lav-logo-mask::before {
+      opacity: 1;
+    }
+    :is(a, button):hover > .lav-star-text,
+    :is(a, button):hover > span > .lav-star-text,
+    [data-star-hover] [data-ds='ProcessAccordion'] button:hover > div > span:last-child {
+      color: transparent !important;
+      background-size: 100% 100%;
+      --lav-star-hold: 0s;
+    }
+    :is(a, button):hover > .lav-star-text ~ svg,
+    [data-star-hover] [data-ds='ProcessAccordion'] button:hover > svg {
+      color: var(--lav-star-ink-end) !important;
+    }
   }
 
   /* The hero's entrance, once on load: headline, lead and button rise in one
@@ -760,18 +783,8 @@ html {
   .lav-star-hover[data-state='active']::before {
     opacity: 0 !important;
   }
-  /* Touch screens have no hover: after a tap the fill and the text colour must
-     not stick. (Keyboard focus keeps them, on every device.) */
+  /* Touch screens have no hover: PageShell's 75 % dim would stick after a tap. */
   @media not ((hover: hover) and (pointer: fine)) {
-    .lav-star-hover:hover:not(:focus-visible)::before,
-    [data-star-hover] :is([data-ds='ServicesCarousel'], [data-ds='TestimonialSlider']) button:hover:not(:focus-visible)::before {
-      opacity: 0;
-    }
-    :is(a, button):hover:not(:focus-visible) > .lav-star-text {
-      color: inherit !important;
-      background-size: 0 0;
-    }
-    /* PageShell's 75 % dim would stick after a tap as well. */
     .lavender-page :is(a, button):hover {
       opacity: 1;
     }
@@ -794,8 +807,11 @@ html {
   [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='closed'] {
     animation: lav-fade-out var(--duration-base) ease-out both;
   }
-  @keyframes lav-fade-in { from { opacity: 0; } }
-  @keyframes lav-fade-out { to { opacity: 0; } }
+  /* --lav-veil-from / --lav-menu-from: where the veil and the panel are when
+     the menu is opened or closed while still moving (set by NightNav), so a
+     quick second click or Esc continues from there instead of jumping. */
+  @keyframes lav-fade-in { from { opacity: var(--lav-veil-from, 0); } }
+  @keyframes lav-fade-out { from { opacity: var(--lav-veil-from, 1); } to { opacity: 0; } }
 
   /* The section label in the nav bar fades in when the section changes. */
   .lav-nav-section {
@@ -828,11 +844,11 @@ html {
     animation: lav-menu-out var(--duration-base) var(--ease-emphasized) both;
   }
   @keyframes lav-menu-in {
-    from { transform: translateX(calc(100% + 24px)); }
+    from { transform: var(--lav-menu-from, translateX(calc(100% + 24px))); }
     to { transform: translateX(0); }
   }
   @keyframes lav-menu-out {
-    from { transform: translateX(0); }
+    from { transform: var(--lav-menu-from, translateX(0)); }
     to { transform: translateX(calc(100% + 24px)); }
   }
 

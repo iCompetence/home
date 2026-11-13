@@ -1,10 +1,11 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { type MouseEvent, type ReactNode } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/components/ui/utils';
 import { LINKEDIN_URL, LinkedInGlyph, siteHref } from '@/design-system';
+import { fromKeyboard, glideTo } from './glide';
 import { HamburgGlass } from './HamburgGlass';
 
 /**
@@ -26,11 +27,9 @@ export function LegalStrip({ className }: { className?: string }) {
   const { t, language } = useLanguage();
   const legal =
     'lav-body inline-flex min-h-11 items-center font-medium text-lav-white/70 no-underline hover:opacity-100!';
-  const toTop = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    });
+  // The same glide as every in-page link (glide.ts), not the browser's own smooth scrolling.
+  const toTop = (e: MouseEvent) => glideTo(null, undefined, fromKeyboard(e));
+  const press = 'transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96]';
   return (
     <div
       className={cn(
@@ -52,7 +51,7 @@ export function LegalStrip({ className }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t('lavender.common.linkedin')}
-          className="lav-star-hover inline-flex size-11 shrink-0 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline hover:opacity-100!"
+          className={`lav-star-hover inline-flex size-11 shrink-0 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline hover:opacity-100! ${press}`}
         >
           <LinkedInGlyph size={18} />
         </a>
@@ -60,7 +59,7 @@ export function LegalStrip({ className }: { className?: string }) {
           type="button"
           onClick={toTop}
           aria-label={t('footer.backToTop')}
-          className="inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-white/70 hover:opacity-100!"
+          className={`inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap border-0 bg-transparent text-lav-white/70 hover:opacity-100! ${press}`}
         >
           {/* On phones the arrow alone: the row has no room for the words. */}
           <span className="lav-star-text lav-body font-medium max-sm:hidden">{t('footer.backToTop')}</span>

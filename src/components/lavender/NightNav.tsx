@@ -121,7 +121,18 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
   // because preventing the default also stops Radix' SheetClose.
   const goTo = (e: MouseEvent<HTMLAnchorElement>) => {
     glideOnClick(e); // only acts on '#…' links; others navigate normally
-    setOpen(false);
+    toggle(false);
+  };
+
+  // Opening and closing continue from where the panel and its veil are: a
+  // quick second click or Esc while they still move must not make them jump
+  // (the keyframes in globals.css start from these two values).
+  const toggle = (next: boolean) => {
+    const panel = document.querySelector<HTMLElement>('.lav-menu');
+    const veil = panel?.previousElementSibling as HTMLElement | null | undefined;
+    panel?.style.setProperty('--lav-menu-from', getComputedStyle(panel).transform);
+    veil?.style.setProperty('--lav-veil-from', getComputedStyle(veil).opacity);
+    setOpen(next);
   };
 
   return (
@@ -162,7 +173,7 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
           <ArrowUpRight size={18} strokeWidth={2} className="max-[389px]:hidden" />
         </a>
 
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet open={open} onOpenChange={toggle}>
           {/* In the bar the trigger also names the section the page is in
               (from tablets up); the whole thing opens the menu. */}
           <SheetTrigger
@@ -181,7 +192,7 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
             side="right"
             aria-describedby={undefined}
             // [&>button]:hidden removes the sheet's own small close icon; ours is below.
-            className="lav-menu inset-y-3 right-3 h-auto w-[calc(100%-1.5rem)] gap-0 overflow-y-auto rounded-frame-inner border-0 bg-lav-page p-6 text-lav-navy shadow-none sm:max-w-[640px] md:p-10 [&>button]:hidden"
+            className="lav-menu transition-none inset-y-3 right-3 h-auto w-[calc(100%-1.5rem)] gap-0 overflow-y-auto rounded-frame-inner border-0 bg-lav-page p-6 text-lav-navy shadow-none sm:max-w-[640px] md:p-10 [&>button]:hidden"
           >
             <SheetTitle className="sr-only">{t('topNav.menu')}</SheetTitle>
 

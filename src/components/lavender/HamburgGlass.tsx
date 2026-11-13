@@ -85,17 +85,24 @@ export function HamburgGlass({ className }: { className?: string }) {
       lit.style.height = `${h}px`;
       lit.style.transform = `scale(${1 / sx},${1 / sy}) translate3d(${-x}px,${-y}px,0)`;
     };
-    const tick = () => {
+    let last = 0;
+    const tick = (now: number) => {
+      // The same pace on any display (60 or 120 Hz): the step grows with the
+      // time since the last frame, as in nightSky.ts.
+      const dt = last ? Math.min(now - last, 60) : 16.667;
+      last = now;
+      const pace = (k: number) => 1 - Math.pow(1 - k, dt / 16.667);
       // While nothing is lit, the light jumps to the new place and fades in there.
       const jump = cur.a < 0.02;
       let done = true;
       (Object.keys(cur) as (keyof Light)[]).forEach((key) => {
-        const k = key === 'a' ? (still ? 1 : 0.09) : jump || still ? 1 : 0.14;
+        const k = key === 'a' ? (still ? 1 : pace(0.09)) : jump || still ? 1 : pace(0.14);
         cur[key] += (target[key] - cur[key]) * k;
         if (Math.abs(target[key] - cur[key]) > 0.0008) done = false;
       });
       paint();
       raf = done ? 0 : requestAnimationFrame(tick);
+      if (done) last = 0;
     };
     const go = () => {
       if (!raf) raf = requestAnimationFrame(tick);
