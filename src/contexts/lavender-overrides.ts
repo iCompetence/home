@@ -67,6 +67,32 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritized list on which the final legal review can build.',
   },
 
+  // Content team 11/2026 (docs/korrekturen-2026-11.md E-6, E-9 to E-15, E-20).
+  'empco.form.title': {
+    de: 'Unser Angebot: deine kostenlose Probeseite',
+  },
+  'empco.seo.banned.title': {
+    de: 'Das verbietet die EmpCo-Richtlinie',
+  },
+  'empco.seo.compare.r1.empco': {
+    de: 'In Kraft, wird seit dem 27. September 2026 verbindlich angewendet',
+  },
+  'empco.seo.faq.a2': {
+    de: 'Die EmpCo-Richtlinie wird seit dem 27. September 2026 verbindlich angewendet. Die EU-Mitgliedstaaten mussten sie bis zum 27. März 2026 in nationales Recht umsetzen, Deutschland hat das über das UWG getan. Eine Übergangsfrist gibt es nicht – seitdem müssen alle kommerziellen Aussagen den Vorgaben entsprechen.',
+  },
+  'empco.seo.faq.a6': {
+    de: 'Nur mit belegbarem Nachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 unzulässig und abmahngefährdet.',
+  },
+  'empco.seo.faq.q8': {
+    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green Claims Directive?',
+  },
+  'empco.seo.faq.q19': {
+    de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Geschäftsführung oder Nachhaltigkeitsmanagement?',
+  },
+  'empco.seo.faq.a19': {
+    de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Das Marketing formuliert, das Nachhaltigkeitsmanagement liefert Daten, die Rechtsabteilung prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.',
+  },
+
   // --- iKnow ---
   'iknow.anchor.statusQuo': { en: 'Status quo' },
   'iknow.anchor.benefits': { en: 'Your benefits', de: 'Dein Mehrwert' },
