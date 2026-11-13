@@ -3000,6 +3000,8 @@ export const translations: Translations = {
   'notFound.products': { en: 'View products', de: 'Produkte ansehen' },
   // Shell: skip link and the LinkedIn icon link (live hard-coded in English).
   'lavender.common.skipToContent': { en: 'Skip to content', de: 'Zum Inhalt springen' },
+  // Privacy-led AI: the hero's button jumps to the principles (the nav has the contact button).
+  'lavender.privacy.seePrinciples': { en: 'See the principles', de: 'Prinzipien ansehen' },
   'lavender.common.linkedin': { en: 'iCompetence on LinkedIn', de: 'iCompetence auf LinkedIn' },
   // Privacy policy page — new in the redesign (live, the privacy text sits on
   // the imprint page); title as in Figma. The soft hyphen breaks the word where
