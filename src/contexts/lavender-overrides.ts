@@ -252,6 +252,13 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Konsistente UTM-Parameter – über alle Kanäle',
   },
   'ct.why.solution.item1': { de: 'Standardisierte Parameter über alle Kanäle' },
+  // C-3 ("Parameterlogs" was a slip) and C-7 (the section now names the tool's benefit).
+  'ct.values.card1.description': {
+    de: 'Einmal definiert, überall genutzt. Eine einheitliche Parameterlogik verhindert Wildwuchs, Tippfehler und unklare Kampagnenbezeichnungen.',
+  },
+  'ct.why.description': {
+    de: 'Kampagnen werden immer komplexer. Touchpoints vervielfachen sich. Ohne konsistente Tracking-Parameter entstehen Datenlücken, Reporting-Brüche und ineffiziente Workflows – mit direktem Impact auf Media Spend und Performance. Mit dem Campaign Parameter Tool vermeidest du diese Probleme und bekommst valide UTM-Parameter für dein Marketing, ohne Mehraufwand.',
+  },
   'ct.values.card3.description': {
     de: 'Keine mühsame manuelle Parameterpflege mehr in Excel-Sheets oder Slack-Threads. Parameter werden automatisch in Echtzeit generiert und dokumentiert.',
   },
