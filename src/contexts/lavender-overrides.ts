@@ -202,7 +202,15 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.hero.bullet4': { en: 'Optimized for media and performance teams' },
   'ct.hero.cta1': { en: 'Start trial' },
   'ct.values.title': { en: 'The value for your team', de: 'Der Mehrwert für dein Team' },
-  'ct.values.card1.title': { en: 'Consistent UTM parameters – across all channels' },
+  // DE: content team 11/2026 (docs/korrekturen-2026-11.md C-2, C-2a) — German on the DE page.
+  'ct.values.card1.title': {
+    en: 'Consistent UTM parameters – across all channels',
+    de: 'Konsistente UTM-Parameter – über alle Kanäle',
+  },
+  'ct.why.solution.item1': { de: 'Standardisierte Parameter über alle Kanäle' },
+  'ct.values.card3.description': {
+    de: 'Keine mühsame manuelle Parameterpflege mehr in Excel-Sheets oder Slack-Threads. Parameter werden automatisch in Echtzeit generiert und dokumentiert.',
+  },
   'ct.values.card2.title': { en: 'Zero maintenance – clear governance in the team' },
   'ct.values.card3.title': { en: 'Less time wasted – more campaigns' },
   'ct.values.card4.title': { en: 'Clean analytics & attribution' },
@@ -223,7 +231,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.features.item3.title': { en: 'Logging & documentation' },
   'ct.features.item4.title': { en: 'Multi-user workflow' },
   'ct.features.item4.description': {
-    de: 'Generiere hunderte Kampagnen-URLs auf einmal via CSV-Import oder API.',
+    de: 'Generiere hunderte Kampagnen-URLs in einem einzigen, zentralen Arbeitsgang via CSV-Import oder API.',
   },
   'ct.features.item5.title': { en: 'Channel & vendor standardization' },
   'ct.features.item6.title': { en: 'Reusable campaign structures' },
@@ -231,7 +239,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.features.item8.title': { en: 'Export to analytics & BI tools' },
   'ct.why.title': { en: 'Why clean UTM parameters are critical' },
   'ct.why.problem.title': { en: 'Without standards' },
-  'ct.pricing.trialBadge': { en: '14 day free trial' },
+  'ct.pricing.trialBadge': { en: '14 day free trial', de: '14 Tage kostenlos testen' },
   'ct.pricing.tier1.rooms': { en: '1 parameter space' },
   'ct.pricing.tier2.rooms': { en: '2 to 4 parameter spaces per space' },
   'ct.pricing.tier3.rooms': { en: '5+ parameter spaces per space' },
@@ -246,7 +254,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.demo.modal.submit': { en: 'Submit demo request' },
   'ct.faq.title': { en: 'Frequently asked questions' },
   'ct.faq.item2.answer': {
-    de: 'Ja – komplett konfigurierbar. Du kannst eigene Templates, Naming Conventions und Validierungsregeln erstellen, die zu deiner Unternehmensstruktur passen.',
+    de: 'Ja – sämtliche Parameterstrukturen lassen sich flexibel an deine internen Standards anpassen. Du kannst eigene Templates, Naming Conventions und Validierungsregeln erstellen, die zu deiner Unternehmensstruktur passen.',
   },
   'ct.faq.item4.answer': {
     de: 'Die Abrechnung erfolgt pro Seat oder pro Team – je nach Use Case. Kontaktiere uns für ein individuelles Angebot, das zu deinen Anforderungen passt.',
