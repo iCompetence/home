@@ -7,11 +7,14 @@ import { cn } from '@/components/ui/utils';
 import { LINKEDIN_URL, siteHref } from '@/design-system';
 import { fromKeyboard, glideTo } from './glide';
 import { HamburgGlass } from './HamburgGlass';
+import { NightSky } from './NightPage';
 import { useTextHaze } from './textHaze';
 
 /**
  * How the pages of the night design end: the closing line with its action on
  * the night ground, the glass skyline of Hamburg, and below it the legal strip.
+ * The night is the live sky of the home page (NightSky): its small stars and
+ * the guide star, which rests above the glass city and follows the pointer.
  *
  * - NightClosing: for pages with a closing call to action (same props as the
  *   design system's ClosingBlock, which it replaces on the preview pages).
@@ -119,13 +122,15 @@ export function NightClosing({ heading, action, id, className }: NightClosingPro
       data-ds="FooterNight"
       data-surface="inverse"
       className={cn(
-        'lav-night-stars relative flex flex-col overflow-hidden bg-lav-navy text-lav-white',
+        // isolate: the sky (fixed, full screen) paints above this navy and below the footer's content.
+        'relative isolate flex flex-col overflow-hidden bg-lav-navy text-lav-white',
         // With a closing line the footer is one screen, laid out like the home page's last
         // screen: the line at the top, the city along the lower edge, the strip below it.
         heading ? 'h-[max(100svh,540px)]' : 'pt-[var(--section-pad-v)]',
         className,
       )}
     >
+      <NightSky className="-z-10" />
       {heading && <ClosingText heading={heading}>{action}</ClosingText>}
       {/* On phones the middle of the skyline, larger; from tablets up the whole of it. */}
       <HamburgGlass

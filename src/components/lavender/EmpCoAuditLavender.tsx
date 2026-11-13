@@ -2,6 +2,7 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import {
@@ -30,7 +31,6 @@ import {
   FormError,
   FormField,
   IconCard,
-  PageShell,
   ProcessAccordion,
   ProductHead,
   ProductTeaser,
@@ -102,7 +102,7 @@ export default function EmpCoAuditLavender() {
       : [];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -213,7 +213,7 @@ export default function EmpCoAuditLavender() {
       <Directive />
       <Faq />
       <MoreProducts />
-    </PageShell>
+    </NightPage>
   );
 }
 

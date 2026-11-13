@@ -2,6 +2,7 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
@@ -17,7 +18,6 @@ import {
   FaqSection,
   IconCard,
   InfoTip,
-  PageShell,
   PriceTag,
   ProductHead,
   ProductTeaser,
@@ -79,7 +79,7 @@ export default function CampaignParameterToolLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -239,7 +239,7 @@ export default function CampaignParameterToolLavender() {
         mode={modal.mode}
         onOpenChange={(open) => setModal((m) => ({ ...m, open }))}
       />
-    </PageShell>
+    </NightPage>
   );
 }
 

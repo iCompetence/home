@@ -2,11 +2,12 @@
 
 import { NightFooter } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { consumePendingFormSuccess, trackThankYouView } from '@/lib/tracking';
-import { Button, Hero, PageShell, PREVIEW_BASE, siteHref } from '@/design-system';
+import { Button, Hero, PREVIEW_BASE, siteHref } from '@/design-system';
 
 /** True while the redesign lives under /lavender (widened from the literal type). */
 const IN_PREVIEW = (PREVIEW_BASE as string) !== '';
@@ -16,7 +17,7 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
   const { language } = useLanguage();
   const home = siteHref(language, '/');
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={<NightFooter />}
     >
@@ -32,7 +33,7 @@ function HeroPage({ title, message, back }: { title: string; message: string; ba
           </Button>
         }
       />
-    </PageShell>
+    </NightPage>
   );
 }
 

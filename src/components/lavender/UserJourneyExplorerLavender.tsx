@@ -2,6 +2,7 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -12,7 +13,6 @@ import {
   CheckItem,
   FaqSection,
   ImageText,
-  PageShell,
   ProductHead,
   ProductTeaser,
   Section,
@@ -52,7 +52,7 @@ export default function UserJourneyExplorerLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -110,7 +110,7 @@ export default function UserJourneyExplorerLavender() {
         }))}
       />
       <MoreProducts />
-    </PageShell>
+    </NightPage>
   );
 }
 

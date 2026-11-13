@@ -10,7 +10,7 @@ import { HamburgGlass } from './HamburgGlass';
 import { ClosingText, LegalStrip } from './NightFooter';
 import { useTextHaze } from './textHaze';
 import { NightNav } from './NightNav';
-import { startNightSky } from './nightSky';
+import { NightSky } from './NightPage';
 import {
   ANCHOR_SCROLL_MARGIN,
   Button,
@@ -42,19 +42,6 @@ const STAR = {
   violet: '/images/nacht-stern-violett.webp',
   mint: '/images/nacht-stern-mint.webp',
 } as const;
-
-/** The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */
-function NightSky({ hidden = false }: { hidden?: boolean }) {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
-  return (
-    <canvas
-      ref={canvas}
-      aria-hidden
-      className={cn('pointer-events-none fixed inset-0 z-0 h-full w-full', hidden && 'invisible')}
-    />
-  );
-}
 
 /*
  * The page's one building block (after orchid.ai's feature rows): a short
@@ -105,7 +92,8 @@ export default function HomeNightLavender() {
 
   return (
     <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing && !covered} />}>
-      <NightSky hidden={covered} />
+      {/* The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */}
+      <NightSky hidden={covered} className="z-0" />
       {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
           whole first screen. id="top" sits here: the stage itself is sticky
           and would not be a scroll target. */}

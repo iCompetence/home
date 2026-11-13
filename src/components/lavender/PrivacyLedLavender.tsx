@@ -2,6 +2,7 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -9,7 +10,6 @@ import {
   BrandStar,
   Button,
   Eyebrow,
-  PageShell,
   PrincipleCard,
   Section,
   siteHref,
@@ -26,7 +26,7 @@ export default function PrivacyLedLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       surface="inverse"
       nav={<NightNav logoHref={home} bar="always" />}
       footer={
@@ -99,6 +99,6 @@ export default function PrivacyLedLavender() {
           ))}
         </div>
       </Section>
-    </PageShell>
+    </NightPage>
   );
 }

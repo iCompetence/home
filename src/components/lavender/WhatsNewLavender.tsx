@@ -2,12 +2,12 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   Hero,
   NewsEntry,
-  PageShell,
   Section,
   SplitBlock,
   siteHref,
@@ -62,7 +62,7 @@ export default function WhatsNewLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={
         <NightClosing
@@ -98,6 +98,6 @@ export default function WhatsNewLavender() {
           </SplitBlock>
         ))}
       </Section>
-    </PageShell>
+    </NightPage>
   );
 }

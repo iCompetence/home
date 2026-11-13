@@ -2,6 +2,7 @@
 
 import { NightFooter } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight } from 'lucide-react';
@@ -13,7 +14,6 @@ import {
   FormError,
   FormField,
   Hero,
-  PageShell,
   Section,
   TextAreaField,
   ValidatedForm,
@@ -34,7 +34,7 @@ export default function ContactLavender() {
   const home = siteHref(language, '/');
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={<NightFooter />}
     >
@@ -44,7 +44,7 @@ export default function ContactLavender() {
       />
       <Hero title={t('contact.hero.title')} />
       <ContactForm />
-    </PageShell>
+    </NightPage>
   );
 }
 

@@ -2,10 +2,11 @@
 
 import { NightFooter } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { Fragment, type ReactNode } from 'react';
 import { useLanguage, type Language } from '@/contexts/LanguageContext';
 import { labels, servicesData, type ServiceData } from '@/components/ServiceAccordion';
-import { FaqList, Hero, PageShell, Section, SplitBlock, siteHref } from '@/design-system';
+import { FaqList, Hero, Section, SplitBlock, siteHref } from '@/design-system';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
@@ -16,13 +17,13 @@ function LegalPage({ title, children }: { title: string; children: ReactNode }) 
   const { language } = useLanguage();
   const home = siteHref(language, '/');
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={home} bar="always" />}
       footer={<NightFooter />}
     >
       <Hero title={title} />
       <Section dsName="LegalText">{children}</Section>
-    </PageShell>
+    </NightPage>
   );
 }
 

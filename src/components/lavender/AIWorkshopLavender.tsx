@@ -2,6 +2,7 @@
 
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
+import { NightPage } from './NightPage';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -16,7 +17,6 @@ import {
   ConsentCheckbox,
   FormError,
   FormField,
-  PageShell,
   ProductHead,
   ProductTeaser,
   Section,
@@ -59,7 +59,7 @@ export default function AIWorkshopLavender() {
   ];
 
   return (
-    <PageShell
+    <NightPage
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
@@ -117,7 +117,7 @@ export default function AIWorkshopLavender() {
 
       <ApplicationForm />
       <MoreProducts />
-    </PageShell>
+    </NightPage>
   );
 }
 
