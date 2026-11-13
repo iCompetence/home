@@ -174,7 +174,7 @@ export default function CampaignParameterToolLavender() {
           src="/assets/how-it-works.png"
           alt="How it works"
           loading="lazy"
-          className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center"
+          className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />
       </Section>
 

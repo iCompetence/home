@@ -260,7 +260,7 @@ function About() {
         src="/assets/empco/EmpCo-Tool-UI.png"
         alt={t('lavender.products.empco.imageAlt')}
         loading="lazy"
-        className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%]"
+        className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%] lg:rounded-frame"
       />
     </Section>
   );

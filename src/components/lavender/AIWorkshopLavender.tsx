@@ -128,7 +128,8 @@ function Experts() {
   return (
     <div
       id="experts"
-      className={`flex flex-col gap-10 rounded-card bg-lav-lavender p-6 md:p-8 lg:p-12 ${ANCHOR_SCROLL_MARGIN}`}
+      // In the gallery's place, with the gallery's big corner from desktop up.
+      className={`flex flex-col gap-10 rounded-card bg-lav-lavender p-6 md:p-8 lg:rounded-frame lg:p-12 ${ANCHOR_SCROLL_MARGIN}`}
     >
       <h2 className="lav-h2 text-lav-navy">{t('workshop.experts.title')}</h2>
       <ul className="m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-2 md:gap-y-10">

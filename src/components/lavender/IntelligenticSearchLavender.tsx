@@ -124,7 +124,7 @@ export default function IntelligenticSearchLavender() {
         <SectionHeader title={t('is.howItWorks.title')} intro={[t('is.howItWorks.description')]} />
         <LoopVideo
           src="/videos/Architecture.mp4"
-          className="aspect-video w-full rounded-card bg-lav-lavender object-contain object-center"
+          className="aspect-video w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />
       </Section>
 

@@ -31,7 +31,8 @@ export function MediaGallery({
         src={current.src}
         alt={current.alt}
         className={cn(
-          'w-full rounded-card bg-lav-lavender object-contain object-center',
+          // The big corner from desktop up, as the large pictures of the night home.
+          'w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame',
           aspectClassName,
         )}
       />
