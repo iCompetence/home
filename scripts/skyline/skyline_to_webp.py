@@ -6,6 +6,17 @@ src, outdir = sys.argv[1], sys.argv[2]
 im = Image.open(src).convert('RGB')
 a = np.asarray(im).astype(np.float32) / 255
 b = a.max(axis=2)
+# the sculpture stands in the middle: the rendering has it off centre (a wider gap left of the
+# base than right of it), so the narrower side gets black added until both gaps are the same
+cols = np.where(b.max(axis=0) > 0.3)[0]
+gap_l, gap_r = int(cols[0]), int(im.width - 1 - cols[-1])
+if gap_l != gap_r:
+    wide = Image.new('RGB', (im.width + abs(gap_l - gap_r), im.height), (0, 0, 0))
+    wide.paste(im, (max(0, gap_r - gap_l), 0))
+    print('centred: gaps', gap_l, gap_r, '->', max(gap_l, gap_r), 'of', wide.width, '| x scale', round(im.width / wide.width, 5), '| x shift', max(0, gap_r - gap_l))
+    im = wide
+    a = np.asarray(im).astype(np.float32) / 255
+    b = a.max(axis=2)
 rows = np.where(b.max(axis=1) > 0.08)[0]
 top = max(0, rows[0] - int(im.height * 0.015))
 crop = im.crop((0, top, im.width, im.height))

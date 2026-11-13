@@ -809,7 +809,7 @@ html {
      round window that follows the pointer (HamburgGlass.tsx moves it). */
   .lav-hamburg {
     position: relative;
-    aspect-ratio: 2600 / 1114;
+    aspect-ratio: 2600 / 1097;
     touch-action: pan-y;
   }
   .lav-hamburg > div,

@@ -11,7 +11,7 @@ import { cn } from '@/components/ui/utils';
  * coloured blue to violet).
  *
  * Two congruent renderings with a transparent ground
- * (public/images/hamburg-glas-*.webp, 2600 × 1114): one unlit, one lit from
+ * (public/images/hamburg-glas-*.webp, 2600 × 1097): one unlit, one lit from
  * inside in the double star's colours. No blend mode, so the city may stand
  * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
@@ -29,16 +29,16 @@ import { cn } from '@/components/ui/utils';
 /** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
 // From west to east, as the city lies along the Elbe.
 const LANDMARKS = [
-  { x: 0.125, half: 0.09, y: 0.68 }, // Köhlbrandbrücke
-  { x: 0.24, half: 0.09, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
-  { x: 0.371, half: 0.03, y: 0.45 }, // Fernsehturm
-  { x: 0.43, half: 0.082, y: 0.78 }, // Rickmer Rickmers
-  { x: 0.513, half: 0.05, y: 0.6 }, // Michel
-  { x: 0.645, half: 0.063, y: 0.64 }, // Elbphilharmonie
-  { x: 0.725, half: 0.03, y: 0.55 }, // St. Nikolai
-  { x: 0.8, half: 0.065, y: 0.64 }, // Rathaus
-  { x: 0.866, half: 0.03, y: 0.55 }, // St. Petri
-  { x: 0.928, half: 0.055, y: 0.8 }, // Speicherstadt
+  { x: 0.123, half: 0.089, y: 0.68 }, // Köhlbrandbrücke
+  { x: 0.236, half: 0.089, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
+  { x: 0.365, half: 0.03, y: 0.45 }, // Fernsehturm
+  { x: 0.423, half: 0.081, y: 0.78 }, // Rickmer Rickmers
+  { x: 0.505, half: 0.049, y: 0.6 }, // Michel
+  { x: 0.635, half: 0.062, y: 0.64 }, // Elbphilharmonie
+  { x: 0.714, half: 0.03, y: 0.55 }, // St. Nikolai
+  { x: 0.788, half: 0.064, y: 0.64 }, // Rathaus
+  { x: 0.853, half: 0.03, y: 0.55 }, // St. Petri
+  { x: 0.914, half: 0.054, y: 0.8 }, // Speicherstadt
 ] as const;
 
 /** Where the light is (fractions of the picture), its radius as a fraction of the width, its strength. */

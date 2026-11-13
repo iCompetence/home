@@ -10,7 +10,7 @@ Beide entstehen aus **einem** Rendering per Skript und werden nie von Hand bearb
 
 - `hamburg-skyline-flux-original.png` – das Rendering (FLORA, FLUX, 3136 × 1344, schwarzer Grund),
   in einem Zug aus einer einheitlich weichgezeichneten Vorlage gerendert
-- `skyline_to_webp.py` – schneidet es zu, skaliert auf 2600 px Breite, macht den Grund
+- `skyline_to_webp.py` – setzt die Skulptur waagerecht in die Mitte, schneidet zu, skaliert auf 2600 px Breite, macht den Grund
   transparent und erzeugt beide WebP-Dateien
 
 ```bash
@@ -26,12 +26,13 @@ Diese Stellen hängen am Bild und müssen mit:
 
 - `LANDMARKS` in `src/components/lavender/HamburgGlass.tsx` – Positionen der Wahrzeichen,
   zwischen denen das Licht ohne Zeiger wandert
-- `aspect-ratio` von `.lav-hamburg` in `src/styles/globals.css` (heute `2600 / 1114`)
-- `SKYLINE_RATIO` in `src/components/lavender/nightSky.ts` (heute `1114 / 2600`)
+- `aspect-ratio` von `.lav-hamburg` in `src/styles/globals.css` (heute `2600 / 1097`)
+- `SKYLINE_RATIO` in `src/components/lavender/nightSky.ts` (heute `1097 / 2600`)
 
 ## Stand 13.11.2026
 
-Das Skript erzeugt `hamburg-glas-dunkel.webp` aus diesem Rendering bis auf
-Encoder-Rauschen gleich. `hamburg-glas-licht.webp` weicht leicht ab (im Mittel 2 von 255,
-die neue Datei wäre 589 statt 484 KB): Die eingecheckte Fassung stammt aus einem etwas
-früheren Stand des Skripts. Beim nächsten Durchlauf werden beide neu erzeugt.
+Beide Dateien sind mit dem Skript neu erzeugt (2600 × 1097). Seitdem setzt es die Skulptur
+waagerecht in die Mitte: Im Rendering hatte die Sockelplatte links 51 px und rechts 2 px Abstand
+zum Bildrand, das Skript ergänzt rechts Schwarz, bis beide Abstände gleich sind (je rund 42 px
+bei 2600 px Breite). Die Wahrzeichen liegen dadurch um den Faktor 0,9846 weiter links; `LANDMARKS`
+und der Ruheplatz des Leitsterns (`at` in `nightSky.ts`) sind angepasst.

@@ -30,7 +30,7 @@ const DEFAULT_SOURCES = { double: '/images/nacht-stern-doppel.webp' };
 /** Mostly white, a few in the brand's light tints. */
 const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4'];
 /** Height / width of the Hamburg rendering (HamburgGlass). */
-const SKYLINE_RATIO = 1114 / 2600;
+const SKYLINE_RATIO = 1097 / 2600;
 
 type FieldStar = { angle: number; radius: number; size: number; tint: string; rate: number; phase: number };
 /** One star glinting: which one, since when, for how long, and how long its cross gets (px). */
@@ -256,7 +256,7 @@ export function startNightSky(
     // text block sits above the middle of the city).
     const box = city?.getBoundingClientRect();
     const skyline = box ? box.height : W * SKYLINE_RATIO;
-    const at = { x: 0.9, y: 0.3 };
+    const at = { x: 0.886, y: 0.3 };
     const land = {
       // Never off screen (on phones the city is wider than the screen).
       x: Math.min(W * 0.86, (box ? box.left : 0) + (box ? box.width : W) * at.x),
