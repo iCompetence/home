@@ -3000,6 +3000,8 @@ export const translations: Translations = {
   'notFound.products': { en: 'View products', de: 'Produkte ansehen' },
   // Shell: skip link and the LinkedIn icon link (live hard-coded in English).
   'lavender.common.skipToContent': { en: 'Skip to content', de: 'Zum Inhalt springen' },
+  // Privacy-led AI: the hero's button jumps to the principles (the nav has the contact button).
+  'lavender.privacy.seePrinciples': { en: 'See the principles', de: 'Prinzipien ansehen' },
   'lavender.common.linkedin': { en: 'iCompetence on LinkedIn', de: 'iCompetence auf LinkedIn' },
   // Privacy policy page — new in the redesign (live, the privacy text sits on
   // the imprint page); title as in Figma. The soft hyphen breaks the word where
@@ -3085,6 +3087,16 @@ export const translations: Translations = {
   'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
   'lavender.products.iknow.cta': { en: 'Explore iKnow', de: 'iKnow entdecken' },
   'lavender.products.analyticsAgent.cta': { en: 'Explore Analytics Agent', de: 'Analytics Agent entdecken' },
+  'lavender.products.intelligenticSearch.cta': { en: 'Explore Intelligentic Search', de: 'Intelligentic Search entdecken' },
+  // Buttons that jump to a section of the same page. Verb in the infinitive like every
+  // button; keys of their own, because the anchors' keys are also the nav's section names.
+  'lavender.jump.empco': { en: 'See how it works', de: 'Funktionsweise ansehen' },
+  'lavender.jump.iknow': { en: 'Look inside the tool', de: 'Ins Tool schauen' },
+  'lavender.jump.analyticsAgent': { en: 'See it in action', de: 'In Aktion sehen' },
+  'lavender.jump.search': { en: 'See how it works', de: 'Funktionsweise ansehen' },
+  'lavender.jump.icu': { en: 'Learn more about ICU', de: 'Mehr über ICU erfahren' },
+  'lavender.jump.workshop': { en: 'Learn more about the workshop', de: 'Mehr zum Workshop erfahren' },
+  'lavender.thankYou.home': { en: 'Go to the homepage', de: 'Startseite aufrufen' },
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {
     en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',

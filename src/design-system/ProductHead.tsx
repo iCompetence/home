@@ -54,7 +54,7 @@ export function ProductHead({
         <div className="flex flex-col gap-8 md:gap-10 lg:flex-row lg:gap-16">
           <div className="w-full lg:w-[56.4%]">
             {media ??
-              (images && thumbLabel && <MediaGallery images={images} thumbLabel={thumbLabel} />)}
+              (images && thumbLabel && <MediaGallery images={images} thumbLabel={thumbLabel} bleed="start" />)}
           </div>
           <div className="flex w-full flex-col gap-8 lg:flex-1">
             {subline && sublineInHeading ? (

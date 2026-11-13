@@ -32,8 +32,9 @@ export type ProductRowProps = RowMedia & {
   eyebrow?: string;
   title: string;
   description: string;
-  href: string;
-  cta: string;
+  /** Where the row leads and what its button says. Without both, the row is text beside a picture and no link. */
+  href?: string;
+  cta?: string;
   /** Opens in a new tab. */
   external?: boolean;
   /** h2 where the row is a section of its own (home page), h3 under a section title (subpages). */
@@ -43,7 +44,7 @@ export type ProductRowProps = RowMedia & {
 
 /**
  * A product (or topic) beside its picture, as on the night home: text column
- * (eyebrow, title, text, a soft button) next to a large picture with the
+ * (eyebrow, title, text and, where the row leads somewhere, a soft button) next to a large picture with the
  * big corner radius that reaches the frame edge. Sides alternate down a page.
  * The whole row is one link to the product; the button names it.
  * Products show their UI pieces on the navy field (`visual` with
@@ -89,29 +90,31 @@ export function ProductRow({
         >
           {title}
         </Heading>
-        <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        {/* The whole row is the link (content team 11/2026, C-10): the link's
-            ::after covers the row and reaches as far as the picture bleeds, so
-            a click anywhere on text or picture goes there. Still one link for
-            screen readers and the keyboard, with its name and focus ring on the
-            button. The button is drawn in a span and takes the link's hover,
-            focus and press (globals.css, "A button drawn inside a link"). */}
-        <a
-          href={href}
-          {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          className={cn(
-            'mt-2 inline-flex rounded-pill',
-            'after:absolute after:top-0 after:bottom-0 after:z-10 after:-left-4 after:-right-4 md:after:-left-8 md:after:-right-8',
-            media === 'right' ? 'lg:after:left-0 lg:after:-right-10' : 'lg:after:-left-10 lg:after:right-0',
-          )}
-        >
-          <Button asChild variant="soft">
-            <span>
-              {cta}
-              <ArrowUpRight size={20} strokeWidth={2} />
-            </span>
-          </Button>
-        </a>
+        <p className="lav-body whitespace-pre-line font-normal text-lav-ink/80">{description}</p>
+        {href && cta && (
+          // The whole row is the link (content team 11/2026, C-10): the link's
+          // ::after covers the row and reaches as far as the picture bleeds, so
+          // a click anywhere on text or picture goes there. Still one link for
+          // screen readers and the keyboard, with its name and focus ring on the
+          // button. The button is drawn in a span and takes the link's hover,
+          // focus and press (globals.css, "A button drawn inside a link").
+          <a
+            href={href}
+            {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            className={cn(
+              'mt-2 inline-flex rounded-pill',
+              'after:absolute after:top-0 after:bottom-0 after:z-10 after:-left-4 after:-right-4 md:after:-left-8 md:after:-right-8',
+              media === 'right' ? 'lg:after:left-0 lg:after:-right-10' : 'lg:after:-left-10 lg:after:right-0',
+            )}
+          >
+            <Button asChild variant="soft">
+              <span>
+                {cta}
+                <ArrowUpRight size={20} strokeWidth={2} />
+              </span>
+            </Button>
+          </a>
+        )}
       </div>
       {/* The picture reaches the frame edge; on phones and tablets it is wider than the text.
           A visual sets its own bleed (ProductGlimpse does the same). */}
@@ -168,7 +171,8 @@ export function MoreProducts({ products, id = 'more' }: { products: readonly Pro
               title={product.title}
               description={t(product.descKey)}
               href={siteHref(language, product.route)}
-              cta={t('lavender.products.learnMore')}
+              // The product's own label, as on the home page: two rows are two links with different names.
+              cta={t(`lavender.products.${key}.cta`)}
               headingLevel="h3"
             />
           );

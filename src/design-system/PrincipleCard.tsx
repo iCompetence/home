@@ -20,7 +20,8 @@ export function PrincipleCard({
   return (
     <article
       data-ds="PrincipleCard"
-      className={cn('flex flex-col gap-8 rounded-card p-8 text-lav-navy md:p-12', className)}
+      // The big corner from desktop up, as the large fields of the night home.
+      className={cn('flex flex-col gap-8 rounded-card p-8 text-lav-navy md:p-12 lg:rounded-frame', className)}
     >
       <span className="lav-small font-medium text-lav-navy/80">{number}</span>
       <h3 className="lav-h1 text-lav-navy">{title}</h3>

@@ -4,15 +4,17 @@ import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
 import { TopicSection } from './TopicSection';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
+  ANCHOR_SCROLL_MARGIN,
   Button,
   Eyebrow,
   PrincipleCard,
   Section,
   siteHref,
+  smoothAnchor,
 } from '@/design-system';
 
 /**
@@ -45,10 +47,12 @@ export default function PrivacyLedLavender() {
             <h1 className="lav-display text-lav-white">{t('privacy.hero.title')}</h1>
             <p className="lav-lead font-normal text-lav-white/70">{t('privacy.hero.subline')}</p>
             <div>
+              {/* One action here, into the page, as in the home page's hero;
+                  "Kontakt aufnehmen" is the nav's button right above. */}
               <Button asChild>
-                <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-                  {t('topNav.letsTalk')}
-                  <ArrowUpRight size={20} strokeWidth={2} />
+                <a href="#principles" onClick={smoothAnchor}>
+                  {t('lavender.privacy.seePrinciples')}
+                  <ArrowDown size={20} strokeWidth={2} />
                 </a>
               </Button>
             </div>
@@ -72,14 +76,14 @@ export default function PrivacyLedLavender() {
 
       {/* A section of its own with a section title: the h1 step and the full
           distance to the intro above (was the h2 step, 80 px below it). */}
-      <Section id="principles" innerClassName="flex flex-col gap-12">
+      <Section id="principles" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <div className="flex flex-col gap-8">
           <h2 className="lav-h1 max-w-measure-wide text-lav-ink">{t('privacy.guidance.title')}</h2>
           <p className="lav-body max-w-measure-lead font-normal text-lav-ink/70">{t('privacy.guidance.subline')}</p>
         </div>
         {/* Two in a row only from 1200px (75rem): below, „Verantwortung“ at
-            H1 size is wider than half a row. Checkerboard in two columns,
-            alternating in one. */}
+            H1 size is wider than half a row. All four on lavender (was a
+            checkerboard with blue: blue is the main action's colour only). */}
         <div className="grid grid-cols-1 gap-6 min-[75rem]:grid-cols-2">
           {[1, 2, 3, 4].map((n) => (
             <PrincipleCard
@@ -87,14 +91,7 @@ export default function PrivacyLedLavender() {
               number={`0${n}`}
               title={t(`privacy.guidance.step${n}.label`)}
               description={t(`privacy.guidance.step${n}.desc`)}
-              className={
-                [
-                  'bg-lav-lavender',
-                  'bg-lav-blue',
-                  'bg-lav-lavender min-[75rem]:bg-lav-blue',
-                  'bg-lav-blue min-[75rem]:bg-lav-lavender',
-                ][n - 1]
-              }
+              className="bg-lav-lavender"
             />
           ))}
         </div>
