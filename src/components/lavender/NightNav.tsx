@@ -172,7 +172,7 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
           href={siteHref(language, 'contact')}
           target="_blank"
           rel="noopener noreferrer"
-          className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-blue px-4 font-brand text-small font-medium whitespace-nowrap text-lav-navy no-underline transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
+          className={`lav-star-hover pointer-events-auto inline-flex min-h-11 items-center gap-1.5 rounded-pill bg-lav-primary px-4 font-brand text-small font-medium whitespace-nowrap text-lav-on-primary no-underline transition-[color,scale]! duration-[var(--duration-fast)] ease-out hover:text-lav-white hover:opacity-100! focus-visible:text-lav-white active:scale-[0.96] md:gap-2 md:px-6 md:text-body ${focusRing} focus-visible:outline-lav-white`}
         >
           {t('topNav.letsTalk')}
           <ArrowUpRight size={18} strokeWidth={2} className="max-[389px]:hidden" />

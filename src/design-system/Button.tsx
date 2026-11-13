@@ -14,10 +14,14 @@ import { cn } from '@/components/ui/utils';
  * the outline goes, hover only under a fine pointer), a press squeezes it to
  * 96 %. .lav-star-hover also stops double-tap zoom and text selection on touch.
  *
- * Colours: blue (`primary`) only for the one main action of a page (request
- * the sample page, start the trial, send the form). Everything else is
- * `solid` or `soft`. Both take their colours from the surface they stand on,
- * so the same button is navy on the light page and white on the night.
+ * Colours: `primary` only for the one main action of a page (request the
+ * sample page, start the trial, send the form, the nav's contact button).
+ * Everything else is `solid` or `soft`. All three take their colours from the
+ * surface they stand on. `primary` is navy on the light page and blue on the
+ * night (2026-11-13: blue only on dark ground, so a light page shows one blue
+ * button, the one in the nav bar). `solid` is navy on the light page and
+ * white on the night: on light the two look the same, on the night the blue
+ * one is the main action and the white one the second.
  *
  * `soft` is the quiet second button: a fill without a line (lavender on the
  * light page, a white veil on the night), so next to a filled button only one
@@ -29,8 +33,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Navy on blue: white fails AA here (2.92:1), navy reaches 5.58:1.
-        primary: 'bg-lav-blue text-lav-navy',
+        // Follows the surface (--color-lav-primary in globals.css): navy with a
+        // light label on the light page; blue with a navy label on the night
+        // (white on blue fails AA at 2.92:1, navy reaches 5.58:1).
+        primary: 'bg-lav-primary text-lav-on-primary',
         // Filled in the ink colour: navy on the light page, white on the night.
         solid: 'bg-lav-ink text-lav-ground',
         // Quiet fill in --color-lav-soft (follows the surface, see globals.css).

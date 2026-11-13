@@ -167,6 +167,11 @@
   /* Fill of the soft button: lavender on the light page, a white veil on the
      night. Follows the surface like ink and ground. */
   --color-lav-soft: #f5e1ff;
+  /* Fill and label of the main action (Button `primary`, the nav's contact
+     button): navy on the light page, blue on the night. Follows the surface
+     like ink, ground and soft. Navy on blue reaches 5.58:1 (white fails AA). */
+  --color-lav-primary: #0b2231;
+  --color-lav-on-primary: #fdfafe;
   /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
   --color-lav-error: #b3433d;
 
@@ -220,11 +225,15 @@
   --color-lav-ink: #ffffff;
   --color-lav-ground: #0b2231;
   --color-lav-soft: rgb(255 255 255 / 0.12);
+  --color-lav-primary: #24a1da;
+  --color-lav-on-primary: #0b2231;
 }
 [data-surface='light'] {
   --color-lav-ink: #0b2231;
   --color-lav-ground: #fdfafe;
   --color-lav-soft: #f5e1ff;
+  --color-lav-primary: #0b2231;
+  --color-lav-on-primary: #fdfafe;
 }
 
 /* Live section padding, consumed by the shared <Section> component. Kept as
