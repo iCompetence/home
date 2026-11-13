@@ -106,15 +106,13 @@ export default function IntelligenticSearchLavender() {
         id="intro"
         className={ANCHOR_SCROLL_MARGIN}
         quote={AMAZON_QUOTE}
-        author={
-          <>
-            (
-            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
-              Amazon
-            </a>
-            , 2025)
-          </>
+        // The name links to the source (Amazon's press release).
+        name={
+          <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
+            Amazon
+          </a>
         }
+        note="2025"
         paragraphs={t('is.quote.text').split('\n\n')}
         conclusion={t('is.quote.conclusion')}
         // Full width and large, as the content team asked (11/2026, I-9).

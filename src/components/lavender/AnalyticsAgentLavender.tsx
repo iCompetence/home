@@ -103,7 +103,8 @@ export default function AnalyticsAgentLavender() {
         id="challenge"
         className={ANCHOR_SCROLL_MARGIN}
         quote={t('analyticsAgent.intro.quote')}
-        author={t('analyticsAgent.intro.quoteAuthor').trim()}
+        name="W. Edwards Deming"
+        note={t('lavender.quote.attributed')}
         paragraphs={[t('analyticsAgent.intro.p1'), t('analyticsAgent.intro.p2')]}
         conclusion={t('analyticsAgent.intro.p3')}
       />

@@ -15,10 +15,15 @@ export type Quote = {
   company?: string;
 };
 
-/** Typographic quotation marks around a quote that has none of its own. */
-function marked(quote: string, language: string) {
-  if (/^["„“”«»‚‘]/.test(quote.trim())) return quote;
-  return language === 'de' ? `„${quote}“` : `“${quote}”`;
+/**
+ * Typographic quotation marks around a quote, in the page's language. Straight
+ * marks typed around the text (as in the live pages' strings) are replaced;
+ * a quote that brings typographic marks of its own keeps them.
+ */
+export function marked(quote: string, language: string) {
+  const bare = quote.trim().replace(/^"([\s\S]*)"$/, '$1');
+  if (/^[„“”«»‚‘]/.test(bare)) return bare;
+  return language === 'de' ? `„${bare}“` : `“${bare}”`;
 }
 
 /**

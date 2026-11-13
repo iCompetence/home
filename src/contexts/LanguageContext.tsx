@@ -2966,6 +2966,8 @@ export const translations: Translations = {
   // Label before the mail address in the imprint (was hard-coded "Email:").
   'lavender.common.email': { en: 'Email', de: 'E-Mail' },
   'lavender.common.moreInfo': { en: 'More information', de: 'Mehr Informationen' },
+  // Second line under a quote whose author is not verified (Analytics Agent: Deming).
+  'lavender.quote.attributed': { en: 'Attributed', de: 'Zugeschrieben' },
   // ConsultModal ("Book your initial consultation"), 2026-10-02.
   'lavender.consult.topic': { en: 'Topic', de: 'Thema' },
   // Under the shortened opening statement (content team 11/2026, U-3).
