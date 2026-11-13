@@ -15,7 +15,7 @@ export const PAGE_UPDATED = {
   'icu-user-journey-explorer': '2026-11-13',
   'intelligentic-search': '2026-11-13',
   'campaign-parameter-tool': '2026-11-13',
-  'ai-workshop': '2026-10-29',
+  'ai-workshop': '2026-11-13',
   'privacy-led-ai': '2026-11-13',
   contact: '2026-10-02',
   imprint: '2026-11-13',

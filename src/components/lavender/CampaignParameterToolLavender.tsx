@@ -3,6 +3,7 @@
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
+import { TopicSection, useSeoFaq } from './TopicSection';
 import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
@@ -63,6 +64,7 @@ export default function CampaignParameterToolLavender() {
     question: t(`ct.faq.item${n}.question`),
     answer: t(`ct.faq.item${n}.answer`),
   }));
+  const topicFaq = useSeoFaq('lavender.seo.cpt', 3);
   const [tier, setTier] = useState<TierId>('tier1');
   const [modal, setModal] = useState<{ open: boolean; mode: TrialMode }>({
     open: false,
@@ -226,9 +228,18 @@ export default function CampaignParameterToolLavender() {
         }))}
       />
 
-      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('ct.faq.title')} items={faq} />
+      {/* The general topic after the product (orientation sheet: SEO & LLM
+          content); its questions join the page's FAQ below. */}
+      <TopicSection prefix="lavender.seo.cpt" route="campaign-parameter-tool" blockCount={3} />
+      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('ct.faq.title')} items={[...faq, ...topicFaq.items]} />
       {/* FAQPage from the same strings as the visible answers. */}
-      <JsonLd data={faqPage({ lang: language, path: previewRoute('campaign-parameter-tool'), items: faq })} />
+      <JsonLd
+        data={faqPage({
+          lang: language,
+          path: previewRoute('campaign-parameter-tool'),
+          items: [...faq, ...topicFaq.schema],
+        })}
+      />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
 
       <TrialModal

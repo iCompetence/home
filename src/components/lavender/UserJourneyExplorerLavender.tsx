@@ -3,6 +3,7 @@
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
+import { TopicSection, useSeoFaq } from './TopicSection';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { previewRoute } from '@/lib/i18n-meta';
@@ -48,6 +49,7 @@ export default function UserJourneyExplorerLavender() {
     question: t(`icu.faq.q${i + 1}.title`),
     answer: t(`icu.faq.q${i + 1}.content`),
   }));
+  const topicFaq = useSeoFaq('lavender.seo.icu', 3);
 
   const tabs = [
     { id: 'offer', label: t('lavender.icu.anchor.statusQuo') },
@@ -117,9 +119,18 @@ export default function UserJourneyExplorerLavender() {
       </div>
       <Benefits />
       <Guidance />
-      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('icu.faq.title')} items={faq} />
+      {/* The general topic after the product (orientation sheet: SEO & LLM
+          content); its questions join the page's FAQ below. */}
+      <TopicSection prefix="lavender.seo.icu" route="icu-user-journey-explorer" blockCount={3} />
+      <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('icu.faq.title')} items={[...faq, ...topicFaq.items]} />
       {/* FAQPage from the same strings as the visible answers. */}
-      <JsonLd data={faqPage({ lang: language, path: previewRoute('icu-user-journey-explorer'), items: faq })} />
+      <JsonLd
+        data={faqPage({
+          lang: language,
+          path: previewRoute('icu-user-journey-explorer'),
+          items: [...faq, ...topicFaq.schema],
+        })}
+      />
       <MoreProducts products={['iknow', 'analyticsAgent']} />
     </NightPage>
   );

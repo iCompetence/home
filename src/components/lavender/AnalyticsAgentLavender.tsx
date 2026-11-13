@@ -3,6 +3,7 @@
 import { NightClosing } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
+import { TopicSection } from './TopicSection';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
@@ -119,6 +120,8 @@ export default function AnalyticsAgentLavender() {
         />
       </Section>
 
+      {/* The general topic after the product (orientation sheet: SEO & LLM content). */}
+      <TopicSection prefix="lavender.seo.analytics" route="analytics-agent" blockCount={3} faqCount={5} />
       <MoreProducts products={['iknow', 'empco']} />
     </NightPage>
   );
