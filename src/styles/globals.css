@@ -809,12 +809,24 @@ html {
     inset: 0;
     pointer-events: none;
   }
+  /* The box the glow lives in. It reaches above and beside the picture, where
+     the glow may spill, and ends at the picture's lower edge with a soft
+     fade, as both renderings do. Without it a parent that clips there (the
+     home page's stage) cut the glow in a straight line above the legal strip.
+     The fade is the lowest 12 % of the picture (7.5 % of this taller box). */
+  .lav-hamburg > .lav-hamburg-glow {
+    inset: -60% -15% 0 -15%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 92.5%, rgb(0 0 0 / 0.5) 96.5%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 92.5%, rgb(0 0 0 / 0.5) 96.5%, transparent 100%);
+  }
   /* The glow behind the city: a 200 px circle that script moves, scales and
-     fades (transform and opacity only, nothing is repainted). */
-  .lav-hamburg > .lav-hamburg-halo {
-    inset: auto;
-    left: 0;
-    top: 0;
+     fades (transform and opacity only, nothing is repainted). Its origin is
+     the picture's top left corner inside the larger box (15/130, 60/160). */
+  .lav-hamburg-glow > .lav-hamburg-halo {
+    position: absolute;
+    pointer-events: none;
+    left: 11.5385%;
+    top: 37.5%;
     width: 200px;
     height: 200px;
     margin: -100px 0 0 -100px;
