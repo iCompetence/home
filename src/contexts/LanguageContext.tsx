@@ -2909,6 +2909,10 @@ export const translations: Translations = {
   'lavender.common.moreInfo': { en: 'More information', de: 'Mehr Informationen' },
   // ConsultModal ("Book your initial consultation"), 2026-10-02.
   'lavender.consult.topic': { en: 'Topic', de: 'Thema' },
+  // Under the shortened opening statement (content team 11/2026, U-3).
+  'lavender.icu.intro.point1': { en: 'Real paths from your data, reconstructed in real time', de: 'Echte Pfade aus deinen Daten, in Echtzeit rekonstruiert' },
+  'lavender.icu.intro.point2': { en: 'Returns and drop-offs at a glance', de: 'Rückkehrer und Abbrüche auf einen Blick' },
+  'lavender.icu.intro.point3': { en: 'No dashboard setup and no data science skills needed', de: 'Ohne Dashboard-Konfiguration und ohne Data-Science-Wissen' },
   'lavender.icu.anchor.statusQuo': { en: 'Status quo', de: 'Status quo' },
   'lavender.icu.anchor.benefits': { en: 'Benefits', de: 'Vorteile' },
   'lavender.icu.anchor.more': { en: 'More about ICU', de: 'Mehr über ICU' },

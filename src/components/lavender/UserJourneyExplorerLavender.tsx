@@ -97,7 +97,17 @@ export default function UserJourneyExplorerLavender() {
       </ProductHead>
 
       <div id="offer" className={ANCHOR_SCROLL_MARGIN}>
-        <Statement text={t('icu.intro.text')} />
+        {/* Short statement, the core features as a checklist below it (content team 11/2026, U-3). */}
+        <Statement
+          text={t('icu.intro.text')}
+          action={
+            <ul className="m-0 flex list-none flex-col gap-3 p-0">
+              {[1, 2, 3].map((n) => (
+                <CheckItem key={n}>{t(`lavender.icu.intro.point${n}`)}</CheckItem>
+              ))}
+            </ul>
+          }
+        />
       </div>
       <Benefits />
       <Guidance />

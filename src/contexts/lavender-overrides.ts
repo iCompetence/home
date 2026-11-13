@@ -196,7 +196,12 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   },
 
   // --- User Journey Explorer (ICU) ---
-  'icu.intro.text': { de: 'Die meisten Analytics-Tools zeigen die Journeys, die du bei deinen Nutzern vermutest. ICU zeigt die, die tatsächlich stattgefunden haben. Das KI-gestützte Tool rekonstruiert jeden echten Pfad durch deine Website oder dein Produkt in Echtzeit — jeden Schritt, jede Rückkehr, jeden Abbruch — und verwandelt ihn in eine visuelle Karte, die jeder verstehen kann. Kein Setup, keine Dashboards zu konfigurieren, kein Analyst-Studium erforderlich.' },
+  // U-3: only the first two sentences stay oversized; the rest became the
+  // checklist below (lavender.icu.intro.point1–3).
+  'icu.intro.text': {
+    en: 'Most analytics tools show the journeys you presume your users take. ICU shows the ones they actually took.',
+    de: 'Die meisten Analytics-Tools zeigen die Journeys, die du bei deinen Nutzern vermutest. ICU zeigt die, die tatsächlich stattgefunden haben.',
+  },
   'icu.carousel.title': { en: "We bring clarity to your user's behavior. In an instant.", de: 'Wir bringen Klarheit in das Verhalten deiner Nutzer. Sofort.' },
   'icu.carousel.subline': { en: 'ICU is built for the people who make decisions and for everybody else. ICU automatically - effortlessly - reveals the real journeys your users take. No dashboards to configure, no filters to master, no IT course to take — just clear, visual behavior anyone on your team can understand intuitively.', de: 'ICU wurde für Entscheider entwickelt — und für alle anderen. ICU enthüllt automatisch und mühelos die echten Journeys deiner Nutzer. Keine Dashboards zu konfigurieren, keine Filter zu beherrschen, kein IT-Kurs nötig — nur klares, visuelles Verhalten, das jeder in deinem Team intuitiv versteht.' },
   'icu.carousel.item1.description': { de: 'ICU deckt jeden echten Pfad deiner Nutzer auf — einschließlich Schleifen, Rückkehrern und stillen Abbrüchen — automatisch aus deinem vollständigen Datensatz rekonstruiert. Kein Setup. Kein Zusammenstückeln. Kein Rätselraten.' },
