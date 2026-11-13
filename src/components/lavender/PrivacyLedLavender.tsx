@@ -32,7 +32,7 @@ export default function PrivacyLedLavender() {
       footer={
         <NightClosing
           id="contact"
-          heading={t('cta.headline')}
+          heading={t('lavender.cta.heading')}
           action={<ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.privacyLedAi')} />}
         />
       }

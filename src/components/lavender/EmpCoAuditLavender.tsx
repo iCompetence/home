@@ -106,7 +106,7 @@ export default function EmpCoAuditLavender() {
       nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
         <NightClosing
-          heading={t('cta.headline')}
+          heading={t('lavender.cta.heading')}
           action={
             <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.empcoAudit')} />
           }

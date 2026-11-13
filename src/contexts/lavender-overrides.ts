@@ -335,7 +335,6 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'whatsNew.january2026.item2.description': { de: 'Speichere und verwende deine häufigsten UTM-Parameter-Konfigurationen mit unserer neuen Vorlagenbibliothek. Teile Vorlagen im Team für konsistentes Kampagnen-Tracking.' },
 
   // --- Shared (all pages) — docs/i18n-luecken.md §11a ---
-  'cta.headline': { en: 'Ready to enable your company for the agentic era?' },
   'burgerMenu.products': { en: 'Products & tools' },
   'burgerMenu.whatsNew': { en: "What's new" },
   // Content-Guidelines: „Privacy-led AI“, never „Privacy-Led AI“ (as in the nav).

@@ -62,7 +62,7 @@ export default function IntelligenticSearchLavender() {
         <NightClosing
           id="contact"
           className={ANCHOR_SCROLL_MARGIN}
-          heading={t('cta.headline')}
+          heading={t('lavender.cta.heading')}
           action={
             <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.intelligenticSearch')} />
           }
