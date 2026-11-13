@@ -136,15 +136,16 @@ export default function IKnowLavender() {
 
 function About() {
   const { t } = useLanguage();
-  const lead = 'lav-lead font-normal text-lav-navy/80';
+  const body = 'lav-body font-normal text-lav-navy/80';
   return (
-    <Section id="what" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14">
+    <Section id="what" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
       <SectionHeader title={t('iknow.what.title')} />
-      <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
-        <p className={lead}>{t('iknow.what.p1')}</p>
-        <p className={lead}>{t('iknow.what.p2')}</p>
-        <p className={lead}>{t('iknow.what.p3')}</p>
-        <p className="lav-lead font-medium text-lav-navy">{t('iknow.what.p4')}</p>
+      <div className="flex max-w-measure-lead flex-col gap-6">
+        <p className={body}>{t('iknow.what.p1')}</p>
+        <p className={body}>{t('iknow.what.p2')}</p>
+        <p className={body}>{t('iknow.what.p3')}</p>
+        {/* Closing line: the paragraphs' size, set apart by weight (K-2). */}
+        <p className="lav-body font-semibold text-lav-navy">{t('iknow.what.p4')}</p>
       </div>
     </Section>
   );

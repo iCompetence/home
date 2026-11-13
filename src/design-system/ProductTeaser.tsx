@@ -46,7 +46,7 @@ export function ProductTeaser({
         <h3 className="lav-h3 text-lav-white">
           {title}
         </h3>
-        <p className="lav-paragraph font-normal text-lav-white/70">
+        <p className="lav-body font-normal text-lav-white/70">
           {description}
         </p>
         <a

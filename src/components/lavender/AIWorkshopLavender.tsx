@@ -106,13 +106,14 @@ export default function AIWorkshopLavender() {
       </ProductHead>
 
       <Section id="intro" className={ANCHOR_SCROLL_MARGIN}>
-        <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
+        <div className="flex max-w-measure-lead flex-col gap-6">
           {/* Order of the print ad (11/2026): promise, free seats, body, then
-              the people behind it right before the experts. */}
-          <p className="lav-lead font-medium text-lav-navy">{t('workshop.intro.run3')}</p>
-          <p className="lav-lead font-medium text-lav-navy">{t('workshop.intro.run4')}</p>
-          <p className="lav-lead font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
-          <p className="lav-lead font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
+              the people behind it right before the experts. Running text in
+              one size; the promise and the free seats stand out by weight. */}
+          <p className="lav-body font-semibold text-lav-navy">{t('workshop.intro.run3')}</p>
+          <p className="lav-body font-semibold text-lav-navy">{t('workshop.intro.run4')}</p>
+          <p className="lav-body font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
+          <p className="lav-body font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
         </div>
       </Section>
 

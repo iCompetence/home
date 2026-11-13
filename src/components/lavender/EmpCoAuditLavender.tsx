@@ -238,18 +238,19 @@ export default function EmpCoAuditLavender() {
 
 function Why() {
   const { t } = useLanguage();
-  const lead = 'lav-lead font-normal text-lav-navy/80';
+  // Running text, one size on every page (content team 11/2026, E-2).
+  const body = 'lav-body font-normal text-lav-navy/80';
   return (
-    <Section id="why" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14">
+    <Section id="why" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
       <SectionHeader title={t('empco.why.title')} />
-      <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
-        <div className="flex flex-1 flex-col gap-10">
-          <p className={lead}>{t('empco.why.p1')}</p>
-          <p className={lead}>{t('empco.why.p2')}</p>
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-16">
+        <div className="flex flex-1 flex-col gap-6">
+          <p className={body}>{t('empco.why.p1')}</p>
+          <p className={body}>{t('empco.why.p2')}</p>
         </div>
-        <div className="flex flex-1 flex-col gap-10">
-          <p className={lead}>{t('empco.why.p3')}</p>
-          <p className="lav-lead font-medium text-lav-navy">{t('empco.why.p4')}</p>
+        <div className="flex flex-1 flex-col gap-6">
+          <p className={body}>{t('empco.why.p3')}</p>
+          <p className="lav-body font-semibold text-lav-navy">{t('empco.why.p4')}</p>
         </div>
       </div>
     </Section>
@@ -260,13 +261,13 @@ function Why() {
 
 function About() {
   const { t } = useLanguage();
-  const paragraph = 'lav-paragraph font-normal text-lav-navy/80';
+  const paragraph = 'lav-body font-normal text-lav-navy/80';
   return (
     // Text only: the tool picture moved, full width, below the test steps
     // (E-5), so it is not shown three times on the page.
-    <Section id="about" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+    <Section id="about" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
       <SectionHeader title={t('empco.what.title')} />
-      <div className="flex max-w-[820px] flex-col gap-6">
+      <div className="flex max-w-measure-lead flex-col gap-6">
         <p className={paragraph}>{t('empco.what.p1')}</p>
         <p className={paragraph}>{t('empco.what.p2')}</p>
       </div>
@@ -331,7 +332,7 @@ function Features() {
         <SectionHeader title={t('empco.features.title')} className="lg:flex-1" />
         <div className="flex flex-col gap-6 lg:flex-1">
           {intro.map((p) => (
-            <p key={p} className="lav-paragraph font-normal text-lav-navy/80">
+            <p key={p} className="lav-body font-normal text-lav-navy/80">
               {p}
             </p>
           ))}
@@ -548,7 +549,7 @@ function ClaimExamples() {
   return (
     <div className="flex flex-col gap-8">
       <h3 className="lav-h2 text-lav-navy">{t('empco.seo.examples.title')}</h3>
-      <p className="lav-paragraph font-normal text-lav-navy/80">{lead}</p>
+      <p className="lav-body font-normal text-lav-navy/80">{lead}</p>
       <ul className="m-0 flex list-none flex-col border-b border-lav-navy/20 p-0">
         {items.map((item) => (
           <li
