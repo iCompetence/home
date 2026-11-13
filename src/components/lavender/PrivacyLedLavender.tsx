@@ -65,7 +65,8 @@ export default function PrivacyLedLavender() {
         <h2 className="lav-h1 text-lav-white lg:flex-1">{t('privacy.intro.line1')}</h2>
         <div className="flex flex-col gap-6 lg:flex-1">
           <p className="lav-body font-normal text-lav-white/70">{t('privacy.intro.text')}</p>
-          <p className="lav-body font-semibold text-lav-blue">{t('privacy.intro.solution')}</p>
+          {/* In ink like every emphasised closing line; blue is the main action's colour only. */}
+          <p className="lav-body font-semibold text-lav-ink">{t('privacy.intro.solution')}</p>
         </div>
       </Section>
 
