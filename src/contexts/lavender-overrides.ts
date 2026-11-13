@@ -115,7 +115,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: '– W. Edwards Deming zugeschrieben',
   },
   'analyticsAgent.intro.p1': {
-    de: 'Dein Unternehmen sammelt jeden Tag riesige Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
+    de: 'Dein Unternehmen sammelt jeden Tag große Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
   },
   'analyticsAgent.intro.p2': {
     de: 'Was wäre, wenn jeder in deinem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.',
@@ -127,7 +127,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit deinen Web-Analytics-Daten im Dialog. Frag alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.',
   },
   'analyticsAgent.what.p3': {
-    de: 'Aber GA4 ist nur der Anfang. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
+    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
   },
   'analyticsAgent.what.p4': {
     de: '→ Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in deiner Sprache.',
@@ -142,14 +142,19 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'analyticsAgent.card4.description': {
     de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis deiner Daten im Kontext. Sie weiß, was deine Metriken bedeuten, wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
   },
+  // Content team 11/2026 (A-1): bullet in the product head and card title.
+  'analyticsAgent.card5.title': { de: 'Sofort einsatzbereit mit Google Analytics 4' },
   'analyticsAgent.card5.description': {
-    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle. Verbinde dich direkt mit der GA4-API und stelle Fragen zu deinem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.',
+    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle für den iCompetence Analytics Agent. Verbinde dich direkt mit der GA4-API und stelle Fragen zu deinem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.',
   },
   'analyticsAgent.card6.title': { de: 'Für dein Unternehmen gebaut' },
   'analyticsAgent.card6.description': {
     de: 'Der Analytics Agent läuft als eigenständige Lösung, die sich in deine bestehende Infrastruktur integriert. Sicher, skalierbar und darauf ausgelegt, mit deiner Datenlandschaft zu wachsen.',
   },
   'analyticsAgent.howItWorks.title': { de: 'Sieh den Analytics Agent in Aktion' },
+  // Not rendered since 11/2026: the content team found it confusing under
+  // "in Aktion" (docs/korrekturen-2026-11.md A-6, A-7). Kept until it is
+  // decided whether it moves elsewhere.
   'analyticsAgent.howItWorks.p1': {
     de: 'Die Frage ist nicht, ob du Daten hast. Sondern ob du sie nutzen kannst.',
   },
