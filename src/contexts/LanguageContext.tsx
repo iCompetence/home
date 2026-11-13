@@ -2906,6 +2906,8 @@ export const translations: Translations = {
   'lavender.common.onThisPage': { en: 'On this page', de: 'Auf dieser Seite' },
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
   'lavender.common.close': { en: 'Close', de: 'Schließen' },
+  // Label before the mail address in the imprint (was hard-coded "Email:").
+  'lavender.common.email': { en: 'Email', de: 'E-Mail' },
   'lavender.common.moreInfo': { en: 'More information', de: 'Mehr Informationen' },
   // ConsultModal ("Book your initial consultation"), 2026-10-02.
   'lavender.consult.topic': { en: 'Topic', de: 'Thema' },
