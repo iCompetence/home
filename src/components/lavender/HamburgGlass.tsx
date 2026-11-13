@@ -11,7 +11,7 @@ import { cn } from '@/components/ui/utils';
  * coloured blue to violet).
  *
  * Two congruent renderings with a transparent ground
- * (public/images/hamburg-glas-*.webp, 2600 × 1109): one unlit, one lit from
+ * (public/images/hamburg-glas-*.webp, 2600 × 1108): one unlit, one lit from
  * inside in the double star's colours. No blend mode, so the city may stand
  * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
@@ -29,17 +29,18 @@ import { cn } from '@/components/ui/utils';
 /** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
 // From west to east, as the city lies along the Elbe.
 const LANDMARKS = [
-  { x: 0.118, half: 0.09, y: 0.68, ry: 0.5 }, // Köhlbrandbrücke
-  { x: 0.24, half: 0.09, y: 0.78, ry: 0.4 }, // Landungsbrücken
-  { x: 0.351, half: 0.03, y: 0.45, ry: 0.9 }, // Fernsehturm
-  { x: 0.43, half: 0.082, y: 0.78, ry: 0.36 }, // Rickmer Rickmers
-  { x: 0.536, half: 0.05, y: 0.6, ry: 0.66 }, // Michel
-  { x: 0.661, half: 0.063, y: 0.64, ry: 0.56 }, // Elbphilharmonie
-  { x: 0.8, half: 0.065, y: 0.64, ry: 0.62 }, // Rathaus
-  { x: 0.924, half: 0.055, y: 0.8, ry: 0.3 }, // Speicherstadt
+  { x: 0.118, half: 0.09, y: 0.68 }, // Köhlbrandbrücke
+  { x: 0.24, half: 0.09, y: 0.78 }, // Landungsbrücken
+  { x: 0.369, half: 0.03, y: 0.45 }, // Fernsehturm
+  { x: 0.444, half: 0.082, y: 0.78 }, // Rickmer Rickmers
+  { x: 0.555, half: 0.05, y: 0.6 }, // Michel
+  { x: 0.7, half: 0.063, y: 0.64 }, // Elbphilharmonie
+  { x: 0.814, half: 0.06, y: 0.64 }, // Rathaus
+  { x: 0.924, half: 0.055, y: 0.8 }, // Speicherstadt
 ] as const;
 
-type Light = { x: number; y: number; rx: number; ry: number; a: number };
+/** Where the light is (fractions of the picture), its radius as a fraction of the width, its strength. */
+type Light = { x: number; y: number; rx: number; a: number };
 
 export function HamburgGlass({ className }: { className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
@@ -49,7 +50,7 @@ export function HamburgGlass({ className }: { className?: string }) {
     if (!el) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const touch = window.matchMedia('(hover: none)').matches;
-    const cur: Light = { x: 0.5, y: 0.7, rx: 0.085, ry: 0.5, a: 0 };
+    const cur: Light = { x: 0.5, y: 0.7, rx: 0.1, a: 0 };
     const target: Light = { ...cur };
     let raf = 0;
     let timer = 0;
@@ -73,13 +74,14 @@ export function HamburgGlass({ className }: { className?: string }) {
       const h = el.clientHeight;
       const x = cur.x * w;
       const y = cur.y * h;
-      const rx = cur.rx * w;
-      const ry = cur.ry * h;
+      // A round light: one radius for both directions.
+      const r = cur.rx * w;
       // Both elements are 200 px circles centred on their own origin.
-      halo.style.transform = `translate3d(${x}px,${y}px,0) scale(${(rx * 0.75 + 46) / 100},${(ry * 0.75 + 46) / 100})`;
-      halo.style.opacity = String(cur.a * 0.3);
-      const sx = (rx * 1.2) / 100;
-      const sy = (ry * 1.15) / 100;
+      const glow = (r * 0.85 + 46) / 100;
+      halo.style.transform = `translate3d(${x}px,${y}px,0) scale(${glow})`;
+      halo.style.opacity = String(cur.a * 0.55);
+      const sx = (r * 1.2) / 100;
+      const sy = sx;
       spot.style.transform = `translate3d(${x}px,${y}px,0) scale(${sx},${sy})`;
       spot.style.opacity = String(cur.a);
       lit.style.width = `${w}px`;
@@ -116,7 +118,7 @@ export function HamburgGlass({ className }: { className?: string }) {
     const walk = () => {
       walking = (walking + 1) % LANDMARKS.length;
       const lm = LANDMARKS[walking];
-      Object.assign(target, { x: lm.x, y: lm.y, rx: lm.half * 1.55, ry: lm.ry, a: 1 });
+      Object.assign(target, { x: lm.x, y: lm.y, rx: Math.max(lm.half * 1.55, 0.08), a: 1 });
       go();
       timer = window.setTimeout(walk, 2600);
     };
@@ -155,8 +157,7 @@ export function HamburgGlass({ className }: { className?: string }) {
       Object.assign(target, {
         x: (e.clientX - box.left) / box.width,
         y: (e.clientY - box.top) / box.height,
-        rx: 0.085,
-        ry: 0.5,
+        rx: 0.1,
         a: 1,
       });
       go();

@@ -1,12 +1,13 @@
 'use client';
 
-import { type MouseEvent, type ReactNode } from 'react';
-import { ChevronUp } from 'lucide-react';
+import { useRef, type MouseEvent, type ReactNode } from 'react';
+import { ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/components/ui/utils';
-import { LINKEDIN_URL, LinkedInGlyph, siteHref } from '@/design-system';
+import { LINKEDIN_URL, siteHref } from '@/design-system';
 import { fromKeyboard, glideTo } from './glide';
 import { HamburgGlass } from './HamburgGlass';
+import { useTextHaze } from './textHaze';
 
 /**
  * How the pages of the night design end: the closing line with its action on
@@ -26,7 +27,7 @@ export const NIGHT_BUTTON =
 export function LegalStrip({ className }: { className?: string }) {
   const { t, language } = useLanguage();
   const legal =
-    'lav-body inline-flex min-h-11 items-center font-medium text-lav-white/70 no-underline hover:opacity-100!';
+    'lav-body inline-flex min-h-11 items-center font-medium text-lav-white/70 no-underline hover:opacity-100! max-[359px]:text-[14px]';
   // The same glide as every in-page link (glide.ts), not the browser's own smooth scrolling.
   const toTop = (e: MouseEvent) => glideTo(null, undefined, fromKeyboard(e));
   const press = 'transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96]';
@@ -39,21 +40,16 @@ export function LegalStrip({ className }: { className?: string }) {
     >
       {/* Where the trip ends: under the skyline. Left out on phones, where the row has no room. */}
       <p className="lav-body font-medium text-lav-white max-sm:hidden">{t('lavender.footer.basedIn')}</p>
-      <div className="flex items-center gap-4 max-sm:w-full max-sm:justify-between md:gap-8">
+      {/* On phones the four share the row evenly; on the narrowest in a smaller size. */}
+      <div className="flex items-center gap-4 max-sm:w-full max-sm:justify-between max-sm:gap-0 md:gap-8">
         <a href={siteHref(language, 'imprint')} className={legal}>
           <span className="lav-star-text">{t('footer.imprint')}</span>
         </a>
         <a href={siteHref(language, 'privacy-policy')} className={legal}>
           <span className="lav-star-text">{t('footer.privacy')}</span>
         </a>
-        <a
-          href={LINKEDIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t('lavender.common.linkedin')}
-          className={`lav-star-hover inline-flex size-11 shrink-0 items-center justify-center rounded-pill bg-lav-white/10 text-lav-white no-underline hover:opacity-100! ${press}`}
-        >
-          <LinkedInGlyph size={18} />
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={legal}>
+          <span className="lav-star-text">LinkedIn</span>
         </a>
         <button
           type="button"
@@ -63,7 +59,8 @@ export function LegalStrip({ className }: { className?: string }) {
         >
           {/* On phones the arrow alone: the row has no room for the words. */}
           <span className="lav-star-text lav-body font-medium max-sm:hidden">{t('footer.backToTop')}</span>
-          <ChevronUp size={16} strokeWidth={2} />
+          {/* The same arrow family as in the buttons. */}
+          <ArrowUp size={20} strokeWidth={2} />
         </button>
       </div>
     </div>
@@ -80,28 +77,57 @@ export type NightClosingProps = {
   className?: string;
 };
 
+/**
+ * The closing line and its action, centred in the upper part of the last
+ * screen. Shared by the home page's stage and the subpages' footer, so both
+ * end in the same picture. Marked for useTextHaze: the city stands back behind it.
+ */
+export function ClosingText({ heading, children }: { heading: string; children?: ReactNode }) {
+  return (
+    <div className="relative z-[1] mx-auto w-full max-w-frame px-[var(--section-pad-h)] pt-[108px] lg:pt-[140px]">
+      <div className="pointer-events-auto mx-auto flex max-w-measure-lead flex-col items-center gap-8 text-center lg:gap-10">
+        <h2 data-haze className="lav-h1 text-lav-white [text-wrap:balance]">
+          {heading}
+        </h2>
+        {children && (
+          <div data-haze="box" className="inline-flex">
+            {children}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function NightClosing({ heading, action, id, className }: NightClosingProps) {
+  const root = useRef<HTMLElement>(null);
+  useTextHaze(
+    () => ({
+      glass: root.current?.querySelector<HTMLElement>('.lav-hamburg-glass'),
+      texts: root.current?.querySelectorAll<HTMLElement>('[data-haze]') ?? [],
+    }),
+    [heading],
+  );
   return (
     <footer
+      ref={root}
       id={id}
       data-ds="FooterNight"
       data-surface="inverse"
       className={cn(
-        'lav-night-stars relative overflow-hidden bg-lav-navy pt-[var(--section-pad-v)] text-lav-white',
+        'lav-night-stars relative flex flex-col overflow-hidden bg-lav-navy text-lav-white',
+        // With a closing line the footer is one screen, laid out like the home page's last
+        // screen: the line at the top, the city along the lower edge, the strip below it.
+        heading ? 'h-[max(100svh,540px)]' : 'pt-[var(--section-pad-v)]',
         className,
       )}
     >
-      {heading && (
-        <div className="relative z-[1] mx-auto flex w-full max-w-frame flex-col items-start gap-8 px-[var(--section-pad-h)] lg:gap-10">
-          <h2 className="lav-h1 max-w-measure-lead text-lav-white [text-wrap:balance]">{heading}</h2>
-          {action}
-        </div>
-      )}
+      {heading && <ClosingText heading={heading}>{action}</ClosingText>}
       {/* On phones the middle of the skyline, larger; from tablets up the whole of it. */}
       <HamburgGlass
-        className={cn('left-[-36%] w-[160%] md:left-0 md:w-full', heading ? 'mt-10 lg:-mt-[5vw]' : 'mt-0')}
+        className={cn('left-[-36%] w-[160%] md:left-0 md:w-full', heading && 'absolute! bottom-[84px]')}
       />
-      <LegalStrip className="relative z-[1]" />
+      <LegalStrip className="relative z-[1] mt-auto" />
     </footer>
   );
 }
