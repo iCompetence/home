@@ -14,7 +14,7 @@ import {
   ImageText,
   MediaGallery,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   QuoteIntro,
   Section,
   SectionHeader,
@@ -119,7 +119,7 @@ export default function AnalyticsAgentLavender() {
         />
       </Section>
 
-      <MoreProducts />
+      <MoreProducts products={['iknow', 'empco']} />
     </NightPage>
   );
 }
@@ -165,33 +165,3 @@ function Features() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="EmpCo Audit"
-          description={t('lavender.products.empco.desc')}
-          image="/images/lavender-empco.png"
-          imageAlt={t('lavender.products.empco.imageAlt')}
-          href={siteHref(language, 'empco-audit')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

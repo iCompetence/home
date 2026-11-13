@@ -18,7 +18,7 @@ import {
   FormError,
   FormField,
   ProductHead,
-  ProductTeaser,
+  MoreProducts,
   Section,
   SectionHeader,
   ValidatedForm,
@@ -116,7 +116,7 @@ export default function AIWorkshopLavender() {
       </Section>
 
       <ApplicationForm />
-      <MoreProducts />
+      <MoreProducts products={['iknow', 'intelligenticSearch']} />
     </NightPage>
   );
 }
@@ -245,33 +245,3 @@ function ApplicationForm() {
   );
 }
 
-/* ---------------- Other products ---------------- */
-
-function MoreProducts() {
-  const { t, language } = useLanguage();
-  return (
-    <Section id="more" innerClassName="flex flex-col gap-12">
-      <SectionHeader title={t('lavender.products.moreTitle')} />
-      <div className="flex w-full flex-col gap-6 md:flex-row lg:gap-10">
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="iKnow"
-          description={t('lavender.products.iknow.desc')}
-          image="/images/lavender-iknow.png"
-          imageAlt={t('lavender.products.iknow.imageAlt')}
-          href={siteHref(language, 'iknow')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-        <ProductTeaser
-          eyebrow={t('lavender.products.eyebrow')}
-          title="Intelligentic Search"
-          description={t('is.hero.subline')}
-          image="/images/ICS_Travel_Club.png"
-          imageAlt="Intelligentic Search Demo"
-          href={siteHref(language, 'intelligentic-search')}
-          ctaLabel={t('lavender.products.learnMore')}
-        />
-      </div>
-    </Section>
-  );
-}

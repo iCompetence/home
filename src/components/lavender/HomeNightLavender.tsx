@@ -14,12 +14,13 @@ import { NightSky } from './NightPage';
 import {
   ANCHOR_SCROLL_MARGIN,
   Button,
-  Eyebrow,
   PageShell,
   ProcessAccordion,
+  ProductRow,
   Section,
   Statement,
   siteHref,
+  type ProductRowProps,
 } from '@/design-system';
 
 /**
@@ -43,23 +44,6 @@ const STAR = {
   violet: '/images/nacht-stern-violett.webp',
   mint: '/images/nacht-stern-mint.webp',
 } as const;
-
-/*
- * The page's one building block (after orchid.ai's feature rows): a short
- * text column next to a large glass field (StarField), sides alternating. The
- * section's star stands behind the field, and a piece of real content floats
- * in front (a description card, a screenshot).
- * The field reaches the frame edge; the text stays on the text column.
- */
-type Side = 'left' | 'right';
-const ROW = 'relative grid items-center gap-10 lg:grid-cols-12 lg:gap-10';
-const textCol = (media: Side) =>
-  cn('flex flex-col items-start gap-8 lg:col-span-5 lg:row-start-1', media === 'right' ? 'lg:col-start-1' : 'lg:col-start-8');
-const mediaCol = (media: Side) =>
-  cn(
-    '-mx-4 md:-mx-8 lg:col-span-7 lg:row-start-1 lg:mx-0',
-    media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
-  );
 
 /**
  * The night home: the glass city of Hamburg stands in the hero, the day layer
@@ -312,65 +296,13 @@ function DayServices() {
 }
 
 /**
- * A product or topic on the day layer: text beside the picture the Lavender
- * pages use for it (a finished composition with its own coloured ground, so no
- * glass field and no star behind it). Sides alternate like the other rows.
+ * A product or topic on the day layer: a section of its own holding one
+ * ProductRow (design system), the picture beside the text. Sides alternate.
  */
-function DayRow({
-  id,
-  media,
-  image,
-  imageAlt,
-  imageClass,
-  eyebrow,
-  title,
-  description,
-  href,
-  cta,
-  external,
-  primary,
-  className,
-}: {
-  id?: string;
-  media: Side;
-  image: string;
-  imageAlt: string;
-  /** Aspect ratio and crop of the picture. */
-  imageClass: string;
-  /** Label above the title; left out where it would only repeat the title. */
-  eyebrow?: string;
-  title: string;
-  description: string;
-  href: string;
-  cta: string;
-  external?: boolean;
-  className?: string;
-  /** Filled button instead of the outlined one. */
-  primary?: boolean;
-}) {
+function DayRow({ id, className, ...row }: ProductRowProps & { id?: string }) {
   return (
-    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN, className)} innerClassName={ROW}>
-      {/* Tight inside the group, wider towards the action: label 16, heading 24, text 32 to the button. */}
-      <div className={cn(textCol(media), 'gap-6')}>
-        {eyebrow && <Eyebrow className="-mb-2 text-lav-ink/70">{eyebrow}</Eyebrow>}
-        {/* One step smaller on small laptops, so two-word names stay on one line. */}
-        <h2 className="lav-h1 text-lav-ink lg:max-xl:text-[40px] lg:max-xl:leading-[44px]">{title}</h2>
-        <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        <Button asChild variant={primary ? 'solid' : 'outline'} className="mt-2">
-          <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-            {cta}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-      </div>
-      <div className={mediaCol(media)}>
-        <img
-          src={image}
-          alt={imageAlt}
-          decoding="async"
-          className={cn('block w-full rounded-card object-cover lg:rounded-frame', imageClass)}
-        />
-      </div>
+    <Section id={id} className={cn('relative', id && ANCHOR_SCROLL_MARGIN, className)}>
+      <ProductRow {...row} />
     </Section>
   );
 }
@@ -394,7 +326,7 @@ function DayProducts() {
           media={i % 2 === 0 ? 'left' : 'right'}
           image={product.image}
           imageAlt={t(`lavender.products.${product.key}.imageAlt`)}
-          imageClass={cn('aspect-[2416/1120]', product.crop)}
+          imageClassName={cn('aspect-[2416/1120]', product.crop)}
           // The three products read as one group: closer to each other than sections are.
           className={i > 0 ? 'lg:pt-4' : undefined}
           eyebrow={t('lavender.products.eyebrow')}
@@ -416,7 +348,7 @@ function DayPrivacyLed() {
       media="left"
       image="/images/privacy-led.jpg"
       imageAlt={t('lavender.privacyLed.title')}
-      imageClass="aspect-[2416/1120] object-center"
+      imageClassName="aspect-[2416/1120] object-center"
       title={t('lavender.privacyLed.title')}
       description={t('lavender.privacyLed.desc')}
       href={siteHref(language, 'privacy-led-ai')}
