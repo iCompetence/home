@@ -97,6 +97,15 @@ Veröffentlichung). Was die Seiten dafür mitbringen:
   getrennt von den Overrides bestehender Texte in `lavender-overrides.ts`).
 - **Links im HTML:** Das Menü (`NightNav`, Radix-Sheet) entsteht erst beim Öffnen; die
   Seitenlinks stehen deshalb zusätzlich als versteckte Liste in der `<nav>`.
+- **Erklär-Abschnitte (SEO- & LLM-Content):** `TopicSection` (`src/components/lavender/`)
+  setzt nach dem Produktteil einen `Explainer` (H2 als Frage, fette Kernantwort im ersten
+  Absatz, H3-Blöcke mit Listen/Tabellen, Stand-Datum) und auf Wunsch ein FAQ samt
+  FAQPage-Schema; CPT und ICU hängen ihre Fragen an das vorhandene FAQ an (ein FAQPage je
+  Seite). Texte in `lavender-seo.ts` im RichText-Format (`src/design-system/RichText.tsx`:
+  Leerzeile trennt Blöcke, `- ` Liste, `1. ` nummeriert, `|` Tabelle, `**fett**`,
+  `[Text](/route/)`). Grundlage: Top-Ergebnisse zu je fünf Suchbegriffen (freigegeben
+  13.11.2026), eigene Texte. Auf der dunklen Privacy-led-Seite liegt der Abschnitt auf einem
+  hellen Blatt wie die Tag-Ebene der Startseite.
 
 **Umzug: Falle bei Canonical und hreflang.** Heute zeigen Canonical, hreflang, og:url und
 JSON-LD aller Vorschauseiten auf `/<lang>/lavender/…`. Das ist richtig, solange die Seiten
