@@ -29,6 +29,7 @@ import {
   SectionHeader,
   SegmentedControl,
   SpecItem,
+  ZoomImage,
   siteHref,
 } from '@/design-system';
 import { TrialModal, type TrialMode } from './TrialModal';
@@ -111,9 +112,8 @@ export default function CampaignParameterToolLavender() {
           { label: 'Campaign Parameter Tool' },
         ]}
         images={[
-          // Alt texts as on the live page.
-          { src: '/assets/hero.png', alt: 'Campaign Parameter Tool' },
-          { src: '/assets/how-it-works.png', alt: 'How it works' },
+          { src: '/assets/hero.png', alt: t('lavender.alt.cpt.hero') },
+          { src: '/assets/how-it-works.png', alt: t('lavender.alt.cpt.howItWorks') },
         ]}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="Campaign Parameter Tool"
@@ -178,9 +178,9 @@ export default function CampaignParameterToolLavender() {
 
       <Section id="how" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.demo.title')} intro={[t('ct.demo.description')]} />
-        <img
+        <ZoomImage
           src="/assets/how-it-works.png"
-          alt="How it works"
+          alt={t('lavender.alt.cpt.howItWorks')}
           loading="lazy"
           className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
         />

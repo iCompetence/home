@@ -41,6 +41,7 @@ import {
   Statement,
   UpdatedNote,
   ValidatedForm,
+  ZoomImage,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
@@ -191,6 +192,18 @@ export default function EmpCoAuditLavender() {
             description: t(`empco.test.step${n}.desc`),
           }))}
         />
+        {/* What the report looks like, right after "Sehen, was der Audit
+            findet", full width and enlargeable (content team 11/2026, E-5). */}
+        <Section id="test-report" className="pt-0">
+          <ZoomImage
+            src="/assets/empco/EmpCo-Tool-UI.webp"
+            alt={t('empco.toolImage.alt')}
+            width={2000}
+            height={1137}
+            loading="lazy"
+            className="h-auto w-full rounded-card bg-lav-lavender lg:rounded-frame"
+          />
+        </Section>
       </div>
 
       <Statement
@@ -249,29 +262,14 @@ function About() {
   const { t } = useLanguage();
   const paragraph = 'lav-paragraph font-normal text-lav-navy/80';
   return (
-    <Section
-      id="about"
-      className={ANCHOR_SCROLL_MARGIN}
-      innerClassName="flex flex-col gap-14 lg:flex-row lg:items-center lg:gap-16"
-    >
-      <div className="flex flex-1 flex-col gap-12">
-        <SectionHeader title={t('empco.what.title')} />
-        <div className="flex flex-col gap-6">
-          <p className={paragraph}>{t('empco.what.p1')}</p>
-          <p className={paragraph}>{t('empco.what.p2')}</p>
-        </div>
+    // Text only: the tool picture moved, full width, below the test steps
+    // (E-5), so it is not shown three times on the page.
+    <Section id="about" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+      <SectionHeader title={t('empco.what.title')} />
+      <div className="flex max-w-[820px] flex-col gap-6">
+        <p className={paragraph}>{t('empco.what.p1')}</p>
+        <p className={paragraph}>{t('empco.what.p2')}</p>
       </div>
-      {/* WebP (121 KB instead of 597 KB) and the alt text describing the
-          screenshot, as on the live page. */}
-      <img
-        src="/assets/empco/EmpCo-Tool-UI.webp"
-        alt={t('empco.toolImage.alt')}
-        width={2000}
-        height={1137}
-        loading="lazy"
-        decoding="async"
-        className="aspect-[4/3] w-full rounded-card bg-lav-lavender object-contain object-center lg:w-[47.4%] lg:rounded-frame"
-      />
     </Section>
   );
 }

@@ -32,13 +32,13 @@ const CARD_IMAGES = [
   '/assets/analytics-agent/enterprise.png',
 ] as const;
 
-// Screens of the tool, in the order of the live page's carousel (alt texts
-// as there).
+// Screens of the tool, in the order of the live page's carousel; the alt
+// texts say what each one shows (lavender.alt.aa.*).
 const SCREENS = [
-  { src: '/assets/analytics-agent/dashboard.png', alt: 'Analytics Agent Dashboard' },
-  { src: '/assets/analytics-agent/chat.png', alt: 'Analytics Agent Chat' },
-  { src: '/assets/analytics-agent/visualization.png', alt: 'Analytics Agent Visualization' },
-  { src: '/assets/analytics-agent/connectors.png', alt: 'Analytics Agent Connectors' },
+  { src: '/assets/analytics-agent/dashboard.png', alt: 'dashboard' },
+  { src: '/assets/analytics-agent/chat.png', alt: 'chat' },
+  { src: '/assets/analytics-agent/visualization.png', alt: 'visualization' },
+  { src: '/assets/analytics-agent/connectors.png', alt: 'connectors' },
 ] as const;
 
 /**
@@ -48,6 +48,7 @@ const SCREENS = [
  */
 export default function AnalyticsAgentLavender() {
   const { t, language } = useLanguage();
+  const screens = SCREENS.map((s) => ({ src: s.src, alt: t(`lavender.alt.aa.${s.alt}`) }));
 
   const tabs = [
     { id: 'challenge', label: t('analyticsAgent.anchor.challenge') },
@@ -77,7 +78,7 @@ export default function AnalyticsAgentLavender() {
           { label: t('topNav.products'), href: siteHref(language, '/#products') },
           { label: 'Analytics Agent' },
         ]}
-        images={SCREENS.slice(0, 2)}
+        images={screens.slice(0, 2)}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="Analytics Agent"
         subline={t('analyticsAgent.hero.subtitle')}
@@ -114,7 +115,7 @@ export default function AnalyticsAgentLavender() {
             Daten hast …" confusing under this title (docs/korrekturen-2026-11.md A-6). */}
         <SectionHeader title={t('analyticsAgent.howItWorks.title')} intro={[t('analyticsAgent.howItWorks.p2')]} />
         <MediaGallery
-          images={SCREENS}
+          images={screens}
           aspectClassName="aspect-[12/7]"
           thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         />
