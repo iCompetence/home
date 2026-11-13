@@ -32,15 +32,15 @@ const CARD_VIDEOS = [
   '/assets/iknow/videos/agents.mov',
 ] as const;
 
-// Screens of the tool, in the order of the live page's carousel (alt texts
-// as there).
+// Screens of the tool, in the order of the live page's carousel; the alt
+// texts say what each one shows (lavender.alt.iknow.*).
 const SCREENS = [
-  { src: '/assets/iknow/chat.png', alt: 'iKnow Chat' },
-  { src: '/assets/iknow/connectoren.png', alt: 'iKnow Connectors' },
-  { src: '/assets/iknow/visualization.png', alt: 'iKnow Visualization' },
-  { src: '/assets/iknow/audio-meeting.png', alt: 'iKnow Audio Meeting' },
-  { src: '/assets/iknow/Interview-erstellen.png', alt: 'iKnow Interview erstellen' },
-  { src: '/assets/iknow/Interview-durchführen.png', alt: 'iKnow Interview durchführen' },
+  { src: '/assets/iknow/chat.png', alt: 'chat' },
+  { src: '/assets/iknow/connectoren.png', alt: 'connectors' },
+  { src: '/assets/iknow/visualization.png', alt: 'visualization' },
+  { src: '/assets/iknow/audio-meeting.png', alt: 'meeting' },
+  { src: '/assets/iknow/Interview-erstellen.png', alt: 'interviewCreate' },
+  { src: '/assets/iknow/Interview-durchführen.png', alt: 'interviewRun' },
 ] as const;
 
 /**
@@ -50,6 +50,7 @@ const SCREENS = [
  */
 export default function IKnowLavender() {
   const { t, language } = useLanguage();
+  const screens = SCREENS.map((s) => ({ src: s.src, alt: t(`lavender.alt.iknow.${s.alt}`) }));
 
   const tabs = [
     { id: 'status-quo', label: t('iknow.anchor.statusQuo') },
@@ -79,7 +80,7 @@ export default function IKnowLavender() {
           { label: t('topNav.products'), href: siteHref(language, '/#products') },
           { label: 'iKnow' },
         ]}
-        images={SCREENS.slice(0, 2)}
+        images={screens.slice(0, 2)}
         thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         title="iKnow"
         subline={t('iknow.hero.subtitle')}
@@ -118,7 +119,7 @@ export default function IKnowLavender() {
           intro={[t('iknow.howItWorks.p2')]}
         />
         <MediaGallery
-          images={SCREENS}
+          images={screens}
           aspectClassName="aspect-[2940/1844]"
           thumbLabel={(n) => `${t('lavender.common.showImage')} ${n}`}
         />

@@ -77,8 +77,7 @@ export default function IntelligenticSearchLavender() {
           { label: t('is.hero.title') },
         ]}
         images={[
-          // Alt text as on the live page.
-          { src: '/images/ICS_Travel_Club.png', alt: 'Intelligentic Search Demo' },
+          { src: '/images/ICS_Travel_Club.png', alt: t('lavender.alt.is.demo') },
           // A still of /videos/ICS_Image_Search.mp4 — the gallery shows images only.
           { src: '/images/is-image-search.jpg', alt: t('is.features.step2.label') },
         ]}

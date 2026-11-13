@@ -2908,6 +2908,60 @@ export const translations: Translations = {
   'lavender.common.showImage': { en: 'Show image', de: 'Bild anzeigen' },
   // Lightbox trigger (ZoomImage), content team 11/2026 G-2.
   'lavender.common.zoomImage': { en: 'Enlarge image', de: 'Bild vergrößern' },
+  // Alt texts that describe what the screenshot shows (content team 11/2026,
+  // G-3); were hard-coded and English, e.g. "How it works", "iKnow Chat".
+  'lavender.alt.cpt.hero': {
+    en: 'Campaign Parameter Tool — campaign fields with the generated URL and a passed validation',
+    de: 'Campaign Parameter Tool — Kampagnenfelder mit generierter URL und bestandener Validierung',
+  },
+  'lavender.alt.cpt.howItWorks': {
+    en: 'Campaign Parameter Tool — campaign from a template, with the generated UTM URL and its validation',
+    de: 'Campaign Parameter Tool — Kampagne aus einer Vorlage, mit generierter UTM-URL und Validierung',
+  },
+  'lavender.alt.is.demo': {
+    en: 'Intelligentic Search — chat with the travel advisor and matching hotel offers with a match score',
+    de: 'Intelligentic Search — Chat mit dem Reiseberater und passende Hotelangebote mit Match-Wert',
+  },
+  'lavender.alt.aa.dashboard': {
+    en: 'Analytics Agent — dashboard with users, sessions, pageviews and other metrics compared with the previous period',
+    de: 'Analytics Agent — Dashboard mit Nutzern, Sitzungen, Seitenaufrufen und weiteren Kennzahlen im Vergleich zum Vorzeitraum',
+  },
+  'lavender.alt.aa.chat': {
+    en: 'Analytics Agent — answer in the chat: last week\'s KPI overview with an interpretation',
+    de: 'Analytics Agent — Antwort im Chat: KPI-Übersicht der letzten Woche mit Einordnung',
+  },
+  'lavender.alt.aa.visualization': {
+    en: 'Analytics Agent — 28-day sessions trend as a chart, in answer to a question in the chat',
+    de: 'Analytics Agent — Verlauf der Sitzungen über 28 Tage als Diagramm, als Antwort auf eine Frage im Chat',
+  },
+  'lavender.alt.aa.connectors': {
+    en: 'Analytics Agent — connecting a new data source, here a Google Analytics 4 property',
+    de: 'Analytics Agent — neue Datenquelle anbinden, hier eine Google-Analytics-4-Property',
+  },
+  'lavender.alt.iknow.chat': {
+    en: 'iKnow — chat with the knowledge base: an answer with its search queries and the sources it is based on',
+    de: 'iKnow — Chat mit der Wissensbasis: Antwort mit Suchanfragen und den Quellen, auf die sie sich stützt',
+  },
+  'lavender.alt.iknow.connectors': {
+    en: 'iKnow — connectors: Google Drive connected, with status, configuration and sync history',
+    de: 'iKnow — Connectoren: Google Drive verbunden, mit Status, Konfiguration und Sync-Verlauf',
+  },
+  'lavender.alt.iknow.visualization': {
+    en: 'iKnow — the knowledge base as a vector space, with the details of one text chunk on the right',
+    de: 'iKnow — Wissensbasis als Vektorraum, rechts die Details zu einem Textabschnitt',
+  },
+  'lavender.alt.iknow.meeting': {
+    en: 'iKnow — meeting recording with transcript, summary and transfer to the knowledge base',
+    de: 'iKnow — Meeting-Aufnahme mit Transkript, Zusammenfassung und Übernahme in die Wissensbasis',
+  },
+  'lavender.alt.iknow.interviewCreate': {
+    en: 'iKnow — creating an interview: putting together the questions for a knowledge interview',
+    de: 'iKnow — Interview anlegen: Fragen für ein Wissensinterview zusammenstellen',
+  },
+  'lavender.alt.iknow.interviewRun': {
+    en: 'iKnow — conducting an interview: question by question with voice recording',
+    de: 'iKnow — Interview durchführen: Frage für Frage mit Sprachaufnahme',
+  },
   'lavender.common.close': { en: 'Close', de: 'Schließen' },
   // Label before the mail address in the imprint (was hard-coded "Email:").
   'lavender.common.email': { en: 'Email', de: 'E-Mail' },
