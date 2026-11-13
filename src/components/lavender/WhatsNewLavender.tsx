@@ -1,15 +1,15 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightNav } from './NightNav';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
-  ClosingBlock,
   Hero,
   NewsEntry,
   PageShell,
   Section,
   SplitBlock,
-  TopNav,
   siteHref,
 } from '@/design-system';
 
@@ -63,13 +63,13 @@ export default function WhatsNewLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} />
           }
         />
       }

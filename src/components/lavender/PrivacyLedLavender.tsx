@@ -1,17 +1,17 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightNav } from './NightNav';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   BrandStar,
   Button,
-  ClosingBlock,
   Eyebrow,
   PageShell,
   PrincipleCard,
   Section,
-  TopNav,
   siteHref,
 } from '@/design-system';
 
@@ -28,12 +28,12 @@ export default function PrivacyLedLavender() {
   return (
     <PageShell
       surface="inverse"
-      nav={<TopNav logoHref={home} surface="light" />}
+      nav={<NightNav logoHref={home} bar="always" />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           heading={t('cta.headline')}
-          action={<ConsultButton variant="dark" topic={t('burgerMenu.privacyLedAi')} />}
+          action={<ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.privacyLedAi')} />}
         />
       }
     >

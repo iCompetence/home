@@ -1,5 +1,7 @@
 'use client';
 
+import { NightFooter } from './NightFooter';
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight } from 'lucide-react';
@@ -14,9 +16,7 @@ import {
   PageShell,
   Section,
   TextAreaField,
-  TopNav,
   ValidatedForm,
-  Footer,
   siteHref,
 } from '@/design-system';
 
@@ -35,8 +35,8 @@ export default function ContactLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
-      footer={<Footer />}
+      nav={<NightNav logoHref={home} bar="always" />}
+      footer={<NightFooter />}
     >
       <Script
         src="https://www.google.com/recaptcha/api.js?render=explicit"

@@ -1,15 +1,15 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightNav } from './NightNav';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Button,
   ButtonStack,
   CheckItem,
-  ClosingBlock,
   ComparisonTable,
   ImageText,
   LoopVideo,
@@ -19,7 +19,6 @@ import {
   QuoteIntro,
   Section,
   SectionHeader,
-  TopNav,
   siteHref,
   smoothAnchor,
 } from '@/design-system';
@@ -58,14 +57,14 @@ export default function IntelligenticSearchLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={t('burgerMenu.intelligenticSearch')} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.intelligenticSearch')} />
           }
         />
       }
@@ -101,8 +100,6 @@ export default function IntelligenticSearchLavender() {
           ))}
         </ul>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <QuoteIntro
         id="intro"

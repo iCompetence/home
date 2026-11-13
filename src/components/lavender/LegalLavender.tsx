@@ -1,9 +1,11 @@
 'use client';
 
+import { NightFooter } from './NightFooter';
+import { NightNav } from './NightNav';
 import { Fragment, type ReactNode } from 'react';
 import { useLanguage, type Language } from '@/contexts/LanguageContext';
 import { labels, servicesData, type ServiceData } from '@/components/ServiceAccordion';
-import { FaqList, Footer, Hero, PageShell, Section, SplitBlock, TopNav, siteHref } from '@/design-system';
+import { FaqList, Hero, PageShell, Section, SplitBlock, siteHref } from '@/design-system';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined). */
@@ -15,8 +17,8 @@ function LegalPage({ title, children }: { title: string; children: ReactNode }) 
   const home = siteHref(language, '/');
   return (
     <PageShell
-      nav={<TopNav logoHref={home} />}
-      footer={<Footer />}
+      nav={<NightNav logoHref={home} bar="always" />}
+      footer={<NightFooter />}
     >
       <Hero title={title} />
       <Section dsName="LegalText">{children}</Section>

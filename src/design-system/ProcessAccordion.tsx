@@ -116,9 +116,10 @@ function ProcessRow({
             transition={{ duration: prefs.d(DURATION.base), ease: EASE.out }}
             className="w-full overflow-hidden"
           >
-        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-4 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:py-8">
-          <div className="flex flex-1 flex-col gap-4 md:gap-6 md:py-2 md:pl-12 lg:py-4 lg:pl-16">
-            <p className="lav-paragraph font-normal text-lav-navy/80">
+        <div className="flex w-full flex-col items-stretch gap-4 pb-6 pt-0 md:flex-row md:items-start md:gap-8 lg:gap-10 lg:pb-8 lg:pt-0">
+          {/* Left padding = number column + gap, so the text starts under the step's title. */}
+          <div className="flex flex-1 flex-col gap-4 md:gap-6 md:pb-2 md:pl-[68px] lg:pb-4 lg:pl-[88px]">
+            <p className="lav-paragraph max-w-[760px] font-normal text-lav-navy/80">
               {step.description}
             </p>
           </div>

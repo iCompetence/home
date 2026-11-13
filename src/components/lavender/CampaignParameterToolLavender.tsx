@@ -1,5 +1,7 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightNav } from './NightNav';
 import { useState } from 'react';
 import Script from 'next/script';
 import { ArrowUpRight, BarChart3, Clock, Link2, Users } from 'lucide-react';
@@ -7,12 +9,10 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ConsultButton } from './ConsultModal';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Badge,
   Button,
   ButtonStack,
   CheckItem,
-  ClosingBlock,
   ComparisonTable,
   FaqSection,
   IconCard,
@@ -26,7 +26,6 @@ import {
   SectionHeader,
   SegmentedControl,
   SpecItem,
-  TopNav,
   siteHref,
 } from '@/design-system';
 import { TrialModal, type TrialMode } from './TrialModal';
@@ -81,13 +80,13 @@ export default function CampaignParameterToolLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={'Campaign Parameter Tool'} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={'Campaign Parameter Tool'} />
           }
         />
       }
@@ -152,8 +151,6 @@ export default function CampaignParameterToolLavender() {
           ))}
         </ul>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <Section id="values" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
         <SectionHeader title={t('ct.values.title')} />

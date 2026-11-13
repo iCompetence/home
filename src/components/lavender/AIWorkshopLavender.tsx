@@ -1,5 +1,7 @@
 'use client';
 
+import { NIGHT_BUTTON, NightClosing } from './NightFooter';
+import { NightNav } from './NightNav';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
@@ -8,11 +10,9 @@ import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
-  AnchorTabs,
   Badge,
   Button,
   ButtonStack,
-  ClosingBlock,
   ConsentCheckbox,
   FormError,
   FormField,
@@ -21,7 +21,6 @@ import {
   ProductTeaser,
   Section,
   SectionHeader,
-  TopNav,
   ValidatedForm,
   siteHref,
   smoothAnchor,
@@ -61,14 +60,14 @@ export default function AIWorkshopLavender() {
 
   return (
     <PageShell
-      nav={<TopNav logoHref={siteHref(language, '/')} />}
+      nav={<NightNav logoHref={siteHref(language, '/')} bar="always" sections={tabs} />}
       footer={
-        <ClosingBlock
+        <NightClosing
           id="contact"
           className={ANCHOR_SCROLL_MARGIN}
           heading={t('cta.headline')}
           action={
-            <ConsultButton variant="dark" topic={t('burgerMenu.aiWorkshop')} />
+            <ConsultButton variant="white" className={NIGHT_BUTTON} topic={t('burgerMenu.aiWorkshop')} />
           }
         />
       }
@@ -104,8 +103,6 @@ export default function AIWorkshopLavender() {
           </Button>
         </ButtonStack>
       </ProductHead>
-
-      <AnchorTabs items={tabs} label={t('lavender.common.onThisPage')} />
 
       <Section id="intro" className={ANCHOR_SCROLL_MARGIN}>
         <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">

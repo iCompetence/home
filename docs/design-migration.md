@@ -131,6 +131,151 @@ Stand:
       Footer-Link „Datenschutz" zeigt auf die neue Seite. Leere Aktionsrahmen der Figma-Heroes
       (Kontakt, Impressum, Datenschutz, Neuigkeiten) sind im Code weggelassen.
 
+- [ ] **Startseite Nacht (Designstudie, 12.11.2026)** — `/de|en/lavender/nacht/`, neben der
+      bisherigen Vorschau-Startseite zum Vergleichen. Gleiche Texte und Schlüssel wie
+      `LavenderHome`, dunkle Seite (`PageShell surface="inverse"`) mit Sternenhimmel und Milchglas.
+      Andere Bausteine, wo der Inhalt es verlangt: Leistungen als drei Reiter mit allen vier
+      Leistungen offen (statt Karussell mit Aufklapp-Zeilen), Kundenstimmen als ein Zitat plus
+      Auswahl aller sieben Namen (statt Slider), Vorgehen als drei offene Zeilen (statt Akkordeon).
+      Reiter kommen aus `src/components/ui/tabs` (shadcn/Radix), nur das Verhalten.
+      Neu, nur für diese Seite: `.lav-sky`, `.lav-glass`, Typostufe `.lav-mega` (44/72/112),
+      `rounded-frame` (40 px), `public/images/hamburg-skyline.webp`.
+      Hero ohne Glas (Doppelstern frei, folgt dem Zeiger leicht), dunkle Nav. Eigene Fußzeile
+      `FooterNight` statt `ClosingBlock`: eine Schlusszeile, Kontaktzeile, Hamburg-Skyline als
+      Abschluss. Reiter-Inhalte per `forceMount` im HTML (alle 12 Leistungen, alle 7 Zitate).
+      Produktbilder ohne farbige Bühne: `public/images/nacht-*.webp`.
+      Komponenten nach orchid.ai umgebaut (12.11.2026, Wunsch Dennis): ein Grundbaustein
+      `FeatureRow` (Textspalte neben großem Glasfeld, Seiten abwechselnd; der Stern des
+      Abschnitts liegt hinter dem Feld). Leistungen = je Feld eine Zeile, die vier Leistungen als
+      Liste, die gewählte zeigt ihre Beschreibung als Karte im Feld. Produkte = dieselbe Zeile
+      mit Screenshot. Kundenstimmen = Firmenleiste, die von selbst weiterläuft (hält bei Zeiger/
+      Fokus, stoppt nach Auswahl, nicht bei reduzierter Bewegung), ein Zitat darunter. Vorgehen =
+      drei hohe Glasfelder. Neu: `.lav-glass-clear`, `.lav-progress-run`.
+      Variante `/de|en/lavender/nacht-hamburg/` (`HomeNightLavender city="hero"`): die Glasstadt
+      steht im Hero statt am Seitenende, Text zentriert darüber; der Leitstern startet über der
+      Stadt und steigt beim Scrollen nach oben, am Ende gibt es keine Landung. Zum Vergleichen.
+      Kopfzeile `NightNav` statt `TopNav` (Wunsch Dennis, 12.11.2026): kein Hintergrund, Logo
+      links (blendet nach dem Seitenanfang aus), „Kontakt aufnehmen“ mittig, Menü rechts. Menü =
+      shadcn `Sheet` von rechts als helle, abgerundete Fläche mit großen nummerierten Abschnitts-
+      links, darunter alle Produktseiten, Kontakt, Rechtliches, Sprachwahl. Keine AnchorTabs mehr
+      auf diesen Seiten (deren Navy-Leiste fuhr beim Scrollen ein). Hintergrundsterne bleiben
+      Punkte (max. 1,7 px), der Leitstern ist größer.
+      Himmel als eine feste Canvas hinter der Seite (`nightSky.ts`, ohne React): kleine Sterne
+      als feste Punkte, die nur in der Helligkeit flackern (kein Zoom, keine Bewegung beim
+      Scrollen; Entscheidung Dennis 12.11.2026, das Hineinfliegen war zu viel). Einzig der
+      Leitstern (Doppelstern) bewegt sich: Er folgt dem Zeiger mit Verzögerung hinter dem Inhalt;
+      im Hero der Fassung „unten“ ist er groß und neigt sich nur. Die Sterne der Abschnitte
+      stehen fest hinter ihren Glasfeldern (`StarField`). Bei reduzierter Bewegung steht alles.
+      Funkeln: alle paar Sekunden glitzert ein zufälliger Stern irgendwo im Bild kurz auf (feines
+      Kreuz, 3 bis 9 px), nie mehr als zwei gleichzeitig. Knöpfe der Nachtseiten: Hover wechselt
+      die Farbe (Blau ↔ Weiß, Kontur füllt sich), Druck staucht auf 96 %; im Hero nur noch ein
+      Knopf („Unsere Leistungen ansehen“, weiß).
+      Variante „Hamburg oben“ (`/lavender/nacht-hamburg/`): der Hero ist genau einen Bildschirm
+      groß und bleibt stehen (sticky); darüber schiebt sich beim Scrollen die **Tag-Ebene**
+      (`DayLayer`, `data-surface="light"`), ein helles Blatt mit allen Inhalten. Am Ende rollt
+      das Blatt oben hinaus und dieselbe Bühne (Himmel, Stadt) steht wieder da, jetzt mit dem
+      Schlusstext statt dem Hero-Text: `ClosingStage` ist der `<footer>`, liegt per negativem
+      Rand über dem letzten Bildschirm und klebt am unteren Rand (sticky). Getauscht wird, während
+      das Blatt den Bildschirm ganz bedeckt (`closing` in HomeNightLavender). Das Logo bleibt beim
+      Scrollen stehen und wird auf dem Blatt dunkel.
+      Stand 2026-11-12 (Rückmeldung Dennis): Auf dem Blatt sind Leistungen, Kundenstimmen und
+      „So arbeiten wir“ die Komponenten der heutigen Lavender-Startseite (`ServicesCarousel`,
+      `TestimonialSlider`, `ProcessAccordion`); aus der Studie bleiben Statement, Produktzeilen
+      und Privacy-Led. Der Footer (`ClosingStage`) ist wie `Footer` aufgebaut (Zeile links,
+      Kontakt rechts), darunter die
+      Skyline. Das Blatt hat unten runde Ecken und rollt am Ende ganz hinaus. Die Leiste mit
+      Impressum, Datenschutz, LinkedIn und „Nach oben“ ist ein normaler Block ganz am
+      Seitenende: Auf den letzten Pixeln schiebt sie die Skyline nach oben und erscheint
+      darunter; der Schlusstext bleibt dabei stehen.
+      Zeichenlast (Rückmeldung: Inhalte erschienen beim Scrollen verspätet): Die Studie nutzt
+      eigene Sternbilder in Anzeigegröße (`nacht-stern-*.webp`, 1200 px, statt der rund
+      3000 px großen PNGs mit etwa 36 MB je Bild im Speicher), auf dem Blatt vorab
+      weichgezeichnete Kopien (`-weich.webp`) statt CSS-Filter, kurze Schatten, keine
+      `loading="lazy"`-Bilder; Bühne und Himmel werden nicht gezeichnet, solange das Blatt
+      sie verdeckt. Auf dem Blatt bekommt die Navigation eine dunkle Leiste von Logo bis
+      Menü; neben dem Menü-Icon steht der aktuelle Abschnitt (Leistungen, Produkte, Vorgehen,
+      Privacy-led AI). Hover ist ein System (globals.css): Das Licht des Doppelsterns wandert in das
+      Element unter dem Zeiger. Flächen (Knöpfe, runde Icon-Knöpfe, Logo, Pfeile und Pillen
+      der Lavender-Bausteine) füllen sich mit dem Verlauf (`.lav-star-hover`), Text (Links,
+      Labels, Akkordeon-Titel) nimmt ihn als Schriftfarbe an (`.lav-star-text`); derselbe
+      Verlauf markiert im Menü den aktuellen Abschnitt. Leitstern und Stadtlicht erlöschen
+      über allem Klickbaren. Das Menü passt ohne Scrollen auf einen Bildschirm.
+      „Unsere Leistungen“: Aus zehn Varianten hat Dennis am 2026-11-12 „Tabs mit Sternfeld“
+      gewählt (statt des Karussells): je Feld ein Tab, links die vier Leistungen mit
+      Beschreibung, rechts groß der Stern des Felds. Die Arbeitsseite mit den zehn Varianten
+      ist wieder entfernt (Commit 095d6a6 enthält sie).
+      Kundenstimmen: eigene Fassung statt `TestimonialSlider`, weil dessen Zitate in
+      Überschriftengröße über zwei Bildschirme liefen: ein Zitat zur Zeit in Lesegröße
+      (24 px) auf einer hellen Lila-Fläche, mit Zähler und Pfeilen; passt auf einen Bildschirm.
+      Navigation der übrigen Vorschauseiten (2026-11-13): Alle Lavender-Unterseiten nutzen
+      jetzt `NightNav` statt `TopNav` (`bar="always"`: die dunkle Leiste von Anfang an). Seiten
+      mit Abschnitten geben sie als `sections` mit: Die Leiste nennt den aktuellen Abschnitt,
+      das Menü listet sie als große Links. Die `AnchorTabs`-Zeile entfällt dort; `TopNav` und
+      `AnchorTabs` nutzt nur noch die bisherige Startseite `LavenderHome`.
+      Kundenlogos: `LogoCarousel` steht auf dem hellen Blatt direkt unter dem Statement (die
+      Logodateien brauchen hellen Grund). Produkte und Privacy-Led zeigen die Bilder der
+      Lavender-Startseite (`lavender-*.png`, `privacy-led.jpg`) statt eigener Screenshots. Neue Tokens: `--text-small`, `--radius-frame-inner`,
+      `--container-measure(-lead|-wide)` für Zeilenlängen.
+      Stand 2026-11-13 abends: Alle Vorschauseiten enden mit `NightClosing` / `NightFooter`
+      (NightFooter.tsx: Schlusszeile, Glas-Skyline, Leiste mit „Based in Hamburg.“, Impressum,
+      Datenschutz, LinkedIn, Nach oben) statt `ClosingBlock` / `Footer`. Sprünge zu Abschnitten
+      laufen über `glide.ts` (folgt dem Ziel, auch wenn sich die Seite verschiebt). Die Skyline
+      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1114; Stand 13.11. nachmittags: in einem Zug aus einer
+      einheitlich weichgezeichneten Vorlage gerendert und unverändert übernommen. Merke: Vorlagen
+      aus ausgeschnittenen Teilen übernimmt FLUX samt Schnittkanten, das Ergebnis wirkt wie Patchwork): von West nach Ost Köhlbrandbrücke,
+      Landungsbrücken, dahinter die Tanzenden Türme, Fernsehturm, Rickmer Rickmers, Michel,
+      Elbphilharmonie, dahinter St. Nikolai, Rathaus, dahinter St. Petri, Speicherstadt. Die
+      Gebäude überlappen sich wieder in der Tiefe. Im Hero tritt die Stadt nur direkt hinter dem
+      Text zurück (`textHaze.ts`: weiche Löcher um jede Textzeile und den Knopf statt eines großen
+      Ovals). Das Stadtlicht ist rund; das beleuchtete Bild ist kräftig eingefärbt (Blau und Lila in
+      schrägen Bändern, sodass ein Lichtfleck beide enthält) und hat einen eingerechneten Schein
+      über die Kanten (kein `mix-blend-mode`, nur das Bild selbst). Alle Seiten enden im selben Bild (`ClosingText`: Schlusszeile
+      mittig, Stadt am unteren Rand, Leiste mit Textlinks darunter); beleuchtet = dieselbe Fassung in
+      Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
+      Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
+      Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem
+      Zitat, Hero-Auftakt beim Laden, animierte Druck- und Farbwechsel, Verhalten auf Touch.
+      Das Stadtlicht ist seitdem ein kleines rundes Fenster auf das beleuchtete Bild, das nur
+      verschoben, skaliert und ein-/ausgeblendet wird (vorher: Maske und weichgezeichneter
+      Verlauf über die ganze Skyline, bei jeder Zeigerbewegung neu gezeichnet).
+      Prüfung auf sieben Bildschirmgrößen (360 bis 1920, de/en): Kundenstimmen unter 1280
+      gestapelt, Menü-Links zweispaltig mit größeren Tippflächen, Logo-Link 44 px hoch. Im Footer stehen keine Kontaktdaten mehr (Kontaktseite). Die durchgehend dunkle Variante `/lavender/nacht/` ist unverändert der
+      frühere Stand. Die Bausteine sind dieselben wie auf dem Nachthimmel: ihre
+      Farben kommen aus `lav-ink` und `lav-ground` (globals.css), die je Fläche getauscht werden;
+      `.lav-glass`/`.lav-glass-clear` haben eine helle Fassung. Der Leitstern wird auf der Ebene
+      groß (halbe Bildschirmbreite) und liegt dort auf einer eigenen Leinwand über dem Weiß und
+      hinter dem Inhalt; im Hero bleibt er klein. Die Ebene hat bewusst kein `overflow` und
+      keine `backdrop-filter`: beides zusammen ließ die Seite auf echten Grafikkarten ruckeln
+      und teils abreißen. Die Glasfelder zeichnen dort ihren eigenen Stern einmalig weich
+      (`::before`), der Himmel beschneidet den Leitstern selbst und zeichnet nur bei Änderung. Die Stadt ist dafür jetzt ein Bildpaar mit
+      transparentem Grund (`hamburg-glas-*.webp`), ohne `mix-blend-mode`: sie darf damit in
+      sticky/transformierten Eltern stehen. NightNav schaltet auf der Ebene Menü-Icon und
+      Hover auf Navy (`data-ground` am Header).
+      Abschluss: `HamburgGlass` statt Strichzeichnung: Hamburg als Milchglas-Skulptur, zwei
+      deckungsgleiche Bilder (`hamburg-glas-dunkel/-licht.webp`), in Ruhe dunkel, das Licht folgt
+      dem Zeiger; ohne Zeiger (Touch) wandert es von Wahrzeichen zu Wahrzeichen. Der Leitstern
+      folgt unten dem Zeiger und schrumpft über der Stadt weg, dort übernimmt das Licht im Glas.
+      Bewusste Ausnahme von „Licht und Linie“ (Entscheidung Dennis, 12.11.2026); Footer immer dunkel.
+      Bewegung (Durchsicht 13.11.2026): Kundenlogos als eine Reihe, die mit der Seite läuft
+      (`LogoStream`: nur `transform`, an die Scrollposition gebunden, steht bei reduzierter
+      Bewegung als ruhiger Block; oben und unten gleich viel Luft, je eine halbe
+      Sektions-Polsterung zusätzlich zu der der Nachbarn). Hover nur hinter `(hover: hover) and (pointer: fine)`,
+      Tastaturfokus überall. Menü und Schleier setzen beim schnellen Schließen/Öffnen dort
+      fort, wo sie stehen (`--lav-menu-from`, `--lav-veil-from`). Ankerlinks und „Nach oben“
+      gleiten über `glide.ts`, von der Tastatur aus springen sie. Das Stadtlicht läuft auf
+      60 und 120 Hz gleich schnell. Die Skyline wird mit der Seite vorgeladen (`preload`).
+      Offen: nicht in Figma; Kundenlogos fehlen (Dateien sind für hellen Grund gemacht);
+      EN nicht geprüft; Intro (Stern entsteht) aus dem Prototyp nicht übernommen; Leistung der
+      Canvas auf schwachen Geräten nicht gemessen.
+      Durchsicht vor dem PR (13.11.2026): `NightNav` mit `bar="always"` steht schon im
+      statischen HTML (vorher stand das weiße Logo bis zum Laden des Skripts auf hellem Grund).
+      Die Rechtsleiste weicht dem schwebenden Usercentrics-Knopf aus (44 px / 24 px Abstand unter
+      768 px, 64 px / 40 px darüber, im Usercentrics-Admin eingestellt): auf dem Handy rückt die
+      Zeile nach oben (`--lav-strip-h` 140 statt 84 px, gilt auch für Skyline und Schlussbühne),
+      ab 640 px bleibt rechts Platz (`--lav-uc-corner`), „Nach oben“ unter 1024 px nur als Pfeil.
+      Skyline-Skript und Original-Rendering liegen in `scripts/skyline/` (README: Aufruf und die
+      Stellen, die beim Austausch mitmüssen).
+
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
 Live-Seiten — die bekommen die neue Hülle mit ihrem Livegang.

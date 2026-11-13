@@ -2818,7 +2818,7 @@ export const translations: Translations = {
   },
   'lavender.statement': {
     en: 'We help ambitious teams turn data and AI into real business outcomes.',
-    de: 'Wir verwandeln Daten und KI in echte Geschäftsergebnisse – für sichtbare Erfolge.'
+    de: 'Wir verwandeln Daten und KI in echte Geschäftsergebnisse\u00a0– für sichtbare Erfolge.'
   },
   'lavender.services.title': {
     en: 'Our Services',
@@ -3013,7 +3013,11 @@ export const translations: Translations = {
   'workshop.form.dates': { en: 'Preferred date(s)', de: 'Bevorzugte(r) Termin(e)' },
   'workshop.form.dateCustom': { en: 'Book an individual date', de: 'Individuellen Termin buchen' },
   'workshop.form.submit': { en: 'Submit application', de: 'Bewerbung absenden' },
+  // Brand note in the footer strip; English in both languages, like the tagline.
+  'lavender.footer.basedIn': { en: 'Based in Hamburg.', de: 'Based in Hamburg.' },
   'lavender.products.learnMore': { en: 'Learn more', de: 'Mehr erfahren' },
+  'lavender.products.iknow.cta': { en: 'Explore iKnow', de: 'iKnow entdecken' },
+  'lavender.products.analyticsAgent.cta': { en: 'Explore Analytics Agent', de: 'Analytics Agent entdecken' },
   'lavender.products.empco.title': { en: 'EmpCo Audit', de: 'EmpCo Audit' },
   'lavender.products.empco.desc': {
     en: 'The automated audit that protects you from EmpCo violations on your website. Within a few hours you know which sustainability claims are defensible — and which are becoming a risk.',

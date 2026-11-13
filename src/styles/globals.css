@@ -159,6 +159,11 @@
   --color-lav-page: #fdfafe;
   --color-lav-blue: #24a1da;
   --color-lav-white: #ffffff;
+  /* Text and ground of the surface an element stands on: navy on light by
+     default, swapped inside [data-surface='inverse'] (see the rule below the
+     theme). Lets one component serve the night sky and the day layer. */
+  --color-lav-ink: #0b2231;
+  --color-lav-ground: #fdfafe;
   /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
   --color-lav-error: #b3433d;
 
@@ -172,11 +177,20 @@
   --text-h3: 36px;
   --text-sub: 24px;
   --text-body: 16px;
+  --text-small: 14px;
 
   /* Radii */
   --radius-pill: 100px;
   --radius-card: 24px;
   --radius-card-sm: 16px;
+  /* Large glass frames of the night home (preview /lavender/nacht/). */
+  --radius-frame: 40px;
+  /* Inside a frame, 12 px in from its edge: concentric with the 40 px corner. */
+  --radius-frame-inner: 28px;
+  /* Line lengths of the night home: body text, lead text and quotes, headlines. */
+  --container-measure: 520px;
+  --container-measure-lead: 760px;
+  --container-measure-wide: 1100px;
 
   /* Section rhythm — see the responsive :root block below for the live values. */
   --spacing-section-v: 64px;
@@ -194,6 +208,34 @@
   --duration-slower: 550ms;
   --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Animations the installed library components expect (as their registries
+     prescribe): Magic UI marquee, Aceternity infinite-moving-cards. */
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
+  }
+  @keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
+  }
+  @keyframes scroll {
+    to { transform: translate(calc(-50% - 0.5rem)); }
+  }
+}
+
+/* Ink and ground follow the surface: dark pages swap them, a light layer on a
+   dark page (the day layer of the night home) swaps them back. */
+[data-surface='inverse'] {
+  --color-lav-ink: #ffffff;
+  --color-lav-ground: #0b2231;
+}
+[data-surface='light'] {
+  --color-lav-ink: #0b2231;
+  --color-lav-ground: #fdfafe;
 }
 
 /* Live section padding, consumed by the shared <Section> component. Kept as
@@ -214,6 +256,35 @@
   :root {
     --section-pad-v: 80px;
     --section-pad-h: 96px;
+  }
+}
+
+/* The legal strip at the foot of the night pages (LegalStrip in NightFooter.tsx)
+   keeps out of the bottom-right corner, where Usercentrics' privacy button floats
+   over every page. Usercentrics sizes it once on load (set in its admin, not here):
+   44 px at 24 px from the edges below 768 px, 64 px at 40 px from 768 px up.
+   --lav-strip-h: the strip's height. On phones the row moves up out of the corner
+   and the button floats on the empty ground below it. The skyline and the home
+   page's closing stage end this far above the page's end.
+   --lav-uc-corner: room the strip leaves on the right from 640 px up (the button
+   plus a gap); 0 on phones, where the row has moved up instead. */
+:root {
+  --lav-strip-h: 84px;
+  --lav-uc-corner: 0px;
+}
+@media (max-width: 639.98px) {
+  :root {
+    --lav-strip-h: 140px;
+  }
+}
+@media (min-width: 640px) {
+  :root {
+    --lav-uc-corner: 80px;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --lav-uc-corner: 120px;
   }
 }
 
@@ -465,5 +536,411 @@ html {
     hyphens: auto;
     hyphenate-limit-chars: 14 6 6;
     overflow-wrap: break-word;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Night home (preview /lavender/nacht/): milk glass and one larger type
+ * step. The sky itself is a canvas (src/components/lavender/nightSky.ts). Own classes only, so nothing here reaches the other pages.
+ * ------------------------------------------------------------------ */
+@layer components {
+  /* One step above lav-display for the night home's two big lines. */
+  .lav-mega {
+    margin: 0;
+    font-family: var(--font-brand);
+    text-box: trim-both cap alphabetic;
+    font-size: 44px;
+    line-height: 44px;
+    letter-spacing: -1.5px;
+    font-weight: 500;
+  }
+  @media (min-width: 768px) {
+    .lav-mega { font-size: 72px; line-height: 70px; letter-spacing: -2.5px; }
+  }
+  @media (min-width: 1024px) {
+    .lav-mega { font-size: 112px; line-height: 106px; letter-spacing: -4.5px; }
+  }
+
+  /* Milk glass on the night sky: dark and frosted, a light edge on top, depth
+     below. Dark enough that white text stays readable when a star passes behind. */
+  .lav-glass {
+    background-color: rgb(15 44 63 / 0.62);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    backdrop-filter: blur(26px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgb(253 250 254 / 0.5),
+      inset 0 0 0 1px rgb(253 250 254 / 0.16),
+      0 40px 80px -40px rgb(0 0 0 / 0.55);
+  }
+
+  /* The clear glass of the feature rows' fields: nothing but a floating card or
+     a screenshot sits on it, so it can stay light and let the star glow through. */
+  .lav-glass-clear {
+    background-color: rgb(253 250 254 / 0.05);
+    -webkit-backdrop-filter: blur(34px) saturate(160%);
+    backdrop-filter: blur(34px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgb(253 250 254 / 0.5),
+      inset 0 0 0 1px rgb(253 250 254 / 0.16),
+      0 40px 80px -40px rgb(0 0 0 / 0.55);
+  }
+
+  /* The same two glasses on the day layer: milky white with a fine dark edge.
+     Kept cheap to paint, because a sheet this long is painted piece by piece
+     while scrolling and anything costly shows up late: no backdrop-filter, no
+     blur filter (the field shows a small pre-blurred copy of its star,
+     ::before), a short shadow. The guide star passes behind the nearly opaque
+     glass. */
+  [data-surface='light'] .lav-glass {
+    background-color: rgb(247 242 251 / 0.88);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 0 0 1px rgb(11 34 49 / 0.07),
+      0 14px 28px -18px rgb(11 34 49 / 0.28);
+  }
+  [data-surface='light'] .lav-glass-clear {
+    background-color: rgb(253 250 254 / 0.94);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 0 0 1px rgb(11 34 49 / 0.07),
+      0 14px 28px -18px rgb(11 34 49 / 0.28);
+  }
+  /* Same box as the sharp star behind the field (StarField: -inset-[9%]). */
+  [data-surface='light'] .lav-glass-clear::before {
+    content: '';
+    position: absolute;
+    inset: -9%;
+    background: var(--lav-field-star-soft) center / contain no-repeat;
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  /*
+   * Hover on the night home: the light of the double star moves into whatever
+   * the pointer is on (the guide star itself goes out meanwhile, see nightSky).
+   * One gradient, two uses:
+   * - .lav-star-hover: things with a surface (buttons, round icon buttons, the
+   *   logo) are filled with it, text and icons turn white;
+   * - .lav-star-text: plain text (links, labels) takes it as its colour. It is
+   *   a span inside the link or button; the same look marks the current item
+   *   ([aria-current]).
+   * --lav-star-fill is a little darker than the brand colours so white text
+   * stays readable; --lav-star-ink is the text version per ground.
+   */
+  :root {
+    --lav-star-fill: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink-end: #8a45f2;
+  }
+  [data-surface='inverse'] {
+    --lav-star-ink: linear-gradient(105deg, #53bdf0 0%, #8f93fb 55%, #b88bfb 100%);
+    --lav-star-ink-end: #b88bfb;
+  }
+  [data-surface='light'] {
+    --lav-star-ink: linear-gradient(105deg, #1677b8 0%, #5b5fe8 55%, #8a45f2 100%);
+    --lav-star-ink-end: #8a45f2;
+  }
+
+  /* Filled: the gradient is a layer over the element's own colour that fades
+     in (a gradient itself cannot be transitioned). Hover only where there is a
+     pointer that can hover; on touch screens a tap would leave it switched on.
+     Keyboard focus shows it on every device. */
+  .lav-star-hover {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .lav-star-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--lav-star-fill);
+    opacity: 0;
+    transition: opacity var(--duration-fast) ease-out;
+  }
+  .lav-star-hover:focus-visible::before {
+    opacity: 1;
+  }
+  /* PageShell dims every hovered link and button to 75 %; not here. */
+  [data-star-hover] :is(a, button):not(:disabled):hover {
+    opacity: 1 !important;
+  }
+
+  /* Text: the gradient lies behind the glyphs and the text colour fades to
+     transparent, which can be transitioned. At rest the gradient has no size,
+     so it cannot shine through a text colour that is partly transparent; on
+     the way back it stays until the colour has returned (--lav-star-hold, the
+     delay of the size change: the fade's length at rest, none when lit). The
+     second selector gives the same hover to the titles of the Lavender
+     accordion on the day layer without touching the component. */
+  .lav-star-text,
+  [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
+    background-image: var(--lav-star-ink);
+    background-repeat: no-repeat;
+    background-size: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition:
+      color var(--duration-fast) ease-out,
+      background-size 0s linear var(--lav-star-hold, var(--duration-fast));
+    /* Room for descenders: the type steps trim their box to cap height and
+       baseline, and the gradient only shows inside the box. No effect on layout. */
+    padding-block: 0.3em;
+    margin-block: -0.3em;
+  }
+  /* The global reduced-motion rule narrows every transition to colour and
+     opacity; the size change would then come at once and the text would be
+     gone for a moment on the way back. Keep the pair together. */
+  @media (prefers-reduced-motion: reduce) {
+    .lav-star-text,
+    [data-star-hover] [data-ds='ProcessAccordion'] button > div > span:last-child {
+      transition-property: color, background-size !important;
+      transition-duration: var(--duration-fast), 0s !important;
+      transition-delay: 0s, var(--lav-star-hold, var(--duration-fast)) !important;
+    }
+  }
+  :is(a, button):focus-visible > .lav-star-text,
+  [aria-current] > .lav-star-text,
+  [data-state='open'] > .lav-star-text,
+  :is(a, button):focus-visible > span > .lav-star-text,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > div > span:last-child {
+    color: transparent !important;
+    background-size: 100% 100%;
+    --lav-star-hold: 0s;
+  }
+  /* An icon beside such a text takes the gradient's end colour. */
+  :is(a, button):focus-visible > .lav-star-text ~ svg,
+  [data-star-hover] [data-ds='ProcessAccordion'] button:focus-visible > svg {
+    color: var(--lav-star-ink-end) !important;
+  }
+
+  /* The logo as a shape that can be filled: white at rest, the gradient on hover. */
+  .lav-logo-mask {
+    -webkit-mask: url('/iCompetence_white.svg') center / contain no-repeat;
+    mask: url('/iCompetence_white.svg') center / contain no-repeat;
+  }
+  .lav-logo-mask::before {
+    background: var(--lav-star-ink);
+  }
+  a:focus-visible > .lav-logo-mask::before {
+    opacity: 1;
+  }
+
+  /* The same three, under a pointer. */
+  @media (hover: hover) and (pointer: fine) {
+    .lav-star-hover:hover::before,
+    a:hover > .lav-logo-mask::before {
+      opacity: 1;
+    }
+    :is(a, button):hover > .lav-star-text,
+    :is(a, button):hover > span > .lav-star-text,
+    [data-star-hover] [data-ds='ProcessAccordion'] button:hover > div > span:last-child {
+      color: transparent !important;
+      background-size: 100% 100%;
+      --lav-star-hold: 0s;
+    }
+    :is(a, button):hover > .lav-star-text ~ svg,
+    [data-star-hover] [data-ds='ProcessAccordion'] button:hover > svg {
+      color: var(--lav-star-ink-end) !important;
+    }
+  }
+
+  /* The hero's entrance, once on load: headline, lead and button rise in one
+     after the other. Runs on the element's own animation, so hiding and
+     showing the block later (the swap with the closing text) does not replay it. */
+  .lav-enter > * {
+    animation: lav-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .lav-enter > :nth-child(2) { animation-delay: 80ms; }
+  .lav-enter > :nth-child(3) { animation-delay: 160ms; }
+  @keyframes lav-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lav-enter > * { animation: none; }
+  }
+
+  /* A still star field for the night footer of the subpages (the home page
+     has the live canvas instead). The glass city fades the lower stars. */
+  .lav-night-stars {
+    background-image:
+      linear-gradient(to bottom, transparent 45%, #0b2231 78%),
+      radial-gradient(0.6px 0.6px at 33.1% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 80.8% 8.6%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 89.3% 15.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 42.1% 17.2%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 7.7% 36.4%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1px 1px at 93.0% 37.0%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 95.7% 5.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 42.2% 34.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 55.8% 43.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 56.8% 14.1%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 70.4% 36.3%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 49.7% 34.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 58.2% 29.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 78.3% 44.2%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 57.1% 34.0%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 29.6% 60.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 42.1% 47.7%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 42.5% 59.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 57.0% 54.7%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 68.7% 38.1%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 8.6% 8.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 68.9% 6.8%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 97.3% 51.5%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1px 1px at 87.2% 23.5%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 18.1% 9.9%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 75.8% 10.6%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 39.5% 54.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 45.1% 35.4%, rgb(255 255 255 / 0.7) 60%, transparent 100%),
+      radial-gradient(1px 1px at 84.9% 19.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 67.5% 25.4%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.6px 0.6px at 10.0% 11.9%, rgb(255 255 255 / 0.35) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 48.6% 37.8%, rgb(255 255 255 / 0.5) 60%, transparent 100%),
+      radial-gradient(0.8px 0.8px at 2.4% 27.7%, rgb(255 255 255 / 0.9) 60%, transparent 100%),
+      radial-gradient(1.2px 1.2px at 56.4% 59.2%, rgb(255 255 255 / 0.9) 60%, transparent 100%);
+  }
+
+  /* The selected tab keeps its own colour under the pointer. */
+  .lav-star-hover[data-state='active']::before {
+    opacity: 0 !important;
+  }
+  /* Touch screens have no hover: PageShell's 75 % dim would stick after a tap. */
+  @media not ((hover: hover) and (pointer: fine)) {
+    .lavender-page :is(a, button):hover {
+      opacity: 1;
+    }
+  }
+  /* Controls: no double-tap zoom delay, no text selection on a long press. */
+  :is(.lav-star-hover, [data-ds='NightNav'] button, [data-ds='FooterNight'] button, [data-star-hover] button) {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .lav-menu {
+    overscroll-behavior: contain;
+  }
+  /* The dark veil behind the menu fades with the panel (the sheet's own
+     animate-in classes do nothing here, no animation plugin is installed). */
+  [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='open'] {
+    animation: lav-fade-in var(--duration-slow) ease-out both;
+  }
+  [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='closed'] {
+    animation: lav-fade-out var(--duration-base) ease-out both;
+  }
+  /* --lav-veil-from / --lav-menu-from: where the veil and the panel are when
+     the menu is opened or closed while still moving (set by NightNav), so a
+     quick second click or Esc continues from there instead of jumping. */
+  @keyframes lav-fade-in { from { opacity: var(--lav-veil-from, 0); } }
+  @keyframes lav-fade-out { from { opacity: var(--lav-veil-from, 1); } to { opacity: 0; } }
+
+  /* The section label in the nav bar fades in when the section changes. */
+  .lav-nav-section {
+    animation: lav-nav-section var(--duration-base) ease-out both;
+  }
+  @keyframes lav-nav-section {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lav-nav-section { animation: none; }
+  }
+
+  /* Progress of the testimonial bar; duration = ROTATE_MS in HomeNightLavender. */
+  .lav-progress-run {
+    animation: lav-progress 8000ms linear both;
+  }
+  @keyframes lav-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* The night home's menu (NightNav): the sheet slides in from the right. The
+     shadcn sheet's own animate-in classes have no effect here (no animation
+     plugin is installed), so the motion is defined for this panel alone. */
+  .lav-menu[data-state='open'] {
+    animation: lav-menu-in var(--duration-slow) var(--ease-emphasized) both;
+  }
+  .lav-menu[data-state='closed'] {
+    animation: lav-menu-out var(--duration-base) var(--ease-emphasized) both;
+  }
+  @keyframes lav-menu-in {
+    from { transform: var(--lav-menu-from, translateX(calc(100% + 24px))); }
+    to { transform: translateX(0); }
+  }
+  @keyframes lav-menu-out {
+    from { transform: var(--lav-menu-from, translateX(0)); }
+    to { transform: translateX(calc(100% + 24px)); }
+  }
+
+  /* Hamburg as a milk-glass sculpture (HamburgGlass.tsx). Two congruent
+     renderings with a transparent ground; the lit one shows through a
+     round window that follows the pointer (HamburgGlass.tsx moves it). */
+  .lav-hamburg {
+    position: relative;
+    aspect-ratio: 2600 / 1114;
+    touch-action: pan-y;
+  }
+  .lav-hamburg > div,
+  .lav-hamburg-glass > div {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  /* The glow behind the city: a 200 px circle that script moves, scales and
+     fades (transform and opacity only, nothing is repainted). */
+  .lav-hamburg > .lav-hamburg-halo {
+    inset: auto;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    background: radial-gradient(closest-side, rgb(36 161 218 / 0.95) 0%, rgb(147 84 246 / 0.6) 38%, rgb(147 84 246 / 0.16) 68%, transparent 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  /* The window onto the lit picture: the same kind of circle with a soft
+     edge; the lit picture inside is moved the opposite way by script. */
+  .lav-hamburg-glass > .lav-hamburg-spot {
+    inset: auto;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 52%, transparent 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .lav-hamburg-spot > .lav-hamburg-on {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    transform-origin: 0 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .lav-hamburg-off,
+  .lav-hamburg-on {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .lav-hamburg-off {
+    background-image: url('/images/hamburg-glas-dunkel.webp');
+    /* The rendering is bright; at rest the city stands back in the night. */
+    opacity: 0.5;
+  }
+  .lav-hamburg-on {
+    background-image: url('/images/hamburg-glas-licht.webp');
   }
 }
