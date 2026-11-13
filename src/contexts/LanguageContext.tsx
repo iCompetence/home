@@ -2954,27 +2954,27 @@ export const translations: Translations = {
   },
   'privacy.guidance.subline': {
     en: "AI in sensitive environments raises questions. We help you understand what's possible, what's safe, and what creates real value in your organization.",
-    de: 'KI in sensiblen Umgebungen wirft Fragen auf. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was in deiner Organisation echten Mehrwert schafft.'
+    de: 'KI in sensiblen Umgebungen wirft Fragen auf. Wir helfen dir herauszufinden, was in deiner Organisation sicher machbar ist und sich wirklich lohnt.'
   },
   'privacy.guidance.step1.label': { en: 'Clarity', de: 'Klarheit' },
   'privacy.guidance.step1.desc': {
     en: "AI raises big questions \u2014 and clarity is where everything starts. We help you understand what's possible, what's safe and what truly drives value, so you can move forward without uncertainty.",
-    de: 'KI wirft große Fragen auf \u2013 und Klarheit ist der Anfang von allem. Wir helfen dir zu verstehen, was möglich ist, was sicher ist und was wirklich Wert schafft, damit du ohne Unsicherheit vorankommst.'
+    de: 'Bevor wir etwas bauen, klären wir mit dir, welche Daten betroffen sind und welche Anwendungsfälle sich mit ihnen sicher umsetzen lassen. So entscheidest du auf Grundlage von Fakten, wo sich KI für dich lohnt.'
   },
   'privacy.guidance.step2.label': { en: 'Responsibility', de: 'Verantwortung' },
   'privacy.guidance.step2.desc': {
     en: 'AI should serve your organization, not undermine its principles. We design internal AI systems that respect your governance, your data boundaries and your responsibility toward customers and employees.',
-    de: 'KI soll deiner Organisation dienen, nicht ihre Prinzipien untergraben. Wir gestalten interne KI-Systeme, die deine Governance, deine Datengrenzen und deine Verantwortung gegenüber Kundinnen, Kunden und Mitarbeitenden respektieren.'
+    de: 'Interne KI-Systeme müssen sich an dieselben Regeln halten wie dein Team. Wir bauen sie so, dass sie deine Governance und deine Datengrenzen einhalten. Gegenüber Kunden und Mitarbeitenden kannst du dann jede Verarbeitung begründen.'
   },
   'privacy.guidance.step3.label': { en: 'Transparency', de: 'Transparenz' },
   'privacy.guidance.step3.desc': {
     en: 'Understanding how AI works is essential \u2014 especially in sensitive environments. We make architectures, data flows and decision paths visible, so you always know what happens, where and why.',
-    de: 'Zu verstehen, wie KI funktioniert, ist entscheidend \u2013 gerade in sensiblen Umgebungen. Wir machen Architekturen, Datenflüsse und Entscheidungswege sichtbar, damit du jederzeit weißt, was wo und warum geschieht.'
+    de: 'Gerade bei sensiblen Daten willst du wissen, was mit ihnen passiert. Wir dokumentieren Architektur und Datenflüsse so, dass du jederzeit nachvollziehen kannst, welches System welche Daten verarbeitet und warum.'
   },
   'privacy.guidance.step4.label': { en: 'Security', de: 'Sicherheit' },
   'privacy.guidance.step4.desc': {
     en: 'Your data never leaves your environment. We implement AI inside your infrastructure \u2014 secure, compliant, auditable \u2014 giving you the confidence and control you need to innovate safely.',
-    de: 'Deine Daten verlassen niemals deine Umgebung. Wir implementieren KI in deiner Infrastruktur \u2013 sicher, konform, prüfbar \u2013 und geben dir das Vertrauen und die Kontrolle, die du für sichere Innovation brauchst.'
+    de: 'Deine Daten bleiben in deiner Umgebung. Wir setzen die KI direkt in deiner Infrastruktur auf, sodass Datenschutz und Prüfbarkeit gewahrt bleiben und du die Kontrolle behältst.'
   },
   // AI Workshop — the live page is hard-coded German; these keys carry the
   // DE copy (in "du") and the EN drafts from docs/i18n-luecken.md §2 as in Figma.
