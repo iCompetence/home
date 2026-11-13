@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { preload } from 'react-dom'
 import HomeNightLavender from '@/components/lavender/HomeNightLavender'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 
 const SITE_URL = 'https://icompetence.de'
 
@@ -27,10 +27,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    // Bilingual canonical + hreflang (de/en/x-default) — ready for go-live.
-    alternates: alternates('lavender', lang),
+    // Own canonical, hreflang and Open Graph. The path is /<lang>/lavender/
+    // today and becomes /<lang>/ once PREVIEW_BASE is '' (previewRoute).
+    ...pageMetadata({ path: previewRoute(''), lang, ...meta[lang] }),
     // Soft-launch preview — keep out of search indexes until go-live.
     // Flip both this and the sitemap entry (public/sitemap.xml) to publish.
     robots: { index: false, follow: false },

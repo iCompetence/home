@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import AIWorkshopLavender from '@/components/lavender/AIWorkshopLavender'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 
 // Same titles and descriptions as the live page (app/[lang]/ai-workshop/page.tsx);
 // the German description says "du" in line with the redesign's wording.
@@ -24,9 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('lavender/ai-workshop', lang),
+    ...pageMetadata({ path: previewRoute('ai-workshop'), lang, ...meta[lang] }),
     // robots: inherited from ../layout.tsx (noindex while this is a preview).
   }
 }

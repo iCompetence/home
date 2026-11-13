@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import PrivacyLedLavender from '@/components/lavender/PrivacyLedLavender'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 
 // Same titles and descriptions as the live page (app/[lang]/privacy-led-ai/page.tsx).
 const meta = {
@@ -21,9 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('lavender/privacy-led-ai', lang),
+    ...pageMetadata({ path: previewRoute('privacy-led-ai'), lang, ...meta[lang] }),
     // robots: inherited from ../layout.tsx (noindex while this is a preview).
   }
 }
