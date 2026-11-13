@@ -667,6 +667,20 @@ html {
     opacity: 1;
   }
 
+  /* A button drawn inside a link (ProductRow, where the link covers the whole
+     row and the button is a span in it) takes the link's focus and press, as
+     if it were the link itself. Hover below. */
+  a:focus-visible > [data-slot='lav-button']::before {
+    opacity: 1;
+  }
+  a:focus-visible > [data-slot='lav-button'] {
+    color: var(--color-lav-white) !important;
+    border-color: transparent !important;
+  }
+  a:active > [data-slot='lav-button'] {
+    scale: 0.96;
+  }
+
   /* The same, under a pointer. */
   @media (hover: hover) and (pointer: fine) {
     .lav-star-hover:not(:disabled):hover::before,
@@ -674,6 +688,13 @@ html {
       opacity: 1;
     }
     .lav-star-hover:not([data-state='active'], :disabled):hover {
+      color: var(--color-lav-white) !important;
+      border-color: transparent !important;
+    }
+    a:hover > [data-slot='lav-button']::before {
+      opacity: 1;
+    }
+    a:hover > [data-slot='lav-button'] {
       color: var(--color-lav-white) !important;
       border-color: transparent !important;
     }

@@ -80,7 +80,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | C-7 | „Warum saubere UTM-Parameter entscheidend sind“: Schlusssatz „Mit dem iCompetence Parameter Tool vermeidest du diese Probleme und erhältst einfach, kostengünstig und effizient valide UTM-Parameter für dein Marketing.“ | 2 | `ct.why.description` | ✅ |
 | C-8 | „Experten vertrauen uns“: Zitate mit Anführungszeichen, kursiv und etwas größer | 3 | `ReviewCard` / Testimonials | ✅ (13.11., Branch `claude/unterseiten-licht-und-linie-d96d42`) |
 | C-9 | FAQ „Kann ich eigene Parameterstrukturen definieren?“: „Ja – sämtliche Parameterstrukturen lassen sich flexibel an eure internen Standards anpassen“ | 1 | `ct.faq.item2.answer` | ✅ |
-| C-10 | „Produkte und Tools“: Bilder per Klick vergrößern (→ G-2), ganze Karte als Link statt nur „Mehr erfahren“ | 3 | `ProductTeaser` | ⏳ |
+| C-10 | „Produkte und Tools“: Bilder per Klick vergrößern (→ G-2), ganze Karte als Link statt nur „Mehr erfahren“ | 3 | `ProductRow` | ✅ |
 | C-11 | CTA „Bereit, dein Unternehmen für die Agentic Era zu befähigen?“ zu lang, CTA zu spät. Stattdessen „Bist du agentic? Jetzt Erstgespräch buchen!“ und dann der Button | 3 | `cta.headline` (alle Produktseiten) | ➖ woanders |
 
 **C-1**
@@ -437,7 +437,7 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **E-11 Green-Claims-Richtlinie:** mit der SEO/GEO-Session abgestimmt und umgesetzt. Tabellenkopf „Green-Claims-Richtlinie (GCD)“, Überschrift „EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich“, FAQ q8 und a8 deutsch, q9 „Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?“. Der englische Name bleibt damit an genau zwei Stellen sichtbar, weil danach gesucht wird.
 
 **Noch offen (⏳):**
-- Ganze Produktkarte als Link (C-10, jetzt in `ProductRow`), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, noch offen. C-8 (Zitate) hat der Branch `claude/unterseiten-licht-und-linie-d96d42` erledigt.
+- Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, noch offen. C-10 (Produktzeile als Link) ist erledigt, siehe „Vierte Runde“. C-8 (Zitate) hat der Branch `claude/unterseiten-licht-und-linie-d96d42` erledigt.
 - D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
 
 ---
@@ -448,6 +448,13 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **E-5:** Kein neuer Screenshot nötig. Das vorhandene Tool-Bild zeigt schon eine Analyse (Befunde, Zitate, Notizen, Zweitbewertung). Es steht jetzt in voller Breite direkt nach „Sehen, was der Audit findet“ und ist vergrößerbar. Der Abschnitt „Was ist der Audit“ ist dafür reiner Text, sonst stünde dasselbe Bild dreimal auf der Seite.
 - **G-3:** Galerie-Vorschaubilder heißen „Bild anzeigen 2: <Alt-Text>“ statt nur mit Nummer. Die dünnen, fest eingebauten englischen Alt-Texte („How it works“, „iKnow Chat“, „Analytics Agent Dashboard“ …) sind durch übersetzte Beschreibungen ersetzt (`lavender.alt.*`), auf CPT, Intelligentic Search, Analytics Agent und iKnow.
 - **Private Adresse entfernt:** Der iKnow-Screenshot „Connectoren“ (`public/assets/iknow/connectoren.png`) zeigte im Feld „Verbindung“ eine private Gmail-Adresse, in der Lightbox gut lesbar. Auf Dennis' Wunsch ersetzt durch „name@beispiel.de“ in Schrift und Farbe der Oberfläche (Inter), nur dieser Bildbereich ist geändert. Das Bild nutzt auch die Live-Seite. Das Connectoren-Video zeigt nur Logos und ist unkritisch.
+
+---
+
+## Vierte Runde: Produktzeile als Link (13.11.2026)
+
+- **C-10:** Jede Produktzeile ist als Ganzes ein Link (`ProductRow`: Startseite mit EmpCo, iKnow, Analytics Agent und Privacy-led, dazu „Weitere Produkte“ am Ende der Produktseiten). Ein Klick auf Überschrift, Text oder Bild führt zur Produktseite. Die Klickfläche reicht so weit wie das Bild, auch dort, wo es bis an den Rand läuft. Im HTML bleibt es ein Link mit dem Button-Text als Namen, Tastatur und Screenreader merken keinen Unterschied, der Fokusrahmen liegt am Button. Fährt die Maus irgendwo über die Zeile, färbt sich der Button mit dem Stern-Verlauf, beim Drücken gibt er nach wie jeder Button. Der Button ist dafür ein gezeichnetes `span` im Link; die Regel „A button drawn inside a link“ in `globals.css` gibt ihm Hover, Fokus und Druck des Links.
+- Nebenwirkung: Text in der Zeile lässt sich mit der Maus nicht mehr markieren, weil die Klickfläche darüber liegt. Bei Teasern, die zu einer eigenen Seite führen, ist das üblich.
 
 ---
 
