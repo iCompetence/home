@@ -431,13 +431,13 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **C-11 Abschluss-Satz:** in der Session „iC | Website“ entschieden (Abschlusszeile der Startseite jetzt auf allen Unterseiten).
 - **F-1 404:** Button „Produkte ansehen“ statt „Zu den Produkten“, weil Buttons seit 13.11. im Infinitiv stehen.
 - **N-1 / N-2 Was ist neu:** zurückgestellt, die Seite wird erst insgesamt aktualisiert.
-- **D-2 / Link-Fehler:** behoben. Die Reset-Regel in `PageShell.tsx` liegt jetzt in `@layer base`. Geprüft auf allen DE-Vorschauseiten: unterstrichen sind nur die Links im Datenschutz und Impressum, dazu neu die Quellenangabe „Amazon“ auf Intelligentic Search. Sonst hat sich nichts verändert.
+- **D-2 / Link-Fehler:** behoben im Branch `claude/unterseiten-licht-und-linie-d96d42` (Commit dc3645e), dort liegt die Reset-Regel in `PageShell.tsx` in `@layer base`. Mit derselben Änderung geprüft: auf allen DE-Vorschauseiten unterstrichen sind nur die Links im Datenschutz und Impressum, dazu neu die Quellenangabe „Amazon“ auf Intelligentic Search. Sonst hat sich nichts verändert.
 - **E-7, E-8, I-9, K-2, U-3, A-4, C-3, C-7, H-5, P-1, E-14 (Schritt 4), Impressum „E-Mail:“:** wie vorgeschlagen umgesetzt.
 - **E-1 Greenwashing in der H1:** erledigt von der SEO/GEO-Session (Branch `claude/seo-geo-lavender-342459`, neues Prop `sublineInHeading` in `ProductHead`). Die H1 lautet im HTML „EmpCo Audit: Website auf Greenwashing prüfen.“, die Optik bleibt. Die H1 des Prüfers würde das Suchziel verschieben und wird nicht übernommen.
 - **E-11 Green-Claims-Richtlinie:** mit der SEO/GEO-Session abgestimmt und umgesetzt. Tabellenkopf „Green-Claims-Richtlinie (GCD)“, Überschrift „EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich“, FAQ q8 und a8 deutsch, q9 „Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?“. Der englische Name bleibt damit an genau zwei Stellen sichtbar, weil danach gesucht wird.
 
 **Noch offen (⏳):**
-- Lightbox (G-2, I-4, U-1, E-5), Bildbeschriftungen der Galerie (G-3), ganze Produktkarte als Link (C-10), Zitate mit Anführungszeichen (C-8), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben. Abstimmung mit der Session „Unterseiten an die neue Startseite angleichen“, weil sie dieselben Bauteile anfasst.
+- Lightbox (G-2, I-4, U-1, E-5), Bildbeschriftungen der Galerie (G-3), ganze Produktkarte als Link (C-10, künftig in `ProductRow`), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, kommen nach dem Merge des Branches `claude/unterseiten-licht-und-linie-d96d42` in einem eigenen PR. C-8 (Zitate) hat jener Branch erledigt.
 - E-5 braucht zusätzlich einen anonymisierten Screenshot einer Audit-Analyse (Kategorie, Textstelle, Vorschlag, Kommentar sichtbar).
 - D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
 
