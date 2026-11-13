@@ -2925,12 +2925,14 @@ export const translations: Translations = {
     de: 'Deine Nachricht wurde erfolgreich gesendet. Wir werden uns schnellstmöglich bei dir melden.'
   },
   'thankYou.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
-  'notFound.title': { en: '404\nPage not found', de: '404\nSeite nicht gefunden' },
+  // 404 sends visitors on instead of only back home (content team 11/2026, F-1);
+  // "404" itself is the eyebrow above the title.
+  'notFound.title': { en: 'Sorry, this is a dead end.', de: 'Hier geht es leider nicht weiter.' },
   'notFound.message': {
-    en: "The page you are looking for doesn't exist or has been moved.",
-    de: 'Die Seite, die du suchst, existiert nicht oder wurde verschoben.'
+    en: "The page you're looking for no longer exists or has been moved. Take a look at our products or get in touch.",
+    de: 'Die Seite, die du suchst, gibt es nicht mehr oder sie wurde verschoben. Schau dir unsere Produkte an oder schreib uns.'
   },
-  'notFound.backToHome': { en: 'Back to home', de: 'Zurück zur Startseite' },
+  'notFound.products': { en: 'View products', de: 'Produkte ansehen' },
   // Shell: skip link and the LinkedIn icon link (live hard-coded in English).
   'lavender.common.skipToContent': { en: 'Skip to content', de: 'Zum Inhalt springen' },
   'lavender.common.linkedin': { en: 'iCompetence on LinkedIn', de: 'iCompetence auf LinkedIn' },
