@@ -21,7 +21,7 @@ import {
   PriceTag,
   ProductHead,
   MoreProducts,
-  ReviewCard,
+  QuotePanel,
   Section,
   SectionHeader,
   SegmentedControl,
@@ -208,21 +208,16 @@ export default function CampaignParameterToolLavender() {
         />
       </Section>
 
-      <Section id="reviews" innerClassName="flex flex-col gap-12">
-        <SectionHeader title={t('ct.testimonials.title')} />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {CLIENTS.map((client, i) => (
-            <ReviewCard
-              key={client.name}
-              logo={client.logo}
-              logoAlt={client.name}
-              quote={t(`ct.testimonials.item${i + 1}.quote`)}
-              role={t(`ct.testimonials.item${i + 1}.role`)}
-              company={t(`ct.testimonials.item${i + 1}.company`)}
-            />
-          ))}
-        </div>
-      </Section>
+      {/* The home page's quote panel (was: three cards). No names are known, so role and company sign. */}
+      <QuotePanel
+        id="reviews"
+        title={t('ct.testimonials.title')}
+        quotes={[1, 2, 3].map((n) => ({
+          quote: t(`ct.testimonials.item${n}.quote`),
+          role: t(`ct.testimonials.item${n}.role`),
+          company: t(`ct.testimonials.item${n}.company`),
+        }))}
+      />
 
       <FaqSection
         className={ANCHOR_SCROLL_MARGIN}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
@@ -17,6 +17,7 @@ import {
   PageShell,
   ProcessAccordion,
   ProductRow,
+  QuotePanel,
   Section,
   Statement,
   siteHref,
@@ -466,74 +467,22 @@ function LogoStream() {
 }
 
 /**
- * Testimonials on the day layer: one quote at a time on a lilac panel, set in
- * a reading size so even the longest quote (about 600 characters) fits one
- * screen together with its author and the arrows. (The Lavender slider sets
- * quotes in headline size on a navy band; long ones ran over two screens.)
- * All quotes share one grid cell, so the height does not jump, and all of
- * them are in the HTML.
+ * Testimonials on the day layer: the design system's QuotePanel (one quote
+ * at a time on a lilac panel, in reading size). The roles already name the
+ * company. data-ds "Testimonials": the nav ends the products' stretch here.
  */
 function DayTestimonials() {
   const { t } = useLanguage();
-  const [index, setIndex] = useState(0);
-  const count = TESTIMONIALS.length;
-  const arrow =
-    'lav-star-hover inline-flex size-11 cursor-pointer items-center justify-center rounded-pill border-0 bg-lav-navy text-lav-white transition-[scale]! duration-[var(--duration-fast)] ease-out active:scale-[0.96] lg:size-12';
   return (
-    <Section dsName="Testimonials">
-      {/* Side padding = the negative margin, so the text inside stands on the page's text edge. */}
-      <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender px-4 py-6 md:-mx-8 md:px-8 md:py-10 lg:-mx-10 lg:gap-12 lg:rounded-frame lg:px-10 lg:py-14">
-        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-          {/* May wrap on narrow panels; then into two even lines, not one word alone. */}
-          <h2 className="lav-h1 text-lav-navy [text-wrap:balance]">{t('lavender.testimonials.title')}</h2>
-          <div className="flex shrink-0 items-center gap-3">
-            <span aria-hidden className="lav-small mr-1 text-lav-navy/70 [font-variant-numeric:tabular-nums]">
-              {index + 1} / {count}
-            </span>
-            <button
-              type="button"
-              aria-label={t('lavender.testimonials.prev')}
-              onClick={() => setIndex((i) => (i - 1 + count) % count)}
-              className={arrow}
-            >
-              <ArrowLeft size={20} strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              aria-label={t('lavender.testimonials.next')}
-              onClick={() => setIndex((i) => (i + 1) % count)}
-              className={arrow}
-            >
-              <ArrowRight size={20} strokeWidth={2} />
-            </button>
-          </div>
-        </div>
-        <div className="grid">
-          {TESTIMONIALS.map((item, i) => (
-            <figure
-              key={item.key}
-              aria-hidden={i !== index}
-              className={cn(
-                // The author below the quote on every width, as in the other quote
-                // components (TestimonialSlider, QuoteIntro, ReviewCard).
-                'col-start-1 row-start-1 m-0 flex flex-col items-start gap-8 transition-opacity duration-[var(--duration-base)] ease-out',
-                i === index ? 'opacity-100' : 'invisible opacity-0',
-              )}
-            >
-              <blockquote className="m-0 max-w-measure-lead">
-                <p className="lav-lead font-medium text-lav-navy">
-                  {t(`lavender.testimonials.${item.key}.quote`)}
-                </p>
-              </blockquote>
-              <figcaption className="flex flex-col gap-2">
-                <span className="lav-body font-medium text-lav-navy">{item.name}</span>
-                <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </Section>
+    <QuotePanel
+      dsName="Testimonials"
+      title={t('lavender.testimonials.title')}
+      quotes={TESTIMONIALS.map((item) => ({
+        quote: t(`lavender.testimonials.${item.key}.quote`),
+        name: item.name,
+        role: t(`lavender.testimonials.${item.key}.role`),
+      }))}
+    />
   );
 }
 
