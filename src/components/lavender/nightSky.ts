@@ -33,7 +33,7 @@ const DEFAULT_SOURCES = { double: '/images/nacht-stern-doppel.webp' };
 /** Mostly white, a few in the brand's light tints. */
 const TINTS = ['#ffffff', '#ffffff', '#ffffff', '#f5e1ff', '#bde3f4', '#bde3f4'];
 /** Height / width of the Hamburg rendering (HamburgGlass). */
-const SKYLINE_RATIO = 1108 / 2600;
+const SKYLINE_RATIO = 1114 / 2600;
 
 type FieldStar = { angle: number; radius: number; size: number; tint: string; rate: number; phase: number };
 /** One star glinting: which one, since when, for how long, and how long its cross gets (px). */

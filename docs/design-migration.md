@@ -220,13 +220,14 @@ Stand:
       (NightFooter.tsx: Schlusszeile, Glas-Skyline, Leiste mit „Based in Hamburg.“, Impressum,
       Datenschutz, LinkedIn, Nach oben) statt `ClosingBlock` / `Footer`. Sprünge zu Abschnitten
       laufen über `glide.ts` (folgt dem Ziel, auch wenn sich die Seite verschiebt). Die Skyline
-      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1108; seit 13.11. nachmittags mit den
-      Gebäuden in der Reihenfolge von West nach Ost: Köhlbrandbrücke (statt der Hafenkräne; ihre
-      Fahrbahn läuft hinter den Landungsbrücken aus), Landungsbrücken, Fernsehturm,
-      Rickmer Rickmers, Michel, Elbphilharmonie, Rathaus, Speicherstadt, rechts mit Luft zwischen den
-      Gebäuden; Bodenplatte mit runden Enden und Boden aus der ersten Fassung übernommen, die
-      Spiegelung folgt den Gebäuden; im Hero tritt die Stadt nur noch direkt hinter dem Text
-      zurück (`useTextHaze`: weiche Löcher um jede Textzeile und den Knopf statt eines großen Ovals); beleuchtet = dieselbe Fassung in
+      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1114; Stand 13.11. nachmittags, in einem Stück
+      gerendert, nichts von Hand ausgeschnitten): von West nach Ost Köhlbrandbrücke,
+      Landungsbrücken, dahinter die Tanzenden Türme, Fernsehturm, Rickmer Rickmers, Michel,
+      Elbphilharmonie, dahinter St. Nikolai, Rathaus, dahinter St. Petri, Speicherstadt. Die
+      Gebäude überlappen sich wieder in der Tiefe. Im Hero tritt die Stadt nur direkt hinter dem
+      Text zurück (`textHaze.ts`: weiche Löcher um jede Textzeile und den Knopf statt eines großen
+      Ovals). Das Stadtlicht ist rund. Alle Seiten enden im selben Bild (`ClosingText`: Schlusszeile
+      mittig, Stadt am unteren Rand, Leiste mit Textlinks darunter); beleuchtet = dieselbe Fassung in
       Blau/Lila eingefärbt). Durchsicht mit drei Skill-Sammlungen (taste-skill, impeccable,
       Emil Kowalski): Fokusring auf dunklem Grund, einheitliche Außenkanten, Abstände in den
       Textblöcken (16/24/32), Leistungen mit fester Höhe beim Tab-Wechsel, Autor neben dem

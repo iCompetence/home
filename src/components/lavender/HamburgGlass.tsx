@@ -11,7 +11,7 @@ import { cn } from '@/components/ui/utils';
  * coloured blue to violet).
  *
  * Two congruent renderings with a transparent ground
- * (public/images/hamburg-glas-*.webp, 2600 × 1108): one unlit, one lit from
+ * (public/images/hamburg-glas-*.webp, 2600 × 1114): one unlit, one lit from
  * inside in the double star's colours. No blend mode, so the city may stand
  * in a sticky or transformed parent. At rest the city is dark; the lit rendering shows through an elliptical
  * mask that follows the pointer (styles: .lav-hamburg in globals.css).
@@ -30,12 +30,14 @@ import { cn } from '@/components/ui/utils';
 // From west to east, as the city lies along the Elbe.
 const LANDMARKS = [
   { x: 0.118, half: 0.09, y: 0.68 }, // Köhlbrandbrücke
-  { x: 0.24, half: 0.09, y: 0.78 }, // Landungsbrücken
-  { x: 0.369, half: 0.03, y: 0.45 }, // Fernsehturm
-  { x: 0.444, half: 0.082, y: 0.78 }, // Rickmer Rickmers
-  { x: 0.555, half: 0.05, y: 0.6 }, // Michel
-  { x: 0.7, half: 0.063, y: 0.64 }, // Elbphilharmonie
-  { x: 0.814, half: 0.06, y: 0.64 }, // Rathaus
+  { x: 0.245, half: 0.09, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
+  { x: 0.36, half: 0.03, y: 0.45 }, // Fernsehturm
+  { x: 0.419, half: 0.082, y: 0.78 }, // Rickmer Rickmers
+  { x: 0.52, half: 0.05, y: 0.6 }, // Michel
+  { x: 0.639, half: 0.063, y: 0.64 }, // Elbphilharmonie
+  { x: 0.716, half: 0.03, y: 0.55 }, // St. Nikolai
+  { x: 0.796, half: 0.065, y: 0.64 }, // Rathaus
+  { x: 0.864, half: 0.03, y: 0.55 }, // St. Petri
   { x: 0.924, half: 0.055, y: 0.8 }, // Speicherstadt
 ] as const;
 
