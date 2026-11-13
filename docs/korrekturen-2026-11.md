@@ -127,7 +127,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | I-3 | „Antworten in Millisekunden“ | 1 | `is.features.step4.label` | ✅ |
 | I-4 | Bild auf Klick groß (→ G-2) | 3 | `ProductHead` | ✅ |
 | I-5 | „So funktioniert's“: Pfeil nach unten kann weg? | 3 | Button im Produktkopf | ➖ bleibt |
-| I-6 | Fließtext so groß wie die H2, die Alleinstellungsmerkmale kleiner. Fließtext so klein wie die Merkmale? | 3 | `lav-lead` in den Abschnitten | ⏳ |
+| I-6 | Fließtext so groß wie die H2, die Alleinstellungsmerkmale kleiner. Fließtext so klein wie die Merkmale? | 3 | `lav-lead` in den Abschnitten | ✅ |
 | I-7 | „… bis Amazon und Google: KI-Suche …“: Doppelpunkt durch Strich ersetzen | 1 | `is.quote.text` | ✅ |
 | I-8 | „Teil davon sein:“ → „!“, „Wir bieten die Next-Level-Suche“, „Tech-Konzernen.“ → „!“ | 1 | `is.quote.text` | ✅ |
 | I-9 | Groß über die ganze Seitenbreite: „Wir wissen, dass du es kannst. Intelligentic Search.“ | 3 | `QuoteIntro` (conclusion) | ✅ |
@@ -167,7 +167,7 @@ Ausgewertet am 13.11.2026 gegen den Code auf `main` (Stand 139f187).
 | U-2 | „Für Nicht-Analysten gemacht – und natürlich auch für Analysten“ | 1 | `icu.carousel.item2.title` | ✅ |
 | U-3 | Viel Text für die Schriftgröße. Einleitenden Satz behalten, Kernfeatures als Checkliste (drei Punkte vorgeschlagen). Dazu fett „Zielgruppen-FAQ“ über dem jetzigen Absatz | 2/3 | `icu.intro.text` (Statement) | ✅ |
 | U-4 | Umbruch auf 2/3 der Seite unverständlich: „Erkunde echte User Journeys …“ | 3 | `icu.guidance.subline` | ➖ bleibt |
-| U-5 | Danach mehr Abstand vor dem nächsten Abschnitt | 3 | Abschnitt „guidance“ | ⏳ |
+| U-5 | Danach mehr Abstand vor dem nächsten Abschnitt | 3 | Abschnitt „guidance“ | ✅ |
 | U-6 | FAQ „Brauche ich technisches Wissen …?“: „Nein. ICU ist intuitiv für Nicht-Analysten konzipiert – liefert aber gleichzeitig die Granularität, die Data- und Analytics-Teams erwarten.“ | 1 | `icu.faq.q2.content` | ✅ |
 
 **U-2**
@@ -256,9 +256,9 @@ Unklar ist „Zielgruppen-FAQ“. Soll der restliche Absatz in eine eigene FAQ f
 | # | Anmerkung | Art | Fundstelle | Status |
 |---|---|---|---|---|
 | E-1 | „Greenwashing“ in den Einstieg, z. B. Untertitel „… welche zum Risiko werden, sich dem Vorwurf des Greenwashings auszusetzen“. Weiter unten stattdessen: H1 „Das iCompetence EmpCo Audit: Schütze deine Website vor Greenwashing-Vorwürfen und Abmahnungen.“, Subline „Innerhalb weniger Stunden identifiziert der automatisierte Audit unzulässige Umweltaussagen auf deiner Website und zeigt konkreten Handlungsbedarf.“ | 2 | Produktkopf | ➖ erledigt (SEO-Session) |
-| E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ⏳ |
+| E-2 | Schriftgrößen tanzen, kleinste Schriftgröße abschaffen (auf allen Seiten), nur Absatzgröße | 3 | Typo-Stufen | ✅ |
 | E-3 | Einleitungsabsatz ergänzen: „… kommunizieren dürfen, ohne in den Verdacht des Greenwashings zu geraten.“ | 1 | `empco.why.p1` | ☑️ |
-| E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ⏳ |
+| E-4 | Rosa Kacheln: kleinste Schrift ok; die zwei Absätze darüber größer; aufklappbare Sublines in Absatzgröße | 3 | `IconCard`, `ProcessAccordion` | ✅ |
 | E-5 | Bilder größer klicken (→ G-2); nach „Sehen, was der Audit findet“ ein Screenshot einer Audit-Analyse in voller Breite | 3 | Abschnitt „test“ | ✅ |
 | E-6 | CTA „Kostenlose Probeseite anfordern“ doppelt sich. Überschrift: „Unser Angebot: Deine kostenlose Probeseite“ | 1 | `empco.form.title` | ✅ |
 | E-6a | Button „hier kostenlose Probeseite anfordern“ | 2 | `empco.hero.ctaPrimary`, `empco.test.cta` | ➖ bleibt |
@@ -437,7 +437,7 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 - **E-11 Green-Claims-Richtlinie:** mit der SEO/GEO-Session abgestimmt und umgesetzt. Tabellenkopf „Green-Claims-Richtlinie (GCD)“, Überschrift „EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich“, FAQ q8 und a8 deutsch, q9 „Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?“. Der englische Name bleibt damit an genau zwei Stellen sichtbar, weil danach gesucht wird.
 
 **Noch offen (⏳):**
-- Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5): freigegeben, noch offen. C-10 (Produktzeile als Link) ist erledigt, siehe „Vierte Runde“. C-8 (Zitate) hat der Branch `claude/unterseiten-licht-und-linie-d96d42` erledigt.
+- Erledigt in der vierten Runde: C-10 (Produktzeile als Link), Schriftstufen (I-6, E-2, E-4), Abstand UJE (U-5). C-8 (Zitate) hat der Branch `claude/unterseiten-licht-und-linie-d96d42` erledigt.
 - D-1 / D-3 (Herkunft der Rechtstexte): Frage des Prüfers an Dennis.
 
 ---
@@ -451,10 +451,16 @@ Dennis hat die Vorschläge oben freigegeben, mit diesen Abweichungen und Ergänz
 
 ---
 
-## Vierte Runde: Produktzeile als Link (13.11.2026)
+## Vierte Runde: Produktzeile als Link, Schriftstufen, Abstand (13.11.2026)
 
 - **C-10:** Jede Produktzeile ist als Ganzes ein Link (`ProductRow`: Startseite mit EmpCo, iKnow, Analytics Agent und Privacy-led, dazu „Weitere Produkte“ am Ende der Produktseiten). Ein Klick auf Überschrift, Text oder Bild führt zur Produktseite. Die Klickfläche reicht so weit wie das Bild, auch dort, wo es bis an den Rand läuft. Im HTML bleibt es ein Link mit dem Button-Text als Namen, Tastatur und Screenreader merken keinen Unterschied, der Fokusrahmen liegt am Button. Fährt die Maus irgendwo über die Zeile, färbt sich der Button mit dem Stern-Verlauf, beim Drücken gibt er nach wie jeder Button. Der Button ist dafür ein gezeichnetes `span` im Link; die Regel „A button drawn inside a link“ in `globals.css` gibt ihm Hover, Fokus und Druck des Links.
 - Nebenwirkung: Text in der Zeile lässt sich mit der Maus nicht mehr markieren, weil die Klickfläche darüber liegt. Bei Teasern, die zu einer eigenen Seite führen, ist das üblich.
+- **I-6, E-2, E-4 Schriftstufen:** Auf Dennis' Wunsch nur im Code, Figma bleibt. Die Regel jetzt: Absätze stehen immer in Absatzgröße (`lav-body`, 16 px auf allen Breiten). Größer (`lav-lead`, 24 px ab Tablet) sind nur noch einzelne Sätze, die einleiten: die Subline im Seitenkopf, der hervorgehobene Satz unter einem Titel (iKnow „Die Frage ist nicht …“), die Einladung zum Workshop-Formular. 14 px nur für Hinweise, Beschriftungen, Formulare und das Aktualisierungsdatum. Hervorgehobene Schlusszeilen („Genau hier setzt der EmpCo Audit an.“, „Wie das geht? Mit iKnow.“ usw.) stehen in Absatzgröße und halbfett, wie für K-2 entschieden.
+  - Umgestellt von 24 auf 16 px: Einleitungsabsätze unter Abschnittstiteln (`SectionHeader`), die Texte in `QuoteIntro` und `ImageText`, der erste Absatz im Erklärteil (`Explainer`, die Kernantwort bleibt fett), die Abschnitte „Warum“ und „Was ist“ auf EmpCo, iKnow und Analytics Agent, „It's a match!“, „Modular und dynamisch“ und „Ohne Umweg zum Produkt“ auf Intelligentic Search, die Einleitung des KI-Workshops, die Problembeschreibung auf Privacy-led. Die längste davon hatte 8 Zeilen in 24 px.
+  - Von 15 auf 16 px (auf dem Handy, `lav-paragraph` → `lav-body`): die aufklappbaren Schritte (`ProcessAccordion`, E-4), die zwei Absätze über den rosa Kacheln (E-4), „Was ist der Audit“, Faktenband, Grundsätze auf Privacy-led.
+  - Abstände dazu: Absätze untereinander 24 px (eine Zeile, wie überall bei Fließtext), Überschrift zu Text in den Bild-Text-Blöcken 24 px (wie in `ProductRow`), Abschnittstitel zu den Absätzen darunter 32 px (wie in `SectionHeader`). Fließtext-Spalten auf 760 px (`measure-lead`, wie im Erklärteil) statt 820 px.
+  - Geprüft im Browser bei 1440 px auf allen Produktseiten: Fließtext durchgehend 16 px, in 24 px nur noch Kopf-Sublines und Einzelsätze, in 14 px nur Hinweise. Auf dem Handy kein seitliches Überlaufen.
+- **U-5:** Auf dem User Journey Explorer lagen zwischen der Einleitung „Erkunde echte User Journeys …“ und dem ersten Bild-Text-Block 48 px, zwischen den Blöcken 96 px. Die Einleitung klebte so am ersten Block. Jetzt ist der Abstand gleich (56 px mobil, 96 px ab Desktop), auch auf Intelligentic Search, iKnow und Analytics Agent, die denselben Aufbau haben.
 
 ---
 

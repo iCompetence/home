@@ -24,7 +24,7 @@ export function PrincipleCard({
     >
       <span className="lav-small font-medium text-lav-navy/80">{number}</span>
       <h3 className="lav-h1 text-lav-navy">{title}</h3>
-      <p className="lav-paragraph font-normal text-lav-navy/80">{description}</p>
+      <p className="lav-body font-normal text-lav-navy/80">{description}</p>
     </article>
   );
 }

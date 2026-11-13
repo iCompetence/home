@@ -52,9 +52,10 @@ export function ImageText({
           image && <ZoomImage src={image} alt={imageAlt} loading="lazy" className={media} />
         )}
       </div>
-      <div className="flex w-full flex-col gap-6 md:gap-8 lg:flex-1 lg:gap-10">
+      {/* Heading to text 24px, as in ProductRow; the text is running text (body, content team 11/2026). */}
+      <div className="flex w-full flex-col gap-6 lg:flex-1">
         <h3 className="lav-h2 text-lav-navy">{title}</h3>
-        <p className="lav-lead whitespace-pre-line font-normal text-lav-navy/80">{description}</p>
+        <p className="lav-body whitespace-pre-line font-normal text-lav-navy/80">{description}</p>
       </div>
     </div>
   );

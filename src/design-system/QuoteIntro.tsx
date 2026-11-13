@@ -20,7 +20,7 @@ export function QuoteIntro({
   /** Attribution, e.g. "– Jensen Huang, 2024" (may contain a source link). */
   author: ReactNode;
   paragraphs: readonly string[];
-  /** Last line, set in semibold. */
+  /** Last line, in the paragraphs' size but semibold and in full ink. */
   conclusion?: string;
   /** Set the last line below both columns, full width, in the statement step. */
   conclusionWide?: boolean;
@@ -36,14 +36,14 @@ export function QuoteIntro({
             </blockquote>
             <figcaption className="lav-body font-normal text-lav-navy/70">{author}</figcaption>
           </figure>
-          <div className="flex flex-col gap-8 md:flex-1 md:gap-10">
+          <div className="flex flex-col gap-6 md:flex-1">
             {paragraphs.map((paragraph) => (
-              <p key={paragraph} className="lav-lead whitespace-pre-line font-normal text-lav-navy/80">
+              <p key={paragraph} className="lav-body whitespace-pre-line font-normal text-lav-navy/80">
                 {paragraph}
               </p>
             ))}
             {conclusion && !conclusionWide && (
-              <p className="lav-lead font-semibold text-lav-navy">{conclusion}</p>
+              <p className="lav-body font-semibold text-lav-navy">{conclusion}</p>
             )}
           </div>
         </div>

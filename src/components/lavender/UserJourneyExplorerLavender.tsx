@@ -163,7 +163,8 @@ function Benefits() {
 function Guidance() {
   const { t } = useLanguage();
   return (
-    <Section id="guidance" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+    // Title to the first block as far apart as the blocks are, so the title heads all of them (U-5).
+    <Section id="guidance" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14 lg:gap-24">
       <SectionHeader title={t('icu.guidance.title')} intro={[t('icu.guidance.subline')]} />
       <div className="flex flex-col gap-14 lg:gap-24">
         {CARD_MEDIA.map((media, i) => (

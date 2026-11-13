@@ -38,7 +38,8 @@ const FEATURE_VIDEOS = [
   '/videos/ICS_Millisekunden.mov',
 ] as const;
 
-const lead = 'lav-lead font-normal text-lav-navy/80';
+// Running text, one size on every page (content team 11/2026, I-6).
+const body = 'lav-body font-normal text-lav-navy/80';
 
 /**
  * Intelligentic Search product page in the new design (preview under
@@ -145,12 +146,13 @@ function Features() {
   // The three sublines hold two paragraphs each, separated by a blank line.
   const intro = [1, 2, 3].flatMap((n) => t(`is.features.subline${n}`).split('\n\n'));
   return (
-    <Section id="features" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
+    // Title to the first block as far apart as the blocks are, so the title heads all of them (U-5).
+    <Section id="features" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14 lg:gap-24">
       <div className="flex flex-col gap-8">
         <h2 className="lav-h1 text-lav-navy">{t('is.features.title')}</h2>
-        <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
+        <div className="flex max-w-measure-lead flex-col gap-6">
           {intro.map((p) => (
-            <p key={p} className={lead}>
+            <p key={p} className={body}>
               {p}
             </p>
           ))}
@@ -176,11 +178,11 @@ function Features() {
 function Modular() {
   const { t } = useLanguage();
   return (
-    <Section id="modular" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-14">
+    <Section id="modular" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
       <SectionHeader title={t('is.modular.title')} />
-      <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
-        <p className={lead}>{t('is.modular.text1')}</p>
-        <p className={lead}>{t('is.modular.text2')}</p>
+      <div className="flex max-w-measure-lead flex-col gap-6">
+        <p className={body}>{t('is.modular.text1')}</p>
+        <p className={body}>{t('is.modular.text2')}</p>
       </div>
     </Section>
   );
@@ -204,10 +206,12 @@ function Benefits() {
           secondary: t(`is.comparison.row${n}.secondary`),
         }))}
       />
-      <h2 className="lav-h1 text-lav-navy">{t('is.benefits.title')}</h2>
-      <div className="flex max-w-[820px] flex-col gap-8 md:gap-10">
-        <p className={lead}>{t('is.benefits.text1')}</p>
-        <p className={lead}>{t('is.benefits.text2')}</p>
+      <div className="flex flex-col gap-8">
+        <h2 className="lav-h1 text-lav-navy">{t('is.benefits.title')}</h2>
+        <div className="flex max-w-measure-lead flex-col gap-6">
+          <p className={body}>{t('is.benefits.text1')}</p>
+          <p className={body}>{t('is.benefits.text2')}</p>
+        </div>
       </div>
     </Section>
   );

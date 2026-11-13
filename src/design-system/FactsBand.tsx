@@ -41,7 +41,7 @@ export function FactsBand({
         <div className="relative flex flex-col gap-12 lg:ml-auto lg:w-[65.4%]">
           <div className="flex flex-col gap-6">
             <h2 className="lav-h2 text-lav-white">{title}</h2>
-            {lead && <p className="lav-paragraph font-normal text-lav-white/70">{lead}</p>}
+            {lead && <p className="lav-body font-normal text-lav-white/70">{lead}</p>}
           </div>
           <dl className="m-0 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
             {facts.map((fact) => (
