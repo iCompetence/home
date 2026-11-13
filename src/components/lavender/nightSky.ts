@@ -1,5 +1,5 @@
 /**
- * The night sky of the night home (/lavender/nacht/ and /lavender/nacht-hamburg/),
+ * The night sky of the night home (/lavender/nacht-hamburg/),
  * drawn on one fixed canvas behind the page. No React in here, so it can be
  * started on any canvas: `const stop = startNightSky(canvas)`.
  *
@@ -16,13 +16,9 @@
  *   so glass panels turn it into a glow. Over the glass city (HamburgGlass) it
  *   shrinks away and the city's own light takes over at the same spot.
  *
- * Where the guide star rests without a pointer (touch, or before the pointer
- * has moved) depends on where the glass city stands (canvas `data-city`):
- * - "end" (default): large beside the hero headline, small overhead for the
- *   rest of the page, down over Hamburg at the end;
- * - "hero": above the city at the start, small overhead after that.
- * In the "end" hero the star is large and only leans towards the pointer; it
- * follows fully once it is small.
+ * Without a pointer (touch, or before the pointer has moved) the guide star
+ * rests above the glass city while the stage shows (at the start and at the
+ * end of the page) and small overhead in between.
  *
  * With prefers-reduced-motion nothing animates: no twinkle, no turning, no
  * following. The sky is redrawn on scroll only, for the guide star's rest place.
@@ -56,7 +52,6 @@ export function startNightSky(
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const follows = !reduce && window.matchMedia('(hover: hover)').matches;
   const city = document.querySelector('[data-ds="HamburgGlass"]');
-  const cityInHero = canvas.dataset.city === 'hero';
   // The day layer: a light sheet that scrolls over the hero (Hamburg hero
   // variant). It covers this canvas, so the guide star is drawn a second time
   // on the layer's own canvas, which lies above the white and behind the content.
@@ -226,59 +221,45 @@ export function startNightSky(
 
   /** 0 in the sky, 1 on the ground: the stretch of the page where the city stands. */
   function grounded() {
-    if (cityInHero) {
-      // The stage shows at the top of the page and again at its end, when the
-      // day layer has scrolled out: as much as the layer leaves free.
-      const box = layer?.getBoundingClientRect();
-      if (!box) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
-      return easeInOut(clamp01(Math.max(box.top, H - box.bottom) / (H * 0.85)));
-    }
-    const end = document.documentElement.scrollHeight - H;
-    return easeInOut(clamp01((window.scrollY - (end - H * 0.9)) / (H * 0.9)));
+    // The stage shows at the top of the page and again at its end, when the
+    // day layer has scrolled out: as much as the layer leaves free.
+    const box = layer?.getBoundingClientRect();
+    if (!box) return 1 - easeInOut(clamp01(window.scrollY / (H * 0.85)));
+    return easeInOut(clamp01(Math.max(box.top, H - box.bottom) / (H * 0.85)));
   }
 
   function guideStar() {
     const compact = W < 768;
     const down = grounded();
-    // With the city in the hero the star never is the large hero star.
-    const away = cityInHero ? 1 : easeInOut(clamp01(window.scrollY / (H * 0.85)));
-    const big = compact
-      ? { x: W * 0.72, y: H * 0.3, size: W * 1.15 }
-      : { x: W * 0.76, y: H * 0.46, size: Math.min(W * 0.66, H * 1.1) };
     const small = { ...pole(), size: Math.max(120, Math.min(W, H) * 0.19) };
-    // Over the city it rests in a gap of sky: between the Elbphilharmonie's
-    // crest and the Rathaus tower at the end of the page, above the Speicherstadt in the
-    // hero (where the text block sits above the middle of the city).
+    // Over the city it rests in a gap of sky above the Speicherstadt (the
+    // text block sits above the middle of the city).
     const box = city?.getBoundingClientRect();
     const skyline = box ? box.height : W * SKYLINE_RATIO;
-    const at = cityInHero ? { x: 0.9, y: 0.3 } : { x: 0.735, y: 0.2 };
+    const at = { x: 0.9, y: 0.3 };
     const land = {
       // Never off screen (on phones the city is wider than the screen).
       x: Math.min(W * 0.86, (box ? box.left : 0) + (box ? box.width : W) * at.x),
       y: (box ? box.top : H - skyline) + skyline * at.y,
-      size: Math.min(cityInHero ? 300 : 360, Math.max(96, skyline * 0.62)),
+      size: Math.min(300, Math.max(96, skyline * 0.62)),
     };
-    const rest = {
-      x: lerp(lerp(big.x, small.x, away), land.x, down),
-      y: lerp(lerp(big.y, small.y, away), land.y, down),
-    };
-    // How much of the way to the pointer it goes: the large hero star only
-    // leans (a quarter of the way), the small star follows all the way.
-    const led = follows && pointer.seen ? lerp(0.25, 1, Math.max(away, down)) : 0;
+    const rest = { x: lerp(small.x, land.x, down), y: lerp(small.y, land.y, down) };
+    // With a pointer it follows all the way.
+    const led = follows && pointer.seen ? 1 : 0;
     const x = lerp(rest.x, chase.x, led);
     const y = lerp(rest.y, chase.y, led);
     // On the day layer there is room: the star grows to a large glow behind
     // the content. In the hero it stays small, the city and the headline need
     // the space.
     const roam = compact ? W * 1.05 : Math.min(W * 0.5, H * 0.82);
-    const night = lerp(lerp(big.size, small.size, away), land.size, down);
+    const night = lerp(small.size, land.size, down);
     return {
       x,
       y,
       size: lerp(night, roam, day) * (1 - melt),
       // At rest overhead it passes behind running text, so it steps back there.
       // On the day layer it lies behind dark text on white: a little lighter.
-      alpha: lerp(lerp(lerp(1, compact ? 0.3 : 0.55, away), 1, down), lerp(0.9, 0.78, day), led) * (1 - melt),
+      alpha: lerp(lerp(compact ? 0.3 : 0.55, 1, down), lerp(0.9, 0.78, day), led) * (1 - melt),
     };
   }
 

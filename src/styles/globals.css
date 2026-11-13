@@ -524,85 +524,10 @@ html {
 }
 
 /* ------------------------------------------------------------------ *
- * Night home (preview /lavender/nacht/): milk glass and one larger type
- * step. The sky itself is a canvas (src/components/lavender/nightSky.ts). Own classes only, so nothing here reaches the other pages.
+ * Night home (preview /lavender/nacht-hamburg/) and the night pages: hover,
+ * motion and menu. The sky itself is a canvas (src/components/lavender/nightSky.ts). Own classes only, so nothing here reaches the other pages.
  * ------------------------------------------------------------------ */
 @layer components {
-  /* One step above lav-display for the night home's two big lines. */
-  .lav-mega {
-    margin: 0;
-    font-family: var(--font-brand);
-    text-box: trim-both cap alphabetic;
-    font-size: 44px;
-    line-height: 44px;
-    letter-spacing: -1.5px;
-    font-weight: 500;
-  }
-  @media (min-width: 768px) {
-    .lav-mega { font-size: 72px; line-height: 70px; letter-spacing: -2.5px; }
-  }
-  @media (min-width: 1024px) {
-    .lav-mega { font-size: 112px; line-height: 106px; letter-spacing: -4.5px; }
-  }
-
-  /* Milk glass on the night sky: dark and frosted, a light edge on top, depth
-     below. Dark enough that white text stays readable when a star passes behind. */
-  .lav-glass {
-    background-color: rgb(15 44 63 / 0.62);
-    -webkit-backdrop-filter: blur(26px) saturate(150%);
-    backdrop-filter: blur(26px) saturate(150%);
-    box-shadow:
-      inset 0 1px 0 rgb(253 250 254 / 0.5),
-      inset 0 0 0 1px rgb(253 250 254 / 0.16),
-      0 40px 80px -40px rgb(0 0 0 / 0.55);
-  }
-
-  /* The clear glass of the feature rows' fields: nothing but a floating card or
-     a screenshot sits on it, so it can stay light and let the star glow through. */
-  .lav-glass-clear {
-    background-color: rgb(253 250 254 / 0.05);
-    -webkit-backdrop-filter: blur(34px) saturate(160%);
-    backdrop-filter: blur(34px) saturate(160%);
-    box-shadow:
-      inset 0 1px 0 rgb(253 250 254 / 0.5),
-      inset 0 0 0 1px rgb(253 250 254 / 0.16),
-      0 40px 80px -40px rgb(0 0 0 / 0.55);
-  }
-
-  /* The same two glasses on the day layer: milky white with a fine dark edge.
-     Kept cheap to paint, because a sheet this long is painted piece by piece
-     while scrolling and anything costly shows up late: no backdrop-filter, no
-     blur filter (the field shows a small pre-blurred copy of its star,
-     ::before), a short shadow. The guide star passes behind the nearly opaque
-     glass. */
-  [data-surface='light'] .lav-glass {
-    background-color: rgb(247 242 251 / 0.88);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.9),
-      inset 0 0 0 1px rgb(11 34 49 / 0.07),
-      0 14px 28px -18px rgb(11 34 49 / 0.28);
-  }
-  [data-surface='light'] .lav-glass-clear {
-    background-color: rgb(253 250 254 / 0.94);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.9),
-      inset 0 0 0 1px rgb(11 34 49 / 0.07),
-      0 14px 28px -18px rgb(11 34 49 / 0.28);
-  }
-  /* Same box as the sharp star behind the field (StarField: -inset-[9%]). */
-  [data-surface='light'] .lav-glass-clear::before {
-    content: '';
-    position: absolute;
-    inset: -9%;
-    background: var(--lav-field-star-soft) center / contain no-repeat;
-    opacity: 0.72;
-    pointer-events: none;
-  }
-
   /*
    * Hover on the night home: the light of the double star moves into whatever
    * the pointer is on (the guide star itself goes out meanwhile, see nightSky).
@@ -836,15 +761,6 @@ html {
   }
   @media (prefers-reduced-motion: reduce) {
     .lav-nav-section { animation: none; }
-  }
-
-  /* Progress of the testimonial bar; duration = ROTATE_MS in HomeNightLavender. */
-  .lav-progress-run {
-    animation: lav-progress 8000ms linear both;
-  }
-  @keyframes lav-progress {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
   }
 
   /* The night home's menu (NightNav): the sheet slides in from the right. The

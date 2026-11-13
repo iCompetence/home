@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from 'next'
 import { preload } from 'react-dom'
 import HomeNightLavender from '@/components/lavender/HomeNightLavender'
 
-// Variant of the night home study (/lavender/nacht/): the glass city of
-// Hamburg stands in the hero instead of at the end of the page. To compare;
-// noindex comes from ../layout.tsx.
+// The night home ("Licht und Linie"): the glass city of Hamburg stands in the
+// hero. Next to the current preview home (/lavender/) until it becomes the home
+// page; noindex comes from ../layout.tsx.
 export const metadata: Metadata = {
   title: 'iCompetence — Separate the signal from the noise.',
 }
@@ -17,5 +17,5 @@ export default function HomeNightHamburgPreview() {
   // browser finds late: fetch it with the page, so it does not pop in after the text.
   preload('/images/hamburg-glas-dunkel.webp', { as: 'image', fetchPriority: 'high' })
   // LanguageProvider comes from ../layout.tsx.
-  return <HomeNightLavender city="hero" />
+  return <HomeNightLavender />
 }

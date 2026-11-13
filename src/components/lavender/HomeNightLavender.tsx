@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronUp } from 'lucide-react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
@@ -15,8 +15,6 @@ import {
   ANCHOR_SCROLL_MARGIN,
   Button,
   Eyebrow,
-  LINKEDIN_URL,
-  LinkedInGlyph,
   PageShell,
   ProcessAccordion,
   Section,
@@ -48,59 +46,17 @@ const STAR = {
   violet: '/images/nacht-stern-violett.webp',
   mint: '/images/nacht-stern-mint.webp',
 } as const;
-const STAR_SOFT = {
-  blue: '/images/nacht-stern-blau-weich.webp',
-  violet: '/images/nacht-stern-violett-weich.webp',
-  mint: '/images/nacht-stern-mint-weich.webp',
-} as const;
-type StarKind = keyof typeof STAR;
-
-/**
- * A glass field with its star: the star is part of the page and stands still
- * behind the glass. It is a little larger than the field, so its tips show
- * sharp past the edges while the glass turns the rest into a glow. The outer
- * element takes the grid placement, `children` float inside the glass.
- */
-function StarField({ star, className, children }: { star: StarKind; className?: string; children: ReactNode }) {
-  return (
-    // --lav-field-star-soft: on the day layer the field shows a pre-blurred
-    // copy of the star instead of blurring its backdrop (.lav-glass-clear::before).
-    <div
-      className={cn('relative', className)}
-      style={{ '--lav-field-star-soft': `url(${STAR_SOFT[star]})` } as CSSProperties}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-[9%] bg-contain bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${STAR[star]})` }}
-      />
-      <div className="lav-glass-clear relative h-full min-h-[320px] overflow-hidden rounded-card md:min-h-[400px] lg:min-h-[500px] lg:rounded-frame">
-        {children}
-      </div>
-    </div>
-  );
-}
 
 /** The sky: one fixed canvas behind the whole page (small stars and the guide star). On the day layer the guide star continues on that layer's own canvas. */
-function NightSky({ city, hidden = false }: { city: CityPlace; hidden?: boolean }) {
+function NightSky({ hidden = false }: { hidden?: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => (canvas.current ? startNightSky(canvas.current) : undefined), []);
   return (
     <canvas
       ref={canvas}
       aria-hidden
-      data-city={city}
       className={cn('pointer-events-none fixed inset-0 z-0 h-full w-full', hidden && 'invisible')}
     />
-  );
-}
-
-/** Small sharp four-pointed star: the brand mark as a line-art glyph. */
-function Spark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden className={cn('shrink-0 -rotate-[17deg]', className)}>
-      <path fill="currentColor" d="M12 0Q14.5 9.5 24 12Q14.5 14.5 12 24Q9.5 14.5 0 12Q9.5 9.5 12 0Z" />
-    </svg>
   );
 }
 
@@ -121,34 +77,6 @@ const mediaCol = (media: Side) =>
     media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
   );
 
-function FeatureRow({
-  id,
-  media,
-  star,
-  className,
-  children,
-  field,
-}: {
-  id?: string;
-  /** Side of the glass field; the text takes the other one. */
-  media: Side;
-  star: StarKind;
-  className?: string;
-  /** The text column. */
-  children: ReactNode;
-  /** What floats in the glass field. */
-  field: ReactNode;
-}) {
-  return (
-    <Section id={id} className={cn('relative', className)} innerClassName={ROW}>
-      <div className={textCol(media)}>{children}</div>
-      <StarField star={star} className={mediaCol(media)}>
-        {field}
-      </StarField>
-    </Section>
-  );
-}
-
 /*
  * Button states. The design system's buttons (and PageShell's page-wide rule)
  * only dim to 75 % on hover, which reads as "disabled". Here the hovered
@@ -167,13 +95,11 @@ const solidOnNight = `${pressable} bg-lav-ink text-lav-ground`;
 const outlineOnNight = `${pressable} border-lav-ink text-lav-ink hover:border-transparent focus-visible:border-transparent`;
 
 /**
- * Where the glass city of Hamburg stands: at the end of the page (the trip
- * lands there) or in the hero (the trip starts there). Two variants to compare.
+ * The night home: the glass city of Hamburg stands in the hero, the day layer
+ * scrolls over it, and at the end the same stage is back with the closing line.
  */
-type CityPlace = 'end' | 'hero';
-
-export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }) {
-  // Hamburg hero variant: which text stands on the stage. It changes while the
+export default function HomeNightLavender() {
+  // Which text stands on the stage. It changes while the
   // day layer covers the whole screen (half a screen after it has closed over
   // the hero), so nobody sees the swap.
   const [closing, setClosing] = useState(false);
@@ -196,54 +122,33 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [city]);
+  }, []);
 
-  if (city === 'hero') {
-    return (
-      <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing && !covered} />}>
-        <NightSky city={city} hidden={covered} />
-        {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
-            whole first screen. id="top" sits here: the stage itself is sticky
-            and would not be a scroll target. */}
-        <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
-          <HeroHamburg hidden={closing} covered={covered} />
-          {/* On the day layer: the process accordion is the component of today's
-              Lavender home (design system); services (tabs), statement, products,
-              testimonials and Privacy-Led are this study's. */}
-          <DayLayer>
-            <DayServices />
-            <Statement />
-            {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
-                the proof right after the claim. */}
-            <LogoStream />
-            <DayProducts />
-            <DayTestimonials />
-            <DayProcess />
-            <DayPrivacyLed />
-          </DayLayer>
-          {/* The last screen: the day layer scrolls out completely and the
-              stage is back. The footer text (ClosingStage) lies over this space. */}
-          <div aria-hidden className={STAGE_HEIGHT} />
-        </div>
-      </PageShell>
-    );
-  }
-
-  // All-night variant (Hamburg at the end of the page): the earlier state of
-  // this study, kept for comparison.
   return (
-    <PageShell surface="inverse" nav={<NightNav />} footer={<Closing withCity />}>
-      <NightSky city={city} />
-      <div className="relative">
-        <Hero />
-        {/* No client logos: the logo files are made for a light ground. No
-            AnchorTabs: their navy bar slid in under the nav while scrolling. */}
-        <Services />
-        <Statement />
-        <Products />
-        <Testimonials />
-        <Process />
-        <PrivacyLed />
+    <PageShell surface="inverse" nav={<NightNav />} footer={<ClosingStage shown={closing && !covered} />}>
+      <NightSky hidden={covered} />
+      {/* Pulled up under the nav (76 / 92 px tall), so the stage fills the
+          whole first screen. id="top" sits here: the stage itself is sticky
+          and would not be a scroll target. */}
+      <div id="top" className="relative -mt-[76px] lg:-mt-[92px]">
+        <HeroHamburg hidden={closing} covered={covered} />
+        {/* On the day layer: the process accordion is the component of today's
+            Lavender home (design system); services (tabs), statement, products,
+            testimonials and Privacy-Led are this study's. */}
+        <DayLayer>
+          <DayServices />
+          <Statement />
+          {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
+              the proof right after the claim. */}
+          <LogoStream />
+          <DayProducts />
+          <DayTestimonials />
+          <DayProcess />
+          <DayPrivacyLed />
+        </DayLayer>
+        {/* The last screen: the day layer scrolls out completely and the
+            stage is back. The footer text (ClosingStage) lies over this space. */}
+        <div aria-hidden className={STAGE_HEIGHT} />
       </div>
     </PageShell>
   );
@@ -276,35 +181,6 @@ function DayLayer({ children }: { children: ReactNode }) {
 }
 
 /* ---------------- Hero ---------------- */
-
-function Hero() {
-  const { t } = useLanguage();
-  // No glass here: the first view is the sky itself, with the double star as
-  // the one sharp thing in it. Glass starts with the content below.
-  return (
-    <Section
-      id="top"
-      className="relative"
-      innerClassName="relative flex min-h-[calc(100svh-200px)] flex-col justify-end lg:min-h-[calc(100svh-240px)]"
-    >
-      <div className="relative flex flex-col gap-10 lg:gap-14">
-        <h1 className="lav-mega max-w-measure-wide text-lav-ink">{t('lavender.hero.headline')}</h1>
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p className="lav-lead max-w-measure-lead text-lav-ink/80">{t('lavender.hero.subline')}</p>
-          <div className="flex flex-wrap gap-4">
-            {/* One action here; "Kontakt aufnehmen" is the nav's button right above. */}
-            <Button asChild variant="white" className={solidOnNight}>
-              <a href="#services" onClick={(e) => glideOnClick(e, 1100)}>
-                {t('lavender.hero.seeServices')}
-                <ArrowDown size={20} strokeWidth={2} />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
 
 /*
  * Variant: the trip starts and ends in Hamburg. One stage (the sky and the
@@ -786,67 +662,6 @@ const SERVICE_FIELDS = [
   { id: 'workshops', star: 'mint', media: 'right', items: ['ai', 'enablement', 'briefings', 'trainings'] },
 ] as const;
 
-/**
- * A field of services: its four services as a list on the text side; the one
- * that is picked shows its description on a card in the glass field. Tabs
- * (shadcn/Radix) give the list its keyboard behaviour; every description is in
- * the HTML (forceMount).
- */
-function ServiceRow({ field, first }: { field: (typeof SERVICE_FIELDS)[number]; first: boolean }) {
-  const { t } = useLanguage();
-  return (
-    <Section
-      id={first ? 'services' : undefined}
-      className={cn('relative', first && ANCHOR_SCROLL_MARGIN)}
-      innerClassName="relative"
-    >
-      <Tabs defaultValue={field.items[0]} orientation="vertical" className={cn(ROW, 'gap-10')}>
-        <div className={textCol(field.media)}>
-          {first && <Eyebrow className="text-lav-ink/70">{t('lavender.services.title')}</Eyebrow>}
-          <h2 className="lav-display text-lav-ink">{t(`lavender.services.${field.id}.title`)}</h2>
-          <TabsList className="flex h-auto w-full flex-col items-stretch justify-start gap-0 rounded-none border-b border-lav-ink/20 bg-transparent p-0 text-lav-ink">
-            {field.items.map((item) => (
-              <TabsTrigger
-                key={item}
-                value={item}
-                className="h-auto flex-none justify-between gap-4 whitespace-normal rounded-none border-0 border-t border-lav-ink/20 px-0 py-5 text-left font-brand text-[20px] font-medium leading-[1.2] text-lav-ink opacity-60 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:text-[24px] [&>svg]:opacity-0 data-[state=active]:[&>svg]:opacity-100"
-              >
-                {t(`lavender.services.${field.id}.${item}.label`)}
-                <Spark className="size-4 transition-opacity duration-[var(--duration-fast)]" />
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </div>
-        <StarField star={field.star} className={mediaCol(field.media)}>
-          {field.items.map((item) => (
-            <TabsContent
-              key={item}
-              value={item}
-              forceMount
-              // 12 px from the field's edge with radius 28: concentric with the 40 px field.
-              // Always a navy card with white text, on the night sky and on the day layer.
-              className="absolute inset-x-3 bottom-3 flex flex-none flex-col gap-5 rounded-card-sm bg-lav-navy/80 p-6 in-data-[surface=light]:bg-lav-navy data-[state=inactive]:hidden lg:right-auto lg:w-[64%] lg:rounded-frame-inner lg:p-8"
-            >
-              <h3 className="lav-h3 text-lav-white">{t(`lavender.services.${field.id}.${item}.label`)}</h3>
-              <p className="lav-paragraph text-lav-white/80">{t(`lavender.services.${field.id}.${item}.desc`)}</p>
-            </TabsContent>
-          ))}
-        </StarField>
-      </Tabs>
-    </Section>
-  );
-}
-
-function Services() {
-  return (
-    <>
-      {SERVICE_FIELDS.map((field, i) => (
-        <ServiceRow key={field.id} field={field} first={i === 0} />
-      ))}
-    </>
-  );
-}
-
 /* ---------------- Statement ---------------- */
 
 function Statement() {
@@ -868,100 +683,6 @@ function Statement() {
 
 /* ---------------- Products: the same row, a screenshot in the field ---------------- */
 
-function ProductRow({
-  id,
-  media,
-  star,
-  eyebrow,
-  title,
-  description,
-  image,
-  imageAlt,
-  href,
-  cta,
-}: {
-  id?: string;
-  media: Side;
-  star: StarKind;
-  eyebrow: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  href: string;
-  cta: string;
-}) {
-  return (
-    <FeatureRow
-      id={id}
-      media={media}
-      star={star}
-      className={id ? ANCHOR_SCROLL_MARGIN : undefined}
-      field={
-        // The screenshot starts inside the field and runs off its far corner,
-        // so the glow of the star stays visible above and beside it.
-        <img
-          src={image}
-          alt={imageAlt}
-          className="absolute left-6 top-6 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] max-w-none rounded-tl-card-sm object-cover object-left-top outline outline-1 -outline-offset-1 outline-white/10 lg:left-12 lg:top-12 lg:h-[calc(100%-3rem)] lg:w-[calc(100%-3rem)] lg:rounded-tl-[28px]"
-        />
-      }
-    >
-      <Eyebrow className="text-lav-ink/70">{eyebrow}</Eyebrow>
-      <h2 className="lav-h1 text-lav-ink">{title}</h2>
-      <p className="lav-body text-lav-ink/80">{description}</p>
-      <Button asChild variant="outline" className={outlineOnNight}>
-        <a href={href}>
-          {cta}
-          <ArrowUpRight size={20} strokeWidth={2} />
-        </a>
-      </Button>
-    </FeatureRow>
-  );
-}
-
-function Products() {
-  const { t, language } = useLanguage();
-  return (
-    <>
-      <ProductRow
-        id="products"
-        media="left"
-        star="blue"
-        eyebrow={t('lavender.products.featuredEyebrow')}
-        title={t('lavender.products.empco.title')}
-        description={t('lavender.products.empco.desc')}
-        image="/images/nacht-empco.webp"
-        imageAlt={t('lavender.products.empco.imageAlt')}
-        href={siteHref(language, 'empco-audit')}
-        cta={t('lavender.products.empco.cta')}
-      />
-      <ProductRow
-        media="right"
-        star="violet"
-        eyebrow={t('lavender.products.eyebrow')}
-        title="iKnow"
-        description={t('lavender.products.iknow.desc')}
-        image="/images/nacht-iknow.webp"
-        imageAlt={t('lavender.products.iknow.imageAlt')}
-        href={siteHref(language, 'iknow')}
-        cta={t('lavender.products.learnMore')}
-      />
-      <ProductRow
-        media="left"
-        star="mint"
-        eyebrow={t('lavender.products.eyebrow')}
-        title="Analytics Agent"
-        description={t('lavender.products.analyticsAgent.desc')}
-        image="/images/nacht-analytics-agent.webp"
-        imageAlt={t('lavender.products.analyticsAgent.imageAlt')}
-        href={siteHref(language, 'analytics-agent')}
-        cta={t('lavender.products.learnMore')}
-      />
-    </>
-  );
-}
-
 /* ---------------- Testimonials: companies as a bar, one quote below ---------------- */
 
 const TESTIMONIALS = [
@@ -974,98 +695,6 @@ const TESTIMONIALS = [
   { key: 'buettner', name: 'Till Büttner', company: 'DHL Group' },
 ] as const;
 
-/** Keep in step with .lav-progress-run in globals.css. */
-const ROTATE_MS = 8000;
-
-/**
- * One quote at a time; the seven companies sit in a bar above it and the bar
- * moves on by itself. It waits while the pointer or the keyboard focus is on
- * the section, stops for good once someone picks a company, and never moves
- * with reduced motion. All quotes share one grid cell, so the height does not
- * jump, and all of them are in the HTML.
- */
-function Testimonials() {
-  const { t } = useLanguage();
-  const [active, setActive] = useState<string>(TESTIMONIALS[0].key);
-  const [auto, setAuto] = useState(false);
-  const [waiting, setWaiting] = useState(false);
-
-  useEffect(() => {
-    setAuto(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
-  useEffect(() => {
-    if (!auto || waiting) return;
-    const timer = window.setTimeout(() => {
-      const i = TESTIMONIALS.findIndex((item) => item.key === active);
-      setActive(TESTIMONIALS[(i + 1) % TESTIMONIALS.length].key);
-    }, ROTATE_MS);
-    return () => window.clearTimeout(timer);
-  }, [active, auto, waiting]);
-
-  return (
-    <Section>
-      <Tabs
-        value={active}
-        onValueChange={(value) => {
-          setActive(value);
-          setAuto(false);
-        }}
-        className="block gap-0"
-        onPointerEnter={() => setWaiting(true)}
-        onPointerLeave={() => setWaiting(false)}
-        onFocusCapture={() => setWaiting(true)}
-        onBlurCapture={() => setWaiting(false)}
-      >
-        <Eyebrow className="text-lav-ink/70">{t('lavender.testimonials.title')}</Eyebrow>
-        <TabsList className="mt-8 flex h-auto w-full items-stretch justify-start gap-2 overflow-x-auto rounded-none bg-transparent p-0 text-lav-ink lg:mt-10">
-          {TESTIMONIALS.map((item) => (
-            <TabsTrigger
-              key={item.key}
-              value={item.key}
-              className="relative h-auto min-w-[9.5rem] flex-none justify-start rounded-none border-0 border-t border-lav-ink/25 px-0 pb-2 pt-5 text-left font-brand text-body font-medium text-lav-ink opacity-55 transition-opacity duration-[var(--duration-fast)] data-[state=active]:bg-transparent data-[state=active]:opacity-100 lg:min-w-0 lg:flex-1"
-            >
-              {item.company}
-              {active === item.key && (
-                <span
-                  key={`${auto}-${waiting}`}
-                  aria-hidden
-                  className={cn(
-                    'absolute -top-px left-0 h-0.5 w-full origin-left bg-lav-ink',
-                    auto && !waiting && 'lav-progress-run',
-                  )}
-                />
-              )}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        <div className="mt-12 grid lg:mt-20">
-          {TESTIMONIALS.map((item) => (
-            <TabsContent
-              key={item.key}
-              value={item.key}
-              forceMount
-              className="col-start-1 row-start-1 flex max-w-measure-wide flex-none flex-col gap-10 transition-opacity duration-[var(--duration-base)] data-[state=inactive]:invisible data-[state=inactive]:opacity-0"
-            >
-              <blockquote className="m-0">
-                {/* Between lav-h3 and lav-h2: the quotes run from 150 to 600 characters. */}
-                <p className="m-0 font-brand text-[20px] font-medium leading-[1.3] text-lav-ink md:text-[24px] lg:text-[30px] lg:leading-[1.25] lg:tracking-[-0.3px]">
-                  {t(`lavender.testimonials.${item.key}.quote`)}
-                </p>
-              </blockquote>
-              <p className="m-0 flex flex-col gap-2">
-                <span className="text-body font-medium leading-[1.4] text-lav-ink">{item.name}</span>
-                <span className="text-[14px] font-normal leading-[1.4] text-lav-ink/70">
-                  {t(`lavender.testimonials.${item.key}.role`)}
-                </span>
-              </p>
-            </TabsContent>
-          ))}
-        </div>
-      </Tabs>
-    </Section>
-  );
-}
-
 /* ---------------- Process: three tall glass fields ---------------- */
 
 const PROCESS_STEPS = [
@@ -1074,103 +703,6 @@ const PROCESS_STEPS = [
   { number: '03', key: 'rollout' },
 ] as const;
 
-function Process() {
-  const { t } = useLanguage();
-  return (
-    <Section id="process" className={cn('relative', ANCHOR_SCROLL_MARGIN)} innerClassName="relative">
-      <Eyebrow className="text-lav-ink/70">{t('lavender.process.title')}</Eyebrow>
-      <ol className="-mx-4 mt-8 grid list-none gap-4 p-0 md:-mx-8 lg:-mx-10 lg:mt-10 lg:grid-cols-3">
-        {PROCESS_STEPS.map((step) => (
-          <li
-            key={step.key}
-            className="lav-glass flex flex-col justify-between gap-16 rounded-card p-6 md:p-8 lg:min-h-[460px] lg:rounded-frame lg:p-10"
-          >
-            <div className="flex flex-col gap-6">
-              <span className="lav-display text-lav-ink/35">{step.number}</span>
-              <h3 className="lav-h1 text-lav-ink">{t(`lavender.process.${step.key}.title`)}</h3>
-            </div>
-            <p className="lav-paragraph text-lav-ink/80">{t(`lavender.process.${step.key}.desc`)}</p>
-          </li>
-        ))}
-      </ol>
-    </Section>
-  );
-}
-
 /* ---------------- Privacy-Led: the same row ---------------- */
 
-function PrivacyLed() {
-  const { t, language } = useLanguage();
-  return (
-    <FeatureRow
-      id="privacy-led"
-      media="left"
-      star="blue"
-      className={ANCHOR_SCROLL_MARGIN}
-      field={<Spark className="absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 text-lav-ink/90 lg:size-28" />}
-    >
-      <Eyebrow className="text-lav-ink/70">{t('topNav.privacyLed')}</Eyebrow>
-      <h2 className="lav-h1 text-lav-ink">{t('lavender.privacyLed.title')}</h2>
-      <p className="lav-body text-lav-ink/80">{t('lavender.privacyLed.desc')}</p>
-      <Button asChild variant="outline" className={outlineOnNight}>
-        <a href={siteHref(language, 'privacy-led-ai')} target="_blank" rel="noopener noreferrer">
-          {t('lavender.privacyLed.cta')}
-          <ArrowUpRight size={20} strokeWidth={2} />
-        </a>
-      </Button>
-    </FeatureRow>
-  );
-}
-
 /* ---------------- Closing: the landing in Hamburg ---------------- */
-
-const EMAIL = 'info@icompetence.de';
-const PHONE = '+49 40 22636380';
-
-/**
- * Own footer instead of ClosingBlock + Footer: those end on a second big
- * headline ("Separate the signal …") right under the CTA line. Here the page
- * has one closing line, a compact row of contact and legal links, and the
- * Hamburg skyline as the very last thing.
- */
-function Closing({ withCity }: { withCity: boolean }) {
-  const { t, language } = useLanguage();
-  return (
-    <Section
-      as="footer"
-      dsName="FooterNight"
-      className={cn('relative overflow-hidden', withCity && 'pb-0')}
-      innerClassName="relative"
-    >
-      <div className="relative flex flex-col items-start gap-10 lg:gap-14">
-        <h2 className="lav-mega max-w-measure-wide text-lav-ink">{t('lavender.cta.heading')}</h2>
-        <Button asChild variant="white" className={solidOnNight}>
-          <a href={siteHref(language, 'contact')} target="_blank" rel="noopener noreferrer">
-            {t('topNav.letsTalk')}
-            <ArrowUpRight size={20} strokeWidth={2} />
-          </a>
-        </Button>
-      </div>
-
-      <div className="relative mt-[var(--section-pad-v)] grid gap-8 border-t border-lav-ink/20 pt-8 md:grid-cols-12 md:gap-10">
-        <div className="flex flex-col gap-3 md:col-span-4">
-          <Eyebrow className="text-lav-ink/70">{t('footer.inquiries')}</Eyebrow>
-          <a href={`mailto:${EMAIL}`} className="lav-body text-lav-ink">{EMAIL}</a>
-        </div>
-        <div className="flex flex-col gap-3 md:col-span-4">
-          <Eyebrow className="text-lav-ink/70">{t('footer.phone')}</Eyebrow>
-          <span className="lav-body text-lav-ink">{PHONE}</span>
-        </div>
-        <div className="flex flex-wrap items-start gap-x-8 gap-y-3 md:col-span-4 md:justify-end">
-          <a href={siteHref(language, 'imprint')} className="lav-body text-lav-ink/80">{t('footer.imprint')}</a>
-          <a href={siteHref(language, 'privacy-policy')} className="lav-body text-lav-ink/80">{t('footer.privacy')}</a>
-          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="lav-body text-lav-ink/80">LinkedIn</a>
-        </div>
-      </div>
-
-      {/* Full bleed by negative margins, not by a transform: a transform would
-          isolate the glass from the sky and its black would stop blending away. */}
-      {withCity && <HamburgGlass className="-mx-[var(--section-pad-h)] mt-10 lg:mt-6" />}
-    </Section>
-  );
-}
