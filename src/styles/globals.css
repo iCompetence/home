@@ -480,10 +480,13 @@ html {
     text-box: trim-both cap alphabetic;
   }
   .lav-display { font-size: 40px; line-height: 42px; letter-spacing: -1px; font-weight: 500; }
-  .lav-h1 { font-size: 32px; line-height: 35.2px; font-weight: 500; }
-  .lav-h2 { font-size: 28px; line-height: 30.8px; font-weight: 500; }
+  /* Large headings are set a little tighter, in em so it scales with every
+     breakpoint: about as tight as .lav-display (-2px at 80px is -0.025em).
+     Inter at 0 tracking reads loose from about 36px up. */
+  .lav-h1 { font-size: 32px; line-height: 35.2px; font-weight: 500; letter-spacing: -0.02em; }
+  .lav-h2 { font-size: 28px; line-height: 30.8px; font-weight: 500; letter-spacing: -0.01em; }
   .lav-h3 { font-size: 22px; line-height: 25.3px; font-weight: 500; }
-  .lav-statement { font-size: 28px; line-height: 32.2px; font-weight: 500; }
+  .lav-statement { font-size: 28px; line-height: 32.2px; font-weight: 500; letter-spacing: -0.02em; }
   .lav-lead { font-size: 16px; line-height: 24px; }
   .lav-body { font-size: 16px; line-height: 24px; }
   .lav-paragraph { font-size: 15px; line-height: 22.5px; }
