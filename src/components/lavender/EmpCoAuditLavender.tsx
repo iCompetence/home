@@ -300,7 +300,9 @@ function Example() {
     <Section id="example" dsName="ExampleFinding" innerClassName="flex flex-col gap-12">
       <SectionHeader title={t('empco.example.title')} intro={[t('empco.example.lead')]} />
       <div className="flex flex-col gap-4">
-        <dl className="m-0 flex flex-col rounded-card bg-lav-lavender px-6 py-2 md:px-10 md:py-4">
+        {/* A lavender panel like the home's quote panel: out over the text edge by its
+            own side padding, so the rows inside stand on the page's text edge. */}
+        <dl className="-mx-4 my-0 flex flex-col rounded-card bg-lav-lavender px-4 py-2 md:-mx-8 md:px-8 md:py-4 lg:-mx-10 lg:rounded-frame lg:px-10">
           {rows.map((row, i) => (
             <div
               key={row.key}
