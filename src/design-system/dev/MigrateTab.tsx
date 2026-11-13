@@ -75,7 +75,7 @@ const TARGETS: {
   selfContained?: boolean;
 }[] = [
   { id: 'nav', label: 'TopNav', hint: 'Kopfzeile — eigene Navigation', selfContained: true },
-  { id: 'hero', label: 'Hero', hint: 'Headline + Subline + CTA + Marken-Stern' },
+  { id: 'hero', label: 'Hero', hint: 'Headline + Subline + CTA' },
   { id: 'logos', label: 'LogoCarousel', hint: 'eigene Logo-Liste', selfContained: true },
   { id: 'services', label: 'ServicesCarousel', hint: 'Karte mit aufklappbaren Pills', needsItems: true },
   { id: 'statement', label: 'Statement', hint: 'ein großer Satz über dem Stern + CTA' },
@@ -458,7 +458,7 @@ export function MigrateTab({ panelEl }: { panelEl: HTMLElement | null }) {
       footer: () => `<Footer />`,
       logos: () => `<LogoCarousel />  {/* nutzt CLIENT_LOGOS, kein Inhalt aus der alten Sektion */}`,
       hero: () =>
-        `<Hero\n  title={${head}}\n  subline={${copy[0] ?? "'…'"}}\n  actions={${ctaJsx('primary')}}\n/>  {/* Stern kommt per Default aus <BrandStar variant="hero" /> */}`,
+        `<Hero\n  title={${head}}\n  subline={${copy[0] ?? "'…'"}}\n  actions={${ctaJsx('primary')}}\n/>`,
       statement: () =>
         `<Statement\n  text={${head}}\n  action={${ctaJsx('primary')}}\n/>`,
       feature: () =>

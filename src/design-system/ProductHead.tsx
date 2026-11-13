@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-import { BrandStar } from './BrandStar';
 import { Breadcrumb, type Crumb } from './Breadcrumb';
 import { MediaGallery, type GalleryImage } from './MediaGallery';
 
@@ -25,8 +24,9 @@ export type ProductHeadProps = {
 /**
  * Head of a product page (template A): gallery on the left, the "buy box"
  * with name, claim and calls to action on the right; stacked on tablet and
- * mobile. Opens the page with the yellow brand star behind the buy box. No
- * eyebrow above the name: the breadcrumb already says "Products" (2026-10-02).
+ * mobile. No star of its own (was: the yellow brand star behind the buy
+ * box): the sky's guide star is the one star on the page. No eyebrow above
+ * the name: the breadcrumb already says "Products" (2026-10-02).
  */
 export function ProductHead({
   breadcrumb,
@@ -49,12 +49,7 @@ export function ProductHead({
             {media ??
               (images && thumbLabel && <MediaGallery images={images} thumbLabel={thumbLabel} />)}
           </div>
-          <div className="relative flex w-full flex-col gap-8 lg:flex-1">
-            {/* Negative z keeps the star behind gallery and copy; the section's
-                own stacking context stops it from sliding under the page. */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-              <BrandStar variant="product" />
-            </div>
+          <div className="flex w-full flex-col gap-8 lg:flex-1">
             <h1 className="lav-h1 text-lav-navy">{title}</h1>
             {subline && <p className="lav-lead font-normal text-lav-navy/80">{subline}</p>}
             {description && <p className="lav-body font-normal text-lav-navy/80">{description}</p>}
