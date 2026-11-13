@@ -52,8 +52,8 @@ export function ImprintLavender() {
         <p className={body}>{t('footer.phone')}: +49 40 22636380</p>
         <p className={body}>
           Email:{' '}
-          <a href="mailto:info@iCompetence.de" className={inlineLink}>
-            info@iCompetence.de
+          <a href="mailto:info@icompetence.de" className={inlineLink}>
+            info@icompetence.de
           </a>
         </p>
       </SplitBlock>

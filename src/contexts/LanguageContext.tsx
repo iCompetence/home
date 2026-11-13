@@ -2876,7 +2876,7 @@ export const translations: Translations = {
   'lavender.services.workshops.ai.label': { en: 'AI Workshops', de: 'KI-Workshops' },
   'lavender.services.workshops.ai.desc': {
     en: 'A focused day of hands-on prototyping. Your team leaves with a working AI use case, not slides.',
-    de: 'Ein fokussierter Tag praktisches Prototyping. Dein Team geht mit einem funktionierenden KI-Use-Case nach Hause – nicht mit Folien.'
+    de: 'Ein fokussierter Tag praktisches Prototyping. Praxis statt PowerPoint: Du gehst mit einem einsatzbereiten, funktionierenden KI-Use-Case nach Hause.'
   },
   'lavender.services.workshops.enablement.label': { en: 'Team Enablement', de: 'Team-Enablement' },
   'lavender.services.workshops.enablement.desc': {
@@ -2886,7 +2886,7 @@ export const translations: Translations = {
   'lavender.services.workshops.briefings.label': { en: 'Executive Briefings', de: 'Executive Briefings' },
   'lavender.services.workshops.briefings.desc': {
     en: "A clear-eyed look at where AI changes your business for the better and where it won't.",
-    de: 'Ein nüchterner Blick darauf, wo KI dein Geschäft wirklich voranbringt – und wo nicht.'
+    de: 'Ein nüchterner Blick darauf, wo KI dein Geschäft messbar voranbringt und echten ROI stiftet.'
   },
   'lavender.services.workshops.trainings.label': { en: 'Hands-on Trainings', de: 'Hands-on-Trainings' },
   'lavender.services.workshops.trainings.desc': {

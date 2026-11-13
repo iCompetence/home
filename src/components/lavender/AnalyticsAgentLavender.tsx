@@ -109,11 +109,9 @@ export default function AnalyticsAgentLavender() {
       <Features />
 
       <Section id="in-action" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12">
-        <SectionHeader
-          title={t('analyticsAgent.howItWorks.title')}
-          leadIn={t('analyticsAgent.howItWorks.p1')}
-          intro={[t('analyticsAgent.howItWorks.p2')]}
-        />
+        {/* No lead-in here: the content team found "Die Frage ist nicht, ob du
+            Daten hast …" confusing under this title (docs/korrekturen-2026-11.md A-6). */}
+        <SectionHeader title={t('analyticsAgent.howItWorks.title')} intro={[t('analyticsAgent.howItWorks.p2')]} />
         <MediaGallery
           images={SCREENS}
           aspectClassName="aspect-[12/7]"

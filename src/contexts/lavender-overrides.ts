@@ -67,6 +67,32 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     en: 'Manually, several departments read the website page by page, collect claims and match them against evidence – an effort that can quickly reach five figures. An automated EmpCo audit takes over this groundwork: it identifies critical claims with their exact location and rule reference and delivers a prioritized list on which the final legal review can build.',
   },
 
+  // Content team 11/2026 (docs/korrekturen-2026-11.md E-6, E-9 to E-15, E-20).
+  'empco.form.title': {
+    de: 'Unser Angebot: deine kostenlose Probeseite',
+  },
+  'empco.seo.banned.title': {
+    de: 'Das verbietet die EmpCo-Richtlinie',
+  },
+  'empco.seo.compare.r1.empco': {
+    de: 'In Kraft, wird seit dem 27. September 2026 verbindlich angewendet',
+  },
+  'empco.seo.faq.a2': {
+    de: 'Die EmpCo-Richtlinie wird seit dem 27. September 2026 verbindlich angewendet. Die EU-Mitgliedstaaten mussten sie bis zum 27. März 2026 in nationales Recht umsetzen, Deutschland hat das über das UWG getan. Eine Übergangsfrist gibt es nicht – seitdem müssen alle kommerziellen Aussagen den Vorgaben entsprechen.',
+  },
+  'empco.seo.faq.a6': {
+    de: 'Nur mit belegbarem Nachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 unzulässig und abmahngefährdet.',
+  },
+  'empco.seo.faq.q8': {
+    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green Claims Directive?',
+  },
+  'empco.seo.faq.q19': {
+    de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Geschäftsführung oder Nachhaltigkeitsmanagement?',
+  },
+  'empco.seo.faq.a19': {
+    de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Das Marketing formuliert, das Nachhaltigkeitsmanagement liefert Daten, die Rechtsabteilung prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.',
+  },
+
   // --- iKnow ---
   'iknow.anchor.statusQuo': { en: 'Status quo' },
   'iknow.anchor.benefits': { en: 'Your benefits', de: 'Dein Mehrwert' },
@@ -83,6 +109,9 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Aber bitte transparent: Du behältst die volle Kontrolle über Inhalte, Quellen und Verarbeitung. Alle Daten bleiben lokal im Unternehmen, ohne Anbindung nach außen, also ohne öffentliche KI-APIs.',
   },
   'iknow.guidance.title': { de: 'Das hast du nun davon!' },
+  // Content team 11/2026 (docs/korrekturen-2026-11.md K-1): the card titles
+  // double as the bullets in the product head and should read on their own.
+  'iknow.card1.title': { de: 'Alle Wissensquellen deines Unternehmens vereint an einem Ort' },
   'iknow.card3.title': { de: 'Optional: Nutze auch Gespräche' },
   'iknow.card3.description': {
     de: 'iKnow kann Meetings und Workshops transkribieren und so neues Wissen direkt in das System integrieren. So kannst du, wenn gewünscht, Wissen sichern, bevor es verloren geht.',
@@ -90,10 +119,11 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'iknow.card4.description': {
     de: 'Sichere Wissen heutiger Generationen für künftige: iKnow bewahrt deine wertvollste Ressource dauerhaft und sichert so das kollektive Gedächtnis deines Unternehmens.',
   },
+  'iknow.card5.title': { de: 'Sicherheit und Souveränität in einer volatilen Welt' },
   'iknow.card5.description': {
     de: 'iKnow arbeitet lokal: Als Desktop-Software verarbeitet es Daten sicher vor Ort. Behalte die Kontrolle über deine Daten und dein Wissen, jederzeit.',
   },
-  'iknow.card6.title': { de: 'Bereit für deine Unternehmens-KI' },
+  'iknow.card6.title': { de: 'Die Grundlage für deine Unternehmens-KI' },
   'iknow.card6.description': {
     de: 'iKnow baut für dich die Datengrundlage, die du für die Nutzung von KI-Agenten benötigst. So wird dein Unternehmen in kurzer Zeit bereit für die Zukunft mit KI – automatisiert, einfach, datensicher und auf der Höhe der Zeit.',
   },
@@ -115,7 +145,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: '– W. Edwards Deming zugeschrieben',
   },
   'analyticsAgent.intro.p1': {
-    de: 'Dein Unternehmen sammelt jeden Tag riesige Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
+    de: 'Dein Unternehmen sammelt jeden Tag große Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
   },
   'analyticsAgent.intro.p2': {
     de: 'Was wäre, wenn jeder in deinem Unternehmen einfach Fragen in natürlicher Sprache stellen und sofort visuelle Antworten erhalten könnte? Kein SQL, keine Dashboards konfigurieren, kein Warten auf das Data-Team.',
@@ -127,7 +157,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Einer der beliebtesten Anwendungsfälle: Google Analytics 4. Der Agent verbindet sich direkt mit der GA4-API und ermöglicht die Interaktion mit deinen Web-Analytics-Daten im Dialog. Frag alles – von einfachen Traffic-Fragen bis zu komplexen Funnel-Analysen.',
   },
   'analyticsAgent.what.p3': {
-    de: 'Aber GA4 ist nur der Anfang. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
+    de: 'Du arbeitest mit einem anderen Tool als GA4, vielleicht sogar mit einer individuellen Lösung? Kein Problem. Der Analytics Agent kann mit jeder erdenklichen Datenquelle verbunden werden – Datenbanken, APIs, Spreadsheets, Data Warehouses. Eine darunterliegende Wissensbasis bringt das semantische Verständnis deiner Daten im relevanten Business-Kontext.',
   },
   'analyticsAgent.what.p4': {
     de: '→ Der Analytics Agent verwandelt Rohdaten in handlungsrelevante Erkenntnisse – sofort, visuell und in deiner Sprache.',
@@ -142,14 +172,19 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'analyticsAgent.card4.description': {
     de: 'Eine Wissensbasis unter dem Agenten bringt semantisches Verständnis deiner Daten im Kontext. Sie weiß, was deine Metriken bedeuten, wie dein Business funktioniert, und liefert Erkenntnisse, die wirklich Sinn ergeben.',
   },
+  // Content team 11/2026 (A-1): bullet in the product head and card title.
+  'analyticsAgent.card5.title': { de: 'Sofort einsatzbereit mit Google Analytics 4' },
   'analyticsAgent.card5.description': {
-    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle. Verbinde dich direkt mit der GA4-API und stelle Fragen zu deinem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.',
+    de: 'Die GA4-Integration ist einer der beliebtesten Anwendungsfälle für den iCompetence Analytics Agent. Verbinde dich direkt mit der GA4-API und stelle Fragen zu deinem Website-Traffic, Nutzerverhalten, Conversions und mehr – kein Dashboard-Setup nötig.',
   },
   'analyticsAgent.card6.title': { de: 'Für dein Unternehmen gebaut' },
   'analyticsAgent.card6.description': {
     de: 'Der Analytics Agent läuft als eigenständige Lösung, die sich in deine bestehende Infrastruktur integriert. Sicher, skalierbar und darauf ausgelegt, mit deiner Datenlandschaft zu wachsen.',
   },
   'analyticsAgent.howItWorks.title': { de: 'Sieh den Analytics Agent in Aktion' },
+  // Not rendered since 11/2026: the content team found it confusing under
+  // "in Aktion" (docs/korrekturen-2026-11.md A-6, A-7). Kept until it is
+  // decided whether it moves elsewhere.
   'analyticsAgent.howItWorks.p1': {
     de: 'Die Frage ist nicht, ob du Daten hast. Sondern ob du sie nutzen kannst.',
   },
@@ -162,6 +197,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'icu.carousel.title': { en: "We bring clarity to your user's behavior. In an instant.", de: 'Wir bringen Klarheit in das Verhalten deiner Nutzer. Sofort.' },
   'icu.carousel.subline': { en: 'ICU is built for the people who make decisions and for everybody else. ICU automatically - effortlessly - reveals the real journeys your users take. No dashboards to configure, no filters to master, no IT course to take — just clear, visual behavior anyone on your team can understand intuitively.', de: 'ICU wurde für Entscheider entwickelt — und für alle anderen. ICU enthüllt automatisch und mühelos die echten Journeys deiner Nutzer. Keine Dashboards zu konfigurieren, keine Filter zu beherrschen, kein IT-Kurs nötig — nur klares, visuelles Verhalten, das jeder in deinem Team intuitiv versteht.' },
   'icu.carousel.item1.description': { de: 'ICU deckt jeden echten Pfad deiner Nutzer auf — einschließlich Schleifen, Rückkehrern und stillen Abbrüchen — automatisch aus deinem vollständigen Datensatz rekonstruiert. Kein Setup. Kein Zusammenstückeln. Kein Rätselraten.' },
+  // Content team 11/2026 (U-2): bullet in the product head and carousel title.
+  'icu.carousel.item2.title': { de: 'Für Nicht-Analysten gemacht – und natürlich auch für Analysten' },
   'icu.carousel.item2.description': { en: 'Marketing managers, product teams, and growth leads can explore behavior without relying on technical analysts. ICU removes the complexity and turns raw activity into understandable, actionable insights.' },
   'icu.carousel.item3.description': { en: 'Ask ICU in plain language —\n"Where did most users drop last week?"\n"How did returning users behave differently from new ones?"\nThe system runs the analysis for you and visualizes the result instantly.', de: 'Frag ICU in einfacher Sprache —\n„Wo sind letzte Woche die meisten Nutzer abgesprungen?"\n„Wie haben sich wiederkehrende Nutzer anders verhalten als neue?"\nDas System führt die Analyse für dich durch und visualisiert das Ergebnis sofort.' },
   'icu.guidance.subline': { de: 'Erkunde echte User Journeys durch visuelle Karten, die du navigieren kannst — oder frag einfach nach den Erkenntnissen, die du brauchst.' },
@@ -172,7 +209,8 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'icu.card5.description': { en: 'Every node is clickable, every transition explorable. ICU lets you dive in as deeply as you need: from high-level patterns to single behavioral decisions. Drop-offs, loops, progressions, anomalies — everything becomes visible the moment you explore it.', de: 'Jeder Knoten ist anklickbar, jeder Übergang erkundbar. ICU lässt dich so tief eintauchen, wie du möchtest: von übergeordneten Mustern bis zu einzelnen Verhaltensentscheidungen. Abbrüche, Schleifen, Fortschritte, Anomalien — alles wird sichtbar, sobald du es erkundest.' },
   'icu.faq.title': { en: 'Frequently asked questions' },
   'icu.faq.q1.content': { de: 'Die meisten Analytics-Plattformen lassen dich hypothetische Flows zusammenstellen.\nICU rekonstruiert die tatsächlichen Journeys deiner Nutzer — automatisch, aus deinem vollständigen Datensatz. Kein manuelles Setup, keine Dashboards zu konfigurieren, kein Rätselraten.' },
-  'icu.faq.q2.content': { en: 'No. ICU is designed for non-analysts.\nMarketing teams, product managers, and growth leads can explore behavior without filters, segments, event taxonomies, or SQL. Everything is visual, intuitive, and guided.' },
+  // DE: content team 11/2026 (docs/korrekturen-2026-11.md U-6) — also names what analysts get.
+  'icu.faq.q2.content': { en: 'No. ICU is designed for non-analysts.\nMarketing teams, product managers, and growth leads can explore behavior without filters, segments, event taxonomies, or SQL. Everything is visual, intuitive, and guided.', de: 'Nein. ICU ist intuitiv für Nicht-Analysten konzipiert – liefert aber gleichzeitig die Granularität, die Data- und Analytics-Teams erwarten.\nMarketing-Teams, Produktmanager und Growth Leads können Verhalten ohne Filter, Segmente, Event-Taxonomien oder SQL erkunden. Alles ist visuell, intuitiv und geführt.' },
   'icu.faq.q3.content': { en: 'ICU processes your raw event data and automatically maps every step, loop, return and drop-off. The system links events into complete journeys and visualizes them as clean, explorable paths.', de: 'ICU verarbeitet deine rohen Event-Daten und kartiert automatisch jeden Schritt, jede Schleife, jede Rückkehr und jeden Abbruch. Das System verknüpft Events zu vollständigen Journeys und visualisiert sie als übersichtliche, erkundbare Pfade.' },
   'icu.faq.q4.content': { de: 'Ja.\nICU enthält einen intelligenten Agenten, der einfache Fragen versteht wie:\n„Wo sind letzte Woche die meisten Nutzer abgesprungen?"\n„Wie verhalten sich neue Nutzer anders als wiederkehrende?"\nICU führt die Analyse für dich durch und zeigt die Antwort visuell.' },
   'icu.faq.q5.content': { en: 'ICU integrates seamlessly with common setups:\nTag Managers, event pipelines, backend events, CRM data, and custom tracking.\nIf your system emits behavioral data, ICU can process it.', de: 'ICU integriert sich nahtlos mit gängigen Setups:\nTag Manager, Event-Pipelines, Backend-Events, CRM-Daten und Custom Tracking.\nWenn dein System Verhaltensdaten ausgibt, kann ICU sie verarbeiten.' },
@@ -182,12 +220,18 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'is.anchor.statusQuo': { en: 'Status quo' },
   // Same wording as iKnow and CPT (Dennis, 02.10.2026); tab and buy-box button.
   'is.anchor.howItWorks': { en: 'How it works', de: "So funktioniert's" },
-  'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google: KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein: Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen.' },
+  'is.quote.text': { de: 'Die Produktsuche ist im KI-Zeitalter angekommen: Von OpenAI und ChatGPT bis Amazon und Google – KI-Suche und KI-Shopping sind das Thema.\n\nMit Intelligentic Search kannst du Teil davon sein! Mehr Features als Amazons Rufus und ein datensicherer Ansatz zu einem erschwinglichen Preis, der sich schnell auszahlt.\nWir bieten die Next-Level-Suche für kleine und mittlere Unternehmen. Überlass deine Kunden nicht den großen Tech-Konzernen!' },
   'is.quote.conclusion': { de: 'Wir wissen, dass du es kannst. Intelligentic Search.' },
-  'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
+  'is.features.subline1': { de: 'Vergiss, was du über Filter wusstest - erlebe die Flexibilität und Hyper-Personalisierung, die nur KI bieten kann!\n\nIntelligentic Search ist eine moderne Form der Produkt- und Informationssuche. Sie erfasst und transformiert die Produktdaten eines Unternehmens automatisch und macht sie in natürlicher Sprache in Millisekunden durchsuchbar.' },
   'is.features.subline3': { de: "Starre Filter? Tausende von „Ergebnissen\" zum Durchklicken? So gestern!\n\nSei auf dem neuesten Stand mit Intelligentic Search. It's a match!" },
+  // DE labels shortened per content team 11/2026 (docs/korrekturen-2026-11.md I-1 to I-3);
+  // they are the bullets in the product head and the feature titles.
+  'is.features.step1.label': { de: 'Präziser als herkömmliche KI-Suchen' },
   'is.features.step2.label': { en: 'Integrated image search' },
-  'is.features.step3.label': { en: 'Intelligentic Search is the real AI' },
+  'is.features.step3.label': { en: 'Intelligentic Search is the real AI', de: 'Die echte KI' },
+  'is.features.step4.label': { de: 'Antworten in Millisekunden' },
+  // A heading — no full stop (content team 11/2026, I-11).
+  'is.modular.title': { de: 'Modular und dynamisch' },
   'is.modular.text1': { de: 'Unsere Mission ist es für jeden die perfekt zugeschnittene Lösung zu finden. Die Intelligentic Search ist ein Modulares System, das um eigene Wünsche und Funktionen erweitert und auf die Eigenschaften deines Unternehmens angepasst werden kann.' },
   'is.howItWorks.title': { en: 'Under the hood: How the Intelligentic Search engine works' },
   'is.comparison.title': { de: 'Die Vorteile für dich' },
@@ -202,7 +246,15 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.hero.bullet4': { en: 'Optimized for media and performance teams' },
   'ct.hero.cta1': { en: 'Start trial' },
   'ct.values.title': { en: 'The value for your team', de: 'Der Mehrwert für dein Team' },
-  'ct.values.card1.title': { en: 'Consistent UTM parameters – across all channels' },
+  // DE: content team 11/2026 (docs/korrekturen-2026-11.md C-2, C-2a) — German on the DE page.
+  'ct.values.card1.title': {
+    en: 'Consistent UTM parameters – across all channels',
+    de: 'Konsistente UTM-Parameter – über alle Kanäle',
+  },
+  'ct.why.solution.item1': { de: 'Standardisierte Parameter über alle Kanäle' },
+  'ct.values.card3.description': {
+    de: 'Keine mühsame manuelle Parameterpflege mehr in Excel-Sheets oder Slack-Threads. Parameter werden automatisch in Echtzeit generiert und dokumentiert.',
+  },
   'ct.values.card2.title': { en: 'Zero maintenance – clear governance in the team' },
   'ct.values.card3.title': { en: 'Less time wasted – more campaigns' },
   'ct.values.card4.title': { en: 'Clean analytics & attribution' },
@@ -223,7 +275,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.features.item3.title': { en: 'Logging & documentation' },
   'ct.features.item4.title': { en: 'Multi-user workflow' },
   'ct.features.item4.description': {
-    de: 'Generiere hunderte Kampagnen-URLs auf einmal via CSV-Import oder API.',
+    de: 'Generiere hunderte Kampagnen-URLs in einem einzigen, zentralen Arbeitsgang via CSV-Import oder API.',
   },
   'ct.features.item5.title': { en: 'Channel & vendor standardization' },
   'ct.features.item6.title': { en: 'Reusable campaign structures' },
@@ -231,7 +283,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.features.item8.title': { en: 'Export to analytics & BI tools' },
   'ct.why.title': { en: 'Why clean UTM parameters are critical' },
   'ct.why.problem.title': { en: 'Without standards' },
-  'ct.pricing.trialBadge': { en: '14 day free trial' },
+  'ct.pricing.trialBadge': { en: '14 day free trial', de: '14 Tage kostenlos testen' },
   'ct.pricing.tier1.rooms': { en: '1 parameter space' },
   'ct.pricing.tier2.rooms': { en: '2 to 4 parameter spaces per space' },
   'ct.pricing.tier3.rooms': { en: '5+ parameter spaces per space' },
@@ -246,7 +298,7 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'ct.demo.modal.submit': { en: 'Submit demo request' },
   'ct.faq.title': { en: 'Frequently asked questions' },
   'ct.faq.item2.answer': {
-    de: 'Ja – komplett konfigurierbar. Du kannst eigene Templates, Naming Conventions und Validierungsregeln erstellen, die zu deiner Unternehmensstruktur passen.',
+    de: 'Ja – sämtliche Parameterstrukturen lassen sich flexibel an deine internen Standards anpassen. Du kannst eigene Templates, Naming Conventions und Validierungsregeln erstellen, die zu deiner Unternehmensstruktur passen.',
   },
   'ct.faq.item4.answer': {
     de: 'Die Abrechnung erfolgt pro Seat oder pro Team – je nach Use Case. Kontaktiere uns für ein individuelles Angebot, das zu deinen Anforderungen passt.',

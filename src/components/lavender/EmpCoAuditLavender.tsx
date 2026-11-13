@@ -46,7 +46,10 @@ import { cn } from '@/components/ui/utils';
 
 const RECAPTCHA_SITE_KEY = '6LdI1S8sAAAAANG9NRRpioS8kVfZgn3wE5tRRY61';
 const FEATURE_ICONS = [Eye, CopyCheck, Quote, Scale, Network, History] as const;
-const FAQ_COUNT = 19;
+// FAQ entries shown, by key number (empco.seo.faq.q<n>/a<n>). No. 14 ("Are carbon
+// offsets a scam?") is left out: the content team found the answer played the
+// problem down (docs/korrekturen-2026-11.md E-19). The live page still has it.
+const FAQ_NUMBERS = Array.from({ length: 19 }, (_, i) => i + 1).filter((n) => n !== 14);
 
 /**
  * EmpCo Audit product page in the new design (preview under /lavender/).
@@ -75,10 +78,10 @@ export default function EmpCoAuditLavender() {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             inLanguage: 'de',
-            mainEntity: Array.from({ length: FAQ_COUNT }, (_, i) => ({
+            mainEntity: FAQ_NUMBERS.map((n) => ({
               '@type': 'Question',
-              name: t(`empco.seo.faq.q${i + 1}`),
-              acceptedAnswer: { '@type': 'Answer', text: t(`empco.seo.faq.a${i + 1}`) },
+              name: t(`empco.seo.faq.q${n}`),
+              acceptedAnswer: { '@type': 'Answer', text: t(`empco.seo.faq.a${n}`) },
             })),
           },
           {
@@ -462,9 +465,9 @@ function Directive() {
 
 function Faq() {
   const { t } = useLanguage();
-  const items = Array.from({ length: FAQ_COUNT }, (_, i) => ({
-    question: t(`empco.seo.faq.q${i + 1}`),
-    answer: t(`empco.seo.faq.a${i + 1}`),
+  const items = FAQ_NUMBERS.map((n) => ({
+    question: t(`empco.seo.faq.q${n}`),
+    answer: t(`empco.seo.faq.a${n}`),
   }));
   return (
     <FaqSection className={ANCHOR_SCROLL_MARGIN} title={t('empco.seo.faq.title')} items={items} />
