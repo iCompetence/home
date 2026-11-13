@@ -275,6 +275,15 @@ Stand:
       ab 640 px bleibt rechts Platz (`--lav-uc-corner`), „Nach oben“ unter 1024 px nur als Pfeil.
       Skyline-Skript und Original-Rendering liegen in `scripts/skyline/` (README: Aufruf und die
       Stellen, die beim Austausch mitmüssen).
+      Arbeitsseiten entfernt (Entscheidung Dennis, 13.11.2026): `/lavender/nacht/` (die durchgehend
+      dunkle Fassung) mit dem `city='end'`-Pfad in `HomeNightLavender` (Hero, Leistungs-, Produkt-,
+      Kundenstimmen-, Vorgehens- und Privacy-Zeilen, `FeatureRow`, `StarField`, Schluss mit Stadt)
+      und `nightSky.ts` (großer Hero-Stern, Landung über der Stadt am Seitenende), dazu die
+      CSS-Klassen `.lav-mega`, `.lav-glass(-clear)`, `.lav-progress-run` und sechs Bilder
+      (`nacht-empco|iknow|analytics-agent.webp`, `nacht-stern-*-weich.webp`). Ebenso
+      `/lavender/bausteine/` mit den Bibliotheksbausteinen (Magic UI, Aceternity), ihren Paketen
+      (`motion`, `@tabler/icons-react`, `@radix-ui/react-icons`), `src/lib/utils.ts` und ihren
+      Animationen. Die neue Startseite bleibt vorerst Vorschau unter `/lavender/nacht-hamburg/`.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
