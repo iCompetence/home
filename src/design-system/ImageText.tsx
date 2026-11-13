@@ -34,7 +34,7 @@ export function ImageText({
   className,
 }: ImageTextProps) {
   // The big corner from desktop up, as the large pictures of the night home.
-  const media = 'aspect-video w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame';
+  const media = 'aspect-video w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame';
 
   return (
     <div

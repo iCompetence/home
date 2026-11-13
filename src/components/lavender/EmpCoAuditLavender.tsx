@@ -201,7 +201,7 @@ export default function EmpCoAuditLavender() {
             width={2000}
             height={1137}
             loading="lazy"
-            className="h-auto w-full rounded-card bg-lav-lavender lg:rounded-frame"
+            className="h-auto w-full rounded-card bg-lav-stage lg:rounded-frame"
           />
         </Section>
       </div>

@@ -182,7 +182,7 @@ export default function CampaignParameterToolLavender() {
           src="/assets/how-it-works.png"
           alt={t('lavender.alt.cpt.howItWorks')}
           loading="lazy"
-          className="aspect-[1948/1014] w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame"
+          className="aspect-[1948/1014] w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame"
         />
       </Section>
 

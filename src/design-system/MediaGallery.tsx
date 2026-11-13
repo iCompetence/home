@@ -34,7 +34,7 @@ export function MediaGallery({
         alt={current.alt}
         className={cn(
           // The big corner from desktop up, as the large pictures of the night home.
-          'w-full rounded-card bg-lav-lavender object-contain object-center lg:rounded-frame',
+          'w-full rounded-card bg-lav-stage object-contain object-center lg:rounded-frame',
           aspectClassName,
         )}
       />
@@ -50,7 +50,7 @@ export function MediaGallery({
               aria-pressed={i === active}
               onClick={() => setActive(i)}
               className={cn(
-                'h-[59px] w-[78px] shrink-0 cursor-pointer overflow-hidden rounded-card-sm border-2 bg-lav-lavender p-0 transition-[border-color,scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] md:h-[78px] md:w-[104px]',
+                'h-[59px] w-[78px] shrink-0 cursor-pointer overflow-hidden rounded-card-sm border-2 bg-lav-stage p-0 transition-[border-color,scale] duration-[var(--duration-fast)] ease-out active:scale-[0.96] md:h-[78px] md:w-[104px]',
                 // The others: a frame in the star gradient on hover (.lav-star-ring).
                 i === active ? 'border-lav-ink' : 'lav-star-ring border-transparent',
               )}

@@ -172,6 +172,10 @@
      like ink, ground and soft. Navy on blue reaches 5.58:1 (white fails AA). */
   --color-lav-primary: #0b2231;
   --color-lav-on-primary: #fdfafe;
+  /* Ground behind product pictures and clips (gallery stage and thumbnails,
+     pictures in rows, large single pictures): the colour that shows where a
+     picture does not fill its frame. One token, so it changes in one place. */
+  --color-lav-stage: #f5e1ff;
   /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
   --color-lav-error: #b3433d;
 
@@ -660,7 +664,7 @@ html {
   .lav-star-ring:focus-visible {
     border-color: transparent;
     background:
-      linear-gradient(var(--color-lav-lavender), var(--color-lav-lavender)) padding-box,
+      linear-gradient(var(--color-lav-stage), var(--color-lav-stage)) padding-box,
       var(--lav-star-fill) border-box;
   }
 
@@ -725,7 +729,7 @@ html {
     .lav-star-ring:hover {
       border-color: transparent;
       background:
-        linear-gradient(var(--color-lav-lavender), var(--color-lav-lavender)) padding-box,
+        linear-gradient(var(--color-lav-stage), var(--color-lav-stage)) padding-box,
         var(--lav-star-fill) border-box;
     }
   }
