@@ -82,7 +82,11 @@ export const CTTrialModal = ({ isOpen, onClose, mode = 'trial' }: CTTrialModalPr
     const formData = new FormData(myForm);
 
     try {
-      const res = await fetch("/", {
+      // Same endpoint as submitNetlifyForm (src/lib/tracking.ts). Not "/":
+      // _redirects sends "/" to /de/ with a 301, the browser repeats the POST
+      // as a GET, Netlify never sees the submission and the 200 of /de/
+      // looked like success.
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),

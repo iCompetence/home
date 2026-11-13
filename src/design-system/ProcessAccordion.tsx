@@ -22,7 +22,7 @@ export type ProcessAccordionProps = {
   /** Optional intro below the title. */
   subline?: string;
   id?: string;
-  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when AnchorTabs point here. */
+  /** Extra classes on the section, e.g. ANCHOR_SCROLL_MARGIN when a link jumps here. */
   className?: string;
   /** Index of the step expanded on first render (default: the second one). */
   defaultExpanded?: number | null;

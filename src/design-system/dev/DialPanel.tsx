@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TextEditor } from './TextEditor';
-import { MigrateTab } from './MigrateTab';
 
 /**
  * DEV-ONLY design token dial panel.
@@ -13,7 +12,7 @@ import { MigrateTab } from './MigrateTab';
  * be applied at three scopes:
  *
  *   global    → :root                    (the whole site)
- *   type      → [data-ds="ProductTeaser"] (every instance of a component)
+ *   type      → [data-ds="ProductRow"]    (every instance of a component)
  *   instance  → the one element you picked
  *
  * It never writes to the source. Changes live in localStorage until you hit
@@ -231,7 +230,7 @@ export function DialPanel() {
   const [exported, setExported] = useState<string | null>(null);
   const [allowed, setAllowed] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [tab, setTab] = useState<'design' | 'text' | 'migrate'>('design');
+  const [tab, setTab] = useState<'design' | 'text'>('design');
   const [relevant, setRelevant] = useState<Set<string> | null>(null);
   /** Current computed spacing of the selection — the dials start from reality. */
   const [spaceBase, setSpaceBase] = useState<Record<string, number> | null>(null);
@@ -575,7 +574,7 @@ export function DialPanel() {
         </div>
 
         <div style={{ display: 'flex', borderBottom: '1px solid #2b3540' }}>
-          {(['design', 'text', 'migrate'] as const).map((id) => (
+          {(['design', 'text'] as const).map((id) => (
             <button
               key={id}
               type="button"
@@ -590,13 +589,12 @@ export function DialPanel() {
                 borderBottom: tab === id ? '2px solid #1f6feb' : '2px solid transparent',
               }}
             >
-              {id === 'design' ? 'Design' : id === 'text' ? 'Text' : 'Migrieren'}
+              {id === 'design' ? 'Design' : 'Text'}
             </button>
           ))}
         </div>
 
         {tab === 'text' && <TextEditor panelEl={panelRef.current} />}
-        {tab === 'migrate' && <MigrateTab panelEl={panelRef.current} />}
 
         {/* Scope */}
         {tab === 'design' && (

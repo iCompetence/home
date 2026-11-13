@@ -401,6 +401,13 @@ Stand:
       dafür `visual` statt `image`; Startseite und `MoreProducts` nutzen es, Privacy-led behält sein
       Bild. Texte unter `lavender.glimpse.*` (DE/EN). Die Bilder `lavender-empco.png`,
       `lavender-iknow.png` und `lavender-analytics-agent.png` sind gelöscht (13.11.2026).
+- [x] Alte Bausteine entfernt (2026-11-13): `TopNav`, `BurgerMenu` (Design-System), `Footer`, `ClosingBlock`,
+      `CTABand`, `ProductShowcase`, `FeatureBlock`, `ProductTeaser`, `ServicesCarousel`, `LogoCarousel`,
+      `TestimonialSlider`, `PricingCard`, `AnchorTabs`, `BrandStar`, `DesignFrameOverlay`, `useBreakpoint`,
+      `icons` und der Tab „Migrieren“ im Dev-Panel (`MigrateTab`). Keine Seite nutzte sie mehr, seit
+      `NightNav`, `NightFooter` und `NightClosing` die Rahmen stellen. `ANCHOR_SCROLL_MARGIN` liegt jetzt in
+      `anchor.ts`. Export geprüft: alle 572 Dateien, HTML gleich, Live-CSS gleich, Vorschau-CSS nur
+      121 ungenutzte Regeln weniger.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
