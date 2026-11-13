@@ -16,7 +16,6 @@ import {
   Eyebrow,
   LINKEDIN_URL,
   LinkedInGlyph,
-  LogoCarousel,
   PageShell,
   ProcessAccordion,
   Section,
@@ -214,8 +213,8 @@ export default function HomeNightLavender({ city = 'end' }: { city?: CityPlace }
             <DayServices />
             <Statement />
             {/* Client logos follow the statement ("… echte Geschäftsergebnisse"):
-                the proof right after the claim. They need the light ground. */}
-            <LogoCarousel plain />
+                the proof right after the claim. */}
+            <LogoWall />
             <DayProducts />
             <DayTestimonials />
             <DayProcess />
@@ -574,6 +573,51 @@ function DayPrivacyLed() {
 }
 
 /**
+ * Twelve clients as a still wall of two rows (was: five logos changing at
+ * random). All in one colour, so the wall reads as part of the page: each
+ * logo is used as a mask over a navy field. The vector logos mask as they
+ * are; five logos that are a lettering on a coloured block (DHL, REWE, Miele,
+ * Klett, Lucky Bike) have a one-colour version in public/logos/mono/.
+ */
+const WALL = [
+  ['DHL', '/logos/mono/dhl.png'],
+  ['REWE', '/logos/mono/rewe.png'],
+  ['Miele', '/logos/mono/miele.png'],
+  ['Eventim', '/logos/eventim.svg'],
+  ['TUI Cruises', '/logos/tui-cruises.svg'],
+  ['TeamViewer', '/logos/teamviewer.svg'],
+  ['CEWE', '/logos/cewe.svg'],
+  ['DER Touristik', '/logos/dertouristik.svg'],
+  ['Klett', '/logos/mono/klett.png'],
+  ['Tagesspiegel', '/logos/tagesspiegel.svg'],
+  ['Pentax', '/logos/pentax.svg'],
+  ['Lucky Bike', '/logos/mono/luckybike.png'],
+] as const;
+
+function LogoWall() {
+  return (
+    // No top padding: the wall belongs to the statement above it.
+    <Section dsName="LogoWall" className="pt-0">
+      <ul className="m-0 grid list-none grid-cols-3 items-center gap-x-8 gap-y-10 p-0 sm:grid-cols-4 lg:grid-cols-6 lg:gap-x-14 lg:gap-y-14">
+        {WALL.map(([name, src]) => (
+          <li key={name} className="flex h-9 items-center justify-center lg:h-11">
+            <span
+              role="img"
+              aria-label={name}
+              className="block h-full w-full max-w-[140px] bg-lav-navy/85"
+              style={{
+                WebkitMask: `url(${src}) center / contain no-repeat`,
+                mask: `url(${src}) center / contain no-repeat`,
+              }}
+            />
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
+}
+
+/**
  * Testimonials on the day layer: one quote at a time on a lilac panel, set in
  * a reading size so even the longest quote (about 600 characters) fits one
  * screen together with its author and the arrows. (The Lavender slider sets
@@ -591,8 +635,9 @@ function DayTestimonials() {
     <Section dsName="Testimonials">
       {/* Side padding = the negative margin, so the text inside stands on the page's text edge. */}
       <div className="-mx-4 flex flex-col gap-8 rounded-card bg-lav-lavender px-4 py-6 md:-mx-8 md:px-8 md:py-10 lg:-mx-10 lg:gap-12 lg:rounded-frame lg:px-10 lg:py-14">
-        <div className="flex flex-col items-start gap-5 xl:flex-row xl:items-center xl:justify-between xl:gap-6">
-          <h2 className="lav-h1 text-lav-navy">{t('lavender.testimonials.title')}</h2>
+        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+          {/* May wrap on narrow panels; then into two even lines, not one word alone. */}
+          <h2 className="lav-h1 text-lav-navy [text-wrap:balance]">{t('lavender.testimonials.title')}</h2>
           <div className="flex shrink-0 items-center gap-3">
             <span aria-hidden className="lav-small mr-1 text-lav-navy/70 [font-variant-numeric:tabular-nums]">
               {index + 1} / {count}
@@ -621,17 +666,18 @@ function DayTestimonials() {
               key={item.key}
               aria-hidden={i !== index}
               className={cn(
-                // Quote and author side by side on wide screens (1280 up; below, the author column would be a sliver).
-                'col-start-1 row-start-1 m-0 flex flex-col gap-8 transition-opacity duration-[var(--duration-base)] ease-out xl:grid xl:grid-cols-[minmax(0,var(--container-measure-lead))_1fr] xl:items-start xl:gap-14',
+                // Quote and author side by side wherever the panel has room for both
+                // (quote 760 + gap + at least 220 for the author); otherwise the author wraps below.
+                'col-start-1 row-start-1 m-0 flex flex-wrap items-start gap-x-14 gap-y-8 transition-opacity duration-[var(--duration-base)] ease-out',
                 i === index ? 'opacity-100' : 'invisible opacity-0',
               )}
             >
-              <blockquote className="m-0 max-w-measure-lead xl:max-w-none">
+              <blockquote className="m-0 min-w-0 flex-[0_1_760px]">
                 <p className="lav-lead font-medium text-lav-navy">
                   {t(`lavender.testimonials.${item.key}.quote`)}
                 </p>
               </blockquote>
-              <figcaption className="flex flex-col gap-2 xl:pt-1.5">
+              <figcaption className="flex flex-[1_0_220px] flex-col gap-2 pt-1.5">
                 <span className="lav-body font-medium text-lav-navy">{item.name}</span>
                 <span className="lav-small font-normal text-lav-navy/70">{t(`lavender.testimonials.${item.key}.role`)}</span>
               </figcaption>
