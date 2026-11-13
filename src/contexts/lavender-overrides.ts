@@ -89,6 +89,10 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'empco.seo.faq.q19': {
     de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Geschäftsführung oder Nachhaltigkeitsmanagement?',
   },
+  // E-14: same wording as the climate-neutral FAQ (no "echte Reduktionsnachweise").
+  'empco.seo.step4.desc': {
+    de: 'Klimaneutral-Aussagen, die auf Kompensation beruhen, streichen oder auf belegte eigene Emissionsminderung umstellen.',
+  },
   'empco.seo.faq.a19': {
     de: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Das Marketing formuliert, das Nachhaltigkeitsmanagement liefert Daten, die Rechtsabteilung prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.',
   },
