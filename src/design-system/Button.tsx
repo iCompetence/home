@@ -35,9 +35,6 @@ const buttonVariants = cva(
         solid: 'bg-lav-ink text-lav-ground',
         // Quiet fill in --color-lav-soft (follows the surface, see globals.css).
         soft: 'bg-lav-soft text-lav-ink',
-        // Old name of `soft`, kept so branches written before the switch
-        // (PR #25) still compile. Remove once nothing passes it any more.
-        outline: 'bg-lav-soft text-lav-ink',
       },
     },
     defaultVariants: {
