@@ -400,7 +400,7 @@ Stand:
       nur die Mindesthöhe, damit auf kleinen Laptops nichts abgeschnitten wird. `ProductRow` nimmt
       dafür `visual` statt `image`; Startseite und `MoreProducts` nutzen es, Privacy-led behält sein
       Bild. Texte unter `lavender.glimpse.*` (DE/EN). Die Bilder `lavender-empco.png`,
-      `lavender-iknow.png` und `lavender-analytics-agent.png` werden nicht mehr verwendet.
+      `lavender-iknow.png` und `lavender-analytics-agent.png` sind gelöscht (13.11.2026).
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
