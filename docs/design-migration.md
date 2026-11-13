@@ -106,6 +106,11 @@ Veröffentlichung). Was die Seiten dafür mitbringen:
   `[Text](/route/)`). Grundlage: Top-Ergebnisse zu je fünf Suchbegriffen (freigegeben
   13.11.2026), eigene Texte. Auf der dunklen Privacy-led-Seite liegt der Abschnitt auf einem
   hellen Blatt wie die Tag-Ebene der Startseite.
+  **Startseite ohne Erklär-Abschnitt und FAQ (13.11.2026, Dennis):** beides passte optisch
+  nicht auf die Startseite und ist dort vorerst entfernt, samt FAQPage-Schema (das Schema darf
+  nur stehen, wo die Fragen sichtbar sind). Die Texte `lavender.seo.home.*` bleiben in
+  `lavender-seo.ts`, bis entschieden ist, wohin sie kommen. Was iCompetence ist, sagen auf der
+  Startseite weiter Title, Description und das Organization-JSON-LD.
 
 **Umzug: Falle bei Canonical und hreflang.** Heute zeigen Canonical, hreflang, og:url und
 JSON-LD aller Vorschauseiten auf `/<lang>/lavender/…`. Das ist richtig, solange die Seiten

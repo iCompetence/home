@@ -6,7 +6,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/components/ui/utils';
 import { glideOnClick } from './glide';
-import { TopicSection } from './TopicSection';
 import { HamburgGlass } from './HamburgGlass';
 import { ClosingText, LegalStrip } from './NightFooter';
 import { useTextHaze } from './textHaze';
@@ -100,9 +99,6 @@ export default function HomeNightLavender() {
           <DayTestimonials />
           <DayProcess />
           <DayPrivacyLed />
-          {/* Who iCompetence is, answer-first, with an FAQ (orientation sheet:
-              SEO & LLM content); on the light layer like everything above. */}
-          <TopicSection prefix="lavender.seo.home" route="" blockCount={3} faqCount={5} />
         </DayLayer>
         {/* The last screen: the day layer scrolls out completely and the
             stage is back. The footer text (ClosingStage) lies over this space. */}

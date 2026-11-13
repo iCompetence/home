@@ -29,6 +29,9 @@ export const lavenderSeo: Record<string, Record<Language, string>> = {
   // Home: KI-Beratung Hamburg · KI-Lösungen und KI-Agenten entwickeln ·
   // KI-Workshops / AI Enablement · Web-Analytics-Beratung · Data & AI Consulting
   // ======================================================================
+  // Not on the page since 13.11.2026: Dennis took the explanatory section and
+  // the FAQ off the home for now (they did not fit it visually). The copy
+  // stays here until it is decided where it goes.
   'lavender.seo.home.title': {
     de: `Was macht iCompetence?`,
     en: `What does iCompetence do?`,
