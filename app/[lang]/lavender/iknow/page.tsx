@@ -4,16 +4,16 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles as the live page (app/[lang]/iknow/page.tsx); the German
+// Title: product name plus the search phrase (approved 13.11.2026); the German
 // description says "verwandle" in line with the redesign's wording.
 const meta = {
   de: {
-    title: 'iKnow | iCompetence',
+    title: 'iKnow: KI-Wissensmanagement, lokal im Unternehmen | iCompetence',
     description:
       'Die zentrale Wissensplattform für Unternehmen. KI-basiert, sicher, lokal – verwandle verteilte Informationen in eine strukturierte Wissensgrundlage.',
   },
   en: {
-    title: 'iKnow | iCompetence',
+    title: 'iKnow: AI knowledge management that stays in-house | iCompetence',
     description:
       'The central knowledge platform for enterprises. AI-based, secure, local – turn scattered information into a structured knowledge base.',
   },

@@ -5,16 +5,16 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// "Separate the signal from the noise." is the brand headline and stays in
-// English in both languages; only the description is localised.
+// The title says what iCompetence is and where (search phrase approved
+// 13.11.2026); the brand line "Separate the signal from the noise." stays the h1.
 const meta = {
   de: {
-    title: 'iCompetence — Separate the signal from the noise.',
+    title: 'KI-Beratung & Data Consulting aus Hamburg | iCompetence',
     description:
       'Mit uns bekommen Teams den Überblick: So werden verstreute Daten zu klaren Entscheidungen, KI zu Produkten und Automatisierung liefert zuverlässige Ergebnisse.',
   },
   en: {
-    title: 'iCompetence — Separate the signal from the noise.',
+    title: 'AI and data consulting from Hamburg | iCompetence',
     description:
       'We help ambitious teams cut through complexity by turning scattered data into clear decisions and AI into the products & automated processes that deliver lasting results.',
   },

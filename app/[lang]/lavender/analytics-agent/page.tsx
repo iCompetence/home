@@ -4,17 +4,17 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles as the live page (app/[lang]/analytics-agent/page.tsx); the
+// Title: product name plus the search phrase (approved 13.11.2026); the
 // descriptions use the redesign's wording ("deine", US "visualizations"), as
 // in lavender.products.analyticsAgent.desc.
 const meta = {
   de: {
-    title: 'Analytics Agent | iCompetence',
+    title: 'Analytics Agent: Daten in natürlicher Sprache analysieren | iCompetence',
     description:
       'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.',
   },
   en: {
-    title: 'Analytics Agent | iCompetence',
+    title: 'Analytics Agent: analyze your data in natural language | iCompetence',
     description:
       'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualizations and insights at the touch of a button.',
   },

@@ -4,16 +4,16 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles and descriptions as the live page
-// (app/[lang]/campaign-parameter-tool/page.tsx).
+// Title: product name plus the search phrase (approved 13.11.2026); description as
+// on the live page (app/[lang]/campaign-parameter-tool/page.tsx).
 const meta = {
   de: {
-    title: 'Campaign Parameter Tool | iCompetence',
+    title: 'Campaign Parameter Tool: UTM-Parameter im Team verwalten | iCompetence',
     description:
       'UTM-Automatisierung für Marketing, Media & Analytics Teams. Professionelles UTM Parameter Management als SaaS-Lösung.',
   },
   en: {
-    title: 'Campaign Parameter Tool | iCompetence',
+    title: 'Campaign Parameter Tool: manage UTM parameters as a team | iCompetence',
     description:
       'UTM automation for marketing, media & analytics teams. Professional UTM parameter management as a SaaS solution.',
   },

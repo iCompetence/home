@@ -4,16 +4,16 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles and descriptions as the live page
-// (app/[lang]/intelligentic-search/page.tsx).
+// Title: product name plus the search phrase (approved 13.11.2026); description as
+// on the live page (app/[lang]/intelligentic-search/page.tsx).
 const meta = {
   de: {
-    title: 'Intelligentic Search | iCompetence',
+    title: 'Intelligentic Search: KI-Produktsuche für Onlineshops | iCompetence',
     description:
       'Moderne KI-gestützte Produkt- und Informationssuche. Natürliche Sprache, Bildsuche, Millisekunden-Antwortzeiten.',
   },
   en: {
-    title: 'Intelligentic Search | iCompetence',
+    title: 'Intelligentic Search: AI product search for online shops | iCompetence',
     description:
       'Modern AI-powered product and information search. Natural language, visual search, millisecond response times.',
   },

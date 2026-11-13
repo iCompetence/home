@@ -4,16 +4,16 @@ import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
 import { PAGE_UPDATED } from '@/lib/page-dates'
 
-// Same titles and descriptions as the live page (app/[lang]/ai-workshop/page.tsx);
-// the German description says "du" in line with the redesign's wording.
+// Title on the search phrase (approved 13.11.2026); description as on the live
+// page (app/[lang]/ai-workshop/page.tsx), German in "du" as in the redesign.
 const meta = {
   de: {
-    title: 'Der KI-Workshop | iCompetence',
+    title: 'KI-Workshop für Unternehmen | iCompetence',
     description:
       'Der KI-Workshop von iCompetence zeigt, wie du KI sicher und gewinnbringend einsetzt und wie viel KI deine Marke braucht. Mit den Köpfen hinter EmpCo Audit und iKnow.',
   },
   en: {
-    title: 'The AI Workshop | iCompetence',
+    title: 'AI workshop for companies | iCompetence',
     description:
       'AI workshop by iCompetence: guidance for introducing and safeguarding AI. From the people behind the EmpCo Audit and iKnow.',
   },
