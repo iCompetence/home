@@ -84,7 +84,20 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
     de: 'Nur mit belegbarem Nachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 unzulässig und abmahngefährdet.',
   },
   'empco.seo.faq.q8': {
-    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green Claims Directive?',
+    de: 'Was ist der Unterschied zwischen der EmpCo-Richtlinie und der Green-Claims-Richtlinie?',
+  },
+  // E-11: German name like "EmpCo-Richtlinie" (content team 11/2026). The English
+  // name stays visible twice (comparison heading, q9) because people search for
+  // and ask AI assistants about it (SEO/GEO session, 13.11.2026).
+  'empco.seo.compare.title': {
+    de: 'EmpCo-Richtlinie und Green-Claims-Richtlinie (Green Claims Directive) im Vergleich',
+  },
+  'empco.seo.compare.colGcd': { de: 'Green-Claims-Richtlinie (GCD)' },
+  'empco.seo.faq.a8': {
+    de: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt seit dem 27. September 2026. Die Green-Claims-Richtlinie (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.',
+  },
+  'empco.seo.faq.q9': {
+    de: 'Wurde die Green-Claims-Richtlinie (Green Claims Directive) zurückgezogen? Was gilt jetzt?',
   },
   'empco.seo.faq.q19': {
     de: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Geschäftsführung oder Nachhaltigkeitsmanagement?',
