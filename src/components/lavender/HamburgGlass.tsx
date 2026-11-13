@@ -29,16 +29,16 @@ import { cn } from '@/components/ui/utils';
 /** Landmarks left to right: centre x, half width, light centre y, light height (fractions of the image). */
 // From west to east, as the city lies along the Elbe.
 const LANDMARKS = [
-  { x: 0.118, half: 0.09, y: 0.68 }, // Köhlbrandbrücke
-  { x: 0.245, half: 0.09, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
-  { x: 0.36, half: 0.03, y: 0.45 }, // Fernsehturm
-  { x: 0.419, half: 0.082, y: 0.78 }, // Rickmer Rickmers
-  { x: 0.52, half: 0.05, y: 0.6 }, // Michel
-  { x: 0.639, half: 0.063, y: 0.64 }, // Elbphilharmonie
-  { x: 0.716, half: 0.03, y: 0.55 }, // St. Nikolai
-  { x: 0.796, half: 0.065, y: 0.64 }, // Rathaus
-  { x: 0.864, half: 0.03, y: 0.55 }, // St. Petri
-  { x: 0.924, half: 0.055, y: 0.8 }, // Speicherstadt
+  { x: 0.125, half: 0.09, y: 0.68 }, // Köhlbrandbrücke
+  { x: 0.24, half: 0.09, y: 0.78 }, // Landungsbrücken, dahinter die Tanzenden Türme
+  { x: 0.371, half: 0.03, y: 0.45 }, // Fernsehturm
+  { x: 0.43, half: 0.082, y: 0.78 }, // Rickmer Rickmers
+  { x: 0.513, half: 0.05, y: 0.6 }, // Michel
+  { x: 0.645, half: 0.063, y: 0.64 }, // Elbphilharmonie
+  { x: 0.725, half: 0.03, y: 0.55 }, // St. Nikolai
+  { x: 0.8, half: 0.065, y: 0.64 }, // Rathaus
+  { x: 0.866, half: 0.03, y: 0.55 }, // St. Petri
+  { x: 0.928, half: 0.055, y: 0.8 }, // Speicherstadt
 ] as const;
 
 /** Where the light is (fractions of the picture), its radius as a fraction of the width, its strength. */

@@ -220,8 +220,9 @@ Stand:
       (NightFooter.tsx: Schlusszeile, Glas-Skyline, Leiste mit „Based in Hamburg.“, Impressum,
       Datenschutz, LinkedIn, Nach oben) statt `ClosingBlock` / `Footer`. Sprünge zu Abschnitten
       laufen über `glide.ts` (folgt dem Ziel, auch wenn sich die Seite verschiebt). Die Skyline
-      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1114; Stand 13.11. nachmittags, in einem Stück
-      gerendert, nichts von Hand ausgeschnitten): von West nach Ost Köhlbrandbrücke,
+      ist eine neue Fassung (FLORA, FLUX 3; 2600 × 1114; Stand 13.11. nachmittags: in einem Zug aus einer
+      einheitlich weichgezeichneten Vorlage gerendert und unverändert übernommen. Merke: Vorlagen
+      aus ausgeschnittenen Teilen übernimmt FLUX samt Schnittkanten, das Ergebnis wirkt wie Patchwork): von West nach Ost Köhlbrandbrücke,
       Landungsbrücken, dahinter die Tanzenden Türme, Fernsehturm, Rickmer Rickmers, Michel,
       Elbphilharmonie, dahinter St. Nikolai, Rathaus, dahinter St. Petri, Speicherstadt. Die
       Gebäude überlappen sich wieder in der Tiefe. Im Hero tritt die Stadt nur direkt hinter dem
