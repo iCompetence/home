@@ -84,7 +84,8 @@ export function RichBody({ text, className }: { text: string; className?: string
   const blocks = text.split(/\n\s*\n/).map((b) => b.split('\n').filter((l) => l.trim() !== ''));
   const body = 'lav-body font-normal text-lav-navy/80';
   return (
-    <div className={cn('flex flex-col gap-6', className)}>
+    // break-words: long tokens such as a UTM link must wrap on phones.
+    <div className={cn('flex flex-col gap-6 break-words', className)}>
       {blocks.map((lines, i) => {
         if (lines.every((l) => l.startsWith('- '))) {
           return (

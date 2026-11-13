@@ -43,7 +43,7 @@ export function Explainer({
     <Section id={id} dsName="Explainer" className={className} innerClassName="flex flex-col gap-12 md:gap-14">
       <div className="flex flex-col gap-8">
         <h2 className="lav-h1 max-w-[var(--container-measure-wide)] text-lav-navy">{title}</h2>
-        <p className="lav-lead max-w-[var(--container-measure-lead)] font-normal text-lav-navy/80">
+        <p className="lav-lead max-w-[var(--container-measure-lead)] font-normal break-words text-lav-navy/80">
           <strong className="font-medium text-lav-navy">{inline(answer)}</strong>
           {lead && <> {inline(lead)}</>}
         </p>
