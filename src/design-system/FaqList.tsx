@@ -53,7 +53,9 @@ export function FaqList({
               )}
             >
               <div className={cn('min-h-0 overflow-hidden', !expanded && 'invisible')}>
-                <p className="lav-body whitespace-pre-line pb-6 pr-0 pt-1 font-normal text-lav-navy/80 lg:pr-16">
+                {/* A long address in an answer may break anywhere: the accordion
+                    clips its content, so on phones it was cut off (privacy policy). */}
+                <p className="lav-body whitespace-pre-line pb-6 pr-0 pt-1 font-normal text-lav-navy/80 [overflow-wrap:anywhere] lg:pr-16">
                   {item.answer}
                 </p>
               </div>
