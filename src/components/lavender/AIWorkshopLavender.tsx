@@ -96,7 +96,7 @@ export default function AIWorkshopLavender() {
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-          <Button asChild variant="outline" className="w-full">
+          <Button asChild variant="soft" className="w-full">
             <a href="#intro" onClick={smoothAnchor}>
               {t('workshop.anchor.about')}
               <ArrowDown size={20} strokeWidth={2} />

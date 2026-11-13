@@ -31,7 +31,7 @@ export type ProductRowProps = {
 
 /**
  * A product (or topic) beside its picture, as on the night home: text column
- * (eyebrow, title, text, an outlined button) next to a large picture with the
+ * (eyebrow, title, text, a soft button) next to a large picture with the
  * big corner radius that reaches the frame edge. Sides alternate down a page.
  * The picture is a finished composition with its own coloured ground, so no
  * field and no star behind it. Renders the row only; the caller wraps it in a
@@ -74,7 +74,7 @@ export function ProductRow({
           {title}
         </Heading>
         <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        <Button asChild variant="outline" className="mt-2">
+        <Button asChild variant="soft" className="mt-2">
           <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
             {cta}
             <ArrowUpRight size={20} strokeWidth={2} />

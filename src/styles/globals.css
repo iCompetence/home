@@ -164,6 +164,9 @@
      theme). Lets one component serve the night sky and the day layer. */
   --color-lav-ink: #0b2231;
   --color-lav-ground: #fdfafe;
+  /* Fill of the soft button: lavender on the light page, a white veil on the
+     night. Follows the surface like ink and ground. */
+  --color-lav-soft: #f5e1ff;
   /* Form errors (Figma border/error, text/error): 5.55:1 on white, 4.51:1 on lavender. */
   --color-lav-error: #b3433d;
 
@@ -216,10 +219,12 @@
 [data-surface='inverse'] {
   --color-lav-ink: #ffffff;
   --color-lav-ground: #0b2231;
+  --color-lav-soft: rgb(255 255 255 / 0.12);
 }
 [data-surface='light'] {
   --color-lav-ink: #0b2231;
   --color-lav-ground: #fdfafe;
+  --color-lav-soft: #f5e1ff;
 }
 
 /* Live section padding, consumed by the shared <Section> component. Kept as

@@ -88,7 +88,7 @@ export default function IntelligenticSearchLavender() {
       >
         <ButtonStack>
           <ConsultButton className="w-full" topic={t('burgerMenu.intelligenticSearch')} />
-          <Button asChild variant="outline" className="w-full">
+          <Button asChild variant="soft" className="w-full">
             <a href="#how-it-works" onClick={smoothAnchor}>
               {t('is.anchor.howItWorks')}
               <ArrowDown size={20} strokeWidth={2} />
