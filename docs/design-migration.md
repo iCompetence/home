@@ -284,6 +284,13 @@ Stand:
       `/lavender/bausteine/` mit den Bibliotheksbausteinen (Magic UI, Aceternity), ihren Paketen
       (`motion`, `@tabler/icons-react`, `@radix-ui/react-icons`), `src/lib/utils.ts` und ihren
       Animationen. Die neue Startseite bleibt vorerst Vorschau unter `/lavender/nacht-hamburg/`.
+      Neue Vorschau-Startseite (Entscheidung Dennis, 13.11.2026): `/<lang>/lavender/` zeigt jetzt
+      `HomeNightLavender` (Metadaten und JSON-LD der Seite bleiben), `LavenderHome` ist entfernt.
+      `/lavender/nacht-hamburg/` leitet per 301 auf `/lavender/` (`public/_redirects`). Damit führen
+      Logo und Menü-Abschnittslinks der Unterseiten auf die neue Startseite. Die echte Startseite `/`
+      bleibt bis zum Umzug unverändert. Nur von `LavenderHome` genutzte Bausteine (u. a. `TopNav`,
+      `AnchorTabs`, `ServicesCarousel`, `TestimonialSlider`, `LogoCarousel`, `ClosingBlock`) sind noch
+      im Design-System und können beim Aufräumen weg.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die
