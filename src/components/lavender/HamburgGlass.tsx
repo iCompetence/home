@@ -117,8 +117,23 @@ export function HamburgGlass({ className }: { className?: string }) {
       window.clearTimeout(timer);
       timer = 0;
     };
+    // Only landmarks that are on screen: on phones the city is wider than the
+    // screen (the middle of it, enlarged), and the light would spend a third of
+    // its round on landmarks nobody sees.
+    const onScreen = (x: number) => {
+      const box = el.getBoundingClientRect();
+      const from = -box.left / box.width;
+      const to = (document.documentElement.clientWidth - box.left) / box.width;
+      return x >= from + 0.03 && x <= to - 0.03;
+    };
     const walk = () => {
-      walking = (walking + 1) % LANDMARKS.length;
+      for (let step = 1; step <= LANDMARKS.length; step++) {
+        const next = (walking + step) % LANDMARKS.length;
+        if (onScreen(LANDMARKS[next].x)) {
+          walking = next;
+          break;
+        }
+      }
       const lm = LANDMARKS[walking];
       Object.assign(target, { x: lm.x, y: lm.y, rx: Math.max(lm.half * 1.55, 0.1), a: 1 });
       go();
