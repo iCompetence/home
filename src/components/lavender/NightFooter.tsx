@@ -17,7 +17,7 @@ import { useTextHaze } from './textHaze';
  * the guide star, which rests above the glass city and follows the pointer.
  *
  * - NightClosing: for pages with a closing call to action (same props as the
- *   design system's ClosingBlock, which it replaces on the preview pages).
+ *   former design-system ClosingBlock it replaced).
  * - NightFooter: the same without a closing line (contact, legal pages).
  * - LegalStrip: the strip alone; the home page puts it under its own stage.
  */

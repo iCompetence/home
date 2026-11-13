@@ -7,8 +7,8 @@ const PAGE_BG = { page: '#fdfafe', inverse: '#0b2231' } as const;
 
 /**
  * Root wrapper of every page in the new design: skip link, the page's
- * `nav` (TopNav, itself the <header>), the content as <main>, then `footer`
- * (Footer or ClosingBlock, which ends in the <footer>). Every page gets the
+ * `nav` (NightNav, itself the <header>), the content as <main>, then `footer`
+ * (NightFooter or NightClosing, which end in the <footer>). Every page gets the
  * same landmarks this way.
  *
  * `.lavender-page` is the scope the redesign's global rules hang on (link and
