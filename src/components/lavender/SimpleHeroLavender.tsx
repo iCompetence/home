@@ -35,7 +35,7 @@ function HeroPage({
   );
 }
 
-function LinkButton({ href, label, variant }: { href: string; label: string; variant?: 'outline' }) {
+function LinkButton({ href, label, variant }: { href: string; label: string; variant?: 'soft' }) {
   return (
     <Button asChild variant={variant}>
       <a href={href}>
@@ -89,7 +89,7 @@ export function NotFoundLavender() {
       actions={
         <>
           <LinkButton href={siteHref(language, '/#products')} label={t('notFound.products')} />
-          <LinkButton href={siteHref(language, 'contact')} label={t('topNav.letsTalk')} variant="outline" />
+          <LinkButton href={siteHref(language, 'contact')} label={t('topNav.letsTalk')} variant="soft" />
         </>
       }
     />

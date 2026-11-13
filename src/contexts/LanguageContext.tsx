@@ -3056,6 +3056,63 @@ export const translations: Translations = {
     en: 'Analytics Agent — conversational data analytics interface',
     de: 'Analytics Agent — Oberfläche für dialogbasierte Datenanalyse'
   },
+  // ProductGlimpse: the UI pieces of the product rows, taken from the real
+  // product screens (EmpCo audit of a demo shop, iKnow chat, Analytics Agent
+  // on GA4, the Intelligentic Search travel demo).
+  'lavender.glimpse.empco.level': { en: 'Level', de: 'Stufe' },
+  'lavender.glimpse.empco.claim5': {
+    en: '“Our products are 100 % climate neutral.”',
+    de: '„Unsere Produkte sind zu 100 % klimaneutral.“'
+  },
+  'lavender.glimpse.empco.claim2': {
+    en: '“Every Grünwald product is environmentally friendly …”',
+    de: '„Jedes Grünwald-Produkt ist umweltfreundlich …“'
+  },
+  'lavender.glimpse.empco.critic': {
+    en: 'Second review confirmed: level 5 · Annex I No. 4c',
+    de: 'Zweitbewertung bestätigt: Stufe 5 · Anhang I Nr. 4c'
+  },
+  'lavender.glimpse.iknow.question': {
+    en: 'Should we host our language models ourselves in the EU?',
+    de: 'Sollten wir unsere Sprachmodelle in der EU selbst hosten?'
+  },
+  'lavender.glimpse.iknow.answerLead': { en: 'We follow the principle of', de: 'Wir folgen dem Prinzip' },
+  'lavender.glimpse.iknow.answerRest': {
+    en: ': sensitive data stays under your own control and in line with the GDPR.',
+    de: ': Sensible Daten bleiben unter eigener Kontrolle und im Einklang mit der DSGVO.'
+  },
+  'lavender.glimpse.iknow.answerMeta': { en: '10 sources · vector search', de: '10 Quellen · Vektorsuche' },
+  'lavender.glimpse.iknow.sources': { en: 'Sources · 10 found', de: 'Quellen · 10 gefunden' },
+  'lavender.glimpse.iknow.sourceText': {
+    en: 'Privacy-compliant efficiency through artificial intelligence',
+    de: 'Datenschutzkonforme Effizienz durch Künstliche Intelligenz'
+  },
+  'lavender.glimpse.iknow.page': { en: 'Page 1/1', de: 'Seite 1/1' },
+  'lavender.glimpse.analytics.question': {
+    en: 'How many new users came in February, and through which pages?',
+    de: 'Wie viele neue Nutzer kamen im Februar, und über welche Seiten?'
+  },
+  'lavender.glimpse.analytics.chartTitle': { en: 'New users by landing page', de: 'Neue Nutzer nach Einstiegsseite' },
+  'lavender.glimpse.analytics.period': { en: '1–28 Feb 2026', de: '1.–28. Feb 2026' },
+  'lavender.glimpse.analytics.confidence': { en: 'High confidence', de: 'Hohe Konfidenz' },
+  'lavender.glimpse.is.label': {
+    en: 'Intelligentic Search — a travel advisor chat with matching hotel offers',
+    de: 'Intelligentic Search — Chat mit dem Reiseberater und passenden Hotelangeboten'
+  },
+  'lavender.glimpse.is.user': {
+    en: 'Central, with breakfast. Up to €1,200 per person.',
+    de: 'Zentral, mit Frühstück. So bis 1.200 € pro Person.'
+  },
+  'lavender.glimpse.is.agent': {
+    en: 'Here are several hotels that fit your search perfectly.',
+    de: 'Hier sind mehrere Hotels, die perfekt zu deiner Suche passen.'
+  },
+  'lavender.glimpse.is.features.a': { en: 'Breakfast · Deluxe room · 7 nights', de: 'Frühstück · Deluxe Room · 7 Nächte' },
+  'lavender.glimpse.is.features.b': { en: 'Breakfast · Superior room · 7 nights', de: 'Frühstück · Superior Room · 7 Nächte' },
+  'lavender.glimpse.is.matchA': { en: '100% match', de: '100 % Match' },
+  'lavender.glimpse.is.matchB': { en: '97% match', de: '97 % Match' },
+  'lavender.glimpse.is.priceA': { en: 'from €1,095 p.p.', de: 'ab 1.095 € p. P.' },
+  'lavender.glimpse.is.priceB': { en: 'from €1,132 p.p.', de: 'ab 1.132 € p. P.' },
 
   // Testimonials
   'lavender.testimonials.title': {

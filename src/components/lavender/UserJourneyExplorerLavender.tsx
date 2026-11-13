@@ -90,7 +90,7 @@ export default function UserJourneyExplorerLavender() {
       >
         <ButtonStack>
           <ConsultButton className="w-full" topic={t('burgerMenu.userJourney')} />
-          <Button asChild variant="outline" className="w-full">
+          <Button asChild variant="soft" className="w-full">
             <a href="#guidance" onClick={smoothAnchor}>
               {t('lavender.icu.anchor.more')}
               <ArrowDown size={20} strokeWidth={2} />

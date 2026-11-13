@@ -1,21 +1,33 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/components/ui/utils';
 import { Button } from './Button';
 import { Eyebrow } from './Eyebrow';
+import { ProductGlimpse } from './ProductGlimpse';
 import { SectionHeader } from './SectionHeader';
 import { Section } from './Section';
 import { siteHref } from './routes';
 
-export type ProductRowProps = {
+/**
+ * What stands beside the text: a picture, or a finished visual such as a
+ * product's UI pieces (ProductGlimpse), which brings its own field and corner.
+ */
+type RowMedia =
+  | {
+      image: string;
+      imageAlt: string;
+      /** Aspect ratio and crop of the picture (default: the wide product pictures, centred). */
+      imageClassName?: string;
+      visual?: never;
+    }
+  | { visual: ReactNode; image?: never; imageAlt?: never; imageClassName?: never };
+
+export type ProductRowProps = RowMedia & {
   /** Which side the picture stands on from desktop up (below, it follows the text). */
   media: 'left' | 'right';
-  image: string;
-  imageAlt: string;
-  /** Aspect ratio and crop of the picture (default: the wide product pictures, centred). */
-  imageClassName?: string;
   /** Label above the title; left out where it would only repeat the title. */
   eyebrow?: string;
   title: string;
@@ -31,17 +43,19 @@ export type ProductRowProps = {
 
 /**
  * A product (or topic) beside its picture, as on the night home: text column
- * (eyebrow, title, text, an outlined button) next to a large picture with the
+ * (eyebrow, title, text, a soft button) next to a large picture with the
  * big corner radius that reaches the frame edge. Sides alternate down a page.
- * The picture is a finished composition with its own coloured ground, so no
- * field and no star behind it. Renders the row only; the caller wraps it in a
- * Section (the home page) or lists several under one title (MoreProducts).
+ * Products show their UI pieces on the navy field (`visual` with
+ * ProductGlimpse); topics such as Privacy-led keep a picture. Renders the row
+ * only; the caller wraps it in a Section (the home page) or lists several
+ * under one title (MoreProducts).
  */
 export function ProductRow({
   media,
   image,
   imageAlt,
   imageClassName = 'aspect-[2416/1120] object-center',
+  visual,
   eyebrow,
   title,
   description,
@@ -74,68 +88,42 @@ export function ProductRow({
           {title}
         </Heading>
         <p className="lav-body font-normal text-lav-ink/80">{description}</p>
-        <Button asChild variant="outline" className="mt-2">
+        <Button asChild variant="soft" className="mt-2">
           <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
             {cta}
             <ArrowUpRight size={20} strokeWidth={2} />
           </a>
         </Button>
       </div>
-      {/* The picture reaches the frame edge; on phones and tablets it is wider than the text. */}
+      {/* The picture reaches the frame edge; on phones and tablets it is wider than the text.
+          A visual sets its own bleed (ProductGlimpse does the same). */}
       <div
         className={cn(
-          '-mx-4 md:-mx-8 lg:col-span-7 lg:row-start-1 lg:mx-0',
+          'lg:col-span-7 lg:row-start-1',
+          !visual && '-mx-4 md:-mx-8 lg:mx-0',
           media === 'right' ? 'lg:col-start-6 lg:-mr-10' : 'lg:col-start-1 lg:-ml-10',
         )}
       >
-        <img
-          src={image}
-          alt={imageAlt}
-          // Not lazy, as on the home page: lazy pictures showed up late while scrolling.
-          decoding="async"
-          className={cn('block w-full rounded-card object-cover lg:rounded-frame', imageClassName)}
-        />
+        {visual ?? (
+          <img
+            src={image}
+            alt={imageAlt}
+            // Not lazy, as on the home page: lazy pictures showed up late while scrolling.
+            decoding="async"
+            className={cn('block w-full rounded-card object-cover lg:rounded-frame', imageClassName)}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-/** The products a subpage can point to, with the pictures of the home page. */
+/** The products a subpage can point to; each shows its UI pieces (ProductGlimpse) as on the home page. */
 const CATALOG = {
-  empco: {
-    title: 'EmpCo Audit',
-    descKey: 'lavender.products.empco.desc',
-    altKey: 'lavender.products.empco.imageAlt',
-    image: '/images/lavender-empco.png',
-    // The tall picture, cropped around its screenshot as on the home page.
-    crop: 'object-[50%_34%]',
-    route: 'empco-audit',
-  },
-  iknow: {
-    title: 'iKnow',
-    descKey: 'lavender.products.iknow.desc',
-    altKey: 'lavender.products.iknow.imageAlt',
-    image: '/images/lavender-iknow.png',
-    crop: 'object-center',
-    route: 'iknow',
-  },
-  analyticsAgent: {
-    title: 'Analytics Agent',
-    descKey: 'lavender.products.analyticsAgent.desc',
-    altKey: 'lavender.products.analyticsAgent.imageAlt',
-    image: '/images/lavender-analytics-agent.png',
-    crop: 'object-center',
-    route: 'analytics-agent',
-  },
-  intelligenticSearch: {
-    title: 'Intelligentic Search',
-    descKey: 'is.hero.subline',
-    // As on the live page (no translated alt text there).
-    alt: 'Intelligentic Search Demo',
-    image: '/images/ICS_Travel_Club.png',
-    crop: 'object-center',
-    route: 'intelligentic-search',
-  },
+  empco: { title: 'EmpCo Audit', descKey: 'lavender.products.empco.desc', route: 'empco-audit' },
+  iknow: { title: 'iKnow', descKey: 'lavender.products.iknow.desc', route: 'iknow' },
+  analyticsAgent: { title: 'Analytics Agent', descKey: 'lavender.products.analyticsAgent.desc', route: 'analytics-agent' },
+  intelligenticSearch: { title: 'Intelligentic Search', descKey: 'is.hero.subline', route: 'intelligentic-search' },
 } as const;
 
 export type ProductKey = keyof typeof CATALOG;
@@ -157,9 +145,7 @@ export function MoreProducts({ products, id = 'more' }: { products: readonly Pro
             <ProductRow
               key={key}
               media={i % 2 === 0 ? 'left' : 'right'}
-              image={product.image}
-              imageAlt={'altKey' in product ? t(product.altKey) : product.alt}
-              imageClassName={cn('aspect-[2416/1120]', product.crop)}
+              visual={<ProductGlimpse product={key} />}
               eyebrow={t('lavender.products.eyebrow')}
               title={product.title}
               description={t(product.descKey)}

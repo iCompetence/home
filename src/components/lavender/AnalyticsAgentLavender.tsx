@@ -84,7 +84,7 @@ export default function AnalyticsAgentLavender() {
       >
         <ButtonStack>
           <ConsultButton className="w-full" topic={t('burgerMenu.analyticsAgent')} />
-          <Button asChild variant="outline" className="w-full">
+          <Button asChild variant="soft" className="w-full">
             <a href="#in-action" onClick={smoothAnchor}>
               {t('analyticsAgent.anchor.inAction')}
               <ArrowDown size={20} strokeWidth={2} />

@@ -381,6 +381,26 @@ Stand:
       als h3). Große Bilder ab `lg` mit `rounded-frame`. `QuotePanel` (aus `DayTestimonials`) auch für
       die CPT-Bewertungen statt drei `ReviewCard`s (entfernt); Anführungszeichen setzt das Bauteil
       (Korrektur C-8).
+- [x] Feinschliff nach der serus.ai-Analyse (2026-11-13): Große Überschriften enger gesetzt,
+      in em, damit es mit jeder Stufe skaliert: `lav-h1` und `lav-statement` −0,02 em, `lav-h2`
+      −0,01 em (`lav-display` hatte mit −2 px bei 80 px schon etwa −0,025 em). Der zweite Button ist
+      jetzt eine Fläche ohne Linie: Variante `soft` in `--color-lav-soft` (Lavendel am Tag, Weiß 12 %
+      in der Nacht; folgt der Fläche wie Tinte und Grund). Sie ersetzt `outline` überall (Kaufboxen,
+      `ProductRow`). `outline` ist nach dem Merge von PR #25 entfallen.
+      Auf einer Lavendel-Karte verschwände `soft`: dort `solid`. Figma: Textstile H1, H2, Statement
+      und die Button-Variante nachziehen.
+- [x] Produktzeilen mit UI-Ausschnitten statt Screenshots (2026-11-13): `ProductGlimpse` zeigt je
+      Produkt wenige, große Bausteine aus dem echten Produkt (EmpCo: Stufen und zwei Fundstellen;
+      iKnow: Frage, Antwort, Quelle; Analytics Agent: Frage und Diagramm aus GA4; Intelligentic
+      Search: Reiseberater-Chat und zwei Angebote) auf dem Navy-Feld der Leistungen, mit dem
+      Markenstern des Produkts in der Ecke (EmpCo und Intelligentic Search Violett, iKnow Mint,
+      Analytics Agent Blau). Vorher hatte jedes Produkt einen ganzen Screen auf eigener
+      Verlaufsfarbe. HTML statt Bild: scharf, lesbar, für Crawler sichtbar; nach außen ein Bild
+      (`role="img"` mit dem bisherigen Alt-Text). Das Seitenverhältnis des alten Bilds ist ab `lg`
+      nur die Mindesthöhe, damit auf kleinen Laptops nichts abgeschnitten wird. `ProductRow` nimmt
+      dafür `visual` statt `image`; Startseite und `MoreProducts` nutzen es, Privacy-led behält sein
+      Bild. Texte unter `lavender.glimpse.*` (DE/EN). Die Bilder `lavender-empco.png`,
+      `lavender-iknow.png` und `lavender-analytics-agent.png` werden nicht mehr verwendet.
 
 ### Phase 2 — Shell vereinheitlichen
 Seit dem Vorschau-Beschluss (2026-10-01) gilt das für die Vorschauseiten, nicht für die

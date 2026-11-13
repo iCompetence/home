@@ -16,8 +16,13 @@ import { cn } from '@/components/ui/utils';
  *
  * Colours: blue (`primary`) only for the one main action of a page (request
  * the sample page, start the trial, send the form). Everything else is
- * `solid` or `outline`. Both take ink and ground from the surface they stand
- * on, so the same button is navy on the light page and white on the night.
+ * `solid` or `soft`. Both take their colours from the surface they stand on,
+ * so the same button is navy on the light page and white on the night.
+ *
+ * `soft` is the quiet second button: a fill without a line (lavender on the
+ * light page, a white veil on the night), so next to a filled button only one
+ * of the two carries weight. It replaced the outlined button (2026-11-13). On
+ * a lavender card it would vanish: use `solid` there.
  */
 const buttonVariants = cva(
   'lav-star-hover inline-flex min-h-12 items-center justify-center gap-2 rounded-pill px-6 py-3 font-brand text-body font-medium no-underline cursor-pointer transition-[color,border-color,scale] duration-[var(--duration-fast)] ease-out not-disabled:active:scale-[0.96] disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0',
@@ -28,9 +33,8 @@ const buttonVariants = cva(
         primary: 'bg-lav-blue text-lav-navy',
         // Filled in the ink colour: navy on the light page, white on the night.
         solid: 'bg-lav-ink text-lav-ground',
-        // The line is an inset shadow, not a border: the gradient on hover
-        // then covers the whole button (a border would stay as a 1 px ring).
-        outline: 'bg-transparent text-lav-ink shadow-[inset_0_0_0_1px_var(--color-lav-ink)]',
+        // Quiet fill in --color-lav-soft (follows the surface, see globals.css).
+        soft: 'bg-lav-soft text-lav-ink',
       },
     },
     defaultVariants: {
@@ -62,7 +66,7 @@ function Button({
 }
 
 /**
- * Two buttons stacked as one group — the primary and the outline button of a
+ * Two buttons stacked as one group — the primary and the soft button of a
  * product page's buy box (Figma: group "Aktionen", space/16, as the hero's
  * buttons side by side). Tighter than the buy box's own 32px rhythm, so the
  * pair reads as one choice.

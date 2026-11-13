@@ -17,6 +17,7 @@ import {
   Button,
   PageShell,
   ProcessAccordion,
+  ProductGlimpse,
   ProductRow,
   QuotePanel,
   Section,
@@ -314,13 +315,12 @@ function DayRow({ id, className, ...row }: ProductRowProps & { id?: string }) {
 
 function DayProducts() {
   const { t, language } = useLanguage();
-  // The pictures of the Lavender home (ProductShowcase). Three products of
-  // equal standing: the same size and the same label, none "featured".
+  // Three products of equal standing: the same field, the same label, none
+  // "featured". Each shows its own UI pieces on the navy field (ProductGlimpse).
   const products = [
-    // The wide pictures show in full; the tall EmpCo picture is cropped to the same shape around its screenshot.
-    { key: 'empco', title: t('lavender.products.empco.title'), image: '/images/lavender-empco.png', crop: 'object-[50%_34%]', route: 'empco-audit', cta: t('lavender.products.empco.cta') },
-    { key: 'iknow', title: 'iKnow', image: '/images/lavender-iknow.png', crop: 'object-center', route: 'iknow', cta: t('lavender.products.iknow.cta') },
-    { key: 'analyticsAgent', title: 'Analytics Agent', image: '/images/lavender-analytics-agent.png', crop: 'object-center', route: 'analytics-agent', cta: t('lavender.products.analyticsAgent.cta') },
+    { key: 'empco', title: t('lavender.products.empco.title'), route: 'empco-audit', cta: t('lavender.products.empco.cta') },
+    { key: 'iknow', title: 'iKnow', route: 'iknow', cta: t('lavender.products.iknow.cta') },
+    { key: 'analyticsAgent', title: 'Analytics Agent', route: 'analytics-agent', cta: t('lavender.products.analyticsAgent.cta') },
   ] as const;
   return (
     <>
@@ -329,9 +329,7 @@ function DayProducts() {
           key={product.key}
           id={i === 0 ? 'products' : undefined}
           media={i % 2 === 0 ? 'left' : 'right'}
-          image={product.image}
-          imageAlt={t(`lavender.products.${product.key}.imageAlt`)}
-          imageClassName={cn('aspect-[2416/1120]', product.crop)}
+          visual={<ProductGlimpse product={product.key} />}
           // The three products read as one group: closer to each other than sections are.
           className={i > 0 ? 'lg:pt-4' : undefined}
           eyebrow={t('lavender.products.eyebrow')}

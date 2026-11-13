@@ -154,7 +154,7 @@ export default function EmpCoAuditLavender() {
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-          <Button asChild variant="outline" className="w-full">
+          <Button asChild variant="soft" className="w-full">
             <a href="#about" onClick={smoothAnchor}>
               {t('empco.hero.ctaSecondary')}
               <ArrowDown size={20} strokeWidth={2} />

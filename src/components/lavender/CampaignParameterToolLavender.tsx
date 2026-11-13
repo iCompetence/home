@@ -148,7 +148,7 @@ export default function CampaignParameterToolLavender() {
             {t('ct.hero.cta1')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>
-          <Button variant="outline" className="w-full" onClick={() => openModal('demo')}>
+          <Button variant="soft" className="w-full" onClick={() => openModal('demo')}>
             {t('ct.cta.button')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>
