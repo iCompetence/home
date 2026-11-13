@@ -89,7 +89,7 @@ export default function IKnowLavender() {
           <ConsultButton topic={t('burgerMenu.iknow')} />
           <Button asChild variant="soft">
             <a href="#tool" onClick={smoothAnchor}>
-              {t('iknow.anchor.intoTool')}
+              {t('lavender.jump.iknow')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>

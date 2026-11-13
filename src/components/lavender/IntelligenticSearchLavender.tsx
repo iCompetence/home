@@ -90,7 +90,7 @@ export default function IntelligenticSearchLavender() {
           <ConsultButton topic={t('burgerMenu.intelligenticSearch')} />
           <Button asChild variant="soft">
             <a href="#how-it-works" onClick={smoothAnchor}>
-              {t('is.anchor.howItWorks')}
+              {t('lavender.jump.search')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>

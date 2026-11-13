@@ -157,7 +157,7 @@ export default function EmpCoAuditLavender() {
           </Button>
           <Button asChild variant="soft">
             <a href="#about" onClick={smoothAnchor}>
-              {t('empco.hero.ctaSecondary')}
+              {t('lavender.jump.empco')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>

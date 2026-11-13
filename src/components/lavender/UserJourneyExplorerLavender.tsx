@@ -92,7 +92,7 @@ export default function UserJourneyExplorerLavender() {
           <ConsultButton topic={t('burgerMenu.userJourney')} />
           <Button asChild variant="soft">
             <a href="#guidance" onClick={smoothAnchor}>
-              {t('lavender.icu.anchor.more')}
+              {t('lavender.jump.icu')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>

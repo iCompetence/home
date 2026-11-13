@@ -98,7 +98,7 @@ export default function AIWorkshopLavender() {
           </Button>
           <Button asChild variant="soft">
             <a href="#intro" onClick={smoothAnchor}>
-              {t('workshop.anchor.about')}
+              {t('lavender.jump.workshop')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
           </Button>

@@ -171,7 +171,8 @@ export function MoreProducts({ products, id = 'more' }: { products: readonly Pro
               title={product.title}
               description={t(product.descKey)}
               href={siteHref(language, product.route)}
-              cta={t('lavender.products.learnMore')}
+              // The product's own label, as on the home page: two rows are two links with different names.
+              cta={t(`lavender.products.${key}.cta`)}
               headingLevel="h3"
             />
           );

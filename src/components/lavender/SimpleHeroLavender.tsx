@@ -72,7 +72,7 @@ export function ThankYouLavender() {
     <HeroPage
       title={t('thankYou.title')}
       message={t('thankYou.message')}
-      actions={<LinkButton href={siteHref(language, '/')} label={t('thankYou.backToHome')} />}
+      actions={<LinkButton href={siteHref(language, '/')} label={t('lavender.thankYou.home')} />}
     />
   );
 }
