@@ -19,7 +19,9 @@
  *
  * Without a pointer (touch, or before the pointer has moved) the guide star
  * rests above the glass city while the stage shows (at the start and at the
- * end of the page) and small overhead in between.
+ * end of the page) and small overhead in between. On phones it rests above the
+ * stage's headline instead, where there is room between the nav and the
+ * headline (the hero); over the city it would stand in the towers there.
  *
  * With prefers-reduced-motion nothing animates: no twinkle, no turning, no
  * following. The sky is redrawn on scroll only, for the guide star's rest place.
@@ -62,6 +64,7 @@ export function startNightSky(
   // the stage begins.
   const footer = document.querySelector('[data-ds="FooterNight"]');
   const dayCanvas = layer?.querySelector<HTMLCanvasElement>('canvas[data-sky="day"]') ?? null;
+  const nav = document.querySelector('[data-ds="NightNav"]');
   const dayCtx = dayCanvas?.getContext('2d') ?? null;
 
   let W = 0;
@@ -103,6 +106,28 @@ export function startNightSky(
     if (reduce) draw(true);
   };
   img.src = sources.double;
+
+  // The stages' headlines (the hero's h1, the closing line): marked for the
+  // text haze. Looked up lazily, the page may still be mounting.
+  let titles: HTMLElement[] = [];
+  let titlesAt = -1e9;
+  /** The headline of the stage that shows right now, if any. */
+  function stageTitle(): DOMRect | null {
+    if (!titles.length && performance.now() - titlesAt > 1000) {
+      titles = Array.from(document.querySelectorAll<HTMLElement>('h1[data-haze], h2[data-haze]'));
+      titlesAt = performance.now();
+    }
+    for (const el of titles) {
+      // The hero's headline stays in the page while the closing line shows, hidden.
+      const shown = el.checkVisibility
+        ? el.checkVisibility({ visibilityProperty: true })
+        : getComputedStyle(el).visibility !== 'hidden';
+      if (!shown) continue;
+      const box = el.getBoundingClientRect();
+      if (box.height > 0 && box.top > 0 && box.bottom < H) return box;
+    }
+    return null;
+  }
 
   /** The point the sky turns around: where the guide star stands overhead. */
   const pole = () => ({ x: W * 0.5, y: H * 0.19 });
@@ -263,6 +288,19 @@ export function startNightSky(
       y: (box ? box.top : H - skyline) + skyline * at.y,
       size: Math.min(300, Math.max(96, skyline * 0.62)),
     };
+    if (compact) {
+      // Phones: centred above the stage's headline, between it and the nav.
+      // Without enough room there (the closing line starts right below the
+      // nav) it stays above the city.
+      const title = stageTitle();
+      const top = nav?.getBoundingClientRect().bottom ?? 76;
+      const room = title ? title.top - top : 0;
+      if (room >= 72) {
+        land.x = W / 2;
+        land.y = top + room / 2;
+        land.size = Math.min(190, Math.max(110, room * 1.1));
+      }
+    }
     const rest = { x: lerp(small.x, land.x, down), y: lerp(small.y, land.y, down) };
     // With a pointer it follows all the way.
     const led = follows && pointer.seen ? 1 : 0;
