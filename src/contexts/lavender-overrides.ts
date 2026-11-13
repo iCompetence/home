@@ -158,11 +158,6 @@ export const lavenderOverrides: Record<string, Partial<Record<Language, string>>
   'analyticsAgent.hero.subtitle': { de: 'Deine Daten. Deine Fragen. Sofortige Antworten.' },
   'analyticsAgent.anchor.challenge': { en: 'The challenge' },
   'analyticsAgent.anchor.inAction': { en: 'In action' },
-  // The quote is commonly attributed to Deming; no verified source.
-  'analyticsAgent.intro.quoteAuthor': {
-    en: '– attributed to W. Edwards Deming',
-    de: '– W. Edwards Deming zugeschrieben',
-  },
   'analyticsAgent.intro.p1': {
     de: 'Dein Unternehmen sammelt jeden Tag große Datenmengen – von Web-Analytics über CRM-Systeme bis hin zu Datenbanken und Tabellen. Doch um aussagekräftige Erkenntnisse zu gewinnen, braucht es technisches Know-how, komplexe Abfragen und stundenlange manuelle Analyse.',
   },

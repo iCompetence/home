@@ -89,8 +89,8 @@ export default function UserJourneyExplorerLavender() {
         subline={t('icu.hero.subline')}
       >
         <ButtonStack>
-          <ConsultButton className="w-full" topic={t('burgerMenu.userJourney')} />
-          <Button asChild variant="soft" className="w-full">
+          <ConsultButton topic={t('burgerMenu.userJourney')} />
+          <Button asChild variant="soft">
             <a href="#guidance" onClick={smoothAnchor}>
               {t('lavender.icu.anchor.more')}
               <ArrowDown size={20} strokeWidth={2} />
@@ -147,7 +147,7 @@ function Benefits() {
         {[1, 2, 3].map((n) => (
           <SpecItem
             key={n}
-            number={`(0${n})`}
+            number={`0${n}`}
             headingLevel={3}
             title={t(`icu.carousel.item${n}.title`)}
             description={t(`icu.carousel.item${n}.description`)}

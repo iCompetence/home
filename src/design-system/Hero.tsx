@@ -19,33 +19,36 @@ export type HeroProps = {
  * Extracted from LavenderHome so every migrated page composes the same one
  * rather than re-implementing the type scale. No star of its own (was: the
  * yellow brand star by default): on the night pages the sky's guide star is
- * the one star.
+ * the one star. No tint behind it either (was lavender at 10 %, a band that
+ * ended in a hard edge): it stands on the page ground like the product heads.
+ * Ink colours, so it reads on the day sheet and on the night.
  */
 export function Hero({ title, eyebrow, subline, actions, id = 'top', className }: HeroProps) {
   return (
     <section
       id={id}
       data-ds="Hero"
-      className={cn('w-full bg-lav-lavender/10', className)}
+      className={cn('w-full', className)}
     >
       <div className="mx-auto flex w-full max-w-frame flex-col gap-8 px-6 py-[var(--section-pad-v)] md:gap-12 md:px-12 lg:gap-14 lg:px-24">
         {eyebrow ? (
           <div className="flex flex-col gap-4">
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
+            <h1 className="lav-display whitespace-pre-line text-lav-ink">{title}</h1>
           </div>
         ) : (
-          <h1 className="lav-display whitespace-pre-line text-lav-navy">{title}</h1>
+          <h1 className="lav-display whitespace-pre-line text-lav-ink">{title}</h1>
         )}
 
         {subline && (
-          <p className="lav-lead w-full max-w-full font-normal text-lav-navy/80 md:w-[600px] lg:w-[820px]">
+          <p className="lav-lead w-full max-w-full font-normal text-lav-ink/80 md:w-[600px] lg:w-[820px]">
             {subline}
           </p>
         )}
 
         {actions && (
-          <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
+          // As wide as their labels on every width, as on the night home (was: stretched on phones).
+          <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
             {actions}
           </div>
         )}

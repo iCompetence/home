@@ -23,12 +23,12 @@ export function FaqList({
   const baseId = useId();
 
   return (
-    <div data-ds="FaqList" className="flex w-full flex-col border-b border-lav-navy/20">
+    <div data-ds="FaqList" className="flex w-full flex-col border-b border-lav-ink/20">
       {items.map((item, i) => {
         const expanded = open === i;
         const Icon = expanded ? Minus : Plus;
         return (
-          <div key={item.question} className="border-t border-lav-navy/20">
+          <div key={item.question} className="border-t border-lav-ink/20">
             <h3 className="m-0">
               <button
                 type="button"
@@ -39,8 +39,8 @@ export function FaqList({
                 className="flex min-h-[74px] w-full cursor-pointer items-center justify-between gap-6 border-0 bg-transparent py-6 text-left lg:min-h-[76px]"
               >
                 {/* Hover and focus: the question takes the star gradient, the icon its end colour. */}
-                <span className="lav-h3 lav-star-text text-lav-navy">{item.question}</span>
-                <Icon aria-hidden size={24} strokeWidth={2} className="shrink-0 text-lav-navy" />
+                <span className="lav-h3 lav-star-text text-lav-ink">{item.question}</span>
+                <Icon aria-hidden size={24} strokeWidth={2} className="shrink-0 text-lav-ink" />
               </button>
             </h3>
             <div
@@ -53,7 +53,9 @@ export function FaqList({
               )}
             >
               <div className={cn('min-h-0 overflow-hidden', !expanded && 'invisible')}>
-                <p className="lav-body whitespace-pre-line pb-6 pr-0 pt-1 font-normal text-lav-navy/80 lg:pr-16">
+                {/* A long address in an answer may break anywhere: the accordion
+                    clips its content, so on phones it was cut off (privacy policy). */}
+                <p className="lav-body whitespace-pre-line max-w-measure-lead pb-6 pt-1 font-normal text-lav-ink/80 [overflow-wrap:anywhere]">
                   {item.answer}
                 </p>
               </div>

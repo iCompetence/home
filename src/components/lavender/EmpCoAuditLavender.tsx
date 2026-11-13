@@ -143,7 +143,7 @@ export default function EmpCoAuditLavender() {
         description={t('empco.hero.subtitle')}
       >
         <ButtonStack>
-          <Button asChild variant="primary" className="w-full">
+          <Button asChild variant="primary">
             <a
               href="#form"
               onClick={(e) => {
@@ -155,7 +155,7 @@ export default function EmpCoAuditLavender() {
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
-          <Button asChild variant="soft" className="w-full">
+          <Button asChild variant="soft">
             <a href="#about" onClick={smoothAnchor}>
               {t('empco.hero.ctaSecondary')}
               <ArrowDown size={20} strokeWidth={2} />
@@ -447,8 +447,12 @@ function SampleForm() {
         </Button>
 
         <p className="lav-small font-normal text-lav-navy/70">{t('empco.form.privacyNotice')}</p>
-        <a href={siteHref(language, 'privacy-policy')} className="lav-small font-medium text-lav-navy">
-          <span className="lav-star-text">→ {t('empco.form.privacyLink')}</span>
+        {/* An underlined link like the sources further down; arrows are icons in buttons only. */}
+        <a
+          href={siteHref(language, 'privacy-policy')}
+          className="lav-small lav-star-text self-start font-medium text-lav-ink underline underline-offset-2"
+        >
+          {t('empco.form.privacyLink')}
         </a>
       </ValidatedForm>
     </Section>

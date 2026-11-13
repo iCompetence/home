@@ -14,10 +14,14 @@ import { cn } from '@/components/ui/utils';
  * the outline goes, hover only under a fine pointer), a press squeezes it to
  * 96 %. .lav-star-hover also stops double-tap zoom and text selection on touch.
  *
- * Colours: blue (`primary`) only for the one main action of a page (request
- * the sample page, start the trial, send the form). Everything else is
- * `solid` or `soft`. Both take their colours from the surface they stand on,
- * so the same button is navy on the light page and white on the night.
+ * Colours: `primary` only for the one main action of a page (request the
+ * sample page, start the trial, send the form, the nav's contact button).
+ * Everything else is `solid` or `soft`. All three take their colours from the
+ * surface they stand on. `primary` is navy on the light page and blue on the
+ * night (2026-11-13: blue only on dark ground, so a light page shows one blue
+ * button, the one in the nav bar). `solid` is navy on the light page and
+ * white on the night: on light the two look the same, on the night the blue
+ * one is the main action and the white one the second.
  *
  * `soft` is the quiet second button: a fill without a line (lavender on the
  * light page, a white veil on the night), so next to a filled button only one
@@ -29,8 +33,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Navy on blue: white fails AA here (2.92:1), navy reaches 5.58:1.
-        primary: 'bg-lav-blue text-lav-navy',
+        // Follows the surface (--color-lav-primary in globals.css): navy with a
+        // light label on the light page; blue with a navy label on the night
+        // (white on blue fails AA at 2.92:1, navy reaches 5.58:1).
+        primary: 'bg-lav-primary text-lav-on-primary',
         // Filled in the ink colour: navy on the light page, white on the night.
         solid: 'bg-lav-ink text-lav-ground',
         // Quiet fill in --color-lav-soft (follows the surface, see globals.css).
@@ -66,14 +72,15 @@ function Button({
 }
 
 /**
- * Two buttons stacked as one group — the primary and the soft button of a
- * product page's buy box (Figma: group "Aktionen", space/16, as the hero's
- * buttons side by side). Tighter than the buy box's own 32px rhythm, so the
- * pair reads as one choice.
+ * The actions of a product page's buy box as one group: each button as wide
+ * as its label, as on the night home; side by side while they fit, below
+ * each other otherwise, always on the text edge (was: stacked and stretched
+ * to the column, up to 672 px wide on tablets). 16px between them, tighter
+ * than the buy box's own 32px rhythm, so the pair reads as one choice.
  */
 function ButtonStack({ children }: { children: React.ReactNode }) {
   return (
-    <div data-ds="ButtonStack" className="flex flex-col gap-4">
+    <div data-ds="ButtonStack" className="flex flex-wrap items-start gap-4">
       {children}
     </div>
   );

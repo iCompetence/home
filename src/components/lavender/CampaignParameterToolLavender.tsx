@@ -144,11 +144,11 @@ export default function CampaignParameterToolLavender() {
           {current.trialBadge && <Badge>{t('ct.pricing.trialBadge')}</Badge>}
         </div>
         <ButtonStack>
-          <Button variant="primary" className="w-full" onClick={() => openModal('trial')}>
+          <Button variant="primary" onClick={() => openModal('trial')}>
             {t('ct.hero.cta1')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>
-          <Button variant="soft" className="w-full" onClick={() => openModal('demo')}>
+          <Button variant="soft" onClick={() => openModal('demo')}>
             {t('ct.cta.button')}
             <ArrowUpRight size={20} strokeWidth={2} />
           </Button>
@@ -210,7 +210,7 @@ export default function CampaignParameterToolLavender() {
           primaryHead={t('ct.why.solution.title')}
           secondaryHead={t('ct.why.problem.title')}
           rows={[1, 2, 3, 4].map((n) => ({
-            aspect: `(0${n})`,
+            aspect: `0${n}`,
             primary: t(`ct.why.solution.item${n}`),
             secondary: t(`ct.why.problem.item${n}`),
           }))}

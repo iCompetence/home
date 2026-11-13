@@ -29,7 +29,7 @@ export function FactsBand({
     <Section id={id} dsName="FactsBand">
       <div
         data-surface="inverse"
-        className="relative -mx-4 overflow-hidden rounded-card bg-lav-navy px-4 pb-10 pt-[144px] text-lav-white md:-mx-8 md:px-8 md:pb-14 md:pt-[186px] lg:-mx-10 lg:rounded-frame lg:px-10 lg:py-20"
+        className="relative -mx-4 overflow-hidden rounded-card bg-lav-navy px-4 pb-10 pt-[144px] text-lav-ink md:-mx-8 md:px-8 md:pb-14 md:pt-[186px] lg:-mx-10 lg:rounded-frame lg:px-10 lg:py-20"
       >
         <img
           src="/images/nacht-stern-mint.webp"
@@ -40,14 +40,15 @@ export function FactsBand({
         />
         <div className="relative flex flex-col gap-12 lg:ml-auto lg:w-[65.4%]">
           <div className="flex flex-col gap-6">
-            <h2 className="lav-h2 text-lav-white">{title}</h2>
-            {lead && <p className="lav-body font-normal text-lav-white/70">{lead}</p>}
+            {/* A section title, so the h1 step like every other one (the quote panel's title in its field too). */}
+            <h2 className="lav-h1 text-lav-ink">{title}</h2>
+            {lead && <p className="lav-body font-normal text-lav-ink/70">{lead}</p>}
           </div>
           <dl className="m-0 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
             {facts.map((fact) => (
-              <div key={fact.label} className="flex flex-col gap-4 border-t border-lav-white/[0.32] pt-6">
-                <dt className="lav-small font-normal text-lav-white/70">{fact.label}</dt>
-                <dd className="lav-h2 m-0 text-lav-white">{fact.value}</dd>
+              <div key={fact.label} className="flex flex-col gap-4 border-t border-lav-ink/[0.32] pt-6">
+                <dt className="lav-small font-normal text-lav-ink/70">{fact.label}</dt>
+                <dd className="lav-h2 m-0 text-lav-ink">{fact.value}</dd>
               </div>
             ))}
           </dl>

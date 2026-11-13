@@ -87,8 +87,8 @@ export default function IntelligenticSearchLavender() {
         subline={t('is.hero.subline')}
       >
         <ButtonStack>
-          <ConsultButton className="w-full" topic={t('burgerMenu.intelligenticSearch')} />
-          <Button asChild variant="soft" className="w-full">
+          <ConsultButton topic={t('burgerMenu.intelligenticSearch')} />
+          <Button asChild variant="soft">
             <a href="#how-it-works" onClick={smoothAnchor}>
               {t('is.anchor.howItWorks')}
               <ArrowDown size={20} strokeWidth={2} />
@@ -106,15 +106,13 @@ export default function IntelligenticSearchLavender() {
         id="intro"
         className={ANCHOR_SCROLL_MARGIN}
         quote={AMAZON_QUOTE}
-        author={
-          <>
-            (
-            <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
-              Amazon
-            </a>
-            , 2025)
-          </>
+        // The name links to the source (Amazon's press release).
+        name={
+          <a href={AMAZON_SOURCE} target="_blank" rel="noopener noreferrer" className="lav-star-text underline underline-offset-2">
+            Amazon
+          </a>
         }
+        note="2025"
         paragraphs={t('is.quote.text').split('\n\n')}
         conclusion={t('is.quote.conclusion')}
         // Full width and large, as the content team asked (11/2026, I-9).
@@ -193,27 +191,31 @@ function Modular() {
 function Benefits() {
   const { t } = useLanguage();
   return (
-    <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 lg:gap-14">
-      <SectionHeader title={t('is.comparison.title')} />
-      <ComparisonTable
-        icons
-        caption={t('is.comparison.title')}
-        primaryHead={t('is.comparison.primaryHeader')}
-        secondaryHead={t('is.comparison.secondaryHeader')}
-        rows={[1, 2, 3].map((n) => ({
-          aspect: t(`is.comparison.row${n}.feature`),
-          primary: t(`is.comparison.row${n}.primary`),
-          secondary: t(`is.comparison.row${n}.secondary`),
-        }))}
-      />
-      <div className="flex flex-col gap-8">
-        <h2 className="lav-h1 text-lav-navy">{t('is.benefits.title')}</h2>
+    <>
+      <Section id="benefits" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-12 lg:gap-14">
+        <SectionHeader title={t('is.comparison.title')} />
+        <ComparisonTable
+          icons
+          caption={t('is.comparison.title')}
+          primaryHead={t('is.comparison.primaryHeader')}
+          secondaryHead={t('is.comparison.secondaryHeader')}
+          rows={[1, 2, 3].map((n) => ({
+            aspect: t(`is.comparison.row${n}.feature`),
+            primary: t(`is.comparison.row${n}.primary`),
+            secondary: t(`is.comparison.row${n}.secondary`),
+          }))}
+        />
+      </Section>
+      {/* A section of its own: it has its own title, so it keeps the distance
+          every section has (was 56 px below the table instead of 160). */}
+      <Section id="benefits-summary" innerClassName="flex flex-col gap-8">
+        <SectionHeader title={t('is.benefits.title')} />
         <div className="flex max-w-measure-lead flex-col gap-6">
           <p className={body}>{t('is.benefits.text1')}</p>
           <p className={body}>{t('is.benefits.text2')}</p>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }
 
