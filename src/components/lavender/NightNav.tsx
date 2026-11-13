@@ -92,6 +92,9 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto' }: NightNav
     const marks: { el: Element | null; id: string }[] = [
       ...(watched ? watched.split(',') : []).map((id) => ({ el: document.getElementById(id), id })),
       { el: document.querySelector('[data-ds="Testimonials"]'), id: '' },
+      // The explanatory part after the product (TopicSection) is no section
+      // of the menu: the bar shows no label there instead of the one before.
+      { el: document.querySelector('[data-ds="Explainer"]'), id: '' },
     ];
     const onScroll = () => {
       // Behind the nav means: at 46 px from the top (the middle of the nav).
