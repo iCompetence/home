@@ -16,7 +16,6 @@ import {
   Button,
   ButtonStack,
   ConsentCheckbox,
-  DataTable,
   FormError,
   FormField,
   ProductHead,
@@ -39,33 +38,11 @@ const EXPERTS = [
 ] as const;
 
 /**
- * Submitted value of the "individual date" option, kept identical to the old
- * form so the Netlify submissions stay comparable.
+ * Submitted value of the only date option, kept identical to the live form
+ * so the Netlify submissions stay comparable (the dated options are
+ * commented out on the live page).
  */
 const DATE_CUSTOM_VALUE = 'Individuellen Termin buchen';
-
-/**
- * The free dates, all remote: day (ISO), from and to (24 h, German time).
- * Enter the next ones here. While the list is empty, the page shows no
- * "Termine" section and the form only offers an individual date. The three
- * dates of the print ad (18., 24. and 26.11.2026) are over.
- */
-const WORKSHOP_DATES: readonly { day: string; from: string; to: string }[] = [];
-
-/** Noon, so the day is the same in every time zone the page is rendered in. */
-const dayOf = (iso: string) => new Date(`${iso}T12:00:00`);
-/** "Mittwoch, 18.11.2026" / "Wednesday, November 18, 2026". */
-function dateLabel(iso: string, language: 'de' | 'en') {
-  const date = dayOf(iso);
-  if (language === 'en') {
-    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-  }
-  const weekday = date.toLocaleDateString('de-DE', { weekday: 'long' });
-  const day = date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  return `${weekday}, ${day}`;
-}
-/** The value a dated option submits: always German, as the old form sent it. */
-const dateValue = (d: (typeof WORKSHOP_DATES)[number]) => `${dateLabel(d.day, 'de')} (${d.from} bis ${d.to} Uhr)`;
 
 /**
  * AI Workshop page in the new design (preview under /lavender/). The live
@@ -78,7 +55,6 @@ export default function AIWorkshopLavender() {
   const tabs = [
     { id: 'intro', label: t('workshop.anchor.about') },
     { id: 'experts', label: t('workshop.anchor.experts') },
-    ...(WORKSHOP_DATES.length ? [{ id: 'dates', label: t('workshop.anchor.dates') }] : []),
     { id: 'form', label: t('workshop.anchor.apply') },
     { id: 'contact', label: t('workshop.anchor.contact') },
   ];
@@ -143,34 +119,11 @@ export default function AIWorkshopLavender() {
         </div>
       </Section>
 
-      <Dates />
       <ApplicationForm />
       {/* The general topic after the workshop (orientation sheet: SEO & LLM content). */}
       <TopicSection prefix="lavender.seo.workshop" route="ai-workshop" blockCount={3} faqCount={4} />
       <MoreProducts products={['iknow', 'intelligenticSearch']} />
     </NightPage>
-  );
-}
-
-/* ---------------- Dates ---------------- */
-
-/** The free dates as a table (day, time, place). Nothing while there are none. */
-function Dates() {
-  const { t, language } = useLanguage();
-  if (!WORKSHOP_DATES.length) return null;
-  const time = (d: (typeof WORKSHOP_DATES)[number]) =>
-    t('workshop.dates.time').replace('{from}', d.from).replace('{to}', d.to);
-  return (
-    <Section id="dates" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
-      <SectionHeader title={t('workshop.dates.title')} intro={[t('workshop.dates.intro')]} />
-      <div className="max-w-measure-lead">
-        <DataTable
-          caption={t('workshop.dates.title')}
-          head={[t('workshop.dates.col.day'), t('workshop.dates.col.time'), t('workshop.dates.col.place')]}
-          rows={WORKSHOP_DATES.map((d) => [dateLabel(d.day, language), time(d), t('workshop.dates.remote')])}
-        />
-      </div>
-    </Section>
   );
 }
 
@@ -279,11 +232,6 @@ function ApplicationForm() {
             {t('workshop.form.dates')}
             <span aria-hidden> *</span>
           </legend>
-          {WORKSHOP_DATES.map((d) => (
-            <ConsentCheckbox key={d.day} id={`workshop-date-${d.day}`} name="date" value={dateValue(d)}>
-              {`${dateLabel(d.day, language)}, ${t('workshop.dates.time').replace('{from}', d.from).replace('{to}', d.to)}`}
-            </ConsentCheckbox>
-          ))}
           <ConsentCheckbox id="workshop-date-custom" name="date" value={DATE_CUSTOM_VALUE}>
             {t('workshop.form.dateCustom')}
           </ConsentCheckbox>
