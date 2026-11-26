@@ -50,7 +50,7 @@ export default async function AIWorkshopPreview({
           ...meta[lang],
           dateModified: PAGE_UPDATED['ai-workshop'],
           breadcrumb: productCrumbs(lang, previewRoute(''), COURSE_NAME[lang]),
-          subject: { kind: 'course', name: COURSE_NAME[lang], description: meta[lang].description, free: true },
+          subject: { kind: 'course', name: COURSE_NAME[lang], description: meta[lang].description },
         })}
       />
       <AIWorkshopLavender />

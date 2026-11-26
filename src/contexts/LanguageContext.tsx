@@ -3067,21 +3067,19 @@ export const translations: Translations = {
     en: 'Find out how to put AI to profitable use, how to use it safely and how much AI your brand really needs. With real use cases and room for your questions.',
     de: 'Hier erfährst du, wie du KI gewinnbringend einsetzen kannst, wie du KI sicher nutzen kannst und wie viel KI deine Marke wirklich braucht. Mit echten Use Cases und Platz für deine Fragen.'
   },
-  'workshop.intro.run4': { en: 'Free. Limited seats!', de: 'Gratis. Nur wenige Plätze!' },
   'workshop.experts.title': { en: 'Our experts', de: 'Unsere Experten' },
   'workshop.experts.photoCredit': { en: 'Source: Frank Krems', de: 'Foto: Frank Krems' },
   'workshop.form.title': { en: 'Apply now', de: 'Jetzt bewerben' },
+  // Without seats and dates (26.11.2026): the page names no run of the workshop.
   'workshop.form.intro': {
-    en: 'Secure your seat at the AI Workshop.',
-    de: 'Sichere dir deinen Platz beim KI-Workshop.'
+    en: 'Apply for the AI workshop. We will get back to you and sort out the details.',
+    de: 'Bewirb dich für den KI-Workshop. Wir melden uns bei dir und klären alles Weitere.'
   },
   'workshop.form.name': { en: 'Name', de: 'Name' },
   'workshop.form.email': { en: 'Email', de: 'E-Mail' },
   'workshop.form.phone': { en: 'Phone (optional)', de: 'Telefon (optional)' },
   'workshop.form.position': { en: 'Position', de: 'Position' },
   'workshop.form.company': { en: 'Company', de: 'Firma' },
-  'workshop.form.dates': { en: 'Preferred date(s)', de: 'Bevorzugte(r) Termin(e)' },
-  'workshop.form.dateCustom': { en: 'Book an individual date', de: 'Individuellen Termin buchen' },
   'workshop.form.submit': { en: 'Submit application', de: 'Bewerbung absenden' },
   // Brand note in the footer strip; English in both languages, like the tagline.
   'lavender.footer.basedIn': { en: 'Based in Hamburg.', de: 'Based in Hamburg.' },

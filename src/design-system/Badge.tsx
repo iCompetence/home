@@ -1,7 +1,7 @@
 import { cn } from '@/components/ui/utils';
 
 /**
- * Small pill label, e.g. "Gratis. Nur wenige Plätze!". Lavender by default;
+ * Small pill label, e.g. "14 Tage kostenlos testen". Lavender by default;
  * `navy` for use on a lavender surface.
  */
 export function Badge({
