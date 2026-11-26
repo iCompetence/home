@@ -4,9 +4,9 @@ import { NightFooter } from './NightFooter';
 import { NightNav } from './NightNav';
 import { NightPage } from './NightPage';
 import { Fragment, type ReactNode } from 'react';
-import { useLanguage, type Language } from '@/contexts/LanguageContext';
-import { labels, servicesData, type ServiceData } from '@/components/ServiceAccordion';
-import { FaqList, Hero, RichBody, Section, SplitBlock, UpdatedNote, siteHref } from '@/design-system';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Hero, RichBody, Section, SplitBlock, UpdatedNote, siteHref } from '@/design-system';
+import { ConsentServices } from './ConsentServices';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
@@ -129,11 +129,11 @@ const labelled = (keys: readonly string[], t: (k: string) => string) =>
  * Privacy policy in the new design. New as a page: live, this text sat at the
  * end of the imprint. Since 26.11.2026 a full policy (lavender-legal.ts):
  * controller, the general notes of the old text, hosting, forms, the EmpCo
- * audit, consent, the services as configured in Usercentrics (ServiceAccordion)
- * and the visitor's rights. German in "du".
+ * audit, consent, the services read live from Usercentrics (ConsentServices)
+ * and the visitor's rights. German in "du", except the services' texts.
  */
 export function PrivacyPolicyLavender() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const section = (key: string) => (
     <SplitBlock title={t(`privacyPolicy.${key}.title`)}>
       <RichBody text={t(`privacyPolicy.${key}.body`)} />
@@ -167,13 +167,7 @@ export function PrivacyPolicyLavender() {
       {section('consent')}
 
       <SplitBlock title={t('privacyPolicy.services.title')} contentClassName="gap-0">
-        <FaqList
-          defaultOpen={null}
-          items={servicesData.map((service) => ({
-            question: service.name[language],
-            answer: serviceAnswer(service, language),
-          }))}
-        />
+        <ConsentServices />
       </SplitBlock>
 
       {section('rights')}
@@ -231,89 +225,4 @@ function ProcessorTable() {
       </tbody>
     </table>
   );
-}
-
-/**
- * "du" for the German service texts (the live accordion says "Sie"; Figma
- * has the du wording). EN stays as in the code.
- */
-const DU: readonly [string, string][] = [
-  ['Nachfolgend finden Sie', 'Nachfolgend findest du'],
-  ['werden Sie gesondert informiert', 'wirst du gesondert informiert'],
-  ['Bitte beachten Sie', 'Bitte beachte'],
-  ['Nachstehend finden Sie', 'Nachstehend findest du'],
-  ['entnehmen Sie bitte', 'entnimm bitte'],
-  ['wenden Sie sich', 'wende dich'],
-  ['Klicken Sie hier', 'Klicke hier'],
-  ['Unten sehen Sie', 'Unten siehst du'],
-];
-
-/**
- * One service as the FAQ answer in Figma: blocks of heading, explanation
- * and values, separated by a blank line; lists joined with commas.
- */
-function serviceAnswer(s: ServiceData, lang: Language): ReactNode {
-  const du = (text: string) =>
-    lang === 'de' ? DU.reduce((acc, [from, to]) => acc.replace(from, to), text) : text;
-  const label = (key: keyof typeof labels) => du(labels[key][lang]);
-  const text = (value: { en: string; de: string }) => du(value[lang]);
-  const list = (value: { en: string[]; de: string[] }) => value[lang].join(', ');
-  const link = (href: string, children: string) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={inlineLink}>
-      {children}
-    </a>
-  );
-
-  const blocks: ReactNode[][] = [
-    [label('description'), text(s.description)],
-    // Usercentrics has no address for every provider.
-    [label('processingCompany'), s.company, ...(s.companyAddress ? [s.companyAddress] : [])],
-    [
-      label('dataProtectionOfficer'),
-      text(s.dataProtectionOfficer),
-      link(s.dataProtectionOfficerLink, s.dataProtectionOfficerLink.replace(/^mailto:/, '')),
-    ],
-    [label('purposes'), label('purposesDescription'), list(s.purposes)],
-    // Left out where no technology is listed.
-    ...(s.technologies[lang].length
-      ? [[label('technologies'), label('technologiesDescription'), list(s.technologies)]]
-      : []),
-    [label('dataCollected'), label('dataCollectedDescription'), list(s.dataCollected)],
-    [label('legalBasis'), label('legalBasisDescription'), s.legalBasis],
-    [label('processingLocation'), label('processingLocationDescription'), text(s.processingLocation)],
-    [label('retentionPeriod'), label('retentionPeriodDescription'), text(s.retentionPeriod)],
-  ];
-  if (s.thirdCountryTransfers) {
-    blocks.push([
-      label('thirdCountryTransfers'),
-      label('thirdCountryTransfersDescription'),
-      list(s.thirdCountryTransfers),
-    ]);
-  }
-  blocks.push([
-    label('dataRecipients'),
-    label('dataRecipientsDescription'),
-    s.dataRecipients,
-    link(s.privacyPolicyLink, label('privacyPolicy')),
-    ...(s.cookiePolicyLink ? [link(s.cookiePolicyLink, label('cookiePolicy'))] : []),
-    ...(s.optOutLink ? [link(s.optOutLink, label('optOut'))] : []),
-  ]);
-  if (s.maxCookieStorage) {
-    blocks.push(
-      [label('storedInformation'), label('storageDescription')],
-      [label('maxCookieStorage'), text(s.maxCookieStorage)],
-    );
-  }
-
-  return blocks.map((lines, i) => (
-    <Fragment key={i}>
-      {i > 0 && '\n\n'}
-      {lines.map((line, j) => (
-        <Fragment key={j}>
-          {j > 0 && '\n'}
-          {line}
-        </Fragment>
-      ))}
-    </Fragment>
-  ));
 }

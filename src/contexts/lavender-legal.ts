@@ -4,10 +4,11 @@
  * someone with legal training before it counts as final).
  *
  * What it states is what the site does: hosted by Netlify, forms through
- * Netlify Forms with reCAPTCHA, consent through Usercentrics, and the
- * services configured there (see servicesData in ServiceAccordion.tsx, which
- * mirrors the Usercentrics settings gRxSmB1lD). Change the text when one of
- * these changes.
+ * Netlify Forms with reCAPTCHA, consent through Usercentrics. The services
+ * themselves are not listed here: the page reads them live from Usercentrics
+ * (ConsentServices.tsx, settings gRxSmB1lD). Change the text when hosting,
+ * forms or consent change, and the names in the consent section when the
+ * services of the category "Statistik" change.
  *
  * Same lookup as lavender-seo.ts (variant "lavender"), RichText format
  * (src/design-system/RichText.tsx).
@@ -90,6 +91,11 @@ Services in the category “Essential & functional technologies” are needed fo
   },
 
   'privacyPolicy.services.title': { de: `Eingesetzte Dienste`, en: `Services we use` },
+  // Shown instead of the list when Usercentrics cannot load (blocked, no JavaScript).
+  'privacyPolicy.services.unavailable': {
+    de: `Die Liste der Dienste kommt direkt aus Usercentrics, dem Werkzeug für deine Einwilligung. Sie lässt sich gerade nicht laden, zum Beispiel weil dein Browser Usercentrics blockiert oder JavaScript ausgeschaltet ist. Schreib uns an [info@icompetence.de](mailto:info@icompetence.de), dann schicken wir dir die Liste zu.`,
+    en: `The list of services comes directly from Usercentrics, the tool that manages your consent. It cannot be loaded right now, for example because your browser blocks Usercentrics or JavaScript is switched off. Write to us at [info@icompetence.de](mailto:info@icompetence.de) and we will send you the list.`,
+  },
 
   'privacyPolicy.rights.title': { de: `Deine Rechte`, en: `Your rights` },
   'privacyPolicy.rights.body': {
