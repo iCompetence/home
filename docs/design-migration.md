@@ -27,8 +27,13 @@ danach noch aufzuräumen ist:
 - **Weiterleitungen:** `/de|en/lavender/*` führt auf `/de/*`, damit geteilte Vorschau-Links
   weiter funktionieren.
 - **Sitemap:** von Hand gepflegt, `lastmod` = `PAGE_UPDATED` in `src/lib/page-dates.ts`.
-- **Datenschutz:** eigene Seite `/privacy-policy/`, Texte in `src/contexts/lavender-legal.ts`,
-  Dienste in `ServiceAccordion.tsx` (acht, wie in Usercentrics). Entwurf, juristisch zu prüfen.
+- **Datenschutz:** eigene Seite `/privacy-policy/`, Texte in `src/contexts/lavender-legal.ts`.
+  Entwurf, juristisch zu prüfen. Die Dienste liest die Seite live aus Usercentrics
+  (`ConsentServices.tsx`, das Embed `.uc-embed`); die von Hand gepflegte Liste
+  (`ServiceAccordion.tsx`) gibt es nicht mehr.
+- **Usercentrics-Button:** unten links statt rechts (`ConsentButtonPlacement.tsx`) und
+  ausgeblendet, solange Menü, Formular-Dialog oder Bild-Zoom offen sind (`globals.css`).
+  Sauberer wäre die Einstellung „links“ im Usercentrics-Admin; dann kann die Komponente weg.
 
 Aufräumen nach dem Livegang (eigener PR, bewusst nicht im Umzug, damit der Rückweg ein Revert
 bleibt):
