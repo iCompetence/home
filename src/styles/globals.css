@@ -764,6 +764,15 @@ html {
   .lav-menu {
     overscroll-behavior: contain;
   }
+  /* The privacy button of Usercentrics (the fingerprint, drawn in the shadow
+     root of #usercentrics-cmp-ui above everything else) would lie on the
+     last links of the open menu and on the send button of a form dialog. It
+     is gone while one of the dialogs of the site is in the page: the menu,
+     the consult and trial forms, the image zoom. Its place at the bottom
+     left comes from ConsentButtonPlacement.tsx. */
+  html:has([role='dialog']) #usercentrics-cmp-ui {
+    display: none;
+  }
   /* The dark veil behind the menu fades with the panel (the sheet's own
      animate-in classes do nothing here, no animation plugin is installed). */
   [data-slot='sheet-overlay']:has(+ .lav-menu)[data-state='open'] {
