@@ -10,7 +10,7 @@ This is a **Next.js 16 (React 19, TypeScript)** marketing website for icompetenc
 
 ```bash
 npm run dev      # Start development server
-npm run build    # Build and export static site to /out
+npm run build    # Build and export static site to /out (first refreshes src/data/consent-services.json from Usercentrics, see scripts/consent-services.mjs)
 npm run lint     # Run ESLint with the Next.js rules (flat config in eslint.config.mjs)
 ```
 

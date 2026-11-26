@@ -61,6 +61,7 @@
       },
       "scripts": {
             "dev": "next dev",
+            "prebuild": "node scripts/consent-services.mjs",
             "build": "next build",
             "start": "next start",
             "lint": "eslint ."

@@ -28,9 +28,13 @@ danach noch aufzuräumen ist:
   weiter funktionieren.
 - **Sitemap:** von Hand gepflegt, `lastmod` = `PAGE_UPDATED` in `src/lib/page-dates.ts`.
 - **Datenschutz:** eigene Seite `/privacy-policy/`, Texte in `src/contexts/lavender-legal.ts`.
-  Entwurf, juristisch zu prüfen. Die Dienste liest die Seite live aus Usercentrics
-  (`ConsentServices.tsx`, das Embed `.uc-embed`); die von Hand gepflegte Liste
-  (`ServiceAccordion.tsx`) gibt es nicht mehr.
+  Entwurf, juristisch zu prüfen. Die Dienste kommen aus Usercentrics, auf zwei Wegen
+  (`ConsentServices.tsx`): im Browser live über das Embed `.uc-embed`; wo Usercentrics nicht
+  lädt (Blocker wie in Dia, kein JavaScript, Crawler), bleibt der Stand vom letzten Build
+  stehen (`src/data/consent-services.json`, geholt von `scripts/consent-services.mjs` als
+  `prebuild`). Die von Hand gepflegte Liste (`ServiceAccordion.tsx`) gibt es nicht mehr. Auf
+  den Rechtsseiten blendet Usercentrics nichts ein, deshalb öffnet dort ein eigener Button die
+  Einstellungen (`ConsentSettingsButton.tsx`).
 - **Usercentrics-Button:** unten links statt rechts (`ConsentButtonPlacement.tsx`) und
   ausgeblendet, solange Menü, Formular-Dialog oder Bild-Zoom offen sind (`globals.css`).
   Sauberer wäre die Einstellung „links“ im Usercentrics-Admin; dann kann die Komponente weg.

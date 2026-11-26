@@ -1,0 +1,955 @@
+{
+  "settingsId": "gRxSmB1lD",
+  "version": "139.47.271",
+  "languages": {
+    "de": [
+      {
+        "id": "HkPBYFofN",
+        "name": "Google Fonts",
+        "category": "Essenzielle & funktionale Technologien",
+        "needsConsent": false,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Bietet einen umfangreichen Katalog kostenloser und quelloffener Schriftfamilien zur Verwendung auf Websites und Anwendungen."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Google LLC",
+            "text": "Gordon House, 4 Barrow St, Dublin 4, Ireland"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Bereitstellung von Schriftarten",
+              "Verbesserung des Dienstes"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "API"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "IP-Adresse",
+              "Aggregierte Nutzungszahlen",
+              "Schriftart-Anfrage",
+              "Referrer URL",
+              "CSS-Anfragen",
+              "User Agent",
+              "Browser-Informationen"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Vereinigte Staaten von Amerika",
+              "Taiwan",
+              "Chile",
+              "Singapur"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Google LLC"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://business.safety.google/privacy/?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies?hl=en"
+          }
+        ]
+      },
+      {
+        "id": "BJ59EidsWQ",
+        "name": "Google Tag Manager",
+        "category": "Essenzielle & funktionale Technologien",
+        "needsConsent": false,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Dies ist ein Tag-Management-System. Über den Google Tag Manager können Tags zentral über eine Benutzeroberfläche eingebunden werden. Tags sind kleine Codeabschnitte, die Aktivitäten verfolgen können. Über den Google Tag Manager werden Scriptcodes anderer Tools eingebunden. Der Tag Manager ermöglicht es zu steuern, wann ein bestimmtes Tag ausgelöst wird."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Google Ireland Limited",
+            "text": "Google Building Gordon House, 4 Barrow St, Dublin, D04 E5W5, Ireland"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Tag-Verwaltung",
+              "Marketing",
+              "Analyse"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "Webseiten-Tags"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Aggregierte Daten über die Tag-Auslösung",
+              "Diagnostische Daten"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Singapur",
+              "Taiwan",
+              "Chile",
+              "Vereinigte Staaten von Amerika"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Google LLC"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://business.safety.google/privacy/?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies?hl=en"
+          }
+        ]
+      },
+      {
+        "id": "rJJjcVouoZ7",
+        "name": "gstatic.com",
+        "category": "Essenzielle & funktionale Technologien",
+        "needsConsent": false,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Dies ist eine Domain, die von Google verwendet wird, um statische Inhalte auf einen anderen Domainnamen auszulagern, um die Bandbreitennutzung zu reduzieren und die Netzwerkleistung für den Endbenutzer zu erhöhen."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Alphabet Inc.",
+            "text": "1600 Amphitheatre Parkway, Mountain View, CA 94043-1351, United States of America"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Steigerung der Netzwerkleistung",
+              "Reduzieren der Bandbreitennutzung"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "JavaScript"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Bilder",
+              "CSS"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. f DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Vereinigte Staaten von Amerika"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Anfragen für CSS-Assets werden für 1 Tag zwischengespeichert, Schriftdateien werden für ein Jahr zwischengespeichert. Einige Informationen werden gespeichert, bis sie vom Nutzer entfernt werden, andere laufen nach einer bestimmten Zeit ab, andere werden gespeichert, bis das Google-Konto des Nutzers gelöscht wird."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Vereinigte Staaten von Amerika",
+              "China",
+              "Taiwan",
+              "Singapur"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Alphabet Inc., Google LLC, Google Ireland Limited"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "http://www.google.com/intl/de/policies/privacy/"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um auf allen Domains des verarbeitenden Unternehmens zu widerrufen",
+            "link": "https://safety.google/privacy/privacy-controls/"
+          },
+          {
+            "id": "storageInformation",
+            "title": "Speicherinformation",
+            "description": "Unten sehen Sie die längste potenzielle Speicherdauer auf einem Gerät, die bei Verwendung der Cookie-Speichermethode und bei Verwendung anderer Methoden festgelegt wurde.",
+            "items": [
+              "Höchstgrenze für die Speicherung von Cookies: Session"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Hko_qNsui-Q",
+        "name": "reCAPTCHA",
+        "category": "Essenzielle & funktionale Technologien",
+        "needsConsent": false,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Dabei handelt es sich um einen Dienst, der überprüft, ob die Dateneingabe durch einen Menschen oder durch ein automatisiertes Programm erfolgt."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Google ​Ireland​ Limited",
+            "text": "Google Building Gordon House, 4 Barrow St, Dublin, D04 E5W5, Ireland"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Bot-Schutz",
+              "Spam-Vorbeugung",
+              "Betrugserkennung"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "Skripte"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Browser-Sprache",
+              "Browser-Plugins",
+              "Klickpfad",
+              "Datum und Uhrzeit des Besuchs",
+              "IP-Adresse",
+              "Nutzerverhalten",
+              "Auf einer Seite verbrachte Zeit",
+              "Benutzereingabe",
+              "Geräteinformationen",
+              "Mausbewegungen",
+              "Geografischer Standort",
+              "Gerätebetriebssystem"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Die Daten werden gelöscht, sobald sie für die Zwecke der Verarbeitung nicht mehr erforderlich sind."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Vereinigte Staaten von Amerika",
+              "Singapur",
+              "Taiwan",
+              "Chile"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Alphabet Inc.",
+              "Google LLC",
+              "Google Ireland Limited"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://business.safety.google/privacy/?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies?hl=en"
+          },
+          {
+            "id": "storageInformation",
+            "title": "Speicherinformation",
+            "description": "Unten sehen Sie die längste potenzielle Speicherdauer auf einem Gerät, die bei Verwendung der Cookie-Speichermethode und bei Verwendung anderer Methoden festgelegt wurde.",
+            "items": [
+              "Höchstgrenze für die Speicherung von Cookies: 180 Tage"
+            ]
+          },
+          {
+            "id": "storedInformation",
+            "title": "Gespeicherte Informationen",
+            "items": [
+              "_GRECAPTCHA (Typ: cookie, Dauer: 180 Tage, Domain: google.com)"
+            ],
+            "description": "Dieser Service verwendet verschiedene Mittel zum Speichern von Informationen auf dem Gerät eines Benutzers, wie nachfolgend aufgeführt."
+          }
+        ]
+      },
+      {
+        "id": "H1Vl5NidjWX",
+        "name": "Usercentrics Consent Management Platform",
+        "category": "Essenzielle & funktionale Technologien",
+        "needsConsent": false,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Dies ist ein Zustimmungs-Management-Dienst. Auf Websites und Apps kommt die Usercentrics GmbH als Auftragsverarbeiter zum Einsatz, um das Zustimmungsmanagement zu gewährleisten."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Usercentrics GmbH",
+            "text": "Sendlinger Str. 7, 80331 Munich, Germany"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "datenschutz@usercentrics.com"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Einhaltung der gesetzlichen Verpflichtungen",
+              "Einwilligungsspeicherung"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "Local Storage",
+              "Pixel"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Opt-in- und Opt-out-Daten",
+              "Referrer URL",
+              "User Agent",
+              "Benutzereinstellungen",
+              "Consent ID",
+              "Zeitpunkt der Einwilligung",
+              "Einwilligungstyp",
+              "Template-Version",
+              "Banner-Sprache",
+              "IP-Adresse",
+              "Geografischer Standort"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. c DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Die Einwilligungsdaten (erteilte Einwilligung und Widerruf der Einwilligung) werden ein Jahr gespeichert. Die Daten werden dann unverzüglich gelöscht."
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Usercentrics GmbH"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://usercentrics.com/privacy-policy/"
+          },
+          {
+            "id": "storedInformation",
+            "title": "Gespeicherte Informationen",
+            "items": [
+              "ucString (Typ: web, Domain: usercentrics.com)",
+              "ucData (Typ: web)",
+              "uc:analytics:firedEvents:SETTINGSID (if applicable) (Typ: web)"
+            ],
+            "description": "Dieser Service verwendet verschiedene Mittel zum Speichern von Informationen auf dem Gerät eines Benutzers, wie nachfolgend aufgeführt."
+          }
+        ]
+      },
+      {
+        "id": "S1_9Vsuj-Q",
+        "name": "Google Ads",
+        "category": "Statistik",
+        "needsConsent": true,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Ermöglicht es Unternehmen, Online-Werbekampagnen zu erstellen und Anzeigen über verschiedene Kanäle hinweg zu schalten, um potenzielle Kunden zu erreichen."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Google LLC",
+            "text": "Gordon House, 4 Barrow Street, Dublin D04 E5W5, Ireland"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Werbung",
+              "Analyse",
+              "Bereitstellung von Diensten",
+              "Statistiken"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "Cookies",
+              "Tracking Pixel"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Angesehene Werbeanzeigen",
+              "Cookie ID",
+              "Datum und Uhrzeit des Besuchs",
+              "Geräteinformationen",
+              "Geografischer Standort",
+              "IP-Adresse",
+              "Suchbegriffe",
+              "Impressionen",
+              "Online-Identifikatoren",
+              "Browser-Informationen",
+              "Referrer URL",
+              "Interaktionsdaten"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Vereinigte Staaten von Amerika",
+              "Chile",
+              "Singapur",
+              "Taiwan"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Google LLC"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/privacy"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um auf allen Domains des verarbeitenden Unternehmens zu widerrufen",
+            "link": "https://safety.google/privacy/privacy-controls/"
+          },
+          {
+            "id": "storageInformation",
+            "title": "Speicherinformation",
+            "description": "Unten sehen Sie die längste potenzielle Speicherdauer auf einem Gerät, die bei Verwendung der Cookie-Speichermethode und bei Verwendung anderer Methoden festgelegt wurde.",
+            "items": [
+              "Höchstgrenze für die Speicherung von Cookies: 396 Tage"
+            ]
+          },
+          {
+            "id": "storedInformation",
+            "title": "Gespeicherte Informationen",
+            "items": [
+              "NID (Typ: cookie, Dauer: 183 Tage)",
+              "__gads (Typ: cookie, Dauer: 396 Tage)",
+              "pm_sess (Typ: cookie, Dauer: 30 Minuten)",
+              "ANID (Typ: cookie, Dauer: 396 Tage)",
+              "_gcl_au (Typ: cookie, Dauer: 90 Tage)",
+              "FPGCLAW (Typ: cookie, Dauer: 90 Tage)",
+              "FPGCLGB (Typ: cookie, Dauer: 90 Tage)",
+              "_gcl_gb (Typ: cookie, Dauer: 90 Tage)",
+              "_gac_gb_<wpid> (Typ: cookie, Dauer: 90 Tage)",
+              "_gcl_aw (Typ: cookie, Dauer: 90 Tage)",
+              "YSC (Typ: cookie, Dauer: Session)",
+              "1P_JAR (Typ: cookie, Dauer: 30 Tage)",
+              "AID (Typ: cookie, Dauer: 396 Tage)",
+              "FPAU (Typ: cookie, Dauer: 90 Tage)",
+              "IDE (Typ: cookie, Dauer: 365 Tage, Domain: doublecheck.net)"
+            ],
+            "description": "Dieser Service verwendet verschiedene Mittel zum Speichern von Informationen auf dem Gerät eines Benutzers, wie nachfolgend aufgeführt."
+          }
+        ]
+      },
+      {
+        "id": "87JYasXPF",
+        "name": "Google Analytics 4",
+        "category": "Statistik",
+        "needsConsent": true,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Dies ist ein Analysedienst. Der Dienst ermöglicht es, den Verkehr und das Engagement auf Websites und mobilen Apps geräteübergreifend anhand anpassbarer Berichte zu messen."
+          },
+          {
+            "id": "processingCompany",
+            "title": "Verarbeitendes Unternehmen",
+            "description": "Google Ireland Limited",
+            "text": "Google Building Gordon House, 4 Barrow St, Dublin, D04 E5W5, Ireland"
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "https://support.google.com/policies/contact/general_privacy_form"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Marketing",
+              "Analyse"
+            ]
+          },
+          {
+            "id": "techonologiesUsed",
+            "title": "Genutzte Technologien",
+            "description": "Diese Liste enthält alle Technologien, mit denen dieser Dienst Daten sammelt. Typische Technologien sind Cookies und Pixel, die im Browser platziert werden.",
+            "items": [
+              "Tracking-Code",
+              "Cookies"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "Geräteinformationen",
+              "Geografischer Standort",
+              "Browser-Informationen",
+              "Bildschirmauflösung",
+              "Referrer URL",
+              "Interaktionsdaten",
+              "Datum und Uhrzeit des Besuchs",
+              "Nutzerverhalten",
+              "Besuchte Seiten",
+              "Online-Identifikatoren",
+              "Gekürzte IP-Adresse",
+              "Nutzer-ID",
+              "Werbekennung",
+              "Kaufinformationen",
+              "Gerätebetriebssystem"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Europäische Union"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Die Daten werden je nach Wahl des Verantwortlichen bis zu 50 Monate lang gespeichert."
+            ]
+          },
+          {
+            "id": "thirdPartyCountries",
+            "title": "Weitergabe an Drittländer",
+            "description": "Bei in Inanspruchnahme dieser Dienstleistung können die gesammelten Daten in ein anderes Land weitergeleitet werden. Bitte beachten Sie, dass im Rahmen dieser Dienstleistung die Daten möglicherweise in ein Land übertragen werden, das nicht über die erforderlichen Datenschutznormen verfügt. Nachstehend finden Sie eine Liste der Länder, in die die Daten übertragen werden. Weitere Informationen zu den Sicherheitsmaßnahmen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Anbieters oder wenden Sie sich unmittelbar an den Anbieter selbst.",
+            "items": [
+              "Singapur",
+              "Taiwan",
+              "Chile",
+              "Vereinigte Staaten von Amerika"
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "Alphabet Inc., Google LLC, Google Ireland Limited"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://business.safety.google/privacy/?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um die Cookie-Richtlinie des Datenverarbeiters zu lesen",
+            "link": "https://policies.google.com/technologies/cookies?hl=en"
+          },
+          {
+            "id": "cookiePolicy",
+            "title": "Klicken Sie hier, um auf allen Domains des verarbeitenden Unternehmens zu widerrufen",
+            "link": "https://tools.google.com/dlpage/gaoptout?hl=de"
+          },
+          {
+            "id": "storageInformation",
+            "title": "Speicherinformation",
+            "description": "Unten sehen Sie die längste potenzielle Speicherdauer auf einem Gerät, die bei Verwendung der Cookie-Speichermethode und bei Verwendung anderer Methoden festgelegt wurde.",
+            "items": [
+              "Höchstgrenze für die Speicherung von Cookies: 731 Tage"
+            ]
+          },
+          {
+            "id": "storedInformation",
+            "title": "Gespeicherte Informationen",
+            "items": [
+              "_ga (Typ: cookie, Dauer: 731 Tage)",
+              "_ga_<container-id> (Typ: cookie, Dauer: 731 Tage)"
+            ],
+            "description": "Dieser Service verwendet verschiedene Mittel zum Speichern von Informationen auf dem Gerät eines Benutzers, wie nachfolgend aufgeführt."
+          }
+        ]
+      },
+      {
+        "id": "uRoG9JxhEUtI4V",
+        "name": "PostHog.com",
+        "category": "Statistik",
+        "needsConsent": true,
+        "sections": [
+          {
+            "id": "description",
+            "title": "Beschreibung des Services",
+            "description": "Analysedienst, der Einblicke in die Nutzung der Website gewährt."
+          },
+          {
+            "id": "dataProtectionOfficer",
+            "title": "Datenschutzbeauftragter der verarbeitenden Firma",
+            "description": "Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.",
+            "link": "privacy@posthog.com"
+          },
+          {
+            "id": "dataPurposes",
+            "title": "Datenverarbeitungszwecke",
+            "description": "Diese Liste stellt die Zwecke der Datenerhebung und -verarbeitung dar.",
+            "items": [
+              "Analyse",
+              "Berichte"
+            ]
+          },
+          {
+            "id": "dataCollected",
+            "title": "Erhobene Daten",
+            "description": "Diese Liste enthält alle (persönlichen) Daten, die bei der oder durch die Nutzung des Services gesammelt werden.",
+            "items": [
+              "IP-Adresse",
+              "Verhaltensdaten",
+              "Analysedaten"
+            ]
+          },
+          {
+            "id": "legalBasis",
+            "title": "Rechtsgrundlage",
+            "description": "Im Folgenden wird die erforderliche Rechtsgrundlage für die Verarbeitung von Daten genannt.",
+            "items": [
+              "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+            ]
+          },
+          {
+            "id": "processingLocation",
+            "title": "Ort der Verarbeitung",
+            "description": "Dies ist der primäre Ort, an dem die gesammelten Daten verarbeitet werden. Sollten die Daten auch in anderen Ländern verarbeitet werden, werden Sie gesondert informiert.",
+            "items": [
+              "Vereinigte Staaten von Amerika,Deutschland"
+            ]
+          },
+          {
+            "id": "retentionPeriod",
+            "title": "Aufbewahrungsdauer",
+            "description": "Die Aufbewahrungsfrist ist die Zeitspanne, in der die gesammelten Daten für die Verarbeitung gespeichert werden. Die Daten müssen gelöscht werden, sobald sie für die angegebenen Verarbeitungszwecke nicht mehr benötigt werden.",
+            "items": [
+              "Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden."
+            ]
+          },
+          {
+            "id": "dataRecipients",
+            "title": "Datenempfänger",
+            "description": "Im Folgenden werden die Empfänger der erhobenen Daten aufgelistet.",
+            "items": [
+              "PostHog Cloud"
+            ]
+          },
+          {
+            "id": "privacyPolicy",
+            "title": "Klicken Sie hier, um die Datenschutzbestimmungen des Datenverarbeiters zu lesen",
+            "link": "https://posthog.com/privacy"
+          },
+          {
+            "id": "storageInformation",
+            "title": "Speicherinformation",
+            "description": "Unten sehen Sie die längste potenzielle Speicherdauer auf einem Gerät, die bei Verwendung der Cookie-Speichermethode und bei Verwendung anderer Methoden festgelegt wurde.",
+            "items": [
+              "Nicht-Cookie-Speicherung: nein"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
