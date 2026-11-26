@@ -281,7 +281,11 @@ export function ConsentServices() {
 
   const showLive = live && !touched;
   return (
-    <div ref={box} data-ds="ConsentServices" className="w-full">
+    // data-snapshot: the version of the Usercentrics settings the snapshot was
+    // taken from, readable in the exported HTML. Compare it with "version" at
+    // v1.api.service.cmp.usercentrics.eu/latest/core/<settings id> to see
+    // whether the last build refreshed the snapshot.
+    <div ref={box} data-ds="ConsentServices" data-snapshot={snapshot.version} className="w-full">
       <div hidden={showLive} onClickCapture={() => setTouched(true)}>
         <FaqList
           defaultOpen={null}
