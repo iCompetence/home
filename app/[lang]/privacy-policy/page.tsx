@@ -27,7 +27,6 @@ export async function generateMetadata({
   const lang = toLang((await params).lang)
   return {
     ...pageMetadata({ path: previewRoute('privacy-policy'), lang, ...meta[lang] }),
-    // robots: inherited from ../layout.tsx (noindex while this is a preview).
   }
 }
 

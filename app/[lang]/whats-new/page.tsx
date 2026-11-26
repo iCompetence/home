@@ -1,10 +1,20 @@
 import type { Metadata } from 'next'
-import WhatsNewPage from '@/components/WhatsNewPage'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import WhatsNewLavender from '@/components/lavender/WhatsNewLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
+// Titles as on the live page (app/[lang]/whats-new/page.tsx), English in
+// sentence case like the h1; the German description says "du" as in the redesign.
 const meta = {
-  de: { title: "Neuigkeiten | iCompetence", description: "Entdecken Sie die neuesten Produkte, Features und Updates von iCompetence – Ihrem Partner für Data & AI Consulting." },
-  en: { title: "What's New | iCompetence", description: "Discover the latest products, features and updates from iCompetence — your Data & AI consulting partner." },
+  de: {
+    title: 'Neuigkeiten | iCompetence',
+    description: 'Entdecke die neuesten Produkte, Features und Updates von iCompetence – deinem Partner für Data & AI Consulting.',
+  },
+  en: {
+    title: "What's new | iCompetence",
+    description: 'Discover the latest products, features and updates from iCompetence — your Data & AI consulting partner.',
+  },
 }
 
 export async function generateMetadata({
@@ -14,18 +24,30 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('whats-new', lang),
-    robots: { index: true, follow: true },
+    ...pageMetadata({ path: previewRoute('whats-new'), lang, ...meta[lang] }),
   }
 }
 
-export default async function Page({
+export default async function WhatsNewPreview({
   params,
 }: {
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  return <WhatsNewPage initialLanguage={lang} />
+  const path = previewRoute('whats-new')
+  // LanguageProvider comes from ../layout.tsx.
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['whats-new'],
+          type: 'CollectionPage',
+        })}
+      />
+      <WhatsNewLavender />
+    </>
+  )
 }

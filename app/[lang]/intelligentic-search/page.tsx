@@ -1,10 +1,22 @@
 import type { Metadata } from 'next'
-import IntelligenticSearchPage from '@/components/IntelligenticSearchPage'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import IntelligenticSearchLavender from '@/components/lavender/IntelligenticSearchLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
+// Title: product name plus the search phrase (approved 13.11.2026); description as
+// on the live page (app/[lang]/intelligentic-search/page.tsx).
 const meta = {
-  de: { title: "Intelligentic Search | iCompetence", description: "Moderne KI-gestützte Produkt- und Informationssuche. Natürliche Sprache, Bildsuche, Millisekunden-Antwortzeiten." },
-  en: { title: "Intelligentic Search | iCompetence", description: "Modern AI-powered product and information search. Natural language, visual search, millisecond response times." },
+  de: {
+    title: 'Intelligentic Search: KI-Produktsuche für Onlineshops | iCompetence',
+    description:
+      'Moderne KI-gestützte Produkt- und Informationssuche. Natürliche Sprache, Bildsuche, Millisekunden-Antwortzeiten.',
+  },
+  en: {
+    title: 'Intelligentic Search: AI product search for online shops | iCompetence',
+    description:
+      'Modern AI-powered product and information search. Natural language, visual search, millisecond response times.',
+  },
 }
 
 export async function generateMetadata({
@@ -14,18 +26,31 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('intelligentic-search', lang),
-    robots: { index: true, follow: true },
+    ...pageMetadata({ path: previewRoute('intelligentic-search'), lang, ...meta[lang] }),
   }
 }
 
-export default async function Page({
+export default async function IntelligenticSearchPreview({
   params,
 }: {
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  return <IntelligenticSearchPage initialLanguage={lang} />
+  const path = previewRoute('intelligentic-search')
+  // LanguageProvider comes from ../layout.tsx.
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['intelligentic-search'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'Intelligentic Search'),
+          subject: { kind: 'software', name: 'Intelligentic Search', description: meta[lang].description },
+        })}
+      />
+      <IntelligenticSearchLavender />
+    </>
+  )
 }

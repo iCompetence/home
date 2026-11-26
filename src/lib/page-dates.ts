@@ -15,11 +15,11 @@ export const PAGE_UPDATED = {
   'icu-user-journey-explorer': '2026-11-13',
   'intelligentic-search': '2026-11-13',
   'campaign-parameter-tool': '2026-11-13',
-  'ai-workshop': '2026-11-13',
+  'ai-workshop': '2026-11-26',
   'privacy-led-ai': '2026-11-13',
   contact: '2026-10-02',
-  imprint: '2026-11-13',
-  'privacy-policy': '2026-10-02',
+  imprint: '2026-11-26',
+  'privacy-policy': '2026-11-26',
   'whats-new': '2026-10-02',
 } as const satisfies Record<string, string>;
 

@@ -1,10 +1,23 @@
 import type { Metadata } from 'next'
-import AnalyticsAgentPage from '@/components/AnalyticsAgentPage'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import AnalyticsAgentLavender from '@/components/lavender/AnalyticsAgentLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
+// Title: product name plus the search phrase (approved 13.11.2026); the
+// descriptions use the redesign's wording ("deine", US "visualizations"), as
+// in lavender.products.analyticsAgent.desc.
 const meta = {
-  de: { title: "Analytics Agent | iCompetence", description: "Der KI-Agent für Ihre Daten. Verbinden Sie beliebige Datenquellen und interagieren Sie in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck." },
-  en: { title: "Analytics Agent | iCompetence", description: "The AI agent for your data. Connect any data source and interact in natural language – analyses, visualisations and insights at the touch of a button." },
+  de: {
+    title: 'Analytics Agent: Daten in natürlicher Sprache analysieren | iCompetence',
+    description:
+      'Der KI-Agent für deine Daten. Verbinde beliebige Datenquellen und interagiere in natürlicher Sprache – Analysen, Visualisierungen und Insights auf Knopfdruck.',
+  },
+  en: {
+    title: 'Analytics Agent: analyze your data in natural language | iCompetence',
+    description:
+      'The AI agent for your data. Connect any data source and interact in natural language – analyses, visualizations and insights at the touch of a button.',
+  },
 }
 
 export async function generateMetadata({
@@ -14,18 +27,31 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('analytics-agent', lang),
-    robots: { index: true, follow: true },
+    ...pageMetadata({ path: previewRoute('analytics-agent'), lang, ...meta[lang] }),
   }
 }
 
-export default async function Page({
+export default async function AnalyticsAgentPreview({
   params,
 }: {
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  return <AnalyticsAgentPage initialLanguage={lang} />
+  const path = previewRoute('analytics-agent')
+  // LanguageProvider comes from ../layout.tsx.
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['analytics-agent'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'Analytics Agent'),
+          subject: { kind: 'software', name: 'Analytics Agent', description: meta[lang].description },
+        })}
+      />
+      <AnalyticsAgentLavender />
+    </>
+  )
 }

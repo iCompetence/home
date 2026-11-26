@@ -16,7 +16,8 @@ import { DataTable } from './DataTable';
  * - a block whose lines all start with "|" is a <table>, the first row its head
  * - anything else is a paragraph
  * - inline: **bold** and [label](/route/) for internal links (through
- *   siteHref, so they stay in the preview) or [label](https://…) external
+ *   siteHref, so they stay in the preview), [label](https://…) external,
+ *   [label](mailto:…) and [label](tel:…) as they are
  * - in a list item, "Term: text" sets the term in bold when it is short
  */
 
@@ -44,10 +45,11 @@ export function useInline() {
       } else {
         const href = m[3];
         const external = /^https?:\/\//.test(href);
+        const direct = external || /^(mailto|tel):/.test(href);
         out.push(
           <a
             key={m.index}
-            href={external ? href : siteHref(language, href)}
+            href={direct ? href : siteHref(language, href)}
             {...(external ? { target: '_blank', rel: 'noopener' } : {})}
             // underline! — PageShell's unlayered `a { text-decoration: none }`
             // beats the plain utility; links in running text need the line.

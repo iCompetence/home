@@ -12,10 +12,8 @@ import { ConsultButton } from './ConsultModal';
 import { submitNetlifyForm } from '@/lib/tracking';
 import {
   ANCHOR_SCROLL_MARGIN,
-  Badge,
   Button,
   ButtonStack,
-  ConsentCheckbox,
   FormError,
   FormField,
   ProductHead,
@@ -38,9 +36,10 @@ const EXPERTS = [
 ] as const;
 
 /**
- * Submitted value of the only date option, kept identical to the live form
- * so the Netlify submissions stay comparable (the dated options are
- * commented out on the live page).
+ * Value of the form's `date` field. The page names no dates and no free run
+ * any more (Dennis, 26.11.2026: the three free dates of November 2026 are
+ * over), so the field is sent hidden with the value the old form's only
+ * remaining option had. That keeps the Netlify submissions comparable.
  */
 const DATE_CUSTOM_VALUE = 'Individuellen Termin buchen';
 
@@ -52,10 +51,12 @@ const DATE_CUSTOM_VALUE = 'Individuellen Termin buchen';
 export default function AIWorkshopLavender() {
   const { t, language } = useLanguage();
 
+  // In the order of the page. "About the workshop" is the topic section
+  // since the workshop's own text moved into the head (26.11.2026).
   const tabs = [
-    { id: 'intro', label: t('workshop.anchor.about') },
     { id: 'experts', label: t('workshop.anchor.experts') },
     { id: 'form', label: t('workshop.anchor.apply') },
+    { id: 'explained', label: t('workshop.anchor.about') },
     { id: 'contact', label: t('workshop.anchor.contact') },
   ];
 
@@ -88,7 +89,16 @@ export default function AIWorkshopLavender() {
         title={t('workshop.hero.title')}
         subline={t('workshop.hero.subline')}
       >
-        <Badge>{t('workshop.intro.run4')}</Badge>
+        {/* The workshop's text above the buttons (Dennis, 26.11.2026: next to
+            the experts the head was nearly empty; before, a section of its
+            own below). Order of the print ad (11/2026) without its line on
+            the free seats: promise, body, then the people behind it. Running
+            text in one size; the promise stands out by weight. */}
+        <div className="flex max-w-measure-lead flex-col gap-6">
+          <p className="lav-body font-semibold text-lav-navy">{t('workshop.intro.run3')}</p>
+          <p className="lav-body font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
+          <p className="lav-body font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
+        </div>
         <ButtonStack>
           <Button asChild variant="primary">
             <a href="#form" onClick={smoothAnchor}>
@@ -96,8 +106,9 @@ export default function AIWorkshopLavender() {
               <ArrowUpRight size={20} strokeWidth={2} />
             </a>
           </Button>
+          {/* Jumps past the form to the topic section, the page's "more". */}
           <Button asChild variant="soft">
-            <a href="#intro" onClick={smoothAnchor}>
+            <a href="#explained" onClick={smoothAnchor}>
               {t('lavender.jump.workshop')}
               <ArrowDown size={20} strokeWidth={2} />
             </a>
@@ -105,23 +116,9 @@ export default function AIWorkshopLavender() {
         </ButtonStack>
       </ProductHead>
 
-      {/* Every section starts with its title (was: four paragraphs without one). */}
-      <Section id="intro" className={ANCHOR_SCROLL_MARGIN} innerClassName="flex flex-col gap-8">
-        <SectionHeader title={t('workshop.anchor.about')} />
-        <div className="flex max-w-measure-lead flex-col gap-6">
-          {/* Order of the print ad (11/2026): promise, free seats, body, then
-              the people behind it right before the experts. Running text in
-              one size; the promise and the free seats stand out by weight. */}
-          <p className="lav-body font-semibold text-lav-navy">{t('workshop.intro.run3')}</p>
-          <p className="lav-body font-semibold text-lav-navy">{t('workshop.intro.run4')}</p>
-          <p className="lav-body font-normal text-lav-navy/80">{t('workshop.intro.run2')}</p>
-          <p className="lav-body font-normal italic text-lav-navy">{t('workshop.intro.run1')}</p>
-        </div>
-      </Section>
-
       <ApplicationForm />
       {/* The general topic after the workshop (orientation sheet: SEO & LLM content). */}
-      <TopicSection prefix="lavender.seo.workshop" route="ai-workshop" blockCount={3} faqCount={4} />
+      <TopicSection prefix="lavender.seo.workshop" route="ai-workshop" blockCount={3} faqCount={3} />
       <MoreProducts products={['iknow', 'intelligenticSearch']} />
     </NightPage>
   );
@@ -227,15 +224,7 @@ function ApplicationForm() {
           required
           label={t('workshop.form.company')}
         />
-        <fieldset className="m-0 flex flex-col gap-3 border-0 p-0">
-          <legend className="lav-small mb-3 p-0 font-medium text-lav-navy">
-            {t('workshop.form.dates')}
-            <span aria-hidden> *</span>
-          </legend>
-          <ConsentCheckbox id="workshop-date-custom" name="date" value={DATE_CUSTOM_VALUE}>
-            {t('workshop.form.dateCustom')}
-          </ConsentCheckbox>
-        </fieldset>
+        <input type="hidden" name="date" value={DATE_CUSTOM_VALUE} />
 
         {/* Rendered after mount only, so it is absent from the exported HTML:
             Netlify's deploy-time processing would otherwise inject the widget

@@ -653,8 +653,8 @@ A free UTM generator builds individual links correctly. But it doesn't know your
     en: `An AI workshop uses examples from your own business to work out what your team can sensibly use AI for and what it needs to watch out for.`,
   },
   'lavender.seo.workshop.lead': {
-    de: `Am Ende stehen Einsatzfälle, die alle verstehen, und ein Plan für die nächsten Schritte. Unser kostenloser KI-Workshop für Marken geht der Frage nach, wie viel KI eine Marke wirklich braucht und wie sie KI sicher und gewinnbringend nutzt.`,
-    en: `You come away with use cases everyone understands and a plan for the next steps. Our free AI workshop for brands looks at how much AI a brand really needs and how to use it safely and profitably.`,
+    de: `Am Ende stehen Einsatzfälle, die alle verstehen, und ein Plan für die nächsten Schritte. Unser KI-Workshop für Marken geht der Frage nach, wie viel KI eine Marke wirklich braucht und wie sie KI sicher und gewinnbringend nutzt.`,
+    en: `You come away with use cases everyone understands and a plan for the next steps. Our AI workshop for brands looks at how much AI a brand really needs and how to use it safely and profitably.`,
   },
   'lavender.seo.workshop.b1.title': {
     de: `KI-Workshop, KI-Schulung oder AI Enablement?`,
@@ -722,19 +722,12 @@ In the workshop we work with real use cases and leave room for your questions. T
     de: `Nein. Die KI-Verordnung schreibt weder ein Zertifikat noch einen KI-Führerschein vor. Es hilft aber, Schulungen zu dokumentieren.`,
     en: `No. The AI Act requires neither a certificate nor an "AI license". It does help to document trainings.`,
   },
+  // No question on the price: the free run with limited seats is over (26.11.2026).
   'lavender.seo.workshop.faq.q3': {
-    de: `Was kostet der KI-Workshop von iCompetence?`,
-    en: `How much does the iCompetence AI workshop cost?`,
-  },
-  'lavender.seo.workshop.faq.a3': {
-    de: `Der KI-Workshop für Marken ist kostenlos. Die Plätze sind begrenzt, deshalb bewirbst du dich über das Formular auf dieser Seite.`,
-    en: `The AI workshop for brands is free. Seats are limited, so you apply using the form on this page.`,
-  },
-  'lavender.seo.workshop.faq.q4': {
     de: `Was ist der Unterschied zwischen einem KI-Workshop und einer KI-Schulung?`,
     en: `What is the difference between an AI workshop and an AI training?`,
   },
-  'lavender.seo.workshop.faq.a4': {
+  'lavender.seo.workshop.faq.a3': {
     de: `Im Workshop geht es darum, Einsatzfälle zu finden und Entscheidungen zu treffen. Eine Schulung vermittelt, wie man Werkzeuge sicher bedient. Viele Unternehmen beginnen mit einem Workshop und schulen danach gezielt die Teams, die KI einsetzen.`,
     en: `A workshop is about finding use cases and making decisions. A training teaches how to use tools safely. Many companies start with a workshop and then train the specific teams that will use AI.`,
   },

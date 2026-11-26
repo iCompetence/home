@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 /* Fix the layer order before anything else declares it. This snapshot has no
    components layer; the redesign (src/styles/globals.css, loaded after it)
    does — without this line it would land after utilities and beat them. */

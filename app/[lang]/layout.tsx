@@ -1,34 +1,68 @@
 import type { Metadata } from 'next';
-// Live pages: the frozen Tailwind snapshot, exactly as on main. The redesign
-// adds the compiled design system in app/[lang]/lavender/layout.tsx.
+// Both stylesheets, in this order, exactly as the redesign was reviewed in its
+// preview (the old site's frozen snapshot, then the compiled design system on
+// top). The snapshot goes in the cleanup after go-live, with a visual
+// comparison of every page; until then removing it could shift details.
+// Inter from our own server; neither stylesheet imports it from Google any more.
+import '@/styles/fonts.css';
 import '../../src/index.css';
+import '@/styles/globals.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { DevDials } from '@/design-system';
+import { LanguageProvider } from '@/contexts/LanguageContext';
+import { SITE_LANGS, alternates } from '@/lib/i18n-meta';
+import { organizationNode } from '@/lib/structured-data';
 
 type Lang = 'en' | 'de';
 
 const SITE_URL = 'https://icompetence.de';
 
+// The published languages (SITE_LANGS in src/lib/i18n-meta.ts): German only
+// while English is switched off. Pages that exist in more languages (the
+// Media Monitoring legal pages) name them in their own generateStaticParams.
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'de' }];
+  return SITE_LANGS.map((lang) => ({ lang }));
 }
 
-// Only /en and /de exist; anything else 404s at build/export time.
+// Only these exist; anything else 404s at build/export time.
 export const dynamicParams = false;
 
+// Defaults for pages without their own metadata (every content page sets its
+// own through pageMetadata()): the home page's wording.
 const meta: Record<Lang, { title: string; description: string }> = {
   de: {
-    title: 'iCompetence – Wir befähigen Unternehmen für die Agentic Era',
+    title: 'KI-Beratung & Data Consulting aus Hamburg | iCompetence',
     description:
-      'Wir befähigen Unternehmen für die Agentic Era auf einer vertrauenswürdigen Datenbasis.',
+      'iCompetence ist eine Beratung für Daten und KI aus Hamburg: Datenstrategie, Web-Analytics, Dashboards, KI-Agenten und KI-Workshops, remote oder bei dir vor Ort.',
   },
   en: {
-    title: 'iCompetence - We enable companies for the Agentic Era',
+    title: 'AI and data consulting from Hamburg | iCompetence',
     description:
-      'We enable companies for the Agentic Era on a trustworthy data foundation.',
+      'iCompetence is a data and AI consultancy from Hamburg: data strategy, web analytics, dashboards, AI agents and AI workshops, remotely or on site.',
   },
 };
+
+/**
+ * A reload starts at the top of the page (Dennis, 13.11.2026). Browsers put
+ * you back where you were, which on the home page drops you onto the day layer
+ * without the night stage; a #section in the address would jump there too.
+ * Only reloads: back and forward keep the remembered position. Inline, so it
+ * runs while the page is parsed, before the browser restores the position.
+ */
+const RELOAD_TO_TOP = `(function () {
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    if (!nav || nav.type !== 'reload') return;
+    history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+    window.scrollTo(0, 0);
+    window.addEventListener('load', function () { window.scrollTo(0, 0); }, { once: true });
+    // Back on when leaving, so this entry remembers its position for back and
+    // forward. (Earlier, at load, was too soon: the browser restores later.)
+    window.addEventListener('pagehide', function () { history.scrollRestoration = 'auto'; });
+  } catch (e) {}
+})();`;
 
 export async function generateMetadata({
   params,
@@ -41,14 +75,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: meta[l].title,
     description: meta[l].description,
-    alternates: {
-      canonical: `/${l}/`,
-      languages: {
-        de: '/de/',
-        en: '/en/',
-        'x-default': '/de/',
-      },
-    },
+    alternates: alternates('', l),
     robots: {
       index: true,
       follow: true,
@@ -107,29 +134,9 @@ export default async function RootLayout({
   const GTM_ID = 'GTM-WMTT46J';
   const USERCENTRICS_ID = 'gRxSmB1lD';
 
-  // JSON-LD structured data for Organization (language-aware description)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    // Same @id as organizationNode() (src/lib/structured-data.tsx) on the
-    // redesigned pages, so both blocks describe one entity.
-    '@id': `${SITE_URL}/#organization`,
-    name: 'iCompetence',
-    url: SITE_URL,
-    logo: `${SITE_URL}/iCompetence_logo.svg`,
-    description: meta[l].description,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'DE',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+494022636380',
-      contactType: 'customer service',
-      email: 'info@icompetence.de',
-    },
-    sameAs: ['https://www.linkedin.com/company/icompetence/'],
-  };
+  // The company once per page, the same node the pages link their own
+  // structured data to (@id, src/lib/structured-data.tsx).
+  const jsonLd = { '@context': 'https://schema.org', ...organizationNode() };
 
   return (
     <html lang={l}>
@@ -186,8 +193,14 @@ export default async function RootLayout({
             height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
-        {children}
-        {/* Dev-only design/copy/migration panel — compiled out of production. */}
+        <script dangerouslySetInnerHTML={{ __html: RELOAD_TO_TOP }} />
+        {/* One provider for every page; variant "lavender" applies the
+            redesign's wording (src/contexts/lavender-overrides.ts and the
+            files beside it) over the old site's strings. */}
+        <LanguageProvider initialLanguage={l} variant="lavender">
+          {children}
+        </LanguageProvider>
+        {/* Dev-only design/copy panel — compiled out of production. */}
         <DevDials />
       </body>
     </html>
