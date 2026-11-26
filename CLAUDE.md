@@ -39,6 +39,7 @@ The redesign ("Licht und Linie") went live on these routes on 26.11.2026; see `d
 - `src/components/campaign-tool/` — Campaign Parameter Tool sub-components (11 files, prefixed `CT*`)
 - `src/imports/` — Figma-generated design system components (Aurora effects, Frame wrappers); do not manually edit these
 - `src/styles/globals.css` — the design system's styles (Tailwind CSS v4); `src/index.css` is the old site's frozen snapshot, still loaded underneath until the cleanup
+- `src/styles/fonts.css` — Inter from our own server (`src/styles/fonts/`); do not load fonts from Google or another third party
 - `src/REUSABLE_COMPONENTS.md` — Component API docs with usage examples for major reusable components
 
 ### Key Patterns

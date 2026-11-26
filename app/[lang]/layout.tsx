@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 // preview (the old site's frozen snapshot, then the compiled design system on
 // top). The snapshot goes in the cleanup after go-live, with a visual
 // comparison of every page; until then removing it could shift details.
+// Inter from our own server; neither stylesheet imports it from Google any more.
+import '@/styles/fonts.css';
 import '../../src/index.css';
 import '@/styles/globals.css';
 import Script from 'next/script';
