@@ -67,8 +67,7 @@ export function ImprintLavender() {
           <br />
           {t('imprint.section2.number')}
           <br />
-          {t('imprint.section2.taxNumber')}
-          <br />
+          {/* Without the tax number (Dennis, 26.11.2026): the VAT ID is what the law asks for. */}
           {t('imprint.section2.vatId')}
         </p>
       </SplitBlock>
