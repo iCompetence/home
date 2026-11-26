@@ -50,6 +50,34 @@ bleibt):
       übernehmen, `variant` am `LanguageProvider` entfernen.
 - [ ] Ordner `src/components/lavender/` und die Namen `*Lavender` umbenennen (kein Vorschau-Bezug mehr).
 
+## Vorschau-Seite „Piwik PRO statt GA4“ (26.11.2026)
+
+`/de/piwik-pro/` (`app/[lang]/piwik-pro/page.tsx`, `src/components/lavender/PiwikProLavender.tsx`)
+ist eine Leistungsseite: iCompetence richtet Piwik PRO ein und zieht die Messung von GA4 um.
+Sie ist **Vorschau**, bis Dennis sie freigibt:
+
+- `robots: noindex, nofollow` in der `page.tsx`; nicht im Menü (`nav-links.ts`), nicht im Footer,
+  nicht in `public/sitemap.xml`.
+- Aufbau aus vorhandenen Bausteinen: Textkopf mit Breadcrumb „Leistungen › Piwik PRO“,
+  `FactsBand`, `ComparisonTable` (Piwik PRO gegen GA4) mit dem Block „Wo GA4 vorne liegt“,
+  „Für wen“ als zwei `SplitBlock`s, sechs `IconCard`s, `ProcessAccordion`, `Statement`,
+  `FaqSection` mit FAQPage-Schema, Quellenliste. Kein neuer Baustein im Design-System.
+- **Jede Aussage hat eine Quelle.** Die Texte stehen unter `piwik.*` in
+  `src/contexts/lavender-seo.ts`, die Adressen in `SOURCES` der Seitenkomponente; alles am
+  26.11.2026 an den Seiten der Anbieter geprüft. Ändert sich ein Fakt (Preis, Tarif,
+  Speicherort), Text, Quelle und `PAGE_UPDATED['piwik-pro']` gemeinsam ändern.
+- Immer „Piwik PRO“ schreiben, nie „Piwik“ (so hieß Matomo bis 2018).
+- Vergleichende Aussagen nennen die Eigenschaft, um die es geht (§ 6 UWG: objektiv und
+  nachprüfbar). Deshalb heißt die Seite „Piwik PRO statt GA4“ und nicht „das bessere GA4“; die
+  Wertung steht im Lead und ist an Speicherort und Anbieter gebunden.
+- Keine Logos oder Screenshots von Piwik PRO oder Google. Der einzige Platzhalter ist das
+  Partner-Badge im Kopf (`BadgePlaceholder`, gestrichelte Pille): vor der Freigabe ersetzen
+  oder entfernen.
+
+Freigabe: `robots`-Zeile in der `page.tsx` entfernen, Seite in `public/sitemap.xml` eintragen
+(`lastmod` = `PAGE_UPDATED['piwik-pro']`), verlinken (Menü oder Leistungen der Startseite),
+Platzhalter klären, Fakten noch einmal gegen die Quellen prüfen.
+
 Die Abschnitte unten beschreiben den Weg dorthin und sind Geschichte.
 
 ## Ausgangslage: zwei parallele Systeme
