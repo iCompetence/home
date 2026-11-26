@@ -1,20 +1,29 @@
 import type { Metadata } from 'next'
-import EmpCoAuditPage from '@/components/EmpCoAuditPage'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import EmpCoAuditLavender from '@/components/lavender/EmpCoAuditLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph, productCrumbs } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
-const SITE_URL = 'https://icompetence.de'
-
-// Title/description target the product searches ("EmpCo Audit", "EmpCo Check",
-// "Website auf Greenwashing prüfen") and state that the directive already applies.
+// Same title as the live page (app/[lang]/empco-audit/page.tsx, 26.10.2026):
+// it targets the product searches ("EmpCo Audit", "EmpCo Check", "Website auf
+// Greenwashing prüfen") like the h1, and the description says the directive
+// already applies. German in "du" in line with the redesign's wording.
 const meta = {
   de: {
     title: 'EmpCo Audit & Check: Website auf Greenwashing prüfen | iCompetence',
-    description: 'EmpCo (EU 2024/825) gilt seit 27.09.2026: Prüfen Sie Ihre Website auf Greenwashing. KI-Audit mit Zitat, Regelverweis und Zweitprüfung – Probeseite kostenlos.',
+    description:
+      'EmpCo (EU 2024/825) gilt seit 27.09.2026: Prüf deine Website auf Greenwashing. KI-Audit mit Zitat, Regelverweis und Zweitprüfung – Probeseite kostenlos.',
   },
   en: {
     title: 'EmpCo Audit & Check: Scan your website for greenwashing | iCompetence',
-    description: 'EmpCo (EU 2024/825) applies since 27 Sep 2026: check your website for greenwashing. AI audit with verbatim quotes, legal references and a second review – free sample page.',
+    description:
+      'EmpCo (EU 2024/825) applies since 27 Sep 2026: check your website for greenwashing. AI audit with verbatim quotes, legal references and a second review – free sample page.',
   },
+}
+
+const SERVICE_TYPE = {
+  de: 'Prüfung von Website-Umweltaussagen nach der EmpCo-Richtlinie',
+  en: 'Website audit of environmental claims under the EmpCo Directive',
 }
 
 export async function generateMetadata({
@@ -23,123 +32,35 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
-  const url = `${SITE_URL}/${lang}/empco-audit/`
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('empco-audit', lang),
-    robots: { index: true, follow: true },
-    // Own Open Graph / Twitter tags — otherwise the homepage values from the
-    // layout are inherited and link previews show the homepage.
-    openGraph: {
-      title: meta[lang].title,
-      description: meta[lang].description,
-      url,
-      siteName: 'iCompetence',
-      images: [
-        {
-          url: '/og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'iCompetence - Data & AI Consulting',
-        },
-      ],
-      locale: lang === 'de' ? 'de_DE' : 'en_US',
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: meta[lang].title,
-      description: meta[lang].description,
-      images: ['/og-image.jpg'],
-    },
+    ...pageMetadata({ path: previewRoute('empco-audit'), lang, ...meta[lang] }),
   }
 }
 
-// EmpCo SEO FAQ — German (the primary SEO target for this URL). Rendered server-side
-// so the FAQPage / HowTo structured data is in the crawlable static HTML. The text must
-// stay identical to the German answers in LanguageContext (empco.seo.faq.q*/a*), which
-// the FAQ accordion renders into the HTML (Google policy: JSON-LD must match the
-// visible content).
-const empcoFaqDe: { q: string; a: string }[] = [
-  { q: 'Was ist die EmpCo-Richtlinie?', a: 'Die EmpCo-Richtlinie (Directive (EU) 2024/825, „Empowering Consumers for the Green Transition“) ist ein EU-Gesetz gegen Greenwashing. Sie ändert die UGP-Richtlinie (2005/29/EG) und die Verbraucherrechte-Richtlinie (2011/83/EU) und verbietet irreführende Umweltaussagen sowie unbelegte Nachhaltigkeitssiegel in der Werbung gegenüber Verbraucherinnen und Verbrauchern. Die Richtlinie ist seit März 2024 in Kraft.' },
-  { q: 'Ab wann gilt die EmpCo-Richtlinie?', a: 'Die EmpCo-Richtlinie gilt seit dem 27. September 2026 verbindlich. Die EU-Mitgliedstaaten mussten sie bis zum 27. März 2026 in nationales Recht umsetzen, Deutschland hat das über das UWG getan. Eine Übergangsfrist für bereits im Markt befindliche Produkte gibt es nicht – seit dem Stichtag müssen alle kommerziellen Aussagen den neuen Regeln entsprechen.' },
-  { q: 'Welche Unternehmen betrifft die EmpCo?', a: 'Die EmpCo betrifft alle Unternehmen, die Produkte oder Dienstleistungen an Verbraucher in der EU vermarkten – unabhängig von Branche, Unternehmensgröße oder Firmensitz. Auch kleine und mittlere Unternehmen sowie Anbieter aus Drittländern fallen darunter, sobald sie EU-Konsumenten ansprechen. Reine B2B-Kommunikation ist nicht direkt erfasst, faktisch aber oft mitbetroffen.' },
-  { q: 'Was sind Green Claims?', a: 'Green Claims sind umweltbezogene Werbeaussagen – also Angaben, die einem Produkt, einer Dienstleistung oder einem Unternehmen einen ökologischen Vorteil zuschreiben, etwa „klimaneutral“, „aus recyceltem Material“ oder „plastikfrei“. Die EmpCo-Richtlinie regelt, unter welchen Bedingungen solche Green Claims gegenüber Verbrauchern zulässig sind und welche pauschalen Aussagen verboten werden.' },
-  { q: 'Welche Umweltaussagen verbietet die EmpCo?', a: 'Verboten sind pauschale Umweltaussagen wie „umweltfreundlich“, „nachhaltig“, „grün“ oder „ökologisch“, die weder konkret erläutert noch durch eine anerkannte hervorragende Umweltleistung belegt sind. Ebenfalls unzulässig sind Klimaaussagen wie „klimaneutral“, „CO₂-reduziert“ oder „klimapositiv“, die auf CO₂-Kompensation beruhen, Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sowie Versprechen über künftige Umweltleistung ohne realistischen, unabhängig geprüften Umsetzungsplan.' },
-  { q: 'Ist „klimaneutral“ noch erlaubt?', a: 'Nur mit echtem Reduktionsnachweis. „Klimaneutral“ bleibt zulässig, wenn die Aussage auf tatsächlicher Emissionsminderung beruht, belastbar belegt ist und direkt in der Werbung erläutert wird. Verboten ist Werbung mit Klimaneutralität, die ausschließlich oder überwiegend auf CO₂-Kompensation (Offsetting) gestützt wird. Aussagen wie „klimaneutral durch Kompensation“ sind seit dem 27. September 2026 nicht mehr erlaubt.' },
-  { q: 'Was passiert mit Nachhaltigkeitssiegeln?', a: 'Nachhaltigkeitssiegel dürfen seit dem 27. September 2026 nur noch mit zertifizierter, unabhängig geprüfter Grundlage verwendet werden – oder wenn sie von einer Behörde eingeführt wurden. Selbst erstellte Logos und Siegel ohne transparente, geprüfte Kriterien müssen aus Werbung, Verpackung und Website entfernt werden.' },
-  { q: 'Was ist der Unterschied zwischen EmpCo und der Green Claims Directive?', a: 'Die EmpCo setzt einen Mindeststandard und verbietet irreführende Umweltaussagen generell; sie gilt seit dem 27. September 2026. Die Green Claims Directive (GCD) war als detaillierteres Regelwerk geplant, das eine verpflichtende externe Vorab-Prüfung („ex ante“) jeder grünen Aussage gefordert hätte. Die GCD wurde 2025 gestoppt – die EmpCo gilt davon unabhängig weiter.' },
-  { q: 'Wurde die Green Claims Directive zurückgezogen – was gilt jetzt?', a: 'Ja – die EU-Kommission hat die GCD im Juni 2025 zur Rücknahme angekündigt, vor allem wegen des hohen Prüfaufwands für Unternehmen. Für die Praxis ändert das wenig: Die EmpCo-Richtlinie gilt weiterhin und verpflichtet seit dem 27. September 2026 dazu, jede Umweltaussage belegen zu können.' },
-  { q: 'Welche Strafen drohen bei Verstößen gegen die EmpCo?', a: 'Das Hauptrisiko sind Abmahnungen und Unterlassungsklagen durch Wettbewerber und Verbände. Bei weitverbreiteten Verstößen mit EU-Dimension sind zudem Bußgelder von bis zu 4 % des Jahresumsatzes möglich. Reale Beispiele zeigen die Größenordnung: Die italienische Wettbewerbsbehörde AGCM verhängte gegen Shein 1 Mio. € Bußgeld wegen irreführender Umweltaussagen, und Apple wurde die „CO₂-neutral“-Werbung für die Apple Watch in Deutschland erstinstanzlich untersagt. Hinzu kommen Reputationsschäden und die Pflicht, beanstandete Werbung zu korrigieren oder zurückzuziehen.' },
-  { q: 'Wie wird die EmpCo in Deutschland umgesetzt?', a: 'Über das Dritte Gesetz zur Änderung des Gesetzes gegen den unlauteren Wettbewerb (UWG), im Bundesgesetzblatt verkündet am 19. Februar 2026. Es ist im Wesentlichen am 27. September 2026 in Kraft getreten – zeitgleich mit dem EU-weiten Geltungsbeginn. Die verbotenen Praktiken wurden in die „schwarze Liste“ stets unzulässiger Geschäftspraktiken aufgenommen. Eine allgemeine Übergangsfrist für Bestandsaussagen ist nicht vorgesehen – die gesamte Nachhaltigkeitskommunikation muss seitdem den neuen Regeln entsprechen.' },
-  { q: 'Gibt es eine Übergangsfrist für Bestandsprodukte?', a: 'Nein, eine Übergangsfrist gibt es nicht. Seit dem 27. September 2026 müssen sämtliche Umweltaussagen – auf Verpackungen, Websites, in Werbung und im Online-Shop – den neuen Anforderungen entsprechen. Wer Bestände und Kommunikationsmittel noch nicht geprüft hat, sollte das jetzt nachholen.' },
-  { q: 'Was müssen Unternehmen jetzt konkret tun?', a: 'Alle Umweltaussagen inventarisieren und umgehend prüfen – der Stichtag 27.09.2026 ist bereits verstrichen. Pauschale Claims streichen oder mit Nachweisen unterlegen, nicht zertifizierte Siegel entfernen und kompensationsbasierte Klimaaussagen überarbeiten. Sinnvoll sind ein fester Freigabeprozess zwischen Marketing, Recht und Nachhaltigkeit sowie ein Audit der Außenkommunikation – die 5 Schritte oben fassen das Vorgehen zusammen.' },
-  { q: 'Sind CO₂-Kompensationen (Carbon Offsets) Betrug?', a: 'Pauschal nein, aber sie stehen massiv in der Kritik, weil ihre tatsächliche Klimawirkung oft schwer messbar und teils überschätzt ist. Genau deshalb verbietet die EmpCo-Richtlinie seit dem 27. September 2026, ein Produkt allein auf Basis von Kompensation als „klimaneutral“ zu bewerben. Für Unternehmen heißt das: Offsetting kann Teil einer Strategie sein, taugt aber nicht mehr als alleinige Grundlage einer Umweltwerbung.' },
-  { q: 'Kann ich für eine „umweltfreundlich“-Aussage abgemahnt oder verklagt werden?', a: 'Ja. Unbelegte oder pauschale Umweltaussagen sind schon heute nach § 5 UWG als Irreführung abmahnfähig – durch Wettbewerber und Verbände. Seit dem 27.09.2026 verschärft die EmpCo-Umsetzung im UWG dies zusätzlich. Belege müssen vorliegen, bevor die Aussage online geht.' },
-  { q: 'Muss ich alte Website-Seiten und Bestandsinhalte auch prüfen?', a: 'Ja. Die Regeln gelten für alle Aussagen, die seit dem Stichtag (27.09.2026) öffentlich sind – auch für über Jahre gewachsene Bestandsseiten, Produkttexte und Landingpages. Genau hier liegt das Hauptproblem: Die meisten Unternehmen wissen nicht, was auf hunderten eigenen Seiten steht. Ein automatisierter Audit verschafft hier in Stunden einen vollständigen Überblick.' },
-  { q: 'Wie prüfe ich meine Website auf Green-Claims-Risiken?', a: 'Manuell lesen mehrere Abteilungen die Website Seite für Seite, sammeln Aussagen und gleichen sie mit Belegen ab – ein Aufwand, der schnell einen fünfstelligen Betrag erreichen kann. Ein automatisierter EmpCo-Audit übernimmt diese Vorarbeit: Er identifiziert kritische Aussagen mit Fundstelle und Regelverweis und liefert eine priorisierte Liste, auf der die juristische Letztprüfung gezielt aufsetzt.' },
-  { q: 'Reicht es nicht, ChatGPT einen Screenshot zu zeigen?', a: 'Nein. Ein einzelner KI-Durchlauf ist nicht reproduzierbar – dieselbe Seite kann bei jedem Lauf zu einem anderen Befund führen. Ein belastbarer Audit prüft jede Seite in mehreren Durchläufen, unterzieht kritische Aussagen einer skeptischen Gegenprüfung und wertet Text und visuelle Darstellung gemeinsam aus. Erst das macht den Befund vollständig und nachvollziehbar.' },
-  { q: 'Wer haftet im Unternehmen für Greenwashing – Marketing, Recht oder Nachhaltigkeit?', a: 'Rechtlich haftet das Unternehmen; intern liegt das Problem meist in der Lücke zwischen den Abteilungen, die in getrennten Tools arbeiten. Marketing formuliert, Nachhaltigkeit liefert Daten, Recht prüft – aber niemand hat den Gesamtüberblick über die Website. Ein gemeinsamer Audit als „Single Source of Truth“ schließt genau diese Lücke.' },
-]
-
-const empcoStepsDe: { name: string; text: string }[] = [
-  { name: 'Bestandsaufnahme', text: 'Alle Umweltaussagen auf Website, Verpackung, Online-Shop und in Werbung erfassen.' },
-  { name: 'Pauschalclaims streichen oder belegen', text: '„nachhaltig“, „klimaneutral“ & Co. entfernen oder mit belastbaren Nachweisen unterlegen.' },
-  { name: 'Siegel prüfen', text: 'Nicht zertifizierte Eigen-Siegel ohne unabhängige Grundlage entfernen.' },
-  { name: 'Klimaaussagen überarbeiten', text: 'Kompensationsbasierte „klimaneutral“-Claims durch echte Reduktionsnachweise ersetzen.' },
-  { name: 'Freigabeprozess etablieren', text: 'Jede grüne Aussage gemeinsam von Marketing, Recht und Nachhaltigkeit freigeben lassen.' },
-]
-
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  inLanguage: 'de',
-  mainEntity: empcoFaqDe.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-}
-
-const howToJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  inLanguage: 'de',
-  name: 'In 5 Schritten EmpCo-konform werden',
-  description:
-    'Vorgehen, um die Nachhaltigkeitskommunikation an die seit dem 27. September 2026 geltende EmpCo-Richtlinie anzupassen.',
-  step: empcoStepsDe.map((s, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: s.name,
-    text: s.text,
-  })),
-}
-
-export default async function EmpCoAudit({
+export default async function EmpCoAuditPreview({
   params,
 }: {
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
+  const path = previewRoute('empco-audit')
+  // LanguageProvider comes from ../layout.tsx. The FAQPage/HowTo structured
+  // data is emitted by the page component itself (it needs the same strings
+  // the page shows, which live in the client-side i18n module) and is still
+  // part of the statically exported HTML; it links to this graph by @id.
   return (
     <>
-      {/* German FAQ/HowTo structured data only on the German URL — the JSON-LD
-          text is German and must match the visible (German) content. */}
-      {lang === 'de' && (
-        <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
-          />
-        </>
-      )}
-      <EmpCoAuditPage initialLanguage={lang} />
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED['empco-audit'],
+          breadcrumb: productCrumbs(lang, previewRoute(''), 'EmpCo Audit'),
+          subject: { kind: 'service', name: 'EmpCo Audit', description: meta[lang].description, serviceType: SERVICE_TYPE[lang] },
+        })}
+      />
+      <EmpCoAuditLavender />
     </>
   )
 }

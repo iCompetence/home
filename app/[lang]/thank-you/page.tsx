@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import ThankYouPage from '@/components/ThankYouPage'
-import { toLang } from '@/lib/i18n-meta'
+import { ThankYouLavender } from '@/components/lavender/SimpleHeroLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
 
+// The page after a form: not for search results.
 const meta = {
-  de: { title: 'Danke | iCompetence', description: 'Vielen Dank für Ihre Nachricht.' },
+  de: { title: 'Danke | iCompetence', description: 'Vielen Dank für deine Nachricht.' },
   en: { title: 'Thank you | iCompetence', description: 'Thank you for your message.' },
 }
 
@@ -14,17 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
+    ...pageMetadata({ path: previewRoute('thank-you'), lang, ...meta[lang] }),
     robots: { index: false, follow: false },
   }
 }
 
-export default async function ThankYou({
-  params,
-}: {
-  params: Promise<{ lang: string }>
-}) {
-  const lang = toLang((await params).lang)
-  return <ThankYouPage language={lang} />
+export default function ThankYouPage() {
+  // LanguageProvider comes from ../layout.tsx.
+  return <ThankYouLavender />
 }

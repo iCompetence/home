@@ -1,10 +1,20 @@
 import type { Metadata } from 'next'
-import ContactPage from '@/components/ContactPage'
-import { alternates, toLang } from '@/lib/i18n-meta'
+import ContactLavender from '@/components/lavender/ContactLavender'
+import { pageMetadata, previewRoute, toLang } from '@/lib/i18n-meta'
+import { JsonLd, pageGraph } from '@/lib/structured-data'
+import { PAGE_UPDATED } from '@/lib/page-dates'
 
+// Same titles as the live page (app/[lang]/contact/page.tsx); the German
+// description says "du" in line with the redesign's wording.
 const meta = {
-  de: { title: "Kontakt | iCompetence", description: "Nehmen Sie Kontakt mit iCompetence auf – Ihrem Partner für Data und AI." },
-  en: { title: "Contact | iCompetence", description: "Get in touch with iCompetence - your partner for data and AI." },
+  de: {
+    title: 'Kontakt | iCompetence',
+    description: 'Nimm Kontakt mit iCompetence auf – deinem Partner für Data und AI.',
+  },
+  en: {
+    title: 'Contact | iCompetence',
+    description: 'Get in touch with iCompetence - your partner for data and AI.',
+  },
 }
 
 export async function generateMetadata({
@@ -14,18 +24,30 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang = toLang((await params).lang)
   return {
-    title: meta[lang].title,
-    description: meta[lang].description,
-    alternates: alternates('contact', lang),
-    robots: { index: true, follow: true },
+    ...pageMetadata({ path: previewRoute('contact'), lang, ...meta[lang] }),
   }
 }
 
-export default async function Page({
+export default async function ContactPreview({
   params,
 }: {
   params: Promise<{ lang: string }>
 }) {
   const lang = toLang((await params).lang)
-  return <ContactPage initialLanguage={lang} />
+  const path = previewRoute('contact')
+  // LanguageProvider comes from ../layout.tsx.
+  return (
+    <>
+      <JsonLd
+        data={pageGraph({
+          lang,
+          path,
+          ...meta[lang],
+          dateModified: PAGE_UPDATED.contact,
+          type: 'ContactPage',
+        })}
+      />
+      <ContactLavender />
+    </>
+  )
 }

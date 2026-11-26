@@ -5,6 +5,7 @@ import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { LINKEDIN_URL, LanguageToggle, NEWS_LINK, PRINCIPLE_LINKS, PRODUCT_LINKS, siteHref } from '@/design-system';
+import { SITE_LANGS } from '@/lib/i18n-meta';
 import { NavSurfaceContext } from '@/design-system/nav-surface';
 import { cn } from '@/components/ui/utils';
 import { glideOnClick } from './glide';
@@ -287,9 +288,13 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto', contactAnc
                   <a href={siteHref(language, 'privacy-policy')} className={smallLink}>
                     <span className="lav-star-text">{t('footer.privacy')}</span>
                   </a>
-                  <NavSurfaceContext.Provider value="light">
-                    <LanguageToggle />
-                  </NavSurfaceContext.Provider>
+                  {/* The language switch, only while the site is published in more
+                      than one language (SITE_LANGS; English is switched off). */}
+                  {SITE_LANGS.length > 1 && (
+                    <NavSurfaceContext.Provider value="light">
+                      <LanguageToggle />
+                    </NavSurfaceContext.Provider>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,23 +1,29 @@
 import type { Metadata } from 'next';
-import { PREVIEW_BASE } from '@/design-system/routes';
+import { PREVIEW_BASE, SITE_LANGS } from '@/design-system/routes';
 
 export type Lang = 'en' | 'de';
 
 export const toLang = (l: string): Lang => (l === 'de' ? 'de' : 'en');
 
+// Which languages are published: SITE_LANGS in src/design-system/routes.ts.
+export { SITE_LANGS };
+
 /**
- * Build canonical + hreflang alternates for a page that exists in both
- * languages under /de/<route>/ and /en/<route>/.
- * Pass route='' for the homepage. x-default points at German (site default).
+ * Build canonical + hreflang alternates for a page under /<lang>/<route>/,
+ * one entry per published language. Pass route='' for the homepage.
+ * x-default points at German (site default). `langs` for the few pages that
+ * exist in more languages than the site.
  */
-export function alternates(route: string, lang: Lang): Metadata['alternates'] {
-  const path = (l: Lang | 'x-default'): string =>
-    route ? `/${l}/${route}/` : `/${l}/`;
+export function alternates(
+  route: string,
+  lang: Lang,
+  langs: readonly Lang[] = SITE_LANGS,
+): Metadata['alternates'] {
+  const path = (l: Lang): string => (route ? `/${l}/${route}/` : `/${l}/`);
   return {
     canonical: path(lang),
     languages: {
-      de: path('de'),
-      en: path('en'),
+      ...Object.fromEntries(langs.map((l) => [l, path(l)])),
       'x-default': path('de'),
     },
   };
@@ -84,7 +90,7 @@ export function pageMetadata({
       url: pageUrl(path, lang),
       siteName: SITE_NAME,
       locale: lang === 'de' ? 'de_DE' : 'en_US',
-      alternateLocale: lang === 'de' ? ['en_US'] : ['de_DE'],
+      ...(SITE_LANGS.length > 1 ? { alternateLocale: lang === 'de' ? ['en_US'] : ['de_DE'] } : {}),
       type: 'website',
       images: [OG_IMAGE],
     },

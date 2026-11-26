@@ -30,49 +30,65 @@
 /de/nutzungsbedingungen-media-monitoring  /de/terms-media-monitoring/          301
 /de/nutzungsbedingungen-media-monitoring/ /de/terms-media-monitoring/          301
 
-# --- everything else: English was the indexed/primary language ---
-/whats-new                     /en/whats-new/                  301
-/whats-new/                    /en/whats-new/                  301
-/intelligentic-search          /en/intelligentic-search/       301
-/intelligentic-search/         /en/intelligentic-search/       301
-/icu-user-journey-explorer     /en/icu-user-journey-explorer/  301
-/icu-user-journey-explorer/    /en/icu-user-journey-explorer/  301
-/campaign-parameter-tool       /en/campaign-parameter-tool/    301
-/campaign-parameter-tool/      /en/campaign-parameter-tool/    301
-/analytics-agent               /en/analytics-agent/            301
-/analytics-agent/              /en/analytics-agent/            301
+# --- everything else: these pointed at the English pages (the indexed language
+# before /de/ and /en/ existed). 302 to German while English is switched off
+# (SITE_LANGS in src/lib/i18n-meta.ts); back to /en/… with 301 when it returns. ---
+/whats-new                     /de/whats-new/                  302
+/whats-new/                    /de/whats-new/                  302
+/intelligentic-search          /de/intelligentic-search/       302
+/intelligentic-search/         /de/intelligentic-search/       302
+/icu-user-journey-explorer     /de/icu-user-journey-explorer/  302
+/icu-user-journey-explorer/    /de/icu-user-journey-explorer/  302
+/campaign-parameter-tool       /de/campaign-parameter-tool/    302
+/campaign-parameter-tool/      /de/campaign-parameter-tool/    302
+/analytics-agent               /de/analytics-agent/            302
+/analytics-agent/              /de/analytics-agent/            302
 # ai-workshop: German page — the German print ad (11/2026) prints /ai-workshop
 /ai-workshop                   /de/ai-workshop/                301
 /ai-workshop/                  /de/ai-workshop/                301
-/privacy-led-ai                /en/privacy-led-ai/             301
-/privacy-led-ai/               /en/privacy-led-ai/             301
-/iknow                         /en/iknow/                      301
-/iknow/                        /en/iknow/                      301
-/contact                       /en/contact/                    301
-/contact/                      /en/contact/                    301
-/imprint                       /en/imprint/                    301
-/imprint/                      /en/imprint/                    301
-/thank-you                     /en/thank-you/                  301
-/thank-you/                    /en/thank-you/                  301
-/lavender                      /de/lavender/                   301
-/lavender/                     /de/lavender/                   301
+/privacy-led-ai                /de/privacy-led-ai/             302
+/privacy-led-ai/               /de/privacy-led-ai/             302
+/iknow                         /de/iknow/                      302
+/iknow/                        /de/iknow/                      302
+/contact                       /de/contact/                    302
+/contact/                      /de/contact/                    302
+/imprint                       /de/imprint/                    302
+/imprint/                      /de/imprint/                    302
+/thank-you                     /de/thank-you/                  302
+/thank-you/                    /de/thank-you/                  302
 
-# --- Preview: the night home was /<lang>/lavender/nacht-hamburg/ until it became
-# the preview home (13.11.2026); shared links land on /<lang>/lavender/. ---
-/de/lavender/nacht-hamburg     /de/lavender/                   301
-/de/lavender/nacht-hamburg/    /de/lavender/                   301
-/en/lavender/nacht-hamburg     /en/lavender/                   301
-/en/lavender/nacht-hamburg/    /en/lavender/                   301
+# --- The redesign's preview lived under /<lang>/lavender/… until go-live
+# (26.11.2026). Links shared from there land on the real pages. ---
+/lavender                      /de/                            301
+/lavender/                     /de/                            301
+/de/lavender/nacht-hamburg     /de/                            301
+/de/lavender/nacht-hamburg/    /de/                            301
+/en/lavender/nacht-hamburg     /de/                            301
+/en/lavender/nacht-hamburg/    /de/                            301
+/de/lavender                   /de/                            301
+/de/lavender/*                 /de/:splat                      301
+/en/lavender                   /de/                            301
+/en/lavender/*                 /de/:splat                      301
 
 # --- EmpCo cluster pages (wave 1) taken offline 2026-07-15: redirect to pillar.
 # Non-forced rules: they stop applying automatically if the pages return. ---
 /de/empco-audit/abmahnung-greenwashing/          /de/empco-audit/    301
-/en/empco-audit/abmahnung-greenwashing/          /en/empco-audit/    301
+/en/empco-audit/abmahnung-greenwashing/          /de/empco-audit/    302
 /de/empco-audit/greenwashing-strafe/          /de/empco-audit/    301
-/en/empco-audit/greenwashing-strafe/          /en/empco-audit/    301
+/en/empco-audit/greenwashing-strafe/          /de/empco-audit/    302
 /de/empco-audit/green-claims-formulieren/          /de/empco-audit/    301
-/en/empco-audit/green-claims-formulieren/          /en/empco-audit/    301
+/en/empco-audit/green-claims-formulieren/          /de/empco-audit/    302
 /de/empco-audit/website-green-claims-pruefen/          /de/empco-audit/    301
-/en/empco-audit/website-green-claims-pruefen/          /en/empco-audit/    301
+/en/empco-audit/website-green-claims-pruefen/          /de/empco-audit/    302
 /de/empco-audit/klimaneutral-werben-verboten/          /de/empco-audit/    301
-/en/empco-audit/klimaneutral-werben-verboten/          /en/empco-audit/    301
+/en/empco-audit/klimaneutral-werben-verboten/          /de/empco-audit/    302
+
+# --- English is switched off (26.11.2026, SITE_LANGS in src/lib/i18n-meta.ts):
+# no /en/ pages are exported, so these rules apply to every /en/ address
+# except the three Media Monitoring legal pages, which exist as files and are
+# therefore served as they are. Temporary (302), so English can come back. ---
+/en                            /de/                            302
+/en/*                          /de/:splat                      302
+
+# --- Everything else that does not exist: the 404 page, with status 404. ---
+/*                             /de/404/index.html              404
