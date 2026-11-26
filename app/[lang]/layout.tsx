@@ -11,6 +11,7 @@ import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { DevDials } from '@/design-system';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { ConsentButtonPlacement } from '@/components/lavender/ConsentButtonPlacement';
 import { SITE_LANGS, alternates } from '@/lib/i18n-meta';
 import { organizationNode } from '@/lib/structured-data';
 
@@ -200,6 +201,8 @@ export default async function RootLayout({
         <LanguageProvider initialLanguage={l} variant="lavender">
           {children}
         </LanguageProvider>
+        {/* Usercentrics' fingerprint button: bottom left instead of bottom right. */}
+        <ConsentButtonPlacement />
         {/* Dev-only design/copy panel — compiled out of production. */}
         <DevDials />
       </body>
