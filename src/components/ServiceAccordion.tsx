@@ -240,6 +240,76 @@ export const servicesData: ServiceData[] = [
     cookiePolicyLink: 'https://policies.google.com/technologies/cookies?hl=en',
     optOutLink: 'https://tools.google.com/dlpage/gaoptout?hl=de',
     maxCookieStorage: { en: '731 days', de: '731 Tage' }
+  },
+  // Google Ads and PostHog.com were configured in Usercentrics but missing
+  // here until 26.11.2026. German wording from the Usercentrics templates;
+  // English translated from the German, so both languages say the same.
+  {
+    name: { en: 'Google Ads', de: 'Google Ads' },
+    description: {
+      en: 'Enables businesses to create online advertising campaigns and display ads across various channels to reach potential customers.',
+      de: 'Ermöglicht es Unternehmen, Online-Werbekampagnen zu erstellen und Anzeigen über verschiedene Kanäle hinweg zu schalten, um potenzielle Kunden zu erreichen.'
+    },
+    company: 'Google LLC',
+    companyAddress: 'Gordon House, 4 Barrow Street, Dublin D04 E5W5, Ireland',
+    dataProtectionOfficer: {
+      en: 'Below you can find the email address of the data protection officer of the processing company.',
+      de: 'Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.'
+    },
+    dataProtectionOfficerLink: 'https://support.google.com/policies/contact/general_privacy_form',
+    purposes: {
+      en: ['Advertising', 'Analytics', 'Provision of services', 'Statistics'],
+      de: ['Werbung', 'Analyse', 'Bereitstellung von Diensten', 'Statistiken']
+    },
+    technologies: { en: ['Cookies', 'Tracking pixel'], de: ['Cookies', 'Tracking Pixel'] },
+    dataCollected: {
+      en: ['Ads viewed', 'Cookie ID', 'Date and time of visit', 'Device information', 'Geographic location', 'IP address', 'Search terms', 'Impressions', 'Online identifiers', 'Browser information', 'Referrer URL', 'Interaction data'],
+      de: ['Angesehene Werbeanzeigen', 'Cookie ID', 'Datum und Uhrzeit des Besuchs', 'Geräteinformationen', 'Geografischer Standort', 'IP-Adresse', 'Suchbegriffe', 'Impressionen', 'Online-Identifikatoren', 'Browser-Informationen', 'Referrer URL', 'Interaktionsdaten']
+    },
+    legalBasis: 'Art. 6 Abs. 1 S. 1 lit. a DSGVO',
+    processingLocation: { en: 'European Union', de: 'Europäische Union' },
+    retentionPeriod: {
+      en: 'Data is deleted as soon as it is no longer needed for processing purposes.',
+      de: 'Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden.'
+    },
+    thirdCountryTransfers: {
+      en: ['United States of America', 'Chile', 'Singapore', 'Taiwan'],
+      de: ['Vereinigte Staaten von Amerika', 'Chile', 'Singapur', 'Taiwan']
+    },
+    dataRecipients: 'Google LLC',
+    privacyPolicyLink: 'https://policies.google.com/privacy',
+    cookiePolicyLink: 'https://policies.google.com/technologies/cookies',
+    optOutLink: 'https://safety.google/privacy/privacy-controls/',
+    maxCookieStorage: { en: '396 days', de: '396 Tage' }
+  },
+  {
+    name: { en: 'PostHog.com', de: 'PostHog.com' },
+    description: {
+      en: 'Analytics service that provides insights into how the website is used.',
+      de: 'Analysedienst, der Einblicke in die Nutzung der Website gewährt.'
+    },
+    company: 'PostHog Cloud',
+    // Usercentrics lists no address for this provider.
+    companyAddress: '',
+    dataProtectionOfficer: {
+      en: 'Below you can find the email address of the data protection officer of the processing company.',
+      de: 'Nachfolgend finden Sie die E-Mail-Adresse des Datenschutzbeauftragten des verarbeitenden Unternehmens.'
+    },
+    dataProtectionOfficerLink: 'mailto:privacy@posthog.com',
+    purposes: { en: ['Analytics', 'Reports'], de: ['Analyse', 'Berichte'] },
+    technologies: { en: [], de: [] },
+    dataCollected: {
+      en: ['IP address', 'Behavioral data', 'Analytics data'],
+      de: ['IP-Adresse', 'Verhaltensdaten', 'Analysedaten']
+    },
+    legalBasis: 'Art. 6 Abs. 1 S. 1 lit. a DSGVO',
+    processingLocation: { en: 'United States of America, Germany', de: 'Vereinigte Staaten von Amerika, Deutschland' },
+    retentionPeriod: {
+      en: 'Data is deleted as soon as it is no longer needed for processing purposes.',
+      de: 'Daten werden gelöscht, sobald sie für die Verarbeitungszwecke nicht mehr benötigt werden.'
+    },
+    dataRecipients: 'PostHog Cloud',
+    privacyPolicyLink: 'https://posthog.com/privacy'
   }
 ];
 
@@ -403,7 +473,7 @@ export const ServiceAccordion = ({ language }: ServiceAccordionProps) => {
                   </h4>
                   <p style={{ color: 'var(--gray-light)', marginBottom: '0.25rem' }}>{service.dataProtectionOfficer[language]}</p>
                   <a href={service.dataProtectionOfficerLink} target="_blank" rel="noopener noreferrer" style={{ color: '#0b99cc', textDecoration: 'none' }}>
-                    {service.dataProtectionOfficerLink}
+                    {service.dataProtectionOfficerLink.replace(/^mailto:/, '')}
                   </a>
                 </div>
 

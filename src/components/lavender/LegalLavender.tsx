@@ -6,7 +6,7 @@ import { NightPage } from './NightPage';
 import { Fragment, type ReactNode } from 'react';
 import { useLanguage, type Language } from '@/contexts/LanguageContext';
 import { labels, servicesData, type ServiceData } from '@/components/ServiceAccordion';
-import { FaqList, Hero, Section, SplitBlock, siteHref } from '@/design-system';
+import { FaqList, Hero, RichBody, Section, SplitBlock, UpdatedNote, siteHref } from '@/design-system';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
@@ -122,22 +122,33 @@ const labelled = (keys: readonly string[], t: (k: string) => string) =>
   ));
 
 /**
- * Privacy policy in the new design (preview under /lavender/). New as a page:
- * live, this text sits at the end of the imprint. Same content — data
- * protection, the EmpCo audit and the six services from ServiceAccordion —
- * with the German wording in "du" as in Figma.
+ * Privacy policy in the new design. New as a page: live, this text sat at the
+ * end of the imprint. Since 26.11.2026 a full policy (lavender-legal.ts):
+ * controller, the general notes of the old text, hosting, forms, the EmpCo
+ * audit, consent, the services as configured in Usercentrics (ServiceAccordion)
+ * and the visitor's rights. German in "du".
  */
 export function PrivacyPolicyLavender() {
   const { t, language } = useLanguage();
+  const section = (key: string) => (
+    <SplitBlock title={t(`privacyPolicy.${key}.title`)}>
+      <RichBody text={t(`privacyPolicy.${key}.body`)} />
+    </SplitBlock>
+  );
   return (
     <LegalPage title={t('privacyPolicy.title')}>
-      <SplitBlock title={t('imprint.section4.privacy.title')}>
+      {section('controller')}
+
+      <SplitBlock title={t('privacyPolicy.general.title')}>
         {[1, 2, 3].map((n) => (
           <p key={n} className={body}>
             {t(`imprint.section4.privacy.text${n}`)}
           </p>
         ))}
       </SplitBlock>
+
+      {section('hosting')}
+      {section('forms')}
 
       <SplitBlock title={t('imprint.empco.title')}>
         <p className={body}>{t('imprint.empco.intro')}</p>
@@ -149,7 +160,9 @@ export function PrivacyPolicyLavender() {
         <p className="lav-small font-normal text-lav-navy/70">{t('imprint.source')}</p>
       </SplitBlock>
 
-      <SplitBlock title={labels.services[language]} contentClassName="gap-0">
+      {section('consent')}
+
+      <SplitBlock title={t('privacyPolicy.services.title')} contentClassName="gap-0">
         <FaqList
           defaultOpen={null}
           items={servicesData.map((service) => ({
@@ -158,6 +171,10 @@ export function PrivacyPolicyLavender() {
           }))}
         />
       </SplitBlock>
+
+      {section('rights')}
+
+      <UpdatedNote route="privacy-policy" className="border-t border-lav-navy/20 pt-6" />
     </LegalPage>
   );
 }
@@ -245,14 +262,18 @@ function serviceAnswer(s: ServiceData, lang: Language): ReactNode {
 
   const blocks: ReactNode[][] = [
     [label('description'), text(s.description)],
-    [label('processingCompany'), s.company, s.companyAddress],
+    // Usercentrics has no address for every provider.
+    [label('processingCompany'), s.company, ...(s.companyAddress ? [s.companyAddress] : [])],
     [
       label('dataProtectionOfficer'),
       text(s.dataProtectionOfficer),
-      link(s.dataProtectionOfficerLink, s.dataProtectionOfficerLink),
+      link(s.dataProtectionOfficerLink, s.dataProtectionOfficerLink.replace(/^mailto:/, '')),
     ],
     [label('purposes'), label('purposesDescription'), list(s.purposes)],
-    [label('technologies'), label('technologiesDescription'), list(s.technologies)],
+    // Left out where no technology is listed.
+    ...(s.technologies[lang].length
+      ? [[label('technologies'), label('technologiesDescription'), list(s.technologies)]]
+      : []),
     [label('dataCollected'), label('dataCollectedDescription'), list(s.dataCollected)],
     [label('legalBasis'), label('legalBasisDescription'), s.legalBasis],
     [label('processingLocation'), label('processingLocationDescription'), text(s.processingLocation)],

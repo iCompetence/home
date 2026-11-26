@@ -19,7 +19,7 @@ export const PAGE_UPDATED = {
   'privacy-led-ai': '2026-11-13',
   contact: '2026-10-02',
   imprint: '2026-11-13',
-  'privacy-policy': '2026-10-02',
+  'privacy-policy': '2026-11-26',
   'whats-new': '2026-10-02',
 } as const satisfies Record<string, string>;
 
