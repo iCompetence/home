@@ -17,6 +17,9 @@ export const PAGE_UPDATED = {
   'campaign-parameter-tool': '2026-11-13',
   'ai-workshop': '2026-11-26',
   'privacy-led-ai': '2026-11-13',
+  // Preview page, not released yet (noindex, no links to it). The date is
+  // also the day its facts were checked against the vendors' pages.
+  'piwik-pro': '2026-11-26',
   contact: '2026-10-02',
   imprint: '2026-11-26',
   'privacy-policy': '2026-11-26',

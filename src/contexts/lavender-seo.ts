@@ -855,4 +855,402 @@ Our products follow the same principle: [iKnow](/iknow/) runs locally inside the
     de: `Wir klären mit dir, was möglich und sicher ist, gestalten interne KI-Systeme passend zu deiner Governance und setzen sie in deiner Infrastruktur um. Unsere Produkte wie [iKnow](/iknow/) arbeiten nach demselben Prinzip lokal.`,
     en: `We work out with you what is possible and safe, design internal AI systems that fit your governance and implement them in your infrastructure. Our products such as [iKnow](/iknow/) work locally on the same principle.`,
   },
+
+  // ======================================================================
+  // Piwik PRO (preview page /piwik-pro/, not released): Piwik PRO statt GA4 ·
+  // GA4 Alternative · Piwik PRO Agentur / Partner · Piwik PRO einrichten ·
+  // Umzug von GA4
+  //
+  // Every fact here was checked on 26.11.2026 against the page linked for it
+  // in the page's source list (PiwikProLavender.tsx, SOURCES). Nothing from
+  // memory: when a fact changes, change text, source and the page's date
+  // (src/lib/page-dates.ts) together. Always "Piwik PRO", never "Piwik"
+  // (that was Matomo's name until 2018). Comparative statements name the
+  // property they compare (§ 6 UWG: objective, verifiable); no blanket
+  // "better than GA4".
+  // ======================================================================
+  'piwik.anchor.compare': { de: `Vergleich`, en: `Comparison` },
+  'piwik.anchor.fit': { de: `Für wen`, en: `Who it fits` },
+  'piwik.anchor.services': { de: `Leistungen`, en: `Services` },
+  'piwik.anchor.process': { de: `Ablauf`, en: `Process` },
+  'piwik.anchor.faq': { de: `FAQ`, en: `FAQ` },
+
+  // --- Head ---
+  'piwik.hero.title': { de: `Piwik PRO statt GA4`, en: `Piwik PRO instead of GA4` },
+  'piwik.hero.lead': {
+    de: `Wenn dir wichtig ist, wo deine Analytics-Daten liegen und wer sie verarbeitet, ist Piwik PRO die bessere Wahl als Google Analytics 4. Wir richten es bei dir ein und ziehen deine Messung um.`,
+    en: `If it matters to you where your analytics data is stored and who processes it, Piwik PRO is the better choice than Google Analytics 4. We set it up for you and move your tracking over.`,
+  },
+  'piwik.hero.jump': { de: `Vergleich ansehen`, en: `See the comparison` },
+  'piwik.partner.line': {
+    de: `iCompetence ist im [Partnerverzeichnis von Piwik PRO](https://piwik.pro/partner-directory/) gelistet.`,
+    en: `iCompetence is listed in the [Piwik PRO partner directory](https://piwik.pro/partner-directory/).`,
+  },
+
+  // --- Piwik PRO in brief (FactsBand) ---
+  'piwik.facts.title': { de: `Piwik PRO in Kürze`, en: `Piwik PRO in brief` },
+  'piwik.facts.lead': {
+    de: `Piwik PRO ist eine Analytics-Suite aus Europa. Der Anbieter sitzt in Wrocław und gehört zur dänischen Cookie Information Group. Zum Paket gehören Analytics, Tag Manager, Data Activation und eine Consent-Plattform.`,
+    en: `Piwik PRO is an analytics suite from Europe. The vendor is based in Wrocław and belongs to the Danish Cookie Information Group. The package includes Analytics, Tag Manager, Data Activation and a consent platform.`,
+  },
+  'piwik.fact1.label': { de: `Module im Paket`, en: `Modules in the package` },
+  'piwik.fact1.value': { de: `4`, en: `4` },
+  'piwik.fact2.label': { de: `Datenaufbewahrung`, en: `Data retention` },
+  'piwik.fact2.value': { de: `ab 25 Monate`, en: `from 25 months` },
+  'piwik.fact3.label': { de: `Hosting im Business-Tarif`, en: `Hosting on the Business plan` },
+  'piwik.fact3.value': { de: `Schweden`, en: `Sweden` },
+  'piwik.fact4.label': { de: `Hosting im Enterprise-Tarif`, en: `Hosting on the Enterprise plan` },
+  'piwik.fact4.value': { de: `wählbar, z. B. Deutschland`, en: `your choice, e.g. Germany` },
+  'piwik.fact5.label': { de: `Stichproben in Berichten`, en: `Sampling in reports` },
+  'piwik.fact5.value': { de: `standardmäßig keine`, en: `none by default` },
+  'piwik.fact6.label': { de: `Preis im Business-Tarif`, en: `Price of the Business plan` },
+  'piwik.fact6.value': { de: `ab 36 € im Monat`, en: `from €36 per month` },
+
+  // --- Comparison ---
+  'piwik.compare.title': { de: `Piwik PRO und GA4 im Vergleich`, en: `Piwik PRO and GA4 compared` },
+  'piwik.compare.intro': {
+    de: `Die Tabelle stützt sich auf die Angaben der beiden Anbieter. Bei GA4 meinen wir die kostenlose Standardversion, bei Piwik PRO den Business-Tarif, wenn nichts anderes dasteht. Alle Quellen findest du am Ende der Seite.`,
+    en: `The table is based on what the two vendors publish. For GA4 we mean the free standard version, for Piwik PRO the Business plan unless stated otherwise. You will find all sources at the end of the page.`,
+  },
+  'piwik.compare.colGa4': { de: `Google Analytics 4`, en: `Google Analytics 4` },
+  'piwik.compare.r1.aspect': { de: `Speicherort der Daten`, en: `Where the data is stored` },
+  'piwik.compare.r1.piwik': {
+    de: `Business: Rechenzentrum in Schweden. Enterprise: Rechenzentrum wählbar, zum Beispiel in Deutschland oder den Niederlanden.`,
+    en: `Business: data center in Sweden. Enterprise: your choice of data center, for example in Germany or the Netherlands.`,
+  },
+  'piwik.compare.r1.ga4': {
+    de: `Daten aus der EU werden auf Servern in der EU erfasst und dann zur Verarbeitung weitergeleitet. Laut Vertrag darf Google sie in jedem Land verarbeiten, in dem es Einrichtungen unterhält.`,
+    en: `Data from the EU is collected on servers in the EU and then forwarded for processing. Under the contract, Google may process it in any country where it maintains facilities.`,
+  },
+  'piwik.compare.r2.aspect': { de: `Anbieter`, en: `Vendor` },
+  'piwik.compare.r2.piwik': {
+    de: `Piwik PRO SA aus Wrocław (Polen), eine Tochter der dänischen Cookie Information Group.`,
+    en: `Piwik PRO SA from Wrocław (Poland), a subsidiary of the Danish Cookie Information Group.`,
+  },
+  'piwik.compare.r2.ga4': {
+    de: `Vertragspartner ist Google Ireland Limited. Übermittlungen in die USA stützt Google auf den Datenschutzrahmen EU-USA.`,
+    en: `The contracting party is Google Ireland Limited. Google bases transfers to the US on the EU-US Data Privacy Framework.`,
+  },
+  'piwik.compare.r3.aspect': { de: `Stichproben (Sampling)`, en: `Sampling` },
+  'piwik.compare.r3.piwik': { de: `Standardmäßig keine.`, en: `None by default.` },
+  'piwik.compare.r3.ga4': {
+    de: `Möglich, sobald eine Abfrage mehr als 10 Millionen Ereignisse umfasst, etwa in explorativen Datenanalysen.`,
+    en: `Possible as soon as a query covers more than 10 million events, for example in explorations.`,
+  },
+  'piwik.compare.r4.aspect': { de: `Datenaufbewahrung`, en: `Data retention` },
+  'piwik.compare.r4.piwik': {
+    de: `25 Monate, im Enterprise-Tarif auch länger.`,
+    en: `25 months, longer on the Enterprise plan.`,
+  },
+  'piwik.compare.r4.ga4': {
+    de: `2 oder 14 Monate. Die Grenze gilt für explorative Datenanalysen und Trichterberichte.`,
+    en: `2 or 14 months. The limit applies to explorations and funnel reports.`,
+  },
+  'piwik.compare.r5.aspect': { de: `Rohdaten`, en: `Raw data` },
+  'piwik.compare.r5.piwik': {
+    de: `Abruf über die API in allen Tarifen. Regelmäßiger Export, zum Beispiel nach BigQuery, als Zusatzleistung im Enterprise-Tarif.`,
+    en: `Access through the API on all plans. Scheduled exports, for example to BigQuery, as an add-on to the Enterprise plan.`,
+  },
+  'piwik.compare.r5.ga4': {
+    de: `Export nach BigQuery schon in der kostenlosen Version, täglich bis zu 1 Million Ereignisse.`,
+    en: `Export to BigQuery already in the free version, up to 1 million events per day.`,
+  },
+  'piwik.compare.r6.aspect': { de: `Besuche ohne Einwilligung`, en: `Visits without consent` },
+  'piwik.compare.r6.piwik': {
+    de: `Anonyme Erfassung einstellbar: Die IP-Adresse wird vollständig maskiert und wiederkehrende Besuche werden nicht erkannt. Ob das ohne Einwilligung zulässig ist, klärt dein Datenschutz.`,
+    en: `Anonymous collection can be switched on: the IP address is fully masked and returning visits are not recognized. Whether this is allowed without consent is for your privacy team to decide.`,
+  },
+  'piwik.compare.r6.ga4': {
+    de: `Im Einwilligungsmodus senden die Tags Pings an Google, statt Cookies zu speichern. Lücken schätzt Google mit Modellen, wenn die Property genug Daten hat.`,
+    en: `In consent mode the tags send pings to Google instead of storing cookies. Google fills gaps with models when the property has enough data.`,
+  },
+  'piwik.compare.r7.aspect': { de: `Consent-Plattform`, en: `Consent platform` },
+  'piwik.compare.r7.piwik': { de: `Im Paket enthalten.`, en: `Included in the package.` },
+  'piwik.compare.r7.ga4': {
+    de: `Nicht enthalten. Der Einwilligungsmodus arbeitet mit deinem Banner oder deiner Consent-Plattform zusammen.`,
+    en: `Not included. Consent mode works together with your banner or your consent platform.`,
+  },
+  'piwik.compare.r8.aspect': { de: `Google Ads`, en: `Google Ads` },
+  'piwik.compare.r8.piwik': {
+    de: `Holt Kampagnendaten aus Google Ads in die Berichte.`,
+    en: `Brings campaign data from Google Ads into the reports.`,
+  },
+  'piwik.compare.r8.ga4': {
+    de: `Direkt verknüpft: Schlüsselereignisse werden zu Conversions, Zielgruppen stehen für Remarketing bereit.`,
+    en: `Linked directly: key events become conversions, audiences are available for remarketing.`,
+  },
+  'piwik.compare.r9.aspect': { de: `Support`, en: `Support` },
+  'piwik.compare.r9.piwik': {
+    de: `Business: per E-Mail und im Community-Forum. Enterprise: Antwortzeit von 8 bis 48 Stunden, je nach Stufe.`,
+    en: `Business: by email and in the community forum. Enterprise: a response time of 8 to 48 hours, depending on the tier.`,
+  },
+  'piwik.compare.r9.ga4': {
+    de: `Self-Service über Hilfecenter und Onlinekurse.`,
+    en: `Self-service through the help center and online courses.`,
+  },
+  'piwik.compare.r10.aspect': { de: `Preis`, en: `Price` },
+  'piwik.compare.r10.piwik': {
+    de: `Business ab 36 € im Monat, Enterprise ab 366 € im Monat bei jährlicher Zahlung. Einen kostenlosen Tarif gibt es nicht mehr.`,
+    en: `Business from €36 per month, Enterprise from €366 per month billed annually. There is no free plan anymore.`,
+  },
+  'piwik.compare.r10.ga4': {
+    de: `Kostenlos. Die Bezahlversion Analytics 360 kostet eine Grundgebühr und eine Gebühr nach Ereignisvolumen.`,
+    en: `Free of charge. The paid version, Analytics 360, costs a base fee plus a fee based on event volume.`,
+  },
+  'piwik.compare.ga4.title': { de: `Wo GA4 vorne liegt`, en: `Where GA4 is ahead` },
+  'piwik.compare.ga4.body': {
+    de: `- Preis: Die Standardversion kostet nichts. Den kostenlosen Core-Tarif hat Piwik PRO 2026 auslaufen lassen.
+- Google Ads: Conversions und Zielgruppen aus GA4 stehen direkt in Google Ads bereit.
+- BigQuery: Der Export der Rohdaten gehört schon zur kostenlosen Version.
+- Verbreitung: Laut W3Techs läuft Google Analytics auf 46 % aller Websites (Stand November 2026).
+- Prognosen: GA4 berechnet Kauf- und Abwanderungswahrscheinlichkeiten, sobald genug Nutzerdaten vorliegen.`,
+    en: `- Price: The standard version costs nothing. Piwik PRO phased out its free Core plan in 2026.
+- Google Ads: Conversions and audiences from GA4 are available directly in Google Ads.
+- BigQuery: The raw data export is already part of the free version.
+- Adoption: According to W3Techs, Google Analytics runs on 46% of all websites (as of November 2026).
+- Predictions: GA4 calculates purchase and churn probabilities once there is enough user data.`,
+  },
+
+  // --- Who it fits ---
+  'piwik.fit.title': { de: `Für wen sich der Wechsel lohnt`, en: `Who should switch` },
+  'piwik.fit.intro': {
+    de: `Der Wechsel kostet Zeit und Geld. Diese Punkte helfen dir einzuschätzen, ob er sich für dich rechnet.`,
+    en: `Switching takes time and money. These points help you judge whether it pays off for you.`,
+  },
+  'piwik.fit.yes.title': { de: `Piwik PRO passt zu dir, wenn …`, en: `Piwik PRO fits you if …` },
+  'piwik.fit.yes.item1': {
+    de: `du nachweisen musst, in welchem Land deine Analytics-Daten liegen`,
+    en: `you have to prove in which country your analytics data is stored`,
+  },
+  'piwik.fit.yes.item2': {
+    de: `du anonyme Zahlen auch von Besuchen ohne Einwilligung brauchst und dein Datenschutz das mitträgt`,
+    en: `you need anonymous figures from visits without consent too and your privacy team supports that`,
+  },
+  'piwik.fit.yes.item3': {
+    de: `deine Auswertungen in GA4 an Stichproben oder an der 14-Monats-Grenze scheitern`,
+    en: `your analyses in GA4 run into sampling or the 14-month limit`,
+  },
+  'piwik.fit.yes.item4': {
+    de: `du Analytics, Tag Manager und Consent bei einem europäischen Anbieter bündeln willst`,
+    en: `you want analytics, tag manager and consent from one European vendor`,
+  },
+  'piwik.fit.no.title': {
+    de: `GA4 bleibt die bessere Wahl, wenn …`,
+    en: `GA4 remains the better choice if …`,
+  },
+  'piwik.fit.no.item1': {
+    de: `deine Kampagnen von Conversions und Zielgruppen aus GA4 in Google Ads leben`,
+    en: `your campaigns depend on conversions and audiences from GA4 in Google Ads`,
+  },
+  'piwik.fit.no.item2': {
+    de: `du für Web-Analytics kein Budget einplanen kannst`,
+    en: `you cannot budget for web analytics`,
+  },
+  'piwik.fit.no.item3': {
+    de: `dein Team die Rohdaten schon über den BigQuery-Export von GA4 auswertet`,
+    en: `your team already analyzes the raw data through GA4's BigQuery export`,
+  },
+
+  // --- What we do ---
+  'piwik.services.title': { de: `Was wir für dich machen`, en: `What we do for you` },
+  'piwik.services.intro': {
+    de: `Wir richten auch GA4 und Adobe Analytics ein und wissen deshalb, was beim Umzug zu Piwik PRO anders wird. Du bekommst den ganzen Wechsel aus einer Hand oder nur den Teil, den du brauchst. Dabei gilt unser Grundsatz [Privacy-led AI](/privacy-led-ai/): Deine Daten bleiben unter deiner Kontrolle.`,
+    en: `We also set up GA4 and Adobe Analytics, so we know what changes when you move to Piwik PRO. You get the whole switch from one team or only the part you need. Our principle of [Privacy-led AI](/privacy-led-ai/) applies here too: your data stays under your control.`,
+  },
+  'piwik.service1.title': { de: `Einrichtung`, en: `Setup` },
+  'piwik.service1.desc': {
+    de: `Wir legen dein Konto mit allen Websites und Apps an und richten Ziele und eigene Dimensionen ein.`,
+    en: `We create your account with all websites and apps and set up goals and custom dimensions.`,
+  },
+  'piwik.service2.title': { de: `Umzug von GA4`, en: `Migration from GA4` },
+  'piwik.service2.desc': {
+    de: `Wir übertragen deine Ereignisse und Conversions in das Datenmodell von Piwik PRO. Beide Systeme laufen parallel, bis die Zahlen zusammenpassen.`,
+    en: `We map your events and conversions to the Piwik PRO data model. Both systems run in parallel until the numbers match.`,
+  },
+  'piwik.service3.title': { de: `Tag Manager`, en: `Tag manager` },
+  'piwik.service3.desc': {
+    de: `Wir bauen deine Tags und Trigger im Tag Manager von Piwik PRO nach, auch wenn du bisher den Google Tag Manager nutzt.`,
+    en: `We rebuild your tags and triggers in the Piwik PRO Tag Manager, even if you have used Google Tag Manager so far.`,
+  },
+  'piwik.service4.title': { de: `Consent`, en: `Consent` },
+  'piwik.service4.desc': {
+    de: `Wir binden die Consent-Plattform an. Mit deinem Datenschutz legen wir fest, was Piwik PRO vor und nach der Einwilligung erfasst.`,
+    en: `We connect the consent platform. Together with your privacy team we define what Piwik PRO collects before and after consent.`,
+  },
+  'piwik.service5.title': { de: `Berichte und Daten`, en: `Reports and data` },
+  'piwik.service5.desc': {
+    de: `Wir bauen Dashboards in Piwik PRO oder schließen Data Studio an, das frühere Looker Studio. Im Enterprise-Tarif richten wir den Export der Rohdaten ein.`,
+    en: `We build dashboards in Piwik PRO or connect Data Studio, formerly Looker Studio. On the Enterprise plan we set up the raw data export.`,
+  },
+  'piwik.service6.title': { de: `Schulung`, en: `Training` },
+  'piwik.service6.desc': {
+    de: `Dein Team lernt an den eigenen Berichten, wo es in Piwik PRO findet, was es aus GA4 kennt.`,
+    en: `Your team learns on its own reports where to find in Piwik PRO what it knows from GA4.`,
+  },
+
+  // --- Process ---
+  'piwik.process.title': { de: `So läuft der Wechsel ab`, en: `How the switch works` },
+  'piwik.process.step1.title': { de: `Bestandsaufnahme`, en: `Review` },
+  'piwik.process.step1.desc': {
+    de: `Wir sehen uns dein GA4-Setup an und klären, welche Berichte dein Team wirklich nutzt. Dazu kommt, was dein Datenschutz verlangt. Danach weißt du, ob sich der Wechsel lohnt und welcher Tarif passt.`,
+    en: `We look at your GA4 setup and find out which reports your team really uses. Then we add what your privacy team requires. After that you know whether the switch is worth it and which plan fits.`,
+  },
+  'piwik.process.step2.title': { de: `Messkonzept`, en: `Measurement plan` },
+  'piwik.process.step2.desc': {
+    de: `Wir legen fest, was Piwik PRO messen soll und wie die Ereignisse heißen. Mit deinem Datenschutz stimmen wir ab, was vor einer Einwilligung erfasst wird.`,
+    en: `We define what Piwik PRO should measure and what the events are called. With your privacy team we agree on what is collected before consent.`,
+  },
+  'piwik.process.step3.title': { de: `Einrichtung und Parallelbetrieb`, en: `Setup and parallel run` },
+  'piwik.process.step3.desc': {
+    de: `Wir richten Piwik PRO mit Tag Manager und Consent ein. GA4 läuft weiter, bis die Zahlen beider Systeme zusammenpassen.`,
+    en: `We set up Piwik PRO with tag manager and consent. GA4 keeps running until the numbers of both systems match.`,
+  },
+  'piwik.process.step4.title': { de: `Übergabe und Schulung`, en: `Handover and training` },
+  'piwik.process.step4.desc': {
+    de: `Dein Team bekommt seine Dashboards und eine Schulung an den eigenen Daten. Die alten GA4-Daten lassen sich nicht in Piwik PRO importieren. Wir sichern sie deshalb vorher, zum Beispiel über den BigQuery-Export.`,
+    en: `Your team gets its dashboards and a training on its own data. The old GA4 data cannot be imported into Piwik PRO. So we back it up beforehand, for example through the BigQuery export.`,
+  },
+  'piwik.statement': {
+    de: `Ob sich der Wechsel für dich lohnt, klären wir in einem Gespräch.`,
+    en: `Whether the switch pays off for you is something we work out in one conversation.`,
+  },
+
+  // --- FAQ (also the FAQPage JSON-LD, built from these very strings) ---
+  'piwik.faq.title': {
+    de: `Häufige Fragen zu Piwik PRO`,
+    en: `Frequently asked questions about Piwik PRO`,
+  },
+  'piwik.faq.q1': { de: `Ist Piwik PRO dasselbe wie Matomo?`, en: `Is Piwik PRO the same as Matomo?` },
+  'piwik.faq.a1': {
+    de: `Nein. Matomo ist das Open-Source-Projekt, das bis Januar 2018 Piwik hieß. Piwik PRO ist ein eigenes, kommerzielles Produkt der Piwik PRO SA. Wir schreiben deshalb immer Piwik PRO.`,
+    en: `No. Matomo is the open-source project that was called Piwik until January 2018. Piwik PRO is a separate, commercial product by Piwik PRO SA. That is why we always write Piwik PRO.`,
+  },
+  'piwik.faq.q2': { de: `Gibt es Piwik PRO noch kostenlos?`, en: `Is there still a free version of Piwik PRO?` },
+  'piwik.faq.a2': {
+    de: `Nein. Den kostenlosen Core-Tarif hat Piwik PRO 2026 auslaufen lassen. Der Business-Tarif beginnt bei 36 € im Monat und lässt sich 30 Tage kostenlos testen.`,
+    en: `No. Piwik PRO phased out its free Core plan in 2026. The Business plan starts at €36 per month and comes with a free 30-day trial.`,
+  },
+  'piwik.faq.q3': {
+    de: `Brauche ich mit Piwik PRO noch ein Cookie-Banner?`,
+    en: `Do I still need a cookie banner with Piwik PRO?`,
+  },
+  'piwik.faq.a3': {
+    de: `Das hängt von der Einstellung ab. § 25 TDDDG verlangt eine Einwilligung, sobald Informationen auf dem Gerät gespeichert oder von dort ausgelesen werden. Piwik PRO lässt sich so einstellen, dass es ohne Cookies misst und keine Gerätedaten ausliest. Ob das bei dir ohne Einwilligung zulässig ist, entscheidet dein Datenschutz. Auch Piwik PRO rät, das vorher rechtlich prüfen zu lassen.`,
+    en: `That depends on the configuration. Section 25 of the German TDDDG requires consent as soon as information is stored on the device or read from it. Piwik PRO can be configured to measure without cookies and without reading device data. Whether that is allowed without consent in your case is for your privacy team to decide. Piwik PRO also advises a legal review first.`,
+  },
+  'piwik.faq.q4': {
+    de: `Kann ich meine Daten aus GA4 mitnehmen?`,
+    en: `Can I take my data from GA4 with me?`,
+  },
+  'piwik.faq.a4': {
+    de: `In Piwik PRO hinein geht das nicht, einen Import für GA4-Daten gibt es nicht. Du kannst deine alten Daten aber sichern, etwa über den BigQuery-Export von GA4, und sie in einem BI-Werkzeug neben die neuen Zahlen stellen.`,
+    en: `Not into Piwik PRO, there is no import for GA4 data. You can back up your old data, though, for example through GA4's BigQuery export, and put it next to the new numbers in a BI tool.`,
+  },
+  'piwik.faq.q5': {
+    de: `Funktioniert Google Ads mit Piwik PRO?`,
+    en: `Does Google Ads work with Piwik PRO?`,
+  },
+  'piwik.faq.a5': {
+    de: `Ja, aber anders als mit GA4. Piwik PRO holt Kampagnendaten aus Google Ads in seine Berichte. Eine direkte Verknüpfung wie bei GA4, über die Conversions und Zielgruppen in Google Ads bereitstehen, beschreibt Piwik PRO für seine Integration nicht. Wenn deine Kampagnen davon abhängen, planen wir das im Messkonzept mit ein.`,
+    en: `Yes, but differently than with GA4. Piwik PRO brings campaign data from Google Ads into its reports. A direct link like GA4's, which makes conversions and audiences available in Google Ads, is not something Piwik PRO describes for its integration. If your campaigns depend on that, we account for it in the measurement plan.`,
+  },
+  'piwik.faq.q6': { de: `Wo liegen meine Daten?`, en: `Where is my data stored?` },
+  'piwik.faq.a6': {
+    de: `Im Business-Tarif in einem Rechenzentrum in Schweden. Im Enterprise-Tarif wählst du das Rechenzentrum selbst, zum Beispiel in Deutschland oder den Niederlanden.`,
+    en: `On the Business plan in a data center in Sweden. On the Enterprise plan you choose the data center yourself, for example in Germany or the Netherlands.`,
+  },
+  'piwik.faq.q7': { de: `Ist GA4 in Deutschland verboten?`, en: `Is GA4 banned in Germany?` },
+  'piwik.faq.a7': {
+    de: `Nein. Seit Juli 2023 gilt der Angemessenheitsbeschluss der EU-Kommission zum Datenschutzrahmen EU-USA, auf den Google die Übermittlung in die USA stützt. Das Gericht der EU hat eine Klage dagegen im September 2025 abgewiesen. Dagegen läuft ein Rechtsmittel beim Gerichtshof (C-703/25 P). Für Cookies brauchst du unabhängig vom Werkzeug eine Einwilligung nach § 25 TDDDG.`,
+    en: `No. The European Commission's adequacy decision on the EU-US Data Privacy Framework has been in force since July 2023, and Google bases its transfers to the US on it. The General Court of the EU dismissed an action against it in September 2025. An appeal against that judgment is pending before the Court of Justice (C-703/25 P). For cookies you need consent under Section 25 TDDDG whatever tool you use.`,
+  },
+  'piwik.faq.q8': { de: `Welcher Tarif passt zu mir?`, en: `Which plan fits me?` },
+  'piwik.faq.a8': {
+    de: `Der Business-Tarif reicht bis 2 Millionen Aktionen im Monat und speichert in Schweden. Brauchst du ein Rechenzentrum in Deutschland oder den regelmäßigen Export der Rohdaten, führt der Weg zum Enterprise-Tarif. Im Erstgespräch rechnen wir das mit dir durch.`,
+    en: `The Business plan covers up to 2 million actions per month and stores data in Sweden. If you need a data center in Germany or scheduled raw data exports, you are looking at the Enterprise plan. We work through the numbers with you in the initial consultation.`,
+  },
+
+  // --- Sources (labels; the addresses are in PiwikProLavender.tsx) ---
+  'piwik.sources.title': { de: `Quellen und Stand`, en: `Sources and date` },
+  'piwik.sources.intro': {
+    de: `Alle Angaben auf dieser Seite haben wir an diesen Quellen geprüft.`,
+    en: `We checked every statement on this page against these sources.`,
+  },
+  'piwik.sources.group.piwik': { de: `Piwik PRO`, en: `Piwik PRO` },
+  'piwik.sources.group.google': { de: `Google`, en: `Google` },
+  'piwik.sources.group.law': { de: `Recht und Markt`, en: `Law and market` },
+  'piwik.sources.pricing': { de: `Tarife und Preise`, en: `Plans and pricing` },
+  'piwik.sources.plans': { de: `Business und Enterprise im Vergleich`, en: `Business and Enterprise compared` },
+  'piwik.sources.about': { de: `Über das Unternehmen`, en: `About the company` },
+  'piwik.sources.contact': { de: `Standorte`, en: `Offices` },
+  'piwik.sources.core': {
+    de: `Changelog 18.58.0 zum Ende des Core-Tarifs`,
+    en: `Changelog 18.58.0 on the end of the Core plan`,
+  },
+  'piwik.sources.anon': {
+    de: `Hilfe: Daten von Besuchen ohne Einwilligung`,
+    en: `Help: data from visitors who don't consent`,
+  },
+  'piwik.sources.tdddg': { de: `Hilfe: Einrichtung nach TDDDG`, en: `Help: setup under the TDDDG` },
+  'piwik.sources.ads': { de: `Hilfe: Google-Ads-Integration`, en: `Help: Google Ads integration` },
+  'piwik.sources.import': {
+    de: `Hilfe: Import aus Google Analytics`,
+    en: `Help: importing from Google Analytics`,
+  },
+  'piwik.sources.directory': { de: `Partnerverzeichnis`, en: `Partner directory` },
+  'piwik.sources.terms': {
+    de: `Nutzungsbedingungen für Google Analytics`,
+    en: `Google Analytics terms of service`,
+  },
+  'piwik.sources.sampling': { de: `Analytics-Hilfe: Stichproben`, en: `Analytics Help: data sampling` },
+  'piwik.sources.retention': { de: `Analytics-Hilfe: Datenaufbewahrung`, en: `Analytics Help: data retention` },
+  'piwik.sources.bigquery': { de: `Analytics-Hilfe: BigQuery Export`, en: `Analytics Help: BigQuery Export` },
+  'piwik.sources.eu': {
+    de: `Analytics-Hilfe: Daten und Datenschutz in der EU`,
+    en: `Analytics Help: EU-focused data and privacy`,
+  },
+  'piwik.sources.processor': {
+    de: `Auftragsverarbeitungsbedingungen für Google Werbeprodukte`,
+    en: `Google Ads data processing terms`,
+  },
+  'piwik.sources.transfers': {
+    de: `Informationen zu internationalen Datenübertragungen`,
+    en: `Information on international data transfers`,
+  },
+  'piwik.sources.consentMode': { de: `Analytics-Hilfe: Einwilligungsmodus`, en: `Analytics Help: consent mode` },
+  'piwik.sources.modeling': {
+    de: `Analytics-Hilfe: Verhaltensmodellierung`,
+    en: `Analytics Help: behavioral modeling`,
+  },
+  'piwik.sources.adsLink': {
+    de: `Analytics-Hilfe: Google Ads verknüpfen`,
+    en: `Analytics Help: linking Google Ads`,
+  },
+  'piwik.sources.support': {
+    de: `Analytics-Hilfe: Support für Standard-Properties`,
+    en: `Analytics Help: support for standard properties`,
+  },
+  'piwik.sources.a360': {
+    de: `Marketing-Platform-Hilfe: Abrechnung von Analytics 360`,
+    en: `Marketing Platform Help: Analytics 360 billing`,
+  },
+  'piwik.sources.predictive': { de: `Analytics-Hilfe: Prognosemesswerte`, en: `Analytics Help: predictive metrics` },
+  'piwik.sources.tdddg25': { de: `§ 25 TDDDG`, en: `Section 25 TDDDG (German)` },
+  'piwik.sources.adequacy': {
+    de: `Durchführungsbeschluss (EU) 2023/1795 zum Datenschutzrahmen EU-USA`,
+    en: `Implementing Decision (EU) 2023/1795 on the EU-US Data Privacy Framework`,
+  },
+  'piwik.sources.appeal': {
+    de: `Rechtssache C-703/25 P: Rechtsmittel gegen das Urteil T-553/23`,
+    en: `Case C-703/25 P: appeal against the judgment in T-553/23`,
+  },
+  'piwik.sources.w3techs': {
+    de: `W3Techs: Verbreitung von Google Analytics`,
+    en: `W3Techs: usage of Google Analytics`,
+  },
+  'piwik.sources.matomo': { de: `Matomo: Piwik heißt jetzt Matomo`, en: `Matomo: Piwik is now Matomo` },
+  'piwik.sources.disclaimer': {
+    de: `Preise und Funktionen können sich ändern, maßgeblich sind die Angaben der Anbieter. Diese Seite ist keine Rechtsberatung. Piwik PRO, Google Analytics und Matomo sind Marken ihrer jeweiligen Inhaber.`,
+    en: `Prices and features can change; what the vendors publish is authoritative. This page is not legal advice. Piwik PRO, Google Analytics and Matomo are trademarks of their respective owners.`,
+  },
 };
