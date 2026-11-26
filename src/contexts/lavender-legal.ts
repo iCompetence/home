@@ -6,9 +6,11 @@
  * What it states is what the site does: hosted by Netlify, forms through
  * Netlify Forms with reCAPTCHA, consent through Usercentrics. The services
  * themselves are not listed here: the page reads them live from Usercentrics
- * (ConsentServices.tsx, settings gRxSmB1lD). Change the text when hosting,
- * forms or consent change, and the names in the consent section when the
- * services of the category "Statistik" change.
+ * (ConsentServices.tsx, settings gRxSmB1lD), with the snapshot of the last
+ * build where Usercentrics cannot load. {services} in the consent section is
+ * filled from that snapshot: the services that need consent. Change the text
+ * when hosting, forms or consent change, or when Usercentrics gets another
+ * category than "Statistik" for services that need consent.
  *
  * Same lookup as lavender-seo.ts (variant "lavender"), RichText format
  * (src/design-system/RichText.tsx).
@@ -78,12 +80,12 @@ We delete your details once your request has been dealt with and no statutory re
 
   'privacyPolicy.consent.title': { de: `Einwilligung und Cookies`, en: `Consent and cookies` },
   'privacyPolicy.consent.body': {
-    de: `Beim ersten Besuch fragen wir dich über ein Einwilligungsfenster von Usercentrics, welche Dienste wir einsetzen dürfen. Dienste der Kategorie „Statistik“ laden erst, wenn du zugestimmt hast. Das sind derzeit Google Analytics 4, Google Ads und PostHog. Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG.
+    de: `Beim ersten Besuch fragen wir dich über ein Einwilligungsfenster von Usercentrics, welche Dienste wir einsetzen dürfen. Dienste der Kategorie „Statistik“ laden erst, wenn du zugestimmt hast. Das sind derzeit {services}. Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG.
 
 Deine Auswahl kannst du jederzeit ändern oder widerrufen. Dafür gibt es die Schaltfläche mit dem Fingerabdruck am unteren Bildschirmrand. Der Widerruf gilt für die Zukunft.
 
 Dienste der Kategorie „Essenzielle & funktionale Technologien“ sind nötig, damit die Website funktioniert, und laden ohne Einwilligung. Welche Dienste das sind und welche Daten sie verarbeiten, steht im folgenden Abschnitt.`,
-    en: `On your first visit, a consent window by Usercentrics asks which services we may use. Services in the category “Statistics” only load once you have agreed. At present these are Google Analytics 4, Google Ads and PostHog. The legal basis is your consent under Art. 6 (1) (a) GDPR and Section 25 (1) TDDDG.
+    en: `On your first visit, a consent window by Usercentrics asks which services we may use. Services in the category “Statistics” only load once you have agreed. At present these are {services}. The legal basis is your consent under Art. 6 (1) (a) GDPR and Section 25 (1) TDDDG.
 
 You can change or withdraw your choice at any time using the button with the fingerprint at the bottom of the screen. Withdrawal applies to the future.
 
@@ -91,11 +93,6 @@ Services in the category “Essential & functional technologies” are needed fo
   },
 
   'privacyPolicy.services.title': { de: `Eingesetzte Dienste`, en: `Services we use` },
-  // Shown instead of the list when Usercentrics cannot load (blocked, no JavaScript).
-  'privacyPolicy.services.unavailable': {
-    de: `Die Liste der Dienste kommt direkt aus Usercentrics, dem Werkzeug für deine Einwilligung. Sie lässt sich gerade nicht laden, zum Beispiel weil dein Browser Usercentrics blockiert oder JavaScript ausgeschaltet ist. Schreib uns an [info@icompetence.de](mailto:info@icompetence.de), dann schicken wir dir die Liste zu.`,
-    en: `The list of services comes directly from Usercentrics, the tool that manages your consent. It cannot be loaded right now, for example because your browser blocks Usercentrics or JavaScript is switched off. Write to us at [info@icompetence.de](mailto:info@icompetence.de) and we will send you the list.`,
-  },
 
   'privacyPolicy.rights.title': { de: `Deine Rechte`, en: `Your rights` },
   'privacyPolicy.rights.body': {

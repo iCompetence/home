@@ -6,7 +6,7 @@ import { NightPage } from './NightPage';
 import { Fragment, type ReactNode } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Hero, RichBody, Section, SplitBlock, UpdatedNote, siteHref } from '@/design-system';
-import { ConsentServices } from './ConsentServices';
+import { ConsentServices, consentServices } from './ConsentServices';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
@@ -133,12 +133,21 @@ const labelled = (keys: readonly string[], t: (k: string) => string) =>
  * and the visitor's rights. German in "du", except the services' texts.
  */
 export function PrivacyPolicyLavender() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const section = (key: string) => (
     <SplitBlock title={t(`privacyPolicy.${key}.title`)}>
       <RichBody text={t(`privacyPolicy.${key}.body`)} />
     </SplitBlock>
   );
+  // The services that load only after consent, by name, from the snapshot of
+  // Usercentrics taken at build time (the same data as the list below).
+  const names = consentServices(language)
+    .filter((service) => service.needsConsent)
+    .map((service) => service.name);
+  const needConsent =
+    names.length > 1
+      ? `${names.slice(0, -1).join(', ')} ${language === 'de' ? 'und' : 'and'} ${names[names.length - 1]}`
+      : (names[0] ?? '');
   return (
     <LegalPage title={t('privacyPolicy.title')}>
       {section('controller')}
@@ -164,7 +173,9 @@ export function PrivacyPolicyLavender() {
         <p className="lav-small font-normal text-lav-navy/70">{t('imprint.source')}</p>
       </SplitBlock>
 
-      {section('consent')}
+      <SplitBlock title={t('privacyPolicy.consent.title')}>
+        <RichBody text={t('privacyPolicy.consent.body').replace('{services}', needConsent)} />
+      </SplitBlock>
 
       <SplitBlock title={t('privacyPolicy.services.title')} contentClassName="gap-0">
         <ConsentServices />
