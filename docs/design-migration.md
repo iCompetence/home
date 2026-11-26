@@ -4,6 +4,45 @@ Die `/lavender`-Seite (`src/components/LavenderHome.tsx`) ist das neue Design (k
 Homepage). Dieses Dokument ist die lebende Roadmap, um **alle** anderen
 icompetence.de-Seiten nach und nach auf dieses Design zu ziehen.
 
+## Livegang (26.11.2026)
+
+Das neue Design liegt seit dem Livegang auf den echten Routen (`/de/…`). Was dabei gilt und was
+danach noch aufzuräumen ist:
+
+- **Routen:** Die Seiten aus `app/[lang]/lavender/` liegen in `app/[lang]/`. `PREVIEW_BASE` in
+  `src/design-system/routes.ts` ist `''`; Links, Canonicals, hreflang, JSON-LD und die
+  Tracking-Sperre der Vorschau hängen daran und sind gemeinsam umgesprungen.
+- **Grundgerüst:** `app/[lang]/layout.tsx` stellt den `LanguageProvider` mit `variant="lavender"`,
+  das Skript „Reload beginnt oben“ und die Organization als JSON-LD (`organizationNode()`).
+  Es lädt weiter **beide** Stylesheets (`src/index.css`, dann `src/styles/globals.css`), so wie
+  die Vorschau geprüft wurde. Der Export wurde gegen die Vorschau verglichen: Alle Seiten sind
+  bis auf die erzeugten React-IDs gleich.
+- **Englisch ist abgeschaltet** (`SITE_LANGS` in `src/design-system/routes.ts`): keine
+  `/en/`-Seiten im Export, kein hreflang `en`, kein Sprachumschalter, Sitemap nur Deutsch,
+  `/en/*` leitet mit 302 auf `/de/*`. Ausnahme sind die drei Rechtsseiten der
+  Media-Monitoring-App, die für die App-Prüfung in beiden Sprachen bleiben. Wie Englisch
+  zurückkommt, steht am Kommentar von `SITE_LANGS`.
+- **404:** `app/[lang]/404/` ist die Seite für unbekannte Adressen (`public/_redirects`, letzte
+  Regel, Status 404). `app/[lang]/not-found.tsx` zeigt dieselbe Seite für `notFound()`.
+- **Weiterleitungen:** `/de|en/lavender/*` führt auf `/de/*`, damit geteilte Vorschau-Links
+  weiter funktionieren.
+- **Sitemap:** von Hand gepflegt, `lastmod` = `PAGE_UPDATED` in `src/lib/page-dates.ts`.
+- **Datenschutz:** eigene Seite `/privacy-policy/`, Texte in `src/contexts/lavender-legal.ts`,
+  Dienste in `ServiceAccordion.tsx` (acht, wie in Usercentrics). Entwurf, juristisch zu prüfen.
+
+Aufräumen nach dem Livegang (eigener PR, bewusst nicht im Umzug, damit der Rückweg ein Revert
+bleibt):
+
+- [ ] Alte Seiten-Komponenten löschen (`src/components/*Page.tsx`, `App.tsx`, `Home.tsx`,
+      `campaign-tool/`, `LegalPageShell`, `MediaMonitoringLegalPage`, `ThankYouPage` …) samt
+      der nur von ihnen genutzten Bilder und Schlüssel.
+- [ ] `src/index.css` aus dem Layout nehmen und löschen, mit Sichtvergleich aller Seiten.
+- [ ] `lavender-overrides.ts`, `lavender-seo.ts` und `lavender-legal.ts` in `translations`
+      übernehmen, `variant` am `LanguageProvider` entfernen.
+- [ ] Ordner `src/components/lavender/` und die Namen `*Lavender` umbenennen (kein Vorschau-Bezug mehr).
+
+Die Abschnitte unten beschreiben den Weg dorthin und sind Geschichte.
+
 ## Ausgangslage: zwei parallele Systeme
 
 | | **Lavender (neu)** | **Rest (alt)** |

@@ -20,13 +20,16 @@ No testing framework is configured.
 
 ### Routing & Entry Points
 
-- `app/` — Next.js App Router pages and API routes
-- `app/page.tsx` — Home page; renders `src/App.tsx`
-- `app/layout.tsx` — Root layout; includes Google Tag Manager and Usercentrics consent integration
-- `app/api/contact/route.ts` — Contact form API endpoint (email service not yet integrated)
-- Tool pages: `/campaign-parameter-tool`, `/icu-user-journey-explorer`, `/intelligentic-search`, `/privacy-led-ai`, `/ai-workshop`, `/iknow`
-- Info pages: `/contact`, `/kontakt`, `/imprint`, `/impressum`
-- `app/not-found.tsx` — 404 fallback page
+- `app/[lang]/` — Next.js App Router pages; `lang` is `de` (English is switched off, see `SITE_LANGS` in `src/design-system/routes.ts`)
+- `app/[lang]/layout.tsx` — Root layout: Google Tag Manager, Usercentrics consent, the `LanguageProvider` (`variant="lavender"`), both stylesheets
+- `app/[lang]/page.tsx` — Home page; renders `src/components/lavender/HomeNightLavender.tsx`
+- Product pages: `/empco-audit`, `/iknow`, `/analytics-agent`, `/intelligentic-search`, `/icu-user-journey-explorer`, `/campaign-parameter-tool`, `/ai-workshop`, `/privacy-led-ai`
+- Info pages: `/contact`, `/imprint`, `/privacy-policy`, `/whats-new`, `/thank-you`, `/404`
+- Media Monitoring app legal pages (German and English): `/privacy-media-monitoring`, `/data-deletion-media-monitoring`, `/terms-media-monitoring`
+- `app/api/contact/route.ts` — Contact form API endpoint (not used by the static export; forms post to Netlify)
+- `public/_redirects` — legacy addresses, `/en/*` → `/de/*` while English is off, and the 404 page
+
+The redesign ("Licht und Linie") went live on these routes on 26.11.2026; see `docs/design-migration.md`, section "Livegang". The old page components (`src/components/*Page.tsx`, `src/App.tsx`) are no longer routed and wait for the cleanup.
 
 ### Source Code (`src/`)
 
@@ -35,7 +38,7 @@ No testing framework is configured.
 - `src/components/` — All React components; `ui/` contains ~48 shadcn/ui (Radix UI) primitives
 - `src/components/campaign-tool/` — Campaign Parameter Tool sub-components (11 files, prefixed `CT*`)
 - `src/imports/` — Figma-generated design system components (Aurora effects, Frame wrappers); do not manually edit these
-- `src/index.css` — Global styles with Tailwind CSS v4
+- `src/styles/globals.css` — the design system's styles (Tailwind CSS v4); `src/index.css` is the old site's frozen snapshot, still loaded underneath until the cleanup
 - `src/REUSABLE_COMPONENTS.md` — Component API docs with usage examples for major reusable components
 
 ### Key Patterns
