@@ -50,7 +50,12 @@ export function ImprintLavender() {
         <p className={body}>
           <strong className="font-medium">{t('imprint.section1.director')}</strong> Matthias Postel
         </p>
-        <p className={body}>{t('footer.phone')}: +49 40 22636380</p>
+        <p className={body}>
+          {t('footer.phone')}:{' '}
+          <a href="tel:+494022636380" className={inlineLink}>
+            +49 40 22636380
+          </a>
+        </p>
         <p className={body}>
           {t('lavender.common.email')}:{' '}
           <a href="mailto:info@icompetence.de" className={inlineLink}>

@@ -21,7 +21,7 @@ export const lavenderLegal: Record<string, { en: string; de: string }> = {
 Weidenallee 10c
 20357 Hamburg
 
-Telefon: +49 40 22636380
+Telefon: [+49 40 22636380](tel:+494022636380)
 E-Mail: [info@icompetence.de](mailto:info@icompetence.de)
 
 Wenn du Fragen zum Datenschutz hast oder eines deiner Rechte ausüben möchtest, schreib uns an diese Adresse.`,
@@ -31,7 +31,7 @@ Wenn du Fragen zum Datenschutz hast oder eines deiner Rechte ausüben möchtest,
 Weidenallee 10c
 20357 Hamburg, Germany
 
-Phone: +49 40 22636380
+Phone: [+49 40 22636380](tel:+494022636380)
 Email: [info@icompetence.de](mailto:info@icompetence.de)
 
 If you have questions about data protection or want to exercise one of your rights, write to us at this address.`,

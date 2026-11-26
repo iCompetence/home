@@ -60,6 +60,7 @@ export type NightNavProps = {
 
 const EMAIL = 'info@icompetence.de';
 const PHONE = '+49 40 22636380';
+const PHONE_HREF = 'tel:+494022636380';
 
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
 // Hover is the star gradient on the text (a .lav-star-text span inside, see globals.css).
@@ -276,7 +277,9 @@ export function NightNav({ logoHref = '#top', sections, bar = 'auto', contactAnc
                   <a href={`mailto:${EMAIL}`} className={smallLink}>
                     <span className="lav-star-text">{EMAIL}</span>
                   </a>
-                  <span className="lav-paragraph py-3 font-medium text-lav-navy">{PHONE}</span>
+                  <a href={PHONE_HREF} className={smallLink}>
+                    <span className="lav-star-text">{PHONE}</span>
+                  </a>
                 </div>
                 <div className="flex flex-col items-start sm:items-end">
                   <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={smallLink}>

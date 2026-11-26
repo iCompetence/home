@@ -67,7 +67,7 @@ export const PROVIDER: Record<Lang, string[]> = {
     'Weidenallee 10c, 20357 Hamburg',
     'Geschäftsführer: Matthias Postel',
     'Registergericht: Amtsgericht Hamburg, HRB 110059',
-    'Telefon: +49 40 22636380',
+    'Telefon: [+49 40 22636380](tel:+494022636380)',
     'E-Mail: [info@iCompetence.de](mailto:info@iCompetence.de)',
   ],
   en: [
@@ -75,7 +75,7 @@ export const PROVIDER: Record<Lang, string[]> = {
     'Weidenallee 10c, 20357 Hamburg, Germany',
     'Managing Director: Matthias Postel',
     'Register Court: Amtsgericht Hamburg (District Court of Hamburg), HRB 110059',
-    'Phone: +49 40 22636380',
+    'Phone: [+49 40 22636380](tel:+494022636380)',
     'Email: [info@iCompetence.de](mailto:info@iCompetence.de)',
   ],
 };
