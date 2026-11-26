@@ -82,14 +82,21 @@ We delete your details once your request has been dealt with and no statutory re
   'privacyPolicy.consent.body': {
     de: `Beim ersten Besuch fragen wir dich über ein Einwilligungsfenster von Usercentrics, welche Dienste wir einsetzen dürfen. Dienste der Kategorie „Statistik“ laden erst, wenn du zugestimmt hast. Das sind derzeit {services}. Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG.
 
-Deine Auswahl kannst du jederzeit ändern oder widerrufen. Dafür gibt es die Schaltfläche mit dem Fingerabdruck am unteren Bildschirmrand. Der Widerruf gilt für die Zukunft.
+Dienste der Kategorie „Essenzielle & funktionale Technologien“ sind nötig, damit die Website funktioniert, und laden ohne Einwilligung. Welche Dienste das sind und welche Daten sie verarbeiten, steht im folgenden Abschnitt.
 
-Dienste der Kategorie „Essenzielle & funktionale Technologien“ sind nötig, damit die Website funktioniert, und laden ohne Einwilligung. Welche Dienste das sind und welche Daten sie verarbeiten, steht im folgenden Abschnitt.`,
+Deine Auswahl kannst du jederzeit ändern oder widerrufen. Der Widerruf gilt für die Zukunft. Auf den meisten Seiten gibt es dafür die Schaltfläche mit dem Fingerabdruck am unteren Bildschirmrand, auf dieser Seite die Schaltfläche unter diesem Absatz.`,
     en: `On your first visit, a consent window by Usercentrics asks which services we may use. Services in the category “Statistics” only load once you have agreed. At present these are {services}. The legal basis is your consent under Art. 6 (1) (a) GDPR and Section 25 (1) TDDDG.
 
-You can change or withdraw your choice at any time using the button with the fingerprint at the bottom of the screen. Withdrawal applies to the future.
+Services in the category “Essential & functional technologies” are needed for the website to work and load without consent. The following section lists these services and the data they process.
 
-Services in the category “Essential & functional technologies” are needed for the website to work and load without consent. The following section lists these services and the data they process.`,
+You can change or withdraw your choice at any time. Withdrawal applies to the future. On most pages you do this with the fingerprint button at the bottom of the screen, on this page with the button below this paragraph.`,
+  },
+
+  // The button below the consent section (ConsentSettingsButton) and its line when Usercentrics is blocked.
+  'privacyPolicy.consent.open': { de: `Einstellungen öffnen`, en: `Open settings` },
+  'privacyPolicy.consent.blocked': {
+    de: `Die Einstellungen lassen sich gerade nicht öffnen, zum Beispiel weil dein Browser Usercentrics blockiert.`,
+    en: `The settings cannot be opened right now, for example because your browser blocks Usercentrics.`,
   },
 
   'privacyPolicy.services.title': { de: `Eingesetzte Dienste`, en: `Services we use` },

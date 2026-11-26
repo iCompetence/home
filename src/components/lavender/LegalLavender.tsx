@@ -7,6 +7,7 @@ import { Fragment, type ReactNode } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Hero, RichBody, Section, SplitBlock, UpdatedNote, siteHref } from '@/design-system';
 import { ConsentServices, consentServices } from './ConsentServices';
+import { ConsentSettingsButton } from './ConsentSettingsButton';
 
 const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
@@ -175,6 +176,7 @@ export function PrivacyPolicyLavender() {
 
       <SplitBlock title={t('privacyPolicy.consent.title')}>
         <RichBody text={t('privacyPolicy.consent.body').replace('{services}', needConsent)} />
+        <ConsentSettingsButton />
       </SplitBlock>
 
       <SplitBlock title={t('privacyPolicy.services.title')} contentClassName="gap-0">
