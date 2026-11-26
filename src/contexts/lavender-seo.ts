@@ -886,11 +886,6 @@ Our products follow the same principle: [iKnow](/iknow/) runs locally inside the
     de: `iCompetence ist im [Partnerverzeichnis von Piwik PRO](https://piwik.pro/partner-directory/) gelistet.`,
     en: `iCompetence is listed in the [Piwik PRO partner directory](https://piwik.pro/partner-directory/).`,
   },
-  // Preview only: where the partner badge goes once Piwik PRO has cleared its use.
-  'piwik.partner.placeholder': {
-    de: `Platzhalter: Partner-Badge, Freigabe offen`,
-    en: `Placeholder: partner badge, approval pending`,
-  },
 
   // --- Piwik PRO in brief (FactsBand) ---
   'piwik.facts.title': { de: `Piwik PRO in Kürze`, en: `Piwik PRO in brief` },

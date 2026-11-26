@@ -75,13 +75,15 @@ Sie ist **Vorschau**, bis Dennis sie freigibt:
 - Vergleichende Aussagen nennen die Eigenschaft, um die es geht (§ 6 UWG: objektiv und
   nachprüfbar). Deshalb heißt die Seite „Piwik PRO statt GA4“ und nicht „das bessere GA4“; die
   Wertung steht im Lead und ist an Speicherort und Anbieter gebunden.
-- Keine Logos oder Screenshots von Piwik PRO oder Google. Der einzige Platzhalter ist das
-  Partner-Badge im Kopf (`BadgePlaceholder`, gestrichelte Pille): vor der Freigabe ersetzen
-  oder entfernen.
+- Keine Logos, Badges oder Screenshots von Piwik PRO oder Google, solange die Nutzung nicht
+  geklärt ist. Die Partnerschaft steht im Kopf als Satz mit Link zum Partnerverzeichnis; das
+  Partner-Badge käme an dieselbe Stelle, sobald Piwik PRO es freigibt.
+- Seit dem 26.11.2026 auf main und damit unter der Adresse erreichbar, weiter versteckt
+  (Entscheidung Dennis: nur auffindbar, wenn man die URL kennt).
 
 Freigabe: `robots`-Zeile in der `page.tsx` und die Regeln in `public/_headers` entfernen, Seite in `public/sitemap.xml` eintragen
 (`lastmod` = `PAGE_UPDATED['piwik-pro']`), verlinken (Menü oder Leistungen der Startseite),
-Platzhalter klären, Fakten noch einmal gegen die Quellen prüfen.
+Partner-Badge klären, Fakten noch einmal gegen die Quellen prüfen.
 
 Die Abschnitte unten beschreiben den Weg dorthin und sind Geschichte.
 

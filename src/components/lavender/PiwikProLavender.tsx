@@ -115,8 +115,8 @@ const SOURCES = [
  *
  * The comparison is the page's core and has to stay verifiable: every fact
  * has its source in SOURCES and its wording in lavender-seo.ts (piwik.*).
- * No logos or screenshots of Piwik PRO or Google while their use is not
- * cleared; the one marked placeholder is the partner badge in the head.
+ * No logos, badges or screenshots of Piwik PRO or Google while their use is
+ * not cleared.
  */
 export default function PiwikProLavender() {
   const { t, language } = useLanguage();
@@ -217,31 +217,14 @@ function Head() {
               </a>
             </Button>
           </ButtonStack>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-            <BadgePlaceholder />
-            <p className="lav-small font-normal text-lav-ink/70">{inline(t('piwik.partner.line'))}</p>
-          </div>
+          {/* The partnership in words, with the directory as proof. Piwik PRO's
+              partner badge would stand here; it is left out until its use is
+              cleared with Piwik PRO (their terms grant no right to their marks
+              without a written agreement). */}
+          <p className="lav-small font-normal text-lav-ink/70">{inline(t('piwik.partner.line'))}</p>
         </div>
       </div>
     </section>
-  );
-}
-
-/**
- * PREVIEW ONLY. Marks where Piwik PRO's partner badge goes once its use is
- * cleared with Piwik PRO (their terms grant no right to their marks without
- * a written agreement). Before the page is released: put the badge here or
- * remove this placeholder.
- */
-function BadgePlaceholder() {
-  const { t } = useLanguage();
-  return (
-    <span
-      data-placeholder="partner-badge"
-      className="lav-small inline-flex min-h-9 items-center rounded-pill border border-dashed border-lav-ink/40 px-4 font-medium text-lav-ink/70"
-    >
-      {t('piwik.partner.placeholder')}
-    </span>
   );
 }
 
