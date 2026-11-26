@@ -3070,6 +3070,18 @@ export const translations: Translations = {
   'workshop.intro.run4': { en: 'Free. Limited seats!', de: 'Gratis. Nur wenige Plätze!' },
   'workshop.experts.title': { en: 'Our experts', de: 'Unsere Experten' },
   'workshop.experts.photoCredit': { en: 'Source: Frank Krems', de: 'Foto: Frank Krems' },
+  // The free dates (section "Termine", list WORKSHOP_DATES in AIWorkshopLavender.tsx).
+  'workshop.anchor.dates': { en: 'Dates', de: 'Termine' },
+  'workshop.dates.title': { en: 'Dates', de: 'Termine' },
+  'workshop.dates.intro': {
+    en: 'For first-time participants, the workshop is free of charge on these days. You can book individual dates for a fee.',
+    de: 'Für Erstnutzende bieten wir den Workshop an diesen Tagen kostenfrei an. Eigene Termine kannst du gegen Gebühr buchen.',
+  },
+  'workshop.dates.col.day': { en: 'Date', de: 'Termin' },
+  'workshop.dates.col.time': { en: 'Time', de: 'Uhrzeit' },
+  'workshop.dates.col.place': { en: 'Place', de: 'Ort' },
+  'workshop.dates.time': { en: '{from} to {to} (German time)', de: '{from} bis {to} Uhr' },
+  'workshop.dates.remote': { en: 'Remote', de: 'Remote' },
   'workshop.form.title': { en: 'Apply now', de: 'Jetzt bewerben' },
   'workshop.form.intro': {
     en: 'Secure your seat at the AI Workshop.',
