@@ -50,9 +50,15 @@ export const RELATED_TITLE: Text = {
   en: `More information on "${APP_NAME}"`,
 };
 
+// The website's own legal pages. (One label for both until 26.11.2026, when
+// the privacy policy became a page of its own.)
 export const IMPRINT_LABEL: Text = {
-  de: 'Impressum & Datenschutz der Website',
-  en: 'Website legal disclosure & privacy',
+  de: 'Impressum der Website',
+  en: 'Website legal disclosure',
+};
+export const SITE_PRIVACY_LABEL: Text = {
+  de: 'Datenschutzerklärung der Website',
+  en: 'Website privacy policy',
 };
 
 export const PROVIDER: Record<Lang, string[]> = {

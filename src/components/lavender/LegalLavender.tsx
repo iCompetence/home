@@ -12,8 +12,8 @@ const body = 'lav-body font-normal text-lav-navy/80';
 /** Inline links in running text (same colour as the text, hence underlined; the star gradient on hover). */
 const inlineLink = 'lav-star-text text-inherit underline underline-offset-2';
 
-/** Hero (title only) and footer around the legal text blocks. */
-function LegalPage({ title, children }: { title: string; children: ReactNode }) {
+/** Hero (title, optionally a line above it) and footer around the legal text blocks. */
+export function LegalPage({ title, eyebrow, children }: { title: string; eyebrow?: string; children: ReactNode }) {
   const { language } = useLanguage();
   const home = siteHref(language, '/');
   return (
@@ -21,7 +21,7 @@ function LegalPage({ title, children }: { title: string; children: ReactNode }) 
       nav={<NightNav logoHref={home} bar="always" />}
       footer={<NightFooter />}
     >
-      <Hero title={title} />
+      <Hero title={title} eyebrow={eyebrow} />
       <Section dsName="LegalText">{children}</Section>
     </NightPage>
   );
