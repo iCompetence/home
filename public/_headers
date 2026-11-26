@@ -1,0 +1,12 @@
+# Netlify response headers.
+
+# Preview page "Piwik PRO statt GA4", until it is released
+# (docs/design-migration.md): kept out of search results by a header as well.
+# The page's HTML already says noindex; the header also covers the data files
+# Next.js exports beside it (index.txt, __next.*.txt), which carry the page's
+# text and cannot hold a robots meta tag. Remove both rules when the page is
+# released.
+/de/piwik-pro
+  X-Robots-Tag: noindex, nofollow
+/de/piwik-pro/*
+  X-Robots-Tag: noindex, nofollow

@@ -42,7 +42,8 @@ export async function generateMetadata({
     ...pageMetadata({ path: previewRoute('piwik-pro'), lang, ...meta[lang] }),
     // Preview until Dennis releases the page: not in search results, not in
     // the nav, the footer or public/sitemap.xml. To release it, remove this
-    // line, add the page to the sitemap and link it (docs/design-migration.md).
+    // line and the page's rules in public/_headers, add the page to the
+    // sitemap and link it (docs/design-migration.md).
     robots: { index: false, follow: false },
   }
 }

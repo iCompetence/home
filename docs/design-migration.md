@@ -57,7 +57,12 @@ ist eine Leistungsseite: iCompetence richtet Piwik PRO ein und zieht die Messung
 Sie ist **Vorschau**, bis Dennis sie freigibt:
 
 - `robots: noindex, nofollow` in der `page.tsx`; nicht im Menü (`nav-links.ts`), nicht im Footer,
-  nicht in `public/sitemap.xml`.
+  nicht in `public/sitemap.xml`. Dazu `X-Robots-Tag: noindex, nofollow` in `public/_headers`
+  für die Seite und ihre Datendateien (`index.txt`, `__next.*.txt`), die den Seitentext
+  enthalten und kein robots-Meta tragen können.
+- Was das nicht abdeckt: Das Repository ist öffentlich (Code, Branch und PR sind auf GitHub
+  lesbar), und die Texte liegen wie alle Übersetzungen im gemeinsamen JavaScript-Paket, das
+  jede Seite lädt. Wer dort sucht, findet sie; Suchmaschinen und Besucher der Website nicht.
 - Aufbau aus vorhandenen Bausteinen: Textkopf mit Breadcrumb „Leistungen › Piwik PRO“,
   `FactsBand`, `ComparisonTable` (Piwik PRO gegen GA4) mit dem Block „Wo GA4 vorne liegt“,
   „Für wen“ als zwei `SplitBlock`s, sechs `IconCard`s, `ProcessAccordion`, `Statement`,
@@ -74,7 +79,7 @@ Sie ist **Vorschau**, bis Dennis sie freigibt:
   Partner-Badge im Kopf (`BadgePlaceholder`, gestrichelte Pille): vor der Freigabe ersetzen
   oder entfernen.
 
-Freigabe: `robots`-Zeile in der `page.tsx` entfernen, Seite in `public/sitemap.xml` eintragen
+Freigabe: `robots`-Zeile in der `page.tsx` und die Regeln in `public/_headers` entfernen, Seite in `public/sitemap.xml` eintragen
 (`lastmod` = `PAGE_UPDATED['piwik-pro']`), verlinken (Menü oder Leistungen der Startseite),
 Platzhalter klären, Fakten noch einmal gegen die Quellen prüfen.
 
